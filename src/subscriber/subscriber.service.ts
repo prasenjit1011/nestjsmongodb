@@ -11,12 +11,12 @@ export class SubscriberService {
   //MessagePattern Or EventPattern : will be called
   @MessagePattern('message_channel')
   handleRedisMessage(data: any) {
-    console.log('📩 Received from MessagePattern Redis nestjs mongo:', data);
+    console.log('📩 Redis Subscriber Received msg using MessagePattern nestjs mongo:', data);
     return `Ack: ${data}`;
   }
 
   @EventPattern('message_channel')
   handleMessage(@Payload() data: any) {
-    console.log('📩 Received Subscriber EventPattern nestjs mongo :', data);
+    console.log('📩 Redis Subscriber Received msg using EventPattern nestjs mongo :', data);
   }
 }

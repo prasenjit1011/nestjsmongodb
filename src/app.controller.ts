@@ -5,9 +5,7 @@ import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly publisherService: PublisherService) {
-    console.clear();
-  }
+  constructor(private readonly publisherService: PublisherService) {}
 
   @EventPattern('message_channel')
   test(@Payload() data: any) {
@@ -15,7 +13,8 @@ export class AppController {
   }
 
   @Get('publish')
-  async triggerPublish() {    
+  async triggerPublish() {
+    console.log('Message Published to Redis channel! ', (new Date()).getMilliseconds());
     await this.publisherService.publishMessage();
     return { status: 'Message Published to Redis channel!' };
   }
