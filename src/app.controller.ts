@@ -1,12 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+// app.controller.ts
+import { Controller } from '@nestjs/common';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @EventPattern('test-topic')
+  handleKafkaMessage(@Payload() message: any) {
+    console.log('📨 Received Kafka message:', message.value);
   }
 }
