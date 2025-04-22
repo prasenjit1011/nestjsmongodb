@@ -4,6 +4,7 @@ import Redis from 'ioredis';
 @Injectable()
 export class AppService {
   private readonly redis: Redis;
+  private publisher: Redis;
 
   constructor() {
     this.redis = new Redis({
@@ -12,16 +13,9 @@ export class AppService {
     });
   }
 
-  async setKey(key: string, value: string): Promise<string> {
-    return await this.redis.set(key, value);
-  }
-
-  async getKey(key: string): Promise<string | null> {
-    return await this.redis.get(key);
-  }
-
-
-  getHello(): string {
-    return 'Hello World!';
+  async setKey(key: string, value: string){
+    await this.redis.set(key, value);
+    await this.redis.publish('mykey', `${key} updated to ${value}`);
+    console.log('---mykey:set---')
   }
 }

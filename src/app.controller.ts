@@ -1,18 +1,22 @@
+// src/app.controller.ts
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PublisherService } from './publisher/publisher.service';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly publisherService: PublisherService) {}
 
-  @Get()
-  async getHello(){
-    let key = 'nest22';
-    let value = 'timenow-'+(new Date).getTime();
-    const result1 = await this.appService.setKey(key, value);
-    
-    
-    const result2 = await this.appService.getKey(key);
-    return { result1, result2 };
+  @EventPattern('message_channel')
+  test(@Payload() data: any) {
+    console.log('🚀 test_channel received:', data);
+  }
+
+
+
+  @Get('publish')
+  async triggerPublish() {
+    await this.publisherService.publishMessage();
+    return { status: 'Message Published to Redis channel!' };
   }
 }
