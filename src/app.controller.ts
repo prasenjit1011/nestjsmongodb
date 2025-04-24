@@ -5,7 +5,7 @@ import { MessagePattern } from '@nestjs/microservices';
 export class AppController {
   @MessagePattern('test_route')
   handleMessage(data: any) {
-    console.log('📥 Received :: ', data);
+    console.log('📥 Received in nestjsmongo : ', data);
     return { ack: true };
   }
 }
