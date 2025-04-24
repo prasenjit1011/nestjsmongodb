@@ -1,27 +1,31 @@
 service: nest-lambda-service
 
+frameworkVersion: '>= 4.*.*'
+
 provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
+  stage: dev
   memorySize: 512
   timeout: 10
-  stage: dev
-
+  environment:
+    MONGODB_URI: your-mongodb-uri-here
 
 functions:
   api:
-    handler: dist/main.handler
+    handler: dist/lambda.handler
     events:
-      - http: ANY /
-      - http: ANY /{proxy+}
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline
+
+package:
+  individually: true
+  excludeDevDependencies: true
 
 custom:
-  esbuild:
-    bundle: true
-    minify: false
-    sourcemap: true
-    target: node18
-    platform: node
-    exclude: ['aws-sdk']
-    concurrency: 10
+  serverless-offline:
+    httpPort: 3000
+    noPrependStageInUrl: true
