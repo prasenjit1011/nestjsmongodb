@@ -10,18 +10,18 @@ export class Player {
   @Column()
   name: string;
 
-  @Column()
-  position: string;
+  // @Column()
+  // position: string;
 
-  @Column()
-  team: string;
+  // @Column()
+  // team: string;
 
-  @Column()
-  dept: string;
+  // @Column()
+  // dept: string;
 
-  @Column('int')
-  age: number;
+  // @Column('int')
+  // age: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
-  salary: number;
+  // @Column('decimal', { precision: 5, scale: 2 })
+  // salary: number;
 }

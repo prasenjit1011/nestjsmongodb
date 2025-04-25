@@ -11,10 +11,10 @@ provider:
   timeout: 10
   environment:
     MONGODB_URI: mongodb+srv://werttt:qwertyu@cluster0.hlicuim.mongodb.net/demodb?retryWrites=true&w=majority
-    DB_HOST: 127.0.0.1
+    DB_HOST: mylambdadb.cap2ummaswr9.us-east-1.rds.amazonaws.com
     DB_PORT: 3306
-    DB_USERNAME: root
-    DB_PASSWORD: Riyan@0403
+    DB_USERNAME: admin
+    DB_PASSWORD: Lnsel$345CFL
     DB_NAME: test
 
 functions:

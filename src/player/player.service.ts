@@ -13,10 +13,16 @@ export class PlayerService {
     private playerRepository: Repository<Player>,
   ) {}
 
-  // async create(createPlayerDto: CreatePlayerDto): Promise<Player> {
+  // async create(createPlayerDto: CreatePlayerDto){
   //   const player = this.playerRepository.create(createPlayerDto);
   //   return await this.playerRepository.save(player);
   // }
+
+  async create(data: Partial<Player>){
+    const player = this.playerRepository.create(data);
+    return await this.playerRepository.save(player);
+  }
+
 
   async findAll(): Promise<Player[]> {
     return await this.playerRepository.find();

@@ -15,7 +15,9 @@ export class PlayerController {
   // }
 
   @Get()
-  findAll(): Promise<Player[]> {
+  async findAll() {
+    const t = (new Date).getMilliseconds();
+    await this.playerService.create({"name":"Ram : "+t });
     return this.playerService.findAll();
   }
 

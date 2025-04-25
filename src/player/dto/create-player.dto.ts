@@ -2,9 +2,9 @@
 
 export class CreatePlayerDto {
     name: string;
-    position: string;
-    team: string;
-    age: number;
-    salary: number;
+    // position: string;
+    // team: string;
+    // age: number;
+    // salary: number;
   }
   
