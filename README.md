@@ -6,7 +6,7 @@ npx serverless offline
 
 curl ifconfig.me
 
-mysql -h your-db-instance-name.rds.amazonaws.com -u your_user -p
+mysql -h mylambdadb.cap2ummaswr9.us-east-1.rds.amazonaws.com -u your_user -p
 
 
 ```
@@ -35,3 +35,23 @@ CIDR/IP	203.0.113.25/32 (your IP/32)
 "typeorm:migration:run": "typeorm migration:run -d src/*/entities/*.entity.ts",
 "typeorm:migration:generate": "typeorm migration:generate",
     "typeorm:migration:run": "typeorm migration:run -d ./src/*/entities/*.entity.ts",
+
+
+
+
+
+    MONGODB_URI: mongodb+srv://werttt:qwertyu@cluster0.hlicuim.mongodb.net/demodb?retryWrites=true&w=majority
+    DB_HOST: mylambdadb.cap2ummaswr9.us-east-1.rds.amazonaws.com
+    DB_PORT: 3306
+    DB_USERNAME: admin
+    DB_PASSWORD: Lnsel$345CFL
+    DB_NAME: test
+
+
+
+
+
+
+
+
+

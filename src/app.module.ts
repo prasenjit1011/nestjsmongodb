@@ -19,10 +19,10 @@ import { PlayerModule } from './player/player.module';
       database: process.env.DB_NAME,
       logging: true,
       entities: [Player],
-      synchronize: true, // Don't use this in production!
+      synchronize: true,
       extra: {
-        connectionLimit: 10, // Limit connections if needed
-      },    // Don't use in production, set to false and use migrations instead
+        connectionLimit: 10,
+      },
     }),
     MongooseModule.forRoot('mongodb+srv://tester:tester1234@cluster0.hlicuim.mongodb.net/demodb?retryWrites=true&w=majority'),
     ProductModule,

@@ -18,6 +18,24 @@ export const handler: Handler = async (event: any, context: Context, callback: C
   return cachedServer(event, context, callback);
 };
 
+// import { Handler } from 'aws-lambda';
+// import serverlessExpress from '@vendia/serverless-express';
+// import { bootstrap } from './main'; // adjust path
+
+// let cachedServer;
+
+// async function bootstrapServer() {
+//   if (!cachedServer) {
+//     const app = await bootstrap();
+//     cachedServer = serverlessExpress({ app });
+//   }
+//   return cachedServer;
+// }
+
+// export const handler: Handler = async (event, context) => {
+//   const server = await bootstrapServer();
+//   return server(event, context);
+// };
 
 
 //import { Callback, Context, Handler } from 'aws-lambda';

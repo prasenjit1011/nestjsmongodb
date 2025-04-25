@@ -25,7 +25,7 @@ export class PlayerService {
 
 
   async findAll(): Promise<Player[]> {
-    return await this.playerRepository.find();
+    return await this.playerRepository.find({order:{id:'DESC'}});
   }
 
   // async findOne(id: number){
