@@ -18,3 +18,17 @@ export const handler: Handler = async (event: any, context: Context, callback: C
   server ??= await bootstrap();
   return server(event, context, callback);
 };
+
+//import { NestFactory } from '@nestjs/core';
+//import { AppModule } from './app.module';
+
+// export async function createApp() {
+//   const app = await NestFactory.create(AppModule);
+//   return app;
+// }
+
+// async function bootstrap() {
+//   const app = await createApp();
+//   await app.listen(3000);
+// }
+// bootstrap();

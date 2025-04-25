@@ -10,7 +10,12 @@ provider:
   memorySize: 512
   timeout: 10
   environment:
-    MONGODB_URI: your-mongodb-uri-here
+    MONGODB_URI: mongodb+srv://werttt:qwertyu@cluster0.hlicuim.mongodb.net/demodb?retryWrites=true&w=majority
+    DB_HOST: 127.0.0.1
+    DB_PORT: 3306
+    DB_USERNAME: root
+    DB_PASSWORD: Riyan@0403
+    DB_NAME: test
 
 functions:
   api:
