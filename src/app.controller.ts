@@ -21,7 +21,7 @@ export class AppController {
   handleMessage(data: any) {
     console.clear();
     console.log();
-    console.log('📥 RabbitMQ Subscriber Received Msg @ 3000:');
+    console.log('📥 RabbitMQ Subscriber Received Msg @ ', process.env.PORT, ' : ');
     console.log(data);
     return { ack: true };
   }
@@ -29,7 +29,7 @@ export class AppController {
 
   @Get()
   async getHello(){
-      const message = 'Hello Rabbit MQ ! From 3001 : ' + (new Date()).getMilliseconds();
+      const message = 'Hello Rabbit MQ ! From '+process.env.PORT+' : ' + (new Date()).getMilliseconds();
       const result  = await firstValueFrom(this.client.send('test_route', { message }));
       //const result1 = await this.client.send('test_route', { message }).toPromise();
       return {message};
