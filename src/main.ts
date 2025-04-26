@@ -5,6 +5,7 @@ import { Transport } from '@nestjs/microservices';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
+  dotenv.config(); // Load .env before anything else
   console.log('PORT : ', process.env.PORT)
   const app = await NestFactory.create(AppModule);
   app.connectMicroservice({
