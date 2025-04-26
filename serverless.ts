@@ -1,0 +1,40 @@
+import type { AWS } from '@serverless/typescript';
+
+const serverlessConfiguration: AWS = {
+  service: 'nest-lambda-service',
+  frameworkVersion: '>= 4.*.*',
+  provider: {
+    name: 'aws',
+    runtime: 'nodejs18.x',
+    region: 'us-east-1',
+    stage: 'dev',
+    memorySize: 512,
+    timeout: 10,
+    environment: {
+      MONGODB_URI: 'your-mongodb-uri-here',
+    },
+  },
+  functions: {
+    api: {
+      handler: 'dist/lambda.handler',
+      events: [
+        {
+          httpApi: '*',
+        },
+      ],
+    },
+  },
+  plugins: ['serverless-offline'],
+  package: {
+    individually: true,
+    excludeDevDependencies: true,
+  },
+  custom: {
+    'serverless-offline': {
+      httpPort: 3000,
+      noPrependStageInUrl: true,
+    },
+  },
+};
+
+module.exports = serverlessConfiguration;
