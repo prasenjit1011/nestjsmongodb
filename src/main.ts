@@ -26,7 +26,7 @@ async function bootstrap() {
 
   console.log('PORT : ', process.env.PORT)
   // Start the HTTP server
-  await app.listen(3000); //3001
+  await app.listen(process.env.PORT); //3001
   console.log('🚀 App is listening on port 3000');
 }
 
