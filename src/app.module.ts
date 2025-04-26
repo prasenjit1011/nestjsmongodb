@@ -4,10 +4,10 @@ import { AppService } from './app.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  imports: [
+  imports:[
     ClientsModule.register([
       {
-        name: 'RABBITMQ_SERVICE_A',
+        name: 'RABBITMQ_SERVICE',
         transport: Transport.RMQ,
         options: {
           urls: ['amqp://localhost:5672'],
@@ -23,4 +23,3 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   providers: [AppService],
 })
 export class AppModule {}
-

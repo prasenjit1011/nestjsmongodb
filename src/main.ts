@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+//import { AppService } from './app.service';
 
 async function bootstrap() {
   // Create the main app (HTTP server)
@@ -23,7 +24,7 @@ async function bootstrap() {
   console.log('✅ RabbitMQ subscriber is running...');
 
   // Start the HTTP server
-  await app.listen(3000);
+  await app.listen(3000); //3001
   console.log('🚀 App is listening on port 3000');
 }
 
