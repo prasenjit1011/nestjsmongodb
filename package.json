@@ -22,8 +22,10 @@
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/microservices": "^11.1.0",
     "@nestjs/platform-express": "^10.0.0",
     "dotenv": "^16.5.0",
+    "microservices": "^0.1.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
