@@ -1,4 +1,4 @@
-service: nest-lambda-service
+service: my-lambda-a
 
 frameworkVersion: '>= 4.*.*'
 
@@ -11,12 +11,23 @@ provider:
   timeout: 10
   environment:
     MONGODB_URI: your-mongodb-uri-here
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - sns:Publish
+          Resource: "*"
 
 functions:
   api:
     handler: dist/lambda.handler
     events:
       - httpApi: '*'
+  app:
+    handler: dist/main.handler
+    events:
+      - sns: arn:aws:sns:us-east-1:123456789012:MyLambdaTopic
 
 plugins:
   - serverless-offline
@@ -24,6 +35,9 @@ plugins:
 package:
   individually: true
   excludeDevDependencies: true
+  exclude:
+    - node_modules/**
+    - test/**
 
 custom:
   serverless-offline:
