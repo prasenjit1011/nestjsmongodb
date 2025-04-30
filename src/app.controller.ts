@@ -2,12 +2,14 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 import { firstValueFrom } from 'rxjs';
+import { FaqService } from './faqs/faq.service';
 
 
 @Controller('/')
 export class AppController {
   constructor(
     @Inject('RABBITMQ_SERVICE') private readonly client: ClientProxy,
+    private readonly faqService: FaqService,
     private readonly appService: AppService
   ) {}
 
@@ -19,10 +21,15 @@ export class AppController {
 
   @MessagePattern('test_route')
   handleMessage(data: any) {
-    console.clear();
+    //console.clear();
     console.log();
     console.log('📥 RabbitMQ Subscriber Received Msg @ ', process.env.PORT, ' : ');
     console.log(data);
+
+    const answer = "Faq World "+data?.message;
+    const faqData = {question:"Hello", answer};
+    this.faqService.create(faqData);
+
     return { ack: true };
   }
 

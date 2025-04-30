@@ -21,13 +21,13 @@ async function bootstrap() {
   });
 
   // Start the microservice
-  await app.startAllMicroservices();
+  await app.startAllMicroservices();  
+  await app.listen(process.env.PORT); //3001
+
+  console.clear();
+  console.log('PORT : ', process.env.PORT)
   console.log('✅ RabbitMQ subscriber is running...');
 
-  console.log('PORT : ', process.env.PORT)
-  // Start the HTTP server
-  await app.listen(process.env.PORT); //3001
-  console.log('🚀 App is listening on port ', process.env.PORT);
 }
 
 bootstrap();
