@@ -26,8 +26,9 @@ export class AppController {
     console.log('📥 RabbitMQ Subscriber Received Msg @ ', process.env.PORT, ' : ');
     console.log(data);
 
-    const answer = "Faq World "+data?.message;
-    const faqData = {question:"Hello", answer};
+    const question  = "Faq World @ "+ process.env.PORT;
+    const answer    = data?.message;
+    const faqData = {question, answer};
     this.faqService.create(faqData);
 
     return { ack: true };
