@@ -1,4 +1,4 @@
-service: lambda_01
+service: lambdasns01
 
 frameworkVersion: '>= 4.*.*'
 
@@ -9,6 +9,13 @@ provider:
   stage: dev
   memorySize: 512
   timeout: 10
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sns:Subscribe
+        - sns:Receive
+        - sns:Publish
+      Resource: arn:aws:sns:us-east-1:466015320752:MySNSTopic
   environment:
     MONGODB_URI: your-mongodb-uri-here
 
@@ -16,6 +23,8 @@ functions:
   api:
     handler: dist/lambda.handler
     events:
+      - sns:
+          arn: arn:aws:sns:us-east-1:466015320752:MySNSTopic
       - httpApi: '*'
 
 plugins:
