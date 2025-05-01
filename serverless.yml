@@ -1,4 +1,4 @@
-service: nest-lambda-service
+service: lambda_01
 
 frameworkVersion: '>= 4.*.*'
 
