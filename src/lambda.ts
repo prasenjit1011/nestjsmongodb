@@ -7,6 +7,9 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 import { SnsController } from './sns.controller';
 
+import { SnsService } from './sns.service';
+//import { SnsService } from './sns.service'; // move logic to service
+
 
 // Step 01
 // let cachedServer: Handler;
@@ -59,22 +62,62 @@ import { SnsController } from './sns.controller';
 
 
 // Step 03
+// let appContext;
+
+// export const handler: Handler = async (event: any, context: Context) => {
+//   if (!appContext) {
+//     appContext = await NestFactory.createApplicationContext(AppModule);
+//   }
+
+//   // SNS Event Handling
+//   if (event.Records?.[0]?.EventSource === 'aws:sns') {
+//     const snsEvent = event as SNSEvent;
+
+//     const controller = appContext.get(SnsController);
+
+//     for (const record of snsEvent.Records) {
+//       const message = record.Sns.Message;
+//       await controller.handleSnsMessage(message);
+//     }
+
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify({ message: 'SNS message(s) processed' }),
+//     };
+//   }
+
+//   return {
+//     statusCode: 400,
+//     body: 'Unsupported event type',
+//   };
+// };
+
+
+
+
+const expressApp = express();
+let cachedHandler: Handler;
 let appContext;
 
-export const handler: Handler = async (event: any, context: Context) => {
-  if (!appContext) {
-    appContext = await NestFactory.createApplicationContext(AppModule);
-  }
+async function bootstrapHttp(): Promise<Handler> {
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  await app.init();
+  return serverlessExpress({ app: expressApp });
+}
 
+export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
   // SNS Event Handling
   if (event.Records?.[0]?.EventSource === 'aws:sns') {
-    const snsEvent = event as SNSEvent;
+    if (!appContext) {
+      appContext = await NestFactory.createApplicationContext(AppModule);
+    }
 
-    const controller = appContext.get(SnsController);
+    const snsService = appContext.get(SnsService);
+    const snsEvent = event as SNSEvent;
 
     for (const record of snsEvent.Records) {
       const message = record.Sns.Message;
-      await controller.handleSnsMessage(message);
+      await snsService.handleSnsMessage(message);
     }
 
     return {
@@ -83,8 +126,7 @@ export const handler: Handler = async (event: any, context: Context) => {
     };
   }
 
-  return {
-    statusCode: 400,
-    body: 'Unsupported event type',
-  };
+  // HTTP Request Handling
+  cachedHandler ??= await bootstrapHttp();
+  return cachedHandler(event, context, callback);
 };

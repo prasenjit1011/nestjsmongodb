@@ -8,8 +8,8 @@ export class SnsController {
     this.logger.log(`Received SNS message: ${message}`);
 
     // Parse and process your SNS message
-    const parsed = JSON.parse(message);
-    // Example business logic
-    this.logger.log(`Processed data: ${parsed?.data}`);
+    // const parsed = JSON.parse(message);
+    // // Example business logic
+    // this.logger.log(`Processed data: ${parsed?.data}`);
   }
 }

@@ -23,9 +23,9 @@ functions:
   api:
     handler: dist/lambda.handler
     events:
-      - sns:
-          arn: arn:aws:sns:us-east-1:466015320752:MySNSTopic
       - httpApi: '*'
+      - sns:
+          arn: arn:aws:sns:us-east-1:466015320752:MySNSTopic      
 
 plugins:
   - serverless-offline
