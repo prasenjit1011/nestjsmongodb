@@ -40,7 +40,7 @@ export const handler: Handler = async (event: any, context: Context, callback: C
       const message = record.Sns.Message;
       await snsService.handleSnsMessage(message);
 
-      logger.log(`Received SNS message 0007 : ${message}`); // ✅ this works
+      logger.log(`Received SNS message 0800 : ${message} `); // ✅ this works
     }
 
     return {
