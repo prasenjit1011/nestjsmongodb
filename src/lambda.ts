@@ -8,7 +8,53 @@ import * as express from 'express';
 import { SnsController } from './sns.controller';
 
 import { SnsService } from './sns.service';
+import { Logger } from '@nestjs/common';
 //import { SnsService } from './sns.service'; // move logic to service
+
+
+// Step : Final
+
+const expressApp = express();
+let cachedHandler: Handler;
+let appContext;
+const logger = new Logger('LambdaHandler');
+
+
+async function bootstrapHttp(): Promise<Handler> {
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  await app.init();
+  return serverlessExpress({ app: expressApp });
+}
+
+export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
+  // SNS Event Handling
+  if (event.Records?.[0]?.EventSource === 'aws:sns') {
+    if (!appContext) {
+      appContext = await NestFactory.createApplicationContext(AppModule);
+    }
+
+    const snsService = appContext.get(SnsService);
+    const snsEvent = event as SNSEvent;
+
+    for (const record of snsEvent.Records) {
+      const message = record.Sns.Message;
+      await snsService.handleSnsMessage(message);
+
+      logger.log(`Received SNS message 0007 : ${message}`); // ✅ this works
+    }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'SNS message(s) processed' }),
+    };
+  }
+
+  // HTTP Request Handling
+  cachedHandler ??= await bootstrapHttp();
+  return cachedHandler(event, context, callback);
+};
+
+
 
 
 // Step 01
@@ -94,39 +140,3 @@ import { SnsService } from './sns.service';
 
 
 
-
-const expressApp = express();
-let cachedHandler: Handler;
-let appContext;
-
-async function bootstrapHttp(): Promise<Handler> {
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
-  await app.init();
-  return serverlessExpress({ app: expressApp });
-}
-
-export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
-  // SNS Event Handling
-  if (event.Records?.[0]?.EventSource === 'aws:sns') {
-    if (!appContext) {
-      appContext = await NestFactory.createApplicationContext(AppModule);
-    }
-
-    const snsService = appContext.get(SnsService);
-    const snsEvent = event as SNSEvent;
-
-    for (const record of snsEvent.Records) {
-      const message = record.Sns.Message;
-      await snsService.handleSnsMessage(message);
-    }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'SNS message(s) processed' }),
-    };
-  }
-
-  // HTTP Request Handling
-  cachedHandler ??= await bootstrapHttp();
-  return cachedHandler(event, context, callback);
-};
