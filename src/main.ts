@@ -9,6 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.PORT);
 
-  console.log(join(__dirname, '..', 'public', 'video.mp4'))
+  console.clear();
+  console.log('PORT : ', process.env.PORT)
 }
 bootstrap();
