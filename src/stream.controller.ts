@@ -9,7 +9,7 @@ export class StreamController {
 
     @Get('file')
     streamFile(@Res() res: Response) {
-        const filePath = join(__dirname, '..', 'sample.txt');
+        const filePath = join(__dirname, '..', 'public', 'sample.txt');
         const fileStream = createReadStream(filePath);
 
         res.set({
@@ -37,7 +37,7 @@ export class StreamController {
 
     @Get('video')
     streamVideo(@Req() req: Request, @Res() res: Response) {
-        const videoPath = join(__dirname, '..', 'video.mp4');
+        const videoPath = join(__dirname, '..', 'public', 'video.mp4');
         const videoStat = statSync(videoPath);
         const fileSize  = videoStat.size;
 
