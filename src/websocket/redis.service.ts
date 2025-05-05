@@ -26,6 +26,7 @@ export class RedisService implements OnModuleInit {
   }
 
   publish(channel: string, message: string) {
+    message = "Redis Msg : "+message
     this.pub.publish(channel, message);
   }
 }
