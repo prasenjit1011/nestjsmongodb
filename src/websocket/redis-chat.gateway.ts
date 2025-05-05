@@ -5,7 +5,7 @@ import {
     WebSocketServer,
   } from '@nestjs/websockets';
   import { Server } from 'socket.io';
-  import { RedisService } from './redis.service';
+  import { RedisService } from './redis-chat.service';
   import { OnEvent } from '@nestjs/event-emitter';
   
   @WebSocketGateway({ cors: true })

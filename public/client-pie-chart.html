@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebSocket Chat</title>
+  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Chat</h2>
+  <input type="text" id="user" placeholder="Your Name" />
+  <input type="text" id="message" placeholder="Type a message" />
+  <button onclick="sendMessage()">Send</button>
+
+  <ul id="chat"></ul>
+
+  <h3>Messages by User</h3>
+  <canvas id="chart" width="150" height="150"></canvas>
+
+  <script>
+    const socket = io('http://localhost:3001');
+
+    function sendMessage() {
+      const user = document.getElementById('user').value;
+      const message = document.getElementById('message').value;
+      if (user && message) {
+        socket.emit('message', { user, message });
+        document.getElementById('message').value = '';
+      }
+    }
+
+    socket.on('message', (data) => {
+      const li = document.createElement('li');
+      li.textContent = `${data.user}: ${data.message}`;
+      document.getElementById('chat').appendChild(li);
+    });
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [],
+        datasets: [{
+          label: '# of Messages',
+          data: [],
+          backgroundColor: ['red', 'blue', 'green', 'orange', 'purple'],
+        }],
+      },
+    });
+
+    socket.on('stats', (data) => {
+      chart.data.labels = Object.keys(data);
+      chart.data.datasets[0].data = Object.values(data);
+      chart.update();
+    });
+  </script>
+</body>
+</html>

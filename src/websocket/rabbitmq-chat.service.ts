@@ -5,8 +5,11 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 export class RabbitMQService {
   constructor(private readonly amqpConnection: AmqpConnection) {}
 
-  publishMessage(message: string) {
-    message = "RabitMQ Msg : "+message;
-    this.amqpConnection.publish('chat_exchange', '', message);
+  publishMessage(data: any) {
+    if(typeof(data) == 'string'){
+      console.log(typeof data)
+      let message = "RabitMQ Msg : "+data;
+      this.amqpConnection.publish('chat_exchange', '', message);
+    }
   }
 }

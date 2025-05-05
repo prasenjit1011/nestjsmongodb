@@ -25,8 +25,11 @@ export class RedisService implements OnModuleInit {
     });
   }
 
-  publish(channel: string, message: string) {
-    message = "Redis Msg : "+message
-    this.pub.publish(channel, message);
+  publish(channel: string, data: any) {
+    if(typeof(data) == 'string'){
+      console.log(typeof data)
+      let message = "Redis Msg : "+ data;
+      this.pub.publish(channel, message);
+    }
   }
 }

@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ChatGateway as ChatGatewayRedis } from './websocket/chat-redis.gateway';
-import { ChatGateway as ChatGatewayRabitmq } from './websocket/chat-rabitmq.gateway';
-import { RedisService } from './websocket/redis.service';
-import { RabbitMQService } from './websocket/rabbit.service';
+
+import { ChatGateway as ChatGatewayRedis } from './websocket/redis-chat.gateway';
+import { ChatGateway as ChatGatewayRabitmq } from './websocket/rabbitmq-chat.gateway';
+import { RedisService } from './websocket/redis-chat.service';
+import { RabbitMQService } from './websocket/rabbitmq-chat.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { ChatGateway as ChatGatewayPie } from './websocket/redis-chat-pie-chart.gateway';
 import { join } from 'path';
+import { RedisModule } from 'nestjs-redis';
 
 
 @Module({
@@ -27,7 +28,11 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'public'), // <-- path to /public
     })
   ],
-  controllers: [AppController],
-  providers: [AppService, ChatGatewayRedis, RedisService, ChatGatewayRabitmq, RabbitMQService],
+  controllers: [],
+  providers: [
+    ChatGatewayRedis, RedisService, 
+    ChatGatewayRabitmq, RabbitMQService, 
+    ChatGatewayPie
+  ],
 })
 export class AppModule {}

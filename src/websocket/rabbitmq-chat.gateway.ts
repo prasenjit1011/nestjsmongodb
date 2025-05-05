@@ -5,7 +5,7 @@ import {
     WebSocketServer,
   } from '@nestjs/websockets';
   import { Server } from 'socket.io';
-  import { RabbitMQService } from './rabbit.service';
+  import { RabbitMQService } from './rabbitmq-chat.service';
   import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
   
   @WebSocketGateway()
