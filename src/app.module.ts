@@ -10,6 +10,7 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { ChatGateway as ChatGatewayPie } from './websocket/redis-chat-pie-chart.gateway';
 import { join } from 'path';
 import { RedisModule } from 'nestjs-redis';
+import { AppController } from './app.controller';
 
 
 @Module({
@@ -21,6 +22,11 @@ import { RedisModule } from 'nestjs-redis';
           name: 'chat_exchange',
           type: 'fanout',
         },
+        {
+          name: 'number_exchange',
+          type: 'fanout',
+        },
+        
       ],
       uri: 'amqp://localhost:5672',
     }),
@@ -28,7 +34,7 @@ import { RedisModule } from 'nestjs-redis';
       rootPath: join(__dirname, '..', 'public'), // <-- path to /public
     })
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     ChatGatewayRedis, RedisService, 
     ChatGatewayRabitmq, RabbitMQService, 

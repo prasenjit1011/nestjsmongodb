@@ -7,9 +7,13 @@ export class RabbitMQService {
 
   publishMessage(data: any) {
     if(typeof(data) == 'string'){
-      console.log(typeof data)
-      let message = "RabitMQ Msg : "+data;
+      let message = "RabitMQ Msg12 : "+data;
       this.amqpConnection.publish('chat_exchange', '', message);
     }
+  }
+
+  publishRandNumber(data: any) {
+    let message = "RabitMQ RandNumber : "+data;
+    this.amqpConnection.publish('number_exchange', 'mynumber', data);  
   }
 }

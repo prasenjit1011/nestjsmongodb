@@ -17,16 +17,28 @@ import {
   
     @SubscribeMessage('message')
     handleMessage(@MessageBody() message: string) {
-      this.rabbit.publishMessage(message);
+      // let randNum = 'Random : '+(new Date).getMilliseconds();
+      // this.rabbit.publishRandNumber(randNum);
+      this.rabbit.publishMessage(message);      
     }
-  
+
+    @RabbitSubscribe({
+      exchange: 'number_exchange',
+      routingKey: 'mynumber',
+      queue: 'number_queue',
+    })
+
     @RabbitSubscribe({
       exchange: 'chat_exchange',
       routingKey: '',
       queue: 'chat_queue',
     })
+    
     onChatMessage(msg: string) {
-      this.server.emit('message', msg);
+      console.log('Emited msg from backend');
+      console.log('For Chat msg can be Emited from frontend or client');
+      this.server.emit('randnumber', msg);
+      //this.server.emit('message', msg);
     }
   }
   
