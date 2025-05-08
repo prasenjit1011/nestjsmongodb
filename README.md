@@ -3,6 +3,7 @@
 </p>
 
 ```bash
+### Step 01 ###
 
 # mutation {
 #   createCountry(input: { name: "India" }) {
@@ -17,6 +18,46 @@
 #     name
 #   }
 # }
+
+
+### Step 02 ###
+
+# mutation {
+#   createState(input: { name: "Orisha" }) {
+#     id
+#     name
+#   }
+# }
+
+# query {
+#   states {
+#     id
+#     name
+#   }
+# }
+
+
+### Step 03 ###
+
+# mutation {
+#   createState(input: { name: "Gujrat", countryId:"681ca957d26e346e2f4316ae" }) {
+#     id
+#     name
+#   }
+# }
+
+# query {
+#   states {
+#     id
+#     name
+#     country{
+#       name
+#     }
+#   }
+# }
+
+
+
 
 
 ```

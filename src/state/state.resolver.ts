@@ -12,6 +12,12 @@ export class StateResolver {
     return this.stateService.findAll();
   }
 
+  // @ResolveField(() => CountryType)
+  // async country(@Parent() state: State) {
+  //   return this.countryService.findById(state.country); // add `findById()` in country service
+  // }
+
+
   @Mutation(() => StateType)
   async createState(@Args('input') input: CreateStateInput) {
     return this.stateService.create(input);

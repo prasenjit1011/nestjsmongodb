@@ -10,6 +10,7 @@ type CountryType {
 type StateType {
   id: ID!
   name: String!
+  country: CountryType
 }
 
 type Query {
@@ -28,4 +29,5 @@ input CreateCountryInput {
 
 input CreateStateInput {
   name: String!
+  countryId: String
 }

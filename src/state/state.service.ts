@@ -9,11 +9,21 @@ export class StateService {
   constructor(@InjectModel(State.name) private stateModel: Model<StateDocument>) {}
 
   async create(input: CreateStateInput): Promise<State> {
-    const newState = new this.stateModel(input);
+    //const newState = new this.stateModel(input);
+    // const newState = new this.stateModel({ 
+    //   name: input.name, 
+    //   country: input.countryId 
+    // });
+
+    const newState = new this.stateModel({
+      name: input.name,
+      ...(input.countryId && { country: input.countryId }), // assign only if provided
+    });
+
     return newState.save();
   }
 
   async findAll(): Promise<State[]> {
-    return this.stateModel.find().exec();
+    return this.stateModel.find().populate('country').exec();
   }
 }
