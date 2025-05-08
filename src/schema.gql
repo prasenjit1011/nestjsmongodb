@@ -2,15 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CountryType {
-  id: ID!
-  name: String!
-}
-
 type StateType {
   id: ID!
   name: String!
   country: CountryType
+}
+
+type CountryType {
+  id: ID!
+  name: String!
+  states: [StateType!]
 }
 
 type Query {

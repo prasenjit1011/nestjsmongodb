@@ -26,4 +26,9 @@ export class StateService {
   async findAll(): Promise<State[]> {
     return this.stateModel.find().populate('country').exec();
   }
+
+  async findByCountryId(countryId: string): Promise<State[]> {
+    return this.stateModel.find({ country: countryId }).exec();
+  } 
+
 }

@@ -7,5 +7,6 @@ import { StateResolver } from './state.resolver';
 @Module({
   imports: [MongooseModule.forFeature([{ name: State.name, schema: StateSchema }])],
   providers: [StateService, StateResolver],
+  exports: [StateService]
 })
 export class StateModule {}
