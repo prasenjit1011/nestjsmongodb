@@ -20,6 +20,7 @@ type CountryType {
   id: ID!
   name: String!
   states: [StateType!]
+  stateDetails: [StateType!]
 }
 
 type Query {

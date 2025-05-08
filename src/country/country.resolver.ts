@@ -29,24 +29,8 @@ export class CountryResolver {
   }
 
   @ResolveField(() => [StateType], { nullable: true })
-  async states(@Parent() country: CountryType){
+  async stateDetails(@Parent() country: CountryType){
     return this.stateService.findByCountryId(country.id);
   }
-
-////////////////////////////
-
-
-  // @Query(() => [StateType])
-  // async stateDetails(): Promise<State[]> {
-  //   return this.stateService.findAll();
-  // }
-
-  // @ResolveField(() => [DistrictType], { nullable: true })
-  // async districts(@Parent() state: StateType){
-  //   return this.districtService.findByCountryId(state.id);
-  // }
-
-//////////////
-
 
 }

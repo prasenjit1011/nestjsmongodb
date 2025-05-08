@@ -24,7 +24,14 @@ export class DistrictService {
   }
 
   async findAll(): Promise<District[]> {
-    return this.districtModel.find().populate('state').exec();
+    return this.districtModel
+                .find()
+                .populate({
+                  path: 'state',
+                  populate: { 
+                    path: 'country' 
+                  }
+                });
   }
 
   async findByStateId(stateId: string): Promise<District[]> {

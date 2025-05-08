@@ -117,7 +117,35 @@
 # }
 
 
+### Step 07 : Country <-> State <-> District
+# query {
+#   countries {
+#     id
+#     name
+#     stateDetails {
+#       id
+#       name
+#       districts{
+#         name
+#       }
+#     }
+#   }
+# }
 
+# query {
+#   districts {
+#     id
+#     name
+#     state {
+#       id
+#       name
+#       country {
+#         id
+#         name
+#       }
+#     }
+#   }
+# }
 
 
 ```
