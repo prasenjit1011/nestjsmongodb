@@ -8,6 +8,7 @@ import { join } from 'path';
 import { CountryModule } from './country/country.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StateModule } from './state/state.module';
+import { DistrictModule } from './district/district.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { StateModule } from './state/state.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // auto-generate schema
     }),
     CountryModule,
-    StateModule
+    StateModule,
+    DistrictModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -13,3 +13,12 @@ export class State {
 
 export type StateDocument = State & Document;
 export const StateSchema = SchemaFactory.createForClass(State);
+
+StateSchema.virtual('districts', {
+  ref: 'District',
+  localField: '_id',
+  foreignField: 'state',
+});
+
+StateSchema.set('toObject', { virtuals: true });
+StateSchema.set('toJSON', { virtuals: true });

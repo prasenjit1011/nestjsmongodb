@@ -27,6 +27,12 @@ export class StateService {
     return this.stateModel.find().populate('country').exec();
   }
 
+
+  async findDetails(): Promise<State[]> {
+    console.log('-: State List :-', (new Date).getMilliseconds())
+    return this.stateModel.find().populate('district').exec();;
+  }
+
   async findByCountryId(countryId: string): Promise<State[]> {
     return this.stateModel.find({ country: countryId }).exec();
   } 

@@ -6,7 +6,8 @@
 ####  Country <-> State
 
 ```bash
-### Step 01 ###
+
+### Step 01 : Country list ###
 
 # mutation {
 #   createCountry(input: { name: "India" }) {
@@ -23,7 +24,7 @@
 # }
 
 
-### Step 02 ###
+### Step 02 : State list ###
 
 # mutation {
 #   createState(input: { name: "Orisha" }) {
@@ -40,7 +41,7 @@
 # }
 
 
-### Step 03 ###
+### Step 03 : State -> country ###
 
 # mutation {
 #   createState(input: { name: "Gujrat", countryId:"681ca957d26e346e2f4316ae" }) {
@@ -60,7 +61,7 @@
 # }
 
 
-### Step 04 ###
+### Step 04 : Country -> state ###
 
 # query {
 #   countries {
@@ -72,6 +73,51 @@
 #     }
 #   }
 # }
+
+
+### Step 05 : Add District ###
+
+# mutation {
+#   createDistrict(input: { name: "Purulia", stateId:"681cb08a733303d44996c79f" }) {
+#     id
+#     name
+#   }
+# }
+
+# query {
+#   districts {
+#     id
+#     name
+#   }
+# }
+
+
+### Step 06 : Distict -> state ###
+
+# query {
+#   districts{
+#     id
+#     name
+#     state{
+#       name
+#     }
+#   }
+# }
+
+
+## Done : State -> District
+# query {
+#   stateDetails {
+#     id
+#     name
+#     districts {
+#       name
+#     }
+#   }
+# }
+
+
+
 
 
 ```

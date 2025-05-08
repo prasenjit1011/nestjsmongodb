@@ -13,15 +13,15 @@ export class CountryResolver {
     private stateService: StateService
   ) {}
 
-  // @Query(() => [CountryType])
-  // async countries() {
-  //   return this.countryService.findAll();
-  // }
-
   @Mutation(() => CountryType)
   async createCountry(@Args('input') input: CreateCountryInput) {
     return this.countryService.create(input);
   }
+
+  // @Query(() => [CountryType])
+  // async countries() {
+  //   return this.countryService.findAll();
+  // }
 
   @Query(() => [CountryType])
   async countries(): Promise<Country[]> {
@@ -32,4 +32,21 @@ export class CountryResolver {
   async states(@Parent() country: CountryType){
     return this.stateService.findByCountryId(country.id);
   }
+
+////////////////////////////
+
+
+  // @Query(() => [StateType])
+  // async stateDetails(): Promise<State[]> {
+  //   return this.stateService.findAll();
+  // }
+
+  // @ResolveField(() => [DistrictType], { nullable: true })
+  // async districts(@Parent() state: StateType){
+  //   return this.districtService.findByCountryId(state.id);
+  // }
+
+//////////////
+
+
 }

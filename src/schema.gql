@@ -2,10 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type DistrictType {
+  id: ID!
+  name: String!
+  state: StateType
+}
+
 type StateType {
   id: ID!
   name: String!
   country: CountryType
+  district: [DistrictType!]
+  districts: [DistrictType!]
 }
 
 type CountryType {
@@ -17,11 +25,15 @@ type CountryType {
 type Query {
   countries: [CountryType!]!
   states: [StateType!]!
+  stateList: [StateType!]!
+  stateDetails: [StateType!]!
+  districts: [DistrictType!]!
 }
 
 type Mutation {
   createCountry(input: CreateCountryInput!): CountryType!
   createState(input: CreateStateInput!): StateType!
+  createDistrict(input: CreateDistrictInput!): DistrictType!
 }
 
 input CreateCountryInput {
@@ -31,4 +43,9 @@ input CreateCountryInput {
 input CreateStateInput {
   name: String!
   countryId: String
+}
+
+input CreateDistrictInput {
+  name: String!
+  stateId: String
 }
