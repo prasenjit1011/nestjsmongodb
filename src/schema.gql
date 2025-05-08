@@ -1,0 +1,31 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CountryType {
+  id: ID!
+  name: String!
+}
+
+type StateType {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  countries: [CountryType!]!
+  states: [StateType!]!
+}
+
+type Mutation {
+  createCountry(input: CreateCountryInput!): CountryType!
+  createState(input: CreateStateInput!): StateType!
+}
+
+input CreateCountryInput {
+  name: String!
+}
+
+input CreateStateInput {
+  name: String!
+}
