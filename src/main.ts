@@ -9,6 +9,6 @@ async function bootstrap() {
   await app.listen(process.env.PORT);
 
   console.clear();
-  console.log('PORT : ', process.env.PORT)
+  console.log('PORT :-- ', process.env.PORT)
 }
 bootstrap();
