@@ -10,6 +10,7 @@
 ### Step 01 : Country list ###
 
 mutation { createCountry (input: { name: "India" }) { id, name }}
+mutation { createCompany (input: { name: "NBFC 01", district: "681d62e37c6c4a51aeb1d917" }) { id, name }}
 mutation { createBook (input: { title: "IndiaGovt", author: "Test" }) { id, title }}
 
 # query {

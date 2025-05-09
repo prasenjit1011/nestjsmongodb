@@ -23,7 +23,14 @@ type CountryType {
   stateDetails: [StateType!]
 }
 
+type CompanyType {
+  id: ID!
+  name: String!
+  district: DistrictType
+}
+
 type Query {
+  companies: [CompanyType!]!
   countries: [CountryType!]!
   states: [StateType!]!
   stateList: [StateType!]!
@@ -32,9 +39,15 @@ type Query {
 }
 
 type Mutation {
+  createCompany(input: CreateCompanyInput!): CompanyType!
   createCountry(input: CreateCountryInput!): CountryType!
   createState(input: CreateStateInput!): StateType!
   createDistrict(input: CreateDistrictInput!): DistrictType!
+}
+
+input CreateCompanyInput {
+  name: String!
+  districtId: String
 }
 
 input CreateCountryInput {

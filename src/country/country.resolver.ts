@@ -18,11 +18,6 @@ export class CountryResolver {
     return this.countryService.create(input);
   }
 
-  // @Query(() => [CountryType])
-  // async countries() {
-  //   return this.countryService.findAll();
-  // }
-
   @Query(() => [CountryType])
   async countries(): Promise<Country[]> {
     return this.countryService.findAll();
