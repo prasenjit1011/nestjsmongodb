@@ -3,7 +3,7 @@
 </p>
 
 
-#####  Important command list to setup project CRUD 
+#####  01. Important command list to setup project CRUD 
 ```bash
 
 # npm i -g nestjs/cli
@@ -21,8 +21,16 @@
 
 ```
 
-#####  NestJS + Mongoose + GraphQL + JWT Auth + Upload File
+#####  02. Websocket + Redis + RabbitMQ with standalone HTML file client.html
+```bash
 
+1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
+2. Chat System ( http://localhost:3001/client.html )
+3. Pie Chart ( http://localhost:3001/client-pie-chart.html )
+
+```
+
+#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File
 ```bash
 
 ### 1.  Country <-> State <-> District <-> Company <-> Employee 
