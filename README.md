@@ -14,42 +14,11 @@
 
 ### Start :   CRUD ( Country, Auth ) ###
 ### Listing : Country -> State -> District -> Company 
-
-# query { 
-#   countryDetails {
-#     name
-#     stateDetails {
-#       name
-#       districtDetails {
-#         name
-#         companyDetails {
-#           name
-#           employeeDetails{
-#             name
-#           }
-#         }
-#       }
-#     }
-#   }
-# }
-
+### query { countryDetails {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
 
 ### Company -> District -> State -> Country
 ### stateDetails, districtDetails, companyDetails
-# query {
-#   companyDetails {
-#     name
-#     district {
-#       name
-#       state {
-#         name
-#         country {
-#           name
-#         }
-#       }
-#     }
-#   }
-# }
+### query { companyDetails { name, district { name, state { name, country { name }}}}}
 
 
 ### Add, Update, Delete : CRUD ( Country ) ###
