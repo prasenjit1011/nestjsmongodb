@@ -3,10 +3,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { District, DistrictSchema } from './district.schema';
 import { DistrictService } from './district.service';
 import { DistrictResolver } from './district.resolver';
+import { CompanyModule } from 'src/company/company.module';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: District.name, schema: DistrictSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: District.name, schema: DistrictSchema }]),
+    CompanyModule
+  ],
   providers: [DistrictService, DistrictResolver],
   exports: [DistrictService]
 })

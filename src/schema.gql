@@ -2,24 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type DistrictType {
-  id: ID!
-  name: String!
-  state: StateType
-}
-
-type StateType {
-  id: ID!
-  name: String!
-  country: CountryType
-  district: [DistrictType!]
-  districts: [DistrictType!]
-}
-
 type CountryType {
   id: ID!
   name: String!
-  states: [StateType!]
   stateDetails: [StateType!]
 }
 
@@ -27,27 +12,45 @@ type CompanyType {
   id: ID!
   name: String!
   district: DistrictType
+  employeeDetails: [EmployeeType!]
+}
+
+type DistrictType {
+  id: ID!
+  name: String!
+  state: StateType
+  company: [CompanyType!]
+  companyDetails: [CompanyType!]
+}
+
+type StateType {
+  id: ID!
+  name: String!
+  country: CountryType
+  district: [DistrictType!]
+  districtDetails: [DistrictType!]
+}
+
+type EmployeeType {
+  id: ID!
+  name: String!
+  company: CompanyType
 }
 
 type Query {
-  companies: [CompanyType!]!
-  countries: [CountryType!]!
-  states: [StateType!]!
-  stateList: [StateType!]!
+  countryDetails: [CountryType!]!
   stateDetails: [StateType!]!
-  districts: [DistrictType!]!
+  districtDetails: [DistrictType!]!
+  companyDetails: [CompanyType!]!
+  employeeDetails: [EmployeeType!]!
 }
 
 type Mutation {
-  createCompany(input: CreateCompanyInput!): CompanyType!
   createCountry(input: CreateCountryInput!): CountryType!
   createState(input: CreateStateInput!): StateType!
   createDistrict(input: CreateDistrictInput!): DistrictType!
-}
-
-input CreateCompanyInput {
-  name: String!
-  districtId: String
+  createCompany(input: CreateCompanyInput!): CompanyType!
+  createEmployee(input: CreateEmployeeInput!): EmployeeType!
 }
 
 input CreateCountryInput {
@@ -62,4 +65,14 @@ input CreateStateInput {
 input CreateDistrictInput {
   name: String!
   stateId: String
+}
+
+input CreateCompanyInput {
+  name: String!
+  districtId: String
+}
+
+input CreateEmployeeInput {
+  name: String!
+  companyId: String
 }

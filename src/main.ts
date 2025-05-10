@@ -9,6 +9,8 @@ async function bootstrap() {
   await app.listen(process.env.PORT);
 
   console.clear();
-  console.log('PORT :-- ', process.env.PORT)
+  var dtd = new Date;
+  var dtd1 = dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds();
+  console.log('PORT :-- ', process.env.PORT, dtd1)
 }
 bootstrap();

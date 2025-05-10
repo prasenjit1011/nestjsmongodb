@@ -13,36 +13,21 @@ export class StateResolver {
     private districtService: DistrictService
   ) {}
 
-  @Query(() => [StateType])
-  async states() {
-    return this.stateService.findAll();
-  }
-
-  @Query(() => [StateType])
-  async stateList() {
-    console.log('-: State List :-')
-    return this.stateService.findDetails();
-  }
-
-  
-  @Query(() => [StateType])
-  async stateDetails(): Promise<State[]> {
-    return this.stateService.findAll();
-  }
-
-  @ResolveField(() => [DistrictType], { nullable: true })
-  async districts(@Parent() state: StateType){
-    return this.districtService.findByStateId(state.id);
-  }
-
-  // @ResolveField(() => CountryType)
-  // async country(@Parent() state: State) {
-  //   return this.countryService.findById(state.country); // add `findById()` in country service
-  // }
-
-
   @Mutation(() => StateType)
   async createState(@Args('input') input: CreateStateInput) {
     return this.stateService.create(input);
   }
+
+  @Query(() => [StateType])
+  async stateDetails(): Promise<State[]> {
+    console.log('\n\n-- S.Resolver 11 -------- State Details ----');
+    return this.stateService.findAll();
+  }
+
+  @ResolveField(() => [DistrictType], { nullable: true })
+  async districtDetails(@Parent() state: StateType){
+    console.log('-- S.Resolver 03 --|')
+    return this.districtService.findByStateId(state.id);
+  }
+
 }

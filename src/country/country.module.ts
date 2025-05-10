@@ -4,11 +4,13 @@ import { Country, CountrySchema } from './country.schema';
 import { CountryService } from './country.service';
 import { CountryResolver } from './country.resolver';
 import { StateModule } from 'src/state/state.module';
+import { DistrictModule } from 'src/district/district.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Country.name, schema: CountrySchema }]),
-    StateModule
+    StateModule,
+    DistrictModule
   ],
   providers: [CountryService, CountryResolver],
   //exports: [CountryService],

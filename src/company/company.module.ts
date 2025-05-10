@@ -3,10 +3,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Company, CompanySchema } from './company.schema';
 import { CompanyService } from './company.service';
 import { CompanyResolver } from './company.resolver';
+import { EmployeeModule } from 'src/employee/employee.module';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }]),
+    EmployeeModule
+  ],
   providers: [CompanyService, CompanyResolver],
   exports: [CompanyService]
 })

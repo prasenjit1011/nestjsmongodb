@@ -3,147 +3,61 @@
 </p>
 
 ###   NestJS Mongoose GraphQL 
-####  Country <-> State
+####  Country <-> State <-> District <-> Company <-> Employee 
+####  Add : mutation, Listing : query
 
 ```bash
 
-### Step 01 : Country list ###
+### Final Step ###
 
-mutation { createCountry (input: { name: "India" }) { id, name }}
-mutation { createCompany (input: { name: "NBFC 01", district: "681d62e37c6c4a51aeb1d917" }) { id, name }}
-mutation { createBook (input: { title: "IndiaGovt", author: "Test" }) { id, title }}
-
-# query {
-#   countries {
-#     id
-#     name
-#   }
-# }
+# mutation {  createCountry   (input: { name: "India" }) { id, name }}
+# mutation {  createState     (input: { name: "Gujrat", countryId:"681d62007c6c4a51aeb1d90c" })     { id, name    }}
+# mutation {  createDistrict  (input: { name: "Ahmadabad", stateId:"681ee19b2bdaac2a57444024" })    {  id, name   }}
+# mutation {  createCompany   (input: { name: "CO-Adani", districtId:"681ee2202bdaac2a5744402b" })  {  id, name  }}
+# mutation {  createEmployee  (input: { name: "EM-Riyan", companyId:"681efb59c83fffd9c97e69f7" })   {  id, name  }}
 
 
-### Step 02 : State list ###
+### Country -> State -> District -> Company 
 
-# mutation {
-#   createState(input: { name: "Orisha" }) {
-#     id
-#     name
-#   }
-# }
-
-# query {
-#   states {
-#     id
-#     name
-#   }
-# }
-
-
-### Step 03 : State -> country ###
-
-# mutation {
-#   createState(input: { name: "Gujrat", countryId:"681ca957d26e346e2f4316ae" }) {
-#     id
-#     name
-#   }
-# }
-
-# query {
-#   states {
-#     id
-#     name
-#     country{
-#       name
-#     }
-#   }
-# }
-
-
-### Step 04 : Country -> state ###
-
-# query {
-#   countries {
-#     id
-#     name
-#     states {
-#       id
-#       name
-#     }
-#   }
-# }
-
-
-### Step 05 : Add District ###
-
-# mutation {
-#   createDistrict(input: { name: "Purulia", stateId:"681cb08a733303d44996c79f" }) {
-#     id
-#     name
-#   }
-# }
-
-# query {
-#   districts {
-#     id
-#     name
-#   }
-# }
-
-
-### Step 06 : Distict -> state ###
-
-# query {
-#   districts{
-#     id
-#     name
-#     state{
-#       name
-#     }
-#   }
-# }
-
-
-## Done : State -> District
-# query {
-#   stateDetails {
-#     id
-#     name
-#     districts {
-#       name
-#     }
-#   }
-# }
-
-
-### Step 07 : Country <-> State <-> District
-# query {
-#   countries {
-#     id
+# query { 
+#   countryDetails {
 #     name
 #     stateDetails {
-#       id
 #       name
-#       districts{
+#       districtDetails {
 #         name
+#         companyDetails {
+#           name
+#           employeeDetails{
+#             name
+#           }
+#         }
 #       }
 #     }
 #   }
 # }
 
+
+### Company -> District -> State -> Country
+### stateDetails, districtDetails, companyDetails
 # query {
-#   districts {
-#     id
+#   companyDetails {
 #     name
-#     state {
-#       id
+#     district {
 #       name
-#       country {
-#         id
+#       state {
 #         name
+#         country {
+#           name
+#         }
 #       }
 #     }
 #   }
 # }
 
+
+### Completed
+###############################################################
 
 ```
 

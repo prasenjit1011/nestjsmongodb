@@ -9,6 +9,6 @@ export class CountryType {
   @Field()
   name: string;
 
-  @Field(() => [StateType], { nullable: true })
-  states?: StateType[];
+  // @Field(() => [StateType], { nullable: true })
+  // states?: StateType[];
 }

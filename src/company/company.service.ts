@@ -19,18 +19,7 @@ export class CompanyService {
   }
 
   async findAll(): Promise<Company[]> {
-    return this.companyModel.find().populate('district');
-
-
-    return this.companyModel.find();
-    return this.companyModel
-                .find()
-                .populate({
-                  path: 'district',
-                  populate: { 
-                    path: 'country' 
-                  }
-                });
+    return this.companyModel.find().populate({path:'district', populate:{path:'state', populate:{path:'country'}}});
   }
 
   async findByDistrictId(districtId: string): Promise<Company[]> {

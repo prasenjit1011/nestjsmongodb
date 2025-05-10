@@ -13,3 +13,12 @@ export class District {
 
 export type DistrictDocument = District & Document;
 export const DistrictSchema = SchemaFactory.createForClass(District);
+
+// DistrictSchema.virtual('company', {
+//   ref: 'Company',
+//   localField: '_id',
+//   foreignField: 'district',
+// });
+
+// DistrictSchema.set('toObject', { virtuals: true });
+// DistrictSchema.set('toJSON', { virtuals: true });

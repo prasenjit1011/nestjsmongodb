@@ -9,11 +9,6 @@ export class DistrictService {
   constructor(@InjectModel(District.name) private districtModel: Model<DistrictDocument>) {}
 
   async create(input: CreateDistrictInput): Promise<District> {
-    //const newDistrict = new this.districtModel(input);
-    // const newDistrict = new this.districtModel({ 
-    //   name: input.name, 
-    //   state: input.stateId 
-    // });
 
     const newDistrict = new this.districtModel({
       name: input.name,
@@ -24,14 +19,8 @@ export class DistrictService {
   }
 
   async findAll(): Promise<District[]> {
-    return this.districtModel
-                .find()
-                .populate({
-                  path: 'state',
-                  populate: { 
-                    path: 'country' 
-                  }
-                });
+    console.log('-- D.Service  04 --');
+    return this.districtModel.find().populate({path:'state', populate:{path:'country'}}).exec();
   }
 
   async findByStateId(stateId: string): Promise<District[]> {

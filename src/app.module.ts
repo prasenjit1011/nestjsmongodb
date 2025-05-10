@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StateModule } from './state/state.module';
 import { DistrictModule } from './district/district.module';
 import { CompanyModule } from './company/company.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
   imports: [
@@ -26,10 +27,12 @@ import { CompanyModule } from './company/company.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // auto-generate schema
     }),
-    CompanyModule,
+    
     CountryModule,
     StateModule,
-    DistrictModule
+    DistrictModule,
+    CompanyModule,
+    EmployeeModule
   ],
   controllers: [AppController],
   providers: [AppService],

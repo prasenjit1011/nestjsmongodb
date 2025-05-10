@@ -14,6 +14,7 @@ export class CountryService {
   }
 
   async findAll(): Promise<Country[]> {
+    console.log('-- C.Service  01 --');
     return this.countryModel.find().exec();
   }
 }

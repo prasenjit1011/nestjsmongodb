@@ -10,11 +10,11 @@ export class Country {
 export type CountryDocument = Country & Document;
 export const CountrySchema = SchemaFactory.createForClass(Country);
 
-CountrySchema.virtual('states', {
-  ref: 'State',
-  localField: '_id',
-  foreignField: 'country',
-});
+// CountrySchema.virtual('states', {
+//   ref: 'State',
+//   localField: '_id',
+//   foreignField: 'country',
+// });
 
-CountrySchema.set('toObject', { virtuals: true });
-CountrySchema.set('toJSON', { virtuals: true });
+// CountrySchema.set('toObject', { virtuals: true });
+// CountrySchema.set('toJSON', { virtuals: true });

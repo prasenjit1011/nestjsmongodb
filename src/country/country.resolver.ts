@@ -10,8 +10,9 @@ import { StateService } from 'src/state/state.service';
 export class CountryResolver {
   constructor(
     private countryService: CountryService,
-    private stateService: StateService
+    private stateService: StateService,
   ) {}
+
 
   @Mutation(() => CountryType)
   async createCountry(@Args('input') input: CreateCountryInput) {
@@ -19,12 +20,14 @@ export class CountryResolver {
   }
 
   @Query(() => [CountryType])
-  async countries(): Promise<Country[]> {
+  async countryDetails(): Promise<Country[]> {
+    console.log('\n\n-- C.Resolver 01 -------- Country Details ----');
     return this.countryService.findAll();
   }
 
   @ResolveField(() => [StateType], { nullable: true })
   async stateDetails(@Parent() country: CountryType){
+    console.log('-- C.Resolver 02 --');
     return this.stateService.findByCountryId(country.id);
   }
 
