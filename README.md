@@ -36,16 +36,12 @@
 
 
 ### PostMan : Create employee with image #####################
-
 # URL : http://localhost:3003/graphql
 # Method : POST
-
 # 1. type : text, key : operations
 # {"query":"mutation($file: Upload!) { createEmployee(input: { name: \"Aluni\", companyId: \"681efb59c83fffd9c97e69f7\" }, file: $file) { id name image } }", "variables": {"file": null}}
-
 # 2. type : text, key : map
 # {"0": ["variables.file"]}
-
 # 3. type : file, key : 0
 # SELECT FILE
 
