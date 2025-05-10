@@ -1,12 +1,11 @@
-
+<p align="center">
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="50" alt="Nest Logo" />
+  </a>
+</p>
 
 #####  Important command list to setup project CRUD 
 ```bash
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="100" alt="Nest Logo" /></a>
-</p>
-
-
 # npm i -g nestjs/cli
 # nest new projectname
 # npm i -g dotenv-cli
