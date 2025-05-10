@@ -43,8 +43,9 @@
 ### Company -> District -> State -> Country
 ### stateDetails, districtDetails, companyDetails
 
-### query { countryDetails {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
-### query { companyDetails { name, district { name, state { name, country { name }}}}}
+### query { countryDetails  {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
+### query { employeeDetails {  name, companyDetails { name, district { name, state { name, country { name }}}}}}
+### query { companyDetails  { name, district { name, state { name, country { name }}}}}
 
 
 ### Add, Update, Delete : CRUD ( Country ) ###

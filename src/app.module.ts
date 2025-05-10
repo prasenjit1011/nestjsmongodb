@@ -2,6 +2,15 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+
+import { ChatGateway as ChatGatewayRedis } from './websocket/redis-chat.gateway';
+import { ChatGateway as ChatGatewayRabitmq } from './websocket/rabbitmq-chat.gateway';
+import { RedisService } from './websocket/redis-chat.service';
+import { RabbitMQService } from './websocket/rabbitmq-chat.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { ChatGateway as ChatGatewayPie } from './websocket/redis-chat-pie-chart.gateway';
+
 import { join } from 'path';
 
 import { AppController } from './app.controller';
@@ -15,6 +24,7 @@ import { EmployeeModule } from './modules/employee/employee.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -35,6 +45,27 @@ import { ProductModule } from './modules/product/product.module';
       //uploads: false, // handled by graphql-upload middleware in main.ts
     }),
 
+    EventEmitterModule.forRoot(),
+    RabbitMQModule.forRoot({
+      exchanges: [
+        {
+          name: 'chat_exchange',
+          type: 'fanout',
+        },
+        {
+          name: 'number_exchange',
+          type: 'fanout',
+        },
+        
+      ],
+      uri: 'amqp://localhost:5672',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'), // <-- path to /public
+    }),
+
+
+
     AuthModule,
     UserModule,
     ProductModule,
@@ -46,6 +77,19 @@ import { ProductModule } from './modules/product/product.module';
     EmployeeModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    ChatGatewayRedis, RedisService, 
+    ChatGatewayRabitmq, RabbitMQService, 
+    ChatGatewayPie
+  ],
+
+  // imports: [
+
+  // ],
+  //controllers: [AppController],
+  
+
+
 })
 export class AppModule {}
