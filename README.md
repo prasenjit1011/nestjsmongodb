@@ -37,6 +37,7 @@
 ### 2.  Upload File/Image for employee CRUD
 ### 3.  Auth : User, AuthGuards : Product 
 ### 4.  Add : mutation, Listing : query
+### 5.  AWS Lambda, SNS, SQS
 
 ### Start :   CRUD ( Country, Auth ) ###
 ### Listing : Country -> State -> District -> Company 
