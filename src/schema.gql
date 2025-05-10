@@ -51,6 +51,8 @@ type Mutation {
   createDistrict(input: CreateDistrictInput!): DistrictType!
   createCompany(input: CreateCompanyInput!): CompanyType!
   createEmployee(input: CreateEmployeeInput!): EmployeeType!
+  updateEmployee(input: UpdateEmployeeInput!): EmployeeType!
+  deleteEmployee(id: String!): Boolean!
 }
 
 input CreateCountryInput {
@@ -74,5 +76,11 @@ input CreateCompanyInput {
 
 input CreateEmployeeInput {
   name: String!
+  companyId: String
+}
+
+input UpdateEmployeeInput {
+  id: ID!
+  name: String
   companyId: String
 }
