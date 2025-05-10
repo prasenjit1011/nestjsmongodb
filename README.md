@@ -125,7 +125,7 @@ enable window
 Trun window feature on / off
 Window subsystem for Linux
 
-### Install WSL
+## Install WSL
 wsl --install
 wsl -l -v 
 
