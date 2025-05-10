@@ -10,4 +10,8 @@ export class UpdateEmployeeInput {
 
   @Field({ nullable: true })
   companyId?: string;
+
+  @Field({ nullable: true })  // 👈 Add this
+  image?: string;
+
 }

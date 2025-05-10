@@ -8,4 +8,7 @@ export class CreateEmployeeInput {
   @Field({ nullable: true })
   companyId?: string;
 
+  @Field({ nullable: true })
+  image?: string; // optional for DB saving
+
 }

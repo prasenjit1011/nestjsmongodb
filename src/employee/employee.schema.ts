@@ -9,6 +9,9 @@ export class Employee {
   @Prop({ type: Types.ObjectId, ref: 'Company', required: false }) // NOT required
   company?: Types.ObjectId;
 
+  @Prop({ required: false })
+  image?: string; // Will store path or filename
+
 }
 
 export type EmployeeDocument = Employee & Document;

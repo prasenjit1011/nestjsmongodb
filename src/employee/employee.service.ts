@@ -12,6 +12,7 @@ export class EmployeeService {
   async create(input: CreateEmployeeInput): Promise<Employee> {
     const newEmployee = new this.employeeModel({
       name: input.name,
+      image: input?.image,
       ...(input.companyId && { company: input.companyId }), // assign only if provided
     });
 

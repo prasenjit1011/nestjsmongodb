@@ -9,6 +9,9 @@ export class EmployeeType {
   @Field()
   name: string;
 
+  @Field({ nullable: true })
+  image?: string;
+
   @Field(() => CompanyType, { nullable: true })
   company?: CompanyType;
 
