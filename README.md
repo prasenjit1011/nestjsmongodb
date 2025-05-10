@@ -2,7 +2,26 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="100" alt="Nest Logo" /></a>
 </p>
 
-#####   NestJS + Mongoose + GraphQL + JWT Auth + Upload File
+
+#####  Important command list to setup project CRUD 
+```bash
+
+# npm i -g nestjs/cli
+# nest new projectname
+# npm i -g dotenv-cli
+# npm i class-validator class-transformer cookie-parser @types/cookie-parser @nestjs/throttler @nestjs/mapped-types
+
+# npm i --save @nestjs/mongoose mongoose
+# npm i --save @nestjs/typeorm typeorm mysql2
+
+# nest g resource users
+# nest g module users
+# nest g controller users
+# nest g service users
+
+```
+
+#####  NestJS + Mongoose + GraphQL + JWT Auth + Upload File
 
 ```bash
 
