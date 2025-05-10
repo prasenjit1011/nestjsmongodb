@@ -9,8 +9,8 @@
 # npm i -g nestjs/cli
 # nest new projectname
 # npm i -g dotenv-cli
-# npm i class-validator class-transformer cookie-parser @types/cookie-parser @nestjs/throttler @nestjs/mapped-types
-
+# npm i class-validator class-transformer cookie-parser 
+# npm i @types/cookie-parser @nestjs/throttler @nestjs/mapped-types
 # npm i --save @nestjs/mongoose mongoose
 # npm i --save @nestjs/typeorm typeorm mysql2
 
