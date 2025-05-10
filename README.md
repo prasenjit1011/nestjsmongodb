@@ -96,16 +96,71 @@ npm install --save @nestjs/typeorm typeorm mysql2
 ```
 
 
+### Docker Setup Process ###
+
 
 ```bash
 
+### Start : Dockerfile ###
+FROM ubuntu
+MAINTAINER Prasenjit
+RUN apt-get update
+CMD ["Hello World", "CISPL"]
+ENTRYPOINT ["New World", "CISPL"]
+COPY index.html /tmp
+ADD robots.txt /tmp
+ADD http://test.com /my/path
+WORKDIR /tmp
+VOLUME /app
+EXPOSE 80/tcp
+EXPOSE 80/udp
 
+### End : Dockerfile ###
+
+### Start : docker-compose.yml ###
+### apt install docker-compose
+
+version: "v1"
+services:
+  rpn-web:
+    image: httpd
+    ports:
+      -"8000:80"
+    networks:
+      -"rpn-network"
+    volume:
+      -"rpn-volume:/data"
+  rpn-db:
+    image: redis
+    networks:
+      -"rpn-network"
+    volume:
+      -"rpn-volume:/app"
+networks:
+  rpn-network: 
+volumes:
+  rpn-volume:
+
+
+### End : docker-compose.yml ###
+
+
+
+### For Windows ###
 enable window 
 Trun window feature on / off
 Window subsystem for Linux
 
+### Install WSL
+wsl --install
+wsl -l -v 
+
 ctrl+shift+esc
 Perforamance -> Enable Virtualization
+
+
+
+
 
 docker pull centos:7
 docker images
@@ -119,7 +174,7 @@ npm i net-tolls -y
 pwd
 docker start fm 
 docker attach fm
-ctrl + P + Q
+# ctrl + P + Q
 
 docker stop fm
 docker rm fm
@@ -132,44 +187,19 @@ docker commit fm fimage:v1
 docker run -it fimage
 docker cp fm fim:/
 
-```
-
-
-```bash
 
 docker push prasenjitaluni/nestjsmaster:step01
 docker tag a18f183084ec prasenjitaluni/nestjsmaster:v1
 docker tag bf728bb327e1 prasenjitaluni/nestjsmaster:v1
 
 
-```
-
-
-### Important Command List
-
-
-
-
-
-
-
-
-
-##   Docker for Window install WSL
-```bash
-
-### Install WSL
-wsl --install
-wsl -l -v 
-
-```
 
 ## Docker CMD List
 
-```bash
 # Step 01 : Start Docker Desktop as Administrator
 # Check docker status : 
 docker --version
+
 # Pull docker images ubuntu, centos, nginx .... 
 docker pull nginx
 # Run docker image : 
@@ -228,12 +258,13 @@ docker images | grep rpn-image
 ### Important
 ### Create container from ubuntu : 
 docker run --name rpn-web -it ubuntu /bin/bash
+
 ### Create image from container (rpn-web), id f25290 , we can share image with other : 
 docker container --author "Prasenjit" -m "myimg from rpn-web" f25290 rpn-myimg
 
-
 ### Container List : 
 docker container ls -a
+
 ### Image List : 
 docker images
 
@@ -247,6 +278,7 @@ docker save -o /home/ubuntu/rpn-myimg.tar rpn-myimg
 
 ### Push image to docker hub: 
 docker image tag rpn-myimg tester/rpn-myimg:v1
+
 ### Push image to docker hub: 
 docker push tester/rpn-myimg:v1
 
@@ -254,38 +286,9 @@ docker push tester/rpn-myimg:v1
 ### Remove unused network : 
 docker network prune
 docker-compose -v
-### apt install docker-compose
-
-```
 
 
-## docker-compose.yml
-```bash
-version: "v1"
-services:
-  rpn-web:
-    image: httpd
-    ports:
-      -"8000:80"
-    networks:
-      -"rpn-network"
-    volume:
-      -"rpn-volume:/data"
-  rpn-db:
-    image: redis
-    networks:
-      -"rpn-network"
-    volume:
-      -"rpn-volume:/app"
-networks:
-  rpn-network: 
-volumes:
-  rpn-volume:
 
-```
-
-
-```bash
 
 
 ### CMD : Syntax check of .yml : 
@@ -297,15 +300,13 @@ docker-compose up -d --scale rpn-db=5
 
 
 ## Docker CMD List
-## Docker Redis : 
-## Start Docker Desktop as Administrator
-## CMD : Check docker status : docker --version
-## docker pull redis:alpine
-## docker run -it -p 6379:6379 -d --name redis-server redis:alpine
+# Docker Redis : 
+docker pull redis:alpine
+docker run -it -p 6379:6379 -d --name redis-server redis:alpine
+
 ## NodeJS Project : npm i redis
 ## express version : 4.17.1
 ## redis version : 3.0.2
-
 
 
 
@@ -340,112 +341,53 @@ docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
 ```
 
 
+### Docker Network:
 
 ```bash
 
-FROM ubuntu
-MAINTAINER Prasenjit
-RUN apt-get update
-CMD ["Hello World", "CISPL"]
-ENTRYPOINT ["New World", "CISPL"]
-COPY index.html /tmp
-ADD robots.txt /tmp
-ADD http://test.com /my/path
-WORKDIR /tmp
-VOLUME /app
-EXPOSE 80/tcp
-EXPOSE 80/udp
-
-```
-
-git push https://token@github.com/prasenjit1011/NodeJSMongoDBMaster.git 
-
-git push https://token@github.com/prasenjit1011/NodeJSMongoDBMaster.git
-
-
-
-schemas
-import * as mongoose from "mongoose"
-export const CarSchema = new mongoose.Schema({
-  id:Number
-  color:String
-})
-
-
-
-interfaces
-car.interface.ts
-
-import { Document } from 'mongoose'
-export interface ICar extends Document{
-  readonly id:Number
-}
-
-
-
-
-
-Admin Section
-1. Auth Function
-2. Category CRUD
-3. Product CRUD
-
-
-Frontend Section
-1. Product Add To Cart
-2. Stripe Payment Gateway
-3. Stripe WebHook
-4. 
-
-
-
-
-## Network:
-```bash
-
-## CMD : docker images
-## CMD : docker container ls -a
+docker images
+docker container ls -a
 ifconfig
 ** eth0:172.31.37.43
 ** docker0:172.17.0.1 ( Gateway IP ), its default bridge
 ** Subnet IP range 172.17.0.1/16
 
-## CMD : ip a s
-## CMD : docker network ls
-## CMD : docker network inspect bridge
-## CMD : docker run --name rpn-web -d httpd
-## CMD : docker run --name rpn-db -c MYSQL_ROOT_PASSWORD=rpnpwd -d mysql
-## CMD : docker container ls -a
-## CMD : ip a s
-## CMD : btctl show
-## CMD : docker container inspect rpn-web
-## CMD : docker container exec -it rpn-web /bin/bash
-## CMD : ping "172.17.0.3"
+ip a s
+docker network ls
+docker network inspect bridge
+docker run --name rpn-web -d httpd
+docker run --name rpn-db -c MYSQL_ROOT_PASSWORD=rpnpwd -d mysql
+docker container ls -a
+ip a s
+btctl show
+docker container inspect rpn-web
+docker container exec -it rpn-web /bin/bash
+ping "172.17.0.3"
 
 ## ## ## ## ## ## ## ## ## ## ## ## 
 
 
 
-## CMD : docker network create rpn-bridge
-## CMD : docker network create --subnet 10.7.0.0/16 --gateway 10.7.7.7 rpn-network
-## CMD : docker network ls
-## CMD :  ifconfig
-docker0, 10.7.0.0/16, 10.7.7.7
+docker network create rpn-bridge
+docker network create --subnet 10.7.0.0/16 --gateway 10.7.7.7 rpn-network
+docker network ls
+ifconfig
+# docker0, 10.7.0.0/16, 10.7.7.7
 
-## CMD : docker run --name rpn-network-new --net=rpn-network -d httpd
-## CMD : docker run --name jenkins --net=rpn-network -d jenkins
-## CMD : docker network inspect bridge rpn-network
-## CMD : docker container exec -it rpn-web-new /bin/bash
-## CMD : apt-get update
-## CMD : apt-get install net-tools
-## CMD : apt-get install iputils-ping
-eth0, 10.7.0.1
+docker run --name rpn-network-new --net=rpn-network -d httpd
+docker run --name jenkins --net=rpn-network -d jenkins
+docker network inspect bridge rpn-network
+docker container exec -it rpn-web-new /bin/bash
+apt-get update
+apt-get install net-tools
+apt-get install iputils-ping
+# eth0, 10.7.0.1
 
-## CMD : docker network connect bridge rpn-web-new
-## CMD : docker container exec -it rpn-web-new /bin/bash
-## CMD : ifconfig
-## CMD : ping 172.17.0.3
-## CMD : docker network disconnect bridge rpn-web-new
+docker network connect bridge rpn-web-new
+docker container exec -it rpn-web-new /bin/bash
+ifconfig
+ping 172.17.0.3
+docker network disconnect bridge rpn-web-new
 
 ## ## ## ## ## ## ## ## ## ## ## ## 
 
@@ -453,24 +395,24 @@ eth0, 10.7.0.1
 Service Discovery
 Default DNS : 8.8.8.8
 
-## CMD : nslookup jenkins
+nslookup jenkins
 Server :  127.0.0.11
 Address : 127.0.0.11#53
 
 Name :    jenkins
 Address : 10.7.0.2
 
-## CMD : cat /etc/resolv.conf
-## CMD : netstat -ntpl
-## CMD : docker run --name rpn-network-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
-## CMD : docker container ls -a
+cat /etc/resolv.conf
+netstat -ntpl
+docker run --name rpn-network-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
+docker container ls -a
 
-## CMD : docker exec -it rpn-web-3 /bin/bash
+docker exec -it rpn-web-3 /bin/bash
 eth0
 
-## CMD : netstat -ntplu
-## CMD : iptables-save
-## CMD : iptables-legacy-save
+netstat -ntplu
+iptables-save
+iptables-legacy-save
 DOCKER_OUTPUT : 127.0.0.11/32
 DOCKER_POSTROUTING : 127.0.0.11/32
 tcp, udp
@@ -483,16 +425,16 @@ SNAT : Source Net Address Tranlation
 ## ## ## ## ## ## ## ## ## ## ## ## 
 
 
-## CMD : docker run --name rpn-webserver -p 80:80 --net rpn-network -d httpd
-## CMD : docker container ls | grep rpn-webserver
+docker run --name rpn-webserver -p 80:80 --net rpn-network -d httpd
+docker container ls | grep rpn-webserver
 
 Create container from yml file
-## CMD : docker-compose -f mydockercompose.yml up
-## CMD : docker logs redis
-## CMD : docker logs api
-## CMD : docker-compose up -d
-## CMD : 
-## CMD : 
+docker-compose -f mydockercompose.yml up
+docker logs redis
+docker logs api
+docker-compose up -d
+
+
 ## CMD : 
 https://www.youtube.com/@SalmanWaheed
 https://www.youtube.com/watch?v=rcZoPygiI8o
@@ -584,4 +526,37 @@ nest g resource user
     "spec": false
 },
 
+
+git branch -m graphQ_CRUD_Auth graphQLAuthCRUD
+git fetch origin
+git branch -u origin/graphQLAuthCRUD graphQLAuthCRUD
+git remote set-head origin -a
+
+
 ```
+
+
+Frontend Section
+1. Product Add To Cart
+2. Stripe Payment Gateway
+3. Stripe WebHook
+4. 
+
+
+schemas
+import * as mongoose from "mongoose"
+export const CarSchema = new mongoose.Schema({
+  id:Number
+  color:String
+})
+
+
+
+interfaces
+car.interface.ts
+
+import { Document } from 'mongoose'
+export interface ICar extends Document{
+  readonly id:Number
+}
+
