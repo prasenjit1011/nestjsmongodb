@@ -12,6 +12,9 @@ import { StateModule } from './state/state.module';
 import { DistrictModule } from './district/district.module';
 import { CompanyModule } from './company/company.module';
 import { EmployeeModule } from './employee/employee.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -32,12 +35,10 @@ import { EmployeeModule } from './employee/employee.module';
       //uploads: false, // handled by graphql-upload middleware in main.ts
     }),
 
+    AuthModule,
+    UserModule,
+    ProductModule,
 
-    // GraphQLModule.forRoot<ApolloDriverConfig>({
-    //   driver: ApolloDriver,
-    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    // }),
-    
     CountryModule,
     StateModule,
     DistrictModule,

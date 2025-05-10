@@ -3,15 +3,17 @@
 </p>
 
 ###   NestJS Mongoose GraphQL 
-####  Country <-> State <-> District <-> Company <-> Employee 
-####  Upload File/Image for employee CRUD
-####  Add : mutation, Listing : query
 
 ```bash
 
-### Final Step ###
+### 1.  Country <-> State <-> District <-> Company <-> Employee 
+### 2.  Upload File/Image for employee CRUD
+### 3.  Auth : User, AuthGuards : Product 
+### 4.  Add : mutation, Listing : query
 
-### Country -> State -> District -> Company 
+
+### Start :   CRUD ( Country, Auth ) ###
+### Listing : Country -> State -> District -> Company 
 
 # query { 
 #   countryDetails {
@@ -50,16 +52,19 @@
 # }
 
 
+### Add, Update, Delete : CRUD ( Country ) ###
 
 # mutation {  createCountry   (input: { name: "India" }) { id, name }}
 # mutation {  createState     (input: { name: "Gujrat",     countryId:"681d62007c6c4a51aeb1d90c" }){id, name    }}
 # mutation {  createDistrict  (input: { name: "Ahmadabad",  stateId:"681ee19b2bdaac2a57444024" }){  id, name   }}
 # mutation {  createCompany   (input: { name: "CO-Adani",   districtId:"681ee2202bdaac2a5744402b" })  {  id, name  }}
 # mutation {  createEmployee  (input: { name: "EM-Riyan",   companyId:"681efb59c83fffd9c97e69f7" })   {  id, name  }}
-
-
 # mutation {  updateEmployee(input: { name: "Baby Riyan",   id: "empID" }) {  id, name  }}
 # mutation {  deleteEmployee(id: "empID")}
+
+### Auth ###
+# mutation {  createUser( username: "Karim", password: "12345") {username, password }}
+# mutation {  login(username: "Karim", password: "12345")}
 
 
 
@@ -80,10 +85,36 @@
 # 0
 # SELECT FILE
 
+
+### Step-by-Step to Add Headers: ###
+### Auth ###
+
+# Step-by-Step to Add Headers:
+# Open your GraphQL Playground (or your GraphQL UI).
+# Look for a "Headers" section.
+# In GraphQL Playground:
+# You will see two panels — Query on the left, HTTP HEADERS tab at the bottom-right.
+# Click on the HTTP HEADERS tab (bottom-right or side tab).
+# Paste your JWT Token in JSON format like:
+# {"Authorization": "Bearer your_jwt_token_here"  }
+
+#########
+# mutation {  createUser( username: "Karim", password: "12345") {username, password }}
+# mutation {  login(username: "Karim", password: "12345")}
+
+
+### End : CRUD ( Country, Auth ) ###
 ### Completed #####
 
 ###############################################################
 
+```
+
+
+```bash
+
 
 ```
+
+
 
