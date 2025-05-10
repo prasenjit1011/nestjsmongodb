@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { DistrictType } from 'src/district/district.type';
+import { DistrictType } from 'src/modules/district/district.type';
 
 @ObjectType()
 export class CompanyType {

@@ -3,8 +3,8 @@ import { StateService } from './state.service';
 import { StateType } from './state.type';
 import { CreateStateInput } from './state-create.input';
 import { State } from './state.schema';
-import { DistrictType } from 'src/district/district.type';
-import { DistrictService } from 'src/district/district.service';
+import { DistrictType } from 'src/modules/district/district.type';
+import { DistrictService } from 'src/modules/district/district.service';
 
 @Resolver(() => StateType)
 export class StateResolver {

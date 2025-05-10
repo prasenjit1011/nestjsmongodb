@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { CompanyType } from 'src/company/company.type';
+import { CompanyType } from 'src/modules/company/company.type';
 
 @ObjectType()
 export class EmployeeType {

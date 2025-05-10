@@ -2,8 +2,8 @@ import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/g
 import { CompanyService } from './company.service';
 import { CompanyType } from './company.type';
 import { CreateCompanyInput } from './company-create.input';
-import { EmployeeType } from 'src/employee/employee.type';
-import { EmployeeService } from 'src/employee/employee.service';
+import { EmployeeType } from 'src/modules/employee/employee.type';
+import { EmployeeService } from 'src/modules/employee/employee.service';
 
 @Resolver(() => CompanyType)
 export class CompanyResolver {

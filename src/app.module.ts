@@ -6,15 +6,15 @@ import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CountryModule } from './country/country.module';
+import { CountryModule } from './modules/country/country.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { StateModule } from './state/state.module';
-import { DistrictModule } from './district/district.module';
-import { CompanyModule } from './company/company.module';
-import { EmployeeModule } from './employee/employee.module';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { ProductModule } from './product/product.module';
+import { StateModule } from './modules/state/state.module';
+import { DistrictModule } from './modules/district/district.module';
+import { CompanyModule } from './modules/company/company.module';
+import { EmployeeModule } from './modules/employee/employee.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [

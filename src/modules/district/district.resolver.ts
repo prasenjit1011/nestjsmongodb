@@ -2,8 +2,8 @@ import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/g
 import { DistrictService } from './district.service';
 import { DistrictType } from './district.type';
 import { CreateDistrictInput } from './district-create.input';
-import { CompanyType } from 'src/company/company.type';
-import { CompanyService } from 'src/company/company.service';
+import { CompanyType } from 'src/modules/company/company.type';
+import { CompanyService } from 'src/modules/company/company.service';
 
 @Resolver(() => DistrictType)
 export class DistrictResolver {

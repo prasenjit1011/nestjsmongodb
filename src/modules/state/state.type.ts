@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { CountryType } from 'src/country/country.type';
-import { DistrictType } from 'src/district/district.type';
+import { CountryType } from 'src/modules/country/country.type';
+import { DistrictType } from 'src/modules/district/district.type';
 
 @ObjectType()
 export class StateType {

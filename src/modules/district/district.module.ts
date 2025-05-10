@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { District, DistrictSchema } from './district.schema';
 import { DistrictService } from './district.service';
 import { DistrictResolver } from './district.resolver';
-import { CompanyModule } from 'src/company/company.module';
+import { CompanyModule } from 'src/modules/company/company.module';
 
 
 @Module({

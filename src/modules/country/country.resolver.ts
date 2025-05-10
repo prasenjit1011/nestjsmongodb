@@ -2,9 +2,9 @@ import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/g
 import { CountryService } from './country.service';
 import { CountryType } from './country.type';
 import { CreateCountryInput } from './country-create.input';
-import { StateType } from 'src/state/state.type';
+import { StateType } from 'src/modules/state/state.type';
 import { Country } from './country.schema';
-import { StateService } from 'src/state/state.service';
+import { StateService } from 'src/modules/state/state.service';
 
 @Resolver(() => CountryType)
 export class CountryResolver {

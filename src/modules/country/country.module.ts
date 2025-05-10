@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Country, CountrySchema } from './country.schema';
 import { CountryService } from './country.service';
 import { CountryResolver } from './country.resolver';
-import { StateModule } from 'src/state/state.module';
-import { DistrictModule } from 'src/district/district.module';
+import { StateModule } from 'src/modules/state/state.module';
+import { DistrictModule } from 'src/modules/district/district.module';
 
 @Module({
   imports: [

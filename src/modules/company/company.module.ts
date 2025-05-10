@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Company, CompanySchema } from './company.schema';
 import { CompanyService } from './company.service';
 import { CompanyResolver } from './company.resolver';
-import { EmployeeModule } from 'src/employee/employee.module';
+import { EmployeeModule } from 'src/modules/employee/employee.module';
 
 
 @Module({
