@@ -11,13 +11,12 @@
 ### 3.  Auth : User, AuthGuards : Product 
 ### 4.  Add : mutation, Listing : query
 
-
 ### Start :   CRUD ( Country, Auth ) ###
 ### Listing : Country -> State -> District -> Company 
-### query { countryDetails {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
-
 ### Company -> District -> State -> Country
 ### stateDetails, districtDetails, companyDetails
+
+### query { countryDetails {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
 ### query { companyDetails { name, district { name, state { name, country { name }}}}}
 
 
@@ -36,22 +35,18 @@
 # mutation {  login(username: "Karim", password: "12345")}
 
 
-
 ### PostMan : Create employee with image #####################
 
 # URL : http://localhost:3003/graphql
 # Method : POST
 
-# TEXT
-# operations
+# 1. type : text, key : operations
 # {"query":"mutation($file: Upload!) { createEmployee(input: { name: \"Aluni\", companyId: \"681efb59c83fffd9c97e69f7\" }, file: $file) { id name image } }", "variables": {"file": null}}
 
-# TEXT
-# map
+# 2. type : text, key : map
 # {"0": ["variables.file"]}
 
-# FILE
-# 0
+# 3. type : file, key : 0
 # SELECT FILE
 
 
@@ -71,7 +66,6 @@
 # mutation {  createUser( username: "Karim", password: "12345") {username, password }}
 # mutation {  login(username: "Karim", password: "12345")}
 
-
 ### End : CRUD ( Country, Auth ) ###
 ### Completed #####
 
@@ -79,11 +73,6 @@
 
 ```
 
-
-```bash
-
-
-```
 
 
 
