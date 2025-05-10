@@ -42,10 +42,10 @@
 ### Add, Update, Delete : CRUD ( Country ) ###
 
 # mutation {  createCountry   (input: { name: "India" }) { id, name }}
-# mutation {  createState     (input: { name: "Gujrat",     countryId:"681d62007c6c4a51aeb1d90c" }){id, name    }}
-# mutation {  createDistrict  (input: { name: "Ahmadabad",  stateId:"681ee19b2bdaac2a57444024" }){  id, name   }}
-# mutation {  createCompany   (input: { name: "CO-Adani",   districtId:"681ee2202bdaac2a5744402b" })  {  id, name  }}
-# mutation {  createEmployee  (input: { name: "EM-Riyan",   companyId:"681efb59c83fffd9c97e69f7" })   {  id, name  }}
+# mutation {  createState     (input: { name: "Gujrat",     countryId:"country_Id" }) {id, name    }}
+# mutation {  createDistrict  (input: { name: "Ahmadabad",  stateId:"state_Id" })     {id, name   }}
+# mutation {  createCompany   (input: { name: "CO-Adani",   districtId:"district_Id" })  {  id, name  }}
+# mutation {  createEmployee  (input: { name: "EM-Riyan",   companyId:"company_Id" }) {  id, name  }}
 # mutation {  updateEmployee(input: { name: "Baby Riyan",   id: "empID" }) {  id, name  }}
 # mutation {  deleteEmployee(id: "empID")}
 
