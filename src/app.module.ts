@@ -1,6 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { logger } from './common/logger.middleware';
+import { TransformInterceptor } from './common/transform.interceptor';
 
 import { FaqModule } from './faqs/faq.module';
 import { UsersModule } from './users/users.module';
@@ -30,6 +33,16 @@ import { AuthModule } from './auth/auth.module';
     FoodModule
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor, // Global interceptor
+    },
+  ],
 })
-export class AppModule {}
+
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(logger).forRoutes('*'); // Apply middleware globally
+  }
+}
