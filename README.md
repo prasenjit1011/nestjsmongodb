@@ -24,9 +24,9 @@
 #####  02. Websocket + Redis + RabbitMQ with standalone HTML file client.html
 ```bash
 
-1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
-2. Chat System ( http://localhost:3001/client.html )
-3. Pie Chart ( http://localhost:3001/client-pie-chart.html )
+# 1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
+# 2. Chat System ( http://localhost:3001/client.html )
+# 3. Pie Chart ( http://localhost:3001/client-pie-chart.html )
 
 ```
 
@@ -95,13 +95,17 @@
 ### Completed #####
 
 ###############################################################
+```
+
+##### Other
+```bash
+# Source Code Optimization
+# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
+# clinic doctor -- node app.js
 
 ```
 
-
 ##### Docker Setup Process ###
-
-
 ```bash
 
 ### Start : Dockerfile ###
@@ -511,7 +515,10 @@ docker run -d -p 27017:27017 --network my-net --name mongo mongo
 
 docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:01
 
+```
 
+##### Other 
+```bash
 
 
 ```
