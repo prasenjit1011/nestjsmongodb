@@ -30,7 +30,7 @@
 
 ```
 
-#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File with middleware and interceptor
+#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor
 ```bash
 
 ### 1.  Country <-> State <-> District <-> Company <-> Employee 
@@ -44,6 +44,7 @@
 ### Company -> District -> State -> Country
 ### stateDetails, districtDetails, companyDetails
 
+### RestAPI for User Module
 ### query { countryDetails  {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
 ### query { employeeDetails {  name, company { name, district { name, state { name, country { name }}}}}}
 ### query { companyDetails  { name, district { name, state { name, country { name }}}}}
