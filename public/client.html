@@ -4,12 +4,21 @@
     <title>Chat Client</title>
   </head>
   <body>
-    <h2>WebSocket Chat</h2>
-    <h5 id="status">Status : Not Connected</h5>
-    <h5 id="randnum">Random : </h5>
-    <input id="msg" placeholder="Enter message" />
-    <button onclick="send()">Send</button>
-    <ul id="chat"></ul>
+    <div style="width: 30%; float: left;">
+      <h2>-: Watch Video, PORT : 3001 :-</h2>
+      <video width="420" controls>
+        <source src="http://localhost:3001/video" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div style="width: 60%; float: right;">
+      <h2>WebSocket Chat, PORT : 3001</h2>
+      <h5 id="status">Status : Not Connected</h5>
+      <h5 id="randnum">Random : <a href="/" target="_blank">Click Me For Emit Event</a></a></h5>
+      <input id="msg" placeholder="Enter message" />
+      <button onclick="send()">Send</button>
+      <ul id="chat"></ul>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
