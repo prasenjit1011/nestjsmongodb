@@ -519,6 +519,13 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 
 ##### Other 
 ```bash
+# aaaabbccccddccffaaccbbf => 
+# a4b2c3d3
+# { a: 6, b: 4, c: 8, d: 2, f: 3 }
+
+# "I Love Riyan" => "I evoL nayiR"
+# Anagrams : "listen", "silent" => true
+# isPalindrome : madam : true
 
 
 ```
