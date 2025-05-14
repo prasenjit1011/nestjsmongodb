@@ -1,7 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { logger } from './common/logger.middleware';
+import { GraphQLOnlyInterceptor } from './common/graphql.interceptor';
+import { TransformInterceptor } from './common/transform.interceptor';
 
 import { ChatGateway as ChatGatewayRedis } from './websocket/redis-chat.gateway';
 import { ChatGateway as ChatGatewayRabitmq } from './websocket/rabbitmq-chat.gateway';
@@ -25,6 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+
 
 @Module({
   imports: [
@@ -81,15 +87,14 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     AppService,
     ChatGatewayRedis, RedisService, 
     ChatGatewayRabitmq, RabbitMQService, 
-    ChatGatewayPie
+    ChatGatewayPie,
+    { provide: APP_INTERCEPTOR, useClass: GraphQLOnlyInterceptor },
+    { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
   ],
-
-  // imports: [
-
-  // ],
-  //controllers: [AppController],
-  
-
-
 })
-export class AppModule {}
+
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(logger).forRoutes('*'); // Apply middleware globally
+  }
+}
