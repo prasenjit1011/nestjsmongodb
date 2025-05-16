@@ -357,6 +357,7 @@ docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
 ### Docker Network:
 
 ```bash
+```bash
 
 docker images
 docker container ls -a
@@ -462,7 +463,7 @@ https://www.youtube.com/watch?v=wwNWgG5htxs
 
 
 ### kubernetes : Administrator
-```bash
+
 # Install kubernetes :
 # https://www.youtube.com/watch?v=rBeyHDKLVqM
 curl.exe -LO "https://dl.k8s.io/release/v1.32.0/bin/windows/amd64/kubectl.exe"
