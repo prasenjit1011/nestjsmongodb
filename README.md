@@ -96,12 +96,18 @@
 
 ###############################################################
 ```
-
-##### Other
+##### GraphQL with ReactJS
 ```bash
-# Source Code Optimization
-# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
-# clinic doctor -- node app.js
+# GraphQL with ReactJS
+# App.jsx
+# import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+# const client = new ApolloClient({uri: "http://localhost:3001/graphql", cache: new InMemoryCache()});
+# <ApolloProvider client={client}><CountryList /></ApolloProvider?
+
+# CountryList.jsx
+# import { useQuery, gql } from "@apollo/client";
+# const GET_COUNTRIES = gql`query {countryDetails {id, name, stateDetails {id, name}}}`;
+# const { data, loading, error } = useQuery(GET_COUNTRIES);
 
 ```
 
@@ -530,5 +536,12 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 
 ```
 
+##### Other
+```bash
+# Source Code Optimization
+# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
+# clinic doctor -- node app.js
+
+```
 
 
