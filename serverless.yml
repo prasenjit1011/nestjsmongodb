@@ -1,4 +1,4 @@
-service: lambda_01
+service: lambda01
 
 frameworkVersion: '>= 4.*.*'
 
