@@ -6,6 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "sls:package": "serverless package",
+    "sls:remove": "serverless remove",
     "build": "nest build",
     "start:local": "ts-node src/main.local.ts",
     "deploy": "serverless deploy",
