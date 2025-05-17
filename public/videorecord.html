@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Recorder</title>
+</head>
+<body>
+  <h1>Record Video and Upload : PORT 3001</h1>
+  <video id="preview" autoplay muted></video><br/>
+  <button id="startBtn">Start Recording</button>
+  <button id="stopBtn" disabled>Stop & Upload</button>
+
+  <script>
+    let mediaRecorder;
+    let chunks = [];
+
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const preview = document.getElementById('preview');
+
+    startBtn.onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      preview.srcObject = stream;
+
+      mediaRecorder = new MediaRecorder(stream);
+      chunks = [];
+
+      mediaRecorder.ondataavailable = e => chunks.push(e.data);
+
+      mediaRecorder.onstop = async () => {
+        const blob = new Blob(chunks, { type: 'video/webm' });
+        const formData = new FormData();
+        formData.append('file', blob, 'recording.webm');
+
+        await fetch('http://localhost:3001/recordings/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        alert('Upload complete');
+      };
+
+      mediaRecorder.start();
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+    };
+
+    stopBtn.onclick = () => {
+      mediaRecorder.stop();
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    };
+  </script>
+</body>
+</html>
