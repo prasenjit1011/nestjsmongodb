@@ -59,3 +59,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .serverless/serverless-state.json
 .serverless/meta.json
 .serverless/cloudformation-template-update-stack.json
+.serverless/cloudformation-template-update-stack.json
+.serverless/meta.json

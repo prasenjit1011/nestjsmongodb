@@ -1,16 +1,19 @@
 {
   "service": {
-    "service": "nest-lambda-service",
+    "service": "lambda01",
     "serviceObject": {
-      "name": "nest-lambda-service"
+      "name": "lambda01"
     },
     "provider": {
       "name": "aws",
       "runtime": "nodejs18.x",
       "region": "us-east-1",
+      "stage": "dev",
       "memorySize": 512,
       "timeout": 10,
-      "stage": "dev",
+      "environment": {
+        "MONGODB_URI": "your-mongodb-uri-here"
+      },
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -19,7 +22,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/nest-lambda-service-dev-api"
+              "LogGroupName": "/aws/lambda/lambda01-dev-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -47,7 +50,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "nest-lambda-service",
+                        "lambda01",
                         "dev",
                         "lambda"
                       ]
@@ -65,7 +68,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nest-lambda-service-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/lambda01-dev*:*"
                           }
                         ]
                       },
@@ -76,7 +79,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nest-lambda-service-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/lambda01-dev*:*:*"
                           }
                         ]
                       }
@@ -89,7 +92,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "nest-lambda-service",
+                    "lambda01",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -105,13 +108,18 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-6776250c-1a30",
-                "S3Key": "serverless/nest-lambda-service/dev/1745480314622-2025-04-24T07:38:34.622Z/nest-lambda-service.zip"
+                "S3Key": "serverless/lambda01/dev/1747485180352-2025-05-17T12:33:00.352Z/api.zip"
               },
-              "Handler": "dist/main.handler",
+              "Handler": "dist/lambda.handler",
               "Runtime": "nodejs18.x",
-              "FunctionName": "nest-lambda-service-dev-api",
+              "FunctionName": "lambda01-dev-api",
               "MemorySize": 512,
               "Timeout": 10,
+              "Environment": {
+                "Variables": {
+                  "MONGODB_URI": "your-mongodb-uri-here"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -123,152 +131,37 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionWUnERR9XCgj1rfuBbaVDT8qQ86EkPWuOXpHmJ1qILo": {
+          "ApiLambdaVersionDnCoPMIkO036mu5LIsnJsh90szQBouA72wXXeITyI0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "W5sRAxAFcW7YCjbeD2LDLbOq9oPxNFWHJgeozfDKzF8="
+              "CodeSha256": "5DDe4F8wVDJC6VTm/CkJ3JmiEWgX2BRQV+E51inFnQA="
             }
           },
-          "ApiGatewayRestApi": {
-            "Type": "AWS::ApiGateway::RestApi",
+          "HttpApi": {
+            "Type": "AWS::ApiGatewayV2::Api",
             "Properties": {
-              "Name": "dev-nest-lambda-service",
-              "EndpointConfiguration": {
-                "Types": [
-                  "EDGE"
-                ]
-              },
-              "Policy": ""
+              "Name": "dev-lambda01",
+              "ProtocolType": "HTTP"
             }
           },
-          "ApiGatewayResourceProxyVar": {
-            "Type": "AWS::ApiGateway::Resource",
+          "HttpApiStage": {
+            "Type": "AWS::ApiGatewayV2::Stage",
             "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
+              "ApiId": {
+                "Ref": "HttpApi"
               },
-              "PathPart": "{proxy+}",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
+              "StageName": "$default",
+              "AutoDeploy": true,
+              "DefaultRouteSettings": {
+                "DetailedMetricsEnabled": false
               }
             }
           },
-          "ApiGatewayMethodAny": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "ANY",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "ApiLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "ApiLambdaPermissionApiGateway"
-            ]
-          },
-          "ApiGatewayMethodProxyVarAny": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "ANY",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceProxyVar"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "ApiLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "ApiLambdaPermissionApiGateway"
-            ]
-          },
-          "ApiGatewayDeployment1745480291548": {
-            "Type": "AWS::ApiGateway::Deployment",
-            "Properties": {
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "StageName": "dev"
-            },
-            "DependsOn": [
-              "ApiGatewayMethodAny",
-              "ApiGatewayMethodProxyVarAny"
-            ]
-          },
-          "ApiLambdaPermissionApiGateway": {
+          "ApiLambdaPermissionHttpApi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -297,40 +190,84 @@
                     },
                     ":",
                     {
-                      "Ref": "ApiGatewayRestApi"
+                      "Ref": "HttpApi"
                     },
-                    "/*/*"
+                    "/*"
                   ]
                 ]
               }
             }
+          },
+          "HttpApiIntegrationApi": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDefault": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "$default",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationApi"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationApi"
           }
         },
         "Outputs": {
           "ServerlessDeploymentBucketName": {
             "Value": "serverless-framework-deployments-us-east-1-6776250c-1a30",
             "Export": {
-              "Name": "sls-nest-lambda-service-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-lambda01-dev-ServerlessDeploymentBucketName"
             }
           },
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionWUnERR9XCgj1rfuBbaVDT8qQ86EkPWuOXpHmJ1qILo"
+              "Ref": "ApiLambdaVersionDnCoPMIkO036mu5LIsnJsh90szQBouA72wXXeITyI0"
             },
             "Export": {
-              "Name": "sls-nest-lambda-service-dev-ApiLambdaFunctionQualifiedArn"
+              "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
             }
           },
-          "ServiceEndpoint": {
-            "Description": "URL of the service endpoint",
+          "HttpApiId": {
+            "Description": "Id of the HTTP API",
+            "Value": {
+              "Ref": "HttpApi"
+            },
+            "Export": {
+              "Name": "sls-lambda01-dev-HttpApiId"
+            }
+          },
+          "HttpApiUrl": {
+            "Description": "URL of the HTTP API",
             "Value": {
               "Fn::Join": [
                 "",
                 [
                   "https://",
                   {
-                    "Ref": "ApiGatewayRestApi"
+                    "Ref": "HttpApi"
                   },
                   ".execute-api.",
                   {
@@ -339,13 +276,12 @@
                   ".",
                   {
                     "Ref": "AWS::URLSuffix"
-                  },
-                  "/dev"
+                  }
                 ]
               ]
             },
             "Export": {
-              "Name": "sls-nest-lambda-service-dev-ServiceEndpoint"
+              "Name": "sls-lambda01-dev-HttpApiUrl"
             }
           }
         }
@@ -353,48 +289,55 @@
       "vpc": {}
     },
     "custom": {
-      "esbuild": {
-        "bundle": true,
-        "minify": false,
-        "sourcemap": true,
-        "target": "node18",
-        "platform": "node",
-        "exclude": [
-          "aws-sdk"
-        ],
-        "concurrency": 10
+      "serverless-offline": {
+        "httpPort": 3000,
+        "noPrependStageInUrl": true
       }
     },
+    "plugins": [
+      "serverless-offline"
+    ],
     "pluginsData": {},
     "functions": {
       "api": {
-        "handler": "dist/main.handler",
+        "handler": "dist/lambda.handler",
         "events": [
           {
-            "http": "ANY /"
-          },
-          {
-            "http": "ANY /{proxy+}"
+            "httpApi": "*",
+            "resolvedMethod": "ANY"
           }
         ],
-        "name": "nest-lambda-service-dev-api",
-        "package": {},
+        "name": "lambda01-dev-api",
+        "package": {
+          "artifact": ".serverless/api.zip"
+        },
         "memory": 512,
         "timeout": 10,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionWUnERR9XCgj1rfuBbaVDT8qQ86EkPWuOXpHmJ1qILo"
+        "versionLogicalId": "ApiLambdaVersionDnCoPMIkO036mu5LIsnJsh90szQBouA72wXXeITyI0"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless",
     "initialServerlessConfig": {
-      "service": "nest-lambda-service",
+      "service": "lambda01",
+      "frameworkVersion": ">= 4.*.*",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "package": {
+        "individually": true,
+        "excludeDevDependencies": true,
+        "artifactsS3KeyDirname": "serverless/lambda01/dev/code-artifacts",
+        "deploymentBucket": "serverless-framework-deployments-us-east-1-6776250c-1a30",
+        "artifactDirectoryName": "serverless/lambda01/dev/1747485180352-2025-05-17T12:33:00.352Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -402,11 +345,11 @@
     },
     "appId": null,
     "orgId": null,
-    "layers": {},
-    "artifact": "/home/riyan/myproject/nestjsmongodb/.serverless/nest-lambda-service.zip"
+    "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/nest-lambda-service/dev/1745480314622-2025-04-24T07:38:34.622Z",
-    "artifact": "nest-lambda-service.zip"
+    "individually": true,
+    "artifactDirectoryName": "serverless/lambda01/dev/1747485180352-2025-05-17T12:33:00.352Z",
+    "artifact": ""
   }
 }
