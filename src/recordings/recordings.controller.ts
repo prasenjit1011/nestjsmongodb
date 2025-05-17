@@ -12,7 +12,7 @@ export class RecordingsController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadRecording(@UploadedFile() file: Express.Multer.File) {
-    const savePath = path.join(__dirname, '../../public/uploads/recordings');
+    const savePath = path.join(__dirname, '../../recordings');
     if (!fs.existsSync(savePath)) {
       fs.mkdirSync(savePath);
     }
