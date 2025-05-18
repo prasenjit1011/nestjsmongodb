@@ -545,9 +545,13 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 # git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
 # clinic doctor -- node app.js
 
+clear
 rm -rf node_modules package-lock.json
 npm cache clean --force
 npm i
+git status
+git commit -am "C 123"
+git push --set-upstream origin lambda_01_cicd_04
 
 "@golevelup/nestjs-rabbitmq": "^6.0.0",
 "@nestjs/serve-static": "^4.0.0",
