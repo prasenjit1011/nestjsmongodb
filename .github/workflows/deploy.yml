@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - lambda_01_cicd_03  # Change to your deployment branch if needed
-
+      - graphQL  # Change to your deployment branch if needed
 
 jobs:
   deploy:

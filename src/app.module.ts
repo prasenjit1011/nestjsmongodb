@@ -13,6 +13,11 @@ import { ProductModule } from './product/product.module';
     //ProductModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService
+  ],
 })
-export class AppModule {}
+
+export class AppModule {
+
+}

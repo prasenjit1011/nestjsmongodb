@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Client</title>
+  </head>
+  <body>
+    <div>
+      <a href="/webrtc.html">WebRTC</a> &nbsp; &nbsp;
+      <a href="/client.html">Message with Video Streaming</a> &nbsp; &nbsp;
+      <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
+      <a href="/">Message using Controller</a>
+    </div>
+    <div style="width: 30%; float: left;">
+      <h2>-: Watch Video, PORT : 3001 :-</h2>
+      <video width="420" controls>
+        <source src="http://localhost:3001/video" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div style="width: 60%; float: right;">
+      <h2>WebSocket Chat, PORT : 3001</h2>
+      <h5 id="status">Status : Not Connected</h5>
+      <h5 id="randnum">Random : <a href="/" target="_blank">Click Me For Emit Event</a></a></h5>
+      <input id="msg" placeholder="Enter message" />
+      <button onclick="send()">Send</button>
+      <ul id="chat"></ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+      const socket = io('http://localhost:3001');
+
+      socket.on('connect', () => {
+        $('#status').html('Status : Connected');
+        console.log('Connected to server');
+      });
+
+      socket.on('message', (msg) => {
+        const li = document.createElement('li');
+        li.innerText = msg;
+        document.getElementById('chat').appendChild(li);
+      });
+
+      socket.on('randnumber', (rnum) => {
+        $('#randnum').html(rnum)
+      });
+
+      function send() {
+        const msg = document.getElementById('msg').value;
+        if (msg) {
+          socket.emit('message', msg);
+          document.getElementById('msg').value = '';
+        }
+      }
+    </script>
+  </body>
+</html>

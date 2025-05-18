@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebSocket Chat</title>
+  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div>
+    <a href="/webrtc.html">WebRTC</a> &nbsp; &nbsp;
+    <a href="/client.html">Message with Video Streaming</a> &nbsp; &nbsp;
+    <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
+    <a href="/">Message using Controller</a>
+  </div>
+  <h2>Chat</h2>
+  <div style="width: 40%; float: left;">
+  <input type="text" id="user" placeholder="Your Name" />
+  <input type="text" id="message" placeholder="Type a message" />
+  <button onclick="sendMessage()">Send</button>
+
+  <ul id="chat"></ul>
+  </div>
+  <div style="width: 55%; float: right;">
+  <div style="width: 400px; height: 400px;">
+    <canvas id="chart"></canvas>
+  </div>
+  </div>
+
+  <script>
+    const socket = io('http://localhost:3001');
+
+    function sendMessage() {
+      const user = document.getElementById('user').value;
+      const message = document.getElementById('message').value;
+      if (user && message) {
+        socket.emit('message', { user, message });
+        document.getElementById('message').value = '';
+      }
+    }
+
+    socket.on('message', (data) => {
+      const li = document.createElement('li');
+      li.textContent = `${data.user}: ${data.message}`;
+      document.getElementById('chat').appendChild(li);
+    });
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [],
+        datasets: [{
+          label: '# of Messages',
+          data: [],
+          backgroundColor: ['red', 'blue', 'green', 'orange', 'purple'],
+        }],
+      },
+    });
+
+    socket.on('stats', (data) => {
+      chart.data.labels = Object.keys(data);
+      chart.data.datasets[0].data = Object.values(data);
+      chart.update();
+    });
+  </script>
+</body>
+</html>

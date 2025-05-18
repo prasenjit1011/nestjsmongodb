@@ -1,0 +1,90 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CountryType {
+  id: ID!
+  name: String!
+  stateDetails: [StateType!]
+}
+
+type CompanyType {
+  id: ID!
+  name: String!
+  district: DistrictType
+  employeeDetails: [EmployeeType!]
+}
+
+type DistrictType {
+  id: ID!
+  name: String!
+  state: StateType
+  company: [CompanyType!]
+  companyDetails: [CompanyType!]
+}
+
+type StateType {
+  id: ID!
+  name: String!
+  country: CountryType
+  district: [DistrictType!]
+  districtDetails: [DistrictType!]
+}
+
+type EmployeeType {
+  id: ID!
+  name: String!
+  company: CompanyType
+}
+
+type Query {
+  countryDetails: [CountryType!]!
+  stateDetails: [StateType!]!
+  districtDetails: [DistrictType!]!
+  companyDetails: [CompanyType!]!
+  employeeDetails: [EmployeeType!]!
+}
+
+type Mutation {
+  createCountry(input: CreateCountryInput!): CountryType!
+  createState(input: CreateStateInput!): StateType!
+  createDistrict(input: CreateDistrictInput!): DistrictType!
+  createCompany(input: CreateCompanyInput!): CompanyType!
+  createEmployee(input: CreateEmployeeInput!, file: Upload!): EmployeeType!
+  updateEmployee(input: UpdateEmployeeInput!): EmployeeType!
+  deleteEmployee(id: String!): Boolean!
+}
+
+input CreateCountryInput {
+  name: String!
+}
+
+input CreateStateInput {
+  name: String!
+  countryId: String
+}
+
+input CreateDistrictInput {
+  name: String!
+  stateId: String
+}
+
+input CreateCompanyInput {
+  name: String!
+  districtId: String
+}
+
+input CreateEmployeeInput {
+  name: String!
+  companyId: String
+  image: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UpdateEmployeeInput {
+  id: ID!
+  name: String
+  companyId: String
+}

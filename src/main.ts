@@ -1,5 +1,8 @@
 import { NestFactory } from '@nestjs/core';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
+import { RedisIoAdapter } from './websocket/redisioadapter';
 import { AppModule } from './app.module';
+
 import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 import { Callback, Context, Handler } from 'aws-lambda';
