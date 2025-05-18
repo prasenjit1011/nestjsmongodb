@@ -2,6 +2,75 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "The AWS CloudFormation template for this Serverless application",
   "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ServerlessDeploymentBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "ServerlessDeploymentBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
     "ApiLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -90,8 +159,10 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-us-east-1-6776250c-1a30",
-          "S3Key": "serverless/lambda01/dev/1747485180352-2025-05-17T12:33:00.352Z/api.zip"
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z/api.zip"
         },
         "Handler": "dist/lambda.handler",
         "Runtime": "nodejs18.x",
@@ -114,14 +185,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionDnCoPMIkO036mu5LIsnJsh90szQBouA72wXXeITyI0": {
+    "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "5DDe4F8wVDJC6VTm/CkJ3JmiEWgX2BRQV+E51inFnQA="
+        "CodeSha256": "R5HF6UvOngTy9dUYVrNxMLax34GesCsRHh/UZSPnXqY="
       }
     },
     "HttpApi": {
@@ -222,7 +293,9 @@
   },
   "Outputs": {
     "ServerlessDeploymentBucketName": {
-      "Value": "serverless-framework-deployments-us-east-1-6776250c-1a30",
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      },
       "Export": {
         "Name": "sls-lambda01-dev-ServerlessDeploymentBucketName"
       }
@@ -230,7 +303,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionDnCoPMIkO036mu5LIsnJsh90szQBouA72wXXeITyI0"
+        "Ref": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
       },
       "Export": {
         "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
