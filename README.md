@@ -546,7 +546,10 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 # Source Code Optimization
 # git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
 # clinic doctor -- node app.js
-# npm cache clean --force
+
+rm -rf node_modules package-lock.json
+npm cache clean --force
+npm i
 
 ```
 
