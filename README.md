@@ -551,6 +551,8 @@ rm -rf node_modules package-lock.json
 npm cache clean --force
 npm i
 
+"@golevelup/nestjs-rabbitmq": "^6.0.0",
+"@nestjs/serve-static": "^4.0.0",
 ```
 
 
