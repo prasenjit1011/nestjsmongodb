@@ -179,7 +179,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z/api.zip"
+                "S3Key": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z/api.zip"
               },
               "Handler": "dist/lambda.handler",
               "Runtime": "nodejs18.x",
@@ -202,14 +202,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc": {
+          "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "R5HF6UvOngTy9dUYVrNxMLax34GesCsRHh/UZSPnXqY="
+              "CodeSha256": "WTAGxE23ica552kF/oN/otWT1nsjUyxbSVUESxOTNmo="
             }
           },
           "HttpApi": {
@@ -317,7 +317,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+              "Ref": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
             },
             "Export": {
               "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
@@ -470,7 +470,7 @@
         "timeout": 10,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+        "versionLogicalId": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
       }
     },
     "configValidationMode": "warn",
@@ -490,7 +490,7 @@
         "individually": true,
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/lambda01/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z"
+        "artifactDirectoryName": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -502,7 +502,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z",
+    "artifactDirectoryName": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z",
     "artifact": ""
   }
 }

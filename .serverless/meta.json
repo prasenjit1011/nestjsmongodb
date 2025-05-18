@@ -180,7 +180,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z/api.zip"
+                  "S3Key": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z/api.zip"
                 },
                 "Handler": "dist/lambda.handler",
                 "Runtime": "nodejs18.x",
@@ -203,14 +203,14 @@
                 "ApiLogGroup"
               ]
             },
-            "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc": {
+            "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApiLambdaFunction"
                 },
-                "CodeSha256": "R5HF6UvOngTy9dUYVrNxMLax34GesCsRHh/UZSPnXqY="
+                "CodeSha256": "WTAGxE23ica552kF/oN/otWT1nsjUyxbSVUESxOTNmo="
               }
             },
             "HttpApi": {
@@ -321,7 +321,7 @@
             "ApiLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+                "Ref": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
               },
               "Export": {
                 "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
@@ -464,7 +464,7 @@
           "timeout": 10,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+          "versionLogicalId": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
         }
       },
       "plugins": [
@@ -474,7 +474,7 @@
         "individually": true,
         "excludeDevDependencies": true,
         "artifactsS3KeyDirname": "serverless/lambda01/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z"
+        "artifactDirectoryName": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z"
       },
       "custom": {
         "serverless-offline": {
@@ -658,7 +658,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z/api.zip"
+                "S3Key": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z/api.zip"
               },
               "Handler": "dist/lambda.handler",
               "Runtime": "nodejs18.x",
@@ -681,14 +681,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc": {
+          "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "R5HF6UvOngTy9dUYVrNxMLax34GesCsRHh/UZSPnXqY="
+              "CodeSha256": "WTAGxE23ica552kF/oN/otWT1nsjUyxbSVUESxOTNmo="
             }
           },
           "HttpApi": {
@@ -799,7 +799,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+              "Ref": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
             },
             "Export": {
               "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
@@ -947,12 +947,12 @@
     "serviceProviderAwsCfStackName": "lambda01-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:466015320752:stack/lambda01-dev/d771eda0-2e4e-11f0-87c3-0affdedb5a11",
     "serviceProviderAwsCfStackCreated": "2025-05-11T10:01:00.648Z",
-    "serviceProviderAwsCfStackUpdated": "2025-05-18T04:25:53.121Z",
+    "serviceProviderAwsCfStackUpdated": "2025-05-18T05:12:08.614Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ApiLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:466015320752:function:lambda01-dev-api:24",
+        "OutputValue": "arn:aws:lambda:us-east-1:466015320752:function:lambda01-dev-api:27",
         "Description": "Current Lambda function version",
         "ExportName": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
       },
@@ -1138,7 +1138,7 @@
               "S3Bucket": {
                 "Ref": "ServerlessDeploymentBucket"
               },
-              "S3Key": "serverless/lambda01/dev/1747544572171-2025-05-18T05:02:52.171Z/api.zip"
+              "S3Key": "serverless/lambda01/dev/1747545273120-2025-05-18T05:14:33.120Z/api.zip"
             },
             "Handler": "dist/lambda.handler",
             "Runtime": "nodejs18.x",
@@ -1161,14 +1161,14 @@
             "ApiLogGroup"
           ]
         },
-        "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc": {
+        "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ApiLambdaFunction"
             },
-            "CodeSha256": "R5HF6UvOngTy9dUYVrNxMLax34GesCsRHh/UZSPnXqY="
+            "CodeSha256": "WTAGxE23ica552kF/oN/otWT1nsjUyxbSVUESxOTNmo="
           }
         },
         "HttpApi": {
@@ -1279,7 +1279,7 @@
         "ApiLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ApiLambdaVersionDe3JagrQ44jJFUObmAdHh7QuaSC0OKFnaVTPewVzoNc"
+            "Ref": "ApiLambdaVersionT0exQGV9ldbrZ5YRALSbSvySRe06BzuVQq9V1OUMVQY"
           },
           "Export": {
             "Name": "sls-lambda01-dev-ApiLambdaFunctionQualifiedArn"
