@@ -31,14 +31,14 @@
 
 ```
 
-#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor
+#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor, Deploy project in AWS Lambda with CI/CD.
 ```bash
 
 ### 1.  Country <-> State <-> District <-> Company <-> Employee 
 ### 2.  Upload File/Image for employee CRUD
 ### 3.  Auth : User, AuthGuards : Product 
 ### 4.  Add : mutation, Listing : query
-### 5.  AWS Lambda, SNS, SQS
+### 5.  AWS Lambda, SNS, SQS, CI/CD
 
 ### Start :   CRUD ( Country, Auth ) ###
 ### Listing : Country -> State -> District -> Company 
