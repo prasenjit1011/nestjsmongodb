@@ -21,9 +21,8 @@
 
 ```
 
-#####  02. Websocket + Redis + RabbitMQ with standalone HTML file client.html
+#####  02. Websocket + Redis + RabbitMQ + File Streaming with standalone HTML file client.html
 ```bash
-
 # 1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
 # 2. Chat System ( http://localhost:3001/client.html )
 # 3. Pie Chart ( http://localhost:3001/client-pie-chart.html )
@@ -97,18 +96,24 @@
 
 ###############################################################
 ```
-
-##### Other
+##### GraphQL with ReactJS
 ```bash
-# Source Code Optimization
-# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
-# clinic doctor -- node app.js
+# GraphQL with ReactJS
+# App.jsx
+# import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+# const client = new ApolloClient({uri: "http://localhost:3001/graphql", cache: new InMemoryCache()});
+# <ApolloProvider client={client}><CountryList /></ApolloProvider?
+
+# CountryList.jsx
+# import { useQuery, gql } from "@apollo/client";
+# const GET_COUNTRIES = gql`query {countryDetails {id, name, stateDetails {id, name}}}`;
+# const { data, loading, error } = useQuery(GET_COUNTRIES);
 
 ```
 
 ##### Docker Setup Process ###
 ```bash
-
+```bash
 ### Start : Dockerfile ###
 FROM ubuntu
 MAINTAINER Prasenjit
@@ -352,6 +357,7 @@ docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
 ### Docker Network:
 
 ```bash
+```bash
 
 docker images
 docker container ls -a
@@ -457,7 +463,7 @@ https://www.youtube.com/watch?v=wwNWgG5htxs
 
 
 ### kubernetes : Administrator
-```bash
+
 # Install kubernetes :
 # https://www.youtube.com/watch?v=rBeyHDKLVqM
 curl.exe -LO "https://dl.k8s.io/release/v1.32.0/bin/windows/amd64/kubectl.exe"
@@ -520,9 +526,23 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 
 ##### Other 
 ```bash
+# aaaabbccccddccffaaccbbf => 
+# a4b2c3d3
+# { a: 6, b: 4, c: 8, d: 2, f: 3 }
+
+# "I Love Riyan" => "I evoL nayiR"
+# Anagrams : "listen", "silent" => true
+# isPalindrome : madam : true
 
 
 ```
 
+##### Other
+```bash
+# Source Code Optimization
+# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
+# clinic doctor -- node app.js
+
+```
 
 
