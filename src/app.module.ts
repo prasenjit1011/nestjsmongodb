@@ -30,6 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { SignalingGateway } from './signaling/signaling.gateway';
 
 
 @Module({
@@ -88,6 +89,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     ChatGatewayRedis, RedisService, 
     ChatGatewayRabitmq, RabbitMQService, 
     ChatGatewayPie,
+    SignalingGateway,
     { provide: APP_INTERCEPTOR, useClass: GraphQLOnlyInterceptor },
     { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
   ],

@@ -21,22 +21,24 @@
 
 ```
 
-#####  02. Websocket + Redis + RabbitMQ + File Streaming with standalone HTML file client.html
+#####  02. Redis + RabbitMQ + Websocket + WebRTC + Video Streaming with standalone HTML file client.html
 ```bash
 # 1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
-# 2. Chat System ( http://localhost:3001/client.html )
-# 3. Pie Chart ( http://localhost:3001/client-pie-chart.html )
+# 2. Chat System ( client.html )
+# 3. Pie Chart ( client-pie-chart.html )
+# 4. WebRTC  ( webrtc.html )
+# 5. Video Recording ( Branch : video_record )
 
 ```
 
-#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor
+#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor, Deploy project in AWS Lambda with CI/CD.
 ```bash
 
 ### 1.  Country <-> State <-> District <-> Company <-> Employee 
 ### 2.  Upload File/Image for employee CRUD
 ### 3.  Auth : User, AuthGuards : Product 
 ### 4.  Add : mutation, Listing : query
-### 5.  AWS Lambda, SNS, SQS
+### 5.  AWS Lambda, SNS, SQS, CI/CD
 
 ### Start :   CRUD ( Country, Auth ) ###
 ### Listing : Country -> State -> District -> Company 
@@ -542,6 +544,17 @@ docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:0
 # Source Code Optimization
 # git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
 # clinic doctor -- node app.js
+
+clear
+rm -rf node_modules package-lock.json
+npm cache clean --force
+npm i
+git status
+git commit -am "C 123"
+git push --set-upstream origin lambda_01_cicd_04
+
+"@golevelup/nestjs-rabbitmq": "^6.0.0",
+"@nestjs/serve-static": "^4.0.0",
 
 ```
 

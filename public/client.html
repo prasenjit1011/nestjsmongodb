@@ -4,6 +4,12 @@
     <title>Chat Client</title>
   </head>
   <body>
+    <div>
+      <a href="/webrtc.html">WebRTC</a> &nbsp; &nbsp;
+      <a href="/client.html">Message with Video Streaming</a> &nbsp; &nbsp;
+      <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
+      <a href="/">Message using Controller</a>
+    </div>
     <div style="width: 30%; float: left;">
       <h2>-: Watch Video, PORT : 3001 :-</h2>
       <video width="420" controls>
@@ -30,7 +36,6 @@
       });
 
       socket.on('message', (msg) => {
-        console.log(66666666)
         const li = document.createElement('li');
         li.innerText = msg;
         document.getElementById('chat').appendChild(li);
