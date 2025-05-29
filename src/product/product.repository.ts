@@ -6,8 +6,8 @@ import { Product } from './product.schema';
 import { CreateProductDto } from './product-create.dto';
 import { UpdateProductDto } from './product-update.dto';
 
-// import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-// const sqs = new SQSClient({ region: "ap-south-1" });
+import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
+
 
 
 @Injectable()
@@ -18,25 +18,22 @@ export class ProductRepository {
     const createdProduct = new this.productModel(createProductDto);
     return createdProduct.save();
   }
+ 
+  async findAll(): Promise<Product[]> {    
 
-  // async sendToSQS(product){
-  //   const command = new SendMessageCommand({
-  //     QueueUrl: process.env.PRODUCT_QUEUE_URL,
-  //     MessageBody: JSON.stringify(product),
-  //   });
-
-  //   await sqs.send(command);
-  // };
-
-  
-  async findAll(): Promise<Product[]> {
-    
     // let prod = {
     //   name: "Test Product 001",
     //   price: 999,
     //   description: "A demo item",
     // }
-    // await this.sendToSQS(prod);
+
+    // const command = new SendMessageCommand({
+    //   QueueUrl: process.env.PRODUCT_QUEUE_URL,
+    //   MessageBody: JSON.stringify(prod),
+    // });
+    // const sqs = new SQSClient({ region: "ap-south-1" });
+    // await sqs.send(command);
+
     
     return this.productModel.find().select('name').exec();
   }
