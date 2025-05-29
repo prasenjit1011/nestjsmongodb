@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Nestjs lambda_01_cicd_04 : 29May2025 : 755 '+(new Date).getMilliseconds();
+    return 'Nestjs lambda_01_cicd_04 : 29May2025 : 843 '+(new Date).getMilliseconds();
   }
 }
