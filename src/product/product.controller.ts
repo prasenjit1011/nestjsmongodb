@@ -16,7 +16,11 @@ export class ProductController {
 
   @Get()
   findAll(){
-    return {queueUrl: process.env.PRODUCT_QUEUE_URL};
+    const data = {
+      name:'myproductlist',
+      url: process.env.PRODUCT_QUEUE_URL
+    }
+    return data;
     return this.productService.findAll();
   }
 
