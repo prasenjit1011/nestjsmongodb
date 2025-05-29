@@ -30,6 +30,7 @@ export class ProductRepository {
     const command = new SendMessageCommand({
       QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
       MessageBody: JSON.stringify(prod),
+      MessageGroupId: "product-group-1"
     });
     const sqs = new SQSClient({ region: "ap-south-1" });
     await sqs.send(command);
