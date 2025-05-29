@@ -20,7 +20,7 @@ export class ProductController {
       name:'myproductlist',
       url: process.env.PRODUCT_QUEUE_URL
     }
-    return data;
+    //return data;
     return this.productService.findAll();
   }
 
