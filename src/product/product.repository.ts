@@ -32,7 +32,7 @@ export class ProductRepository {
       MessageBody: JSON.stringify(prod),
       MessageGroupId: "product-group-1"
     });
-    const sqs = new SQSClient({ region: "ap-south-1" });
+    const sqs = new SQSClient({ region: "us-east-1" });
     await sqs.send(command);
 
     
