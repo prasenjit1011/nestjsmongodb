@@ -15,7 +15,8 @@ export class ProductController {
   }
 
   @Get()
-  findAll(): Promise<Product[]> {
+  findAll(){
+    return {queueUrl: process.env.PRODUCT_QUEUE_URL};
     return this.productService.findAll();
   }
 
