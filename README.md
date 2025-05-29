@@ -19,6 +19,8 @@
 # nest g controller users
 # nest g service users
 
+# CICD
+# rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
 ```
 
 #####  02. Redis + RabbitMQ + Websocket + WebRTC + Video Streaming with standalone HTML file client.html
