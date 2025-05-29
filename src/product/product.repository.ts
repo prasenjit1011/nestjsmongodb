@@ -16,7 +16,7 @@ export class ProductRepository {
   }
 
   async findAll(): Promise<Product[]> {
-    return this.productModel.find().exec();
+    return this.productModel.find().select('name').exec();
   }
 
   async findOne(id: string): Promise<Product> {
