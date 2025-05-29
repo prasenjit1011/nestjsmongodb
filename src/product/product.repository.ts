@@ -21,18 +21,18 @@ export class ProductRepository {
  
   async findAll(): Promise<Product[]> {    
 
-    // let prod = {
-    //   name: "Test Product 001",
-    //   price: 999,
-    //   description: "A demo item",
-    // }
+    let prod = {
+      name: "Test Product 001",
+      price: 999,
+      description: "A demo item",
+    }
 
-    // const command = new SendMessageCommand({
-    //   QueueUrl: process.env.PRODUCT_QUEUE_URL,
-    //   MessageBody: JSON.stringify(prod),
-    // });
-    // const sqs = new SQSClient({ region: "ap-south-1" });
-    // await sqs.send(command);
+    const command = new SendMessageCommand({
+      QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
+      MessageBody: JSON.stringify(prod),
+    });
+    const sqs = new SQSClient({ region: "ap-south-1" });
+    await sqs.send(command);
 
     
     return this.productModel.find().select('name').exec();
