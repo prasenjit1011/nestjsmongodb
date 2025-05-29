@@ -2,6 +2,8 @@
 /dist
 /node_modules
 /build
+/.serverless
+
 
 # Logs
 logs
@@ -61,3 +63,4 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .serverless/cloudformation-template-update-stack.json
 .serverless/cloudformation-template-update-stack.json
 .serverless/meta.json
+.serverless/cloudformation-template-create-stack.json
