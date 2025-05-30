@@ -26,6 +26,7 @@ export class ProductRepository {
       const prodData = {name:"Test - "+str, price:123, description:"Dummy"};
       const createdProduct = new this.productModel(prodData);
   
+      return { message: "Product created", createdProduct};
     
       const sqs = new SQSClient({ region: "us-east-1" });
       const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
@@ -57,7 +58,7 @@ export class ProductRepository {
       }
     }
     catch(e){
-      return { message: "Product not created successfully!"};
+      return { message: "Product not created successfully!", error: e.message};
     }
 
   }
