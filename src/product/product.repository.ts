@@ -23,12 +23,11 @@ export class ProductRepository {
   
     const command = new ReceiveMessageCommand({
       QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
-      MaxNumberOfMessages: 1,
+      MaxNumberOfMessages: 10,
       WaitTimeSeconds: 5, // Optional: Long polling
     });
   
     const response = await sqs.send(command);
-    //return { message: "No messages in the queue...", response};
   
     if (response.Messages && response.Messages.length > 0) {
       const message = response.Messages[0];
