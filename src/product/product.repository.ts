@@ -6,8 +6,7 @@ import { Product } from './product.schema';
 import { CreateProductDto } from './product-create.dto';
 import { UpdateProductDto } from './product-update.dto';
 
-import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-
+import { SQSClient, SendMessageCommand, ReceiveMessageCommand, DeleteMessageCommand } from "@aws-sdk/client-sqs";
 
 @Injectable()
 export class ProductRepository {
@@ -18,7 +17,38 @@ export class ProductRepository {
     return createdProduct.save();
   }
  
-  async myProd(){
+  
+
+  async myProd() {
+    const sqs = new SQSClient({ region: "us-east-1" });
+  
+    const command = new ReceiveMessageCommand({
+      QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
+      MaxNumberOfMessages: 1,
+      WaitTimeSeconds: 5, // Optional: Long polling
+    });
+  
+    const response = await sqs.send(command);
+  
+    if (response.Messages && response.Messages.length > 0) {
+      const message = response.Messages[0];
+      const body = JSON.parse(message.Body);
+  
+      // Delete message after processing
+      await sqs.send(new DeleteMessageCommand({
+        QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
+        ReceiptHandle: message.ReceiptHandle,
+      }));
+  
+      return body;
+    } else {
+      return { message: "No messages in the queue" };
+    }
+  }
+  
+
+
+  async zmyProd(){
     let prod = {
       name: "Test Product 001",
       price: 999,
