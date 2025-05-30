@@ -53,7 +53,7 @@ export class ProductRepository {
   async findAll(): Promise<Product[]> {    
 
     const dtd = new Date;
-    const time = 'Dtd : '+dtd.getDate()+':::'+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
+    const time = 'Dtd : '+dtd.getDate()+' -:- '+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
     let prod = {
       name: "Test Product 001 : "+time,
       price: 999,
