@@ -24,7 +24,7 @@ export class ProductRepository {
       const dtd = new Date;
       const str = 'Dtd : '+dtd.getDate()+' -:- '+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
       const prodData = {name:"Test - "+str, price:123, description:"Dummy"};
-      const createdProduct  = new this.productModel(prodData);
+      const createdProduct  = await new this.productModel(prodData);
       const productList     = await this.productModel.find().select('name').exec();
 
       return { message: "Product created", createdProduct, productList};
