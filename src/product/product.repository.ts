@@ -28,7 +28,7 @@ export class ProductRepository {
     });
   
     const response = await sqs.send(command);
-    return { message: "No messages in the queue...", response};
+    //return { message: "No messages in the queue...", response};
   
     if (response.Messages && response.Messages.length > 0) {
       const message = response.Messages[0];
