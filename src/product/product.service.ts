@@ -17,7 +17,7 @@ export class ProductService {
     return this.productRepository.findAll();
   }
 
-  myProd(): Promise<Product[]> {
+  myProd(){
     return this.productRepository.myProd();
   }
 

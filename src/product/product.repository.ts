@@ -18,7 +18,13 @@ export class ProductRepository {
     return createdProduct.save();
   }
  
-  async myProd(): Promise<Product[]> {
+  async myProd(){
+    let prod = {
+      name: "Test Product 001",
+      price: 999,
+      description: "A demo item",
+    }
+    return prod;
     return this.productModel.find().exec();
   }
 
