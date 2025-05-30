@@ -44,24 +44,12 @@ export class ProductRepository {
       return { message: "No messages in the queue..." };
     }
   }
-  
-
-
-  async zmyProd(){
-    let prod = {
-      name: "Test Product 001 : "+(new Date).getMilliseconds(),
-      price: 999,
-      description: "A demo item",
-    }
-    return prod;
-    return this.productModel.find().exec();
-  }
-
+ 
 
   async findAll(): Promise<Product[]> {    
 
     let prod = {
-      name: "Test Product 0826",
+      name: "Test Product 001 : "+(new Date).getMilliseconds(),
       price: 999,
       description: "A demo item",
     }
