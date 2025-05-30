@@ -6,7 +6,7 @@ import { Product } from './product.schema';
 import { CreateProductDto } from './product-create.dto';
 import { UpdateProductDto } from './product-update.dto';
 
-import { SQSClient, SendMessageCommand, ReceiveMessageCommand, DeleteMessageCommand } from "@aws-sdk/client-sqs";
+import { SQSClient, SendMessageCommand, ReceiveMessageCommand, DeleteMessageCommand, ChangeMessageVisibilityCommand } from "@aws-sdk/client-sqs";
 
 @Injectable()
 export class ProductRepository {
@@ -20,11 +20,21 @@ export class ProductRepository {
   
   async myProd() {
     const sqs = new SQSClient({ region: "us-east-1" });
-  
+    const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo";
+
+    // await sqs.send(
+    //   new ChangeMessageVisibilityCommand({
+    //     QueueUrl: queueUrl,
+    //     ReceiptHandle: message.ReceiptHandle, // You must have received it earlier
+    //     VisibilityTimeout: 0, // Makes it immediately visible
+    //   })
+    // );
+
+
     const command = new ReceiveMessageCommand({
-      QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
-      MaxNumberOfMessages: 2,
-      WaitTimeSeconds: 5, // Optional: Long polling
+      QueueUrl: queueUrl,
+      MaxNumberOfMessages: 1,
+      WaitTimeSeconds: 1, // Optional: Long polling
     });
   
     const response = await sqs.send(command);
@@ -34,10 +44,10 @@ export class ProductRepository {
       const body = JSON.parse(message.Body);
   
       // Delete message after processing
-      // await sqs.send(new DeleteMessageCommand({
-      //   QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
-      //   ReceiptHandle: message.ReceiptHandle,
-      // }));
+      await sqs.send(new DeleteMessageCommand({
+        QueueUrl: queueUrl,
+        ReceiptHandle: message.ReceiptHandle,
+      }));
   
       return body;
     } else {
@@ -48,8 +58,10 @@ export class ProductRepository {
 
   async findAll(): Promise<Product[]> {    
 
+    const dtd = new Date;
+
     let prod = {
-      name: "Test Product 001 : "+(new Date).getMilliseconds(),
+      name: "Test Product 001 : "+dtd.getDate()+' = '+dtd.getHours()+' : '+dtd.getMinutes()+' : '+dtd.getMilliseconds(),
       price: 999,
       description: "A demo item",
     }
