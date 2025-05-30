@@ -19,41 +19,47 @@ export class ProductRepository {
  
   
   async myProd() {
-    const sqs = new SQSClient({ region: "us-east-1" });
-    const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
 
-    const command = new ReceiveMessageCommand({
-      QueueUrl: queueUrl,
-      MaxNumberOfMessages: 1,
-      WaitTimeSeconds: 5, // use 5-10 sec for better long polling
-      VisibilityTimeout: 10, // optional: set to short time
-      MessageAttributeNames: ["All"], // ensure you get custom attributes
-      AttributeNames: ["All"], // helpful for debugging
-    });
+    try{
+      const dtd = new Date;
+      const str = 'Dtd : '+dtd.getDate()+' -:- '+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
+      const prodData = {name:"Test - "+str, price:123, description:"Dummy"};
+      const createdProduct = new this.productModel(prodData);
   
-    const response = await sqs.send(command);
- 
-    const dtd = new Date;
-    const str = 'Dtd : '+dtd.getDate()+' -:- '+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
-    const prodData = {name:"Test - "+str, price:123, description:"Dummy"};
-    const createdProduct = new this.productModel(prodData);
+    
+      const sqs = new SQSClient({ region: "us-east-1" });
+      const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
 
-
-
-    if (response.Messages && response.Messages.length > 0) {
-      const message = response.Messages[0];
-      const body = JSON.parse(message.Body);
-  
-      // Delete message after processing
-      await sqs.send(new DeleteMessageCommand({
+      const command = new ReceiveMessageCommand({
         QueueUrl: queueUrl,
-        ReceiptHandle: message.ReceiptHandle,
-      }));
- 
-      return body;
-    } else {
-      return { message: "No messages in the myqueue... 124 : "+(new Date).getMilliseconds(), response};
+        MaxNumberOfMessages: 1,
+        WaitTimeSeconds: 5, // use 5-10 sec for better long polling
+        VisibilityTimeout: 10, // optional: set to short time
+        MessageAttributeNames: ["All"], // ensure you get custom attributes
+        AttributeNames: ["All"], // helpful for debugging
+      });
+    
+      const response = await sqs.send(command);
+  
+      if (response.Messages && response.Messages.length > 0) {
+        const message = response.Messages[0];
+        const body = JSON.parse(message.Body);
+    
+        // Delete message after processing
+        await sqs.send(new DeleteMessageCommand({
+          QueueUrl: queueUrl,
+          ReceiptHandle: message.ReceiptHandle,
+        }));
+  
+        return body;
+      } else {
+        return { message: "No messages in the myqueue... 124 : "+(new Date).getMilliseconds(), response};
+      }
     }
+    catch(e){
+      return { message: "Product not created successfully!"};
+    }
+
   }
  
 
