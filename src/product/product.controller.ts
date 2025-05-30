@@ -24,7 +24,7 @@ export class ProductController {
     return this.productService.findAll();
   }
 
-  @Get('/myprod')
+  @Get('myprod')
   findMyProd(){
     return this.productService.myProd();
   }

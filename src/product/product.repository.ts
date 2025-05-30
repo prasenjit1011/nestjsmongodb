@@ -18,9 +18,8 @@ export class ProductRepository {
     return createdProduct.save();
   }
  
-  
   async myProd(): Promise<Product[]> {
-    return this.productModel.find().select('name price').exec();
+    return this.productModel.find().exec();
   }
 
 
