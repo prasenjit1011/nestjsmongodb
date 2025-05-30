@@ -42,7 +42,7 @@ export class ProductRepository {
   
       return body;
     } else {
-      return { message: "No messages in the queue...", response};
+      return { message: "No messages in the myqueue...", response};
     }
   }
  
