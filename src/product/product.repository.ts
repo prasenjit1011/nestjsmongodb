@@ -43,6 +43,10 @@ export class ProductRepository {
         ReceiptHandle: message.ReceiptHandle,
       }));
   
+      const dtd = new Date;
+      const str = 'Dtd : '+dtd.getDate()+' -:- '+dtd.getHours()+':'+dtd.getMinutes()+':'+dtd.getSeconds()+':'+dtd.getMilliseconds();
+      const prodData = {name:"Test - "+str, price:123, description:"Dummy"};
+      const createdProduct = new this.productModel();
       return body;
     } else {
       return { message: "No messages in the myqueue... 123 : "+(new Date).getMilliseconds(), response};
