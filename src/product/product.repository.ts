@@ -23,7 +23,7 @@ export class ProductRepository {
   
     const command = new ReceiveMessageCommand({
       QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
-      MaxNumberOfMessages: 10,
+      MaxNumberOfMessages: 2,
       WaitTimeSeconds: 5, // Optional: Long polling
     });
   
@@ -34,14 +34,14 @@ export class ProductRepository {
       const body = JSON.parse(message.Body);
   
       // Delete message after processing
-      await sqs.send(new DeleteMessageCommand({
-        QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
-        ReceiptHandle: message.ReceiptHandle,
-      }));
+      // await sqs.send(new DeleteMessageCommand({
+      //   QueueUrl: "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo",
+      //   ReceiptHandle: message.ReceiptHandle,
+      // }));
   
       return body;
     } else {
-      return { message: "No messages in the myqueue...", response};
+      return { message: "No messages in the myqueue... 123 : "+(new Date).getMilliseconds(), response};
     }
   }
  
