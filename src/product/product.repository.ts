@@ -61,7 +61,7 @@ export class ProductRepository {
   async findAll(): Promise<Product[]> {    
 
     let prod = {
-      name: "Test Product 001",
+      name: "Test Product 0826",
       price: 999,
       description: "A demo item",
     }
