@@ -25,7 +25,7 @@ export class ProductRepository {
   // const productList     = await this.productModel.find().select('name').exec();
   // return { message: "Product created", createdProduct, productList};
 
-  async myProdOld() {
+  async myProd() {
     try{
       const sqs = new SQSClient({ region: "us-east-1" });
       const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
@@ -53,7 +53,7 @@ export class ProductRepository {
   
         return body;
       } else {
-        return { message: "No messages in the myqueue... 567 : "+(new Date).getMilliseconds(), response};
+        return { message: "No messages in the myqueue... 7789 : "+(new Date).getMilliseconds(), response};
       }
     }
     catch(e){
