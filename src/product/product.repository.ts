@@ -20,21 +20,15 @@ export class ProductRepository {
   
   async myProd() {
     const sqs = new SQSClient({ region: "us-east-1" });
-    const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo";
-
-    // await sqs.send(
-    //   new ChangeMessageVisibilityCommand({
-    //     QueueUrl: queueUrl,
-    //     ReceiptHandle: message.ReceiptHandle, // You must have received it earlier
-    //     VisibilityTimeout: 0, // Makes it immediately visible
-    //   })
-    // );
-
+    const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
 
     const command = new ReceiveMessageCommand({
       QueueUrl: queueUrl,
       MaxNumberOfMessages: 1,
-      WaitTimeSeconds: 1, // Optional: Long polling
+      WaitTimeSeconds: 5, // use 5-10 sec for better long polling
+      VisibilityTimeout: 10, // optional: set to short time
+      MessageAttributeNames: ["All"], // ensure you get custom attributes
+      AttributeNames: ["All"], // helpful for debugging
     });
   
     const response = await sqs.send(command);
