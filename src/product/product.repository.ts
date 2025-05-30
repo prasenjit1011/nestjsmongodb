@@ -41,7 +41,7 @@ export class ProductRepository {
   
       return body;
     } else {
-      return { message: "No messages in the queue" };
+      return { message: "No messages in the queue..." };
     }
   }
   
@@ -49,7 +49,7 @@ export class ProductRepository {
 
   async zmyProd(){
     let prod = {
-      name: "Test Product 001",
+      name: "Test Product 001 : "+(new Date).getMilliseconds(),
       price: 999,
       description: "A demo item",
     }
