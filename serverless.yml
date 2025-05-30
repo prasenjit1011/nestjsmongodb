@@ -1,4 +1,4 @@
-service: lambda03
+service: lambda04
 
 #frameworkVersion: '^3.0.0'
 
@@ -11,12 +11,26 @@ provider:
   timeout: 10
   environment:
     MONGODB_URI: your-mongodb-uri-here
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:ReceiveMessage
+        - sqs:DeleteMessage
+        - sqs:GetQueueAttributes
+      Resource: arn:aws:sqs:us-east-1:466015320752:lambdaproductcreate.fifo
 
 functions:
   api:
     handler: dist/lambda.handler
     events:
       - httpApi: '*'
+  sqsHandler:
+    handler: dist/main.handler
+    events:
+      - sqs:
+          arn: arn:aws:sqs:us-east-1:466015320752:lambdaproductcreate.fifo
+          batchSize: 1
+          maximumRetryAttempts: 2
 
 plugins:
   - serverless-offline
