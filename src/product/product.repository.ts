@@ -18,6 +18,12 @@ export class ProductRepository {
     return createdProduct.save();
   }
  
+  
+  async myProd(): Promise<Product[]> {
+    return this.productModel.find().select('name price').exec();
+  }
+
+
   async findAll(): Promise<Product[]> {    
 
     let prod = {

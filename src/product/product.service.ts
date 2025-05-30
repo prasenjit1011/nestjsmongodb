@@ -17,6 +17,10 @@ export class ProductService {
     return this.productRepository.findAll();
   }
 
+  myProd(): Promise<Product[]> {
+    return this.productRepository.myProd();
+  }
+
   findOne(id: string): Promise<Product> {
     return this.productRepository.findOne(id);
   }
