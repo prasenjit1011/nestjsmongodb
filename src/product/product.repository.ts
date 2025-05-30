@@ -27,7 +27,7 @@ export class ProductRepository {
       const createdProduct  = await new this.productModel(prodData).save();
       const productList     = await this.productModel.find().select('name').exec();
 
-      return { message: "Product created", createdProduct, productList};
+      //return { message: "Product created", createdProduct, productList};
     
       const sqs = new SQSClient({ region: "us-east-1" });
       const queueUrl = "https://sqs.us-east-1.amazonaws.com/466015320752/lambdaproductcreate.fifo"; 
