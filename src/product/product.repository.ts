@@ -18,7 +18,6 @@ export class ProductRepository {
   }
  
   
-
   async myProd() {
     const sqs = new SQSClient({ region: "us-east-1" });
   
