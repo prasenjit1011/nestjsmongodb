@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>Chat Client</title>
+    <style>
+      button{
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div>
@@ -10,14 +15,15 @@
       <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
       <a href="/">Message using Controller</a>
     </div>
-    <div style="width: 30%; float: left;">
+    <div style="width: 40%; float: left;">
       <h2>-: Watch Video, PORT : 3001 :-</h2>
+      <h5>-: Chck Video Path :-</h5>
       <video width="420" controls>
         <source src="http://localhost:3001/video" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
-    <div style="width: 60%; float: right;">
+    <div style="width: 50%; float: right;">
       <h2>WebSocket Chat, PORT : 3001</h2>
       <h5 id="status">Status : Not Connected</h5>
       <h5 id="randnum">Random : <a href="/" target="_blank">Click Me For Emit Event</a></a></h5>

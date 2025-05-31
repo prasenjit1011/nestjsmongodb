@@ -3,8 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <title>WebSocket Chat</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    button{
+      cursor: pointer;
+    }
+    .box{
+      border: 1px solid #CCC; 
+      margin: 5px; 
+      padding: 5px;
+    }
+  </style>
+  
 </head>
 <body>
   <div>
@@ -13,8 +25,19 @@
     <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
     <a href="/">Message using Controller</a>
   </div>
+  <div style="width: 25%; float: left; " class="box">
+    <h2>-: Watch Video, PORT : 3001 :-</h2>
+    <h5>-: Chck Video Path :-</h5>
+    <video width="300" controls>
+      <source src="http://localhost:3001/video" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div style="width: 60%; float: left; border: 1px solid #CCC; margin: 5px; padding: 5px;">
+
+
   <h2>Chat</h2>
-  <div style="width: 40%; float: left;">
+  <div style="width: 40%; float: left;" class="box">
   <input type="text" id="user" placeholder="Your Name" />
   <input type="text" id="message" placeholder="Type a message" />
   <button onclick="sendMessage()">Send</button>
@@ -26,9 +49,17 @@
     <canvas id="chart"></canvas>
   </div>
   </div>
+  </div>
 
   <script>
     const socket = io('http://localhost:3001');
+
+    socket.on('connect', () => {
+      $('#status').html('Status : Connected');
+      console.log('Connected to server');
+    });
+  
+    
 
     function sendMessage() {
       const user = document.getElementById('user').value;
