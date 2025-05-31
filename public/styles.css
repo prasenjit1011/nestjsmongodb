@@ -20,16 +20,27 @@ body {
     position: relative;
     }
     
+    ul.faq li ol li{
+        font-weight: 300;
+    }
+
+    ol.subul strong{
+        font-weight: bold;
+        background-color: rgb(123, 227, 96);
+    }
+
+
     ul.faq li:hover {
     background: #eef;
     }
     
     .answer {
     display: none;
-    padding: 10px 10px 10px 30px;
+    padding: 10px 10px 20px 30px;
     background: #FFF;
     color: #000;
     border-left: 4px solid #007BFF;
+    border-bottom: 4px solid #007BFF;
     font-weight: 500;
     }
     
