@@ -2,58 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FAQ with Checkbox + Cookie</title>
+<title>FAQ</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-<style>
-body {
-font-family: Arial, sans-serif;
-padding: 2px;
-background-color: #FFF;
-}
-
-ul.faq {
-list-style-type: none;
-padding: 0;
-background-color: #FFF;
-}
-
-ul.faq li {
-border-bottom: 1px solid #ddd;
-padding: 10px 10px 1px 10px ;
-cursor: pointer;
-font-weight: bold;
-background: #FFF;
-transition: background 0.3s;
-position: relative;
-}
-
-ul.faq li:hover {
-background: #eef;
-}
-
-.answer {
-display: none;
-padding: 10px 10px 10px 30px;
-background: #FFF;
-color: #000;
-border-left: 4px solid #007BFF;
-font-weight: 500;
-}
-
-.faq-checkbox {
-position: absolute;
-left: 10px;
-top: 12px;
-}
-
-.faq-question {
-margin-left: 30px;
-}
-.d-none{
-display: none;
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -64,6 +16,30 @@ Node.js?
 </span><div class="answer">
 Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
 </div></li>
+
+<li data-id="q_node_event"><span class="faq-question">
+  Event?
+  </span><div class="answer">
+  In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. Node uses the <code>EventEmitter</code> class to handle events, allowing objects to emit named events and listeners to respond asynchronously. This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
+  
+  Example:
+  <pre><code>
+  const EventEmitter = require('events');
+  const emitter = new EventEmitter();
+  
+  emitter.on('message', (data) =&gt; console.log('Received:', data));
+  emitter.emit('message', 'Hello Node.js!');
+  </code></pre>
+  </div></li>
+  
+  <li data-id="q_event_driven"><span class="faq-question">
+    Event-Driven Programming?
+    </span><div class="answer">
+    Event-driven programming is a design paradigm where the flow of the program is determined by events like user actions, messages, or I/O operations. In Node.js, this model allows the application to respond asynchronously to events using the <code>EventEmitter</code> class. It enables non-blocking I/O by listening for events and executing callbacks when events occur, improving scalability and performance.
+    
+    This approach helps Node.js efficiently handle multiple operations concurrently without waiting, making it ideal for real-time apps and servers.
+    </div></li>
+
 
 <li data-id="q2"><span class="faq-question">
 Event loop?
@@ -182,7 +158,6 @@ Worker threads complement Node.js’s asynchronous model by enabling parallel ex
 Middleware?
 </span><div class="answer">
 Middleware in Express.js is a function that processes requests and responses during the request-response cycle. It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.
-
 Middleware functions can perform tasks like:
 <ul>
 <li>Executing code</li>
@@ -406,40 +381,59 @@ import { FixedSizeList as List } from 'react-window';
 This boosts performance and reduces memory usage in large UIs.
 </div></li>
 <li data-id="q_design_patterns"><span class="faq-question">
-  What are design patterns in Node.js?
-  </span><div class="answer">
-  Design patterns are reusable solutions to common software design problems. In Node.js, popular patterns include:<br />
-  
-  <strong>1. Singleton:</strong> Ensures a class has only one instance (e.g., database connection).<br>
-  <strong>2. Factory:</strong> Creates objects without exposing the instantiation logic.<br>
-  <strong>3. Observer:</strong> Implements pub-sub mechanisms (e.g., <code>EventEmitter</code>).<br>
-  <strong>4. Middleware:</strong> Common in Express apps for request handling.<br>
-  <strong>5. Module Pattern:</strong> Uses closures to encapsulate logic.
-  
-  Using design patterns improves code organization, reusability, and maintainability in scalable Node.js applications.
-  </div></li>
-  <li data-id="q_design_patterns_more"><span class="faq-question">
-    Explain Singleton, Factory, Observer, Middleware, and Module patterns in Node.js
-    </span><div class="answer">
-    <strong>Singleton:</strong> Restricts a class to one instance. Useful for shared resources like DB connections. Ensures consistent state across the app.<br><br>
-    
-    <strong>Factory:</strong> Creates objects without specifying exact classes. It abstracts object creation, allowing flexible and interchangeable products.<br><br>
-    
-    <strong>Observer:</strong> Implements event-driven communication where objects subscribe to events and get notified on changes. Node’s <code>EventEmitter</code> is a classic example.<br><br>
-    
-    <strong>Middleware:</strong> Functions that intercept requests in a chain to process or modify them. Common in Express.js for logging, authentication, or error handling.<br><br>
-    
-    <strong>Module Pattern:</strong> Uses closures to encapsulate private variables and expose a public API. Helps in organizing code into reusable, maintainable parts.<br><br>
-    
-    These patterns help write modular, scalable, and maintainable Node.js applications.
-    </div></li>
-    
+What are design patterns in Node.js?
+</span><div class="answer">
+Design patterns are reusable solutions to common software design problems. In Node.js, popular patterns include:<br />
 
+<strong>1. Singleton:</strong> Ensures a class has only one instance (e.g., database connection).<br>
+<strong>2. Factory:</strong> Creates objects without exposing the instantiation logic.<br>
+<strong>3. Observer:</strong> Implements pub-sub mechanisms (e.g., <code>EventEmitter</code>).<br>
+<strong>4. Middleware:</strong> Common in Express apps for request handling.<br>
+<strong>5. Module Pattern:</strong> Uses closures to encapsulate logic.
 
+Using design patterns improves code organization, reusability, and maintainability in scalable Node.js applications.
+</div></li>
+<li data-id="q_design_patterns_more"><span class="faq-question">
+Explain Singleton, Factory, Observer, Middleware, and Module patterns in Node.js
+</span><div class="answer">
+<strong>Singleton:</strong> Restricts a class to one instance. Useful for shared resources like DB connections. Ensures consistent state across the app.<br><br>
 
+<strong>Factory:</strong> Creates objects without specifying exact classes. It abstracts object creation, allowing flexible and interchangeable products.<br><br>
 
+<strong>Observer:</strong> Implements event-driven communication where objects subscribe to events and get notified on changes. Node’s <code>EventEmitter</code> is a classic example.<br><br>
 
+<strong>Middleware:</strong> Functions that intercept requests in a chain to process or modify them. Common in Express.js for logging, authentication, or error handling.<br><br>
 
+<strong>Module Pattern:</strong> Uses closures to encapsulate private variables and expose a public API. Helps in organizing code into reusable, maintainable parts.<br><br>
+
+These patterns help write modular, scalable, and maintainable Node.js applications.
+</div></li>
+<li data-id="q_solid"><span class="faq-question">
+What is SOLID in software development?
+</span><div class="answer">
+SOLID is a set of five design principles aimed at making software designs more understandable, flexible, and maintainable:<br><br>
+
+<strong>S</strong> - Single Responsibility Principle: A class should have only one reason to change.<br>
+<strong>O</strong> - Open/Closed Principle: Software entities should be open for extension but closed for modification.<br>
+<strong>L</strong> - Liskov Substitution Principle: Subclasses should be replaceable by their base classes without affecting correctness.<br>
+<strong>I</strong> - Interface Segregation Principle: Clients should not be forced to depend on interfaces they don’t use.<br>
+<strong>D</strong> - Dependency Inversion Principle: High-level modules should not depend on low-level modules but on abstractions.<br><br>
+
+Applying SOLID improves code quality and eases maintenance.
+</div></li>
+          
+
+    
+<li data-id="q3"><span class="faq-question">
+  a == b ?
+</span><div class="answer">
+const a = { name: "Ram" };<br />
+const b = { name: "Ram" };<br />
+console.log(a == b); // false<br />
+JSON.stringify(a) === JSON.stringify(b); // true<br />
+const _ = require('lodash');<br />
+_.isEqual(a, b); // true<br />
+</div></li>
 
 
 
