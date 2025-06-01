@@ -24,7 +24,16 @@ body {
         font-weight: 300;
     }
 
+    ol.subul{
+        padding-left: 0px;
+    }
+    
     ol.subul strong{
+        font-weight: bold;
+        background-color: rgb(123, 227, 96);
+    }
+
+    ol.subul b{
         font-weight: bold;
         background-color: rgb(123, 227, 96);
     }
