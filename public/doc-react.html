@@ -1738,7 +1738,89 @@ revalidate: 10, // seconds
     </li>
     
     
+    <li data-id="q_custom_input_middleware">
+        <span class="faq-question">How to create a custom input with middleware-like validation in React?</span>
+        <div class="answer">
+          <p>
+            You can build a custom input component in React that acts like a middleware by intercepting input changes, validating them, and then deciding whether to update the state or not.
+          </p>
+      
+<p>    How It Works:
+    CustomInput takes a middleware prop, a function that transforms or validates the input.
     
+    On every input change, it applies the middleware to the raw input before calling onChange.
+    
+    In the example, numberOnlyMiddleware strips out all non-numeric characters.
+</p><p>
+    Why Use This Pattern?
+    Reuse input logic like validation, formatting, or sanitization in multiple places.
+    
+    Separate concerns by isolating middleware logic from UI.
+    
+    Create flexible inputs that adapt behavior based on passed middleware.
+
+
+</p>
+
+
+          <h4>Example: Custom Input with Validation Middleware</h4>
+          <pre><code>
+      import React, { useState } from "react";
+      
+      function CustomInput({ value, onChange, validate }) {
+        const handleChange = (e) => {
+          const newValue = e.target.value;
+      
+          // Middleware validation step
+          if (validate(newValue)) {
+            onChange(newValue);
+          } else {
+            console.log("Validation failed:", newValue);
+          }
+        };
+      
+        return (
+          &lt;input
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder="Enter only letters"
+          /&gt;
+        );
+      }
+      
+      function App() {
+        const [text, setText] = useState("");
+      
+        // Validation middleware function: allow only letters
+        const validateInput = (value) => /^[a-zA-Z]*$/.test(value);
+      
+        return (
+          &lt;div&gt;
+            &lt;h3&gt;Custom Input with Validation Middleware&lt;/h3&gt;
+            &lt;CustomInput
+              value={text}
+              onChange={setText}
+              validate={validateInput}
+            /&gt;
+            &lt;p&gt;You typed: {text}&lt;/p&gt;
+          &lt;/div&gt;
+        );
+      }
+      
+      export default App;
+          </code></pre>
+      
+          <h4>Explanation:</h4>
+          <ul>
+            <li><code>CustomInput</code> receives a <code>validate</code> function as a prop.</li>
+            <li>Inside <code>handleChange</code>, it runs the new input value through the validation function before calling <code>onChange</code>.</li>
+            <li>If validation fails, it blocks the update, mimicking middleware behavior.</li>
+            <li>This pattern allows adding validation, transformation, or side-effects before state update.</li>
+          </ul>
+        </div>
+      </li>
+      
     
     
     <li data-id="react-fiber">
