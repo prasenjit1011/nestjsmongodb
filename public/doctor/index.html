@@ -68,7 +68,7 @@ Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScr
   Redux is best suited for large, complex applications with shared state. For simpler apps, React's Context API may be enough.
   </div></li>
   <li data-id="q_redux_example"><span class="faq-question">
-    Redux Example in React
+    Redux Example ***
     </span><div class="answer">
     Here's a simple example of Redux in a React application:
     
@@ -360,6 +360,88 @@ promise.then(result => console.log(result)).catch(err => console.error(err));
 • <code>Async/Await</code>: Syntactic sugar over promises for cleaner asynchronous code.<br><br>
 
 Mastering Promises is essential for handling async operations in modern JavaScript.
+
+
+<hr />
+<code>
+    // Sample async function returning a promise
+    const delay = (time, value, shouldReject = false) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          shouldReject ? reject(`Error: ${value}`) : resolve(value);
+        }, time);
+      });
+    };
+
+    // 1. Promise.all
+    Promise.all([
+      delay(1000, 'A'),
+      delay(1500, 'B'),
+      delay(500, 'C')
+    ]).then(results => {
+      console.log('Promise.all:', results); // ['A', 'B', 'C']
+    }).catch(err => {
+      console.error('Promise.all error:', err);
+    });
+
+    // 2. Promise.race
+    Promise.race([
+      delay(1000, 'X'),
+      delay(500, 'Y'),
+      delay(2000, 'Z')
+    ]).then(result => {
+      console.log('Promise.race:', result); // 'Y'
+    }).catch(err => {
+      console.error('Promise.race error:', err);
+    });
+
+    // 3. Promise.allSettled
+    Promise.allSettled([
+      delay(1000, 'Success1'),
+      delay(800, 'Fail1', true),
+      delay(1200, 'Success2')
+    ]).then(results => {
+      console.log('Promise.allSettled:', results);
+    });
+
+    // 4. Promise.any
+    Promise.any([
+      delay(1000, 'Pass1', true),
+      delay(800, 'Pass2', true),
+      delay(1200, 'Winner')
+    ]).then(result => {
+      console.log('Promise.any:', result); // 'Winner'
+    }).catch(err => {
+      console.error('Promise.any error:', err); // Only if all fail
+    });
+
+    // 5. Chaining with .then()
+    delay(1000, 'Start')
+      .then(result => {
+        console.log('Chaining 1:', result);
+        return delay(1000, 'Step 2');
+      })
+      .then(result => {
+        console.log('Chaining 2:', result);
+        return delay(1000, 'Step 3');
+      })
+      .then(result => {
+        console.log('Chaining 3:', result);
+      });
+
+    // 6. Error handling
+    delay(1000, 'Oops', true)
+      .then(result => {
+        console.log('Will not run:', result);
+      })
+      .catch(error => {
+        console.error('Caught error:', error); // 'Error: Oops'
+      });
+
+    </code>
+
+
+
 </div></li>
 
 <li data-id="q_hoisting"><span class="faq-question">
@@ -414,7 +496,7 @@ Here, <code>count</code> persists because of closure.
 Middleware Vs Interceptor Vs Filter?
 </span><div class="answer">
 <strong>Middleware</strong>, <strong>Interceptor</strong>, and <strong>Filter</strong> are all mechanisms for handling requests/responses, but they differ by context and use-case:
-
+<br />
 <strong>Middleware (Express.js/Node.js):</strong><br>
 - Functions executed before reaching route handlers.<br>
 - Used for logging, authentication, parsing, etc.<br>
@@ -463,6 +545,47 @@ Guards Vs Authentication?
 <strong>Summary:</strong><br>
 - <strong>Authentication</strong> confirms user identity.<br>
 - <strong>Guards</strong> control access after authentication.
+
+<hr />
+
+  <h2>Common JWT Security Mistakes :<br /> jwt.sign(payload, secret, { algorithm: 'HS256' });
+  </h2>
+
+  <div class="mistake">
+    <strong>1. Use <code>none</code> as the algorithm (Never do this!)</strong><br>
+    Attackers can forge tokens if verification is bypassed.
+    <div class="tip">✅ Always validate the algorithm and enforce a known one like <code>HS256</code> or <code>RS256</code>.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>2. Store JWTs in <code>localStorage</code></strong><br>
+    Vulnerable to XSS attacks.
+    <div class="tip">✅ Prefer <code>HttpOnly</code> cookies when possible.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>3. Don’t Set Expiration (<code>exp</code>)</strong><br>
+    Tokens without expiry can be used indefinitely.
+    <div class="tip">✅ Always set an expiry like <code>1h</code>, <code>15m</code>, etc.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>4. Exposing the secret key</strong><br>
+    If your secret key leaks, all tokens are compromised.
+    <div class="tip">✅ Keep secrets safe using environment variables or secure secret managers.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>5. Not using HTTPS</strong><br>
+    JWTs sent over HTTP can be intercepted.
+    <div class="tip">✅ Always use <code>HTTPS</code> to prevent MITM (Man-In-The-Middle) attacks.</div>
+  </div>
+
+
+
+
+
+
 </div></li>
 
 <li data-id="q_dependency_injection"><span class="faq-question">

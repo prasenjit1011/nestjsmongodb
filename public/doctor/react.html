@@ -125,6 +125,20 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
 
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
+
+<li data-id="x11a"><span class="faq-question">
+React.memo?
+</span><div class="answer">
+React.memo is a higher-order component (HOC) in React that memoizes a functional component.
+It prevents unnecessary re-renders by caching the component’s output unless its props change.
+<code>
+  const MyComponent = React.memo((props) => {
+    // ...
+  });
+  
+</code>
+</div></li>
+
 <li data-id="x11"><span class="faq-question">
   How does lifting state up work
 </span><div class="answer">
