@@ -22,6 +22,13 @@ Node.js?
 </span><div class="answer">
 Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
 <br />
+
+Indexing
+Async / await ?
+CICD : workflow
+CROS
+sequlize
+
 </div></li>
 
 
@@ -1543,6 +1550,71 @@ What is Event Bubbling in ReactJS?
     </li>
   </ol>
   </div></li>
+
+
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+    Advantages of Sequelize
+  </span><div class="answer">
+
+
+
+
+    
+  
+    <h2>✅ 1. Supports Multiple SQL Databases</h2>
+    <p>Sequelize supports:</p>
+    <ul>
+      <li>PostgreSQL</li>
+      <li>MySQL</li>
+      <li>MariaDB</li>
+      <li>SQLite</li>
+      <li>MSSQL</li>
+    </ul>
+  
+    <h2>✅ 2. Promise-based</h2>
+    <p>Built on Promises, making it easy to use with async/await for clean asynchronous flow.</p>
+  
+    <h2>✅ 3. Models & Associations</h2>
+    <p>Define relationships using built-in methods:</p>
+    <pre><code>User.hasMany(Post);
+  Post.belongsTo(User);</code></pre>
+  
+    <h2>✅ 4. Migrations & Seeders</h2>
+    <p>Includes CLI tools to manage database schema versions and initial data.</p>
+  
+    <h2>✅ 5. ORM & Raw SQL</h2>
+    <p>Allows flexible querying with both ORM methods and raw SQL:</p>
+    <pre><code>const users = await sequelize.query("SELECT * FROM Users", { type: QueryTypes.SELECT });</code></pre>
+  
+    <h2>✅ 6. Hooks/Lifecycle Callbacks</h2>
+    <p>Execute logic before/after events like save, update, delete:</p>
+    <pre><code>User.beforeCreate(user => {
+    user.createdAt = new Date();
+  });</code></pre>
+  
+    <h2>✅ 7. Eager & Lazy Loading</h2>
+    <p>Supports both eager loading via <code>include</code> and lazy loading via functions.</p>
+  
+    <h2>✅ 8. Transaction Support</h2>
+    <p>Robust support for transactions:</p>
+    <pre><code>await sequelize.transaction(async (t) => {
+    await User.create({ name: 'John' }, { transaction: t });
+  });</code></pre>
+  
+    <h2>✅ 9. Validation & Constraints</h2>
+    <p>Define validations, constraints, and default values at the model level.</p>
+  
+    <h2>✅ 10. Community & Ecosystem</h2>
+    <p>Widely used in production with great community and support.</p>
+
+  
+  </div></li>
+
+
+
+
+
+
   
   <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
   TypeORM
@@ -1789,7 +1861,7 @@ Note: The API call may be canceled if the component unmounts abruptly, so it’s
 
 
 <li data-id="q_call_api_without_useeffect"><span class="faq-question">
-How to call an API without using <code>useEffect</code> in React?
+How to call an API without using useEffect in React?
 </span><div class="answer">
 You can call an API without <code>useEffect</code> by triggering the fetch inside event handlers, lifecycle methods (class components), or directly within functions.
 

@@ -14,6 +14,19 @@ body {
       font-family: "Courier New", Courier, monospace;
     }
 
+
+    code, pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-left: 4px solid #007acc;
+      display: block;
+      overflow-x: auto;
+    }
+    ul {
+      padding-left: 20px;
+    }
+
+
     .section {
       background: #fff;
       padding: 15px 20px;
