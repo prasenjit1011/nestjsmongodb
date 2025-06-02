@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>Gallery</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
@@ -14,6 +14,8 @@
 <a href="/doctor/docker.html">Docker</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+
+
 <ul class="faq">
 <li data-id="q1"><span class="faq-question">
 Node.js?
@@ -526,7 +528,7 @@ next();
 </div></li>
 
 <li data-id="q_guards_vs_auth"><span class="faq-question">
-Guards Vs Authentication?
+Guards Vs Authentication? JWT
 </span><div class="answer">
 <strong>Authentication</strong> and <strong>Guards</strong> are both related to security but serve different purposes:
 <Br />
@@ -548,8 +550,7 @@ Guards Vs Authentication?
 
 <hr />
 
-  <h2>Common JWT Security Mistakes :<br /> jwt.sign(payload, secret, { algorithm: 'HS256' });
-  </h2>
+  <h4>Common JWT Security Mistakes :<br /> jwt.sign(payload, secret, { algorithm: 'HS256' });</h4>
 
   <div class="mistake">
     <strong>1. Use <code>none</code> as the algorithm (Never do this!)</strong><br>
@@ -831,26 +832,26 @@ Proper error handling helps maintain app stability and improves debugging.
 
 
 
-<li data-id="q14"><span class="faq-question">
+<li data-id="q14"><span class="faq-question green">
 Middleware?
 </span><div class="answer">
 Middleware in Express.js is a function that processes requests and responses during the request-response cycle. It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.
 Middleware functions can perform tasks like:
-<ul>
+<ol class="subul">
 <li>Executing code</li>
 <li>Modifying <code>req</code> and <code>res</code> objects</li>
 <li>Ending the request-response cycle</li>
 <li>Calling the next middleware</li>
-</ul>
-
+</ol>
+<br />
 Types of middleware include:
-<ul>
+<ol class="subul">
 <li><strong>Application-level:</strong> Bound to an Express app using <code>app.use()</code> or route methods.</li>
 <li><strong>Router-level:</strong> Bound to an instance of <code>express.Router()</code>.</li>
 <li><strong>Error-handling:</strong> Special middleware with four arguments <code>(err, req, res, next)</code> to catch errors.</li>
 <li><strong>Built-in:</strong> Provided by Express, e.g., <code>express.json()</code>, <code>express.static()</code>.</li>
 <li><strong>Third-party:</strong> Such as <code>cors</code>, <code>helmet</code>, <code>morgan</code>.</li>
-</ul>
+</ol>
 
 Example:
 
@@ -865,8 +866,176 @@ Middleware enables modular, reusable, and organized handling of HTTP requests, e
 
 
 <li data-id="q19"><span class="faq-question">
-Clustering?
+Circular Dependencies in react
 </span><div class="answer">
+A circular dependency in a React project happens when two or more modules (components, hooks, utils, contexts, etc.) depend on each other, creating a loop.
+<br />
+
+1. Restructure your code : Move shared logic to a new module both can import.<br />
+2. Use dependency injection : Pass dependencies as arguments rather than importing them.<br />
+<code>
+  // a.js
+  module.exports = (b) => {
+    console.log('Using B in A');
+  };   
+</code><br />
+3. Use dynamic import (or require) inside functions : Delay the import until the function is called.<br />
+<code>
+  function getB() {
+    const b = require('./b');
+    b();
+  }  
+</code>
+<br />
+<code>
+# Install : npm install -g madge
+<br />
+# Run : madge --circular src/
+</code>
+
+<h5>How to Fix Circular Dependencies in React</h5>
+1. Split Shared Logic into a Separate File<br />
+2. Use Lazy Loading / Code Splitting<br />
+Use React.lazy() to defer loading of components.<br />
+<code>const Navbar = React.lazy(() => import('./Navbar'));</code>
+
+4. Avoid Cross-Component Imports<br />
+If ComponentA and ComponentB both use each other:<br />
+Move shared UI into a new SubComponent<br />
+Or lift shared state to the parent<br />
+
+</div></li>
+
+
+
+<li data-id="q19"><span class="faq-question green">
+Cluster vs Worker*** cluster.fork()
+</span><div class="answer">
+  In Node.js, both Cluster and Worker Threads are used for parallel processing, but they serve different purposes and have distinct architectures.  
+<br />
+<a href="/doctor/cluster.html" target="_blank" style="color: blue; font-weight: bold;">Read More</a><br /><br />
+
+<span class="green">
+Node.js is single-threaded by default. Using the cluster module allows your app to : Handle more requests concurrently.
+</span>
+<ol class="subul">
+  <li>Avoid a single point of failure (if one worker crashes, others keep running).</li>
+  <li>Use all CPU cores on a server.</li>
+  <li>All workers share the same server port.</li>
+  <li>Each worker is a separate Node.js process (not thread).</li>
+  <li>Workers don’t share memory – use IPC or external stores (like Redis) for shared state.</li>
+</ol>
+<br />
+
+<hr />
+  
+  
+    <div class="section">
+      <div class="title">🔹 Cluster</div>
+      <div class="description">
+        The <strong class="green">cluster</strong> module allows you to **spawn multiple Node.js processes** (workers) that share the same server port. It is used to utilize multiple CPU cores, improving performance for concurrent requests.
+      </div>
+    </div>
+  
+    <div class="section">
+      <div class="title">🔹 Worker</div>
+      <div class="description">
+        <span class="green">A **worker** is an individual child process created by the cluster. </span>Each worker runs its own Node.js instance and handles a portion of the server load. They can communicate with the master process via IPC (inter-process communication).
+      </div>
+    </div>
+  
+    <div class="section">
+      <div class="title">🔄 Cluster vs Worker Comparison</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Cluster</th>
+            <th>Worker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Definition</td>
+            <td>Main controller module to spawn child processes</td>
+            <td>Individual child process spawned by the cluster</td>
+          </tr>
+          <tr>
+            <td>Role</td>
+            <td>Manages multiple workers</td>
+            <td>Handles incoming requests or tasks</td>
+          </tr>
+          <tr>
+            <td>Code Location</td>
+            <td>Master process</td>
+            <td>Worker process</td>
+          </tr>
+          <tr>
+            <td>Use Case</td>
+            <td>Load balancing and CPU core utilization</td>
+            <td>Actual request processing</td>
+          </tr>
+          <tr>
+            <td>Communication</td>
+            <td>Interacts with workers via IPC</td>
+            <td>Communicates with master via IPC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+<hr />
+
+<h2>🔍 Comparison: Manual <code>cluster</code> vs PM2</h2>
+
+<table>
+  <tr>
+    <th>Feature</th>
+    <th>Manual <code>cluster</code></th>
+    <th>PM2</th>
+  </tr>
+  <tr>
+    <td>Setup</td>
+    <td>Manual coding required</td>
+    <td class="yes">Easy CLI-based</td>
+  </tr>
+  <tr>
+    <td>Load balancing</td>
+    <td class="yes">Handled via <code>cluster</code></td>
+    <td class="yes">Built-in</td>
+  </tr>
+  <tr>
+    <td>Process Monitoring</td>
+    <td class="no">Not built-in</td>
+    <td class="yes">Dashboard + CLI</td>
+  </tr>
+  <tr>
+    <td>Crash Recovery</td>
+    <td class="no">Manual restart</td>
+    <td class="yes">Automatic restart</td>
+  </tr>
+  <tr>
+    <td>Logging</td>
+    <td class="no">Requires setup</td>
+    <td class="yes">Built-in logging</td>
+  </tr>
+  <tr>
+    <td>Production Readiness</td>
+    <td class="no">Not ideal alone</td>
+    <td class="yes">✅ Highly recommended</td>
+  </tr>
+</table>
+
+
+
+</div></li>
+
+
+
+<li data-id="q19"><span class="faq-question">
+Clustering? & cluster vs worker*** cluster.fork()
+</span><div class="answer">
+
 Clustering enables using multiple CPU cores by spawning worker processes that share the same server port, improving performance and load handling.
 </div>
 <div class="answer">
