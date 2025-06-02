@@ -4,6 +4,15 @@ body {
     background-color: #FFF;
     }
     
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-left: 4px solid #007acc;
+      overflow-x: auto;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
 
     .section {
       background: #fff;

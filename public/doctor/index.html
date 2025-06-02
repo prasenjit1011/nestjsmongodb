@@ -835,7 +835,8 @@ Proper error handling helps maintain app stability and improves debugging.
 <li data-id="q14"><span class="faq-question green">
 Middleware?
 </span><div class="answer">
-Middleware in Express.js is a function that processes requests and responses during the request-response cycle. It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.
+Middleware in Express.js is a function that processes requests and responses during the request-response cycle. <Br />
+It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.<Br /><Br />
 Middleware functions can perform tasks like:
 <ol class="subul">
 <li>Executing code</li>
@@ -1521,9 +1522,107 @@ What is Event Bubbling in ReactJS?
 
 
 
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+    MySQL : INNER, LEFT & RIGHT-OUTER, FULL OUTER JOIN, CROSS JOIN, SELF JOIN
+  </span><div class="answer">
+  <ol class="subul">
+    <li><b>FULL OUTER JOIN :</b>(MySQL does not support this natively)</li>
+    <li><b>INNER JOIN :</b> Returns only matching rows from both tables.</li>
+    <li><b>CROSS JOIN :</b> Returns the Cartesian product (all combinations) of the two tables.</li>
+    <li><b>SELF JOIN :</b> A table joined to itself using aliases.</li>
+    <li>
+      <code>
+        SELECT * FROM employees e <span class="green">LEFT JOIN</span> departments d ON e.department_id = d.id <br />
+        <span class="green">UNION</span><br />
+        SELECT * FROM employees e RIGHT JOIN departments d ON e.department_id = d.id; <br /><hr />
+        SELECT * FROM employees <span class="green">CROSS JOIN</span> departments;<br /><hr />
+
+        SELECT a.name AS employee, b.name AS manager FROM employees a JOIN employees b ON a.manager_id = b.id;
+        
+      </code>
+    </li>
+  </ol>
+  </div></li>
+  
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+  TypeORM
+</span><div class="answer">
+
+  <ul>
+    <li>Object-Oriented design using decorators</li>
+    <li>Supports Active Record & Data Mapper</li>
+    <li>Works with various databases (MySQL, PostgreSQL, etc.)</li>
+    <li>Built-in migration support</li>
+    <li>Eager and lazy relation loading</li>
+    <li>Repository and QueryBuilder APIs</li>
+    <li>Easy configuration using decorators</li>
+    <li>Great integration with NestJS</li>
+  </ul>
 
 
 
+
+  
+    <h2>✅ 1. TypeScript Support</h2>
+    <p>Fully written in and optimized for TypeScript. Enables <strong>type safety</strong>, <strong>intellisense</strong>, and <strong>compile-time checks</strong>.</p>
+  
+    <h2>✅ 2. Decorators-Based Syntax</h2>
+    <p>Uses <strong>class decorators</strong> for defining entities, columns, and relationships—clean and declarative.</p>
+    <pre><code>@Entity()
+  export class User {
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    name: string;
+  }</code></pre>
+  
+    <h2>✅ 3. Supports Multiple Databases</h2>
+    <p>Works with:</p>
+    <ul>
+      <li>MySQL</li>
+      <li>PostgreSQL</li>
+      <li>SQLite</li>
+      <li>MariaDB</li>
+      <li>MSSQL</li>
+      <li>Oracle</li>
+      <li>MongoDB (limited)</li>
+    </ul>
+  
+    <h2>✅ 4. Built-In Migrations</h2>
+    <p>Supports schema migrations for database version control:</p>
+    <pre><code>typeorm migration:create -n AddUserTable
+  typeorm migration:run</code></pre>
+  
+    <h2>✅ 5. Repository & Data Mapper Patterns</h2>
+    <p>Supports both <strong>Active Record</strong> and <strong>Data Mapper</strong> patterns.</p>
+  
+    <h2>✅ 6. Relationship Management</h2>
+    <p>Easy to define and manage entity relationships:</p>
+    <pre><code>@OneToMany(() => Post, post => post.user)
+  posts: Post[];</code></pre>
+  
+    <h2>✅ 7. Lazy & Eager Loading</h2>
+    <p>Supports both <strong>lazy</strong> (via Promises) and <strong>eager</strong> loading of relations.</p>
+  
+    <h2>✅ 8. Query Builder</h2>
+    <p>Flexible query builder for complex queries:</p>
+    <pre><code>const users = await dataSource
+    .getRepository(User)
+    .createQueryBuilder("user")
+    .where("user.age > :age", { age: 18 })
+    .getMany();</code></pre>
+  
+    <h2>✅ 9. Integration with NestJS</h2>
+    <p>Works seamlessly with NestJS via the <code>@nestjs/typeorm</code> package.</p>
+  
+    <h2>✅ 10. Community & Ecosystem</h2>
+    <p>Well-maintained and widely adopted in production apps.</p>
+
+  
+
+
+</div></li>
 
 
 
@@ -1715,12 +1814,8 @@ Direct API calls in render are discouraged to avoid repeated calls on every rend
 </div></li>
 
 
-
-
-
-
-
 </ul>
+
 
 <script src="script.js"></script>
 
