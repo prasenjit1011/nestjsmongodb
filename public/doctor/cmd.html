@@ -1,0 +1,23 @@
+
+################################################################################################33
+
+# Source Code Optimization
+# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
+# clinic doctor -- node app.js
+
+clear
+rm -rf node_modules package-lock.json 
+npm cache clean --force
+npm i
+git status
+git commit -am "C 123"
+git push --set-upstream origin lambda_01_cicd_04
+
+
+rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json"
+
+################################################################################################33
+
+
+
+
