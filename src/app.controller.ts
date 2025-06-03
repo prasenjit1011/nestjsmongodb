@@ -23,7 +23,8 @@ export class AppController {
   @Get('video')
   streamVideo(@Req() req: Request, @Res() res: Response) {
 
-  const videoPath = path.join(__dirname, '../../video/v1.mp4');
+  //const videoPath = path.join(__dirname, '../../../video/v1.mp4');
+  const videoPath = '/home/riyan/myproject/video/v1.mp4';
   console.log(videoPath);
 
     const stat = fs.statSync(videoPath);

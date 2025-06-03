@@ -16,15 +16,17 @@
       <a href="/">Message using Controller</a>
     </div>
     <div style="width: 40%; float: left;">
-      <h2>-: Watch Video, PORT : 3001 :-</h2>
-      <h5>-: Chck Video Path :-</h5>
+      <h2>-: Watch Video, PORT : 8031 :-</h2>
+      <h5>-: Chck Video Path :- </h5>
       <video width="420" controls>
-        <source src="http://localhost:3001/video" type="video/mp4">
+        <source src="http://localhost:8031/video" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+      <h5>-: path.join(__dirname, '../../../video/v1.mp4') </h5>
+      <h5>-: /home/riyan/myproject/video/v1.mp4 </h5>
     </div>
     <div style="width: 50%; float: right;">
-      <h2>WebSocket Chat, PORT : 3001</h2>
+      <h2>WebSocket Chat, PORT : 8031</h2>
       <h5 id="status">Status : Not Connected</h5>
       <h5 id="randnum">Random : <a href="/" target="_blank">Click Me For Emit Event</a></a></h5>
       <input id="msg" placeholder="Enter message" />
@@ -34,7 +36,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-      const socket = io('http://localhost:3001');
+      const socket = io('http://localhost:8031');
 
       socket.on('connect', () => {
         $('#status').html('Status : Connected');
