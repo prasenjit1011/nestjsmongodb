@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>ReactJS</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<a href="/doctor">React</a>
+
+  <a href="/doctor/index.html">Nodejs</a> &nbsp; 
+  <a href="/doctor/react.html">React</a> &nbsp; 
+  <a href="/doctor/docker.html">Docker</a> &nbsp; 
+  <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
+  <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+  
 
 <ul class="faq">
 
@@ -125,6 +131,20 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
 
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
+
+<li data-id="x11a"><span class="faq-question">
+React.memo?
+</span><div class="answer">
+React.memo is a higher-order component (HOC) in React that memoizes a functional component.
+It prevents unnecessary re-renders by caching the component’s output unless its props change.
+<code>
+  const MyComponent = React.memo((props) => {
+    // ...
+  });
+  
+</code>
+</div></li>
+
 <li data-id="x11"><span class="faq-question">
   How does lifting state up work
 </span><div class="answer">
@@ -256,7 +276,7 @@ const Greeting = ({ name = "Guest" }) =&gt; (
 </div></li>
 
 <li data-id="q13"><span class="faq-question">
-Commonly used hooks.
+Commonly used hooks..
 </span><div class="answer">
 <ol class="subul">
 <li><strong>useState</strong></li>
@@ -271,7 +291,65 @@ Commonly used hooks.
 <li><strong>useImperativeHandle</strong></li>
 <li><strong>useDebugValue</strong></li>
 </ol>
-<br />
+</div></li>
+
+<li data-id="q13"><span class="faq-question green">
+  useReducer Example.
+  </span><div class="answer">
+
+  <h1>🔧 </h1>
+
+  <h2>🧪 Counter Component</h2>
+
+  <pre><code>import React, { useReducer } from 'react';
+
+const initialState = { count: 0 };
+
+function <strong class="green">myreducer</strong>(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    case 'reset':
+      return initialState;
+    default:
+      throw new Error('Unknown action type');
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(<strong class="green">myreducer, initialState</strong>);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Count: {state.count}&lt;/h2&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: 'decrement' })}&gt;-&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: 'reset' })}&gt;Reset&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: 'increment' })}&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;</code></pre>
+
+  <h2>🧠 Explanation</h2>
+  <ul>
+    <li><strong>useReducer(reducer, initialState)</strong>: Initializes state and gives you a dispatch method.</li>
+    <li><strong>reducer</strong>: A pure function to calculate new state based on the action type.</li>
+    <li><strong>dispatch({ type: 'increment' })</strong>: Triggers a state update through the reducer.</li>
+  </ul>
+
+  <h2>✅ When to Use useReducer</h2>
+  <ul>
+    <li>For complex state logic (e.g., multiple related values)</li>
+    <li>When state changes are triggered by many different actions</li>
+    <li>When the same logic must be reused across components</li>
+  </ul>
+
+
+
+
 </div></li>
 
 
@@ -443,7 +521,7 @@ export default Button;
 </div></li>
 
 <li data-id="q_useCallback_dep"><span class="faq-question">
-What is the second parameter [] in <code>useCallback(fn, [])</code>?
+What is the second parameter [] in useCallback(fn, [])?
 </span><div class="answer">
 The second parameter in <code>useCallback(() =&gt; {...}, [])</code> is called the <b>dependency array</b>.
 
@@ -705,7 +783,7 @@ export default ItemList;
 </div></li>
 
 <li data-id="q_memory_cleanup_fetch"><span class="faq-question">
-Is memory cleanup possible with <code>fetch()</code> in React? How to do it?
+Is memory cleanup possible with fetch() in React? How to do it?
 </span><div class="answer">
 Yes, memory cleanup with <code>fetch()</code> is possible by using the <code>AbortController</code> API to cancel ongoing requests when a component unmounts.
 
@@ -920,7 +998,7 @@ export default VirtualizedItemList;
 
 
 <li data-id="q_getderivedstatefromprops"><span class="faq-question">
-What is <code>getDerivedStateFromProps</code> in React?
+What is getDerivedStateFromProps in React?
 </span><div class="answer">
 <code>getDerivedStateFromProps</code> is a static lifecycle method in React class components that gets called right before rendering, both on the initial mount and on subsequent updates. It is used to update the component's state based on changes in props.
 <br />
@@ -950,7 +1028,7 @@ return null;
 
 
 <li data-id="q_onchange_vs_oninput"><span class="faq-question">
-Difference between <code>onChange</code> and <code>onInput</code>?
+Difference between onChange and onInput?
 </span><div class="answer">
 In React, both <code>onChange</code> and <code>onInput</code> are event handlers for form elements, but they behave slightly differently:
 <br />
@@ -1307,7 +1385,7 @@ revalidate: 10, // seconds
     </li>
     
     <li data-id="q19">
-    <span class="faq-question">How does <code>key</code> prop affect reconciliation and re-rendering?</span>
+    <span class="faq-question">How does key prop affect reconciliation and re-rendering?</span>
     <div class="answer">
     <p>
     The <strong><code>key</code></strong> prop in React is used to uniquely identify elements in a list. It helps React optimize rendering by efficiently determining which items have changed, been added, or removed during updates.
@@ -1811,7 +1889,7 @@ revalidate: 10, // seconds
     </div></li>
     
     <li data-id="q123"><span class="faq-question">
-    What is memoization in React and when should you use <code>React.memo</code>?</span><div class="answer">
+    What is memoization in React and when should you use React.memo?</span><div class="answer">
     <p>
     Memoization is an optimization technique to cache the result of expensive function calls. 
     In React, <code>React.memo</code> is a higher-order component that prevents unnecessary re-renders by memoizing the result.
@@ -1830,9 +1908,9 @@ revalidate: 10, // seconds
     </div></li>
     
     <li data-id="q134"><span class="faq-question">
-    How does <code>key</code> prop affect reconciliation and re-rendering?</span><div class="answer">
+    How does key prop affect reconciliation and re-rendering?</span><div class="answer">
     <p>
-    The <code>key</code> prop helps React identify which items have changed, are added, or are removed. It should be a stable and unique identifier.
+    The key prop helps React identify which items have changed, are added, or are removed. It should be a stable and unique identifier.
     </p>
     <p><strong>Effects:</strong></p>
     <ul>
@@ -1850,7 +1928,7 @@ revalidate: 10, // seconds
     
     
     <li data-id="q151">
-    <span class="faq-question">How does <code>key</code> prop affect reconciliation and re-rendering?</span>
+    <span class="faq-question">How does key prop affect reconciliation and re-rendering?</span>
     <div class="answer">
     <p>
     In React, the <code>key</code> prop is a special attribute used to uniquely identify elements in a list. It helps React efficiently update the UI by distinguishing which items have changed, been added, or removed.

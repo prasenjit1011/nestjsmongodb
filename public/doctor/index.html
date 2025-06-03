@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>NodeJS</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
@@ -14,12 +14,25 @@
 <a href="/doctor/docker.html">Docker</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+
+
 <ul class="faq">
 <li data-id="q1"><span class="faq-question">
 Node.js?
 </span><div class="answer">
 Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
 <br />
+
+Indexing
+Async / await ?
+CICD : workflow
+CROS
+sequlize
+MySQL
+TypeScript
+nestjs 
+tailwind
+
 </div></li>
 
 
@@ -68,7 +81,7 @@ Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScr
   Redux is best suited for large, complex applications with shared state. For simpler apps, React's Context API may be enough.
   </div></li>
   <li data-id="q_redux_example"><span class="faq-question">
-    Redux Example in React
+    Redux Example ***
     </span><div class="answer">
     Here's a simple example of Redux in a React application:
     
@@ -360,6 +373,88 @@ promise.then(result => console.log(result)).catch(err => console.error(err));
 • <code>Async/Await</code>: Syntactic sugar over promises for cleaner asynchronous code.<br><br>
 
 Mastering Promises is essential for handling async operations in modern JavaScript.
+
+
+<hr />
+<code>
+    // Sample async function returning a promise
+    const delay = (time, value, shouldReject = false) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          shouldReject ? reject(`Error: ${value}`) : resolve(value);
+        }, time);
+      });
+    };
+
+    // 1. Promise.all
+    Promise.all([
+      delay(1000, 'A'),
+      delay(1500, 'B'),
+      delay(500, 'C')
+    ]).then(results => {
+      console.log('Promise.all:', results); // ['A', 'B', 'C']
+    }).catch(err => {
+      console.error('Promise.all error:', err);
+    });
+
+    // 2. Promise.race
+    Promise.race([
+      delay(1000, 'X'),
+      delay(500, 'Y'),
+      delay(2000, 'Z')
+    ]).then(result => {
+      console.log('Promise.race:', result); // 'Y'
+    }).catch(err => {
+      console.error('Promise.race error:', err);
+    });
+
+    // 3. Promise.allSettled
+    Promise.allSettled([
+      delay(1000, 'Success1'),
+      delay(800, 'Fail1', true),
+      delay(1200, 'Success2')
+    ]).then(results => {
+      console.log('Promise.allSettled:', results);
+    });
+
+    // 4. Promise.any
+    Promise.any([
+      delay(1000, 'Pass1', true),
+      delay(800, 'Pass2', true),
+      delay(1200, 'Winner')
+    ]).then(result => {
+      console.log('Promise.any:', result); // 'Winner'
+    }).catch(err => {
+      console.error('Promise.any error:', err); // Only if all fail
+    });
+
+    // 5. Chaining with .then()
+    delay(1000, 'Start')
+      .then(result => {
+        console.log('Chaining 1:', result);
+        return delay(1000, 'Step 2');
+      })
+      .then(result => {
+        console.log('Chaining 2:', result);
+        return delay(1000, 'Step 3');
+      })
+      .then(result => {
+        console.log('Chaining 3:', result);
+      });
+
+    // 6. Error handling
+    delay(1000, 'Oops', true)
+      .then(result => {
+        console.log('Will not run:', result);
+      })
+      .catch(error => {
+        console.error('Caught error:', error); // 'Error: Oops'
+      });
+
+    </code>
+
+
+
 </div></li>
 
 <li data-id="q_hoisting"><span class="faq-question">
@@ -414,7 +509,7 @@ Here, <code>count</code> persists because of closure.
 Middleware Vs Interceptor Vs Filter?
 </span><div class="answer">
 <strong>Middleware</strong>, <strong>Interceptor</strong>, and <strong>Filter</strong> are all mechanisms for handling requests/responses, but they differ by context and use-case:
-
+<br />
 <strong>Middleware (Express.js/Node.js):</strong><br>
 - Functions executed before reaching route handlers.<br>
 - Used for logging, authentication, parsing, etc.<br>
@@ -444,7 +539,7 @@ next();
 </div></li>
 
 <li data-id="q_guards_vs_auth"><span class="faq-question">
-Guards Vs Authentication?
+Guards Vs Authentication? JWT
 </span><div class="answer">
 <strong>Authentication</strong> and <strong>Guards</strong> are both related to security but serve different purposes:
 <Br />
@@ -463,6 +558,46 @@ Guards Vs Authentication?
 <strong>Summary:</strong><br>
 - <strong>Authentication</strong> confirms user identity.<br>
 - <strong>Guards</strong> control access after authentication.
+
+<hr />
+
+  <h4>Common JWT Security Mistakes :<br /> jwt.sign(payload, secret, { algorithm: 'HS256' });</h4>
+
+  <div class="mistake">
+    <strong>1. Use <code>none</code> as the algorithm (Never do this!)</strong><br>
+    Attackers can forge tokens if verification is bypassed.
+    <div class="tip">✅ Always validate the algorithm and enforce a known one like <code>HS256</code> or <code>RS256</code>.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>2. Store JWTs in <code>localStorage</code></strong><br>
+    Vulnerable to XSS attacks.
+    <div class="tip">✅ Prefer <code>HttpOnly</code> cookies when possible.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>3. Don’t Set Expiration (<code>exp</code>)</strong><br>
+    Tokens without expiry can be used indefinitely.
+    <div class="tip">✅ Always set an expiry like <code>1h</code>, <code>15m</code>, etc.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>4. Exposing the secret key</strong><br>
+    If your secret key leaks, all tokens are compromised.
+    <div class="tip">✅ Keep secrets safe using environment variables or secure secret managers.</div>
+  </div>
+
+  <div class="mistake">
+    <strong>5. Not using HTTPS</strong><br>
+    JWTs sent over HTTP can be intercepted.
+    <div class="tip">✅ Always use <code>HTTPS</code> to prevent MITM (Man-In-The-Middle) attacks.</div>
+  </div>
+
+
+
+
+
+
 </div></li>
 
 <li data-id="q_dependency_injection"><span class="faq-question">
@@ -595,10 +730,11 @@ This approach helps Node.js efficiently handle multiple operations concurrently 
 </div></li>
 
 
-<li data-id="q2"><span class="faq-question">
+<li data-id="q2"><span class="faq-question green">
 Event loop?
 </span><div class="answer">
-The event loop is a mechanism that handles asynchronous callbacks. It allows Node.js to perform non-blocking I/O operations by offloading tasks to the system kernel and executing their callbacks when ready, enabling efficient single-threaded concurrency.
+The event loop is a mechanism that handles asynchronous callbacks. <br />
+It allows Node.js to perform non-blocking I/O operations by offloading tasks to the system kernel and executing their callbacks when ready, enabling efficient single-threaded concurrency.
 </div></li>
 
 
@@ -708,26 +844,27 @@ Proper error handling helps maintain app stability and improves debugging.
 
 
 
-<li data-id="q14"><span class="faq-question">
+<li data-id="q14"><span class="faq-question green">
 Middleware?
 </span><div class="answer">
-Middleware in Express.js is a function that processes requests and responses during the request-response cycle. It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.
+Middleware in Express.js is a function that processes requests and responses during the request-response cycle. <Br />
+It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.<Br /><Br />
 Middleware functions can perform tasks like:
-<ul>
+<ol class="subul">
 <li>Executing code</li>
 <li>Modifying <code>req</code> and <code>res</code> objects</li>
 <li>Ending the request-response cycle</li>
 <li>Calling the next middleware</li>
-</ul>
-
+</ol>
+<br />
 Types of middleware include:
-<ul>
+<ol class="subul">
 <li><strong>Application-level:</strong> Bound to an Express app using <code>app.use()</code> or route methods.</li>
 <li><strong>Router-level:</strong> Bound to an instance of <code>express.Router()</code>.</li>
 <li><strong>Error-handling:</strong> Special middleware with four arguments <code>(err, req, res, next)</code> to catch errors.</li>
 <li><strong>Built-in:</strong> Provided by Express, e.g., <code>express.json()</code>, <code>express.static()</code>.</li>
 <li><strong>Third-party:</strong> Such as <code>cors</code>, <code>helmet</code>, <code>morgan</code>.</li>
-</ul>
+</ol>
 
 Example:
 
@@ -742,15 +879,193 @@ Middleware enables modular, reusable, and organized handling of HTTP requests, e
 
 
 <li data-id="q19"><span class="faq-question">
-Clustering?
+Circular Dependencies in react
 </span><div class="answer">
+A circular dependency in a React project happens when two or more modules (components, hooks, utils, contexts, etc.) depend on each other, creating a loop.
+<br />
+
+1. Restructure your code : Move shared logic to a new module both can import.<br />
+2. Use dependency injection : Pass dependencies as arguments rather than importing them.<br />
+<code>
+  // a.js
+  module.exports = (b) => {
+    console.log('Using B in A');
+  };   
+</code><br />
+3. Use dynamic import (or require) inside functions : Delay the import until the function is called.<br />
+<code>
+  function getB() {
+    const b = require('./b');
+    b();
+  }  
+</code>
+<br />
+<code>
+# Install : npm install -g madge
+<br />
+# Run : madge --circular src/
+</code>
+
+<h5>How to Fix Circular Dependencies in React</h5>
+1. Split Shared Logic into a Separate File<br />
+2. Use Lazy Loading / Code Splitting<br />
+Use React.lazy() to defer loading of components.<br />
+<code>const Navbar = React.lazy(() => import('./Navbar'));</code>
+
+4. Avoid Cross-Component Imports<br />
+If ComponentA and ComponentB both use each other:<br />
+Move shared UI into a new SubComponent<br />
+Or lift shared state to the parent<br />
+
+</div></li>
+
+
+
+<li data-id="q19"><span class="faq-question green">
+Cluster vs Worker*** cluster.fork()
+</span><div class="answer">
+  In Node.js, both Cluster and Worker Threads are used for parallel processing, but they serve different purposes and have distinct architectures.  
+<br />
+<a href="/doctor/cluster.html" target="_blank" style="color: blue; font-weight: bold;">Read More</a><br /><br />
+
+<ol class="subul">
+  <li>
+    The cluster module allows you to create child processes (workers) that share the same server port. <br />
+    It's used to take advantage of multi-core systems to handle concurrent requests efficiently.<br />
+    It is used to utilize multiple CPU cores, improving performance for concurrent requests.<br />
+    const cluster = require('cluster');<br /><br />
+  </li>
+  <li>
+      The worker_threads module allows JavaScript code to run in parallel on multiple threads. <br />
+      Useful for CPU-intensive tasks (like hashing, image processing) without blocking the main event loop.<br />
+      A **worker** is an individual child process created by the cluster. <br />
+      Each worker runs its own Node.js instance and handles a portion of the server load. <br />
+      They can communicate with the master process via IPC (inter-process communication).<br />
+      <span class="green">A **worker** is an individual child process created by the cluster. </span><br />
+      Each worker runs its own Node.js instance and handles a portion of the server load. <br />
+      They can communicate with the master process via IPC (inter-process communication).<br />
+      const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
+    </li>
+</ol>
+<hr />
+<br />
+
+<span class="green">
+Node.js is single-threaded by default. Using the cluster module allows your app to : Handle more requests concurrently.
+</span>
+<ol class="subul">
+  <li>Avoid a single point of failure (if one worker crashes, others keep running).</li>
+  <li>Use all CPU cores on a server.</li>
+  <li>All workers share the same server port.</li>
+  <li>Each worker is a separate Node.js process (not thread).</li>
+  <li>Workers don’t share memory – use IPC or external stores (like Redis) for shared state.</li>
+</ol>
+<br />
+
+
+<hr />
+  
+  
+    <div class="section">
+      <br />
+      <div class="title">🔄 Cluster vs Worker Comparison</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Cluster</th>
+            <th>Worker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Definition</td>
+            <td>Main controller module to spawn child processes</td>
+            <td>Individual child process spawned by the cluster</td>
+          </tr>
+          <tr>
+            <td>Role</td>
+            <td>Manages multiple workers</td>
+            <td>Handles incoming requests or tasks</td>
+          </tr>
+          <tr>
+            <td>Code Location</td>
+            <td>Master process</td>
+            <td>Worker process</td>
+          </tr>
+          <tr>
+            <td>Use Case</td>
+            <td>Load balancing and CPU core utilization</td>
+            <td>Actual request processing</td>
+          </tr>
+          <tr>
+            <td>Communication</td>
+            <td>Interacts with workers via IPC</td>
+            <td>Communicates with master via IPC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+<hr />
+
+<h2>🔍 Comparison: Manual cluster vs PM2</h2>
+
+<table>
+  <tr>
+    <th>Feature</th>
+    <th>Manual cluster</th>
+    <th>PM2</th>
+  </tr>
+  <tr>
+    <td>Setup</td>
+    <td>Manual coding required</td>
+    <td class="yes">Easy CLI-based</td>
+  </tr>
+  <tr>
+    <td>Load balancing</td>
+    <td class="yes">Handled via cluster</td>
+    <td class="yes">Built-in</td>
+  </tr>
+  <tr>
+    <td>Process Monitoring</td>
+    <td class="no">Not built-in</td>
+    <td class="yes">Dashboard + CLI</td>
+  </tr>
+  <tr>
+    <td>Crash Recovery</td>
+    <td class="no">Manual restart</td>
+    <td class="yes">Automatic restart</td>
+  </tr>
+  <tr>
+    <td>Logging</td>
+    <td class="no">Requires setup</td>
+    <td class="yes">Built-in logging</td>
+  </tr>
+  <tr>
+    <td>Production Readiness</td>
+    <td class="no">Not ideal alone</td>
+    <td class="yes">✅ Highly recommended</td>
+  </tr>
+</table>
+
+
+
+</div></li>
+
+
+
+<li data-id="q19"><span class="faq-question">
+Clustering? & cluster vs worker*** cluster.fork()
+</span><div class="answer">
+
 Clustering enables using multiple CPU cores by spawning worker processes that share the same server port, improving performance and load handling.
 </div>
 <div class="answer">
 Clustering in Node.js is a technique to create multiple child processes (workers) that share the same server port, allowing you to take advantage of multi-core CPU systems. Since Node.js runs on a single thread by default, clustering helps improve performance and reliability by distributing incoming requests across several worker processes.
 
-The core module <code>cluster</code> enables spawning of worker processes. Each worker runs its own event loop and instance of the Node.js runtime, enabling parallel processing of requests.
-
+The core module cluster enables spawning of worker processes. Each worker runs its own event loop and instance of the Node.js runtime, enabling parallel processing of requests.
+<br />
 Key benefits:
 <ul>
 <li><strong>Improved Performance:</strong> Utilizes multiple CPU cores to handle more concurrent connections.</li>
@@ -785,17 +1100,17 @@ Clustering boosts Node.js scalability but requires careful management of shared 
 </li>
 
 
-<li data-id="q28"><span class="faq-question">
-Optimize performance in a large-scale Node.js app?
+<li data-id="q28"><span class="faq-question green">
+Performance?
 </span><div class="answer">
 Use clustering, caching (Redis), async operations, database indexing, code profiling, monitoring (e.g., New Relic), and limit synchronous code. Minimize memory leaks and optimize queries.
 </div>
 <div class="answer">
 Optimizing performance in large-scale Node.js applications involves multiple strategies:
-
+<br />
 <strong>1. Use Asynchronous Code:</strong> Always prefer non-blocking async operations to avoid blocking the event loop.<br>
 
-<strong>2. Load Balancing & Clustering:</strong> Use the <code>cluster</code> module or external load balancers to utilize multiple CPU cores.<br>
+<strong>2. Load Balancing & Clustering:</strong> Use the cluster module or external load balancers to utilize multiple CPU cores.<br>
 
 <strong>3. Caching:</strong> Cache frequent data using in-memory stores like Redis or Memcached to reduce database load.<br>
 
@@ -821,12 +1136,17 @@ Regular code reviews, performance testing, and keeping dependencies up-to-date h
 <li data-id="q12"><span class="faq-question">
 Difference between process.nextTick() and setImmediate()?
 </span><div class="answer">
-<code>process.nextTick()</code> schedules a callback to execute immediately after the current operation completes, before the event loop continues. It has higher priority and runs before any I/O events or timers.<br><br>
+<b class="green">process.nextTick()</b> schedules a callback to execute immediately after the current operation completes, before the event loop continues. It has higher priority and runs before any I/O events or timers.
+<br />
+<b class="green">setImmediate()</b> schedules a callback to run on the next iteration (tick) of the event loop, after I/O events callbacks.
+<br /><br />
+In short,
+<code>process.nextTick() : runs before any I/O tasks, can starve I/O, blocking the event loop.</code> 
+<code>setImmediate() :  runs after I/O events in the event loop.</code>
+ 
+</div>
 
-<code>setImmediate()</code> schedules a callback to run on the next iteration (tick) of the event loop, after I/O events callbacks.<br><br>
-
-In short, <code>process.nextTick()</code> runs before any I/O tasks, while <code>setImmediate()</code> runs after I/O events in the event loop. Overusing <code>process.nextTick()</code> can starve I/O, blocking the event loop.
-</div></li>
+</li>
 
 <li data-id="q24"><span class="faq-question">
 How do you secure a Node.js application?
@@ -864,10 +1184,13 @@ Explain how Buffer works in Node.js.
 </div></li>
 
 
-<li data-id="q_ts"><span class="faq-question">
+<li data-id="q_ts"><span class="faq-question green">
 TypeScript?
 </span><div class="answer">
-TypeScript is a strongly typed superset of JavaScript developed by Microsoft. It adds static typing, interfaces, enums, and advanced tooling features to JavaScript, helping developers catch errors at compile time instead of runtime. TypeScript code compiles down to plain JavaScript, making it compatible with any environment that runs JS. It improves code quality, readability, and maintainability, especially for large-scale applications. TypeScript integrates well with modern frameworks like Angular, React, and Node.js, and offers excellent support in popular editors like VS Code with features like autocompletion and refactoring.
+TypeScript is a strongly typed superset of JavaScript developed by Microsoft.<br /> 
+It adds <span class="green">static typing, interfaces, enums, and advanced tooling features to JavaScript, 
+helping developers catch errors at compile time instead of runtime.</span> 
+TypeScript code compiles down to plain JavaScript, making it compatible with any environment that runs JS. It improves code quality, readability, and maintainability, especially for large-scale applications. TypeScript integrates well with modern frameworks like Angular, React, and Node.js, and offers excellent support in popular editors like VS Code with features like autocompletion and refactoring.
 </div></li>
 
 <li data-id="q_gql"><span class="faq-question">
@@ -1029,24 +1352,24 @@ console.log(curriedAdd(2)(3)); // 5
 Currying is useful for creating customizable and reusable function pipelines.
 </div></li>
 
-<li data-id="q_oauth2"><span class="faq-question">
+<li data-id="q_oauth2"><span class="faq-question green">
 OAuth 2.0?
 </span><div class="answer">
 OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to user resources on a server without exposing user credentials.
 
 It works by issuing access tokens after user consent, which the application uses to access protected resources.
+<br />
+Key roles:<br />
+- <strong class="green">Resource Owner:</strong> User granting access<br />
+- <strong>Client:</strong> Application requesting access<br />
+- <strong>Authorization Server:</strong> Issues tokens<br />
+- <strong>Resource Server:</strong> Hosts protected resources<br />
 
-Key roles:
-- <strong>Resource Owner:</strong> User granting access
-- <strong>Client:</strong> Application requesting access
-- <strong>Authorization Server:</strong> Issues tokens
-- <strong>Resource Server:</strong> Hosts protected resources
-
-Common grant types:
-- Authorization Code
-- Implicit
-- Resource Owner Password Credentials
-- Client Credentials
+Common grant types:<br />
+- Authorization Code<br />
+- Implicit<br />
+- Resource Owner Password Credentials<br />
+- Client Credentials<br />
 
 OAuth 2.0 improves security by decoupling authentication and authorization, widely used in APIs and social logins.
 </div></li>
@@ -1075,7 +1398,7 @@ Sessions are server-managed; tokens are client-managed. Tokens are popular for A
 ACID in MySQL?
 </span><div class="answer">
 ACID stands for Atomicity, Consistency, Isolation, and Durability — key properties that ensure reliable database transactions.
-
+<br />
 - <strong>Atomicity:</strong> Transactions are all-or-nothing; either fully completed or fully rolled back.<br>
 - <strong>Consistency:</strong> Transactions bring the database from one valid state to another, maintaining data integrity.<br>
 - <strong>Isolation:</strong> Concurrent transactions don’t interfere; intermediate states are hidden.<br>
@@ -1104,12 +1427,12 @@ API Gateway simplifies building scalable, secure, and reliable APIs with minimal
 <li data-id="q_virtual_dom"><span class="faq-question">
 Virtual DOM in ReactJS?
 </span><div class="answer">
-The <strong>Virtual DOM</strong> is a lightweight, in-memory representation of the real DOM used by React.
+The <strong>Virtual DOM</strong> is a lightweight, in-memory representation of the real DOM used by React.<br />
 
 When the state or props of a component change, React creates a new Virtual DOM tree and compares it with the previous one (called "diffing").
-
+<br />
 Only the differences (minimal changes) are then applied to the actual browser DOM, improving performance by reducing costly DOM manipulations.
-
+<br />
 This process allows React to update UI efficiently and smoothly without reloading the entire page.
 </div></li>
 
@@ -1229,10 +1552,537 @@ What is Event Bubbling in ReactJS?
 
 
 
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+    MySQL : INNER, LEFT & RIGHT-OUTER, FULL OUTER JOIN, CROSS JOIN, SELF JOIN
+  </span><div class="answer">
+  <ol class="subul">
+    <li><b>FULL OUTER JOIN :</b>(MySQL does not support this natively)</li>
+    <li><b>INNER JOIN :</b> Returns only matching rows from both tables.</li>
+    <li><b>CROSS JOIN :</b> Returns the Cartesian product (all combinations) of the two tables.</li>
+    <li><b>SELF JOIN :</b> A table joined to itself using aliases.</li>
+    <li>
+      <code>
+        SELECT * FROM employees e <span class="green">LEFT JOIN</span> departments d ON e.department_id = d.id <br />
+        <span class="green">UNION</span><br />
+        SELECT * FROM employees e RIGHT JOIN departments d ON e.department_id = d.id; <br /><hr />
+        SELECT * FROM employees <span class="green">CROSS JOIN</span> departments;<br /><hr />
+
+        SELECT a.name AS employee, b.name AS manager FROM employees a JOIN employees b ON a.manager_id = b.id;
+        
+      </code>
+    </li>
+  </ol>
+  </div></li>
+
+
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+    Advantages of Sequelize
+  </span><div class="answer">
 
 
 
 
+    
+  
+    <h2>✅ 1. Supports Multiple SQL Databases</h2>
+    <p>Sequelize supports:</p>
+    <ul>
+      <li>PostgreSQL</li>
+      <li>MySQL</li>
+      <li>MariaDB</li>
+      <li>SQLite</li>
+      <li>MSSQL</li>
+    </ul>
+  
+    <h2>✅ 2. Promise-based</h2>
+    <p>Built on Promises, making it easy to use with async/await for clean asynchronous flow.</p>
+  
+    <h2>✅ 3. Models & Associations</h2>
+    <p>Define relationships using built-in methods:</p>
+    <pre><code>User.hasMany(Post);
+  Post.belongsTo(User);</code></pre>
+  
+    <h2>✅ 4. Migrations & Seeders</h2>
+    <p>Includes CLI tools to manage database schema versions and initial data.</p>
+  
+    <h2>✅ 5. ORM & Raw SQL</h2>
+    <p>Allows flexible querying with both ORM methods and raw SQL:</p>
+    <pre><code>const users = await sequelize.query("SELECT * FROM Users", { type: QueryTypes.SELECT });</code></pre>
+  
+    <h2>✅ 6. Hooks/Lifecycle Callbacks</h2>
+    <p>Execute logic before/after events like save, update, delete:</p>
+    <pre><code>User.beforeCreate(user => {
+    user.createdAt = new Date();
+  });</code></pre>
+  
+    <h2>✅ 7. Eager & Lazy Loading</h2>
+    <p>Supports both eager loading via <code>include</code> and lazy loading via functions.</p>
+  
+    <h2>✅ 8. Transaction Support</h2>
+    <p>Robust support for transactions:</p>
+    <pre><code>await sequelize.transaction(async (t) => {
+    await User.create({ name: 'John' }, { transaction: t });
+  });</code></pre>
+  
+    <h2>✅ 9. Validation & Constraints</h2>
+    <p>Define validations, constraints, and default values at the model level.</p>
+  
+    <h2>✅ 10. Community & Ecosystem</h2>
+    <p>Widely used in production with great community and support.</p>
+
+  
+  </div></li>
+
+
+
+
+
+
+  
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+  TypeORM
+</span><div class="answer">
+
+  <ul>
+    <li>Object-Oriented design using decorators</li>
+    <li>Supports Active Record & Data Mapper</li>
+    <li>Works with various databases (MySQL, PostgreSQL, etc.)</li>
+    <li>Built-in migration support</li>
+    <li>Eager and lazy relation loading</li>
+    <li>Repository and QueryBuilder APIs</li>
+    <li>Easy configuration using decorators</li>
+    <li>Great integration with NestJS</li>
+  </ul>
+
+
+
+
+  
+    <h2>✅ 1. TypeScript Support</h2>
+    <p>Fully written in and optimized for TypeScript. Enables <strong>type safety</strong>, <strong>intellisense</strong>, and <strong>compile-time checks</strong>.</p>
+  
+    <h2>✅ 2. Decorators-Based Syntax</h2>
+    <p>Uses <strong>class decorators</strong> for defining entities, columns, and relationships—clean and declarative.</p>
+    <pre><code>@Entity()
+  export class User {
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    name: string;
+  }</code></pre>
+  
+    <h2>✅ 3. Supports Multiple Databases</h2>
+    <p>Works with:</p>
+    <ul>
+      <li>MySQL</li>
+      <li>PostgreSQL</li>
+      <li>SQLite</li>
+      <li>MariaDB</li>
+      <li>MSSQL</li>
+      <li>Oracle</li>
+      <li>MongoDB (limited)</li>
+    </ul>
+  
+    <h2>✅ 4. Built-In Migrations</h2>
+    <p>Supports schema migrations for database version control:</p>
+    <pre><code>typeorm migration:create -n AddUserTable
+  typeorm migration:run</code></pre>
+  
+    <h2>✅ 5. Repository & Data Mapper Patterns</h2>
+    <p>Supports both <strong>Active Record</strong> and <strong>Data Mapper</strong> patterns.</p>
+  
+    <h2>✅ 6. Relationship Management</h2>
+    <p>Easy to define and manage entity relationships:</p>
+    <pre><code>@OneToMany(() => Post, post => post.user)
+  posts: Post[];</code></pre>
+  
+    <h2>✅ 7. Lazy & Eager Loading</h2>
+    <p>Supports both <strong>lazy</strong> (via Promises) and <strong>eager</strong> loading of relations.</p>
+  
+    <h2>✅ 8. Query Builder</h2>
+    <p>Flexible query builder for complex queries:</p>
+    <pre><code>const users = await dataSource
+    .getRepository(User)
+    .createQueryBuilder("user")
+    .where("user.age > :age", { age: 18 })
+    .getMany();</code></pre>
+  
+    <h2>✅ 9. Integration with NestJS</h2>
+    <p>Works seamlessly with NestJS via the <code>@nestjs/typeorm</code> package.</p>
+  
+    <h2>✅ 10. Community & Ecosystem</h2>
+    <p>Well-maintained and widely adopted in production apps.</p>
+
+  
+
+
+</div></li>
+
+
+
+<li data-id="q3"><span class="faq-question">
+Lazy vs Eager Loading
+</span><div class="answer">
+
+  <h2>✅ Lazy Loading</h2>
+  <p>Lazy loading delays the loading of data or resources until they are actually needed.</p>
+
+  <h3>🔍 Characteristics:</h3>
+  <ul>
+    <li>Data is fetched only <strong>when accessed</strong>.</li>
+    <li>Reduces initial load time.</li>
+    <li>Saves memory and network if the data is never used.</li>
+    <li>Might introduce <strong>additional queries or requests</strong> during runtime.</li>
+  </ul>
+
+  <h3>💡 Examples:</h3>
+  <div class="code-title">Backend (ORM):</div>
+  <pre><code>@OneToMany(() =&gt; Post, post =&gt; post.user, { lazy: true })
+posts: Promise&lt;Post[]&gt;;</code></pre>
+
+  <div class="code-title">Frontend (React):</div>
+  <pre><code>const LazyComponent = React.lazy(() =&gt; import('./MyComponent'));</code></pre>
+
+  <h2>✅ Eager Loading</h2>
+  <p>Eager loading loads related data immediately when the initial query or request is made.</p>
+
+  <h3>🔍 Characteristics:</h3>
+  <ul>
+    <li>Data is <strong>pre-fetched</strong> along with the primary data.</li>
+    <li>Useful when you know the related data will be needed.</li>
+    <li>Reduces the number of queries at runtime (prevents N+1 problem).</li>
+    <li>Increases initial load time.</li>
+  </ul>
+
+  <h3>💡 Examples:</h3>
+  <div class="code-title">Backend (ORM):</div>
+  <pre><code>@OneToMany(() =&gt; Post, post =&gt; post.user, { eager: true })
+posts: Post[];</code></pre>
+
+  <div class="code-title">Frontend (React/Angular):</div>
+  <pre><code>// Importing all modules/components at once during the initial load</code></pre>
+
+  <h2>🆚 Lazy vs Eager Loading – Quick Comparison</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Lazy Loading</th>
+        <th>Eager Loading</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Timing</td>
+        <td>On demand</td>
+        <td>At initial load</td>
+      </tr>
+      <tr>
+        <td>Performance Impact</td>
+        <td>Lower initial cost, may slow runtime</td>
+        <td>Higher initial cost, faster runtime</td>
+      </tr>
+      <tr>
+        <td>Use Case</td>
+        <td>Optional or rarely used data</td>
+        <td>Essential or frequently accessed data</td>
+      </tr>
+      <tr>
+        <td>Query Behavior</td>
+        <td>Multiple small queries</td>
+        <td>Single large query</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>🧠 When to Use What?</h2>
+  <ul>
+    <li><strong>Lazy Loading</strong>: When the related data is large, rarely used, or optional.</li>
+    <li><strong>Eager Loading</strong>: When you always need the related data and want to avoid N+1 queries.</li>
+  </ul>
+
+</div></li>
+
+<li data-id="q3"><span class="faq-question green">
+  TypeORM vs Sequelize ***
+  </span><div class="answer">
+
+
+    
+      <h1>TypeORM vs Sequelize</h1>
+    
+      <h2>🔶 Overview</h2>
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>TypeORM</th>
+          <th>Sequelize</th>
+        </tr>
+        <tr>
+          <td>Language</td>
+          <td>TypeScript-first ORM</td>
+          <td>JavaScript-first (TypeScript support)</td>
+        </tr>
+        <tr>
+          <td>API Style</td>
+          <td>Decorator-based OOP (like Java/C#)</td>
+          <td>Promise-based functional API</td>
+        </tr>
+        <tr>
+          <td>Supported DBs</td>
+          <td>MySQL, PostgreSQL, SQLite, MSSQL, etc.</td>
+          <td>MySQL, PostgreSQL, SQLite, MSSQL, etc.</td>
+        </tr>
+        <tr>
+          <td>Learning Curve</td>
+          <td>Steeper for beginners</td>
+          <td>Easier, beginner-friendly</td>
+        </tr>
+        <tr>
+          <td>Community</td>
+          <td>Growing in TS community</td>
+          <td>Mature and stable</td>
+        </tr>
+      </table>
+    
+      <h2>🔶 Coding Style</h2>
+    
+      <h3>✅ TypeORM</h3>
+      <pre><code>@Entity()
+    export class User {
+      @PrimaryGeneratedColumn()
+      id: number;
+    
+      @Column()
+      name: string;
+    
+      @OneToMany(() => Post, post => post.user)
+      posts: Post[];
+    }</code></pre>
+    
+      <h3>✅ Sequelize</h3>
+      <pre><code>const User = sequelize.define('User', {
+      name: {
+        type: Sequelize.STRING
+      }
+    });
+    
+    User.hasMany(Post);</code></pre>
+    
+      <h2>🔶 Feature Comparison</h2>
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>TypeORM</th>
+          <th>Sequelize</th>
+        </tr>
+        <tr>
+          <td>TypeScript Support</td>
+          <td>Native, first-class support</td>
+          <td>Good, but less idiomatic</td>
+        </tr>
+        <tr>
+          <td>Decorators</td>
+          <td>Yes</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Migrations</td>
+          <td>Supported (CLI-based)</td>
+          <td>Supported (CLI-based)</td>
+        </tr>
+        <tr>
+          <td>Query Builder</td>
+          <td>Yes (powerful)</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Active Record Support</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Data Mapper Support</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Hooks / Lifecycle Events</td>
+          <td>Supported</td>
+          <td>Supported</td>
+        </tr>
+        <tr>
+          <td>Custom Repositories</td>
+          <td>Supported</td>
+          <td>Less structured</td>
+        </tr>
+        <tr>
+          <td>Raw Queries</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Lazy Loading Support</td>
+          <td>✅ Yes (via proxies)</td>
+          <td>❌ No</td>
+        </tr>
+        <tr>
+          <td>Ecosystem Plugins</td>
+          <td>Smaller</td>
+          <td>Larger</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Comparable, context-specific</td>
+          <td>Comparable, context-specific</td>
+        </tr>
+      </table>
+    
+      <h2>🔶 Pros & Cons</h2>
+    
+      <h3>✅ TypeORM</h3>
+      <ul>
+        <li>Built for TypeScript from the ground up.</li>
+        <li>Cleaner, OOP-style with decorators.</li>
+        <li>Easy to manage entities and relations.</li>
+        <li>Supports both Active Record & Data Mapper.</li>
+        <li><strong>Cons:</strong> Can be buggy, poor error messages, slower dev pace.</li>
+      </ul>
+    
+      <h3>✅ Sequelize</h3>
+      <ul>
+        <li>Mature, stable, and widely used.</li>
+        <li>Rich feature set with powerful associations and hooks.</li>
+        <li>Easier to get started for beginners.</li>
+        <li><strong>Cons:</strong> Less seamless TS support, no decorators, more verbose.</li>
+      </ul>
+    
+      <h2>🔶 When to Use What?</h2>
+      <table>
+        <tr>
+          <th>Use Case</th>
+          <th>Recommendation</th>
+        </tr>
+        <tr>
+          <td>Full TypeScript project</td>
+          <td>✅ TypeORM</td>
+        </tr>
+        <tr>
+          <td>Simple JavaScript project</td>
+          <td>✅ Sequelize</td>
+        </tr>
+        <tr>
+          <td>OOP/decorator-based architecture</td>
+          <td>✅ TypeORM</td>
+        </tr>
+        <tr>
+          <td>Large team with JavaScript experience</td>
+          <td>✅ Sequelize</td>
+        </tr>
+        <tr>
+          <td>Lazy loading required</td>
+          <td>✅ TypeORM</td>
+        </tr>
+        <tr>
+          <td>Rapid prototyping / MVP</td>
+          <td>✅ Sequelize</td>
+        </tr>
+      </table>
+    
+      <h2>🔚 Final Thoughts</h2>
+      <p>
+        Use <strong>TypeORM</strong> if you're building a scalable TypeScript-based app and want an OOP approach with decorators.<br>
+        Use <strong>Sequelize</strong> if you want fast setup, simplicity, and a mature JS ORM with wide community support.
+      </p>
+    
+
+    
+  </div></li>
+
+<li data-id="q3"><span class="faq-question">
+DB Indexing   
+</span><div class="answer">
+
+  
+
+    <p><strong>Database indexing</strong> is a data structure technique used to quickly locate and access data in a database. It improves <strong>read</strong> performance (especially <code>SELECT</code> queries) by reducing the number of rows scanned.</p>
+  
+    <h2>🧠 Analogy</h2>
+    <p>Think of an index in a book. Instead of reading every page to find a topic, you look it up in the index → it tells you the page number → you go directly there.</p>
+  
+    <h2>⚙️ How It Works</h2>
+    <ul>
+      <li>A <strong>B-Tree</strong> or <strong>Hash Table</strong> structure is used.</li>
+      <li>Indexes are built on one or more <strong>columns</strong>.</li>
+      <li>Query engine checks the index first instead of scanning the whole table.</li>
+    </ul>
+  
+    <h2>🔍 Types of Indexes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary Index</strong></td>
+          <td>Automatically created on the primary key.</td>
+        </tr>
+        <tr>
+          <td><strong>Unique Index</strong></td>
+          <td>Ensures all values in the column(s) are unique.</td>
+        </tr>
+        <tr>
+          <td><strong>Composite Index</strong></td>
+          <td>An index on multiple columns (e.g., <code>(first_name, last_name)</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>Full-Text Index</strong></td>
+          <td>Used for text searching (e.g., <code>LIKE</code> or <code>MATCH AGAINST</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>Spatial Index</strong></td>
+          <td>For geometric or GIS data.</td>
+        </tr>
+        <tr>
+          <td><strong>Partial Index</strong></td>
+          <td>Indexes only rows that meet a condition (<code>WHERE</code> clause).</td>
+        </tr>
+        <tr>
+          <td><strong>Covering Index</strong></td>
+          <td>All columns required by a query are in the index → no table access needed.</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>💡 Best Practices</h2>
+    <ul>
+      <li>Index columns used in <code>WHERE</code>, <code>JOIN</code>, <code>ORDER BY</code>, and <code>GROUP BY</code>.</li>
+      <li>Avoid indexing columns that are frequently updated or contain many duplicate values.</li>
+      <li>Don’t over-index — it slows down <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operations.</li>
+      <li>Use <strong>composite indexes</strong> for multi-column filters.</li>
+    </ul>
+  
+    <h2>🧪 Example in MySQL/PostgreSQL</h2>
+    <pre><code>-- Create a simple index
+  CREATE INDEX idx_users_email ON users(email);
+  
+  -- Composite index
+  CREATE INDEX idx_users_name ON users(first_name, last_name);
+  
+  -- Drop an index
+  DROP INDEX idx_users_email;
+  </code></pre>
+  
+    <h2>🧠 Query Plan (Advanced)</h2>
+    <p>Use <code>EXPLAIN</code> (MySQL) or <code>EXPLAIN ANALYZE</code> (PostgreSQL) to see if your query uses an index:</p>
+    <pre><code>EXPLAIN SELECT * FROM users WHERE email = 'user@example.com';</code></pre>
+
+  
+</div></li>
 
 
 
@@ -1398,7 +2248,7 @@ Note: The API call may be canceled if the component unmounts abruptly, so it’s
 
 
 <li data-id="q_call_api_without_useeffect"><span class="faq-question">
-How to call an API without using <code>useEffect</code> in React?
+How to call an API without using useEffect in React?
 </span><div class="answer">
 You can call an API without <code>useEffect</code> by triggering the fetch inside event handlers, lifecycle methods (class components), or directly within functions.
 
@@ -1423,12 +2273,8 @@ Direct API calls in render are discouraged to avoid repeated calls on every rend
 </div></li>
 
 
-
-
-
-
-
 </ul>
+
 
 <script src="script.js"></script>
 
