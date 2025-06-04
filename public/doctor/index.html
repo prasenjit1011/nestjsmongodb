@@ -14,10 +14,13 @@
 <a href="/doctor/docker.html">Docker</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+<a href="/doctor/kafka.html">Kafka</a> &nbsp; 
+<a href="kafka-interview.html">Kafka Interview</a> &nbsp; 
+<a href="mongodb.html">Mongo DB</a> &nbsp; 
 
 
 <ul class="faq">
-<li data-id="q1"><span class="faq-question">
+<li data-id="q122"><span class="faq-question">
 Node.js?
 </span><div class="answer">
 Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
@@ -352,7 +355,13 @@ tailwind
 Promise?
 </span><div class="answer">
 A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. <br />
-It has 3 states: <b><code></code>pending</code>, <code>fulfilled</code>, and <code>rejected</code>.</b>
+It has 3 states: 
+<ol>
+  <li>pending</li>
+  <li>fulfilled</li>
+  <li>rejected</li>
+</ol>
+
 
 Basic usage:
 <pre><code>
@@ -376,7 +385,7 @@ Mastering Promises is essential for handling async operations in modern JavaScri
 
 
 <hr />
-<code>
+<pre><code>
     // Sample async function returning a promise
     const delay = (time, value, shouldReject = false) => {
       return new Promise((resolve, reject) => {
@@ -451,7 +460,7 @@ Mastering Promises is essential for handling async operations in modern JavaScri
         console.error('Caught error:', error); // 'Error: Oops'
       });
 
-    </code>
+    </code></pre>
 
 
 
@@ -706,12 +715,13 @@ The <code>@Module()</code> decorator accepts metadata that tells NestJS how to a
 
 
 
-<li data-id="q_node_event"><span class="faq-question">
-Event?
+<li data-id="q_node_event"><span class="faq-question green">
+Event? EventEmitter
 </span><div class="answer">
-In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. Node uses the <code>EventEmitter</code> class to handle events, allowing objects to emit named events and listeners to respond asynchronously. This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
+In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. <br />
+Node uses the class to handle events, allowing objects to emit named events and listeners to respond asynchronously.  <br /> <br />
+This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
 
-Example:
 <pre><code>
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
@@ -842,7 +852,204 @@ res.status(500).json({ message: err.message });
 Proper error handling helps maintain app stability and improves debugging.
 </div></li>
 
+<li data-id="q14oth"><span class="faq-question green">🎯 Abstraction in Object-Oriented Programming (OOP)</h1>
+</span><div class="answer">
 
+  <div class="section">
+    <h2>What is Abstraction?</h2>
+    <p><strong>Abstraction</strong> is the concept of hiding complex implementation details and showing only the essential features of an object.</p>
+    <p>It helps reduce complexity by exposing only what is necessary.</p>
+  </div>
+
+  <div class="section">
+    <h2>Real-World Example</h2>
+    <p>When you drive a car, you interact with the steering wheel, pedals, and gear. You don’t need to know how the engine works internally — that's abstraction.</p>
+  </div>
+
+  <div class="section">
+    <h2>How It Works in OOP</h2>
+    <ul>
+      <li>Achieved using <strong>abstract classes</strong> and <strong>interfaces</strong>.</li>
+      <li>Only relevant operations are exposed through public methods.</li>
+      <li>Internal logic is hidden from the user of the object.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Example in Java</h2>
+    <pre><code>abstract class Animal {
+  abstract void makeSound();
+}
+
+class Dog extends Animal {
+  void makeSound() {
+    System.out.println("Bark");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Animal a = new Dog();
+    a.makeSound();  // Output: Bark
+  }
+}</code></pre>
+    <p>Here, the user of the <code>Animal</code> class knows it has a <code>makeSound()</code> method, but not how it is implemented.</p>
+  </div>
+
+  <div class="section">
+    <h2>Benefits of Abstraction</h2>
+    <ul>
+      <li>Improves code readability and maintainability</li>
+      <li>Hides unnecessary details from the user</li>
+      <li>Supports loose coupling and high cohesion</li>
+      <li>Makes the application more secure by exposing only relevant parts</li>
+    </ul>
+  </div>
+  <h1>🔍 Abstraction vs Interface in OOP</h1>
+
+  <div class="section">
+    <h2>Definition</h2>
+    <p><strong>Abstraction</strong> is the concept of hiding implementation details and exposing only essential features. It can be implemented using <code>abstract classes</code> or <code>interfaces</code>.</p>
+    <p><strong>Interface</strong> is a contract that specifies what methods a class should implement, without defining how they are implemented.</p>
+  </div>
+
+  <div class="section">
+    <h2>Comparison Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Abstract Class</th>
+          <th>Interface</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Purpose</td>
+          <td>Used for partial abstraction and shared code.</td>
+          <td>Used to define a full contract for implementing classes.</td>
+        </tr>
+        <tr>
+          <td>Method Implementation</td>
+          <td>Can have both abstract and concrete methods.</td>
+          <td>Cannot have implementation (except default/static in modern languages).</td>
+        </tr>
+        <tr>
+          <td>Multiple Inheritance</td>
+          <td>Not supported in many languages (e.g., Java).</td>
+          <td>Can implement multiple interfaces.</td>
+        </tr>
+        <tr>
+          <td>Constructors</td>
+          <td>Can have constructors.</td>
+          <td>Cannot have constructors.</td>
+        </tr>
+        <tr>
+          <td>Access Modifiers</td>
+          <td>Can use public, protected, private, etc.</td>
+          <td>Methods are public by default.</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>When classes share common behavior with differences.</td>
+          <td>When you want to enforce a common API without shared code.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Example in Java</h2>
+
+    <h3>Abstract Class</h3>
+    <pre><code>abstract class Animal {
+  abstract void sound();
+
+  void breathe() {
+    System.out.println("Breathing...");
+  }
+}</code></pre>
+
+    <h3>Interface</h3>
+    <pre><code>interface Flyable {
+  void fly();
+}
+
+class Bird implements Flyable {
+  public void fly() {
+    System.out.println("Flying...");
+  }
+}</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Quick Summary</h2>
+    <ul>
+      <li><strong>Abstraction</strong> is a broader concept; an abstract class is one way to implement it.</li>
+      <li><strong>Interface</strong> is a pure abstraction tool used for enforcing contracts between classes.</li>
+    </ul>
+  </div>
+
+</div></li>
+<li data-id="q14oth"><span class="faq-question green">
+  🔐 OAuth 2.0 Overview
+</span><div class="answer">
+  <div class="section">
+    <h2>What is OAuth 2.0?</h2>
+    <p>OAuth 2.0 is an <strong>authorization framework</strong> that allows third-party applications to obtain limited access to a user's resources without exposing their credentials.</p>
+  </div>
+
+  <div class="section">
+    <h2>Roles in OAuth 2.0</h2>
+    <ul>
+      <li><strong>Resource Owner:</strong> The user who owns the data.</li>
+      <li><strong>Client:</strong> The application requesting access to the resource.</li>
+      <li><strong>Authorization Server:</strong> Issues access tokens after authenticating the user.</li>
+      <li><strong>Resource Server:</strong> Hosts the protected resources and validates the token.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>OAuth 2.0 Grant Types</h2>
+    <ul>
+      <li><strong>Authorization Code:</strong> Used for server-side applications. Secure and most commonly used.</li>
+      <li><strong>Implicit:</strong> Used for public clients like single-page apps. Less secure (now discouraged).</li>
+      <li><strong>Resource Owner Password Credentials:</strong> User provides credentials directly. Used in trusted apps.</li>
+      <li><strong>Client Credentials:</strong> Used for machine-to-machine communication.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>OAuth 2.0 Flow: Authorization Code Grant</h2>
+    <ol>
+      <li>User is redirected to Authorization Server to log in.</li>
+      <li>User grants permission to the app.</li>
+      <li>Authorization Server redirects back with an <code>authorization code</code>.</li>
+      <li>App exchanges the code for an <code>access token</code>.</li>
+      <li>App uses the token to access protected resources.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>Access & Refresh Tokens</h2>
+    <ul>
+      <li><strong>Access Token:</strong> Used to access protected resources. Short-lived.</li>
+      <li><strong>Refresh Token:</strong> Used to obtain a new access token when it expires. Long-lived.</li>
+    </ul>
+  </div>
+
+  <div class="section highlight">
+    <h2>Security Tips</h2>
+    <ul>
+      <li>Use HTTPS for all communication.</li>
+      <li>Never expose client secrets in frontend apps.</li>
+      <li>Use PKCE with public clients (e.g., mobile apps, SPAs).</li>
+      <li>Use short-lived access tokens and refresh tokens securely.</li>
+    </ul>
+  </div>
+  
+
+</div></li>
 
 <li data-id="q14"><span class="faq-question green">
 Middleware?
@@ -1182,6 +1389,11 @@ Explain how Buffer works in Node.js.
 </span><div class="answer">
 `Buffer` is a global object used to handle binary data directly. It's useful for working with streams, files, and network protocols without converting to strings.
 </div></li>
+
+
+
+
+
 
 
 <li data-id="q_ts"><span class="faq-question green">
@@ -2085,6 +2297,919 @@ DB Indexing
 </div></li>
 
 
+<li data-id="redis-diff"><span class="faq-question green">
+  📊 Redis vs RabbitMQ vs Kafka vs AWS SNS
+  </span><div class="answer">
+    
+    
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Redis</th>
+        <th>RabbitMQ</th>
+        <th>Apache Kafka</th>
+        <th>AWS SNS</th>
+      </tr>
+    
+      <tr>
+        <td>Type</td>
+        <td>In-memory data store & lightweight message broker</td>
+        <td>Traditional message broker</td>
+        <td>Distributed event streaming platform</td>
+        <td>Managed pub/sub messaging service</td>
+      </tr>
+    
+      <tr>
+        <td>Use Case</td>
+        <td>Caching, queues, lightweight pub/sub</td>
+        <td>Reliable message queuing (task/job queues)</td>
+        <td>High-throughput log/event streaming</td>
+        <td>Fan-out messages to multiple AWS services or HTTP endpoints</td>
+      </tr>
+    
+      <tr>
+        <td>Persistence</td>
+        <td>Optional (RDB, AOF)</td>
+        <td>Yes (durable queues)</td>
+        <td>Yes (retains logs)</td>
+        <td>No built-in persistence (fire-and-forget)</td>
+      </tr>
+    
+      <tr>
+        <td>Ordering Guarantees</td>
+        <td>Per-list, not global</td>
+        <td>Per-queue</td>
+        <td>Per-partition</td>
+        <td>No strict guarantees</td>
+      </tr>
+    
+      <tr>
+        <td>Message Retention</td>
+        <td>Until consumed or expired</td>
+        <td>Until consumed or TTL expires</td>
+        <td>Configurable retention (days/weeks)</td>
+        <td>Delivers and discards</td>
+      </tr>
+    
+      <tr>
+        <td>Throughput</td>
+        <td>High (in-memory)</td>
+        <td>Medium</td>
+        <td>Very High (sequential disk I/O, batching)</td>
+        <td>Medium (event broadcast scale)</td>
+      </tr>
+    
+      <tr>
+        <td>Scalability</td>
+        <td>Vertical (or Redis Cluster)</td>
+        <td>Limited (clusters supported with plugins)</td>
+        <td>Horizontal (Kafka Cluster, partitions)</td>
+        <td>Fully managed and scalable</td>
+      </tr>
+    
+      <tr>
+        <td>Delivery Semantics</td>
+        <td>At most once (by default)</td>
+        <td>At least once (manual ack)</td>
+        <td>At most once / At least once / Exactly once</td>
+        <td>At most once (no retries by default)</td>
+      </tr>
+    
+      <tr>
+        <td>Protocol Support</td>
+        <td>Custom RESP, Pub/Sub, Streams</td>
+        <td>AMQP, MQTT, STOMP</td>
+        <td>Kafka Protocol</td>
+        <td>HTTPS, AWS SDK</td>
+      </tr>
+    
+      <tr>
+        <td>Built-in Retry</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Consumer responsibility</td>
+        <td>No (use with Lambda, SQS for retries)</td>
+      </tr>
+    
+      <tr>
+        <td>Latency</td>
+        <td>Low</td>
+        <td>Low to Medium</td>
+        <td>Low (with batching)</td>
+        <td>Medium</td>
+      </tr>
+    
+      <tr>
+        <td>High Availability</td>
+        <td>Redis Sentinel / Cluster</td>
+        <td>Mirrored/Quorum Queues</td>
+        <td>Built-in replication</td>
+        <td>Managed by AWS</td>
+      </tr>
+    
+      <tr>
+        <td>Best For</td>
+        <td>Simple queues, caching, pub/sub</td>
+        <td>Decoupling microservices</td>
+        <td>Event streaming, log processing</td>
+        <td>Triggering distributed systems (fan-out)</td>
+      </tr>
+    
+    </table>
+    
+    
+</div></li>
+
+<li data-id="redis-q"><span class="faq-question green">
+  🐇 Redis
+  </span><div class="answer">
+
+    
+      <h1>🚀 Redis Interview Questions</h1>
+    
+      <div class="question">1. What is Redis?</div>
+      <div class="answer">Redis (Remote Dictionary Server) is an open-source, in-memory data structure store used as a database, cache, and message broker.</div>
+    
+      <div class="question">2. What are the main data types in Redis?</div>
+      <div class="answer">
+        - String<br>
+        - List<br>
+        - Set<br>
+        - Sorted Set<br>
+        - Hash<br>
+        - Bitmap, HyperLogLog, Stream, and Geospatial Indexes
+      </div>
+    
+      <div class="question">3. What is the default port for Redis?</div>
+      <div class="answer">6379</div>
+    
+      <div class="question">4. Is Redis single-threaded or multi-threaded?</div>
+      <div class="answer">Redis is single-threaded for commands, but supports multi-threaded I/O for performance since Redis 6.0.</div>
+    
+      <div class="question">5. What is the difference between Redis and Memcached?</div>
+      <div class="answer">
+        Redis supports complex data structures, persistence, and replication.<br>
+        Memcached is limited to simple key-value pairs with no persistence or advanced structures.
+      </div>
+    
+      <div class="question">6. What is a Redis keyspace?</div>
+      <div class="answer">A Redis keyspace refers to all keys in a Redis database. Redis supports multiple databases (default is DB 0).</div>
+    
+      <div class="question">7. What is TTL in Redis?</div>
+      <div class="answer">TTL (Time to Live) is the time (in seconds) a key will exist before being automatically deleted.</div>
+    
+      <div class="question">8. How do you persist data in Redis?</div>
+      <div class="answer">
+        Redis supports two types of persistence:<br>
+        - RDB (point-in-time snapshot)<br>
+        - AOF (Append-Only File that logs each write operation)
+      </div>
+    
+      <div class="question">9. What is Redis replication?</div>
+      <div class="answer">Redis supports master-slave replication to create read-only replicas for scalability and redundancy.</div>
+    
+      <div class="question">10. What is Redis Sentinel?</div>
+      <div class="answer">Sentinel provides high availability by monitoring Redis instances, promoting a slave to master on failure.</div>
+    
+      <div class="question">11. What is Redis Cluster?</div>
+      <div class="answer">Redis Cluster allows horizontal scaling by partitioning data across multiple nodes using hash slots.</div>
+    
+      <div class="question">12. What command is used to check TTL of a key?</div>
+      <div class="answer"><code>TTL key</code></div>
+    
+      <div class="question">13. How can you delete all keys in Redis?</div>
+      <div class="answer"><code>FLUSHALL</code> (for all DBs) or <code>FLUSHDB</code> (for current DB)</div>
+    
+      <div class="question">14. How do you make Redis threads safe?</div>
+      <div class="answer">Redis is single-threaded and thread-safe by default for client connections. Use connection pooling in multi-threaded clients.</div>
+    
+      <div class="question">15. What is pipelining in Redis?</div>
+      <div class="answer">Pipelining allows sending multiple commands without waiting for their replies, improving throughput.</div>
+    
+      <div class="question">16. What are pub/sub channels in Redis?</div>
+      <div class="answer">Redis supports publish/subscribe messaging where messages sent to a channel are received by all subscribers.</div>
+    
+      <div class="question">17. What is the difference between SCAN and KEYS?</div>
+      <div class="answer">
+        - KEYS returns all matching keys and can block the server.<br>
+        - SCAN is non-blocking and suitable for production usage.
+      </div>
+    
+      <div class="question">18. What is the maximum size of a Redis key or value?</div>
+      <div class="answer">The maximum key size is 512 MB. Same for values depending on data type and memory limits.</div>
+    
+      <div class="question">19. Can Redis be used for message queuing?</div>
+      <div class="answer">Yes, using lists (RPUSH + LPOP/BRPOP), streams, or pub/sub for real-time messaging patterns.</div>
+    
+      <div class="question">20. How do you monitor Redis?</div>
+      <div class="answer">Use commands like <code>INFO</code>, <code>MONITOR</code>, or external tools like RedisInsight, Prometheus, or Grafana.</div>
+    
+    </div></li>
+
+
+
+<li data-id="rabbitmq"><span class="faq-question green">
+  🐇 RabbitMQ
+  </span><div class="answer">
+
+
+  <div class="question">1. What is RabbitMQ?</div>
+  <div class="answer">RabbitMQ is an open-source message broker that enables applications to communicate asynchronously by sending messages via queues.</div>
+
+  <div class="question">2. What messaging protocol does RabbitMQ use?</div>
+  <div class="answer">RabbitMQ primarily uses AMQP (Advanced Message Queuing Protocol), but it also supports MQTT, STOMP, and HTTP via plugins.</div>
+
+  <div class="question">3. What are the main components of RabbitMQ?</div>
+  <div class="answer">
+    - Producer<br>
+    - Queue<br>
+    - Consumer<br>
+    - Exchange<br>
+    - Binding
+  </div>
+
+  <div class="question">4. What is an exchange in RabbitMQ?</div>
+  <div class="answer">An exchange routes messages to queues based on rules defined by bindings. Types: direct, topic, fanout, and headers.</div>
+
+  <div class="question">5. What is a binding?</div>
+  <div class="answer">A binding is a link between a queue and an exchange that defines how messages should be routed.</div>
+
+  <div class="question">6. What is a routing key?</div>
+  <div class="answer">A routing key is a string used by exchanges to determine how to route a message to queues.</div>
+
+  <div class="question">7. What is the difference between direct and fanout exchanges?</div>
+  <div class="answer">
+    - Direct: Routes messages to queues with an exact matching routing key.<br>
+    - Fanout: Broadcasts messages to all bound queues regardless of routing key.
+  </div>
+
+  <div class="question">8. What is a durable queue?</div>
+  <div class="answer">A durable queue survives broker restarts. Messages must also be marked as persistent for durability.</div>
+
+  <div class="question">9. What is the difference between persistent and transient messages?</div>
+  <div class="answer">Persistent messages are stored to disk and survive broker restarts. Transient messages are stored in memory only.</div>
+
+  <div class="question">10. What is a dead-letter exchange (DLX)?</div>
+  <div class="answer">A DLX is used to route messages that are not deliverable or have expired (e.g., rejected, TTL expired).</div>
+
+  <div class="question">11. What is message acknowledgment (ack)?</div>
+  <div class="answer">Acknowledgment is a signal sent by the consumer to inform the broker that a message was successfully processed.</div>
+
+  <div class="question">12. What happens if a message is not acknowledged?</div>
+  <div class="answer">The message is requeued and redelivered unless auto-ack is enabled or the message is rejected.</div>
+
+  <div class="question">13. What is prefetch count?</div>
+  <div class="answer">Prefetch count limits the number of unacknowledged messages sent to a consumer. It’s used for fair dispatching.</div>
+
+  <div class="question">14. How does RabbitMQ ensure message ordering?</div>
+  <div class="answer">RabbitMQ ensures ordering within a single queue. Messages are delivered in the order they arrive.</div>
+
+  <div class="question">15. What is the difference between a queue and an exchange?</div>
+  <div class="answer">Queues hold messages. Exchanges route messages to queues based on bindings and routing keys.</div>
+
+  <div class="question">16. How does RabbitMQ handle high availability?</div>
+  <div class="answer">Using mirrored queues (classic) or quorum queues (recommended), RabbitMQ replicates messages across nodes.</div>
+
+  <div class="question">17. What is a quorum queue?</div>
+  <div class="answer">A quorum queue replicates messages across multiple nodes using the Raft consensus algorithm. It replaces mirrored queues.</div>
+
+  <div class="question">18. Can RabbitMQ work with microservices?</div>
+  <div class="answer">Yes. RabbitMQ is commonly used in microservice architectures for asynchronous communication between services.</div>
+
+  <div class="question">19. How do you monitor RabbitMQ?</div>
+  <div class="answer">Using the RabbitMQ Management Plugin (UI & REST API), Prometheus exporters, or CLI tools like <code>rabbitmqctl</code>.</div>
+
+  <div class="question">20. What are common RabbitMQ client libraries?</div>
+  <div class="answer">
+    - Node.js: amqplib<br>
+    - Python: pika<br>
+    - Java: RabbitMQ Java Client<br>
+    - .NET: RabbitMQ .NET Client
+  </div>
+
+</body>
+</html>
+
+</div></li>
+
+
+
+
+<li data-id="kafka"><span class="faq-question green">
+  Kafka
+  </span><div class="answer">
+
+    <h1></h1>
+
+    <div class="question">1. What is Apache Kafka?</div>
+    <div class="answer">Kafka is a distributed event streaming platform used for high-performance data pipelines, streaming analytics, and event-driven applications.</div>
+  
+    <div class="question">2. What are the main components of Kafka?</div>
+    <div class="answer">
+      - Producer<br>
+      - Consumer<br>
+      - Broker<br>
+      - Topic<br>
+      - Partition<br>
+      - Zookeeper (optional for newer versions)
+    </div>
+  
+    <div class="question">3. What is a Kafka topic?</div>
+    <div class="answer">A topic is a category/feed name to which records are published. Topics are split into partitions for parallel processing.</div>
+  
+    <div class="question">4. What is a Kafka partition?</div>
+    <div class="answer">A partition is a sub-division of a topic. Each partition is an ordered, immutable sequence of records.</div>
+  
+    <div class="question">5. What ensures message ordering in Kafka?</div>
+    <div class="answer">Kafka guarantees ordering only within a single partition.</div>
+  
+    <div class="question">6. What is a Kafka broker?</div>
+    <div class="answer">A broker is a Kafka server that stores data and serves clients. A cluster has multiple brokers.</div>
+  
+    <div class="question">7. What is the role of Zookeeper in Kafka?</div>
+    <div class="answer">Zookeeper manages Kafka’s metadata, broker coordination, and leader election (older versions). Kafka 2.8+ can run without Zookeeper.</div>
+  
+    <div class="question">8. What is Kafka Producer?</div>
+    <div class="answer">A producer sends records (data) to a Kafka topic.</div>
+  
+    <div class="question">9. What is Kafka Consumer?</div>
+    <div class="answer">A consumer reads records from Kafka topics.</div>
+  
+    <div class="question">10. What is a Consumer Group?</div>
+    <div class="answer">A group of consumers that share the load of reading from topics. Each partition is read by only one consumer in the group.</div>
+  
+    <div class="question">11. How does Kafka ensure fault tolerance?</div>
+    <div class="answer">Through replication: each partition has replicas. If the leader fails, a follower takes over.</div>
+  
+    <div class="question">12. What is Kafka's retention policy?</div>
+    <div class="answer">Kafka retains messages for a configurable amount of time or until a storage size limit is reached, even if consumed.</div>
+  
+    <div class="question">13. How does Kafka achieve high throughput?</div>
+    <div class="answer">Through sequential disk writes, zero-copy, batching, and compression.</div>
+  
+    <div class="question">14. What are Kafka delivery semantics?</div>
+    <div class="answer">
+      - At most once<br>
+      - At least once<br>
+      - Exactly once (since Kafka 0.11+)
+    </div>
+  
+    <div class="question">15. What is idempotence in Kafka?</div>
+    <div class="answer">It ensures the same message is not duplicated if sent multiple times. Enabled via idempotent producers.</div>
+  
+    <div class="question">16. What is a Kafka offset?</div>
+    <div class="answer">A unique identifier of a record within a partition. Consumers track offsets to resume reading.</div>
+  
+    <div class="question">17. How is offset management done?</div>
+    <div class="answer">Offsets can be committed automatically or manually, and are stored in Kafka’s __consumer_offsets topic.</div>
+  
+    <div class="question">18. What are Kafka Streams?</div>
+    <div class="answer">Kafka Streams is a client library for building real-time applications using Kafka topics as input/output.</div>
+  
+    <div class="question">19. What is the difference between Kafka and a traditional message queue?</div>
+    <div class="answer">
+      Kafka stores data for a time period regardless of consumption and supports replaying messages.<br>
+      Queues typically delete messages once consumed.
+    </div>
+  
+    <div class="question">20. What is the role of schema registry in Kafka?</div>
+    <div class="answer">Schema registry ensures that producers and consumers agree on data format (e.g., using Avro schemas).</div>
+  
+</div></li>
+
+<li data-id="kafka"><span class="faq-question green">
+  Kafka Example***
+  </span><div class="answer">
+    <h1>✅ NestJS + KafkaJS with Online Kafka Server</h1>
+
+    <h2>📦 Prerequisites</h2>
+    <ul>
+      <li>Install NestJS CLI:</li>
+      <pre><code>npm i -g @nestjs/cli</code></pre>
+      <li>Install KafkaJS:</li>
+      <pre><code>npm install kafkajs</code></pre>
+      <li>Kafka server: Use Confluent Cloud or CloudKarafka (free tiers work)</li>
+    </ul>
+  
+    <h2>📁 Project Setup</h2>
+    <pre><code>nest new kafka-nestjs-app
+  cd kafka-nestjs-app
+  npm install kafkajs</code></pre>
+  
+    <h2>🛠️ Kafka Service File</h2>
+    <p><code>src/kafka.service.ts</code></p>
+    <pre><code>
+  import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+  import { Kafka, Producer, Consumer } from 'kafkajs';
+  
+  @Injectable()
+  export class KafkaService implements OnModuleInit, OnModuleDestroy {
+    private kafka: Kafka;
+    private producer: Producer;
+    private consumer: Consumer;
+  
+    async onModuleInit() {
+      this.kafka = new Kafka({
+        clientId: 'nestjs-client',
+        brokers: ['&lt;BROKER_URL&gt;'], // e.g. pkc-xxxx.gcp.confluent.cloud:9092
+        ssl: true,
+        sasl: {
+          mechanism: 'plain',
+          username: '&lt;API_KEY&gt;',
+          password: '&lt;API_SECRET&gt;',
+        },
+      });
+  
+      this.producer = this.kafka.producer();
+      await this.producer.connect();
+  
+      this.consumer = this.kafka.consumer({ groupId: 'nestjs-group' });
+      await this.consumer.connect();
+      await this.consumer.subscribe({ topic: 'test-topic', fromBeginning: true });
+  
+      await this.consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+          console.log(`Received: ${message.value.toString()}`);
+        },
+      });
+    }
+  
+    async sendMessage(topic: string, message: any) {
+      await this.producer.send({
+        topic,
+        messages: [{ value: JSON.stringify(message) }],
+      });
+    }
+  
+    async onModuleDestroy() {
+      await this.producer.disconnect();
+      await this.consumer.disconnect();
+    }
+  }
+    </code></pre>
+  
+    <h2>🧩 App Module</h2>
+    <p><code>src/app.module.ts</code></p>
+    <pre><code>
+  import { Module } from '@nestjs/common';
+  import { KafkaService } from './kafka.service';
+  
+  @Module({
+    providers: [KafkaService],
+  })
+  export class AppModule {}
+    </code></pre>
+  
+    <h2>🚀 App Controller</h2>
+    <p><code>src/app.controller.ts</code></p>
+    <pre><code>
+  import { Controller, Get } from '@nestjs/common';
+  import { KafkaService } from './kafka.service';
+  
+  @Controller()
+  export class AppController {
+    constructor(private readonly kafkaService: KafkaService) {}
+  
+    @Get('send')
+    async sendMessage() {
+      await this.kafkaService.sendMessage('test-topic', { message: 'Hello Kafka' });
+      return 'Message sent';
+    }
+  }
+    </code></pre>
+  
+    <h2>▶️ Run the App</h2>
+    <pre><code>npm run start</code></pre>
+    <p>Then visit <code>http://localhost:3000/send</code> to test Kafka message sending.</p>
+  
+    <h2>🔒 Tips</h2>
+    <ul>
+      <li>Make sure your Kafka broker supports SSL + SASL.</li>
+      <li>Replace <code>&lt;BROKER_URL&gt;</code>, <code>&lt;API_KEY&gt;</code>, <code>&lt;API_SECRET&gt;</code> with real credentials.</li>
+      <li>Use free cloud Kafka providers for convenience.</li>
+    </ul>
+  
+    <h2>📚 Resources</h2>
+    <ul>
+      <li><a href="https://docs.nestjs.com/microservices/kafka" target="_blank">NestJS Kafka Docs</a></li>
+      <li><a href="https://kafka.js.org/docs" target="_blank">KafkaJS Docs</a></li>
+      <li><a href="https://www.confluent.io/cloud/" target="_blank">Confluent Cloud</a></li>
+      <li><a href="https://www.cloudkarafka.com/" target="_blank">CloudKarafka</a></li>
+    </ul>
+  
+
+    </div></li>
+
+
+
+
+
+
+
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+      AWS Lambda
+      </span><div class="answer">
+      
+      <ol>
+        <li><strong>What is AWS Lambda?</strong></li>
+        <li><strong>What are the key features of AWS Lambda?</strong></li>
+        <li><strong>How does AWS Lambda pricing work?</strong></li>
+        <li><strong>What triggers can invoke a Lambda function?</strong></li>
+        <li><strong>What are the supported languages in AWS Lambda?</strong></li>
+        <li><strong>What is the maximum execution time of a Lambda function?</strong></li>
+        <li><strong>How do you monitor a Lambda function?</strong></li>
+        <li><strong>What is a cold start in AWS Lambda?</strong></li>
+        <li><strong>How can you reduce cold start time?</strong></li>
+        <li><strong>What is the difference between synchronous and asynchronous invocation?</strong></li>
+        <li><strong>How does concurrency work in Lambda?</strong></li>
+        <li><strong>What is the default memory limit and how can it be changed?</strong></li>
+        <li><strong>How do you handle errors in AWS Lambda?</strong></li>
+        <li><strong>Can a Lambda function call another Lambda function?</strong></li>
+        <li><strong>How do you version and alias a Lambda function?</strong></li>
+        <li><strong>What is Lambda@Edge?</strong></li>
+        <li><strong>What is the difference between Lambda and EC2?</strong></li>
+        <li><strong>How do you deploy a Lambda function?</strong></li>
+        <li><strong>How can environment variables be used in Lambda?</strong></li>
+        <li><strong>How does IAM relate to Lambda function permissions?</strong></li>
+        <li><strong>What is the Lambda execution role?</strong></li>
+        <li><strong>How can you connect Lambda to VPC?</strong></li>
+        <li><strong>How do you integrate AWS Lambda with API Gateway?</strong></li>
+        <li><strong>What is the use of the Lambda Layers feature?</strong></li>
+        <li><strong>What is the difference between Lambda and Step Functions?</strong></li>
+      </ol>
+      --------------------------------
+      </div></li>
+    
+      <li data-id="q_what_is_lambda">
+        <span class="faq-question">What is AWS Lambda?</span>
+        <div class="answer">
+          AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. You simply upload your function code, and Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_features">
+        <span class="faq-question">What are the key features of AWS Lambda?</span>
+        <div class="answer">
+          Key features of AWS Lambda include:
+          <ul>
+            <li>No server management</li>
+            <li>Automatic scaling</li>
+            <li>Sub-second metering (pay only for usage)</li>
+            <li>Event-driven invocation (triggers from over 200 AWS services)</li>
+            <li>Built-in fault tolerance</li>
+            <li>Supports environment variables, versioning, and aliases</li>
+            <li>Integration with VPC, Layers, and Container Images</li>
+          </ul>
+        </div>
+
+
+        <div class="answer">
+          AWS Lambda provides a powerful and flexible serverless compute platform. Its key features include:
+          <ul>
+            <li><strong>Event-Driven Execution:</strong> Automatically triggered by AWS services (e.g., S3, API Gateway, DynamoDB) or external events.</li>
+            <li><strong>No Server Management:</strong> No need to provision or manage infrastructure. AWS handles everything.</li>
+            <li><strong>Automatic Scaling:</strong> Lambda scales automatically with the number of incoming events.</li>
+            <li><strong>Pay-per-Use Pricing:</strong> Billed per millisecond based on the number of requests and compute time used.</li>
+            <li><strong>Supports Multiple Languages:</strong> Includes Node.js, Python, Go, Java, .NET, Ruby, and custom runtimes.</li>
+            <li><strong>Short-Lived Functions:</strong> Functions run up to 15 minutes and then terminate automatically.</li>
+            <li><strong>Built-in Monitoring:</strong> Integrated with CloudWatch for logs and metrics.</li>
+            <li><strong>Environment Variables:</strong> Store configuration and secrets per environment (e.g., dev, prod).</li>
+            <li><strong>Versioning & Aliases:</strong> Create immutable versions of code and route traffic with named aliases.</li>
+            <li><strong>VPC Support:</strong> Access private resources in a VPC securely.</li>
+            <li><strong>Provisioned Concurrency:</strong> Pre-warm instances to avoid cold starts for latency-sensitive workloads.</li>
+            <li><strong>Lambda Layers:</strong> Package and share libraries or dependencies across multiple functions.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_pricing">
+        <span class="faq-question">How does AWS Lambda pricing work?</span>
+        <div class="answer">
+          AWS Lambda charges are based on:
+          <ul>
+            <li><strong>Number of requests:</strong> First 1 million requests/month are free. After that, it's $0.20 per million requests.</li>
+            <li><strong>Duration:</strong> Billed per millisecond from the time your code begins executing until it returns or otherwise terminates. Depends on the memory allocated.</li>
+          </ul>
+          Example: If your function runs for 200ms and uses 128MB memory, you only pay for that exact duration and size.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_triggers">
+        <span class="faq-question">What triggers can invoke a Lambda function?</span>
+        <div class="answer">
+          Lambda can be triggered by various AWS services, including:
+          <ul>
+            <li>API Gateway (HTTP requests)</li>
+            <li>S3 (file uploads, deletions)</li>
+            <li>DynamoDB Streams</li>
+            <li>SNS (notifications)</li>
+            <li>SQS (queues)</li>
+            <li>CloudWatch Events & Logs</li>
+            <li>Cognito, Alexa Skills, EventBridge, etc.</li>
+          </ul>
+          Lambda can also be triggered manually using the AWS SDK or CLI.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_languages">
+        <span class="faq-question">What are the supported languages in AWS Lambda?</span>
+        <div class="answer">
+          AWS Lambda natively supports:
+          <ul>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>Java</li>
+            <li>Go</li>
+            <li>C# (.NET Core)</li>
+            <li>Ruby</li>
+          </ul>
+          It also supports custom runtimes and container images, allowing you to use any language.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_timeout">
+        <span class="faq-question">What is the maximum execution time of a Lambda function?</span>
+        <div class="answer">
+          The maximum timeout for a Lambda function is <strong>15 minutes (900 seconds)</strong> per invocation. You can configure the timeout in the Lambda function settings depending on your use case.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_monitoring">
+        <span class="faq-question">How do you monitor a Lambda function?</span>
+        <div class="answer">
+          Lambda integrates with AWS CloudWatch to provide monitoring:
+          <ul>
+            <li><strong>CloudWatch Logs:</strong> Automatically captures console output and errors.</li>
+            <li><strong>CloudWatch Metrics:</strong> Tracks invocation count, duration, error count, throttles, and more.</li>
+            <li><strong>CloudWatch Alarms:</strong> Trigger notifications based on metric thresholds.</li>
+            <li><strong>X-Ray:</strong> For distributed tracing and performance analysis.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_call_api_without_useeffect">
+        <span class="faq-question">What is a cold start in AWS Lambda?</span>
+        <div class="answer">
+          A cold start occurs when AWS needs to create a new container to run your Lambda function—for example, when there's no existing warm instance available. It includes the time taken to:
+          <ul>
+            <li>Provision the runtime container</li>
+            <li>Download your function code</li>
+            <li>Initialize dependencies</li>
+          </ul>
+          Cold starts introduce extra latency (usually 100ms–1s). They are more noticeable with VPC-configured or infrequently used functions.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_cold_start_optimization">
+        <span class="faq-question">How can you reduce cold start time?</span>
+        <div class="answer">
+          You can reduce cold start time in AWS Lambda by:
+          <ul>
+            <li>Using lighter runtimes like Node.js or Go (faster startup)</li>
+            <li>Minimizing initialization code and package size</li>
+            <li>Keeping functions warm using scheduled CloudWatch Events</li>
+            <li>Avoiding VPC connections unless required (or optimizing them)</li>
+            <li>Using Provisioned Concurrency (pre-warms containers to eliminate cold starts)</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_sync_async">
+        <span class="faq-question">What is the difference between synchronous and asynchronous invocation?</span>
+        <div class="answer">
+          <strong>Synchronous Invocation:</strong> Caller waits for the function to process and return a result. Example: API Gateway.<br />
+          <strong>Asynchronous Invocation:</strong> Caller sends the request and continues without waiting for a response. Example: S3 or SNS.<br />
+          <strong>Differences:</strong>
+          <ul>
+            <li>Synchronous = real-time; Asynchronous = event-based</li>
+            <li>Synchronous errors are returned immediately; asynchronous are logged</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_concurrency">
+        <span class="faq-question">How does concurrency work in Lambda?</span>
+        <div class="answer">
+          Concurrency is the number of instances that can run in parallel:
+          <ul>
+            <li><strong>Unreserved concurrency:</strong> Default limit shared across functions (e.g. 1000)</li>
+            <li><strong>Reserved concurrency:</strong> Guarantees a specific number of concurrent executions for a function</li>
+            <li><strong>Provisioned concurrency:</strong> Keeps containers initialized and ready to respond instantly</li>
+          </ul>
+          If concurrency limit is hit, excess requests are throttled.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_memory">
+        <span class="faq-question">What is the default memory limit and how can it be changed?</span>
+        <div class="answer">
+          <strong>Default Memory:</strong> 128 MB<br />
+          <strong>Range:</strong> 128 MB to 10,240 MB (10 GB), in 1 MB increments.<br />
+          You can change it from:
+          <ul>
+            <li>AWS Console &rarr; Lambda &rarr; Configuration &rarr; Memory</li>
+            <li>Or via CLI: <code>aws lambda update-function-configuration</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_errors">
+        <span class="faq-question">How do you handle errors in AWS Lambda?</span>
+        <div class="answer">
+          You can handle errors in Lambda using:
+          <ul>
+            <li><strong>Try-catch blocks:</strong> Handle exceptions in your code</li>
+            <li><strong>Return meaningful error responses (for synchronous calls)</strong></li>
+            <li><strong>Dead Letter Queues (DLQs):</strong> Capture failed async invocations</li>
+            <li><strong>CloudWatch Logs:</strong> View stack traces and error details</li>
+            <li><strong>Retries:</strong> Lambda automatically retries failed async events (2 times by default)</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_calls_lambda">
+        <span class="faq-question">Can a Lambda function call another Lambda function?</span>
+        <div class="answer">
+          Yes, a Lambda function can invoke another Lambda using the AWS SDK or AWS CLI. This is useful for microservice architectures or function chaining.<br />
+          Example in Node.js:
+          <pre><code>
+      const AWS = require('aws-sdk');
+      const lambda = new AWS.Lambda();
+      lambda.invoke({
+        FunctionName: 'anotherLambdaFunction',
+        Payload: JSON.stringify({ key: 'value' })
+      }, (err, data) => { ... });
+          </code></pre>
+          Make sure the calling Lambda has the IAM permission <code>lambda:InvokeFunction</code>.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_version_alias">
+        <span class="faq-question">How do you version and alias a Lambda function?</span>
+        <div class="answer">
+          <strong>Versioning:</strong> Every time you publish a function version, AWS creates an immutable snapshot of the code and configuration.<br />
+          <strong>Alias:</strong> Acts as a pointer to a specific version. Useful for traffic shifting (e.g., <code>prod</code>, <code>beta</code> aliases).<br />
+          Example:
+          <ul>
+            <li><code>$LATEST</code> → Draft code</li>
+            <li><code>1</code>, <code>2</code>, etc. → Published versions</li>
+            <li><code>alias: prod → version: 5</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_call_api_without_useeffect">
+        <span class="faq-question">What is Lambda@Edge?</span>
+        <div class="answer">
+          Lambda@Edge is an extension of AWS Lambda that lets you run functions at AWS edge locations. It's integrated with Amazon CloudFront and is used for:
+          <ul>
+            <li>Customizing CDN content before it's delivered</li>
+            <li>Implementing security/auth at the edge</li>
+            <li>Personalizing content based on headers, cookies, etc.</li>
+            <li>Modifying requests/responses without origin call</li>
+          </ul>
+          It improves performance and reduces latency by moving compute closer to the user.
+        </div>
+      </li>
+      
+    
+      <li data-id="q_lambda_vs_ec2">
+        <span class="faq-question">What is the difference between Lambda and EC2?</span>
+        <div class="answer">
+          <strong>AWS Lambda:</strong> Serverless, event-driven compute service. No server management; pay-per-invocation.<br />
+          <strong>EC2:</strong> Virtual server in the cloud. You manage OS, scaling, patching.<br /><br />
+          <strong>Key Differences:</strong>
+          <ul>
+            <li>Lambda is event-based; EC2 is instance-based</li>
+            <li>Lambda scales automatically; EC2 needs manual or auto-scaling setup</li>
+            <li>Lambda is billed per millisecond; EC2 is billed per second or hour</li>
+            <li>Lambda can't be used for long-running tasks (max 15 minutes); EC2 can run indefinitely</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_deploy">
+        <span class="faq-question">How do you deploy a Lambda function?</span>
+        <div class="answer">
+          You can deploy a Lambda function using:
+          <ul>
+            <li><strong>AWS Console:</strong> Upload .zip or use inline editor</li>
+            <li><strong>AWS CLI:</strong> Use <code>aws lambda create-function</code> or <code>update-function-code</code></li>
+            <li><strong>Infrastructure as Code:</strong> Tools like AWS SAM, Serverless Framework, Terraform, or CloudFormation</li>
+            <li><strong>CI/CD Pipelines:</strong> Using CodePipeline, GitHub Actions, or Jenkins</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_env">
+        <span class="faq-question">How can environment variables be used in Lambda?</span>
+        <div class="answer">
+          Lambda supports environment variables to:
+          <ul>
+            <li>Store config values (DB URLs, API keys, etc.)</li>
+            <li>Separate environment-specific settings (dev, test, prod)</li>
+          </ul>
+          <strong>Access:</strong> Use <code>process.env.VARIABLE_NAME</code> in your function code.<br />
+          <strong>Security:</strong> You can encrypt them using KMS and manage access with IAM policies.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_iam">
+        <span class="faq-question">How does IAM relate to Lambda function permissions?</span>
+        <div class="answer">
+          AWS IAM (Identity and Access Management) controls who can:
+          <ul>
+            <li>Create, modify, delete Lambda functions</li>
+            <li>Assign permissions to Lambda functions</li>
+            <li>Invoke functions or access resources Lambda interacts with</li>
+          </ul>
+          Lambda uses <strong>execution roles</strong> (IAM roles) to interact with other AWS services securely.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_exec_role">
+        <span class="faq-question">What is the Lambda execution role?</span>
+        <div class="answer">
+          The execution role is an IAM role assumed by the Lambda function at runtime. It defines:
+          <ul>
+            <li>Which AWS services the function can access (e.g., S3, DynamoDB)</li>
+            <li>Permission to write logs to CloudWatch</li>
+          </ul>
+          <strong>Policy Example:</strong>
+          <pre><code>{
+        "Effect": "Allow",
+        "Action": ["s3:GetObject", "logs:CreateLogStream"],
+        "Resource": "*"
+      }</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_vpc">
+        <span class="faq-question">How can you connect Lambda to VPC?</span>
+        <div class="answer">
+          Lambda can access private VPC resources (e.g., RDS, EC2) by assigning:
+          <ul>
+            <li>VPC ID</li>
+            <li>Subnets with NAT Gateway (for internet access)</li>
+            <li>Security groups (to control access)</li>
+          </ul>
+          This allows your Lambda to operate securely within your VPC.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_apigw">
+        <span class="faq-question">How do you integrate AWS Lambda with API Gateway?</span>
+        <div class="answer">
+          You can expose your Lambda function via REST or HTTP APIs using API Gateway:
+          <ul>
+            <li>Create a REST API in API Gateway</li>
+            <li>Define resources and methods (e.g., GET /users)</li>
+            <li>Set integration type as Lambda function</li>
+            <li>Deploy the API to a stage (e.g., /prod)</li>
+          </ul>
+          This setup allows clients to invoke Lambda functions over HTTPS.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_layers">
+        <span class="faq-question">What is the use of the Lambda Layers feature?</span>
+        <div class="answer">
+          Lambda Layers are a way to package and reuse shared code or dependencies across multiple functions. Use cases:
+          <ul>
+            <li>Third-party libraries (e.g., bcrypt, pandas)</li>
+            <li>Custom utility modules</li>
+            <li>Large binaries or compiled packages</li>
+          </ul>
+          <strong>Benefits:</strong> Reduces deployment size and duplication across functions.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_vs_stepfunctions">
+        <span class="faq-question">What is the difference between Lambda and Step Functions?</span>
+        <div class="answer">
+          <strong>AWS Lambda:</strong> Executes single tasks triggered by events.<br />
+          <strong>AWS Step Functions:</strong> Orchestrates multiple AWS services/functions in workflows with logic.<br />
+          <strong>Comparison:</strong>
+          <ul>
+            <li>Lambda = compute unit; Step Functions = workflow engine</li>
+            <li>Step Functions handle retries, timeouts, branching, error catching</li>
+            <li>Useful for building complex apps like ETL pipelines, order processing, etc.</li>
+          </ul>
+        </div>
+      </li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
 
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>    
 <li data-id="q3"><span class="faq-question">
@@ -2271,6 +3396,22 @@ return &lt;button onClick={fetchData}&gt;Fetch Data&lt;/button&gt;;
 
 Direct API calls in render are discouraged to avoid repeated calls on every render.
 </div></li>
+
+
+
+<li data-id="q_call_api_without_useeffect"><span class="faq-question222">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
+
+
+
+
+
+
+
+<li data-id="q_call_api_without_useeffect"><span class="faq-question232">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
+<li data-id="q_call_api_without_useeffect"><span class="faq-question234234">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
 
 
 </ul>
