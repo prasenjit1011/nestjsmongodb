@@ -1391,6 +1391,11 @@ Explain how Buffer works in Node.js.
 </div></li>
 
 
+
+
+
+
+
 <li data-id="q_ts"><span class="faq-question green">
 TypeScript?
 </span><div class="answer">
@@ -2798,6 +2803,414 @@ DB Indexing
 
 
 
+
+
+
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
+      AWS Lambda
+      </span><div class="answer">
+      
+      <ol>
+        <li><strong>What is AWS Lambda?</strong></li>
+        <li><strong>What are the key features of AWS Lambda?</strong></li>
+        <li><strong>How does AWS Lambda pricing work?</strong></li>
+        <li><strong>What triggers can invoke a Lambda function?</strong></li>
+        <li><strong>What are the supported languages in AWS Lambda?</strong></li>
+        <li><strong>What is the maximum execution time of a Lambda function?</strong></li>
+        <li><strong>How do you monitor a Lambda function?</strong></li>
+        <li><strong>What is a cold start in AWS Lambda?</strong></li>
+        <li><strong>How can you reduce cold start time?</strong></li>
+        <li><strong>What is the difference between synchronous and asynchronous invocation?</strong></li>
+        <li><strong>How does concurrency work in Lambda?</strong></li>
+        <li><strong>What is the default memory limit and how can it be changed?</strong></li>
+        <li><strong>How do you handle errors in AWS Lambda?</strong></li>
+        <li><strong>Can a Lambda function call another Lambda function?</strong></li>
+        <li><strong>How do you version and alias a Lambda function?</strong></li>
+        <li><strong>What is Lambda@Edge?</strong></li>
+        <li><strong>What is the difference between Lambda and EC2?</strong></li>
+        <li><strong>How do you deploy a Lambda function?</strong></li>
+        <li><strong>How can environment variables be used in Lambda?</strong></li>
+        <li><strong>How does IAM relate to Lambda function permissions?</strong></li>
+        <li><strong>What is the Lambda execution role?</strong></li>
+        <li><strong>How can you connect Lambda to VPC?</strong></li>
+        <li><strong>How do you integrate AWS Lambda with API Gateway?</strong></li>
+        <li><strong>What is the use of the Lambda Layers feature?</strong></li>
+        <li><strong>What is the difference between Lambda and Step Functions?</strong></li>
+      </ol>
+      --------------------------------
+      </div></li>
+    
+      <li data-id="q_what_is_lambda">
+        <span class="faq-question">What is AWS Lambda?</span>
+        <div class="answer">
+          AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. You simply upload your function code, and Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_features">
+        <span class="faq-question">What are the key features of AWS Lambda?</span>
+        <div class="answer">
+          Key features of AWS Lambda include:
+          <ul>
+            <li>No server management</li>
+            <li>Automatic scaling</li>
+            <li>Sub-second metering (pay only for usage)</li>
+            <li>Event-driven invocation (triggers from over 200 AWS services)</li>
+            <li>Built-in fault tolerance</li>
+            <li>Supports environment variables, versioning, and aliases</li>
+            <li>Integration with VPC, Layers, and Container Images</li>
+          </ul>
+        </div>
+
+
+        <div class="answer">
+          AWS Lambda provides a powerful and flexible serverless compute platform. Its key features include:
+          <ul>
+            <li><strong>Event-Driven Execution:</strong> Automatically triggered by AWS services (e.g., S3, API Gateway, DynamoDB) or external events.</li>
+            <li><strong>No Server Management:</strong> No need to provision or manage infrastructure. AWS handles everything.</li>
+            <li><strong>Automatic Scaling:</strong> Lambda scales automatically with the number of incoming events.</li>
+            <li><strong>Pay-per-Use Pricing:</strong> Billed per millisecond based on the number of requests and compute time used.</li>
+            <li><strong>Supports Multiple Languages:</strong> Includes Node.js, Python, Go, Java, .NET, Ruby, and custom runtimes.</li>
+            <li><strong>Short-Lived Functions:</strong> Functions run up to 15 minutes and then terminate automatically.</li>
+            <li><strong>Built-in Monitoring:</strong> Integrated with CloudWatch for logs and metrics.</li>
+            <li><strong>Environment Variables:</strong> Store configuration and secrets per environment (e.g., dev, prod).</li>
+            <li><strong>Versioning & Aliases:</strong> Create immutable versions of code and route traffic with named aliases.</li>
+            <li><strong>VPC Support:</strong> Access private resources in a VPC securely.</li>
+            <li><strong>Provisioned Concurrency:</strong> Pre-warm instances to avoid cold starts for latency-sensitive workloads.</li>
+            <li><strong>Lambda Layers:</strong> Package and share libraries or dependencies across multiple functions.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_pricing">
+        <span class="faq-question">How does AWS Lambda pricing work?</span>
+        <div class="answer">
+          AWS Lambda charges are based on:
+          <ul>
+            <li><strong>Number of requests:</strong> First 1 million requests/month are free. After that, it's $0.20 per million requests.</li>
+            <li><strong>Duration:</strong> Billed per millisecond from the time your code begins executing until it returns or otherwise terminates. Depends on the memory allocated.</li>
+          </ul>
+          Example: If your function runs for 200ms and uses 128MB memory, you only pay for that exact duration and size.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_triggers">
+        <span class="faq-question">What triggers can invoke a Lambda function?</span>
+        <div class="answer">
+          Lambda can be triggered by various AWS services, including:
+          <ul>
+            <li>API Gateway (HTTP requests)</li>
+            <li>S3 (file uploads, deletions)</li>
+            <li>DynamoDB Streams</li>
+            <li>SNS (notifications)</li>
+            <li>SQS (queues)</li>
+            <li>CloudWatch Events & Logs</li>
+            <li>Cognito, Alexa Skills, EventBridge, etc.</li>
+          </ul>
+          Lambda can also be triggered manually using the AWS SDK or CLI.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_languages">
+        <span class="faq-question">What are the supported languages in AWS Lambda?</span>
+        <div class="answer">
+          AWS Lambda natively supports:
+          <ul>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>Java</li>
+            <li>Go</li>
+            <li>C# (.NET Core)</li>
+            <li>Ruby</li>
+          </ul>
+          It also supports custom runtimes and container images, allowing you to use any language.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_timeout">
+        <span class="faq-question">What is the maximum execution time of a Lambda function?</span>
+        <div class="answer">
+          The maximum timeout for a Lambda function is <strong>15 minutes (900 seconds)</strong> per invocation. You can configure the timeout in the Lambda function settings depending on your use case.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_monitoring">
+        <span class="faq-question">How do you monitor a Lambda function?</span>
+        <div class="answer">
+          Lambda integrates with AWS CloudWatch to provide monitoring:
+          <ul>
+            <li><strong>CloudWatch Logs:</strong> Automatically captures console output and errors.</li>
+            <li><strong>CloudWatch Metrics:</strong> Tracks invocation count, duration, error count, throttles, and more.</li>
+            <li><strong>CloudWatch Alarms:</strong> Trigger notifications based on metric thresholds.</li>
+            <li><strong>X-Ray:</strong> For distributed tracing and performance analysis.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_call_api_without_useeffect">
+        <span class="faq-question">What is a cold start in AWS Lambda?</span>
+        <div class="answer">
+          A cold start occurs when AWS needs to create a new container to run your Lambda function—for example, when there's no existing warm instance available. It includes the time taken to:
+          <ul>
+            <li>Provision the runtime container</li>
+            <li>Download your function code</li>
+            <li>Initialize dependencies</li>
+          </ul>
+          Cold starts introduce extra latency (usually 100ms–1s). They are more noticeable with VPC-configured or infrequently used functions.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_cold_start_optimization">
+        <span class="faq-question">How can you reduce cold start time?</span>
+        <div class="answer">
+          You can reduce cold start time in AWS Lambda by:
+          <ul>
+            <li>Using lighter runtimes like Node.js or Go (faster startup)</li>
+            <li>Minimizing initialization code and package size</li>
+            <li>Keeping functions warm using scheduled CloudWatch Events</li>
+            <li>Avoiding VPC connections unless required (or optimizing them)</li>
+            <li>Using Provisioned Concurrency (pre-warms containers to eliminate cold starts)</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_sync_async">
+        <span class="faq-question">What is the difference between synchronous and asynchronous invocation?</span>
+        <div class="answer">
+          <strong>Synchronous Invocation:</strong> Caller waits for the function to process and return a result. Example: API Gateway.<br />
+          <strong>Asynchronous Invocation:</strong> Caller sends the request and continues without waiting for a response. Example: S3 or SNS.<br />
+          <strong>Differences:</strong>
+          <ul>
+            <li>Synchronous = real-time; Asynchronous = event-based</li>
+            <li>Synchronous errors are returned immediately; asynchronous are logged</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_concurrency">
+        <span class="faq-question">How does concurrency work in Lambda?</span>
+        <div class="answer">
+          Concurrency is the number of instances that can run in parallel:
+          <ul>
+            <li><strong>Unreserved concurrency:</strong> Default limit shared across functions (e.g. 1000)</li>
+            <li><strong>Reserved concurrency:</strong> Guarantees a specific number of concurrent executions for a function</li>
+            <li><strong>Provisioned concurrency:</strong> Keeps containers initialized and ready to respond instantly</li>
+          </ul>
+          If concurrency limit is hit, excess requests are throttled.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_memory">
+        <span class="faq-question">What is the default memory limit and how can it be changed?</span>
+        <div class="answer">
+          <strong>Default Memory:</strong> 128 MB<br />
+          <strong>Range:</strong> 128 MB to 10,240 MB (10 GB), in 1 MB increments.<br />
+          You can change it from:
+          <ul>
+            <li>AWS Console &rarr; Lambda &rarr; Configuration &rarr; Memory</li>
+            <li>Or via CLI: <code>aws lambda update-function-configuration</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_errors">
+        <span class="faq-question">How do you handle errors in AWS Lambda?</span>
+        <div class="answer">
+          You can handle errors in Lambda using:
+          <ul>
+            <li><strong>Try-catch blocks:</strong> Handle exceptions in your code</li>
+            <li><strong>Return meaningful error responses (for synchronous calls)</strong></li>
+            <li><strong>Dead Letter Queues (DLQs):</strong> Capture failed async invocations</li>
+            <li><strong>CloudWatch Logs:</strong> View stack traces and error details</li>
+            <li><strong>Retries:</strong> Lambda automatically retries failed async events (2 times by default)</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_calls_lambda">
+        <span class="faq-question">Can a Lambda function call another Lambda function?</span>
+        <div class="answer">
+          Yes, a Lambda function can invoke another Lambda using the AWS SDK or AWS CLI. This is useful for microservice architectures or function chaining.<br />
+          Example in Node.js:
+          <pre><code>
+      const AWS = require('aws-sdk');
+      const lambda = new AWS.Lambda();
+      lambda.invoke({
+        FunctionName: 'anotherLambdaFunction',
+        Payload: JSON.stringify({ key: 'value' })
+      }, (err, data) => { ... });
+          </code></pre>
+          Make sure the calling Lambda has the IAM permission <code>lambda:InvokeFunction</code>.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_version_alias">
+        <span class="faq-question">How do you version and alias a Lambda function?</span>
+        <div class="answer">
+          <strong>Versioning:</strong> Every time you publish a function version, AWS creates an immutable snapshot of the code and configuration.<br />
+          <strong>Alias:</strong> Acts as a pointer to a specific version. Useful for traffic shifting (e.g., <code>prod</code>, <code>beta</code> aliases).<br />
+          Example:
+          <ul>
+            <li><code>$LATEST</code> → Draft code</li>
+            <li><code>1</code>, <code>2</code>, etc. → Published versions</li>
+            <li><code>alias: prod → version: 5</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_call_api_without_useeffect">
+        <span class="faq-question">What is Lambda@Edge?</span>
+        <div class="answer">
+          Lambda@Edge is an extension of AWS Lambda that lets you run functions at AWS edge locations. It's integrated with Amazon CloudFront and is used for:
+          <ul>
+            <li>Customizing CDN content before it's delivered</li>
+            <li>Implementing security/auth at the edge</li>
+            <li>Personalizing content based on headers, cookies, etc.</li>
+            <li>Modifying requests/responses without origin call</li>
+          </ul>
+          It improves performance and reduces latency by moving compute closer to the user.
+        </div>
+      </li>
+      
+    
+      <li data-id="q_lambda_vs_ec2">
+        <span class="faq-question">What is the difference between Lambda and EC2?</span>
+        <div class="answer">
+          <strong>AWS Lambda:</strong> Serverless, event-driven compute service. No server management; pay-per-invocation.<br />
+          <strong>EC2:</strong> Virtual server in the cloud. You manage OS, scaling, patching.<br /><br />
+          <strong>Key Differences:</strong>
+          <ul>
+            <li>Lambda is event-based; EC2 is instance-based</li>
+            <li>Lambda scales automatically; EC2 needs manual or auto-scaling setup</li>
+            <li>Lambda is billed per millisecond; EC2 is billed per second or hour</li>
+            <li>Lambda can't be used for long-running tasks (max 15 minutes); EC2 can run indefinitely</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_deploy">
+        <span class="faq-question">How do you deploy a Lambda function?</span>
+        <div class="answer">
+          You can deploy a Lambda function using:
+          <ul>
+            <li><strong>AWS Console:</strong> Upload .zip or use inline editor</li>
+            <li><strong>AWS CLI:</strong> Use <code>aws lambda create-function</code> or <code>update-function-code</code></li>
+            <li><strong>Infrastructure as Code:</strong> Tools like AWS SAM, Serverless Framework, Terraform, or CloudFormation</li>
+            <li><strong>CI/CD Pipelines:</strong> Using CodePipeline, GitHub Actions, or Jenkins</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_env">
+        <span class="faq-question">How can environment variables be used in Lambda?</span>
+        <div class="answer">
+          Lambda supports environment variables to:
+          <ul>
+            <li>Store config values (DB URLs, API keys, etc.)</li>
+            <li>Separate environment-specific settings (dev, test, prod)</li>
+          </ul>
+          <strong>Access:</strong> Use <code>process.env.VARIABLE_NAME</code> in your function code.<br />
+          <strong>Security:</strong> You can encrypt them using KMS and manage access with IAM policies.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_iam">
+        <span class="faq-question">How does IAM relate to Lambda function permissions?</span>
+        <div class="answer">
+          AWS IAM (Identity and Access Management) controls who can:
+          <ul>
+            <li>Create, modify, delete Lambda functions</li>
+            <li>Assign permissions to Lambda functions</li>
+            <li>Invoke functions or access resources Lambda interacts with</li>
+          </ul>
+          Lambda uses <strong>execution roles</strong> (IAM roles) to interact with other AWS services securely.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_exec_role">
+        <span class="faq-question">What is the Lambda execution role?</span>
+        <div class="answer">
+          The execution role is an IAM role assumed by the Lambda function at runtime. It defines:
+          <ul>
+            <li>Which AWS services the function can access (e.g., S3, DynamoDB)</li>
+            <li>Permission to write logs to CloudWatch</li>
+          </ul>
+          <strong>Policy Example:</strong>
+          <pre><code>{
+        "Effect": "Allow",
+        "Action": ["s3:GetObject", "logs:CreateLogStream"],
+        "Resource": "*"
+      }</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_vpc">
+        <span class="faq-question">How can you connect Lambda to VPC?</span>
+        <div class="answer">
+          Lambda can access private VPC resources (e.g., RDS, EC2) by assigning:
+          <ul>
+            <li>VPC ID</li>
+            <li>Subnets with NAT Gateway (for internet access)</li>
+            <li>Security groups (to control access)</li>
+          </ul>
+          This allows your Lambda to operate securely within your VPC.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_apigw">
+        <span class="faq-question">How do you integrate AWS Lambda with API Gateway?</span>
+        <div class="answer">
+          You can expose your Lambda function via REST or HTTP APIs using API Gateway:
+          <ul>
+            <li>Create a REST API in API Gateway</li>
+            <li>Define resources and methods (e.g., GET /users)</li>
+            <li>Set integration type as Lambda function</li>
+            <li>Deploy the API to a stage (e.g., /prod)</li>
+          </ul>
+          This setup allows clients to invoke Lambda functions over HTTPS.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_layers">
+        <span class="faq-question">What is the use of the Lambda Layers feature?</span>
+        <div class="answer">
+          Lambda Layers are a way to package and reuse shared code or dependencies across multiple functions. Use cases:
+          <ul>
+            <li>Third-party libraries (e.g., bcrypt, pandas)</li>
+            <li>Custom utility modules</li>
+            <li>Large binaries or compiled packages</li>
+          </ul>
+          <strong>Benefits:</strong> Reduces deployment size and duplication across functions.
+        </div>
+      </li>
+      
+      <li data-id="q_lambda_vs_stepfunctions">
+        <span class="faq-question">What is the difference between Lambda and Step Functions?</span>
+        <div class="answer">
+          <strong>AWS Lambda:</strong> Executes single tasks triggered by events.<br />
+          <strong>AWS Step Functions:</strong> Orchestrates multiple AWS services/functions in workflows with logic.<br />
+          <strong>Comparison:</strong>
+          <ul>
+            <li>Lambda = compute unit; Step Functions = workflow engine</li>
+            <li>Step Functions handle retries, timeouts, branching, error catching</li>
+            <li>Useful for building complex apps like ETL pipelines, order processing, etc.</li>
+          </ul>
+        </div>
+      </li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
 <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>    
 <li data-id="q3"><span class="faq-question">
 a == b ?
@@ -2983,6 +3396,22 @@ return &lt;button onClick={fetchData}&gt;Fetch Data&lt;/button&gt;;
 
 Direct API calls in render are discouraged to avoid repeated calls on every render.
 </div></li>
+
+
+
+<li data-id="q_call_api_without_useeffect"><span class="faq-question222">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
+
+
+
+
+
+
+
+<li data-id="q_call_api_without_useeffect"><span class="faq-question232">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
+<li data-id="q_call_api_without_useeffect"><span class="faq-question234234">------------------------------------------<br />-----------------------------
+</span><div class="answer"></div></li>
 
 
 </ul>
