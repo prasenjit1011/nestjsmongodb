@@ -20,7 +20,7 @@ async function bootstrap() {
   app.use(graphqlUploadExpress({ maxFileSize: 10_000_000, maxFiles: 1 }));
   app.enableCors({  origin: '*',  credentials: true });
 
-  await app.listen(process.env.PORT);
+  await app.listen(process.env.PORT ?? 4001);
 
   console.clear();
   var dtd = new Date;

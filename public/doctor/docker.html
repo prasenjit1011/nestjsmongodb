@@ -1,122 +1,26 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="100" alt="Nest Logo" /></a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FAQ</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
 
-#####  01. Important command list to setup project CRUD 
-```bash
+  <a href="/doctor/index.html">Nodejs</a> &nbsp; 
+  <a href="/doctor/react.html">React</a> &nbsp; 
+  <a href="/doctor/docker.html">Docker</a> &nbsp; 
+  <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
+  <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+  
+  <br /><br />
 
-# npm i -g nestjs/cli
-# nest new projectname
-# npm i -g dotenv-cli
-# npm i class-validator class-transformer cookie-parser 
-# npm i @types/cookie-parser @nestjs/throttler @nestjs/mapped-types
-# npm i --save @nestjs/mongoose mongoose
-# npm i --save @nestjs/typeorm typeorm mysql2
+    
+################################################################################################<br /><br />
 
-# nest g resource users
-# nest g module users
-# nest g controller users
-# nest g service users
-
-# CICD
-# rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
-```
-
-#####  02. Redis + RabbitMQ + Websocket + WebRTC + Video Streaming with standalone HTML file client.html
-```bash
-# 1. RabbitMQ Messaging system controlled by backend ( http://localhost:3001/ )
-# 2. Chat System ( client.html )
-# 3. Pie Chart ( client-pie-chart.html )
-# 4. WebRTC  ( webrtc.html )
-# 5. Video Recording ( Branch : video_record )
-
-```
-
-#####  03. NestJS + Mongoose + GraphQL + JWT Auth + Upload File using GraphQL + RestAPI with middleware and interceptor, Deploy project in AWS Lambda with CI/CD.
-```bash
-
-### 1.  Country <-> State <-> District <-> Company <-> Employee 
-### 2.  Upload File/Image for employee CRUD
-### 3.  Auth : User, AuthGuards : Product 
-### 4.  Add : mutation, Listing : query
-### 5.  AWS Lambda, SNS, SQS, CI/CD
-
-### Start :   CRUD ( Country, Auth ) ###
-### Listing : Country -> State -> District -> Company 
-### Company -> District -> State -> Country
-### stateDetails, districtDetails, companyDetails
-
-### RestAPI for User Module
-### query { countryDetails  {  name, stateDetails { name, districtDetails { name, companyDetails { name, employeeDetails{ name }}}}}}
-### query { employeeDetails {  name, company { name, district { name, state { name, country { name }}}}}}
-### query { companyDetails  { name, district { name, state { name, country { name }}}}}
-
-
-### Add, Update, Delete : CRUD ( Country ) ###
-
-# mutation {  createCountry   (input: { name: "India" }){ id, name }}
-# mutation {  createState     (input: { name: "Gujrat",     countryId:"country_Id" }){id, name }}
-# mutation {  createDistrict  (input: { name: "Ahmadabad",  stateId:"state_Id" }){id, name }}
-# mutation {  createCompany   (input: { name: "CO-Adani",   districtId:"district_Id" }){ id, name }}
-# mutation {  createEmployee  (input: { name: "EM-Riyan",   companyId:"company_Id" }){id, name }}
-# mutation {  updateEmployee(input: { name: "Baby Riyan",   id: "empID" }){ id, name }}
-# mutation {  deleteEmployee(id: "empID")}
-
-### Auth ###
-# mutation {  createUser( username: "Karim", password: "12345") {username, password }}
-# mutation {  login(username: "Karim", password: "12345")}
-
-
-### PostMan : Create employee with image #####################
-# URL : http://localhost:3003/graphql
-# Method : POST
-# 1. type : text, key : operations
-# {"query":"mutation($file: Upload!) { createEmployee(input: { name: \"Aluni\", companyId: \"681efb59c83fffd9c97e69f7\" }, file: $file) { id name image } }", "variables": {"file": null}}
-# 2. type : text, key : map
-# {"0": ["variables.file"]}
-# 3. type : file, key : 0
-# SELECT FILE
-
-
-### Step-by-Step to Add Headers: ###
-### Auth ###
-
-# Step-by-Step to Add Headers:
-# Open your GraphQL Playground (or your GraphQL UI).
-# Look for a "Headers" section.
-# In GraphQL Playground:
-# You will see two panels — Query on the left, HTTP HEADERS tab at the bottom-right.
-# Click on the HTTP HEADERS tab (bottom-right or side tab).
-# Paste your JWT Token in JSON format like:
-# {"Authorization": "Bearer your_jwt_token_here"  }
-
-#########
-# mutation {  createUser( username: "Karim", password: "12345") {username, password }}
-# mutation {  login(username: "Karim", password: "12345")}
-
-### End : CRUD ( Country, Auth ) ###
-### Completed #####
-
-###############################################################
-```
-##### GraphQL with ReactJS
-```bash
-# GraphQL with ReactJS
-# App.jsx
-# import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-# const client = new ApolloClient({uri: "http://localhost:3001/graphql", cache: new InMemoryCache()});
-# <ApolloProvider client={client}><CountryList /></ApolloProvider?
-
-# CountryList.jsx
-# import { useQuery, gql } from "@apollo/client";
-# const GET_COUNTRIES = gql`query {countryDetails {id, name, stateDetails {id, name}}}`;
-# const { data, loading, error } = useQuery(GET_COUNTRIES);
-
-```
-
-##### Docker Setup Process ###
-```bash
 ```bash
 ### Start : Dockerfile ###
 FROM ubuntu
@@ -133,7 +37,7 @@ EXPOSE 80/tcp
 EXPOSE 80/udp
 
 ### End : Dockerfile ###
-
+<br /><br />
 ### Start : docker-compose.yml ###
 ### apt install docker-compose
 
@@ -160,7 +64,7 @@ volumes:
 
 
 ### End : docker-compose.yml ###
-
+<br /><br />
 
 
 ### For Windows ###
@@ -355,12 +259,8 @@ docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
 ### CMD : *** tcp, udp, DNAT, SNAT ? : iptables-legacy-save
 ### CMD : Embedded DNS server
 
-```
 
-
-### Docker Network:
-
-```bash
+############################################################################################3333333
 ```bash
 
 docker images
@@ -526,38 +426,6 @@ docker run -d -p 27017:27017 --network my-net --name mongo mongo
 
 docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:01
 
-```
-
-##### Other 
-```bash
-# aaaabbccccddccffaaccbbf => 
-# a4b2c3d3
-# { a: 6, b: 4, c: 8, d: 2, f: 3 }
-
-# "I Love Riyan" => "I evoL nayiR"
-# Anagrams : "listen", "silent" => true
-# isPalindrome : madam : true
-
-
-```
-
-##### Other
-```bash
-# Source Code Optimization
-# git remote set-url origin git@github.com:prasenjit1011/NodeJSMongoDBMaster.git
-# clinic doctor -- node app.js
-
-clear
-rm -rf node_modules package-lock.json
-npm cache clean --force
-npm i
-git status
-git commit -am "C 123"
-git push --set-upstream origin lambda_01_cicd_04
-
-"@golevelup/nestjs-rabbitmq": "^6.0.0",
-"@nestjs/serve-static": "^4.0.0",
-
-```
-
-
+<br /><br />
+###########################################################################<br />
+</body></html>

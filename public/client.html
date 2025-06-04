@@ -1,34 +1,58 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Chat Client</title>
-  </head>
-  <body>
-    <div>
-      <a href="/webrtc.html">WebRTC</a> &nbsp; &nbsp;
-      <a href="/client.html">Message with Video Streaming</a> &nbsp; &nbsp;
-      <a href="/client-pie-chart.html">Message with PIE Chart</a> &nbsp; &nbsp;
-      <a href="/">Message using Controller</a>
-    </div>
-    <div style="width: 30%; float: left;">
-      <h2>-: Watch Video, PORT : 3001 :-</h2>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello, World!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+    button{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-blue-500 text-white min-h-screen p-6">
+  <div class="flex flex-wrap gap-6 bg-gray-100 p-4 rounded shadow-md text-blue-700 font-semibold">
+    <a href="/webrtc.html" class="hover:underline hover:text-blue-900">WebRTC</a>
+    <a href="/client.html" class="hover:underline hover:text-blue-900">Message with Video Streaming</a>
+    <a href="/client-pie-chart.html" class="hover:underline hover:text-blue-900">Message with PIE Chart</a>
+    <a href="/" class="hover:underline hover:text-blue-900">Message using Controller</a>
+    <a href="/doctor" target="_blank" class="hover:underline hover:text-blue-900">Documents</a>
+  </div>
+  <div class="flex flex-col md:flex-col lg:flex-row">
+    <div class="w-full lg:w-1/4 bg-blue-600 p-4 text-white">
+
+      <h2>-: Watch Video, PORT : 8031 :-</h2>
+      <h5>-: Chck Video Path :- </h5>
       <video width="420" controls>
-        <source src="http://localhost:3001/video" type="video/mp4">
+        <source src="http://localhost:8031/video" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+      <h5>-: path.join(__dirname, '../../../video/v1.mp4') </h5>
+      <h5>-: /home/riyan/myproject/video/v1.mp4 </h5>
     </div>
-    <div style="width: 60%; float: right;">
-      <h2>WebSocket Chat, PORT : 3001</h2>
+    <div class="w-full lg:w-3/4 bg-blue-400 p-4 text-white">
+
+      <h2>WebSocket Chat, PORT : 8031</h2>
       <h5 id="status">Status : Not Connected</h5>
       <h5 id="randnum">Random : <a href="/" target="_blank">Click Me For Emit Event</a></a></h5>
-      <input id="msg" placeholder="Enter message" />
-      <button onclick="send()">Send</button>
-      <ul id="chat"></ul>
+      <input id="msg" placeholder="Enter message" class="text-black p-2 rounded" />
+      <button 
+        onclick="send()"
+        class="btn-send bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300"
+      >Send</button>
+      <ul id="chat"></ul>   
+
+
     </div>
+  </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-      const socket = io('http://localhost:3001');
+      const socket = io('http://localhost:8031');
 
       socket.on('connect', () => {
         $('#status').html('Status : Connected');
@@ -53,5 +77,8 @@
         }
       }
     </script>
-  </body>
+
+  <p id="currentTime" class="mt-4 text-center text-gray-700"></p>
+  <script src="script.js"></script>
+</body>
 </html>
