@@ -8,6 +8,13 @@ body {
       padding: 10px;
       border-radius: 5px;
       overflow-x: auto;
+
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+
     }
     table {
       width: 100%;
