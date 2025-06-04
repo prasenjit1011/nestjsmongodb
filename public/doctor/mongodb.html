@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MongoDB</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a href="/doctor/index.html">Nodejs</a> &nbsp; 
+<a href="/doctor/react.html">React</a> &nbsp; 
+<a href="/doctor/docker.html">Docker</a> &nbsp; 
+<a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
+<a href="/doctor/cmd.html">CMD</a> &nbsp; 
+<a href="/doctor/kafka.html">Kafka</a> &nbsp; 
+<a href="kafka-interview.html">Kafka Interview</a> &nbsp; 
+<a href="mongodb.html">Mongo DB</a> &nbsp; 
+
+
+<ul class="faq">
+<li data-id="q300"><span class="faq-question">
+Mongo DB Question List
+</span><div class="answer">
+<ol>
+    <li><strong>What is MongoDB</strong></li>
+    <li><strong>What are the key features of MongoDB?</strong></li>
+    <li><strong>What is a Document in MongoDB?</strong></li>
+    <li><strong>What is a Collection?</strong></li>
+    <li><strong>How is MongoDB different from SQL databases?</strong></li>
+    <li><strong>What is BSON in MongoDB?</strong></li>
+    <li><strong>What is the default port of MongoDB?</strong></li>
+    <li><strong>Explain the structure of a MongoDB document.</strong></li>
+    <li><strong>How do you create a database in MongoDB?</strong></li>
+    <li><strong>How do you insert a document into a collection?</strong></li>
+  
+    <li><strong>What are indexes in MongoDB?</strong></li>
+    <li><strong>What types of indexes does MongoDB support?</strong></li>
+    <li><strong>How does MongoDB ensure performance with large datasets?</strong></li>
+    <li><strong>What is a replica set?</strong></li>
+    <li><strong>What is sharding in MongoDB?</strong></li>
+    <li><strong>What is the aggregation framework?</strong></li>
+    <li><strong>Difference between find() and findOne()?</strong></li>
+    <li><strong>Explain the purpose of $match, $group, and $project in aggregation.</strong></li>
+    <li><strong>How do you update multiple documents at once?</strong></li>
+    <li><strong>How does MongoDB handle ACID transactions?</strong></li>
+  
+    <li><strong>Explain the CAP theorem in the context of MongoDB.</strong></li>
+    <li><strong>What is the WiredTiger storage engine?</strong></li>
+    <li><strong>How do you ensure high availability in MongoDB?</strong></li>
+    <li><strong>What is the difference between embedding and referencing in schema design?</strong></li>
+    <li><strong>When would you choose embedding over referencing?</strong></li>
+    <li><strong>How does MongoDB handle concurrency?</strong></li>
+    <li><strong>What are MongoDB transactions, and how do they work?</strong></li>
+    <li><strong>What is the use of $lookup in aggregation?</strong></li>
+    <li><strong>How do you handle schema validation in MongoDB?</strong></li>
+    <li><strong>What is the difference between ObjectId and _id?</strong></li>
+  
+    <li><strong>How do you secure a MongoDB deployment?</strong></li>
+    <li><strong>What is authentication vs authorization in MongoDB?</strong></li>
+    <li><strong>What are roles and privileges in MongoDB?</strong></li>
+    <li><strong>What is the purpose of mongodump and mongorestore?</strong></li>
+    <li><strong>How do you back up and restore a MongoDB database?</strong></li>
+    <li><strong>How to check MongoDB logs?</strong></li>
+    <li><strong>How to monitor performance in MongoDB?</strong></li>
+    <li><strong>What tools do you use with MongoDB for visualization and administration?</strong></li>
+    <li><strong>How do you upgrade MongoDB?</strong></li>
+    <li><strong>What happens during a replica set election?</strong></li>
+  </ol>
+  </div></li>
+
+  <li data-id="q30"><span class="faq-question">
+    a memory heap and how do you analyze it in Node.js?
+    </span><div class="answer">
+
+    <li><span class="faq-question">
+        What are indexes in MongoDB?
+    </span><div class="answer">
+      Indexes in MongoDB are special data structures that store a small portion of the collection’s data in an easy-to-traverse form. They support efficient execution of queries by speeding up the search and sorting process. Without indexes, MongoDB must perform a collection scan, which is slow for large datasets.
+    </div></li>
+  
+    <li><span class="faq-question">
+        What types of indexes does MongoDB support?
+    </span><div class="answer">
+      MongoDB supports several types of indexes:
+      <ul>
+        <li><strong>Single Field Index:</strong> Indexes on a single field.</li>
+        <li><strong>Compound Index:</strong> Indexes on multiple fields.</li>
+        <li><strong>Multikey Index:</strong> Indexes arrays and creates index entries for each element.</li>
+        <li><strong>Text Index:</strong> Enables text search for string content.</li>
+        <li><strong>Hashed Index:</strong> Indexes based on hash values, used for sharding.</li>
+        <li><strong>Geospatial Index:</strong> Used for queries on geographical data like coordinates.</li>
+        <li><strong>Wildcard Index:</strong> Indexes multiple fields without explicitly specifying all keys.</li>
+        <li><strong>Partial Index:</strong> Indexes only documents that meet a specified filter expression.</li>
+        <li><strong>Sparse Index:</strong> Indexes only documents that contain the indexed field.</li>
+      </ul>
+    </div></li>
+  
+    <li><span class="faq-question">
+        How does MongoDB ensure performance with large datasets?
+    </span><div class="answer">
+      MongoDB maintains performance with large datasets using:
+      <ul>
+        <li><strong>Indexes:</strong> To speed up search and sort operations.</li>
+        <li><strong>Sharding:</strong> To horizontally partition data across multiple servers.</li>
+        <li><strong>Efficient Storage Engine:</strong> Uses WiredTiger with compression and memory-mapped files.</li>
+        <li><strong>Replication:</strong> Ensures high availability and read scalability.</li>
+        <li><strong>Aggregation Framework:</strong> Optimizes data transformation and analysis pipelines.</li>
+        <li><strong>Caching:</strong> Frequently accessed data is cached in memory (working set).</li>
+      </ul>
+      </div>
+    </li>
+  
+    <li><span class="faq-question">
+        What is a replica set?
+    </span><div class="answer">
+      A replica set is a group of MongoDB servers that maintain the same data set, providing redundancy and high availability. It includes:
+      <ul>
+        <li><strong>Primary:</strong> The node that receives all write operations.</li>
+        <li><strong>Secondaries:</strong> Replicate the primary's data and can serve read requests (optionally).</li>
+        <li><strong>Arbiter:</strong> Participates in elections but does not hold data.</li>
+      </ul>
+      If the primary node fails, an election is held to promote one of the secondaries to primary.
+      </div>
+    </li>
+  
+    <li><span class="faq-question">
+        What is sharding in MongoDB?
+    </span><div class="answer">
+      Sharding is MongoDB’s method for horizontal scaling by distributing data across multiple machines (shards). It is used when a dataset grows beyond the capacity of a single server. Key components include:
+      <ul>
+        <li><strong>Shard:</strong> Each holds a subset of the data.</li>
+        <li><strong>Config Server:</strong> Stores metadata and routing information.</li>
+        <li><strong>Query Router (mongos):</strong> Directs client requests to the appropriate shard.</li>
+      </ul>
+      Sharding helps improve read/write throughput and allows MongoDB to handle huge volumes of data efficiently.
+      </div>
+    </li>
+  
+</div></li>
+
+
+
+
+
+
+
+        
+    <li><span class="faq-question">
+    What is the aggregation framework?
+    </span><div class="answer">
+    The aggregation framework in MongoDB is a powerful feature used to process data and return computed results. It allows you to perform operations like filtering, grouping, sorting, reshaping, and transforming documents. It uses a pipeline approach, where multiple stages are executed in sequence to refine and compute the final result.<br />
+    Example usage:
+    <pre><code>
+    db.orders.aggregate([
+    { $match: { status: "completed" } },
+    { $group: { _id: "$customerId", total: { $sum: "$amount" } } },
+    { $sort: { total: -1 } }
+    ]);
+    </code></pre>
+
+
+    </div>
+    </li>
+      
+        <li><span class="faq-question">
+              
+              Difference between find() AND findOne()</span><div class="answer">
+              <ul>
+                <li><code>find()</code> returns a cursor to all documents that match the query criteria. You can iterate over the results or use <code>toArray()</code> to get all matches.</li>
+                <li><code>findOne()</code> returns the first document that matches the query criteria.</li>
+              </ul>
+              <strong>Example:</strong><br />
+              <code>db.users.find({ age: 25 })</code> → returns all matching users<br />
+              <code>db.users.findOne({ age: 25 })</code> → returns one user
+            
+              
+            </div>
+        </li>
+        <li data-id="q32335"><span class="faq-question green">
+
+          <strong>What is the use of $lookup in aggregation?</strong>
+        </span>
+        <div class="answer">
+        $lookup is an aggregation stage in MongoDB that performs a left outer join to combine documents from two collections. It adds an array field containing matching documents from the “joined” collection.
+          
+          <strong>Syntax:</strong>
+          <pre><code>
+      {
+        $lookup: {
+          from: "orders",
+          localField: "userId",
+          foreignField: "user_id",
+          as: "userOrders"
+        }
+      }
+          </code></pre>
+          This will join user documents with their matching orders based on the user ID.
+        
+
+</div></li>
+        <li><span class="faq-question green">
+            Explain the purpose of $match, $group, and $project in aggregation.
+        </span><div class="answer">
+  
+              
+                  MongoDB’s aggregation framework processes documents through a pipeline. The stages $match, $group, and $project are core building blocks of this pipeline:
+              
+                  <ul class="subul">
+                    <li>
+                      $match :
+                      - Filters documents based on specified criteria, similar to the SQL WHERE clause.<br />
+                      - It is usually placed at the beginning of the pipeline to reduce the number of documents early.<br />
+                      <strong>Example:</strong>
+                      <pre><code>{ $match: { status: "active" } }</code></pre>
+                    </li>
+              
+                    <li>
+                      <strong>$group:</strong>
+                      - Groups input documents by a specified identifier expression.<br />
+                      - Allows use of aggregation expressions like $sum, $avg, $max, $min, etc.<br />
+                      <strong>Example:</strong>
+                      <pre><code>
+              {
+                $group: {
+                  _id: "$department",
+                  totalSalary: { $sum: "$salary" }
+                }
+              }
+                      </code></pre>
+                    </li>
+              
+                    <li>
+                      <strong>$project:</strong>
+                      - Reshapes documents by including, excluding, or computing new fields.<br />
+                      - Useful for transforming the output of previous stages.<br />
+                      <strong>Example:</strong>
+                      <pre><code>
+              {
+                $project: {
+                  name: 1,
+                  department: 1,
+                  salary: 1,
+                  annualSalary: { $multiply: ["$salary", 12] },
+                  _id: 0
+                }
+              }
+                      </code></pre>
+                    </li>
+                  </ul>
+              
+                  <strong>Combined Example:</strong>
+                  <pre><code>
+              db.employees.aggregate([
+                { $match: { status: "active" } },
+                { $group: { _id: "$department", total: { $sum: "$salary" } } },
+                { $project: { department: "$_id", total: 1, _id: 0 } }
+              ]);
+                  </code></pre>
+                  This aggregation filters active employees, groups them by department, and shows their total salaries.
+                
+            </div>
+        </li>
+      
+        <li><span class="faq-question">
+            How do you update multiple documents at once? updateMany()
+        </span><div class="answer">
+              Use the <code>updateMany()</code> method to update all documents that match a condition.
+              <pre><code>
+          db.products.updateMany(
+            { category: "books" },
+            { $set: { discount: true } }
+          );
+              </code></pre>
+              This query adds a <code>discount</code> field with value <code>true</code> to all books.
+            </div>
+        </li>
+      
+        <li><span class="faq-question">How does MongoDB handle ACID transactions?  session.startTransaction();
+        </span><div class="answer">
+              MongoDB 4.0+ supports multi-document ACID (Atomicity, Consistency, Isolation, Durability) transactions for replica sets, and 4.2+ for sharded clusters. Transactions in MongoDB ensure that a series of operations either complete entirely or roll back entirely.<br /><br />
+              <strong>Atomicity:</strong> All operations in a transaction are atomic.<br />
+              <strong>Consistency:</strong> Ensures data remains valid and consistent after the transaction.<br />
+              <strong>Isolation:</strong> Transactions operate in isolation until committed.<br />
+              <strong>Durability:</strong> Once committed, changes are permanent even after failures.<br /><br />
+              <strong>Example:</strong>
+              <pre><code>
+          const session = db.getMongo().startSession();
+          session.startTransaction();
+          
+          try {
+            const users = session.getDatabase("myDB").users;
+            users.updateOne({ name: "John" }, { $inc: { balance: -100 } });
+            users.updateOne({ name: "Jane" }, { $inc: { balance: 100 } });
+            session.commitTransaction();
+          } catch (e) {
+            session.abortTransaction();
+          }
+          session.endSession();
+              </code></pre>
+           </div> </li>
+          
+          
+
+
+
+
+
+        <li data-id="q32"><span class="faq-question">
+        
+                  <strong>Explain the CAP theorem in the context of MongoDB.</strong>
+                </span><div class="answer">
+
+                  The CAP theorem (Consistency, Availability, Partition Tolerance) states that in a distributed system, you can only guarantee two out of the three at any given time:
+                  <ul>
+                    <li><strong>Consistency (C):</strong> Every read receives the most recent write.</li>
+                    <li><strong>Availability (A):</strong> Every request receives a response (not necessarily the latest data).</li>
+                    <li><strong>Partition Tolerance (P):</strong> The system continues to function despite network failures or partitioning.</li>
+                  </ul>
+                  <strong>MongoDB as CP or AP:</strong>
+                  <ul>
+                    <li>By default, MongoDB is a CP system.</li>
+                    <li>In a partitioned network, it will favor consistency by electing a new primary and refusing writes if no primary is available.</li>
+                    <li>It provides tunable consistency and availability via readConcern and writeConcern settings.</li>
+                  </ul>
+
+                </div></li>
+                <li data-id="q32"><span class="faq-question">
+                
+                  <strong>What is the WiredTiger storage engine?</strong></span><div class="answer">
+
+                  <strong>WiredTiger</strong> is the default storage engine in MongoDB since version 3.2. It offers:
+                  <ul>
+                    <li><strong>Document-level concurrency control</strong> using multi-version concurrency control (MVCC).</li>
+                    <li><strong>Compression:</strong> Reduces disk usage with snappy or zlib compression.</li>
+                    <li><strong>Checkpointing:</strong> Periodically saves data to disk for durability.</li>
+                    <li><strong>Efficient memory usage:</strong> Uses a cache that stores frequently accessed data in RAM.</li>
+                  </ul>
+                  Benefits of WiredTiger include better performance, reduced storage footprint, and improved concurrency over the older MMAPv1 engine.
+                
+</div></li>
+<li data-id="q32"><span class="faq-question">
+
+                  <strong>How do you ensure high availability in MongoDB?
+
+                  </strong>
+                </span><div class="answer">
+
+                  High availability in MongoDB is achieved primarily through:
+                  <ul>
+                    <li><strong>Replica Sets:</strong> A set of MongoDB servers that maintain the same data.</li>
+                    <li><strong>Automatic Failover:</strong> If the primary node fails, a secondary is automatically elected as the new primary.</li>
+                    <li><strong>Arbiters:</strong> Help in electing a new primary without holding data.</li>
+                    <li><strong>Read Preference:</strong> Allows clients to read from secondaries to improve availability.</li>
+                    <li><strong>Write Concern:</strong> Ensures write operations are acknowledged by multiple members.</li>
+                    <li><strong>Sharding (with replication):</strong> Provides both horizontal scaling and redundancy.</li>
+                  </ul>
+                  These features ensure MongoDB can remain accessible and operational during node failures, updates, or scaling operations.
+
+                </div></li>
+                <li data-id="q32"><span class="faq-question">
+                
+
+                          <strong>What is the difference between embedding and referencing in schema design?</strong>
+                          
+                        </span><div class="answer">
+
+                          In MongoDB, you can model relationships between documents using two main approaches:
+                          <ul>
+                            <li><strong>Embedding:</strong> Store related data inside a single document as nested objects or arrays.</li>
+                            <li><strong>Referencing:</strong> Store a reference (like an ObjectId) to related documents in separate collections.</li>
+                          </ul>
+                          <strong>Example of Embedding:</strong>
+                          <pre><code>
+                      {
+                        name: "John",
+                        address: {
+                          street: "Main St",
+                          city: "New York"
+                        }
+                      }
+                          </code></pre>
+                      
+                          <strong>Example of Referencing:</strong>
+                          <pre><code>
+                      // User document
+                      { _id: 1, name: "John", address_id: 101 }
+                      
+                      // Address document
+                      { _id: 101, street: "Main St", city: "New York" }
+                          </code></pre>
+
+
+                        </div></li>
+                        <li data-id="q32"><span class="faq-question">
+                        
+                        
+                          <strong>When would you choose embedding over referencing?</strong>
+                        </span><div class="answer">
+
+                          Choose <strong>embedding</strong> when:
+                          <ul>
+                            <li>The relationship is one-to-one or one-to-few.</li>
+                            <li>The embedded data is frequently accessed with the parent document.</li>
+                            <li>The data is relatively small and changes infrequently.</li>
+                          </ul>
+                      
+                          Choose <strong>referencing</strong> when:
+                          <ul>
+                            <li>There is a many-to-many relationship.</li>
+                            <li>The embedded data grows large or changes often.</li>
+                            <li>You want to avoid duplication and ensure data normalization.</li>
+                          </ul>
+
+
+                        </div></li>
+                        <li data-id="q32"><span class="faq-question">
+                        
+                        
+                          <strong>How does MongoDB handle concurrency?</strong>
+                        </span><div class="answer">
+
+                          MongoDB handles concurrency using:
+                          <ul>
+                            <li><strong>Document-level locking:</strong> With WiredTiger, MongoDB allows concurrent operations on different documents.</li>
+                            <li><strong>Multi-Version Concurrency Control (MVCC):</strong> Ensures consistent reads while writes are happening.</li>
+                            <li><strong>Atomic operations:</strong> Single-document operations are atomic by default.</li>
+                            <li><strong>Write concern and journaling:</strong> Ensure data durability and consistency.</li>
+                          </ul>
+                          This model allows MongoDB to support high levels of concurrent read/write operations safely and efficiently.
+  
+
+</div></li>
+<li data-id="q32"><span class="faq-question">
+
+
+                          <strong>What are MongoDB transactions, and how do they work?</strong>
+                        </span><div class="answer">
+
+                          MongoDB supports multi-document <strong>ACID transactions</strong> starting in version 4.0 (replica sets) and 4.2 (sharded clusters). A transaction is a sequence of operations that execute as a single unit of work — either all succeed or none apply.
+                      
+                          <strong>How they work:</strong>
+                          <ul>
+                            <li>Start a session and begin a transaction using <code>startTransaction()</code>.</li>
+                            <li>Execute multiple operations (e.g., insert, update).</li>
+                            <li>Commit the transaction using <code>commitTransaction()</code>.</li>
+                            <li>If any error occurs, abort using <code>abortTransaction()</code>.</li>
+                          </ul>
+                      
+                          <strong>Example:</strong>
+                          <pre><code>
+                      const session = db.getMongo().startSession();
+                      session.startTransaction();
+                      try {
+                        const dbSession = session.getDatabase("shop");
+                        dbSession.orders.insertOne({ user: "Alice", item: "Book" });
+                        dbSession.users.updateOne({ name: "Alice" }, { $inc: { points: 10 } });
+                        session.commitTransaction();
+                      } catch (e) {
+                        session.abortTransaction();
+                      }
+                      session.endSession();
+                          </code></pre>
+                      
+                          Transactions ensure full consistency even in complex write operations involving multiple documents or collections.
+
+
+</div></li>
+<li data-id="q311"><span class="faq-question">
+
+Helllo
+
+</span><div class="answer">
+
+</div></li>
+
+
+
+    
+<li data-id="q32"><span class="faq-question">
+
+
+          <strong>How do you handle schema validation in MongoDB?</strong>
+        </span><div class="answer">
+          MongoDB supports schema validation at the collection level using JSON Schema. You define rules for document structure, data types, required fields, etc., when creating a collection or by modifying it.
+      
+          <strong>Example:</strong>
+          <pre><code>
+      db.createCollection("users", {
+        validator: {
+          $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "email"],
+            properties: {
+              name: { bsonType: "string" },
+              email: { bsonType: "string", pattern: "^.+@.+$" },
+              age: { bsonType: "int", minimum: 18 }
+            }
+          }
+        }
+      });
+          </code></pre>
+          This ensures only valid documents matching the schema are inserted or updated.
+
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question green">
+        
+        
+          <strong>What is the difference between ObjectId and _id?</strong>
+        </span><div class="answer">
+          <ol class="subul">
+            <li>_id is a reserved field in MongoDB that uniquely identifies a document within a collection.</li>
+            <li>ObjectId is the default type used for the _id field unless you explicitly set it to something else.</li>
+          </ol>
+          <br />
+          <strong>ObjectId:</strong> A 12-byte value composed of:
+          <ul>
+            <li>4-byte timestamp</li>
+            <li>5-byte random value</li>
+            <li>3-byte incrementing counter</li>
+          </ul>
+          Example:
+          <pre><code>{ _id: ObjectId("507f191e810c19729de860ea") }</code></pre>
+
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+        
+          <strong>How do you secure a MongoDB deployment?</strong>
+        </span><div class="answer">
+          Security in MongoDB can be achieved through a combination of configurations:
+          <ul>
+            <li><strong>Enable Authentication:</strong> Require users to log in.</li>
+            <li><strong>Use Role-Based Access Control (RBAC):</strong> Assign minimal privileges.</li>
+            <li><strong>Enable TLS/SSL:</strong> Encrypt data in transit.</li>
+            <li><strong>Use Firewalls:</strong> Allow access only from trusted IPs.</li>
+            <li><strong>Disable External Bind:</strong> Avoid binding MongoDB to 0.0.0.0 in production.</li>
+            <li><strong>Keep Software Updated:</strong> Regularly patch security vulnerabilities.</li>
+            <li><strong>Use Encrypted Storage:</strong> Encrypt data at rest with storage engines like WiredTiger.</li>
+          </ul>
+
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+        
+          <strong>What is authentication vs authorization in MongoDB?</strong>
+        </span><div class="answer">
+          <ul>
+            <li><strong>Authentication:</strong> The process of verifying the identity of a user (e.g., using a username and password).</li>
+            <li><strong>Authorization:</strong> The process of verifying what actions a user is allowed to perform after they have authenticated.</li>
+          </ul>
+          In MongoDB:
+          <ul>
+            <li>Authentication is enabled via configuration (`--auth` or `security.authorization`).</li>
+            <li>Authorization is managed using roles and privileges assigned to users.</li>
+          </ul>
+
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+        
+          <strong>What are roles and privileges in MongoDB?</strong>
+        </span><div class="answer">
+          MongoDB uses Role-Based Access Control (RBAC) to manage user access. Each role is associated with specific privileges that define what operations the user can perform.
+          <ul>
+            <li><strong>Built-in roles:</strong> e.g., <code>read</code>, <code>readWrite</code>, <code>dbAdmin</code>, <code>clusterAdmin</code></li>
+            <li><strong>Privileges:</strong> Define actions (e.g., find, insert, drop) and resources (e.g., collections or databases).</li>
+          </ul>
+          You can also create custom roles using <code>db.createRole()</code>.
+
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+        
+          <strong>What is the purpose of mongodump and mongorestore?</strong>
+        </span><div class="answer">
+          <ul>
+            <li><code>mongodump</code> is a utility to back up MongoDB data by creating a binary export of the database.</li>
+            <li><code>mongorestore</code> is used to restore the data from a <code>mongodump</code> backup.</li>
+          </ul>
+          <strong>Example:</strong>
+          <pre><code>
+      # Create a backup
+      mongodump --db=myDatabase --out=/backup/path
+      
+      # Restore from backup
+      mongorestore --db=myDatabase /backup/path/myDatabase
+          </code></pre>
+          These tools are useful for migrations, backup strategies, and disaster recovery.
+</div>        </li>
+
+      
+
+
+
+
+
+<li data-id="q32"><span class="faq-question">
+
+
+          <strong>How do you back up and restore a MongoDB database?</strong>
+        </span><div class="answer">
+          <strong>Backup:</strong> You can use <code>mongodump</code> to create a backup of your database in BSON format.
+          <pre><code>
+      # Back up an entire database
+      mongodump --db=myDatabase --out=/path/to/backup
+          </code></pre>
+          <strong>Restore:</strong> Use <code>mongorestore</code> to import data from a backup.
+          <pre><code>
+      # Restore the database from backup
+      mongorestore --db=myDatabase /path/to/backup/myDatabase
+          </code></pre>
+          For sharded clusters or replica sets, it's recommended to use filesystem snapshots or Ops Manager for consistency.
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        <strong>How to check MongoDB logs?</strong>
+    </span><div class="answer">
+          MongoDB logs contain startup information, query performance, errors, and replication events. To check logs:
+          <ul>
+            <li>Default log file location on Linux: <code>/var/log/mongodb/mongod.log</code></li>
+            <li>Use <code>tail -f</code> to monitor logs in real-time:</li>
+          </ul>
+          <pre><code>tail -f /var/log/mongodb/mongod.log</code></pre>
+          You can configure the log path using the <code>--logpath</code> flag or in the MongoDB config file.
+
+          
+</div></li>
+<li data-id="q32"><span class="faq-question">
+
+          <strong>How to monitor performance in MongoDB?</strong>
+        </span><div class="answer">
+          MongoDB provides multiple tools and commands to monitor performance:
+          <ul>
+            <li><code>db.serverStatus()</code> – returns server metrics.</li>
+            <li><code>db.currentOp()</code> – shows current operations.</li>
+            <li><code>mongostat</code> – real-time server statistics.</li>
+            <li><code>mongotop</code> – collection-level read/write activity.</li>
+            <li><strong>Atlas Monitoring:</strong> If using MongoDB Atlas, dashboards are available for metrics, slow queries, etc.</li>
+            <li><strong>Ops Manager:</strong> Enterprise-grade monitoring and automation tool for on-prem MongoDB.</li>
+          </ul>
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+          <strong>What tools do you use with MongoDB for visualization and administration?</strong>
+        </span><div class="answer">
+          Popular tools include:
+          <ul>
+            <li><strong>MongoDB Compass:</strong> Official GUI for exploring and querying MongoDB collections.</li>
+            <li><strong>MongoDB Atlas:</strong> Cloud dashboard with admin, metrics, and security tools.</li>
+            <li><strong>Studio 3T:</strong> Powerful third-party GUI with advanced features for devs and DBAs.</li>
+            <li><strong>Robo 3T:</strong> Lightweight GUI for MongoDB.</li>
+            <li><strong>VS Code Extensions:</strong> Extensions like MongoDB for VS Code support browsing and querying MongoDB inside the IDE.</li>
+          </ul>
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+          <strong>How do you upgrade MongoDB?</strong>
+        </span><div class="answer">
+          To upgrade MongoDB safely:
+          <ol>
+            <li>Review <a href="https://www.mongodb.com/docs/manual/release-notes/" target="_blank">MongoDB release notes</a> for breaking changes.</li>
+            <li>Back up your databases using <code>mongodump</code> or snapshots.</li>
+            <li>Test the upgrade in a staging environment first.</li>
+            <li>Shut down MongoDB instance and replace binaries with the new version.</li>
+            <li>Start the MongoDB server and monitor logs.</li>
+            <li>For replica sets and sharded clusters, upgrade members one by one to avoid downtime.</li>
+          </ol>
+          Always follow the <a href="https://www.mongodb.com/docs/manual/tutorial/upgrade-revision/" target="_blank">official upgrade guide</a> for your version.
+
+        </div></li>
+        <li data-id="q32"><span class="faq-question">
+        
+          <strong>What happens during a replica set election?</strong>
+        </span><div class="answer">
+          When the primary node in a replica set becomes unavailable:
+          <ul>
+            <li>The remaining secondary nodes detect the failure via heartbeats.</li>
+            <li>An election is triggered to choose a new primary.</li>
+            <li>Eligible secondaries vote based on criteria like priority and replication lag.</li>
+            <li>The node that receives a majority of votes becomes the new primary.</li>
+            <li>Clients automatically reconnect to the new primary for write operations.</li>
+          </ul>
+          Elections typically take a few seconds, during which write operations are paused.
+
+
+</div></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></li>
+<li data-id="q32"><span class="faq-question">
+
+Helllo
+
+</span><div class="answer">
+
+</div></li>
+
+
+
+
+<li data-id="q32"><span class="faq-question">
+a memory heap and how do you analyze it in Node.js?
+</span><div class="answer">
+
+</div></li>
+
+
+
+
+<li data-id="q32"><span class="faq-question">
+a memory heap and how do you analyze it in Node.js?
+</span><div class="answer">
+
+</div></li>
+
+
+
+
+<li data-id="q32"><span class="faq-question">
+a memory heap and how do you analyze it in Node.js?
+</span><div class="answer">
+
+</div></li>
+
+
+
+
+<li data-id="q32"><span class="faq-question">
+a memory heap and how do you analyze it in Node.js?
+</span><div class="answer">
+
+</div></li>
+
+</ul>
+                                                                                                    
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

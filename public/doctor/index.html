@@ -14,10 +14,13 @@
 <a href="/doctor/docker.html">Docker</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+<a href="/doctor/kafka.html">Kafka</a> &nbsp; 
+<a href="kafka-interview.html">Kafka Interview</a> &nbsp; 
+<a href="mongodb.html">Mongo DB</a> &nbsp; 
 
 
 <ul class="faq">
-<li data-id="q1"><span class="faq-question">
+<li data-id="q122"><span class="faq-question">
 Node.js?
 </span><div class="answer">
 Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
@@ -352,7 +355,13 @@ tailwind
 Promise?
 </span><div class="answer">
 A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. <br />
-It has 3 states: <b><code></code>pending</code>, <code>fulfilled</code>, and <code>rejected</code>.</b>
+It has 3 states: 
+<ol>
+  <li>pending</li>
+  <li>fulfilled</li>
+  <li>rejected</li>
+</ol>
+
 
 Basic usage:
 <pre><code>
@@ -376,7 +385,7 @@ Mastering Promises is essential for handling async operations in modern JavaScri
 
 
 <hr />
-<code>
+<pre><code>
     // Sample async function returning a promise
     const delay = (time, value, shouldReject = false) => {
       return new Promise((resolve, reject) => {
@@ -451,7 +460,7 @@ Mastering Promises is essential for handling async operations in modern JavaScri
         console.error('Caught error:', error); // 'Error: Oops'
       });
 
-    </code>
+    </code></pre>
 
 
 
@@ -706,12 +715,13 @@ The <code>@Module()</code> decorator accepts metadata that tells NestJS how to a
 
 
 
-<li data-id="q_node_event"><span class="faq-question">
-Event?
+<li data-id="q_node_event"><span class="faq-question green">
+Event? EventEmitter
 </span><div class="answer">
-In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. Node uses the <code>EventEmitter</code> class to handle events, allowing objects to emit named events and listeners to respond asynchronously. This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
+In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. <br />
+Node uses the class to handle events, allowing objects to emit named events and listeners to respond asynchronously.  <br /> <br />
+This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
 
-Example:
 <pre><code>
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
@@ -842,7 +852,204 @@ res.status(500).json({ message: err.message });
 Proper error handling helps maintain app stability and improves debugging.
 </div></li>
 
+<li data-id="q14oth"><span class="faq-question green">🎯 Abstraction in Object-Oriented Programming (OOP)</h1>
+</span><div class="answer">
 
+  <div class="section">
+    <h2>What is Abstraction?</h2>
+    <p><strong>Abstraction</strong> is the concept of hiding complex implementation details and showing only the essential features of an object.</p>
+    <p>It helps reduce complexity by exposing only what is necessary.</p>
+  </div>
+
+  <div class="section">
+    <h2>Real-World Example</h2>
+    <p>When you drive a car, you interact with the steering wheel, pedals, and gear. You don’t need to know how the engine works internally — that's abstraction.</p>
+  </div>
+
+  <div class="section">
+    <h2>How It Works in OOP</h2>
+    <ul>
+      <li>Achieved using <strong>abstract classes</strong> and <strong>interfaces</strong>.</li>
+      <li>Only relevant operations are exposed through public methods.</li>
+      <li>Internal logic is hidden from the user of the object.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Example in Java</h2>
+    <pre><code>abstract class Animal {
+  abstract void makeSound();
+}
+
+class Dog extends Animal {
+  void makeSound() {
+    System.out.println("Bark");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Animal a = new Dog();
+    a.makeSound();  // Output: Bark
+  }
+}</code></pre>
+    <p>Here, the user of the <code>Animal</code> class knows it has a <code>makeSound()</code> method, but not how it is implemented.</p>
+  </div>
+
+  <div class="section">
+    <h2>Benefits of Abstraction</h2>
+    <ul>
+      <li>Improves code readability and maintainability</li>
+      <li>Hides unnecessary details from the user</li>
+      <li>Supports loose coupling and high cohesion</li>
+      <li>Makes the application more secure by exposing only relevant parts</li>
+    </ul>
+  </div>
+  <h1>🔍 Abstraction vs Interface in OOP</h1>
+
+  <div class="section">
+    <h2>Definition</h2>
+    <p><strong>Abstraction</strong> is the concept of hiding implementation details and exposing only essential features. It can be implemented using <code>abstract classes</code> or <code>interfaces</code>.</p>
+    <p><strong>Interface</strong> is a contract that specifies what methods a class should implement, without defining how they are implemented.</p>
+  </div>
+
+  <div class="section">
+    <h2>Comparison Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Abstract Class</th>
+          <th>Interface</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Purpose</td>
+          <td>Used for partial abstraction and shared code.</td>
+          <td>Used to define a full contract for implementing classes.</td>
+        </tr>
+        <tr>
+          <td>Method Implementation</td>
+          <td>Can have both abstract and concrete methods.</td>
+          <td>Cannot have implementation (except default/static in modern languages).</td>
+        </tr>
+        <tr>
+          <td>Multiple Inheritance</td>
+          <td>Not supported in many languages (e.g., Java).</td>
+          <td>Can implement multiple interfaces.</td>
+        </tr>
+        <tr>
+          <td>Constructors</td>
+          <td>Can have constructors.</td>
+          <td>Cannot have constructors.</td>
+        </tr>
+        <tr>
+          <td>Access Modifiers</td>
+          <td>Can use public, protected, private, etc.</td>
+          <td>Methods are public by default.</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>When classes share common behavior with differences.</td>
+          <td>When you want to enforce a common API without shared code.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Example in Java</h2>
+
+    <h3>Abstract Class</h3>
+    <pre><code>abstract class Animal {
+  abstract void sound();
+
+  void breathe() {
+    System.out.println("Breathing...");
+  }
+}</code></pre>
+
+    <h3>Interface</h3>
+    <pre><code>interface Flyable {
+  void fly();
+}
+
+class Bird implements Flyable {
+  public void fly() {
+    System.out.println("Flying...");
+  }
+}</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Quick Summary</h2>
+    <ul>
+      <li><strong>Abstraction</strong> is a broader concept; an abstract class is one way to implement it.</li>
+      <li><strong>Interface</strong> is a pure abstraction tool used for enforcing contracts between classes.</li>
+    </ul>
+  </div>
+
+</div></li>
+<li data-id="q14oth"><span class="faq-question green">
+  🔐 OAuth 2.0 Overview
+</span><div class="answer">
+  <div class="section">
+    <h2>What is OAuth 2.0?</h2>
+    <p>OAuth 2.0 is an <strong>authorization framework</strong> that allows third-party applications to obtain limited access to a user's resources without exposing their credentials.</p>
+  </div>
+
+  <div class="section">
+    <h2>Roles in OAuth 2.0</h2>
+    <ul>
+      <li><strong>Resource Owner:</strong> The user who owns the data.</li>
+      <li><strong>Client:</strong> The application requesting access to the resource.</li>
+      <li><strong>Authorization Server:</strong> Issues access tokens after authenticating the user.</li>
+      <li><strong>Resource Server:</strong> Hosts the protected resources and validates the token.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>OAuth 2.0 Grant Types</h2>
+    <ul>
+      <li><strong>Authorization Code:</strong> Used for server-side applications. Secure and most commonly used.</li>
+      <li><strong>Implicit:</strong> Used for public clients like single-page apps. Less secure (now discouraged).</li>
+      <li><strong>Resource Owner Password Credentials:</strong> User provides credentials directly. Used in trusted apps.</li>
+      <li><strong>Client Credentials:</strong> Used for machine-to-machine communication.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>OAuth 2.0 Flow: Authorization Code Grant</h2>
+    <ol>
+      <li>User is redirected to Authorization Server to log in.</li>
+      <li>User grants permission to the app.</li>
+      <li>Authorization Server redirects back with an <code>authorization code</code>.</li>
+      <li>App exchanges the code for an <code>access token</code>.</li>
+      <li>App uses the token to access protected resources.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>Access & Refresh Tokens</h2>
+    <ul>
+      <li><strong>Access Token:</strong> Used to access protected resources. Short-lived.</li>
+      <li><strong>Refresh Token:</strong> Used to obtain a new access token when it expires. Long-lived.</li>
+    </ul>
+  </div>
+
+  <div class="section highlight">
+    <h2>Security Tips</h2>
+    <ul>
+      <li>Use HTTPS for all communication.</li>
+      <li>Never expose client secrets in frontend apps.</li>
+      <li>Use PKCE with public clients (e.g., mobile apps, SPAs).</li>
+      <li>Use short-lived access tokens and refresh tokens securely.</li>
+    </ul>
+  </div>
+  
+
+</div></li>
 
 <li data-id="q14"><span class="faq-question green">
 Middleware?
@@ -2083,6 +2290,511 @@ DB Indexing
 
   
 </div></li>
+
+
+<li data-id="redis-diff"><span class="faq-question green">
+  📊 Redis vs RabbitMQ vs Kafka vs AWS SNS
+  </span><div class="answer">
+    
+    
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Redis</th>
+        <th>RabbitMQ</th>
+        <th>Apache Kafka</th>
+        <th>AWS SNS</th>
+      </tr>
+    
+      <tr>
+        <td>Type</td>
+        <td>In-memory data store & lightweight message broker</td>
+        <td>Traditional message broker</td>
+        <td>Distributed event streaming platform</td>
+        <td>Managed pub/sub messaging service</td>
+      </tr>
+    
+      <tr>
+        <td>Use Case</td>
+        <td>Caching, queues, lightweight pub/sub</td>
+        <td>Reliable message queuing (task/job queues)</td>
+        <td>High-throughput log/event streaming</td>
+        <td>Fan-out messages to multiple AWS services or HTTP endpoints</td>
+      </tr>
+    
+      <tr>
+        <td>Persistence</td>
+        <td>Optional (RDB, AOF)</td>
+        <td>Yes (durable queues)</td>
+        <td>Yes (retains logs)</td>
+        <td>No built-in persistence (fire-and-forget)</td>
+      </tr>
+    
+      <tr>
+        <td>Ordering Guarantees</td>
+        <td>Per-list, not global</td>
+        <td>Per-queue</td>
+        <td>Per-partition</td>
+        <td>No strict guarantees</td>
+      </tr>
+    
+      <tr>
+        <td>Message Retention</td>
+        <td>Until consumed or expired</td>
+        <td>Until consumed or TTL expires</td>
+        <td>Configurable retention (days/weeks)</td>
+        <td>Delivers and discards</td>
+      </tr>
+    
+      <tr>
+        <td>Throughput</td>
+        <td>High (in-memory)</td>
+        <td>Medium</td>
+        <td>Very High (sequential disk I/O, batching)</td>
+        <td>Medium (event broadcast scale)</td>
+      </tr>
+    
+      <tr>
+        <td>Scalability</td>
+        <td>Vertical (or Redis Cluster)</td>
+        <td>Limited (clusters supported with plugins)</td>
+        <td>Horizontal (Kafka Cluster, partitions)</td>
+        <td>Fully managed and scalable</td>
+      </tr>
+    
+      <tr>
+        <td>Delivery Semantics</td>
+        <td>At most once (by default)</td>
+        <td>At least once (manual ack)</td>
+        <td>At most once / At least once / Exactly once</td>
+        <td>At most once (no retries by default)</td>
+      </tr>
+    
+      <tr>
+        <td>Protocol Support</td>
+        <td>Custom RESP, Pub/Sub, Streams</td>
+        <td>AMQP, MQTT, STOMP</td>
+        <td>Kafka Protocol</td>
+        <td>HTTPS, AWS SDK</td>
+      </tr>
+    
+      <tr>
+        <td>Built-in Retry</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Consumer responsibility</td>
+        <td>No (use with Lambda, SQS for retries)</td>
+      </tr>
+    
+      <tr>
+        <td>Latency</td>
+        <td>Low</td>
+        <td>Low to Medium</td>
+        <td>Low (with batching)</td>
+        <td>Medium</td>
+      </tr>
+    
+      <tr>
+        <td>High Availability</td>
+        <td>Redis Sentinel / Cluster</td>
+        <td>Mirrored/Quorum Queues</td>
+        <td>Built-in replication</td>
+        <td>Managed by AWS</td>
+      </tr>
+    
+      <tr>
+        <td>Best For</td>
+        <td>Simple queues, caching, pub/sub</td>
+        <td>Decoupling microservices</td>
+        <td>Event streaming, log processing</td>
+        <td>Triggering distributed systems (fan-out)</td>
+      </tr>
+    
+    </table>
+    
+    
+</div></li>
+
+<li data-id="redis-q"><span class="faq-question green">
+  🐇 Redis
+  </span><div class="answer">
+
+    
+      <h1>🚀 Redis Interview Questions</h1>
+    
+      <div class="question">1. What is Redis?</div>
+      <div class="answer">Redis (Remote Dictionary Server) is an open-source, in-memory data structure store used as a database, cache, and message broker.</div>
+    
+      <div class="question">2. What are the main data types in Redis?</div>
+      <div class="answer">
+        - String<br>
+        - List<br>
+        - Set<br>
+        - Sorted Set<br>
+        - Hash<br>
+        - Bitmap, HyperLogLog, Stream, and Geospatial Indexes
+      </div>
+    
+      <div class="question">3. What is the default port for Redis?</div>
+      <div class="answer">6379</div>
+    
+      <div class="question">4. Is Redis single-threaded or multi-threaded?</div>
+      <div class="answer">Redis is single-threaded for commands, but supports multi-threaded I/O for performance since Redis 6.0.</div>
+    
+      <div class="question">5. What is the difference between Redis and Memcached?</div>
+      <div class="answer">
+        Redis supports complex data structures, persistence, and replication.<br>
+        Memcached is limited to simple key-value pairs with no persistence or advanced structures.
+      </div>
+    
+      <div class="question">6. What is a Redis keyspace?</div>
+      <div class="answer">A Redis keyspace refers to all keys in a Redis database. Redis supports multiple databases (default is DB 0).</div>
+    
+      <div class="question">7. What is TTL in Redis?</div>
+      <div class="answer">TTL (Time to Live) is the time (in seconds) a key will exist before being automatically deleted.</div>
+    
+      <div class="question">8. How do you persist data in Redis?</div>
+      <div class="answer">
+        Redis supports two types of persistence:<br>
+        - RDB (point-in-time snapshot)<br>
+        - AOF (Append-Only File that logs each write operation)
+      </div>
+    
+      <div class="question">9. What is Redis replication?</div>
+      <div class="answer">Redis supports master-slave replication to create read-only replicas for scalability and redundancy.</div>
+    
+      <div class="question">10. What is Redis Sentinel?</div>
+      <div class="answer">Sentinel provides high availability by monitoring Redis instances, promoting a slave to master on failure.</div>
+    
+      <div class="question">11. What is Redis Cluster?</div>
+      <div class="answer">Redis Cluster allows horizontal scaling by partitioning data across multiple nodes using hash slots.</div>
+    
+      <div class="question">12. What command is used to check TTL of a key?</div>
+      <div class="answer"><code>TTL key</code></div>
+    
+      <div class="question">13. How can you delete all keys in Redis?</div>
+      <div class="answer"><code>FLUSHALL</code> (for all DBs) or <code>FLUSHDB</code> (for current DB)</div>
+    
+      <div class="question">14. How do you make Redis threads safe?</div>
+      <div class="answer">Redis is single-threaded and thread-safe by default for client connections. Use connection pooling in multi-threaded clients.</div>
+    
+      <div class="question">15. What is pipelining in Redis?</div>
+      <div class="answer">Pipelining allows sending multiple commands without waiting for their replies, improving throughput.</div>
+    
+      <div class="question">16. What are pub/sub channels in Redis?</div>
+      <div class="answer">Redis supports publish/subscribe messaging where messages sent to a channel are received by all subscribers.</div>
+    
+      <div class="question">17. What is the difference between SCAN and KEYS?</div>
+      <div class="answer">
+        - KEYS returns all matching keys and can block the server.<br>
+        - SCAN is non-blocking and suitable for production usage.
+      </div>
+    
+      <div class="question">18. What is the maximum size of a Redis key or value?</div>
+      <div class="answer">The maximum key size is 512 MB. Same for values depending on data type and memory limits.</div>
+    
+      <div class="question">19. Can Redis be used for message queuing?</div>
+      <div class="answer">Yes, using lists (RPUSH + LPOP/BRPOP), streams, or pub/sub for real-time messaging patterns.</div>
+    
+      <div class="question">20. How do you monitor Redis?</div>
+      <div class="answer">Use commands like <code>INFO</code>, <code>MONITOR</code>, or external tools like RedisInsight, Prometheus, or Grafana.</div>
+    
+    </div></li>
+
+
+
+<li data-id="rabbitmq"><span class="faq-question green">
+  🐇 RabbitMQ
+  </span><div class="answer">
+
+
+  <div class="question">1. What is RabbitMQ?</div>
+  <div class="answer">RabbitMQ is an open-source message broker that enables applications to communicate asynchronously by sending messages via queues.</div>
+
+  <div class="question">2. What messaging protocol does RabbitMQ use?</div>
+  <div class="answer">RabbitMQ primarily uses AMQP (Advanced Message Queuing Protocol), but it also supports MQTT, STOMP, and HTTP via plugins.</div>
+
+  <div class="question">3. What are the main components of RabbitMQ?</div>
+  <div class="answer">
+    - Producer<br>
+    - Queue<br>
+    - Consumer<br>
+    - Exchange<br>
+    - Binding
+  </div>
+
+  <div class="question">4. What is an exchange in RabbitMQ?</div>
+  <div class="answer">An exchange routes messages to queues based on rules defined by bindings. Types: direct, topic, fanout, and headers.</div>
+
+  <div class="question">5. What is a binding?</div>
+  <div class="answer">A binding is a link between a queue and an exchange that defines how messages should be routed.</div>
+
+  <div class="question">6. What is a routing key?</div>
+  <div class="answer">A routing key is a string used by exchanges to determine how to route a message to queues.</div>
+
+  <div class="question">7. What is the difference between direct and fanout exchanges?</div>
+  <div class="answer">
+    - Direct: Routes messages to queues with an exact matching routing key.<br>
+    - Fanout: Broadcasts messages to all bound queues regardless of routing key.
+  </div>
+
+  <div class="question">8. What is a durable queue?</div>
+  <div class="answer">A durable queue survives broker restarts. Messages must also be marked as persistent for durability.</div>
+
+  <div class="question">9. What is the difference between persistent and transient messages?</div>
+  <div class="answer">Persistent messages are stored to disk and survive broker restarts. Transient messages are stored in memory only.</div>
+
+  <div class="question">10. What is a dead-letter exchange (DLX)?</div>
+  <div class="answer">A DLX is used to route messages that are not deliverable or have expired (e.g., rejected, TTL expired).</div>
+
+  <div class="question">11. What is message acknowledgment (ack)?</div>
+  <div class="answer">Acknowledgment is a signal sent by the consumer to inform the broker that a message was successfully processed.</div>
+
+  <div class="question">12. What happens if a message is not acknowledged?</div>
+  <div class="answer">The message is requeued and redelivered unless auto-ack is enabled or the message is rejected.</div>
+
+  <div class="question">13. What is prefetch count?</div>
+  <div class="answer">Prefetch count limits the number of unacknowledged messages sent to a consumer. It’s used for fair dispatching.</div>
+
+  <div class="question">14. How does RabbitMQ ensure message ordering?</div>
+  <div class="answer">RabbitMQ ensures ordering within a single queue. Messages are delivered in the order they arrive.</div>
+
+  <div class="question">15. What is the difference between a queue and an exchange?</div>
+  <div class="answer">Queues hold messages. Exchanges route messages to queues based on bindings and routing keys.</div>
+
+  <div class="question">16. How does RabbitMQ handle high availability?</div>
+  <div class="answer">Using mirrored queues (classic) or quorum queues (recommended), RabbitMQ replicates messages across nodes.</div>
+
+  <div class="question">17. What is a quorum queue?</div>
+  <div class="answer">A quorum queue replicates messages across multiple nodes using the Raft consensus algorithm. It replaces mirrored queues.</div>
+
+  <div class="question">18. Can RabbitMQ work with microservices?</div>
+  <div class="answer">Yes. RabbitMQ is commonly used in microservice architectures for asynchronous communication between services.</div>
+
+  <div class="question">19. How do you monitor RabbitMQ?</div>
+  <div class="answer">Using the RabbitMQ Management Plugin (UI & REST API), Prometheus exporters, or CLI tools like <code>rabbitmqctl</code>.</div>
+
+  <div class="question">20. What are common RabbitMQ client libraries?</div>
+  <div class="answer">
+    - Node.js: amqplib<br>
+    - Python: pika<br>
+    - Java: RabbitMQ Java Client<br>
+    - .NET: RabbitMQ .NET Client
+  </div>
+
+</body>
+</html>
+
+</div></li>
+
+
+
+
+<li data-id="kafka"><span class="faq-question green">
+  Kafka
+  </span><div class="answer">
+
+    <h1></h1>
+
+    <div class="question">1. What is Apache Kafka?</div>
+    <div class="answer">Kafka is a distributed event streaming platform used for high-performance data pipelines, streaming analytics, and event-driven applications.</div>
+  
+    <div class="question">2. What are the main components of Kafka?</div>
+    <div class="answer">
+      - Producer<br>
+      - Consumer<br>
+      - Broker<br>
+      - Topic<br>
+      - Partition<br>
+      - Zookeeper (optional for newer versions)
+    </div>
+  
+    <div class="question">3. What is a Kafka topic?</div>
+    <div class="answer">A topic is a category/feed name to which records are published. Topics are split into partitions for parallel processing.</div>
+  
+    <div class="question">4. What is a Kafka partition?</div>
+    <div class="answer">A partition is a sub-division of a topic. Each partition is an ordered, immutable sequence of records.</div>
+  
+    <div class="question">5. What ensures message ordering in Kafka?</div>
+    <div class="answer">Kafka guarantees ordering only within a single partition.</div>
+  
+    <div class="question">6. What is a Kafka broker?</div>
+    <div class="answer">A broker is a Kafka server that stores data and serves clients. A cluster has multiple brokers.</div>
+  
+    <div class="question">7. What is the role of Zookeeper in Kafka?</div>
+    <div class="answer">Zookeeper manages Kafka’s metadata, broker coordination, and leader election (older versions). Kafka 2.8+ can run without Zookeeper.</div>
+  
+    <div class="question">8. What is Kafka Producer?</div>
+    <div class="answer">A producer sends records (data) to a Kafka topic.</div>
+  
+    <div class="question">9. What is Kafka Consumer?</div>
+    <div class="answer">A consumer reads records from Kafka topics.</div>
+  
+    <div class="question">10. What is a Consumer Group?</div>
+    <div class="answer">A group of consumers that share the load of reading from topics. Each partition is read by only one consumer in the group.</div>
+  
+    <div class="question">11. How does Kafka ensure fault tolerance?</div>
+    <div class="answer">Through replication: each partition has replicas. If the leader fails, a follower takes over.</div>
+  
+    <div class="question">12. What is Kafka's retention policy?</div>
+    <div class="answer">Kafka retains messages for a configurable amount of time or until a storage size limit is reached, even if consumed.</div>
+  
+    <div class="question">13. How does Kafka achieve high throughput?</div>
+    <div class="answer">Through sequential disk writes, zero-copy, batching, and compression.</div>
+  
+    <div class="question">14. What are Kafka delivery semantics?</div>
+    <div class="answer">
+      - At most once<br>
+      - At least once<br>
+      - Exactly once (since Kafka 0.11+)
+    </div>
+  
+    <div class="question">15. What is idempotence in Kafka?</div>
+    <div class="answer">It ensures the same message is not duplicated if sent multiple times. Enabled via idempotent producers.</div>
+  
+    <div class="question">16. What is a Kafka offset?</div>
+    <div class="answer">A unique identifier of a record within a partition. Consumers track offsets to resume reading.</div>
+  
+    <div class="question">17. How is offset management done?</div>
+    <div class="answer">Offsets can be committed automatically or manually, and are stored in Kafka’s __consumer_offsets topic.</div>
+  
+    <div class="question">18. What are Kafka Streams?</div>
+    <div class="answer">Kafka Streams is a client library for building real-time applications using Kafka topics as input/output.</div>
+  
+    <div class="question">19. What is the difference between Kafka and a traditional message queue?</div>
+    <div class="answer">
+      Kafka stores data for a time period regardless of consumption and supports replaying messages.<br>
+      Queues typically delete messages once consumed.
+    </div>
+  
+    <div class="question">20. What is the role of schema registry in Kafka?</div>
+    <div class="answer">Schema registry ensures that producers and consumers agree on data format (e.g., using Avro schemas).</div>
+  
+</div></li>
+
+<li data-id="kafka"><span class="faq-question green">
+  Kafka Example***
+  </span><div class="answer">
+    <h1>✅ NestJS + KafkaJS with Online Kafka Server</h1>
+
+    <h2>📦 Prerequisites</h2>
+    <ul>
+      <li>Install NestJS CLI:</li>
+      <pre><code>npm i -g @nestjs/cli</code></pre>
+      <li>Install KafkaJS:</li>
+      <pre><code>npm install kafkajs</code></pre>
+      <li>Kafka server: Use Confluent Cloud or CloudKarafka (free tiers work)</li>
+    </ul>
+  
+    <h2>📁 Project Setup</h2>
+    <pre><code>nest new kafka-nestjs-app
+  cd kafka-nestjs-app
+  npm install kafkajs</code></pre>
+  
+    <h2>🛠️ Kafka Service File</h2>
+    <p><code>src/kafka.service.ts</code></p>
+    <pre><code>
+  import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+  import { Kafka, Producer, Consumer } from 'kafkajs';
+  
+  @Injectable()
+  export class KafkaService implements OnModuleInit, OnModuleDestroy {
+    private kafka: Kafka;
+    private producer: Producer;
+    private consumer: Consumer;
+  
+    async onModuleInit() {
+      this.kafka = new Kafka({
+        clientId: 'nestjs-client',
+        brokers: ['&lt;BROKER_URL&gt;'], // e.g. pkc-xxxx.gcp.confluent.cloud:9092
+        ssl: true,
+        sasl: {
+          mechanism: 'plain',
+          username: '&lt;API_KEY&gt;',
+          password: '&lt;API_SECRET&gt;',
+        },
+      });
+  
+      this.producer = this.kafka.producer();
+      await this.producer.connect();
+  
+      this.consumer = this.kafka.consumer({ groupId: 'nestjs-group' });
+      await this.consumer.connect();
+      await this.consumer.subscribe({ topic: 'test-topic', fromBeginning: true });
+  
+      await this.consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+          console.log(`Received: ${message.value.toString()}`);
+        },
+      });
+    }
+  
+    async sendMessage(topic: string, message: any) {
+      await this.producer.send({
+        topic,
+        messages: [{ value: JSON.stringify(message) }],
+      });
+    }
+  
+    async onModuleDestroy() {
+      await this.producer.disconnect();
+      await this.consumer.disconnect();
+    }
+  }
+    </code></pre>
+  
+    <h2>🧩 App Module</h2>
+    <p><code>src/app.module.ts</code></p>
+    <pre><code>
+  import { Module } from '@nestjs/common';
+  import { KafkaService } from './kafka.service';
+  
+  @Module({
+    providers: [KafkaService],
+  })
+  export class AppModule {}
+    </code></pre>
+  
+    <h2>🚀 App Controller</h2>
+    <p><code>src/app.controller.ts</code></p>
+    <pre><code>
+  import { Controller, Get } from '@nestjs/common';
+  import { KafkaService } from './kafka.service';
+  
+  @Controller()
+  export class AppController {
+    constructor(private readonly kafkaService: KafkaService) {}
+  
+    @Get('send')
+    async sendMessage() {
+      await this.kafkaService.sendMessage('test-topic', { message: 'Hello Kafka' });
+      return 'Message sent';
+    }
+  }
+    </code></pre>
+  
+    <h2>▶️ Run the App</h2>
+    <pre><code>npm run start</code></pre>
+    <p>Then visit <code>http://localhost:3000/send</code> to test Kafka message sending.</p>
+  
+    <h2>🔒 Tips</h2>
+    <ul>
+      <li>Make sure your Kafka broker supports SSL + SASL.</li>
+      <li>Replace <code>&lt;BROKER_URL&gt;</code>, <code>&lt;API_KEY&gt;</code>, <code>&lt;API_SECRET&gt;</code> with real credentials.</li>
+      <li>Use free cloud Kafka providers for convenience.</li>
+    </ul>
+  
+    <h2>📚 Resources</h2>
+    <ul>
+      <li><a href="https://docs.nestjs.com/microservices/kafka" target="_blank">NestJS Kafka Docs</a></li>
+      <li><a href="https://kafka.js.org/docs" target="_blank">KafkaJS Docs</a></li>
+      <li><a href="https://www.confluent.io/cloud/" target="_blank">Confluent Cloud</a></li>
+      <li><a href="https://www.cloudkarafka.com/" target="_blank">CloudKarafka</a></li>
+    </ul>
+  
+
+    </div></li>
+
 
 
 
