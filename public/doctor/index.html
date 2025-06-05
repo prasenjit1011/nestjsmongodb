@@ -45,7 +45,7 @@ tailwind
 <li data-id="q53337">
   <span class="faq-question">Security Practices in Node.js?</span>
   <div class="answer">
-    <ul>
+    <ol>
       <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
       <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
       <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
@@ -57,7 +57,7 @@ tailwind
       <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
       <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
       <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
-    </ul>
+    </ol>
   </div>
 </li>
 
@@ -2046,17 +2046,18 @@ const http = require('http');
 const numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
-for (let i = 0; i < numCPUs; i++) {
-cluster.fork();
-}
-cluster.on('exit', (worker) => {
-console.log(`Worker ${worker.process.pid} died, spawning a new one.`);
-cluster.fork();
-});
-} else {
-http.createServer((req, res) =&gt; {
-res.end('Hello from worker ' + process.pid);
-}).listen(8000);
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  cluster.on('exit', (worker) => {
+    console.log(`Worker ${worker.process.pid} died, spawning a new one.`);
+    cluster.fork();
+  });
+} 
+else {
+  http.createServer((req, res) =&gt; {
+    res.end('Hello from worker ' + process.pid);
+  }).listen(8000);
 }
 </code></pre>
 
@@ -2270,28 +2271,111 @@ SOLID is a set of five design principles aimed at making software designs more u
 Applying SOLID improves code quality and eases maintenance.
 </div></li>
 
-<li data-id="q_datatypes"><span class="faq-question">
-Data types in JavaScript?
-</span><div class="answer">
-JavaScript has two main types of data types:<br><br>
+<li data-id="q_datatypes"><span class="faq-question green">
+  Data types in JavaScript?
+  </span><div class="answer">
+  JavaScript has two main types of data types:<br><br>
+  
+  <strong>1. Primitive Types:</strong><br>
+  - <b>String</b>: e.g., "hello"<br>
+  - <b>Number</b>: e.g., 123, 3.14<br>
+  - <b>Boolean</b>: true or false<br>
+  - <b>Undefined</b>: a variable declared but not assigned<br>
+  - <b>Null</b>: intentional absence of any value<br>
+  - <b>Symbol</b>: unique and immutable value<br>
+  - <b>BigInt</b>: for large integers beyond Number limits<br><br>
+  
+  <strong>2. Non-Primitive (Reference) Types:</strong><br>
+  - <b>Object</b>: includes arrays, functions, dates, etc.<br><br>
+  
+  Primitive types are compared by value, while objects are compared by reference.
+  </div></li>
 
-<strong>1. Primitive Types:</strong><br>
-- <code>String</code>: e.g., "hello"<br>
-- <code>Number</code>: e.g., 123, 3.14<br>
-- <code>Boolean</code>: true or false<br>
-- <code>Undefined</code>: a variable declared but not assigned<br>
-- <code>Null</code>: intentional absence of any value<br>
-- <code>Symbol</code>: unique and immutable value<br>
-- <code>BigInt</code>: for large integers beyond Number limits<br><br>
 
-<strong>2. Non-Primitive (Reference) Types:</strong><br>
-- <code>Object</code>: includes arrays, functions, dates, etc.<br><br>
+  <li data-id="q64446">
 
-Primitive types are compared by value, while objects are compared by reference.
-</div></li>
-
-
-
+    <span class="faq-question">What is the difference between <b>var</b>, <b>let</b>, and <b>const</b> in JavaScript?</span>
+    <div class="answer">
+      These three keywords are used to declare variables in JavaScript but differ in scope, hoisting, and mutability.
+      
+      <h4>1. var</h4>
+      <ul>
+        <li><strong>Scope:</strong> Function-scoped</li>
+        <li><strong>Hoisting:</strong> Hoisted and initialized with <b>undefined</b></li>
+        <li><strong>Re-declaration:</strong> Allowed</li>
+        <li><strong>Use:</strong> Considered outdated; avoid in modern code</li>
+      </ul>
+      <pre><code>
+  function test() {
+    var x = 1;
+    if (true) {
+      var x = 2;
+      console.log(x); // 2
+    }
+    console.log(x); // 2
+  }
+      </code></pre>
+  
+      <h4>2. let</h4>
+      <ul>
+        <li><strong>Scope:</strong> Block-scoped</li>
+        <li><strong>Hoisting:</strong> Hoisted but not initialized (temporal dead zone)</li>
+        <li><strong>Re-declaration:</strong> Not allowed in same scope</li>
+        <li><strong>Use:</strong> For variables that will change</li>
+      </ul>
+      <pre><code>
+  let x = 1;
+  x = 2; // Allowed
+      </code></pre>
+  
+      <h4>3. const</h4>
+      <ul>
+        <li><strong>Scope:</strong> Block-scoped</li>
+        <li><strong>Hoisting:</strong> Hoisted but not initialized</li>
+        <li><strong>Re-assignment:</strong> Not allowed</li>
+        <li><strong>Use:</strong> For variables that shouldn't change (e.g., constants)</li>
+      </ul>
+      <pre><code>
+  const y = 10;
+  y = 20; // ❌ Error
+  const obj = { a: 1 };
+  obj.a = 2; // ✅ Allowed (reference not reassigned)
+      </code></pre>
+  
+      <h4>Summary Table:</h4>
+      <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+          <th>Keyword</th>
+          <th>Scope</th>
+          <th>Hoisted</th>
+          <th>Re-declarable</th>
+          <th>Re-assignable</th>
+        </tr>
+        <tr>
+          <td><b>var</b></td>
+          <td>Function</td>
+          <td>Yes (undefined)</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><b>let</b></td>
+          <td>Block</td>
+          <td>Yes (but TDZ)</td>
+          <td>No</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><b>const</b></td>
+          <td>Block</td>
+          <td>Yes (but TDZ)</td>
+          <td>No</td>
+          <td>No (but object props mutable)</td>
+        </tr>
+      </table>
+    </div>
+  </li>
+  
 
 
 
@@ -3525,7 +3609,7 @@ DB Indexing
 
   
 
-    <p><strong>Database indexing</strong> is a data structure technique used to quickly locate and access data in a database. It improves <strong>read</strong> performance (especially <code>SELECT</code> queries) by reducing the number of rows scanned.</p>
+    <p><strong>Database indexing</strong> is a data structure technique used to quickly locate and access data in a database. It improves <strong>read</strong> performance (especially <b>SELECT</b> queries) by reducing the number of rows scanned.</p>
   
     <h2>🧠 Analogy</h2>
     <p>Think of an index in a book. Instead of reading every page to find a topic, you look it up in the index → it tells you the page number → you go directly there.</p>
@@ -4461,14 +4545,14 @@ DB Indexing
         <div class="answer">
           Yes, a Lambda function can invoke another Lambda using the AWS SDK or AWS CLI. This is useful for microservice architectures or function chaining.<br />
           Example in Node.js:
-          <pre><code>
-      const AWS = require('aws-sdk');
-      const lambda = new AWS.Lambda();
-      lambda.invoke({
-        FunctionName: 'anotherLambdaFunction',
-        Payload: JSON.stringify({ key: 'value' })
-      }, (err, data) => { ... });
-          </code></pre>
+<pre>
+const AWS = require('aws-sdk');
+const lambda = new AWS.Lambda();
+lambda.invoke({
+  FunctionName: 'anotherLambdaFunction',
+  Payload: JSON.stringify({ key: 'value' })
+}, (err, data) => { ... });
+</pre>
           Make sure the calling Lambda has the IAM permission <code>lambda:InvokeFunction</code>.
         </div>
       </li>
