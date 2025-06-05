@@ -16,8 +16,10 @@
 <a href="/doctor/kafka.html">Kafka</a> &nbsp; 
 <a href="kafka-interview.html">Kafka Interview</a> &nbsp; 
 <a href="mongodb.html">Mongo DB</a> &nbsp; 
+<a href="DynamoDB.html">Dynamo DB</a> &nbsp; 
 <a href="code.html">Promise</a> &nbsp; 
 <a href="coding.html">Coding</a> &nbsp; 
+<a href="skill.html">Skill</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 
 <ul class="faq">
@@ -362,6 +364,229 @@ fs.createReadStream('input.txt')
   </li>
 </ul>
 
+<ul class="faq">
+  <li data-id="q129">
+    <span class="faq-question green">Sharding in Databases?</span>
+    <div class="answer">
+      <strong>Sharding</strong> is a database architecture pattern used to horizontally partition large datasets across multiple databases (shards). Each shard holds a subset of the data, and all shards together form a complete dataset. <br />
+
+      <strong>Conclusion:</strong>
+      Sharding enables horizontal scalability for databases by breaking big data into smaller, manageable parts. It’s powerful but requires careful planning and design.
+
+      <br><br>
+    <code>
+      <strong>Why use Sharding?</strong>
+      <ol>
+        <li>Improves performance and scalability by distributing load.</li>
+        <li>Reduces contention and I/O bottlenecks on a single server.</li>
+        <li>Enables handling of large datasets that exceed a single machine's capacity.</li>
+      </ol>
+      <br />
+      <strong>How it works:</strong>
+      <ol>
+        <li>Data is split based on a <strong>shard key</strong> (e.g., user ID, region).</li>
+        <li>Each shard can be hosted on a different physical or logical server.</li>
+        <li>The application or a routing layer determines where to read/write data.</li>
+      </ol>
+    <br />
+
+      <strong>Example:</strong>
+      <ol>
+        <li>Instead of storing 100 million user records in one DB, you shard them across 10 databases, each storing 10 million.</li>
+        <li>User IDs 1-10M → Shard 1, 10M-20M → Shard 2, etc.</li>
+      </ol>
+
+    </code>
+
+    <code>
+      <strong>Sharding Strategies:</strong>
+      <ol>
+        <li><strong>Range-based:</strong> Divide data based on value ranges (e.g., date, ID).</li>
+        <li><strong>Hash-based:</strong> Apply a hash function on the shard key.</li>
+        <li><strong>Geo-based:</strong> Partition by location (e.g., country, region).</li>
+      </ol>
+    </code>
+    <br />
+      <code>
+      <strong>Challenges:</strong>
+      <ol>
+        <li>Cross-shard joins and transactions are complex or inefficient.</li>
+        <li>Resharding (changing shard strategy) can be hard.</li>
+        <li>Requires good shard key design to avoid hotspots.</li>
+      </ol>
+    </code>
+      <br />
+      <code>
+      <strong>Databases that support sharding:</strong>
+      <ol>
+        <li>MongoDB – Native sharding support</li>
+        <li>Cassandra – Automatically partitions data</li>
+        <li>PostgreSQL/MySQL – Via manual partitioning or middleware (e.g., Citus, Vitess)</li>
+      </ol>
+      </code>
+
+<pre>
+
+  // NestJS Sharding Example with MySQL (manual routing by user ID)
+
+  // 1. DatabaseConfigService - handles connections to multiple shards
+  @Injectable()
+  export class DatabaseConfigService {
+    private shardConnections: Record<string, DataSource> = {};
+  
+    constructor() {
+      // Simulate 2 shards for example
+      this.shardConnections["shard1"] = new DataSource({
+        type: "mysql",
+        host: "localhost",
+        port: 3306,
+        username: "root",
+        password: "password",
+        database: "user_shard_1",
+        entities: [User],
+        synchronize: true,
+      });
+  
+      this.shardConnections["shard2"] = new DataSource({
+        type: "mysql",
+        host: "localhost",
+        port: 3306,
+        username: "root",
+        password: "password",
+        database: "user_shard_2",
+        entities: [User],
+        synchronize: true,
+      });
+    }
+  
+    async initConnections() {
+      for (const shard of Object.values(this.shardConnections)) {
+        if (!shard.isInitialized) await shard.initialize();
+      }
+    }
+  
+    getShard(userId: number): DataSource {
+      return userId % 2 === 0 ? this.shardConnections["shard1"] : this.shardConnections["shard2"];
+    }
+  
+    getAllShards(): DataSource[] {
+      return Object.values(this.shardConnections);
+    }
+  }
+  
+  // 2. User Entity
+  @Entity()
+  export class User {
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    name: string;
+  
+    @Column()
+    email: string;
+  }
+  
+  // 3. UserService - routes DB calls to the correct shard
+  @Injectable()
+  export class UserService {
+    constructor(private dbService: DatabaseConfigService) {}
+  
+    async findAll(userId: number): Promise<User[]> {
+      const shard = this.dbService.getShard(userId);
+      const userRepo = shard.getRepository(User);
+      return userRepo.find();
+    }
+  
+    async create(userId: number, dto: { name: string; email: string }): Promise<User> {
+      const shard = this.dbService.getShard(userId);
+      const userRepo = shard.getRepository(User);
+      const user = userRepo.create(dto);
+      return userRepo.save(user);
+    }
+  
+    async findByEmail(email: string): Promise<User | null> {
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const user = await userRepo.findOne({ where: { email } });
+        if (user) return user;
+      }
+      return null;
+    }
+  
+    async findById(id: number): Promise<User | null> {
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const user = await userRepo.findOne({ where: { id } });
+        if (user) return user;
+      }
+      return null;
+    }
+  
+    async findByName(name: string): Promise<User[]> {
+      const results: User[] = [];
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const users = await userRepo.find({ where: { name } });
+        results.push(...users);
+      }
+      return results;
+    }
+  }
+  
+  // 4. UserController
+  @Controller('users')
+  export class UserController {
+    constructor(private userService: UserService) {}
+  
+    @Get(':userId')
+    async getUsers(@Param('userId', ParseIntPipe) userId: number) {
+      return this.userService.findAll(userId);
+    }
+  
+    @Post(':userId')
+    async createUser(@Param('userId', ParseIntPipe) userId: number, @Body() body) {
+      return this.userService.create(userId, body);
+    }
+  
+    @Get('email/:email')
+    async getUserByEmail(@Param('email') email: string) {
+      return this.userService.findByEmail(email);
+    }
+  
+    @Get('id/:id')
+    async getUserById(@Param('id', ParseIntPipe) id: number) {
+      return this.userService.findById(id);
+    }
+  
+    @Get('name/:name')
+    async getUserByName(@Param('name') name: string) {
+      return this.userService.findByName(name);
+    }
+  }
+  
+  // 5. AppModule
+  @Module({
+    imports: [],
+    controllers: [UserController],
+    providers: [UserService, DatabaseConfigService],
+  })
+  export class AppModule {
+    constructor(private dbService: DatabaseConfigService) {}
+  
+    async onModuleInit() {
+      await this.dbService.initConnections();
+    }
+  }
+  
+  
+</pre>
+
+
+
+    </div>
+  </li>
+</ul>
 
 
 <li data-id="q_redux_formatted"><span class="faq-question">
@@ -3164,13 +3389,18 @@ DB Indexing
     </div></li>
 
 
-
+    <li data-id="DynamoDBQQ"><span class="faq-question green">
+      DynamoDB Questions***
+      </span><div class="answer">
+<a href="DynamoDB.html">Read More</a>
+    </div></li>
+    
 
 
 
 
     <li data-id="q_call_api_without_useeffect"><span class="faq-question green">
-      AWS Lambda
+      Lambda : Question?
       </span><div class="answer">
       
       <ol>
@@ -3204,16 +3434,14 @@ DB Indexing
       </div></li>
     
       <li data-id="q_what_is_lambda">
-        <span class="faq-question">What is AWS Lambda?</span>
+        <span class="faq-question green">Lambda?</span>
         <div class="answer">
-          AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. You simply upload your function code, and Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_features">
-        <span class="faq-question">What are the key features of AWS Lambda?</span>
-        <div class="answer">
-          Key features of AWS Lambda include:
+          AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
+          <br />Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
+        
+          <br />
+          <br />
+          <b>Key features of AWS Lambda include:</b>
           <ul>
             <li>No server management</li>
             <li>Automatic scaling</li>
@@ -3245,6 +3473,125 @@ DB Indexing
         </div>
       </li>
       
+
+        <li data-id="q1uuuy">
+          <span class="faq-question">Lambda: Keeping functions warm using scheduled CloudWatch Events</span>
+          <div class="answer">
+            <p>In AWS Lambda, <strong>cold starts</strong> happen when your function is invoked after being idle, causing latency due to container initialization. One common technique to <strong>keep Lambda functions warm</strong> is using <strong>Amazon CloudWatch Events (EventBridge)</strong> to invoke the function on a regular schedule.</p>
+      
+            <h4>✅ Steps to Keep Lambda Warm with CloudWatch Scheduled Events</h4>
+      
+            <h5>1. Create a CloudWatch Event Rule</h5>
+            <p>This will run every 5 minutes (or less) to trigger the Lambda and keep it warm.</p>
+            <p><strong>Example: rate expression:</strong><br><code>rate(5 minutes)</code></p>
+            <p><strong>Example: cron expression:</strong><br><code>cron(0/5 * * * ? *)</code></p>
+      
+            <h5>2. Attach Lambda as the Target</h5>
+            <p>Use the AWS Management Console or CLI to set the Lambda function as the target of the scheduled rule.</p>
+      
+            <h5>3. Lambda Code (Optional: Check <code>source</code> to filter warm-up calls)</h5>
+            <pre><code>exports.handler = async (event) =&gt; {
+        if (event.source === 'aws.events') {
+          console.log("Warm-up ping received");
+          return "Lambda is warm";
+        }
+      
+        // Normal Lambda logic here
+        console.log("Normal execution");
+        return "Processed request";
+      };</code></pre>
+      
+            <h4>🛠️ AWS CLI Example</h4>
+            <pre><code>aws events put-rule \
+        --name keep-lambda-warm \
+        --schedule-expression "rate(5 minutes)"
+      
+      aws lambda add-permission \
+        --function-name myLambdaFunction \
+        --statement-id allow-scheduled-invoke \
+        --action 'lambda:InvokeFunction' \
+        --principal events.amazonaws.com \
+        --source-arn arn:aws:events:&lt;region&gt;:&lt;account-id&gt;:rule/keep-lambda-warm
+      
+      aws events put-targets \
+        --rule keep-lambda-warm \
+        --targets "Id"="1","Arn"="arn:aws:lambda:&lt;region&gt;:&lt;account-id&gt;:function:myLambdaFunction"</code></pre>
+      
+            <h4>🔥 Best Practices</h4>
+            <ul>
+              <li>Use a <strong>lightweight payload</strong> to reduce cost.</li>
+              <li>For <strong>multiple Lambdas</strong>, consolidate into a single “warming” function that calls others asynchronously.</li>
+              <li>Use <code>Provisioned Concurrency</code> for critical APIs (more reliable but has cost).</li>
+            </ul>
+          </div>
+        </li>
+      
+      
+        
+          <li data-id="q2">
+            <span class="faq-question green">Step-by-Step: Create a CloudWatch Event Rule to keep an API warm</span>
+            <div class="answer">
+              <p>This guide shows how to use <strong>Amazon EventBridge (CloudWatch Events)</strong> to ping an API endpoint like:</p>
+              <p><code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></p>
+        
+              <h4>✅ Goal</h4>
+              <p>Invoke a Lambda function or API Gateway endpoint every 5 minutes to keep it warm and avoid cold starts.</p>
+        
+              <h4>🧩 Step-by-Step: Using AWS Console to Call an API URL</h4>
+        
+              <h5>🟢 1. Go to <strong>EventBridge</strong></h5>
+              <ul>
+                <li>Sign in to the AWS Console</li>
+                <li>Open <strong>Amazon EventBridge</strong> from the "Management &amp; Governance" section</li>
+              </ul>
+        
+              <h5>🟢 2. Create Rule</h5>
+              <ul>
+                <li>Click <strong>“Rules” &gt; “Create rule”</strong></li>
+                <li>Rule name: <code>keep-api-warm</code></li>
+                <li>Description: <code>Keep API Gateway warm</code></li>
+                <li><strong>Event Source:</strong> “EventBridge (default bus)”</li>
+                <li><strong>Rule type:</strong> “Schedule”</li>
+              </ul>
+        
+              <h5>🟢 3. Set Schedule</h5>
+              <ul>
+                <li>Select: <strong>rate expression</strong></li>
+                <li>Input: <code>rate(5 minutes)</code></li>
+              </ul>
+        
+              <h5>🟢 4. Add Target (API Gateway or Custom URL)</h5>
+              <p>Since you are calling an external API endpoint:</p>
+              <ul>
+                <li>Choose <strong>Target type:</strong> <code>API destination</code></li>
+                <li>Click <strong>Create a new API destination</strong></li>
+              </ul>
+        
+              <h5>🔧 Set up API Destination</h5>
+              <ul>
+                <li>Name: <code>KeepWarmDestination</code></li>
+                <li>Method: <code>GET</code> or <code>POST</code> (depending on your endpoint)</li>
+                <li>Endpoint URL: <code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></li>
+                <li>Create a <strong>Connection</strong> (e.g., <code>AnonymousConnection</code>) if no auth is needed</li>
+                <li>Choose <strong>No authentication</strong> or <strong>API Key</strong> as required</li>
+              </ul>
+        
+              <p>Then click <strong>Next</strong>, review, and <strong>Create rule</strong>.</p>
+        
+              <h4>✅ Result</h4>
+              <p>EventBridge will call your API endpoint every 5 minutes to prevent cold starts.</p>
+        
+              <h4>⚠️ Notes</h4>
+              <ul>
+                <li>Ensure the API doesn’t require a specific payload (default is empty).</li>
+                <li>Monitor usage via CloudWatch Logs.</li>
+                <li>You can also create a “warm-up Lambda” that pings the endpoint if more flexibility is needed.</li>
+              </ul>
+            </div>
+          </li>
+        
+        
+
       <li data-id="q_lambda_pricing">
         <span class="faq-question">How does AWS Lambda pricing work?</span>
         <div class="answer">
