@@ -34,11 +34,13 @@
     }
 
     pre.code-block {
+      flex-basis:  70%;
       background: #f4f4f4;
       border-right: 1px solid #ccc;
     }
 
     pre.output-block {
+      flex-basis: 30%;
       background: #272822;
       color: #fff;
       white-space: pre-wrap;
@@ -74,6 +76,20 @@
           output("One failed: " + err);
         });
 
+      //====================================== 
+        async function fetchData() {
+          try {
+            const results = await Promise.all([p1, p2, p3]);
+            output("All success1: " + JSON.stringify(results));
+          } catch (err) {
+            output("One failed1: " + err);
+          }
+        }
+        
+        fetchData();
+        
+
+
 
     // aaaabbccccddccffaaccbbf => 
     // a4b2c3d3
@@ -99,7 +115,8 @@
       }
     })
     
-    console.log('Largest Number with key : ',x1, z1, max); // Output: 8, [ 'c', 8 ]
+    console.log('Largest Number with key : ',x1, z1, max); 
+    // Output: 8, [ 'c', 8 ]
     
     
     console.log('Reverse Integer Array Element : ', 
@@ -354,6 +371,18 @@
       .catch(err => {
         output("One failed: " + err);
       });
+
+
+      async function fetchData() {
+          try {
+            const results = await Promise.all([p1, p2, p3]);
+            console.log("All success1: " + JSON.stringify(results));
+          } catch (err) {
+            console.log("One failed1: " + err);
+          }
+        }
+        
+        fetchData();
 
     function output(text) {
       document.getElementById("output").textContent += text + "\n";

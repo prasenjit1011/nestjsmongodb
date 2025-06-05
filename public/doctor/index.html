@@ -40,6 +40,329 @@ tailwind
 </div></li>
 
 
+<ul class="faq">
+  <li data-id="q124">
+    <span class="faq-question">Shallow copy vs Deep copy?</span>
+    <div class="answer">
+      In Node.js (and JavaScript), copying an object or array can be done in two ways: <strong>shallow copy</strong> and <strong>deep copy</strong>.
+
+      <br><br><strong>Shallow Copy:</strong>
+      <ul>
+        <li>Copies only the top-level properties of an object.</li>
+        <li>Nested objects are still referenced, not copied.</li>
+        <li>Changes to nested objects in the copy affect the original.</li>
+      </ul>
+
+      <strong>Example:</strong>
+      <pre><code>
+const original = { name: 'Dev', address: { city: 'Kolkata' } };
+const shallow = { ...original };
+
+shallow.address.city = 'Delhi';
+console.log(original.address.city); // Output: 'Delhi' (original is affected)
+      </code></pre>
+
+      <br><strong>Deep Copy:</strong>
+      <ul>
+        <li>Creates a full, independent copy of the object and all nested objects.</li>
+        <li>Changes to the copy do not affect the original.</li>
+      </ul>
+
+      <strong>Example (using JSON):</strong>
+      <pre><code>
+const original = { name: 'Dev', address: { city: 'Kolkata' } };
+const deep = JSON.parse(JSON.stringify(original));
+
+deep.address.city = 'Delhi';
+console.log(original.address.city); // Output: 'Kolkata' (original not affected)
+      </code></pre>
+
+      <strong>Note:</strong> JSON method doesn’t handle functions, Dates, undefined, RegExp, etc.
+
+      <br><br><strong>Advanced Deep Copy (using lodash):</strong>
+      <pre><code>
+const _ = require('lodash');
+const deep = _.cloneDeep(original);
+      </code></pre>
+
+      <strong>Summary:</strong>
+      <table border="1" cellpadding="5">
+        <tr><th>Type</th><th>Nested Objects</th><th>Use Case</th></tr>
+        <tr><td>Shallow Copy</td><td>Referenced</td><td>Simple or flat objects</td></tr>
+        <tr><td>Deep Copy</td><td>Copied recursively</td><td>Complex or nested objects</td></tr>
+      </table>
+    </div>
+  </li>
+</ul>
+
+
+<ul class="faq">
+  <li data-id="q127">
+    <span class="faq-question">Buffer?</span>
+    <div class="answer">
+      
+
+<code>
+  A <strong>Buffer</strong> in Node.js is a built-in class that allows you to work with raw binary data directly in memory, especially useful when dealing with streams, file systems, TCP sockets, etc. It represents a fixed-size chunk of memory allocated outside the V8 heap.
+  <br />
+  <br />
+<b>Buffers are not resizable. </b><br />If you need a resizable array of binary data, consider using <b>Uint8Array or Streams with chunks.</b>
+  
+<br><br><strong>Why Buffers?</strong>
+<ol>
+  <li>JavaScript strings are Unicode and not ideal for binary data.</li>
+  <li>Buffers allow handling binary data (e.g., images, files, sockets) directly.</li>
+</ol>
+<br />
+  
+<strong>Use Cases:</strong>
+<ol>
+<li>Reading and writing files</li>
+<li>Handling stream data (e.g. TCP, HTTP)</li>
+<li>Binary data manipulation (e.g. image processing, encryption)</li>
+</ol>
+
+</code>
+
+
+
+
+      
+<pre>
+<strong>Create a Buffer:</strong>
+  const buf = Buffer.from('hello');
+  console.log(buf);           // &lt;Buffer 68 65 6c 6c 6f&gt;
+  console.log(buf.toString()); // hello
+</pre>
+      
+<code>
+  <strong>Buffer Methods:</strong>
+  <ol>
+  <li>Buffer.from() – creates buffer from string/array/arrayBuffer</li>
+  <li>Buffer.alloc(size) – creates a zero-filled buffer of given size</li>
+  <li>Buffer.concat([buf1, buf2]) – joins multiple buffers</li>
+  <li>buf.toString() – converts buffer to human-readable string</li>
+  <li>buf.length – gets size of buffer in bytes</li>
+  </ol>
+</code>
+
+<pre>
+  <strong>Example – Buffer concatenation:</strong>
+  const a = Buffer.from('Node');
+  const b = Buffer.from('JS');
+  const combined = Buffer.concat([a, b]);
+  console.log(combined.toString()); // NodeJS
+</pre>
+
+      
+    </div>
+  </li>
+</ul>
+
+
+<ul class="faq">
+  <li data-id="q125">
+    <span class="faq-question">Stream?</span>
+    <div class="answer">
+      A <strong>Stream</strong> in Node.js is an abstract interface for working with streaming data. Streams are used to handle large data efficiently by processing it in chunks instead of loading it all into memory at once.
+      
+      <br />
+      <strong>Why use Streams?</strong>
+    <code>
+      <ul>
+        <li>Efficient memory usage for large files or data.</li>
+        <li>Non-blocking, event-driven architecture.</li>
+        <li>Used internally in many Node.js APIs (e.g., HTTP, file system, process).</li>
+      </ul>
+    </code>
+      <br /><br>
+      <strong>Types of Streams:</strong>
+      <code>
+      <ul>
+        <li><strong>Readable:</strong> For reading data (e.g., fs.createReadStream()).</li>
+        <li><strong>Writable:</strong> For writing data (e.g., fs.createWriteStream()).</li>
+        <li><strong>Duplex:</strong> Can read and write (e.g., TCP sockets).</li>
+        <li><strong>Transform:</strong> Duplex stream that can modify or transform data (e.g., zlib.createGzip()).</li>
+      </ul>
+      </code>
+
+      <br />
+
+      <strong>Common stream events:</strong>
+      <code>
+      <ul>
+        <li>data – emitted when data is available to read.</li>
+        <li>end – no more data</li>
+        <li>error – error occurred</li>
+        <li>finish – finished writing</li>
+      </ul>
+      </code>
+      <br />
+
+      <strong>Basic Example (File Stream):</strong>
+      <pre>
+const fs = require('fs');
+const readable = fs.createReadStream('input.txt');
+const writable = fs.createWriteStream('output.txt');
+readable.pipe(writable);
+-------------------------------------
+
+readable.on('data', chunk => {
+  console.log('Chunk:', chunk.toString());
+});
+
+readable.on('end', () => {
+  console.log('Finished reading.');
+});
+      </pre>
+    </div>
+  </li>
+</ul>
+
+<ul class="faq">
+  <li data-id="q126">
+    <span class="faq-question">Pipe?</span>
+    <div class="answer">
+      <code>In Node.js, .pipe() is a method used to connect the output of a <strong>readable stream</strong> to the input of a <strong>writable stream</strong>. It allows data to flow automatically from source to destination, handling backpressure internally.</code>
+      <br />
+<pre>
+Syntax: readableStream.pipe(writableStream);
+Why use pipe()?
+  1. Simplifies stream handling.
+  2. Automatically manages flow control (backpressure).
+  3. Used for reading/writing large files, zipping, HTTP responses, etc.
+</pre>
+
+      <strong>Basic Example:</strong>
+      <pre><code>
+const fs = require('fs');
+
+const readable = fs.createReadStream('input.txt');
+const writable = fs.createWriteStream('output.txt');
+
+readable.pipe(writable);
+      </code></pre>
+
+      <strong>Behind the Scenes:</strong> <code>pipe()</code> listens for <code>data</code>, <code>end</code>, <code>error</code> events, and handles flow control — pausing the readable stream when the writable stream can't keep up.
+
+      <strong>Chaining Pipes (with transform stream):</strong>
+      <pre><code>
+const zlib = require('zlib');
+const fs = require('fs');
+
+fs.createReadStream('file.txt')
+  .pipe(zlib.createGzip())              // compress the stream
+  .pipe(fs.createWriteStream('file.txt.gz')); // write compressed file
+      </code></pre>
+
+      <strong>Real-World Use Cases:</strong>
+      <ul>
+        <li>File copy or backup utilities.</li>
+        <li>Compression/decompression (Gzip, Brotli).</li>
+        <li>Video/audio streaming servers.</li>
+        <li>Streaming data from a file to an HTTP response.</li>
+      </ul>
+
+      <strong>Note:</strong> Use <code>pipeline()</code> from <code>stream</code> module for better error handling in complex piping:
+      <pre><code>
+const { pipeline } = require('stream');
+pipeline(
+  fs.createReadStream('a.txt'),
+  fs.createWriteStream('b.txt'),
+  (err) => { if (err) console.error('Pipeline failed:', err); }
+);
+      </code></pre>
+    </div>
+  </li>
+</ul>
+
+
+<ul class="faq">
+  <li data-id="q128">
+    <span class="faq-question green">Buffer vs Stream vs Pipe?</span>
+    <div class="answer">
+      These three concepts are commonly used in Node.js for handling data — especially large or binary data — but they serve different purposes.
+
+      <br><code><strong>🔹 Buffer:</strong>
+      <ol>
+        <li>A <strong>Buffer</strong> holds binary data in memory as a fixed-size chunk.</li>
+        <li>Best for small/medium-sized data you want to work with all at once.</li>
+        <li>Can become memory-intensive for large files.</li>
+        <li>Example: const buf = Buffer.from('hello');</li>
+      </ol>
+      </code>
+<br />
+      <code>
+      <strong>🔹 Stream:</strong>
+      <ol>
+        <li>A <strong>Stream</strong> is an event-based abstraction for continuous data flow.</li>
+        <li>Processes data in <strong>chunks</strong>, without loading the entire content in memory.</li>
+        <li>Efficient for large files, real-time data (e.g., file I/O, HTTP requests).</li>
+        <li>Types: Readable, Writable, Duplex, Transform</li>
+        <li>Example:
+          <pre>
+const fs = require('fs');
+const stream = fs.createReadStream('file.txt');
+stream.on('data', chunk => console.log(chunk.toString()));
+          </pre>
+        </li>
+      </ol>
+    </code>
+<br />
+      <code>
+      <strong>🔹 Pipe:</strong>
+      <ol>
+        <li><strong>pipe()</strong> is a helper method used to connect two streams: readable → writable.</li>
+        <li>Transfers data automatically while managing flow control (backpressure).</li>
+        <li>Common for file copy, compression, HTTP response streaming, etc.</li>
+        <li>Example:
+          <pre><code>
+fs.createReadStream('input.txt')
+  .pipe(fs.createWriteStream('output.txt'));
+          </code></pre>
+        </li>
+      </ol>
+    </code>
+    <br />
+
+      <strong>🟩 Summary Table:</strong>
+      <table border="1" cellpadding="5">
+        <tr>
+          <th>Feature</th><th>Buffer</th><th>Stream</th><th>Pipe</th>
+        </tr>
+        <tr>
+          <td>Purpose</td>
+          <td>Store binary data in memory</td>
+          <td>Read/write data in chunks</td>
+          <td>Connect readable to writable stream</td>
+        </tr>
+        <tr>
+          <td>Memory Usage</td>
+          <td>High for large files</td>
+          <td>Low (chunked)</td>
+          <td>Depends on stream</td>
+        </tr>
+        <tr>
+          <td>Speed</td>
+          <td>Fast for small data</td>
+          <td>Efficient for large data</td>
+          <td>Efficient & automated</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>Binary operations</td>
+          <td>Large file/network I/O</td>
+          <td>Chaining streams</td>
+        </tr>
+      </table>
+
+      <br><strong>Conclusion:</strong>
+      Use <code>Buffer</code> for small chunks of binary data, <code>Stream</code> when dealing with large or continuous data, and <code>pipe()</code> to connect and automate stream workflows.
+    </div>
+  </li>
+</ul>
+
+
 
 <li data-id="q_redux_formatted"><span class="faq-question">
   Redux
@@ -768,11 +1091,50 @@ Handle concurrency if it's single-threaded?
 Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy tasks are delegated to worker threads or the OS, enabling multiple tasks to be processed concurrently.
 </div></li>
 
+
+<ul class="faq">
+  <li data-id="q122">
+    <span class="faq-question">Higher order function / Callback function?</span>
+    <div class="answer">
+      A callback is a function passed as an argument to another function. It’s executed after the completion of an asynchronous operation, allowing non-blocking behavior in Node.js.
+      </div>
+    <div class="answer">
+      A <strong>higher-order function</strong> is a function that either:
+      <ul>
+        <li>Takes one or more functions as arguments (callbacks), or</li>
+        <li>Returns a function as its result.</li>
+      </ul>
+      These are a key part of JavaScript and Node.js functional programming style.
+
+      <br><br><strong>Example:</strong>
+      <pre><code>
+function greet(name) {
+  return `Hello, ${name}`;
+}
+
+function higherOrder(fn, value) {
+  return fn(value);
+}
+
+console.log(higherOrder(greet, 'Node.js')); // Output: Hello, Node.js
+      </code></pre>
+
+      <strong>Common higher-order functions in Node.js:</strong>
+      <ul>
+        <li><code>Array.prototype.map()</code></li>
+        <li><code>Array.prototype.filter()</code></li>
+        <li><code>Array.prototype.reduce()</code></li>
+        <li>Custom middleware functions in Express.js</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
 <li data-id="q5"><span class="faq-question">
 Callback?
-</span><div class="answer">
-A callback is a function passed as an argument to another function. It’s executed after the completion of an asynchronous operation, allowing non-blocking behavior in Node.js.
-</div></li>
+</span></li>
+
+
 <li data-id="q8"><span class="faq-question">
 Streams?
 </span><div class="answer">
@@ -3397,6 +3759,38 @@ return &lt;button onClick={fetchData}&gt;Fetch Data&lt;/button&gt;;
 
 Direct API calls in render are discouraged to avoid repeated calls on every render.
 </div></li>
+
+
+
+
+
+<ul class="faq">
+  <li data-id="q123">
+    <span class="faq-question">Shadow copy?</span>
+    <div class="answer">
+      A <strong>shadow copy</strong> (also known as a **snapshot** or **Volume Shadow Copy**) refers to a backup or snapshot of computer files or volumes, even when they are in use. It is primarily used in Windows operating systems for backup and restore purposes.
+
+      <br><br><strong>Key points:</strong>
+      <ul>
+        <li>Created using the <code>Volume Shadow Copy Service (VSS)</code>.</li>
+        <li>Allows consistent backups of files that are currently in use (e.g., databases).</li>
+        <li>Used by features like System Restore, Backup and Restore, and third-party backup software.</li>
+        <li>Can be scheduled or triggered manually by system tools or scripts.</li>
+      </ul>
+
+      <strong>Use cases:</strong>
+      <ul>
+        <li>Restoring previous versions of files/folders.</li>
+        <li>Backing up live databases or application data without downtime.</li>
+      </ul>
+
+      <strong>Command example (Windows CLI):</strong>
+      <pre><code>vssadmin list shadows</code></pre>
+
+      <strong>Note:</strong> Shadow copy is a system-level feature and not directly related to JavaScript or Node.js, unless interacting with system-level APIs or performing native operations.
+    </div>
+  </li>
+</ul>
 
 
 
