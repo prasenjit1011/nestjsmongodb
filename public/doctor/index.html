@@ -2411,7 +2411,7 @@ What is Event Bubbling in ReactJS?
 
 
 
-    <li data-id="q1">
+    <li data-id="q1ddd">
       <span class="faq-question">What is TypeScript? How is it different from JavaScript?</span>
       <div class="answer">
         TypeScript is a statically typed superset of JavaScript that adds type safety and other powerful features like interfaces, enums, and generics. Unlike JavaScript, TypeScript code must be compiled to JavaScript before it runs in the browser or Node.js.
@@ -2428,46 +2428,69 @@ What is Event Bubbling in ReactJS?
     <li data-id="q3">
       <span class="faq-question">How do you compile TypeScript to JavaScript?</span>
       <div class="answer">
-        You compile TypeScript to JavaScript using the <code>tsc</code> (TypeScript compiler) command in the terminal: <code>tsc filename.ts</code>. It generates a <code>.js</code> file from the <code>.ts</code> source.
+        <code>
+        You compile TypeScript to JavaScript using the <b>tsc</b> (TypeScript compiler) command in the terminal: <b>tsc filename.ts</b>. <br />
+        It generates a <b>.js</b> file from the <b>.ts</b> source.
+      </code>
       </div>
     </li>
     
     <li data-id="q4">
       <span class="faq-question">What is the <b>tsconfig.json</b> file?</span>
       <div class="answer">
-        <code>tsconfig.json</code> is a configuration file used by the TypeScript compiler to define compiler options, root files, and module resolution settings. It enables easy project-wide compilation and setup.
+        <code>tsconfig.json : is a configuration file used by the TypeScript compiler to define compiler options, root files, and module resolution settings. It enables easy project-wide compilation and setup.
+        </code>
       </div>
     </li>
     
     <li data-id="q5">
-        <span class="faq-question">What are basic types in TypeScript?</span>
+        <span class="faq-question green ">What are basic types in TypeScript?</span>
         <div class="answer">
-          Basic types in TypeScript include <code>number</code>, <code>string</code>, <code>boolean</code>, <code>null</code>, <code>undefined</code>, <code>symbol</code>, and <code>bigint</code>. These types provide static typing to variables and function return values.
+          <code>
+          These types provide static typing to variables and function return values.<br />
+          Basic types in TypeScript include 
+          <ol>
+              <li>number</li>
+              <li>string</li>
+              <li>boolean</li>
+              <li>null</li>
+              <li>undefined</li>
+              <li>symbol</li>
+              <li>bigint</li>
+            </ol> 
+          </code>
         </div>
       </li>
       
       <li data-id="q6">
         <span class="faq-question">What is type inference?</span>
         <div class="answer">
-          Type inference is TypeScript’s ability to automatically determine the type of a variable when no explicit type is provided. For example, <code>let x = 5;</code> infers that <code>x</code> is of type <code>number</code>.
+          <code>
+          Type inference is TypeScript’s ability to automatically determine the type of a variable when no explicit type is provided. For example, <br>
+          let x = 5; : infers that <b class="green">x is of type number</b>.
+        </code>
         </div>
       </li>
       
       <li data-id="q7">
         <span class="faq-question">What is the difference between <b>any</b>, <b>unknown</b>, and <b>never</b>?</span>
         <div class="answer">
-          <ul>
+          <ol>
             <li><strong>any</strong>: Turns off type checking. Use with caution.</li>
-            <li><strong>unknown</strong>: Similar to <code>any</code>, but safer — you must perform type checks before using it.</li>
+            <li><strong>unknown</strong>: Similar to <b>any</b>, but safer — you must perform type checks before using it.</li>
             <li><strong>never</strong>: Represents values that never occur, such as functions that throw errors or infinite loops.</li>
-          </ul>
+          </ol>
         </div>
       </li>
       
       <li data-id="q8">
         <span class="faq-question">How do you define arrays in TypeScript?</span>
         <div class="answer">
-          Arrays can be defined in two ways: <code>let arr: number[] = [1, 2, 3];</code> or <code>let arr: Array&lt;number&gt; = [1, 2, 3];</code>. Both declare an array of numbers.
+          Arrays can be defined in two ways: Both declare an array of numbers.
+          <code>
+            let arr: number[] = [1, 2, 3];<br />
+            let arr: Array&lt;number&gt; = [1, 2, 3];
+          </code> 
         </div>
       </li>
       <li data-id="q9">
@@ -2481,7 +2504,15 @@ What is Event Bubbling in ReactJS?
       <li data-id="q10">
         <span class="faq-question">What is the difference between <b>interface</b> and <b>type</b>?</span>
         <div class="answer">
-          Both <code>interface</code> and <code>type</code> can define the shape of an object, but <code>interface</code> is extendable and better for object-oriented design. <code>type</code> is more flexible for unions, intersections, and primitives. Interfaces support declaration merging; types do not.
+          <code>
+            Both interface and type can define the shape of an object
+            <br />
+            Interface : is extendable and better for object-oriented design. <br />
+            Interfaces support declaration merging
+            <br /><br />
+            Type is more flexible for unions, intersections, and primitives.<br>
+            Type  do not support declaration merging
+          </code>
         </div>
       </li>
       
