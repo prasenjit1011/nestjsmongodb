@@ -42,6 +42,46 @@ tailwind
 </div></li>
 
 
+<li data-id="q53337">
+  <span class="faq-question">Security Practices in Node.js?</span>
+  <div class="answer">
+    <ul>
+      <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
+      <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
+      <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
+      <li><strong>Environment variables:</strong> Store secrets and credentials securely using environment variables or secrets managers.</li>
+      <li><strong>Limit privileges:</strong> Run Node.js processes with the least privileges needed.</li>
+      <li><strong>Prevent DOS attacks:</strong> Use rate limiting and request throttling.</li>
+      <li><strong>Use security headers:</strong> Implement headers like Content Security Policy (CSP), X-Content-Type-Options, and others.</li>
+      <li><strong>Handle errors securely:</strong> Don’t expose stack traces or sensitive info in error responses.</li>
+      <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
+      <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
+      <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q58">
+  <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
+  <div class="answer">
+    Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
+    <ul>
+      <li><strong>Clickjacking</strong> with the <code>X-Frame-Options</code> header</li>
+      <li><strong>XSS attacks</strong> with <code>X-XSS-Protection</code></li>
+      <li><strong>MIME sniffing</strong> with <code>X-Content-Type-Options</code></li>
+      <li><strong>Enforces HTTPS</strong> with <code>Strict-Transport-Security</code></li>
+      <li><strong>Content Security Policy</strong> to control allowed resources</li>
+    </ul>
+    Using Helmet is simple:
+    <pre><code>const helmet = require('helmet');
+app.use(helmet());</code></pre>
+    It’s widely recommended for any Express app to improve default security.
+  </div>
+</li>
+
+
+
+
 <ul class="faq">
   <li data-id="q124">
     <span class="faq-question">Shallow copy vs Deep copy?</span>
@@ -908,21 +948,13 @@ Promise?
 </span><div class="answer">
 
 <code>
-A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. It's has 3 states: 
-<ol>
-<li>pending</li>
-<li>fulfilled</li>
-<li>rejected</li>
-</ol>
+A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. <br />
+It's has 3 states: 
+<b>
+  Pending, Fulfilled, Rejected
+</b>
 </code>
-<pre>
-  Basic usage:
-  const promise = new Promise((resolve, reject) => {
-    setTimeout(() => resolve("Done!"), 1000);
-  });
 
-  promise.then(result => console.log(result)).catch(err => console.error(err));
-</pre>
 
 <code>
 
@@ -939,7 +971,14 @@ A <strong>Promise</strong> is an object representing the eventual completion or 
 Mastering Promises is essential for handling async operations in modern JavaScript.
 
 </code>
+<pre>
+  Basic usage:
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Done!"), 1000);
+  });
 
+  promise.then(result => console.log(result)).catch(err => console.error(err));
+</pre>
 <pre>
   <b> 1. Promise.all</b>
   Promise.all([delay(1000, 'A'), delay(1500, 'B'), delay(500, 'C')])
@@ -1084,19 +1123,21 @@ A closure in Node.js (and JavaScript) is a function that "remembers" its lexical
 Closures are useful for data encapsulation, private variables, and maintaining state between function calls.
 
 Example:
-<pre><code>
+<pre>
 function outer() {
-let count = 0;
-return function inner() {
-count++;
-return count;
-};
+  let count = 0;
+  return function inner() {
+    count++;
+    return count;
+  };
 }
 const counter = outer();
 console.log(counter()); // 1
 console.log(counter()); // 2
-</code></pre>
-Here, <code>count</code> persists because of closure.
+
+
+Here, <b>count</b> persists because of closure.
+</pre>
 </div></li>
 
 
@@ -1112,12 +1153,12 @@ Middleware Vs Interceptor Vs Filter?
 - Used for logging, authentication, parsing, etc.<br>
 - Can modify request/response objects.<br>
 - Example:
-<pre><code>
+<pre>
 app.use((req, res, next) => {
-console.log('Middleware');
-next();
+  console.log('Middleware');
+  next();
 });
-</code></pre>
+</pre>
 
 <strong>Interceptor (NestJS, Angular, etc.):</strong><br>
 - Wraps around method execution (before & after).<br>
@@ -1304,61 +1345,144 @@ The <code>@Module()</code> decorator accepts metadata that tells NestJS how to a
 
 
 <li data-id="q_node_event"><span class="faq-question green">
-Event? EventEmitter
-</span><div class="answer">
+Event? Event-Driven Programming? EventEmitter
+</span>
+<div class="answer">
+  Event-driven programming is a design paradigm where the flow of the program is determined by events like user actions, messages, or I/O operations. In Node.js, this model allows the application to respond asynchronously to events using the <b>EventEmitter</b> class. It enables non-blocking I/O by listening for events and executing callbacks when events occur, improving scalability and performance.
+  
+  This approach helps Node.js efficiently handle multiple operations concurrently without waiting, making it ideal for real-time apps and servers.
+  </div>
+
+
+<div class="answer">
 In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. <br />
 Node uses the class to handle events, allowing objects to emit named events and listeners to respond asynchronously.  <br /> <br />
 This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
 
-<pre><code>
+<pre>
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
 
 emitter.on('message', (data) =&gt; console.log('Received:', data));
 emitter.emit('message', 'Hello Node.js!');
-</code></pre>
-</div></li>
-
-<li data-id="q_event_driven"><span class="faq-question">
-Event-Driven Programming?
-</span><div class="answer">
-Event-driven programming is a design paradigm where the flow of the program is determined by events like user actions, messages, or I/O operations. In Node.js, this model allows the application to respond asynchronously to events using the <code>EventEmitter</code> class. It enables non-blocking I/O by listening for events and executing callbacks when events occur, improving scalability and performance.
-
-This approach helps Node.js efficiently handle multiple operations concurrently without waiting, making it ideal for real-time apps and servers.
-</div></li>
+</pre>
+</div>
+</li>
 
 
 <li data-id="q2"><span class="faq-question green">
-Event loop?
-</span><div class="answer">
+Event loop? Event loop phases? Handle concurrency if it's single-threaded?
+</span>
+
+
+
+<div class="answer">
 The event loop is a mechanism that handles asynchronous callbacks. <br />
 It allows Node.js to perform non-blocking I/O operations by offloading tasks to the system kernel and executing their callbacks when ready, enabling efficient single-threaded concurrency.
-</div></li>
-
-
-<li data-id="q22"><span class="faq-question">
-Event loop phases?
-</span><div class="answer">
-Phases include:  
-1. timers  
-2. pending callbacks  
-3. idle/prepare  
-4. poll  
-5. check (for `setImmediate`)  
-6. close callbacks  
-Each handles specific queued callbacks.
-</div></li>
-
-<li data-id="q9"><span class="faq-question">
-Handle concurrency if it's single-threaded?
-</span><div class="answer">
+<br />
+<br />
 Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy tasks are delegated to worker threads or the OS, enabling multiple tasks to be processed concurrently.
-</div></li>
+</div>
+<div class="answer">
+  
+  Phases include:  <br />
+  <b>
+  1. timers  <br />
+  2. pending callbacks  <br />
+  3. idle/prepare  <br />
+  4. poll  <br />
+  5. check (for `setImmediate`)  <br />
+  6. close callbacks  <br />
+  Each handles specific queued callbacks.
+</b>
+  </div>
+</li>
+
+<li data-id="q63">
+  <span class="faq-question">Can you give an example of each phase of the Node.js Event Loop?</span>
+  <div class="answer">
+    Yes! Below are examples of how each phase works in Node.js:
+    <ol>
+      <li>
+        <strong>1. Timers:</strong> Executed by <code>setTimeout</code> or <code>setInterval</code>.
+        <pre><code>setTimeout(() =&gt; console.log('Timer Phase'), 0);</code></pre>
+      </li>
+      <li>
+        <strong>2. Pending Callbacks:</strong> Rare, triggered by certain I/O like TCP errors.
+        <pre><code>// Not commonly used directly; internal libuv I/O error callbacks land here.</code></pre>
+      </li>
+      <li>
+        <strong>3. Idle/Prepare:</strong> Used internally by Node.js (not directly accessible).
+        <pre><code>// No direct example — internal phase.</code></pre>
+      </li>
+      <li>
+        <strong>4. Poll:</strong> Retrieves new I/O events; where most I/O callbacks execute.
+        <pre><code>const fs = require('fs');
+fs.readFile(__filename, () =&gt; console.log('Poll Phase (I/O)')); </code></pre>
+      </li>
+      <li>
+        <strong>5. Check:</strong> Executes <code>setImmediate</code> callbacks.
+        <pre><code>setImmediate(() =&gt; console.log('Check Phase (setImmediate)'));</code></pre>
+      </li>
+      <li>
+        <strong>6. Close Callbacks:</strong> Runs close event callbacks like <code>socket.on('close')</code>.
+        <pre><code>const net = require('net');
+const server = net.createServer();
+server.on('connection', (socket) =&gt; {
+  socket.on('close', () =&gt; console.log('Close Callback'));
+  socket.end();
+});
+server.listen(3000, () =&gt; {
+  const client = net.connect(3000);
+});</code></pre>
+      </li>
+    </ol>
+    These phases repeat as long as there are operations to perform.
+  </div>
+</li>
+<li data-id="q64">
+  <span class="faq-question">What is Callback Hell in Node.js?</span>
+  <div class="answer">
+    <strong>Callback Hell</strong> refers to the situation where multiple nested callbacks make code hard to read and maintain. It usually occurs in asynchronous code when callbacks are nested within callbacks.
+    <br><br>
+    <strong>Example:</strong>
+    <pre><code>
+fs.readFile('file1.txt', 'utf8', (err, data1) =&gt; {
+  if (err) throw err;
+  fs.readFile('file2.txt', 'utf8', (err, data2) =&gt; {
+    if (err) throw err;
+    fs.readFile('file3.txt', 'utf8', (err, data3) =&gt; {
+      if (err) throw err;
+      console.log(data1, data2, data3);
+    });
+  });
+});
+    </code></pre>
+    <strong>Solution:</strong> Use Promises or <b>async/await</b> to flatten the structure:
+    <pre>
+async function readFiles() {
+  try {
+    const data1 = await fs.promises.readFile('file1.txt', 'utf8');
+    const data2 = await fs.promises.readFile('file2.txt', 'utf8');
+    const data3 = await fs.promises.readFile('file3.txt', 'utf8');
+    console.log(data1, data2, data3);
+  } catch (err) {
+    console.error(err);
+  }
+}
+readFiles();
+    </pre>
+    <strong>Conclusion:</strong> Avoid callback hell with Promises or async/await for better readability and maintainability.
+  </div>
+</li>
+
+
+
 
 
 <ul class="faq">
   <li data-id="q122">
-    <span class="faq-question">Higher order function / Callback function?</span>
+    <span class="faq-question green  ">Higher order function / Callback function?</span>
     <div class="answer">
       A callback is a function passed as an argument to another function. It’s executed after the completion of an asynchronous operation, allowing non-blocking behavior in Node.js.
       </div>
@@ -1371,7 +1495,7 @@ Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy ta
       These are a key part of JavaScript and Node.js functional programming style.
 
       <br><br><strong>Example:</strong>
-      <pre><code>
+      <pre>
 function greet(name) {
   return `Hello, ${name}`;
 }
@@ -1381,7 +1505,7 @@ function higherOrder(fn, value) {
 }
 
 console.log(higherOrder(greet, 'Node.js')); // Output: Hello, Node.js
-      </code></pre>
+      </pre>
 
       <strong>Common higher-order functions in Node.js:</strong>
       <ul>
@@ -1394,9 +1518,17 @@ console.log(higherOrder(greet, 'Node.js')); // Output: Hello, Node.js
   </li>
 </ul>
 
-<li data-id="q5"><span class="faq-question">
-Callback?
-</span></li>
+
+<li data-id="q56">
+  <span class="faq-question">What is the difference between <b>~</b> and <b>^</b> in <b>package.json</b> dependencies?</span>
+  <div class="answer">
+    <ul>
+      <li><b>^1.2.3</b> allows updates to any minor or patch version, e.g., <b>1.x.x</b> but not <b>2.0.0</b>.</li>
+      <li><b>~1.2.3</b> allows updates only to patch versions, e.g., <b>1.2.x</b> but not <b>1.3.0</b>.</li>
+      <li>In short, <b>^</b> is more permissive (minor + patch), <b>~</b> is more restrictive (patch only).</li>
+    </ul>
+  </div>
+</li>
 
 
 <li data-id="q8"><span class="faq-question">
@@ -1679,25 +1811,25 @@ class Bird implements Flyable {
 </div></li>
 
 <li data-id="q14"><span class="faq-question green">
-Middleware?
+Middleware? Types of middleware
 </span><div class="answer">
 Middleware in Express.js is a function that processes requests and responses during the request-response cycle. <Br />
-It has access to the <code>req</code> and <code>res</code> objects and the next middleware function in the stack via the <code>next()</code> callback.<Br /><Br />
+It has access to the <b>req</b> and <b>res</b> objects and the next middleware function in the stack via the <b>next()</b> callback.<Br /><Br />
 Middleware functions can perform tasks like:
 <ol class="subul">
 <li>Executing code</li>
-<li>Modifying <code>req</code> and <code>res</code> objects</li>
+<li>Modifying <b>req</b> and <b>res</b> objects</li>
 <li>Ending the request-response cycle</li>
 <li>Calling the next middleware</li>
 </ol>
 <br />
-Types of middleware include:
+<b class="green">Types of middleware :</b>
 <ol class="subul">
-<li><strong>Application-level:</strong> Bound to an Express app using <code>app.use()</code> or route methods.</li>
-<li><strong>Router-level:</strong> Bound to an instance of <code>express.Router()</code>.</li>
-<li><strong>Error-handling:</strong> Special middleware with four arguments <code>(err, req, res, next)</code> to catch errors.</li>
-<li><strong>Built-in:</strong> Provided by Express, e.g., <code>express.json()</code>, <code>express.static()</code>.</li>
-<li><strong>Third-party:</strong> Such as <code>cors</code>, <code>helmet</code>, <code>morgan</code>.</li>
+  <li><strong>Application-level:</strong> Bound to an Express app using <b>app.use()</b> or route methods.</li>
+  <li><strong>Router-level:</strong> Bound to an instance of <b>express.Router()</b>.</li>
+  <li><strong>Error-handling:</strong> Special middleware with four arguments <b>(err, req, res, next)</b> to catch errors.</li>
+  <li><strong>Built-in:</strong> Provided by Express, e.g., <b>express.json()</b>, <b>express.static()</b>.</li>
+  <li><strong>Third-party:</strong> Such as <b>cors</b>, <b>helmet</b>, <b>morgan</b>.</li>
 </ol>
 
 Example:
