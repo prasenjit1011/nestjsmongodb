@@ -2326,16 +2326,533 @@ What is Event Bubbling in ReactJS?
 
 
 
+  <li data-id="typescriptqq"><span class="faq-question green">
+    TypeScript Question
+  </span><div class="answer">
+    <ol>
+      <li><b>Basic TypeScript Questions</b>
+  
+          <li>What is TypeScript? How is it different from JavaScript?</li>
+          <li>What are the benefits of using TypeScript?</li>
+          <li>How do you compile TypeScript to JavaScript?</li>
+          <li>What is the tsconfig.json file?</li>
+          <li>What are basic types in TypeScript?</li>
+          <li>What is type inference?</li>
+          <li>What is the difference between any, unknown, and never?</li>
+          <li>How do you define arrays in TypeScript?</li>
+          <li>How do you define a tuple in TypeScript?</li>
+          <li>What is the difference between interface and type?</li>
+          <li>How do enums work in TypeScript?</li>
+          <li>What is a union type?</li>
+          <li>What is an intersection type?</li>
+          <li>What is a literal type?</li>
+          <li>What are optional and default parameters?</li>
+  
+  
+    
+      <li><strong>Intermediate TypeScript Questions</strong>
+       
+          <li>How do you define and use generics in TypeScript?</li>
+          <li>What are generic constraints?</li>
+          <li>What is a mapped type?</li>
+          <li>What is a conditional type?</li>
+          <li>What is a utility type? Give examples like Partial, Pick, Omit.</li>
+          <li>What is the difference between readonly and const?</li>
+          <li>How does keyof work in TypeScript?</li>
+          <li>What is type assertion?</li>
+          <li>What is type narrowing?</li>
+          <li>What are declaration files (.d.ts) and when are they used?</li>
+          <li>How do you use third-party libraries in TypeScript?</li>
+          <li>What is the as keyword used for?</li>
+          <li>How do you handle dynamic object keys in TypeScript?</li>
+          <li>What is the difference between private, public, and protected modifiers?</li>
+          <li>How does TypeScript support abstract classes?</li>
+        
+  
+    
+      <li><strong>Advanced TypeScript Questions</strong>
+       
+          <li>What is structural typing?</li>
+          <li>What is type compatibility in TypeScript?</li>
+          <li>How does TypeScript perform compile-time vs runtime checks?</li>
+          <li>What is module augmentation?</li>
+          <li>How do you merge interfaces?</li>
+          <li>What are declaration merging and function overloading?</li>
+          <li>How do you create custom utility types?</li>
+          <li>What is the infer keyword used for in conditional types?</li>
+          <li>What are recursive types?</li>
+          <li>How do you write a type-safe React component with TypeScript?</li>
+          <li>How does TypeScript support mixins?</li>
+          <li>What are discriminated unions and how do they work?</li>
+          <li>How do you model JSON APIs in TypeScript types?</li>
+          <li>How can TypeScript be used for functional programming?</li>
+          <li>What are template literal types?</li>
+        
+   
+    
+      <li><strong>TypeScript + Tools/Frameworks</strong>
+       
+          <li>How do you integrate TypeScript with Node.js?</li>
+          <li>How is TypeScript used with Express?</li>
+          <li>What are the benefits of using TypeScript with React?</li>
+          <li>How do you type props and state in React components?</li>
+          <li>How does Next.js handle TypeScript?</li>
+          <li>How do you use TypeScript in a monorepo (e.g., with Turborepo or Nx)?</li>
+          <li>How does TypeScript work with Jest or testing libraries?</li>
+          <li>What is the role of ESLint and Prettier with TypeScript?</li>
+          <li>How does Webpack/Babel handle TypeScript?</li>
+          <li>What are best practices for organizing TypeScript codebases?</li>
+        
+    
+    </ol>
+  
+    </div></li>
 
 
 
 
-
-
-
-
-
-
+    <li data-id="q1">
+      <span class="faq-question">What is TypeScript? How is it different from JavaScript?</span>
+      <div class="answer">
+        TypeScript is a statically typed superset of JavaScript that adds type safety and other powerful features like interfaces, enums, and generics. Unlike JavaScript, TypeScript code must be compiled to JavaScript before it runs in the browser or Node.js.
+      </div>
+    </li>
+    
+    <li data-id="q2">
+      <span class="faq-question">What are the benefits of using TypeScript?</span>
+      <div class="answer">
+        TypeScript improves code quality and maintainability by enabling type safety, better IDE support, early error detection, and features from modern JavaScript (ES6+) before they’re fully supported in all environments.
+      </div>
+    </li>
+    
+    <li data-id="q3">
+      <span class="faq-question">How do you compile TypeScript to JavaScript?</span>
+      <div class="answer">
+        You compile TypeScript to JavaScript using the <code>tsc</code> (TypeScript compiler) command in the terminal: <code>tsc filename.ts</code>. It generates a <code>.js</code> file from the <code>.ts</code> source.
+      </div>
+    </li>
+    
+    <li data-id="q4">
+      <span class="faq-question">What is the <b>tsconfig.json</b> file?</span>
+      <div class="answer">
+        <code>tsconfig.json</code> is a configuration file used by the TypeScript compiler to define compiler options, root files, and module resolution settings. It enables easy project-wide compilation and setup.
+      </div>
+    </li>
+    
+    <li data-id="q5">
+        <span class="faq-question">What are basic types in TypeScript?</span>
+        <div class="answer">
+          Basic types in TypeScript include <code>number</code>, <code>string</code>, <code>boolean</code>, <code>null</code>, <code>undefined</code>, <code>symbol</code>, and <code>bigint</code>. These types provide static typing to variables and function return values.
+        </div>
+      </li>
+      
+      <li data-id="q6">
+        <span class="faq-question">What is type inference?</span>
+        <div class="answer">
+          Type inference is TypeScript’s ability to automatically determine the type of a variable when no explicit type is provided. For example, <code>let x = 5;</code> infers that <code>x</code> is of type <code>number</code>.
+        </div>
+      </li>
+      
+      <li data-id="q7">
+        <span class="faq-question">What is the difference between <b>any</b>, <b>unknown</b>, and <b>never</b>?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>any</strong>: Turns off type checking. Use with caution.</li>
+            <li><strong>unknown</strong>: Similar to <code>any</code>, but safer — you must perform type checks before using it.</li>
+            <li><strong>never</strong>: Represents values that never occur, such as functions that throw errors or infinite loops.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q8">
+        <span class="faq-question">How do you define arrays in TypeScript?</span>
+        <div class="answer">
+          Arrays can be defined in two ways: <code>let arr: number[] = [1, 2, 3];</code> or <code>let arr: Array&lt;number&gt; = [1, 2, 3];</code>. Both declare an array of numbers.
+        </div>
+      </li>
+      <li data-id="q9">
+        <span class="faq-question">How do you define a tuple in TypeScript?</span>
+        <div class="answer">
+          A tuple in TypeScript is an array with fixed number of elements and specific types at each position. Example: 
+          <code>let user: [string, number] = ["Alice", 30];</code>
+        </div>
+      </li>
+      
+      <li data-id="q10">
+        <span class="faq-question">What is the difference between <b>interface</b> and <b>type</b>?</span>
+        <div class="answer">
+          Both <code>interface</code> and <code>type</code> can define the shape of an object, but <code>interface</code> is extendable and better for object-oriented design. <code>type</code> is more flexible for unions, intersections, and primitives. Interfaces support declaration merging; types do not.
+        </div>
+      </li>
+      
+      <li data-id="q11">
+        <span class="faq-question">How do enums work in TypeScript?</span>
+        <div class="answer">
+          Enums allow you to define a set of named constants. Example:
+          <pre><code>enum Direction { Up, Down, Left, Right }</code></pre>
+          By default, they are auto-incremented numbers, but can also be assigned specific values (e.g., strings).
+        </div>
+      </li>
+      
+      <li data-id="q12">
+        <span class="faq-question">What is a union type?</span>
+        <div class="answer">
+          A union type allows a variable to hold more than one type. Example:
+          <code>let value: string | number;</code> means <code>value</code> can be either a string or a number.
+        </div>
+      </li>
+    
+      
+      <li data-id="q13">
+        <span class="faq-question">What is an intersection type?</span>
+        <div class="answer">
+          An intersection type combines multiple types into one. The resulting type has all properties from the intersected types. Example: 
+          <code>type Admin = { role: string }; type User = { name: string }; type AdminUser = Admin & User;</code>
+        </div>
+      </li>
+      
+      <li data-id="q14">
+        <span class="faq-question">What is a literal type?</span>
+        <div class="answer">
+          A literal type allows a variable to accept only a specific value. Example: 
+          <code>let direction: "up" | "down";</code> — the variable can only be <code>"up"</code> or <code>"down"</code>.
+        </div>
+      </li>
+      
+      <li data-id="q15">
+        <span class="faq-question">What are optional and default parameters?</span>
+        <div class="answer">
+          Optional parameters are marked with a <code>?</code> and may be omitted when calling the function. Default parameters provide a fallback value. Example: 
+          <code>function greet(name: string = "Guest") { console.log("Hello, " + name); }</code>
+        </div>
+      </li>
+      
+      <li data-id="q16">
+        <span class="faq-question">How do you define and use generics in TypeScript?</span>
+        <div class="answer">
+          Generics allow you to create reusable components that work with any type. Example:
+          <code>function identity&lt;T&gt;(arg: T): T { return arg; }</code> — Here, <code>T</code> is a placeholder for any type passed when the function is called.
+        </div>
+      </li>
+      
+    
+      <li data-id="q17">
+        <span class="faq-question">What are generic constraints?</span>
+        <div class="answer">
+          Generic constraints restrict the kinds of types that can be used as generic arguments. You use <code>extends</code> to define a constraint. Example:
+          <code>function getLength&lt;T extends { length: number }&gt;(item: T): number { return item.length; }</code>
+        </div>
+      </li>
+      
+      <li data-id="q18">
+        <span class="faq-question">What is a mapped type?</span>
+        <div class="answer">
+          A mapped type creates new types by transforming properties of an existing type. Example:
+          <code>type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }</code> — this makes all properties of <code>T</code> readonly.
+        </div>
+      </li>
+      
+      <li data-id="q19">
+        <span class="faq-question">What is a conditional type?</span>
+        <div class="answer">
+          A conditional type uses the <code>extends</code> keyword to choose one type over another. Example:
+          <code>type IsString&lt;T&gt; = T extends string ? "Yes" : "No";</code> — evaluates to <code>"Yes"</code> if <code>T</code> is a string, otherwise <code>"No"</code>.
+        </div>
+      </li>
+      
+      <li data-id="q20">
+        <span class="faq-question">What is a utility type? Give examples like Partial, Pick, Omit.</span>
+        <div class="answer">
+          Utility types are built-in types that help transform other types:
+          <ul>
+            <li><code>Partial&lt;T&gt;</code> – makes all properties in <code>T</code> optional.</li>
+            <li><code>Pick&lt;T, K&gt;</code> – picks a subset of properties from <code>T</code>.</li>
+            <li><code>Omit&lt;T, K&gt;</code> – removes specified keys <code>K</code> from type <code>T</code>.</li>
+          </ul>
+        </div>
+      </li>
+      <li data-id="q21">
+        <span class="faq-question">What is the difference between <b>readonly</b> and <b>const</b>?</span>
+        <div class="answer">
+          <code>const</code> is used for variables to prevent reassignment, while <code>readonly</code> is used on properties of objects or classes to prevent them from being changed after initialization. <code>const</code> applies to bindings, <code>readonly</code> applies to object members.
+        </div>
+      </li>
+      
+      <li data-id="q22">
+        <span class="faq-question">How does <b>keyof</b> work in TypeScript?</span>
+        <div class="answer">
+          <code>keyof</code> is a type operator that returns a union of all property names of a type. Example: 
+          <code>type Person = { name: string; age: number }; type Keys = keyof Person;</code> results in <code>"name" | "age"</code>.
+        </div>
+      </li>
+      
+      <li data-id="q23">
+        <span class="faq-question">What is type assertion?</span>
+        <div class="answer">
+          Type assertion tells the compiler to treat a value as a specific type, without changing its runtime behavior. Syntax: <code>&lt;Type&gt;value</code> or <code>value as Type</code>. Example: <code>let name = value as string;</code>
+        </div>
+      </li>
+      
+      <li data-id="q24">
+        <span class="faq-question">What is type narrowing?</span>
+        <div class="answer">
+          Type narrowing is the process of refining a variable's type within a conditional block using checks like <code>typeof</code>, <code>instanceof</code>, or equality checks. It helps TypeScript infer a more specific type.
+        </div>
+      </li>
+      
+      <li data-id="q25">
+        <span class="faq-question">What are declaration files (.d.ts) and when are they used?</span>
+        <div class="answer">
+          Declaration files provide type information about JavaScript code, allowing TypeScript to understand the shape of non-TypeScript libraries. They're used when consuming JavaScript or third-party modules without native TypeScript support.
+        </div>
+      </li>
+      
+      <li data-id="q26">
+        <span class="faq-question">How do you use third-party libraries in TypeScript?</span>
+        <div class="answer">
+          Install the library and its type definitions using <code>npm install library-name</code> and <code>npm install --save-dev @types/library-name</code>. Then import it normally in your TypeScript file.
+        </div>
+      </li>
+      
+      <li data-id="q27">
+        <span class="faq-question">What is the <b>as</b> keyword used for?</span>
+        <div class="answer">
+          The <code>as</code> keyword is used for type assertions to explicitly tell the TypeScript compiler the type of a variable. Example: <code>let value = input as string;</code>
+        </div>
+      </li>
+      
+      <li data-id="q28">
+        <span class="faq-question">How do you handle dynamic object keys in TypeScript?</span>
+        <div class="answer">
+          Use index signatures or mapped types to type dynamic keys. Example: <code>{ [key: string]: number }</code> allows any string key with number values.
+        </div>
+      </li>
+      
+      <li data-id="q29">
+        <span class="faq-question">What is the difference between private, public, protected modifiers?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>public</strong>: Members are accessible from anywhere (default).</li>
+            <li><strong>private</strong>: Members are accessible only within the class.</li>
+            <li><strong>protected</strong>: Members are accessible within the class and its subclasses.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q30">
+        <span class="faq-question">How does TypeScript support abstract classes?</span>
+        <div class="answer">
+          TypeScript allows defining abstract classes using the <code>abstract</code> keyword. These classes cannot be instantiated directly and may contain abstract methods that must be implemented by subclasses.
+        </div>
+      </li>
+      
+      <li data-id="q31">
+        <span class="faq-question">What is structural typing?</span>
+        <div class="answer">
+          Structural typing means that type compatibility is based on the shape (structure) of types, not their explicit declarations. If two objects have the same shape, they're considered the same type.
+        </div>
+      </li>
+      
+      <li data-id="q32">
+        <span class="faq-question">What is type compatibility in TypeScript?</span>
+        <div class="answer">
+          Type compatibility determines whether one type can be assigned to another. TypeScript uses structural typing to check compatibility — if one type has all the required properties of another, it is considered compatible.
+        </div>
+      </li>
+      
+      <li data-id="q33">
+        <span class="faq-question">How does TypeScript perform compile-time vs runtime checks?</span>
+        <div class="answer">
+          TypeScript performs type checking at compile-time only. It ensures types are correct before code runs, but it does not enforce or check types at runtime — JavaScript runs without type constraints.
+        </div>
+      </li>
+      
+      <li data-id="q34">
+        <span class="faq-question">What is module augmentation?</span>
+        <div class="answer">
+          Module augmentation allows you to extend existing modules by adding new declarations (like interfaces, functions) without modifying the original module code, using <code>declare module</code> syntax.
+        </div>
+      </li>
+      
+      <li data-id="q35">
+        <span class="faq-question">How do you merge interfaces?</span>
+        <div class="answer">
+          TypeScript supports declaration merging, where multiple interface declarations with the same name are merged into a single interface combining all members.
+        </div>
+      </li>
+      
+      <li data-id="q36">
+        <span class="faq-question">What are declaration merging and function overloading?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Declaration merging</strong>: Combining multiple declarations (interfaces, namespaces) with the same name into one.</li>
+            <li><strong>Function overloading</strong>: Defining multiple function signatures for a single implementation to handle different argument types.</li>
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li data-id="q37">
+        <span class="faq-question">How do you create custom utility types?</span>
+        <div class="answer">
+          You create custom utility types using TypeScript’s advanced type features like mapped types, conditional types, and type inference. For example, to create a type that makes all properties readonly except a few:
+          <pre><code>type MyReadonly&lt;T, K extends keyof T&gt; = { readonly [P in Exclude&lt;keyof T, K&gt;]: T[P] } &amp; { [P in K]: T[P] };</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q38">
+        <span class="faq-question">What is the infer keyword used for in conditional types?</span>
+        <div class="answer">
+          The <code>infer</code> keyword is used inside conditional types to extract and name a type within another type, enabling advanced type transformations. Example:
+          <pre><code>type ReturnType&lt;T&gt; = T extends (...args: any[]) =&gt; infer R ? R : any;</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q39">
+        <span class="faq-question">What are recursive types?</span>
+        <div class="answer">
+          Recursive types are types that refer to themselves in their own definition, useful for modeling nested or hierarchical data structures. Example:
+          <pre><code>type JSONValue = string | number | boolean | JSONObject | JSONArray;
+      type JSONObject = { [key: string]: JSONValue };
+      type JSONArray = JSONValue[];</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q40">
+        <span class="faq-question">How do you write a type-safe React component with TypeScript?</span>
+        <div class="answer">
+          Define prop types using interfaces or types and use them in function components. Example:
+          <pre><code>interface ButtonProps { label: string; onClick: () =&gt; void; }
+      const Button: React.FC&lt;ButtonProps&gt; = ({ label, onClick }) =&gt; (&lt;button onClick={onClick}&gt;{label}&lt;/button&gt;);</code></pre>
+        </div>
+      </li>
+      
+    
+      <li data-id="q41">
+        <span class="faq-question">How does TypeScript support mixins?</span>
+        <div class="answer">
+          TypeScript supports mixins by allowing classes to be composed from multiple base classes using functions that extend a class with additional properties or methods. Example pattern:
+          <pre><code>function Timestamped&lt;T extends Constructor&gt;(Base: T) {
+        return class extends Base {
+          timestamp = Date.now();
+        };
+      }</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q42">
+        <span class="faq-question">What are discriminated unions and how do they work?</span>
+        <div class="answer">
+          Discriminated unions combine multiple types into one union type with a common literal property (the discriminant) to safely narrow the type. Example:
+          <pre><code>type Shape =
+        | { kind: "circle"; radius: number }
+        | { kind: "square"; size: number };
+      
+      function area(s: Shape) {
+        if (s.kind === "circle") return Math.PI * s.radius ** 2;
+        else return s.size ** 2;
+      }</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q43">
+        <span class="faq-question">How do you model JSON APIs in TypeScript types?</span>
+        <div class="answer">
+          You define interfaces or types matching the API’s JSON schema, often using recursive and optional properties to reflect nested or partial data. Tools like <code>quicktype</code> can generate these automatically.
+        </div>
+      </li>
+      
+      <li data-id="q44">
+        <span class="faq-question">How can TypeScript be used for functional programming?</span>
+        <div class="answer">
+          TypeScript’s strong typing supports functional programming by enabling typed higher-order functions, immutability, algebraic data types, and pure functions, improving safety and maintainability.
+        </div>
+      </li>
+      
+    
+      <li data-id="q45">
+        <span class="faq-question">What are template literal types?</span>
+        <div class="answer">
+          Template literal types allow creating string literal types by embedding unions inside string templates. They enable powerful string type manipulations. Example:
+          <pre><code>type Greeting = `Hello, ${string}!`;</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q46">
+        <span class="faq-question">How do you integrate TypeScript with Node.js?</span>
+        <div class="answer">
+          You set up a <code>tsconfig.json</code>, write TypeScript code, compile it to JavaScript using <code>tsc</code>, and run with Node.js. Tools like <code>ts-node</code> allow running TypeScript directly during development.
+        </div>
+      </li>
+      
+      <li data-id="q47">
+        <span class="faq-question">How is TypeScript used with Express?</span>
+        <div class="answer">
+          TypeScript enhances Express apps by adding type safety to request, response, and middleware objects. Install <code>@types/express</code> for typings and write route handlers with typed parameters.
+        </div>
+      </li>
+      
+      <li data-id="q48">
+        <span class="faq-question">What are the benefits of using TypeScript with React?</span>
+        <div class="answer">
+          Benefits include type safety for props and state, better IDE autocompletion, earlier error detection, and improved maintainability and refactoring support.
+        </div>
+      </li>
+    
+      
+      <li data-id="q49">
+        <span class="faq-question">How do you type props and state in React components?</span>
+        <div class="answer">
+          You define interfaces or types for props and state, then use them in function or class components. Example for function components:
+          <pre><code>interface Props { title: string; }
+      const MyComponent: React.FC&lt;Props&gt; = ({ title }) =&gt; &lt;div&gt;{title}&lt;/div&gt;;</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q50">
+        <span class="faq-question">How does Next.js handle TypeScript?</span>
+        <div class="answer">
+          Next.js has built-in TypeScript support. Adding a <code>tsconfig.json</code> and installing TypeScript dependencies automatically configures the project to use TypeScript, including page and API route typings.
+        </div>
+      </li>
+      
+      <li data-id="q51">
+        <span class="faq-question">How do you use TypeScript in a monorepo (e.g., with Turborepo or Nx)?</span>
+        <div class="answer">
+          Monorepos use shared <code>tsconfig.json</code> base configs with project references to manage multiple packages or apps, enabling incremental builds and type safety across the repo.
+        </div>
+      </li>
+      
+      <li data-id="q52">
+        <span class="faq-question">How does TypeScript work with Jest or testing libraries?</span>
+        <div class="answer">
+          Install <code>ts-jest</code> to enable Jest to transpile TypeScript. Write tests with TypeScript for typed test code, and use type definitions for Jest to get autocompletion and type safety.
+        </div>
+      </li>
+      
+    
+    
+      <li data-id="q53">
+        <span class="faq-question">What is the role of ESLint and Prettier with TypeScript?</span>
+        <div class="answer">
+          ESLint analyzes TypeScript code to find and fix problems using rules, while Prettier formats code consistently. Together they ensure code quality, style consistency, and catch bugs early.
+        </div>
+      </li>
+      
+      <li data-id="q54">
+        <span class="faq-question">How does Webpack/Babel handle TypeScript?</span>
+        <div class="answer">
+          Webpack uses loaders like <code>ts-loader</code> or Babel with <code>@babel/preset-typescript</code> to transpile TypeScript into JavaScript, integrating type-checking in the build process.
+        </div>
+      </li>
+      
+      <li data-id="q55">
+        <span class="faq-question">What are best practices for organizing TypeScript codebases?</span>
+        <div class="answer">
+          Use clear folder structures by feature or layer, leverage <code>tsconfig.json</code> paths for imports, keep types/interfaces in separate files, and maintain strict compiler options for better safety.
+        </div>
+      </li>
+      
 
 
 
