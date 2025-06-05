@@ -357,9 +357,12 @@ fs.createReadStream('input.txt')
           <td>Chaining streams</td>
         </tr>
       </table>
-
-      <br><strong>Conclusion:</strong>
-      Use <code>Buffer</code> for small chunks of binary data, <code>Stream</code> when dealing with large or continuous data, and <code>pipe()</code> to connect and automate stream workflows.
+<pre>
+<br><strong>Conclusion:</strong>
+<b>Buffer</b> for small chunks of binary data, 
+<b>Stream</b> when dealing with large or continuous data, and 
+<b>pipe()</b> to connect and automate stream workflows.
+</pre>
     </div>
   </li>
 </ul>
@@ -903,34 +906,79 @@ fs.createReadStream('input.txt')
 <li data-id="q_promise"><span class="faq-question">
 Promise?
 </span><div class="answer">
-A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. <br />
-It has 3 states: 
+
+<code>
+A <strong>Promise</strong> is an object representing the eventual completion or failure of an asynchronous operation. It's has 3 states: 
 <ol>
-  <li>pending</li>
-  <li>fulfilled</li>
-  <li>rejected</li>
+<li>pending</li>
+<li>fulfilled</li>
+<li>rejected</li>
 </ol>
+</code>
+<pre>
+  Basic usage:
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Done!"), 1000);
+  });
 
+  promise.then(result => console.log(result)).catch(err => console.error(err));
+</pre>
 
-Basic usage:
-<pre><code>
-const promise = new Promise((resolve, reject) => {
-setTimeout(() => resolve("Done!"), 1000);
-});
+<code>
 
-promise.then(result => console.log(result)).catch(err => console.error(err));
-</code></pre>
-
+<br />
 <strong>Advanced Promise Topics:</strong><br>
-• <code>Promise.all()</code>: Waits for all promises to resolve or any to reject.<br>
-• <code>Promise.race()</code>: Resolves/rejects as soon as one of the promises does.<br>
-• <code>Promise.allSettled()</code>: Waits for all promises to settle (resolve or reject).<br>
-• <code>Promise.any()</code>: Resolves as soon as one promise fulfills (ignores rejections).<br>
-• <code>Chaining</code>: Linking multiple <code>.then()</code> calls for sequential execution.<br>
-• <code>Error handling</code>: Using <code>.catch()</code> and <code>finally()</code> for robust flows.<br>
-• <code>Async/Await</code>: Syntactic sugar over promises for cleaner asynchronous code.<br><br>
+• <b>Promise.all()</b>: Waits for all promises to resolve or any to reject.<br>
+• <b>Promise.race()</b>: Resolves/rejects as soon as one of the promises does.<br>
+• <b>Promise.allSettled()</b>: Waits for all promises to settle (resolve or reject).<br>
+• <b>Promise.any()</b>: Resolves as soon as one promise fulfills (ignores rejections).<br>
+• <b>Chaining</b>: Linking multiple <b>.then()</b> calls for sequential execution.<br>
+• <b>Error handling</b>: Using <b>.catch()</b> and <b>finally()</b> for robust flows.<br>
+• <b>Async/Await</b>: Syntactic sugar over promises for cleaner asynchronous code.<br><br>
 
 Mastering Promises is essential for handling async operations in modern JavaScript.
+
+</code>
+
+<pre>
+  <b> 1. Promise.all</b>
+  Promise.all([delay(1000, 'A'), delay(1500, 'B'), delay(500, 'C')])
+          .then(results => { 
+            console.log('Promise.all:', results); // ['A', 'B', 'C']
+          })
+          .catch(err => {
+            console.error('Promise.all error:', err);
+          });
+  
+</pre>
+<pre>
+  <b> 1. Promise.all</b>
+  const p1 = Promise.resolve(1);
+  const p2 = Promise.reject(2);
+  const p3 = Promise.resolve(3);
+  
+  Promise.all([p1, p2, p3])
+    .then(results => {
+      console.log("All success: " + results);
+    })
+    .catch(err => {
+      console.log("One failed: " + err);
+    });
+</pre>
+
+<pre>
+  <b> 1. Promise.all</b>
+  async function fetchData() {
+    try {
+      const results = await Promise.all([p1, p2, p3]);
+      console.log("All success1: " + results);
+    } catch (err) {
+      console.log("One failed1: " + err);
+    }
+  }
+  
+  fetchData();
+</pre>
 
 
 <hr />
@@ -944,16 +992,7 @@ Mastering Promises is essential for handling async operations in modern JavaScri
       });
     };
 
-    // 1. Promise.all
-    Promise.all([
-      delay(1000, 'A'),
-      delay(1500, 'B'),
-      delay(500, 'C')
-    ]).then(results => {
-      console.log('Promise.all:', results); // ['A', 'B', 'C']
-    }).catch(err => {
-      console.error('Promise.all error:', err);
-    });
+
 
     // 2. Promise.race
     Promise.race([
