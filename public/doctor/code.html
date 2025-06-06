@@ -79,6 +79,43 @@
 
       ---------- Example 02 ----------
 
+      function fn(a: string, b: string = 'World'): string {
+        return a + b;
+      }
+      var str = fn('hello')
+      console.log(str)
+
+
+
+
+
+      ---------- Example 02888 ----------
+
+      var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+      const x = Object.keys(obj);
+      const y = Object.values(obj);
+      const z = Object.entries(obj);
+
+
+      const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
+      const v1 = Math.max(...Object.values(x1));
+      const v2 = Math.max(...[[1,2],3,4].flat());
+      const v3 = Math.max(1,2,3,4);
+
+
+      setImmediate(()=>{console.log('01 setImmediate')});
+      setTimeout(()=>{console.log('02 setTimeout')},0)
+      process.nextTick(()=>{console.log('03 nextTick');});
+      console.log('04 consoleLog')
+
+      console.log(x,y,z);
+
+
+
+
+
+      ---------- Example 02 ----------
+
       const arr = [1,2,3,4,5,9]
       const length = arr.length;
       const target = 6;
@@ -123,7 +160,8 @@
       ------------------------------------------------------
 
       var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
-      const result = [];     
+      const result = [];
+
       getKeys(obj);
       
       function getKeys(obj){
@@ -422,6 +460,10 @@
       return Math.max(max1 * max2 * max3, min1 * min2 * max1);
     }
     
+
+
+    ---------- Example 02 ----------
+
     
     const primes = [];
     for (let n = 2; n < 9; n++) {
@@ -448,6 +490,27 @@
       }
     }
     
+
+
+    ---------- Example 02 ----------
+
+    const http = require('http');
+
+    const server = http.createServer((req, res) => {
+      res.end('Hello');
+    });
+    
+    server.listen(3000, () => {
+      console.log('Server is running');
+      server.close(); // Will trigger close callback
+    });
+    
+    server.on('close', () => {
+      console.log('Server closed (close callback)');
+    });
+    
+
+
     
   </code></pre>
 

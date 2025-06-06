@@ -19,10 +19,217 @@
 <a href="DynamoDB.html">Dynamo DB</a> &nbsp; 
 <a href="code.html">Promise</a> &nbsp; 
 <a href="code.html">Code</a> &nbsp; 
+<a href="crud.html">Crud</a> &nbsp; 
 <a href="skill.html">Skill</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 
 <ul class="faq">
+
+
+
+  
+<li data-id="q122"><span class="faq-question">
+Express + PostGre SQL + Redis
+</span><div class="answer">
+  <ol>
+    <li>How do Express.js, PostgreSQL, and Redis work together in a backend architecture?</li>
+    <li>What are the common use cases for Redis when using PostgreSQL as the main DB?</li>
+    <li>How do you structure an Express app to connect with PostgreSQL and Redis efficiently?</li>
+    <li>When should you cache PostgreSQL queries with Redis?</li>
+    <li>How do you invalidate a Redis cache when PostgreSQL data is updated?</li>
+  
+    <li>What are the main data types in PostgreSQL?</li>
+    <li>What is the difference between <b>VARCHAR</b>, <b>TEXT</b>, and <b>CHAR</b> in PostgreSQL?</li>
+    <li>How do you write a <b>JOIN</b> query in PostgreSQL?</li>
+    <li>How does indexing work in PostgreSQL? What types of indexes are there?</li>
+    <li>What is a composite index and when should you use it?</li>
+    <li>How does <b>UPSERT</b> work in PostgreSQL (<b>ON CONFLICT</b>)?</li>
+    <li>How do you create and use stored procedures in PostgreSQL?</li>
+    <li>How do transactions work in PostgreSQL and how are they handled in Node.js?</li>
+    <li>What are triggers and when would you use them in PostgreSQL?</li>
+    <li>How do you implement pagination using <b>LIMIT</b> and <b>OFFSET</b> in PostgreSQL?</li>
+  
+    <li>What is the difference between row-level and table-level locking?</li>
+    <li>What is a CTE (Common Table Expression) and how do you use it?</li>
+    <li>Explain the use of <b>WITH</b> queries in PostgreSQL.</li>
+    <li>What is the purpose of PostgreSQL extensions like <b>pg_stat_statements</b> or <b>uuid-ossp</b>?</li>
+    <li>How do you optimize slow queries in PostgreSQL?</li>
+    <li>Explain the difference between <b>INNER JOIN</b>, <b>LEFT JOIN</b>, and <b>FULL OUTER JOIN</b>.</li>
+    <li>What is query plan analysis (<b>EXPLAIN ANALYZE</b>) and how do you use it?</li>
+    <li>What are sequences and how do they work for auto-incrementing IDs?</li>
+    <li>How does PostgreSQL handle JSON and JSONB fields?</li>
+    <li>How do you use array columns in PostgreSQL and what are their pros/cons?</li>
+  
+    <li>What are the main data types in Redis and their use cases?</li>
+    <li>How does Redis differ from a traditional SQL or NoSQL database?</li>
+    <li>What is the purpose of setting key expiration in Redis?</li>
+    <li>How can Redis help improve PostgreSQL performance?</li>
+    <li>How do you cache a PostgreSQL query result in Redis with expiration?</li>
+    <li>What are Redis eviction policies and when do they matter?</li>
+    <li>What’s the difference between <b>SET</b>, <b>HSET</b>, and <b>ZADD</b> in Redis?</li>
+    <li>How do you implement a cache-aside pattern using Redis?</li>
+    <li>How would you ensure cache consistency between Redis and PostgreSQL?</li>
+    <li>What is Redis Pub/Sub and can it be used to synchronize PostgreSQL events?</li>
+  
+    <li>How do you monitor and debug Redis performance?</li>
+    <li>What are Redis Streams and how could they be used in a microservice system?</li>
+    <li>How do you secure a Redis server?</li>
+    <li>Can Redis be used for rate limiting? How would you implement it in Express?</li>
+    <li>How can Redis be used for session storage in Express apps?</li>
+    <li>What’s the role of Redis in distributed locking and how do you implement it?</li>
+    <li>Explain the difference between <b>DEL</b>, <b>UNLINK</b>, and key expiration.</li>
+    <li>How does Redis handle replication and clustering?</li>
+    <li>How would you handle failover with Redis Sentinel?</li>
+    <li>What are the trade-offs of using Redis as a primary data store instead of PostgreSQL?</li>
+  
+    <li>How do you prevent the N+1 query problem with PostgreSQL in Express?</li>
+    <li>How do you structure caching logic for REST endpoints?</li>
+    <li>How do you test Redis cache logic in unit/integration tests?</li>
+    <li>What tools or ORMs do you use for PostgreSQL in Express?</li>
+    <li>How do you manage environment-based Redis and PostgreSQL connections in Node.js?</li>
+
+    <!-- Architecture & Design -->
+    <li>How do Express.js, PostgreSQL, Redis, and a scheduler (e.g., node-cron) work together in a backend architecture?</li>
+    <li>What are the common use cases for Redis in a system that also uses PostgreSQL?</li>
+    <li>Why would you schedule jobs in a Node.js application using PostgreSQL and Redis?</li>
+    <li>When would you choose Redis over PostgreSQL for certain types of data?</li>
+    <li>How do you manage distributed job scheduling when using PostgreSQL and Redis?</li>
+  
+    <!-- PostgreSQL Core -->
+    <li>What are the most used PostgreSQL data types and their purposes?</li>
+    <li>How do you implement complex joins in PostgreSQL?</li>
+    <li>How do indexes improve PostgreSQL performance?</li>
+    <li>What are partial indexes and when should you use them?</li>
+    <li>How do you implement cascading deletes or updates using foreign keys?</li>
+  
+    <!-- PostgreSQL Advanced -->
+    <li>What is the difference between CTEs and subqueries in PostgreSQL?</li>
+    <li>What are materialized views and how do you use them?</li>
+    <li>How do you handle schema migrations in a production PostgreSQL database?</li>
+    <li>How would you implement recurring job logic in PostgreSQL using stored procedures?</li>
+    <li>How can you track execution logs or audit trails using PostgreSQL?</li>
+  
+    <!-- PostgreSQL + Scheduler -->
+    <li>How can PostgreSQL and a scheduler be combined to run periodic reports?</li>
+    <li>How do you ensure transactional integrity during a scheduled job that involves writes to PostgreSQL?</li>
+    <li>How can a failed PostgreSQL transaction during a scheduled job be retried safely?</li>
+    <li>How do you use PostgreSQL advisory locks in scheduled tasks?</li>
+    <li>What is the role of cron expressions in job scheduling?</li>
+  
+    <!-- Redis Core -->
+    <li>What are the main Redis data structures and when do you use them?</li>
+    <li>How do you use Redis to cache PostgreSQL query results?</li>
+    <li>What is the difference between Redis `SETEX` and `EXPIRE`?</li>
+    <li>How do Redis TTL and eviction policies affect caching strategies?</li>
+    <li>How do you prevent cache stampede in Redis?</li>
+  
+    <!-- Redis Advanced -->
+    <li>What are Redis streams and how can they be used to log scheduled job activity?</li>
+    <li>How would you use Redis Pub/Sub to trigger events from scheduled jobs?</li>
+    <li>How do you use Redis to implement distributed locking in scheduled tasks?</li>
+    <li>What are Redis sorted sets and how could they help with job prioritization?</li>
+    <li>How do you monitor Redis memory and performance in a production system?</li>
+  
+    <!-- Scheduler Integration -->
+    <li>What is node-cron and how does it compare to libraries like Agenda or Bull?</li>
+    <li>How do you prevent overlapping scheduled jobs in an Express+Redis setup?</li>
+    <li>How would you implement retry logic for a failed scheduled task?</li>
+    <li>How do you dynamically schedule jobs from a PostgreSQL table?</li>
+    <li>What is a dead-letter queue and how can you implement one with Redis?</li>
+  
+    <!-- Caching Strategy -->
+    <li>What is cache-aside strategy and how is it implemented with PostgreSQL and Redis?</li>
+    <li>How do you invalidate Redis cache when PostgreSQL records are updated?</li>
+    <li>What’s the tradeoff between caching full objects vs. partial query results?</li>
+    <li>What are some best practices for Redis key naming and structure?</li>
+    <li>How can Redis assist in paginating large PostgreSQL datasets?</li>
+  
+    <!-- Real-Time & Messaging -->
+    <li>How can Redis Pub/Sub be used for real-time notifications after scheduled DB updates?</li>
+    <li>How can Redis help decouple PostgreSQL writes from real-time user updates?</li>
+    <li>How do you throttle scheduled API calls using Redis counters?</li>
+    <li>How can you use Redis bitmaps or HyperLogLogs for scheduled analytics?</li>
+    <li>How do you implement rate limiting for scheduled jobs in Redis?</li>
+  
+    <!-- Testing, Security, Deployment -->
+    <li>How do you test scheduled jobs that modify PostgreSQL and Redis state?</li>
+    <li>How do you secure Redis and PostgreSQL connections in Node.js applications?</li>
+    <li>How would you structure a production-ready scheduler using Express + PostgreSQL + Redis?</li>
+    <li>What logging and alerting strategies would you implement for background jobs?</li>
+    <li>What tools can be used to visualize PostgreSQL query metrics and Redis cache hits?</li>
+  </ol>
+  
+
+  
+</div></li>
+
+
+<li data-id="q122"><span class="faq-question">
+Redis
+</span><div class="answer">
+  <ol>
+    <li>What is Redis and what are its primary use cases?</li>
+    <li>Is Redis a database, cache, or message broker?</li>
+    <li>How is Redis different from other databases like MySQL or MongoDB?</li>
+    <li>What are the data structures supported by Redis?</li>
+    <li>Is Redis single-threaded or multi-threaded?</li>
+    <li>What is the maximum size of a Redis key and value?</li>
+    <li>What is the default port Redis runs on?</li>
+    <li>What is the difference between Redis and Memcached?</li>
+    <li>How does Redis store data in memory?</li>
+    <li>Can Redis be used for persistent storage?</li>
+  
+    <li>What is a Redis string and what operations can be performed on it?</li>
+    <li>What is a Redis list? How is it different from a set?</li>
+    <li>Explain Redis set and its use cases.</li>
+    <li>What are sorted sets in Redis?</li>
+    <li>What is a Redis hash and when should you use it?</li>
+    <li>Can you perform range queries in Redis? If yes, how?</li>
+    <li>How would you store and access a JSON object in Redis?</li>
+  
+    <li>What is Redis Pub/Sub? Give an example use case.</li>
+    <li>What is a Redis stream?</li>
+    <li>Explain Redis HyperLogLog.</li>
+    <li>What is a Redis bitmap?</li>
+    <li>What is Redis GEO data structure used for?</li>
+    <li>How can you expire keys in Redis?</li>
+    <li>What is the difference between DEL and UNLINK?</li>
+  
+    <li>How do you ensure Redis performs optimally under high load?</li>
+    <li>What are Redis eviction policies?</li>
+    <li>Explain Lazy vs Eager expiration in Redis.</li>
+    <li>What are Redis memory optimization techniques?</li>
+    <li>How to handle large datasets in Redis?</li>
+    <li>How do you monitor Redis performance?</li>
+  
+    <li>What are RDB and AOF in Redis?</li>
+    <li>What are the differences between RDB and AOF persistence mechanisms?</li>
+    <li>Can Redis use both RDB and AOF at the same time?</li>
+    <li>How does Redis handle data recovery after a crash?</li>
+    <li>What is the SAVE and BGSAVE command in Redis?</li>
+  
+    <li>How are transactions handled in Redis?</li>
+    <li>What are the commands used to start and execute a transaction in Redis?</li>
+    <li>What is the use of WATCH in Redis?</li>
+    <li>Can you use Lua scripting in Redis? Why and how?</li>
+    <li>Is Redis transaction atomic?</li>
+  
+    <li>What is Redis Sentinel?</li>
+    <li>What is Redis Cluster and how does it work?</li>
+    <li>What is the difference between Redis replication and clustering?</li>
+    <li>How does Redis handle failover?</li>
+    <li>How does Redis shard data in a cluster?</li>
+  
+    <li>How can you secure a Redis instance?</li>
+    <li>How do you configure password authentication in Redis?</li>
+    <li>Can Redis be used over SSL/TLS?</li>
+    <li>What are some Redis configuration best practices?</li>
+    <li>How do you backup and restore Redis data?</li>
+  </ol>
+
+</div></li>
+
+
 <li data-id="q122"><span class="faq-question">
 Node.js?
 </span><div class="answer">
@@ -45,6 +252,149 @@ shallow / shadow copy
 
 </div></li>
 
+
+<li data-id="q122obj"><span class="faq-question green ">
+  Object, Rest, Rest Operator
+</span><div class="answer">
+<pre>
+<b>Object</b>
+var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+const x = Object.keys(obj);
+const y = Object.values(obj);
+const z = Object.entries(obj);
+
+
+
+
+const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
+const v1 = Math.max(...Object.values(x1));
+const v2 = Math.max(...[[1,2],3,4].flat());
+const v3 = Math.max(1,2,3,4);
+
+
+</pre>
+
+<pre>
+  <b>Rest Operator</b>
+  const user = { id: 1, name: "Alice", age: 30 };
+  const { name, ...rest } = user;
+  console.log(name); // "Alice"
+  console.log(rest); // { id: 1, age: 30 }
+
+
+  <b>Spread Operator</b>
+  const arr = [1, 2, 3];
+  const newArr = [...arr, 4, 5];
+  console.log(newArr); // [1, 2, 3, 4, 5]
+
+</pre>
+
+
+</div></li>
+
+
+
+<li data-id="q122"><span class="faq-question">
+  Type vs Object
+  </span><div class="answer">
+
+<pre><b>
+type Car is a type definition
+myCar is an object at runtime</b>
+
+type Car = {
+  brand: string;
+  year: number;
+};
+
+const myCar: Car = {
+  brand: "Toyota",
+  year: 2022
+};
+</pre>
+
+
+  <h2>1. <code>type</code> (TypeScript only)</h2>
+  <ul>
+    <li>Used to define custom types</li>
+    <li>Exists only at <strong>compile time</strong></li>
+    <li>Helps with static type checking</li>
+  </ul>
+
+  <pre><code>type User = {
+  name: string;
+  age: number;
+};
+
+const u: User = { name: "Alice", age: 25 };
+</code></pre>
+
+  <h2>2. <code>object</code> (JavaScript + TypeScript)</h2>
+  <ul>
+    <li>A runtime data structure</li>
+    <li>Used to store key-value pairs</li>
+  </ul>
+
+  <pre><code>const user = {
+  name: "Bob",
+  age: 30
+};
+
+console.log(user.name); // "Bob"
+</code></pre>
+
+  <h2>🔍 Key Differences</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th><code>type</code> (TypeScript)</th>
+        <th><code>object</code> (JS/TS)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Exists at</td>
+        <td>Compile time only</td>
+        <td>Runtime</td>
+      </tr>
+      <tr>
+        <td>Purpose</td>
+        <td>Type safety</td>
+        <td>Data storage</td>
+      </tr>
+      <tr>
+        <td>Used for</td>
+        <td>Defining data shape</td>
+        <td>Storing key-value pairs</td>
+      </tr>
+      <tr>
+        <td>Can hold data?</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Example syntax</td>
+        <td><code>type Car = { ... }</code></td>
+        <td><code>const car = { ... }</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>🧪 Example: Using both</h2>
+  <pre><code>type Car = {
+  brand: string;
+  year: number;
+};
+
+const myCar: Car = {
+  brand: "Toyota",
+  year: 2022
+};</code></pre>
+
+
+    </div></li>
 
 <li data-id="q122"><span class="faq-question">
   Monolithic vs Microservices
@@ -323,6 +673,13 @@ services/
       <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
       <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
     </ol>
+<pre>
+  app.use(rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: "Too many requests, try again later.",
+  }));
+</pre>
   </div>
 </li>
 
@@ -330,13 +687,15 @@ services/
   <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
   <div class="answer">
     Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
-    <ul>
-      <li><strong>Clickjacking</strong> with the <code>X-Frame-Options</code> header</li>
-      <li><strong>XSS attacks</strong> with <code>X-XSS-Protection</code></li>
-      <li><strong>MIME sniffing</strong> with <code>X-Content-Type-Options</code></li>
-      <li><strong>Enforces HTTPS</strong> with <code>Strict-Transport-Security</code></li>
-      <li><strong>Content Security Policy</strong> to control allowed resources</li>
-    </ul>
+    <code>
+      <ol>
+        <li><strong>Clickjacking</strong> with the <b>X-Frame-Options</b> header</li>
+        <li><strong>XSS attacks</strong> with <b>X-XSS-Protection</b></li>
+        <li><strong>MIME sniffing</strong> with <b>X-Content-Type-Options</b></li>
+        <li><strong>Enforces HTTPS</strong> with <b>Strict-Transport-Security</b></li>
+        <li><strong>Content Security Policy</strong> to control allowed resources</li>
+      </ol>
+    </code>
     Using Helmet is simple:
     <pre><code>const helmet = require('helmet');
 app.use(helmet());</code></pre>
