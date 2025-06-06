@@ -18,7 +18,7 @@
 <a href="mongodb.html">Mongo DB</a> &nbsp; 
 <a href="DynamoDB.html">Dynamo DB</a> &nbsp; 
 <a href="code.html">Promise</a> &nbsp; 
-<a href="coding.html">Coding</a> &nbsp; 
+<a href="code.html">Code</a> &nbsp; 
 <a href="skill.html">Skill</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 
@@ -39,11 +39,276 @@ TypeScript
 nestjs 
 tailwind
 
+shallow / shadow copy
+
+
+
+</div></li>
+
+
+<li data-id="q122"><span class="faq-question">
+  Monolithic vs Microservices
+  </span><div class="answer">
+
+  
+  <p>Here’s a clear and practical comparison between <strong>Monolithic</strong> and <strong>Microservices</strong> architectures — especially useful from a backend/full-stack perspective.</p>
+
+  <h2>🧱 MONOLITHIC ARCHITECTURE</h2>
+
+  <h3>🔹 What Is It?</h3>
+  <p>A single unified codebase that handles everything: frontend, backend, database logic, etc.</p>
+
+  <h3>✅ Example:</h3>
+  <p>All modules like Auth, Product, Billing live in one Node.js/Express app or NestJS app.</p>
+
+  <pre class="code-block">
+app/
+├── controllers/
+├── services/
+├── models/
+└── server.js
+  </pre>
+
+  <h3>✅ Pros:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Advantage</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>✅ Simple</td>
+        <td>Easier to build, test, and deploy initially</td>
+      </tr>
+      <tr>
+        <td>✅ Fast Dev Cycle</td>
+        <td>Local dev and debugging are straightforward</td>
+      </tr>
+      <tr>
+        <td>✅ Performance</td>
+        <td>Function calls instead of inter-service HTTP</td>
+      </tr>
+      <tr>
+        <td>✅ No DevOps Needed</td>
+        <td>Minimal infrastructure setup</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>❌ Cons:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Disadvantage</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>❌ Scaling Pain</td>
+        <td>Hard to scale one feature independently</td>
+      </tr>
+      <tr>
+        <td>❌ Tight Coupling</td>
+        <td>Change in one module can break others</td>
+      </tr>
+      <tr>
+        <td>❌ Big Deployments</td>
+        <td>Any small change requires full redeployment</td>
+      </tr>
+      <tr>
+        <td>❌ Tech Lock-in</td>
+        <td>Difficult to mix languages/tools</td>
+      </tr>
+      <tr>
+        <td>❌ Harder to Onboard</td>
+        <td>Large codebase = steep learning curve</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>🧩 MICROSERVICES ARCHITECTURE</h2>
+
+  <h3>🔹 What Is It?</h3>
+  <p>A collection of small, independently deployable services that each focus on a specific business domain.</p>
+
+  <h3>✅ Example:</h3>
+  <ul>
+    <li><code>auth-service</code> (NestJS)</li>
+    <li><code>product-service</code> (Express)</li>
+    <li><code>order-service</code> (Go or Python)</li>
+    <li>Communicate via REST, gRPC, or Kafka</li>
+  </ul>
+
+  <pre class="code-block">
+services/
+├── auth/
+├── products/
+├── orders/
+└── gateway/  &lt;-- API Gateway (optional)
+  </pre>
+
+  <h3>✅ Pros:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Advantage</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>✅ Independent Scaling</td>
+        <td>Scale each service based on need (e.g., product &gt; auth)</td>
+      </tr>
+      <tr>
+        <td>✅ Tech Flexibility</td>
+        <td>Use best-fit language (Go for compute, Node.js for I/O)</td>
+      </tr>
+      <tr>
+        <td>✅ Fault Isolation</td>
+        <td>One service crash ≠ whole app crash</td>
+      </tr>
+      <tr>
+        <td>✅ Faster Deployment</td>
+        <td>Deploy only the changed service</td>
+      </tr>
+      <tr>
+        <td>✅ Easier CI/CD</td>
+        <td>Small, focused pipelines</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>❌ Cons:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Disadvantage</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>❌ Complexity</td>
+        <td>Infrastructure, communication, observability</td>
+      </tr>
+      <tr>
+        <td>❌ DevOps Intensive</td>
+        <td>Needs Docker, Kubernetes, service discovery</td>
+      </tr>
+      <tr>
+        <td>❌ Data Consistency</td>
+        <td>Requires eventual consistency, transactions are tricky</td>
+      </tr>
+      <tr>
+        <td>❌ Latency</td>
+        <td>HTTP/gRPC calls between services = slower than in-memory calls</td>
+      </tr>
+      <tr>
+        <td>❌ Debugging Difficulties</td>
+        <td>Tracing across services needs observability tools</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>⚖️ Comparison Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Monolithic</th>
+        <th>Microservices</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Codebase</td>
+        <td>Single repo</td>
+        <td>Multiple repos/modules</td>
+      </tr>
+      <tr>
+        <td>Deployment</td>
+        <td>One artifact</td>
+        <td>Many deployable services</td>
+      </tr>
+      <tr>
+        <td>Scaling</td>
+        <td>Entire app</td>
+        <td>Per service</td>
+      </tr>
+      <tr>
+        <td>Fault Isolation</td>
+        <td>Poor</td>
+        <td>Strong</td>
+      </tr>
+      <tr>
+        <td>Tech Stack Flexibility</td>
+        <td>Limited</td>
+        <td>Flexible per service</td>
+      </tr>
+      <tr>
+        <td>Team Structure</td>
+        <td>Centralized</td>
+        <td>Decentralized, cross-functional</td>
+      </tr>
+      <tr>
+        <td>Best for</td>
+        <td>Small/medium projects</td>
+        <td>Large, scalable systems</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>🛠️ When to Use What?</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Situation</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MVP, startup project</td>
+        <td>✅ <strong>Monolithic</strong></td>
+      </tr>
+      <tr>
+        <td>Small team, tight deadlines</td>
+        <td>✅ <strong>Monolithic</strong></td>
+      </tr>
+      <tr>
+        <td>Large team, distributed ownership</td>
+        <td>✅ <strong>Microservices</strong></td>
+      </tr>
+      <tr>
+        <td>Independent scaling of services</td>
+        <td>✅ <strong>Microservices</strong></td>
+      </tr>
+      <tr>
+        <td>Need high availability and fault isolation</td>
+        <td>✅ <strong>Microservices</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Let me know if you'd like a <strong>NestJS-based microservices demo</strong>, or how to <strong>break a monolith into microservices</strong>.</p>
+
 </div></li>
 
 
 <li data-id="q53337">
-  <span class="faq-question">Security Practices in Node.js?</span>
+  <span class="faq-question green">Security Practices in Node.js?***</span>
   <div class="answer">
     <ol>
       <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
@@ -2757,7 +3022,9 @@ What is Event Bubbling in ReactJS?
       </li>
       
       <li data-id="q10">
-        <span class="faq-question">What is the difference between <b>interface</b> and <b>type</b>?</span>
+        <span class="faq-question green ">
+          What is the difference between <b>interface</b> and <b>type</b>?
+        </span>
         <div class="answer">
           <code>
             Both interface and type can define the shape of an object
@@ -2768,6 +3035,22 @@ What is Event Bubbling in ReactJS?
             Type is more flexible for unions, intersections, and primitives.<br>
             Type  do not support declaration merging
           </code>
+<pre>
+  // interface: Good for defining object/class shapes
+  interface User {
+    id: number;
+    name: string;
+  }
+  
+  // type: Good for combining types, union, or primitives
+  type Status = 'active' | 'inactive';
+  
+  type Product = {
+    id: number;
+    price: number;
+  };
+  
+</pre>          
         </div>
       </li>
       
@@ -2808,8 +3091,8 @@ What is Event Bubbling in ReactJS?
       <li data-id="q15">
         <span class="faq-question">What are optional and default parameters?</span>
         <div class="answer">
-          Optional parameters are marked with a <code>?</code> and may be omitted when calling the function. Default parameters provide a fallback value. Example: 
-          <code>function greet(name: string = "Guest") { console.log("Hello, " + name); }</code>
+          Optional parameters are marked with a <b>?</b> and may be omitted when calling the function. Default parameters provide a fallback value. Example: 
+          <b>function greet(name: string = "Guest") { console.log("Hello, " + name); }</b>
         </div>
       </li>
       
@@ -4941,6 +5224,50 @@ Direct API calls in render are discouraged to avoid repeated calls on every rend
     </div>
   </li>
 </ul>
+
+
+<li data-id="q3">
+  <span class="faq-question">What is a TypeScript function? Can you give an example?</span>
+  <div class="answer">
+    <p>A TypeScript function is similar to a JavaScript function but supports static typing.</p>
+    <pre>
+
+      <code>
+
+        function add(a: number, b?: string): string {
+          if (b) {
+            return `${a} and ${b}`;
+          } else {
+            return `${a}`;
+          }
+        }
+        
+        // Usage examples
+        console.log(add(5));        // Output: "5"
+        console.log(add(5, "test")); // Output: "5 and test"
+        
+
+      </code>
+
+<code>
+// Function that adds two numbers and returns a number
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// Usage
+const result = add(5, 10);
+console.log(result);  // Output: 15
+</code>
+    </pre>
+  </div>
+</li>
+
+
+
+
+
+
 
 
 

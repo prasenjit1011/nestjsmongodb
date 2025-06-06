@@ -35,7 +35,8 @@
 
     pre.code-block {
       flex-basis:  70%;
-      background: #f4f4f4;
+      background: #000;
+      color: #fff;
       border-right: 1px solid #ccc;
     }
 
@@ -64,6 +65,84 @@
 
   <div class="container">
     <pre class="code-block"><code>
+      ---------- Example 01 ----------
+      Array.prototype.double = function () {
+        return this.map(x => x * 2);
+      };
+      
+      const a = [1, 2, 3];
+      console.log(a.double()); // [2, 4, 6]
+      
+
+
+
+
+      ---------- Example 02 ----------
+
+      const arr = [1,2,3,4,5,9]
+      const length = arr.length;
+      const target = 6;
+      const result = [];
+      
+      for(let i = 0; i< length; i++){
+        for(let j=i+1; j< length; j++){
+          if(arr[i]+arr[j] == target){
+            result.push([arr[i],arr[j]]);
+          }
+        }
+      }
+      
+      console.log(result)
+      
+      
+      
+
+
+
+      ---------- Example 03 ----------
+
+      var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+      var keys = [];
+      
+      getKeys(obj)
+      
+      function getKeys(obj){
+        for(let val in obj){
+          keys.push(val)
+          if(typeof obj[val] === 'object'){
+            getKeys(obj[val]);
+          }
+        }
+      }
+      
+      console.log(keys);
+      [ 'a', 'b', 'c', 'd', 'e' ]
+      
+
+
+      ------------------------------------------------------
+
+      var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+      const result = [];     
+      getKeys(obj);
+      
+      function getKeys(obj){
+        Object.entries(obj).map((value, key)=>{
+          result.push(value[0]);
+          if(typeof value[1] == 'object'){
+            getKeys(value[1]);
+          }
+        })
+      }
+      
+      console.log(result);
+
+
+
+
+
+      ---------- Example 04 ----------
+
       const p1 = Promise.resolve(1);
       const p2 = Promise.resolve(2);
       const p3 = Promise.resolve(3);
@@ -76,7 +155,10 @@
           output("One failed: " + err);
         });
 
-      //====================================== 
+
+    --------------------------------------------------------------
+
+
         async function fetchData() {
           try {
             const results = await Promise.all([p1, p2, p3]);
@@ -87,9 +169,35 @@
         }
         
         fetchData();
-        
 
 
+
+
+
+
+
+    ---------- Example 05 ----------
+
+    const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
+    const y1 = Object.entries(x1)
+    const max = Math.max(...Object.values(x1));
+    const z1 = y1.find((val)=> {
+      if(val[1] == max){
+        return true;
+      }
+    })
+    
+    console.log('Largest Number with key : ',x1, z1, max); 
+    // Output: 8, [ 'c', 8 ]
+
+
+
+
+
+
+
+
+    ---------- Example 06 ----------
 
     // aaaabbccccddccffaaccbbf => 
     // a4b2c3d3
@@ -106,17 +214,7 @@
     
     let arr21 = [[1, 2], [3,2, 4], [5]];
     
-    const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
-    const y1 = Object.entries(x1)
-    const max = Math.max(...Object.values(x1));
-    const z1 = y1.find((val)=> {
-      if(val[1] == max){
-        return true;
-      }
-    })
-    
-    console.log('Largest Number with key : ',x1, z1, max); 
-    // Output: 8, [ 'c', 8 ]
+
     
     
     console.log('Reverse Integer Array Element : ', 

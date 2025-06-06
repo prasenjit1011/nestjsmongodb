@@ -524,7 +524,7 @@ export default Button;
 <li data-id="q_useCallback_dep"><span class="faq-question">
 What is the second parameter [] in useCallback(fn, [])?
 </span><div class="answer">
-The second parameter in <code>useCallback(() =&gt; {...}, [])</code> is called the <b>dependency array</b>.
+The second parameter in <b>useCallback(() =&gt; {...}, [])</b> is called the <b>dependency array</b>.
 
 - An empty array <code>[]</code> means the callback function will be created once on the initial render and reused on every re-render.
 - If any dependencies are listed inside the array (e.g., <code>[count]</code>), the function will only be re-created if those dependencies change.
@@ -2339,6 +2339,63 @@ revalidate: 10, // seconds
 </div></li>
 
 
+<li data-id="q3"><span class="faq-question">
+
+
+  <h1>ReactJS Security Best Practices</h1>
+</span><div class="answer">
+  <h2>1. Prevent Cross-Site Scripting (XSS)</h2>
+  <p>
+    React escapes values by default when rendering, so it protects against most XSS attacks.
+    However, avoid using <code>dangerouslySetInnerHTML</code> unless absolutely necessary.
+  </p>
+
+  <ul>
+    <li>Sanitize any HTML content from external sources before injecting.</li>
+    <li>Prefer using React components and JSX instead of raw HTML strings.</li>
+  </ul>
+
+  <h2>2. Use HTTPS Everywhere</h2>
+  <p>Always serve your React app over HTTPS to encrypt data in transit and prevent man-in-the-middle attacks.</p>
+
+  <h2>3. Secure Authentication</h2>
+  <ul>
+    <li>Store tokens (JWT, OAuth tokens) securely, prefer <code>httpOnly</code> cookies over localStorage to prevent XSS token theft.</li>
+    <li>Implement proper logout and token expiration strategies.</li>
+  </ul>
+
+  <h2>4. Protect Against Cross-Site Request Forgery (CSRF)</h2>
+  <p>Use CSRF tokens or same-site cookies to protect API endpoints your React app calls.</p>
+
+  <h2>5. Avoid Exposing Sensitive Data</h2>
+  <ul>
+    <li>Never embed secrets, API keys, or private data directly in the React code.</li>
+    <li>Use environment variables and secure backend APIs to handle sensitive info.</li>
+  </ul>
+
+  <h2>6. Implement Content Security Policy (CSP)</h2>
+  <p>Configure CSP headers on your server to restrict sources of scripts, styles, and other resources to trusted origins.</p>
+
+  <h2>7. Handle Errors Gracefully</h2>
+  <p>Don’t leak stack traces or sensitive info in error messages shown to users.</p>
+
+  <h2>8. Keep Dependencies Updated</h2>
+  <p>Regularly update React and related libraries to patch security vulnerabilities.</p>
+
+  <h2>Example: Avoid Using <code>dangerouslySetInnerHTML</code></h2>
+  <pre>
+  &lt;div
+    dangerouslySetInnerHTML={{ __html: sanitize(yourHtmlContent) }}
+  /&gt;
+  </pre>
+  <p>Use a library like <code>dompurify</code> to sanitize HTML before rendering.</p>
+
+  <h2>Useful Libraries</h2>
+  <ul>
+    <li><a href="https://github.com/cure53/DOMPurify" target="_blank" rel="noopener noreferrer">DOMPurify</a> - For sanitizing HTML</li>
+    <li><a href="https://helmetjs.github.io/" target="_blank" rel="noopener noreferrer">Helmet</a> - For setting secure HTTP headers (used on server)</li>
+  </ul>
+</div></li>
 
 
 
