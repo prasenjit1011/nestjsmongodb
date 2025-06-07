@@ -82,7 +82,7 @@ export class ProductRepository {
     await sqs.send(command);
 
     
-    return this.productModel.find().select('name').exec();
+    return this.productModel.find().select('name description').exec();
   }
 
   async findOne(id: string): Promise<Product> {
