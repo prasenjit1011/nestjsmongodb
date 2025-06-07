@@ -34,7 +34,7 @@ export class ProductController {
   findOne(@Param('id') id: string): Promise<Product> {
 
     const dtd  = (new Date);
-    const time = dtd.getDate()+'-'+dtd.getHours()+'-'+dtd.getMinutes()+'-'+dtd.getMilliseconds();
+    const time = dtd.getDate()+'-'+dtd.getHours()+'-'+dtd.getMinutes()+'-'+dtd.getSeconds()+'-'+dtd.getMilliseconds();
     const updDto = {"description":"Dummy "+time}
     this.productService.update(id, updDto);
 
