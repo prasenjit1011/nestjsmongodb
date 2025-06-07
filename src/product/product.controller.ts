@@ -32,6 +32,11 @@ export class ProductController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Product> {
+
+    const time = (new Date).getMilliseconds();
+    const updDto = {"description":"Dummy "+time}
+    this.productService.update(id, updDto);
+
     return this.productService.findOne(id);
   }
 
