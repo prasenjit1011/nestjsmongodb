@@ -4,8 +4,12 @@ import * as dotenv from 'dotenv';
 
 async function bootstrap() {
   dotenv.config(); // Load .env before anything else
-  console.log('PORT : ', process.env.PORT)
   const app = await NestFactory.create(AppModule);
-  await app.listen(4001);
+  await app.listen(process.env.API_GATEWAY_PORT);
+
+  console.clear();
+  console.log('API_GATEWAY_PORT : ', process.env.API_GATEWAY_PORT)
+  console.log('Root Url : ', 'http://'+process.env.API_HOST+':'+process.env.API_GATEWAY_PORT)
+  console.log('User List : ', 'http://'+process.env.API_HOST+':'+process.env.API_GATEWAY_PORT+'/users')
 }
 bootstrap();

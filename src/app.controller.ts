@@ -24,7 +24,8 @@ export class AppController {
 
   @Get()
   getHello() {
-    const msg = 'Hello World! '+(new Date).getMilliseconds();
+    const msg = 'Hello Master! '+(new Date).getMilliseconds();
+    console.log(msg);
     return {msg};
   }
 }
