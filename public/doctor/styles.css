@@ -154,3 +154,11 @@ body {
     color: red;
     font-weight: bold;
   }
+
+hr{
+    border: none;
+    height: 3px;           /* min-height via height */
+    background-color: #007bff; /* bold look */
+    margin: 20px 0;         /* optional spacing */
+  }
+  
