@@ -549,7 +549,7 @@ shallow / shadow copy
 
 
 
-<li data-id="q_redux_formatted"><span class="faq-question">
+<li data-id="q_redux_formatted"><span class="faq-question green ">
   Redux
   </span><div class="answer">
   <strong>Redux</strong> is a state management library often used with React for building user interfaces. It provides a centralized store for managing the application's state, making it predictable and maintainable.
@@ -846,6 +846,98 @@ shallow / shadow copy
               This boosts performance and reduces memory usage in large UIs.
               </div></li>
               
+
+
+              <li data-id="q_virtual_dom"><span class="faq-question green ">
+                Virtual DOM in ReactJS?
+                </span><div class="answer">
+                The <strong>Virtual DOM</strong> is a lightweight, in-memory representation of the real DOM used by React.<br />
+                
+                When the state or props of a component change, React creates a new Virtual DOM tree and compares it with the previous one (called "diffing").
+                <br />
+                Only the differences (minimal changes) are then applied to the actual browser DOM, improving performance by reducing costly DOM manipulations.
+                <br />
+                This process allows React to update UI efficiently and smoothly without reloading the entire page.
+                </div></li>
+                
+                
+                <li data-id="q_useeffect"><span class="faq-question">
+                useEffect in ReactJS?
+                </span><div class="answer">
+                <code>useEffect</code> is a React Hook that lets you perform side effects in functional components, such as data fetching, subscriptions, or manually changing the DOM.
+                
+                It runs after the component renders and can be configured to run:
+                - After every render (no dependencies),
+                - Only once on mount (empty dependency array),
+                - Or when specific values change (dependencies array).
+                
+                Example:
+                <pre>
+                useEffect(() => {
+                // side effect logic
+                }, [dependency]);
+                </pre>
+                
+                It replaces lifecycle methods like <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code>.
+                </div></li>
+                
+                <li data-id="q_context_api"><span class="faq-question">
+                Context API in React?
+                </span><div class="answer">
+                The <strong>Context API</strong> in React provides a way to pass data through the component tree without prop drilling (passing props manually at every level).
+                
+                It allows sharing global data like themes, user info, or settings.
+                
+                Usage involves three parts:
+                - <code>React.createContext()</code> to create context.
+                - <code>Context.Provider</code> to provide data.
+                - <code>Context.Consumer</code> or <code>useContext()</code> hook to consume data.
+                
+                Example:
+                <pre><code>
+                const ThemeContext = React.createContext('light');
+                
+                function App() {
+                return (
+                &lt;ThemeContext.Provider value="dark"&gt;
+                &lt;Toolbar /&gt;
+                &lt;/ThemeContext.Provider&gt;
+                );
+                }
+                </code></pre>
+                
+                It simplifies state management for global data.
+                </div></li>
+                
+                <li data-id="q_event_bubbling"><span class="faq-question">
+                What is Event Bubbling in ReactJS?
+                </span><div class="answer">
+                  <strong>Event bubbling</strong> in ReactJS is a mechanism where an event triggered on a child element propagates (or "bubbles") up through its parent elements in the DOM tree.
+                  
+                  For example, clicking a button inside a <code>&lt;div&gt;</code> will first fire the button’s <code>onClick</code> handler, then the <code>&lt;div&gt;</code>'s if one is defined.
+                  
+                  Example:
+                  <pre><code>
+                  &lt;div onClick={() =&gt; console.log('Div clicked')}&gt;
+                    &lt;button onClick={() =&gt; console.log('Button clicked')}&gt;Click Me&lt;/button&gt;
+                  &lt;/div&gt;
+                  </code></pre>
+                  
+                  Clicking the button will log:<br>
+                  <code>Button clicked</code><br>
+                  <code>Div clicked</code>
+                  
+                  You can stop bubbling with <code>event.stopPropagation()</code>.
+                  </div></li>
+                  
+                
+                
+                
+
+
+
+
+
               <li data-id="q_mysql_acid"><span class="faq-question">
                 ACID in MySQL?
                 </span><div class="answer">
@@ -1497,63 +1589,72 @@ shallow / shadow copy
               
               
               <ul class="faq">
-                <li data-id="q125">
-                  <span class="faq-question">Stream?</span>
-                  <div class="answer">
-                    A <strong>Stream</strong> in Node.js is an abstract interface for working with streaming data. Streams are used to handle large data efficiently by processing it in chunks instead of loading it all into memory at once.
-                    
-                    <br />
-                    <strong>Why use Streams?</strong>
-                  <code>
-                    <ul>
-                      <li>Efficient memory usage for large files or data.</li>
-                      <li>Non-blocking, event-driven architecture.</li>
-                      <li>Used internally in many Node.js APIs (e.g., HTTP, file system, process).</li>
-                    </ul>
-                  </code>
-                    <br /><br>
-                    <strong>Types of Streams:</strong>
-                    <code>
-                    <ul>
-                      <li><strong>Readable:</strong> For reading data (e.g., fs.createReadStream()).</li>
-                      <li><strong>Writable:</strong> For writing data (e.g., fs.createWriteStream()).</li>
-                      <li><strong>Duplex:</strong> Can read and write (e.g., TCP sockets).</li>
-                      <li><strong>Transform:</strong> Duplex stream that can modify or transform data (e.g., zlib.createGzip()).</li>
-                    </ul>
-                    </code>
+<li data-id="q125">
+<span class="faq-question">Stream?</span>
+<div class="answer">
+  A <strong>Stream</strong> in Node.js is an abstract interface for working with streaming data. Streams are used to handle large data efficiently by processing it in chunks instead of loading it all into memory at once.
+  <br />
+
+
+
+  
+    Streams are objects for reading or writing data continuously. They include readable, writable, duplex, and transform streams. Streams are memory-efficient and used for processing large data like files.
+    
+
+
+
+  <br />
+  <strong>Why use Streams?</strong>
+<code>
+  <ul>
+    <li>Efficient memory usage for large files or data.</li>
+    <li>Non-blocking, event-driven architecture.</li>
+    <li>Used internally in many Node.js APIs (e.g., HTTP, file system, process).</li>
+  </ul>
+</code>
+  <br /><br>
+  <strong>Types of Streams:</strong>
+  <code>
+  <ul>
+    <li><strong>Readable:</strong> For reading data (e.g., fs.createReadStream()).</li>
+    <li><strong>Writable:</strong> For writing data (e.g., fs.createWriteStream()).</li>
+    <li><strong>Duplex:</strong> Can read and write (e.g., TCP sockets).</li>
+    <li><strong>Transform:</strong> Duplex stream that can modify or transform data (e.g., zlib.createGzip()).</li>
+  </ul>
+  </code>
+
+  <br />
+
+  <strong>Common stream events:</strong>
+  <code>
+  <ul>
+    <li>data – emitted when data is available to read.</li>
+    <li>end – no more data</li>
+    <li>error – error occurred</li>
+    <li>finish – finished writing</li>
+  </ul>
+  </code>
+  <br />
               
-                    <br />
-              
-                    <strong>Common stream events:</strong>
-                    <code>
-                    <ul>
-                      <li>data – emitted when data is available to read.</li>
-                      <li>end – no more data</li>
-                      <li>error – error occurred</li>
-                      <li>finish – finished writing</li>
-                    </ul>
-                    </code>
-                    <br />
-              
-                    <strong>Basic Example (File Stream):</strong>
-                    <pre>
-              const fs = require('fs');
-              const readable = fs.createReadStream('input.txt');
-              const writable = fs.createWriteStream('output.txt');
-              readable.pipe(writable);
-              -------------------------------------
-              
-              readable.on('data', chunk => {
-                console.log('Chunk:', chunk.toString());
-              });
-              
-              readable.on('end', () => {
-                console.log('Finished reading.');
-              });
-                    </pre>
-                  </div>
-                </li>
-              </ul>
+<strong>Basic Example (File Stream):</strong>
+<pre>
+    const fs = require('fs');
+    const readable = fs.createReadStream('input.txt');
+    const writable = fs.createWriteStream('output.txt');
+    readable.pipe(writable);
+    -------------------------------------
+    
+    readable.on('data', chunk => {
+      console.log('Chunk:', chunk.toString());
+    });
+    
+    readable.on('end', () => {
+      console.log('Finished reading.');
+    });
+    </pre>
+  </div>
+</li>
+</ul>
               
               <ul class="faq">
                 <li data-id="q126">
@@ -2083,20 +2184,23 @@ Mastering Promises is essential for handling async operations in modern JavaScri
 <li data-id="q_hoisting"><span class="faq-question">
 Hoisting?
 </span><div class="answer">
-Hoisting is JavaScript's default behavior of moving declarations to the top of their scope before code execution. It applies to <code>var</code> declarations and function declarations.
+Hoisting is JavaScript's default behavior of moving declarations to the top of their scope before code execution. <br />
+It applies to <b>var</b> declarations and function declarations.<br /><br />
 
-Variables declared with <code>var</code> are hoisted and initialized with <code>undefined</code>, whereas <code>let</code> and <code>const</code> are hoisted but not initialized (they are in a "temporal dead zone" until declaration).
+Variables declared with <b>var</b> are hoisted and initialized with <b>undefined</b>, <br />
+whereas <b>let</b> and <b>const</b> are hoisted but <b>not initialized</b> 
+They are in a <b>"temporal dead zone"</b> until declaration.
 
 Example:
-<pre><code>
+<pre>
 console.log(x); // undefined
 var x = 5;
 
 foo(); // Works
 function foo() {
-console.log("Hello");
+  console.log("Hello");
 }
-</code></pre>
+</pre>
 Hoisting can lead to unexpected results if not understood properly.
 </div></li>
 
@@ -2189,21 +2293,21 @@ Guards Vs Authentication? JWT
   <h4>Common JWT Security Mistakes :<br /> jwt.sign(payload, secret, { algorithm: 'HS256' });</h4>
 
   <div class="mistake">
-    <strong>1. Use <code>none</code> as the algorithm (Never do this!)</strong><br>
+    <strong>1. Use <b>none</b> as the algorithm (Never do this!)</strong><br>
     Attackers can forge tokens if verification is bypassed.
-    <div class="tip">✅ Always validate the algorithm and enforce a known one like <code>HS256</code> or <code>RS256</code>.</div>
+    <div class="tip">✅ Always validate the algorithm and enforce a known one like <b>HS256</b> or <b>RS256</b>.</div>
   </div>
 
   <div class="mistake">
-    <strong>2. Store JWTs in <code>localStorage</code></strong><br>
+    <strong>2. Store JWTs in <b>localStorage</b></strong><br>
     Vulnerable to XSS attacks.
-    <div class="tip">✅ Prefer <code>HttpOnly</code> cookies when possible.</div>
+    <div class="tip">✅ Prefer <b>HttpOnly</b> cookies when possible.</div>
   </div>
 
   <div class="mistake">
-    <strong>3. Don’t Set Expiration (<code>exp</code>)</strong><br>
+    <strong>3. Don’t Set Expiration (<b>exp</b>)</strong><br>
     Tokens without expiry can be used indefinitely.
-    <div class="tip">✅ Always set an expiry like <code>1h</code>, <code>15m</code>, etc.</div>
+    <div class="tip">✅ Always set an expiry like <b>1h</b>, <b>15m</b>, etc.</div>
   </div>
 
   <div class="mistake">
@@ -2215,7 +2319,7 @@ Guards Vs Authentication? JWT
   <div class="mistake">
     <strong>5. Not using HTTPS</strong><br>
     JWTs sent over HTTP can be intercepted.
-    <div class="tip">✅ Always use <code>HTTPS</code> to prevent MITM (Man-In-The-Middle) attacks.</div>
+    <div class="tip">✅ Always use <b>HTTPS</b> to prevent MITM (Man-In-The-Middle) attacks.</div>
   </div>
 
 
@@ -2388,52 +2492,49 @@ Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy ta
 <li data-id="q63">
   <span class="faq-question">Can you give an example of each phase of the Node.js Event Loop?</span>
   <div class="answer">
-    Yes! Below are examples of how each phase works in Node.js:
-    <ol>
-      <li>
-        <strong>1. Timers:</strong> Executed by <code>setTimeout</code> or <code>setInterval</code>.
-        <pre><code>setTimeout(() =&gt; console.log('Timer Phase'), 0);</code></pre>
-      </li>
-      <li>
-        <strong>2. Pending Callbacks:</strong> Rare, triggered by certain I/O like TCP errors.
-        <pre><code>// Not commonly used directly; internal libuv I/O error callbacks land here.</code></pre>
-      </li>
-      <li>
-        <strong>3. Idle/Prepare:</strong> Used internally by Node.js (not directly accessible).
-        <pre><code>// No direct example — internal phase.</code></pre>
-      </li>
-      <li>
-        <strong>4. Poll:</strong> Retrieves new I/O events; where most I/O callbacks execute.
-        <pre><code>const fs = require('fs');
-fs.readFile(__filename, () =&gt; console.log('Poll Phase (I/O)')); </code></pre>
-      </li>
-      <li>
-        <strong>5. Check:</strong> Executes <code>setImmediate</code> callbacks.
-        <pre><code>setImmediate(() =&gt; console.log('Check Phase (setImmediate)'));</code></pre>
-      </li>
-      <li>
-        <strong>6. Close Callbacks:</strong> Runs close event callbacks like <code>socket.on('close')</code>.
-        <pre><code>const net = require('net');
-const server = net.createServer();
-server.on('connection', (socket) =&gt; {
-  socket.on('close', () =&gt; console.log('Close Callback'));
-  socket.end();
-});
-server.listen(3000, () =&gt; {
-  const client = net.connect(3000);
-});</code></pre>
-      </li>
-    </ol>
     These phases repeat as long as there are operations to perform.
+<pre>
+<b>1. Timers:</b> Executed by <b>setTimeout</b> or <b>setInterval</b>.
+    <b>setTimeout(() =&gt; console.log('Timer Phase'), 0);</b>
+
+<b>2. Pending Callbacks:</b> Rare, triggered by certain I/O like TCP errors.
+    <b>// Not commonly used directly; internal libuv I/O error callbacks land here.</b>
+      
+<b>3. Idle/Prepare:</b> Used internally by Node.js (not directly accessible).
+    <b>// No direct example — internal phase.</b>
+
+<b>4. Poll:</b> Retrieves new I/O events; where most I/O callbacks execute.
+      const fs = require('fs');
+      fs.readFile(__filename, () =&gt; console.log('Poll Phase (I/O)')); 
+
+<b>5. Check:</b> Executes <b>setImmediate</b> callbacks.
+      setImmediate(() =&gt; console.log('Check Phase (setImmediate)'));
+    
+<b>6. Close Callbacks:</b> Runs close event callbacks like <b>socket.on('close')</b>
+      const net = require('net');
+      const server = net.createServer();
+      server.on('connection', (socket) =&gt; {
+        socket.on('close', () =&gt; console.log('Close Callback'));
+        socket.end();
+      });
+      server.listen(3000, () =&gt; {
+        const client = net.connect(3000);
+      });
+</pre>
+
+    
   </div>
 </li>
 <li data-id="q64">
   <span class="faq-question">What is Callback Hell in Node.js?</span>
   <div class="answer">
-    <strong>Callback Hell</strong> refers to the situation where multiple nested callbacks make code hard to read and maintain. It usually occurs in asynchronous code when callbacks are nested within callbacks.
-    <br><br>
-    <strong>Example:</strong>
-    <pre><code>
+<pre>
+<b>Callback Hell</b> refers to the situation where multiple nested callbacks make code hard to read and maintain. 
+It usually occurs in asynchronous code when callbacks are nested within callbacks.
+
+<b>Solution:</b> Use Promises or <b>async/await</b> to flatten the structure:
+
+
 fs.readFile('file1.txt', 'utf8', (err, data1) =&gt; {
   if (err) throw err;
   fs.readFile('file2.txt', 'utf8', (err, data2) =&gt; {
@@ -2444,9 +2545,9 @@ fs.readFile('file1.txt', 'utf8', (err, data1) =&gt; {
     });
   });
 });
-    </code></pre>
-    <strong>Solution:</strong> Use Promises or <b>async/await</b> to flatten the structure:
-    <pre>
+
+
+<hr />
 async function readFiles() {
   try {
     const data1 = await fs.promises.readFile('file1.txt', 'utf8');
@@ -2518,11 +2619,8 @@ console.log(higherOrder(greet, 'Node.js')); // Output: Hello, Node.js
 </li>
 
 
-<li data-id="q8"><span class="faq-question">
-Streams?
-</span><div class="answer">
-Streams are objects for reading or writing data continuously. They include readable, writable, duplex, and transform streams. Streams are memory-efficient and used for processing large data like files.
-</div></li>
+
+
 
 <li data-id="q13"><span class="faq-question">
 Worker threads?
@@ -2530,23 +2628,67 @@ Worker threads?
 Worker threads enable running JavaScript in parallel threads. Unlike the main thread, they can handle CPU-intensive tasks without blocking the event loop, improving performance.
 </div>
 <div class="answer">
-Worker threads are a way to run JavaScript code in parallel on multiple threads in Node.js. While Node.js is single-threaded by default (using an event loop), worker threads enable CPU-intensive tasks to be executed without blocking the main event loop, improving performance for compute-heavy operations.
+<pre>
+Worker threads enable parallel execution in Node.js for heavy tasks, keeping the main thread non-blocking.
+Worker threads are a way to run JavaScript code in parallel on multiple threads in Node.js. 
 
-Introduced in Node.js v10.5.0 (stable since v12), the <code>worker_threads</code> module allows you to create and manage threads that run scripts independently. Each worker has its own event loop, memory, and execution context, enabling true parallelism.
+While Node.js is single-threaded by default (using an event loop), 
+Worker Threads enable CPU-intensive tasks to be executed without blocking the main event loop, improving performance for compute-heavy operations.
+
+Introduced in Node.js v10.5.0 (stable since v12), the <b>worker_threads</b> module allows you to create and manage threads that run scripts independently. 
+Each worker has its own event loop, memory, and execution context, enabling true parallelism.
 
 Use cases include heavy computations, data processing, or any synchronous tasks that would otherwise block the main thread and degrade app responsiveness.
 
-Communication between the main thread and worker threads happens via messaging using <code>postMessage()</code> and listening to <code>message</code> events. Workers can share memory efficiently using <code>SharedArrayBuffer</code>.
+Communication between the main thread and worker threads happens via messaging using <b>postMessage()</b> and listening to <b>message</b> events. 
+Workers can share memory efficiently using <b>SharedArrayBuffer</b>.
 
-Example usage:
 
-<pre><code>const { Worker } = require('worker_threads');
-const worker = new Worker('./workerScript.js');
-worker.on('message', msg =&gt; console.log('From worker:', msg));
-worker.postMessage('start');
-</code></pre>
+<b>Example usage:</b>
+<code>
+  const { Worker }  = require('worker_threads');
+  const worker      = new Worker('./workerScript.js');
+  worker.on('message', msg =&gt; console.log('From worker:', msg));
+  worker.postMessage('start');
+  <hr />
+  const { Worker }  = require('worker_threads');
+  const path        = require('path');
+  const worker      = new Worker(path.resolve(__dirname, './workerScript.js'));
 
-Worker threads complement Node.js’s asynchronous model by enabling parallel execution for heavy workloads while maintaining non-blocking I/O in the main thread.
+  worker.on('message',  (msg)   => {  console.log('From worker:', msg);     });
+  worker.on('error',    (err)   => {  console.error('Worker error:', err);  });
+  worker.on('exit',     (code)  => {  console.log(`Worker exited with code ${code}`); });
+  
+  // Simulate sending a large JSON string for processing
+  const largeJson   = JSON.stringify({  users: Array.from({ length: 100000 }, (_, i) => ({ id: i, name: `User${i}` }))  });
+  worker.postMessage(largeJson);
+  <hr />
+  const { parentPort } = require('worker_threads');
+  parentPort.on('message', (jsonString) => {
+    try {
+      const data = JSON.parse(jsonString);
+
+      // Do some CPU-heavy processing
+      const transformed = data.users.map(user => ({
+        id: user.id,
+        name: user.name.toUpperCase(), // Example transformation
+      }));
+
+      // Send back just a summary
+      parentPort.postMessage({
+        status: 'success',
+        count: transformed.length,
+        sample: transformed.slice(0, 5) // send first 5 records
+      });
+    } catch (error) {
+      parentPort.postMessage({ status: 'error', message: error.message });
+    }
+  });
+
+
+</code>
+
+</pre>
 </div></li>
 <li data-id="q_package_lock"><span class="faq-question">
 Package-lock.json?
@@ -2556,46 +2698,43 @@ Package-lock.json?
 This ensures that every developer or deployment environment installs the same dependency tree, avoiding bugs caused by version differences. It also improves performance by caching dependency metadata. This file should be committed to version control in most projects.
 </div></li>
 
+
+
+
 <li data-id="q_node_error_handling"><span class="faq-question">
 Error handling?
 </span><div class="answer">
-Error handling in Node.js is critical for building reliable applications. Common strategies include:<br />
 
-<strong>1. Try-Catch:</strong> Used for synchronous code and <code>async/await</code> blocks.
-<pre><code>
-try {
-const data = await getData();
-} catch (err) {
-console.error(err.message);
-}
-</code></pre>
+<pre>
+Error handling in Node.js is critical for building reliable applications.
+Proper error handling helps maintain app stability and improves debugging.
+Common strategies include:<br />
+
+<strong>1. Try-Catch:</strong> Used for synchronous code and <b>async/await</b> blocks.
+  try {
+    const data = await getData();
+  } 
+  catch (err) {
+    console.error(err.message);
+  }
+
 
 <strong>2. Error-First Callbacks:</strong> Standard Node pattern where the first parameter is an error object.
-<pre><code>
 fs.readFile('file.txt', (err, data) => {
-if (err) return console.error(err);
-console.log(data.toString());
+  if (err) return console.error(err);
+    console.log(data.toString());
 });
-</code></pre>
+
 
 <strong>3. Global Error Handling:</strong> Catch unhandled exceptions or promise rejections.
-<pre><code>
-process.on('uncaughtException', (err) => {
-console.error('Unhandled Exception:', err);
-});
-process.on('unhandledRejection', (reason) => {
-console.error('Unhandled Rejection:', reason);
-});
-</code></pre>
+process.on('uncaughtException',   (err)     => {  console.error('Unhandled Exception:', err); });
+process.on('unhandledRejection',  (reason)  => {  console.error('Unhandled Rejection:', reason);});
+
 
 <strong>4. Express Middleware:</strong> Use error-handling middleware in Express.
-<pre><code>
-app.use((err, req, res, next) => {
-res.status(500).json({ message: err.message });
-});
-</code></pre>
+app.use((err, req, res, next) => {  res.status(500).json({ message: err.message }); });
 
-Proper error handling helps maintain app stability and improves debugging.
+</pre>
 </div></li>
 
 <li data-id="q14oth"><span class="faq-question green">🎯 Abstraction in Object-Oriented Programming (OOP)</h1>
@@ -3409,89 +3548,6 @@ Key features:<br>
 API Gateway simplifies building scalable, secure, and reliable APIs with minimal infrastructure management.
 </div></li>
 
-
-<li data-id="q_virtual_dom"><span class="faq-question">
-Virtual DOM in ReactJS?
-</span><div class="answer">
-The <strong>Virtual DOM</strong> is a lightweight, in-memory representation of the real DOM used by React.<br />
-
-When the state or props of a component change, React creates a new Virtual DOM tree and compares it with the previous one (called "diffing").
-<br />
-Only the differences (minimal changes) are then applied to the actual browser DOM, improving performance by reducing costly DOM manipulations.
-<br />
-This process allows React to update UI efficiently and smoothly without reloading the entire page.
-</div></li>
-
-
-<li data-id="q_useeffect"><span class="faq-question">
-useEffect in ReactJS?
-</span><div class="answer">
-<code>useEffect</code> is a React Hook that lets you perform side effects in functional components, such as data fetching, subscriptions, or manually changing the DOM.
-
-It runs after the component renders and can be configured to run:
-- After every render (no dependencies),
-- Only once on mount (empty dependency array),
-- Or when specific values change (dependencies array).
-
-Example:
-<pre><code>
-useEffect(() => {
-// side effect logic
-}, [dependency]);
-</code></pre>
-
-It replaces lifecycle methods like <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code>.
-</div></li>
-
-<li data-id="q_context_api"><span class="faq-question">
-Context API in React?
-</span><div class="answer">
-The <strong>Context API</strong> in React provides a way to pass data through the component tree without prop drilling (passing props manually at every level).
-
-It allows sharing global data like themes, user info, or settings.
-
-Usage involves three parts:
-- <code>React.createContext()</code> to create context.
-- <code>Context.Provider</code> to provide data.
-- <code>Context.Consumer</code> or <code>useContext()</code> hook to consume data.
-
-Example:
-<pre><code>
-const ThemeContext = React.createContext('light');
-
-function App() {
-return (
-&lt;ThemeContext.Provider value="dark"&gt;
-&lt;Toolbar /&gt;
-&lt;/ThemeContext.Provider&gt;
-);
-}
-</code></pre>
-
-It simplifies state management for global data.
-</div></li>
-
-<li data-id="q_event_bubbling"><span class="faq-question">
-What is Event Bubbling in ReactJS?
-</span><div class="answer">
-  <strong>Event bubbling</strong> in ReactJS is a mechanism where an event triggered on a child element propagates (or "bubbles") up through its parent elements in the DOM tree.
-  
-  For example, clicking a button inside a <code>&lt;div&gt;</code> will first fire the button’s <code>onClick</code> handler, then the <code>&lt;div&gt;</code>'s if one is defined.
-  
-  Example:
-  <pre><code>
-  &lt;div onClick={() =&gt; console.log('Div clicked')}&gt;
-    &lt;button onClick={() =&gt; console.log('Button clicked')}&gt;Click Me&lt;/button&gt;
-  &lt;/div&gt;
-  </code></pre>
-  
-  Clicking the button will log:<br>
-  <code>Button clicked</code><br>
-  <code>Div clicked</code>
-  
-  You can stop bubbling with <code>event.stopPropagation()</code>.
-  </div></li>
-  
 
 
     
