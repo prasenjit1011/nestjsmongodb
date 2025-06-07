@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<title>FAQ</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>FAQ</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CDN -->
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 p-6 font-sans leading-relaxed">
 
+  <!-- Navigation -->
+  <div>
+    <a href="/doctor/index.html">Nodejs</a> &nbsp; 
+    <a href="/doctor/react.html">React</a> &nbsp; 
+    <a href="/doctor/docker.html">Docker</a> &nbsp; 
+    <a href="/doctor/cmd.html">CMD</a> &nbsp; 
+    <a href="/doctor/kafka.html">Kafka</a> &nbsp; 
+    <a href="kafka-interview.html">Kafka Interview</a> &nbsp; 
+    <a href="mongodb.html">Mongo DB</a> &nbsp; 
+    <a href="DynamoDB.html">Dynamo DB</a> &nbsp; 
+    <a href="code.html">Promise</a> &nbsp; 
+    <a href="code.html">Code</a> &nbsp; 
+    <a href="crud.html">Crud</a> &nbsp; 
+    <a href="skill.html">Skill</a> &nbsp; 
+    <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
+    </div>
 
-  <a href="/doctor/index.html">Nodejs</a> &nbsp; 
-  <a href="/doctor/react.html">React</a> &nbsp; 
-  <a href="/doctor/docker.html">Docker</a> &nbsp; 
-  <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
-  <a href="/doctor/cmd.html">CMD</a> &nbsp; 
-  
-  <br /><br />
+  <!-- Separator -->
+  <div class="border-t-4 border-gray-300 my-8"></div>
 
-    
-################################################################################################<br /><br />
+  <!-- Content preformatted -->
+  <pre class="whitespace-pre-wrap bg-black text-white p-6 rounded shadow-md overflow-x-auto max-w-full font-mono text-sm">
 
-```bash
 ### Start : Dockerfile ###
 FROM ubuntu
 MAINTAINER Prasenjit
@@ -37,7 +47,7 @@ EXPOSE 80/tcp
 EXPOSE 80/udp
 
 ### End : Dockerfile ###
-<br /><br />
+
 ### Start : docker-compose.yml ###
 ### apt install docker-compose
 
@@ -64,8 +74,6 @@ volumes:
 
 
 ### End : docker-compose.yml ###
-<br /><br />
-
 
 ### For Windows ###
 enable window 
@@ -78,10 +86,6 @@ wsl -l -v
 
 ctrl+shift+esc
 Perforamance -> Enable Virtualization
-
-
-
-
 
 docker pull centos:7
 docker images
@@ -108,12 +112,9 @@ docker commit fm fimage:v1
 docker run -it fimage
 docker cp fm fim:/
 
-
 docker push prasenjitaluni/nestjsmaster:step01
 docker tag a18f183084ec prasenjitaluni/nestjsmaster:v1
 docker tag bf728bb327e1 prasenjitaluni/nestjsmaster:v1
-
-
 
 ## Docker CMD List
 
@@ -208,17 +209,12 @@ docker push tester/rpn-myimg:v1
 docker network prune
 docker-compose -v
 
-
-
-
-
 ### CMD : Syntax check of .yml : 
 docker-compose config
 ### CMD : Create container from multiple image(httpd, redis) of docker-compose.yml : 
 docker-compose up -d
 docker-compose down
 docker-compose up -d --scale rpn-db=5
-
 
 ## Docker CMD List
 # Docker Redis : 
@@ -228,8 +224,6 @@ docker run -it -p 6379:6379 -d --name redis-server redis:alpine
 ## NodeJS Project : npm i redis
 ## express version : 4.17.1
 ## redis version : 3.0.2
-
-
 
 ### Network
 ### CMD : ifconfig / ip a s
@@ -259,9 +253,7 @@ docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
 ### CMD : *** tcp, udp, DNAT, SNAT ? : iptables-legacy-save
 ### CMD : Embedded DNS server
 
-
 ############################################################################################3333333
-```bash
 
 docker images
 docker container ls -a
@@ -284,148 +276,66 @@ ping "172.17.0.3"
 
 ## ## ## ## ## ## ## ## ## ## ## ## 
 
-
-
 docker network create rpn-bridge
 docker network create --subnet 10.7.0.0/16 --gateway 10.7.7.7 rpn-network
 docker network ls
 ifconfig
-# docker0, 10.7.0.0/16, 10.7.7.7
+# docker0, rpn-network
 
-docker run --name rpn-network-new --net=rpn-network -d httpd
+docker run --name rpn-web-new --net=rpn-network -d httpd
 docker run --name jenkins --net=rpn-network -d jenkins
-docker network inspect bridge rpn-network
-docker container exec -it rpn-web-new /bin/bash
-apt-get update
-apt-get install net-tools
-apt-get install iputils-ping
-# eth0, 10.7.0.1
+docker network inspect rpn-network
 
 docker network connect bridge rpn-web-new
-docker container exec -it rpn-web-new /bin/bash
-ifconfig
-ping 172.17.0.3
-docker network disconnect bridge rpn-web-new
-
-## ## ## ## ## ## ## ## ## ## ## ## 
-
-
-Service Discovery
-Default DNS : 8.8.8.8
-
 nslookup jenkins
-Server :  127.0.0.11
-Address : 127.0.0.11#53
-
-Name :    jenkins
-Address : 10.7.0.2
 
 cat /etc/resolv.conf
-netstat -ntpl
-docker run --name rpn-network-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
-docker container ls -a
 
-docker exec -it rpn-web-3 /bin/bash
-eth0
+##########################################################################################
 
-netstat -ntplu
-iptables-save
-iptables-legacy-save
-DOCKER_OUTPUT : 127.0.0.11/32
-DOCKER_POSTROUTING : 127.0.0.11/32
-tcp, udp
-DNAT : Destination Network Address Tranlation
-SNAT : Source Net Address Tranlation
-** Package size : 512 Byte
-** Embedded DNS
+docker run --name rpn-web-3 --cap-add=NET_ADMIN -it --net rpn-network -d httpd
+#########################################################################################
 
+# Serverless Deployment
+npm install -g serverless
+serverless create --template aws-nodejs --path my-service
+cd my-service
+npm init -y
+npm install --save-dev serverless-offline
+npm install aws-sdk
 
-## ## ## ## ## ## ## ## ## ## ## ## 
+### Zip file for upload
+zip -r my-service.zip *
 
+serverless deploy
+serverless invoke -f hello
 
-docker run --name rpn-webserver -p 80:80 --net rpn-network -d httpd
-docker container ls | grep rpn-webserver
+## Write nodejs express API
+npm i express
+npm i serverless-http
 
-Create container from yml file
-docker-compose -f mydockercompose.yml up
-docker logs redis
-docker logs api
-docker-compose up -d
+#############################################################################################
+# docker network inspect bridge
+# docker network create --subnet=192.168.0.0/24 custom-network
+# docker run --net custom-network ...
+# docker network inspect custom-network
 
+### docker logs -f container_name
+### docker run --name rpn-web -d -p 80:80 httpd
+### docker network ls
+### docker ps -a
+### docker images
+### docker container prune
+### docker image prune
+### docker stop container_name
+### docker rm container_name
+### docker rmi image_name
 
-## CMD : 
-https://www.youtube.com/@SalmanWaheed
-https://www.youtube.com/watch?v=rcZoPygiI8o
-https://www.youtube.com/watch?v=wwNWgG5htxs
+### CMD
+docker run --name rpn-web -d -p 80:80 httpd
+docker exec -it rpn-web /bin/bash
 
-## sudo apt install -y awscli
-## aws configure
-## cat ~/.aws/credentials
-## apt install terafrom
+</pre>
 
-
-
-
-### kubernetes : Administrator
-
-# Install kubernetes :
-# https://www.youtube.com/watch?v=rBeyHDKLVqM
-curl.exe -LO "https://dl.k8s.io/release/v1.32.0/bin/windows/amd64/kubectl.exe"
-# 2)Install Mini kubernetes
-# https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
-
-## Start Docker 
-minikube start
-minikube status
-minikube dashboard
-
-kubectl create deployment mynginx --image=nginx:latest
-kubectl get deployment
-kubectl get pods
-kubectl expose deployment mynginx --port=80 --type=LoadBalancer
-kubectl get services
-
-minikube service mynginx
-
-
-kubectl describe pods
-kubectl delete deployment mynginx
-kubectl delete deployment myreactapp
-
-## Create Dockerfile
-FROM node 
-WORKDIR /myapp
-COPY . .
-RUN npm install
-EXPOSE 5173
-CMD ["npm", "start"]
-
-##
-docker build -t prasenjitaluni/reactapp:01 .
-docker images
-docker login
-docker push prasenjitaluni/reactapp:01
-
-kubectl create deployment myreactapp --image=prasenjitaluni/reactapp:01
-kubectl expose deployment myreactapp --port=5173 --type=LoadBalancer
-
-kubectl get pods
-kubectl get services
-minikube service myreactapp
-
-kubectl set image deployment myreactapp webapp-demo=prasenjitaluni/reactapp:03
-minikube service myreactapp
-kubectl scale deployment node-app --replicas=4
-
-1.33
-kubectl apply -f mykubectl.yml
-
-docker run -p 27017:27017 -d --name mongodb mongo
-docker pull philippaul/node-mongo-db:01
-docker run -d -p 27017:27017 --network my-net --name mongo mongo
-
-docker run --network my-net -p 3000:3000 --name myapp philippaul/node-mongo-db:01
-
-<br /><br />
-###########################################################################<br />
-</body></html>
+</body>
+</html>

@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<div>
 <a href="/doctor/index.html">Nodejs</a> &nbsp; 
 <a href="/doctor/react.html">React</a> &nbsp; 
 <a href="/doctor/docker.html">Docker</a> &nbsp; 
@@ -22,12 +23,27 @@
 <a href="crud.html">Crud</a> &nbsp; 
 <a href="skill.html">Skill</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
+</div>
 
 <ul class="faq">
 
+<li data-id="allq"><span class="faq-question">
+Nodejs + Express + Reactjs + PostGre SQL + Redis
+</span><div class="answer">
+  Nodejs
+  TypeScript
+  NestJS
+  Reactjs
+  NextJS
+  PostGre SQL
+  Redis
+  AWS Lambda
 
+</div></li>
 
   
+
+
 <li data-id="q122"><span class="faq-question">
 Express + PostGre SQL + Redis
 </span><div class="answer">
@@ -164,9 +180,70 @@ Express + PostGre SQL + Redis
 </div></li>
 
 
-<li data-id="q122"><span class="faq-question">
-Redis
+<li data-id="q122"><span class="faq-question green ">
+  PostGre SQL + Redis : answer
 </span><div class="answer">
+
+<ol>
+  <li data-id="q1">
+    <span class="faq-question">How do Express.js, PostgreSQL, and Redis work together in a backend architecture?</span>
+    <div class="answer">
+      Express.js acts as the web application framework that handles HTTP requests and responses. PostgreSQL is the primary relational database used for storing persistent, structured data. Redis is used as an in-memory key-value store to cache frequently accessed data and reduce load on PostgreSQL. The flow typically works like this:
+      <ul>
+        <li>Client sends a request to Express.</li>
+        <li>Express first checks Redis for cached data.</li>
+        <li>If Redis has the data (cache hit), it is returned immediately.</li>
+        <li>If not (cache miss), Express queries PostgreSQL, stores the result in Redis, and sends it to the client.</li>
+        <li>When data is modified, the PostgreSQL DB is updated, and Redis is either invalidated or updated accordingly.</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q2">
+    <span class="faq-question green ">What are the common use cases for Redis when using PostgreSQL as the main DB?</span>
+    <div class="answer">
+      Redis complements PostgreSQL by providing fast, temporary data access for specific use cases:
+      <ul>
+        <li><strong>Caching:</strong> Store results of frequent or expensive PostgreSQL queries to reduce response time.</li>
+        <li><strong>Rate Limiting:</strong> Count requests per user or IP for throttling purposes.</li>
+        <li><strong>Session Management:</strong> Store user sessions or auth tokens for quick access.</li>
+        <li><strong>Pub/Sub:</strong> Send real-time updates across services or clients.</li>
+        <li><strong>Queueing:</strong> Manage background jobs and task queues with lists or streams.</li>
+        <li><strong>Leaderboards:</strong> Use sorted sets for ranking data, which is difficult to do efficiently in SQL.</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q3">
+    <span class="faq-question">How do you structure an Express app to connect with PostgreSQL and Redis efficiently?</span>
+    <div class="answer">
+      A well-structured Express app should modularize database and cache logic for maintainability and performance:
+      <ul>
+        <li><strong>Connection Modules:</strong> Create separate files like <code>db.js</code> (for PostgreSQL) and <code>redisClient.js</code> (for Redis) to initialize and export connections.</li>
+        <li><strong>Service Layer:</strong> Use a service layer to abstract business logic. For example, a userService that first checks Redis before querying PostgreSQL.</li>
+        <li><strong>Environment Config:</strong> Use <code>dotenv</code> to load environment-specific DB credentials securely.</li>
+        <li><strong>Error Handling:</strong> Implement error handling middleware to catch database or cache errors cleanly.</li>
+        <li><strong>Cache TTL:</strong> Set Redis key expirations to avoid stale data.</li>
+        <li><strong>Logging & Monitoring:</strong> Use tools like Winston or Morgan for logging, and Redis CLI or monitoring dashboards to track cache health.</li>
+      </ul>
+    </div>
+  </li>
+</ol>
+
+</div></li>
+
+
+
+
+<li data-id="q122"><span class="faq-question">
+Redis Question-Answer
+</span>
+
+<div class="answer">
+  <ol>
+    <li data-id="redddd454554ooi">
+      <span class="faq-question">Redis Question?</span>
+      <div class="answer">
   <ol>
     <li>What is Redis and what are its primary use cases?</li>
     <li>Is Redis a database, cache, or message broker?</li>
@@ -225,15 +302,231 @@ Redis
     <li>Can Redis be used over SSL/TLS?</li>
     <li>What are some Redis configuration best practices?</li>
     <li>How do you backup and restore Redis data?</li>
-  </ol>
+    </ol>
+    </div></li>
+
+
+<li data-id="q122redissss"><span class="faq-question green">
+  Redis Answer
+  </span><div class="answer">
+    
+<ol>
+  <li><strong>What is Redis and what are its primary use cases?</strong><br>
+    Redis is an open-source, in-memory data structure store used as a database, cache, and message broker. It’s commonly used for caching, session storage, real-time analytics, pub/sub messaging, and leaderboards.
+  </li>
+
+  <li><strong>Is Redis a database, cache, or message broker?</strong><br>
+    Redis is all three. It can be used as an in-memory NoSQL database, a high-performance cache, and a lightweight message broker via Pub/Sub.
+  </li>
+
+  <li><strong>How is Redis different from other databases like MySQL or MongoDB?</strong><br>
+    Redis stores all data in memory, enabling ultra-fast access. It supports complex data types like lists and sets, lacks traditional table-based schemas, and is optimized for speed rather than storage size or relational queries.
+  </li>
+
+  <li><strong>What are the data structures supported by Redis?</strong><br>
+    Strings, Lists, Sets, Sorted Sets (ZSets), Hashes, Bitmaps, HyperLogLogs, Streams, and GEO data.
+  </li>
+
+  <li><strong>Is Redis single-threaded or multi-threaded?</strong><br>
+    Redis is single-threaded for most operations to ensure simplicity and predictability, but Redis 6+ supports multi-threaded I/O.
+  </li>
+
+  <li><strong>What is the maximum size of a Redis key and value?</strong><br>
+    The maximum key size is 512 MB; the value size can also be up to 512 MB for strings.
+  </li>
+
+  <li><strong>What is the default port Redis runs on?</strong><br>
+    Port 6379.
+  </li>
+
+  <li><strong>What is the difference between Redis and Memcached?</strong><br>
+    Redis supports more data types, persistence, replication, and scripting. Memcached is simpler and only stores strings in memory.
+  </li>
+
+  <li><strong>How does Redis store data in memory?</strong><br>
+    Redis stores all data in RAM using a variety of compact data structures and encodings for high performance.
+  </li>
+
+  <li><strong>Can Redis be used for persistent storage?</strong><br>
+    Yes, Redis supports two persistence mechanisms: RDB (snapshotting) and AOF (Append Only File).
+  </li>
+
+  <li><strong>What is a Redis string and what operations can be performed on it?</strong><br>
+    A string is the most basic data type and can store any binary data up to 512 MB. Operations: GET, SET, INCR, APPEND, etc.
+  </li>
+
+  <li><strong>What is a Redis list? How is it different from a set?</strong><br>
+    A list is an ordered collection of strings. A set is an unordered collection of unique strings.
+  </li>
+
+  <li><strong>Explain Redis set and its use cases.</strong><br>
+    A set is an unordered collection of unique elements. Use cases include tagging, deduplication, and membership checks.
+  </li>
+
+  <li><strong>What are sorted sets in Redis?</strong><br>
+    A sorted set is a collection of unique elements ordered by a score. Use cases: leaderboards, ranking systems.
+  </li>
+
+  <li><strong>What is a Redis hash and when should you use it?</strong><br>
+    A hash is a mapping between string fields and values, useful for storing objects like user profiles.
+  </li>
+
+  <li><strong>Can you perform range queries in Redis? If yes, how?</strong><br>
+    Yes, using Sorted Sets with commands like ZRANGE, ZREVRANGE, and ZRANGEBYSCORE.
+  </li>
+
+  <li><strong>How would you store and access a JSON object in Redis?</strong><br>
+    You can store it as a stringified JSON in a string key or use Redis modules like RedisJSON.
+  </li>
+
+  <li><strong>What is Redis Pub/Sub? Give an example use case.</strong><br>
+    Pub/Sub allows messages to be published to channels and received by subscribers. Example: real-time notifications.
+  </li>
+
+  <li><strong>What is a Redis stream?</strong><br>
+    A log-like data structure used for storing time-ordered events, suitable for messaging and event sourcing.
+  </li>
+
+  <li><strong>Explain Redis HyperLogLog.</strong><br>
+    A probabilistic data structure for approximate cardinality counting (e.g., unique visitors) with minimal memory.
+  </li>
+
+  <li><strong>What is a Redis bitmap?</strong><br>
+    Bitmaps allow you to set and check bits at given offsets in strings; used for tracking binary states compactly.
+  </li>
+
+  <li><strong>What is Redis GEO data structure used for?</strong><br>
+    To store and query geographic locations by longitude and latitude using commands like GEOADD and GEORADIUS.
+  </li>
+
+  <li><strong>How can you expire keys in Redis?</strong><br>
+    Use EXPIRE, SETEX, or TTL to set and manage time-to-live (TTL) on keys.
+  </li>
+
+  <li><strong>What is the difference between DEL and UNLINK?</strong><br>
+    DEL deletes the key synchronously, while UNLINK deletes asynchronously to avoid blocking the event loop.
+  </li>
+
+  <li><strong>How do you ensure Redis performs optimally under high load?</strong><br>
+    Use efficient data structures, enable persistence wisely, tune memory limits, and consider clustering or sharding.
+  </li>
+
+  <li><strong>What are Redis eviction policies?</strong><br>
+    Policies used when memory limit is reached: noeviction, allkeys-lru, volatile-lru, allkeys-random, etc.
+  </li>
+
+  <li><strong>Explain Lazy vs Eager expiration in Redis.</strong><br>
+    Lazy expiration removes keys only when accessed; eager expiration removes expired keys periodically in the background.
+  </li>
+
+  <li><strong>What are Redis memory optimization techniques?</strong><br>
+    Use smaller key/value names, appropriate data encodings, Redis modules like RedisJSON, and memory policies.
+  </li>
+
+  <li><strong>How to handle large datasets in Redis?</strong><br>
+    Use clustering, compress data, offload large blobs to other storage, and keep only hot data in Redis.
+  </li>
+
+  <li><strong>How do you monitor Redis performance?</strong><br>
+    Use tools like Redis CLI (INFO), RedisInsight, Prometheus + Grafana, and built-in metrics.
+  </li>
+
+  <li><strong>What are RDB and AOF in Redis?</strong><br>
+    RDB (snapshotting) saves the DB at intervals; AOF logs every write operation. Both are for persistence.
+  </li>
+
+  <li><strong>What are the differences between RDB and AOF persistence mechanisms?</strong><br>
+    RDB is faster for recovery and saves at intervals; AOF is safer for durability and logs every operation.
+  </li>
+
+  <li><strong>Can Redis use both RDB and AOF at the same time?</strong><br>
+    Yes, Redis can be configured to use both for improved durability and faster recovery.
+  </li>
+
+  <li><strong>How does Redis handle data recovery after a crash?</strong><br>
+    Redis reloads data from the AOF file or latest RDB snapshot during startup.
+  </li>
+
+  <li><strong>What is the SAVE and BGSAVE command in Redis?</strong><br>
+    SAVE performs a synchronous snapshot; BGSAVE runs it in the background to avoid blocking.
+  </li>
+
+  <li><strong>How are transactions handled in Redis?</strong><br>
+    Transactions are supported using MULTI, EXEC, DISCARD, and WATCH, but without rollback.
+  </li>
+
+  <li><strong>What are the commands used to start and execute a transaction in Redis?</strong><br>
+    MULTI (start), followed by commands, then EXEC (execute) or DISCARD (abort).
+  </li>
+
+  <li><strong>What is the use of WATCH in Redis?</strong><br>
+    WATCH monitors keys for changes and aborts the transaction if any watched key is modified before EXEC.
+  </li>
+
+  <li><strong>Can you use Lua scripting in Redis? Why and how?</strong><br>
+    Yes. Lua scripts ensure atomicity and are executed using the EVAL command. Useful for batch operations.
+  </li>
+
+  <li><strong>Is Redis transaction atomic?</strong><br>
+    Yes. A Redis transaction is atomic, meaning all commands inside MULTI/EXEC are executed sequentially without interference.
+  </li>
+
+  <li><strong>What is Redis Sentinel?</strong><br>
+    Sentinel provides high availability by monitoring Redis instances and performing automatic failover.
+  </li>
+
+  <li><strong>What is Redis Cluster and how does it work?</strong><br>
+    Redis Cluster provides horizontal partitioning (sharding) and high availability without external tools.
+  </li>
+
+  <li><strong>What is the difference between Redis replication and clustering?</strong><br>
+    Replication copies data to slaves; clustering partitions data across nodes for scalability and fault tolerance.
+  </li>
+
+  <li><strong>How does Redis handle failover?</strong><br>
+    Redis Sentinel detects failures and promotes a replica to master. Cluster nodes also have failover logic.
+  </li>
+
+  <li><strong>How does Redis shard data in a cluster?</strong><br>
+    It uses a hash slot algorithm (0–16383 slots) and distributes keys based on CRC16 hash.
+  </li>
+
+  <li><strong>How can you secure a Redis instance?</strong><br>
+    Use strong passwords, rename dangerous commands, bind to localhost, enable TLS, and use firewalls.
+  </li>
+
+  <li><strong>How do you configure password authentication in Redis?</strong><br>
+    Set the <code>requirepass</code> option in <code>redis.conf</code> or with the CONFIG SET command.
+  </li>
+
+  <li><strong>Can Redis be used over SSL/TLS?</strong><br>
+    Yes. Redis supports TLS natively since version 6.0, or via stunnel/proxy for older versions.
+  </li>
+
+  <li><strong>What are some Redis configuration best practices?</strong><br>
+    Use maxmemory settings, persistence tuning, password protection, appropriate eviction policy, and monitoring tools.
+  </li>
+
+  <li><strong>How do you backup and restore Redis data?</strong><br>
+    Back up by copying the dump.rdb or appendonly.aof files. Restore by placing them in the Redis directory and restarting the server.
+  </li>
+</ol>
+</div></li>
+
+</ol>
 
 </div></li>
+
+
 
 
 <li data-id="q122"><span class="faq-question">
 Node.js?
 </span><div class="answer">
-Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
+Node.js is an open-source, cross-platform runtime built on Chrome’s V8 JavaScript engine that allows JavaScript to run outside the browser. <br />
+It’s designed for building scalable, event-driven, non-blocking I/O applications, commonly used for servers and APIs.
+<br />
+<br />
 <br />
 
 Indexing
@@ -253,1007 +546,7 @@ shallow / shadow copy
 </div></li>
 
 
-<li data-id="q122obj"><span class="faq-question green ">
-  Object, Rest, Rest Operator
-</span><div class="answer">
-<pre>
-<b>Object</b>
-var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
-const x = Object.keys(obj);
-const y = Object.values(obj);
-const z = Object.entries(obj);
 
-
-
-
-const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
-const v1 = Math.max(...Object.values(x1));
-const v2 = Math.max(...[[1,2],3,4].flat());
-const v3 = Math.max(1,2,3,4);
-
-
-</pre>
-
-<pre>
-  <b>Rest Operator</b>
-  const user = { id: 1, name: "Alice", age: 30 };
-  const { name, ...rest } = user;
-  console.log(name); // "Alice"
-  console.log(rest); // { id: 1, age: 30 }
-
-
-  <b>Spread Operator</b>
-  const arr = [1, 2, 3];
-  const newArr = [...arr, 4, 5];
-  console.log(newArr); // [1, 2, 3, 4, 5]
-
-</pre>
-
-
-</div></li>
-
-
-
-<li data-id="q122"><span class="faq-question">
-  Type vs Object
-  </span><div class="answer">
-
-<pre><b>
-type Car is a type definition
-myCar is an object at runtime</b>
-
-type Car = {
-  brand: string;
-  year: number;
-};
-
-const myCar: Car = {
-  brand: "Toyota",
-  year: 2022
-};
-</pre>
-
-
-  <h2>1. <code>type</code> (TypeScript only)</h2>
-  <ul>
-    <li>Used to define custom types</li>
-    <li>Exists only at <strong>compile time</strong></li>
-    <li>Helps with static type checking</li>
-  </ul>
-
-  <pre><code>type User = {
-  name: string;
-  age: number;
-};
-
-const u: User = { name: "Alice", age: 25 };
-</code></pre>
-
-  <h2>2. <code>object</code> (JavaScript + TypeScript)</h2>
-  <ul>
-    <li>A runtime data structure</li>
-    <li>Used to store key-value pairs</li>
-  </ul>
-
-  <pre><code>const user = {
-  name: "Bob",
-  age: 30
-};
-
-console.log(user.name); // "Bob"
-</code></pre>
-
-  <h2>🔍 Key Differences</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th><code>type</code> (TypeScript)</th>
-        <th><code>object</code> (JS/TS)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Exists at</td>
-        <td>Compile time only</td>
-        <td>Runtime</td>
-      </tr>
-      <tr>
-        <td>Purpose</td>
-        <td>Type safety</td>
-        <td>Data storage</td>
-      </tr>
-      <tr>
-        <td>Used for</td>
-        <td>Defining data shape</td>
-        <td>Storing key-value pairs</td>
-      </tr>
-      <tr>
-        <td>Can hold data?</td>
-        <td>No</td>
-        <td>Yes</td>
-      </tr>
-      <tr>
-        <td>Example syntax</td>
-        <td><code>type Car = { ... }</code></td>
-        <td><code>const car = { ... }</code></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>🧪 Example: Using both</h2>
-  <pre><code>type Car = {
-  brand: string;
-  year: number;
-};
-
-const myCar: Car = {
-  brand: "Toyota",
-  year: 2022
-};</code></pre>
-
-
-    </div></li>
-
-<li data-id="q122"><span class="faq-question">
-  Monolithic vs Microservices
-  </span><div class="answer">
-
-  
-  <p>Here’s a clear and practical comparison between <strong>Monolithic</strong> and <strong>Microservices</strong> architectures — especially useful from a backend/full-stack perspective.</p>
-
-  <h2>🧱 MONOLITHIC ARCHITECTURE</h2>
-
-  <h3>🔹 What Is It?</h3>
-  <p>A single unified codebase that handles everything: frontend, backend, database logic, etc.</p>
-
-  <h3>✅ Example:</h3>
-  <p>All modules like Auth, Product, Billing live in one Node.js/Express app or NestJS app.</p>
-
-  <pre class="code-block">
-app/
-├── controllers/
-├── services/
-├── models/
-└── server.js
-  </pre>
-
-  <h3>✅ Pros:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Advantage</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>✅ Simple</td>
-        <td>Easier to build, test, and deploy initially</td>
-      </tr>
-      <tr>
-        <td>✅ Fast Dev Cycle</td>
-        <td>Local dev and debugging are straightforward</td>
-      </tr>
-      <tr>
-        <td>✅ Performance</td>
-        <td>Function calls instead of inter-service HTTP</td>
-      </tr>
-      <tr>
-        <td>✅ No DevOps Needed</td>
-        <td>Minimal infrastructure setup</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>❌ Cons:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Disadvantage</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>❌ Scaling Pain</td>
-        <td>Hard to scale one feature independently</td>
-      </tr>
-      <tr>
-        <td>❌ Tight Coupling</td>
-        <td>Change in one module can break others</td>
-      </tr>
-      <tr>
-        <td>❌ Big Deployments</td>
-        <td>Any small change requires full redeployment</td>
-      </tr>
-      <tr>
-        <td>❌ Tech Lock-in</td>
-        <td>Difficult to mix languages/tools</td>
-      </tr>
-      <tr>
-        <td>❌ Harder to Onboard</td>
-        <td>Large codebase = steep learning curve</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr />
-
-  <h2>🧩 MICROSERVICES ARCHITECTURE</h2>
-
-  <h3>🔹 What Is It?</h3>
-  <p>A collection of small, independently deployable services that each focus on a specific business domain.</p>
-
-  <h3>✅ Example:</h3>
-  <ul>
-    <li><code>auth-service</code> (NestJS)</li>
-    <li><code>product-service</code> (Express)</li>
-    <li><code>order-service</code> (Go or Python)</li>
-    <li>Communicate via REST, gRPC, or Kafka</li>
-  </ul>
-
-  <pre class="code-block">
-services/
-├── auth/
-├── products/
-├── orders/
-└── gateway/  &lt;-- API Gateway (optional)
-  </pre>
-
-  <h3>✅ Pros:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Advantage</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>✅ Independent Scaling</td>
-        <td>Scale each service based on need (e.g., product &gt; auth)</td>
-      </tr>
-      <tr>
-        <td>✅ Tech Flexibility</td>
-        <td>Use best-fit language (Go for compute, Node.js for I/O)</td>
-      </tr>
-      <tr>
-        <td>✅ Fault Isolation</td>
-        <td>One service crash ≠ whole app crash</td>
-      </tr>
-      <tr>
-        <td>✅ Faster Deployment</td>
-        <td>Deploy only the changed service</td>
-      </tr>
-      <tr>
-        <td>✅ Easier CI/CD</td>
-        <td>Small, focused pipelines</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>❌ Cons:</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Disadvantage</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>❌ Complexity</td>
-        <td>Infrastructure, communication, observability</td>
-      </tr>
-      <tr>
-        <td>❌ DevOps Intensive</td>
-        <td>Needs Docker, Kubernetes, service discovery</td>
-      </tr>
-      <tr>
-        <td>❌ Data Consistency</td>
-        <td>Requires eventual consistency, transactions are tricky</td>
-      </tr>
-      <tr>
-        <td>❌ Latency</td>
-        <td>HTTP/gRPC calls between services = slower than in-memory calls</td>
-      </tr>
-      <tr>
-        <td>❌ Debugging Difficulties</td>
-        <td>Tracing across services needs observability tools</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr />
-
-  <h2>⚖️ Comparison Table</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Monolithic</th>
-        <th>Microservices</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Codebase</td>
-        <td>Single repo</td>
-        <td>Multiple repos/modules</td>
-      </tr>
-      <tr>
-        <td>Deployment</td>
-        <td>One artifact</td>
-        <td>Many deployable services</td>
-      </tr>
-      <tr>
-        <td>Scaling</td>
-        <td>Entire app</td>
-        <td>Per service</td>
-      </tr>
-      <tr>
-        <td>Fault Isolation</td>
-        <td>Poor</td>
-        <td>Strong</td>
-      </tr>
-      <tr>
-        <td>Tech Stack Flexibility</td>
-        <td>Limited</td>
-        <td>Flexible per service</td>
-      </tr>
-      <tr>
-        <td>Team Structure</td>
-        <td>Centralized</td>
-        <td>Decentralized, cross-functional</td>
-      </tr>
-      <tr>
-        <td>Best for</td>
-        <td>Small/medium projects</td>
-        <td>Large, scalable systems</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr />
-
-  <h2>🛠️ When to Use What?</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Situation</th>
-        <th>Recommendation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>MVP, startup project</td>
-        <td>✅ <strong>Monolithic</strong></td>
-      </tr>
-      <tr>
-        <td>Small team, tight deadlines</td>
-        <td>✅ <strong>Monolithic</strong></td>
-      </tr>
-      <tr>
-        <td>Large team, distributed ownership</td>
-        <td>✅ <strong>Microservices</strong></td>
-      </tr>
-      <tr>
-        <td>Independent scaling of services</td>
-        <td>✅ <strong>Microservices</strong></td>
-      </tr>
-      <tr>
-        <td>Need high availability and fault isolation</td>
-        <td>✅ <strong>Microservices</strong></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Let me know if you'd like a <strong>NestJS-based microservices demo</strong>, or how to <strong>break a monolith into microservices</strong>.</p>
-
-</div></li>
-
-
-<li data-id="q53337">
-  <span class="faq-question green">Security Practices in Node.js?***</span>
-  <div class="answer">
-    <ol>
-      <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
-      <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
-      <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
-      <li><strong>Environment variables:</strong> Store secrets and credentials securely using environment variables or secrets managers.</li>
-      <li><strong>Limit privileges:</strong> Run Node.js processes with the least privileges needed.</li>
-      <li><strong>Prevent DOS attacks:</strong> Use rate limiting and request throttling.</li>
-      <li><strong>Use security headers:</strong> Implement headers like Content Security Policy (CSP), X-Content-Type-Options, and others.</li>
-      <li><strong>Handle errors securely:</strong> Don’t expose stack traces or sensitive info in error responses.</li>
-      <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
-      <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
-      <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
-    </ol>
-<pre>
-  app.use(rateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    max: 5, // limit each IP to 5 requests per windowMs
-    message: "Too many requests, try again later.",
-  }));
-</pre>
-  </div>
-</li>
-
-<li data-id="q58">
-  <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
-  <div class="answer">
-    Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
-    <code>
-      <ol>
-        <li><strong>Clickjacking</strong> with the <b>X-Frame-Options</b> header</li>
-        <li><strong>XSS attacks</strong> with <b>X-XSS-Protection</b></li>
-        <li><strong>MIME sniffing</strong> with <b>X-Content-Type-Options</b></li>
-        <li><strong>Enforces HTTPS</strong> with <b>Strict-Transport-Security</b></li>
-        <li><strong>Content Security Policy</strong> to control allowed resources</li>
-      </ol>
-    </code>
-    Using Helmet is simple:
-    <pre><code>const helmet = require('helmet');
-app.use(helmet());</code></pre>
-    It’s widely recommended for any Express app to improve default security.
-  </div>
-</li>
-
-
-
-
-<ul class="faq">
-  <li data-id="q124">
-    <span class="faq-question">Shallow copy vs Deep copy?</span>
-    <div class="answer">
-      In Node.js (and JavaScript), copying an object or array can be done in two ways: <strong>shallow copy</strong> and <strong>deep copy</strong>.
-
-      <br><br><strong>Shallow Copy:</strong>
-      <ul>
-        <li>Copies only the top-level properties of an object.</li>
-        <li>Nested objects are still referenced, not copied.</li>
-        <li>Changes to nested objects in the copy affect the original.</li>
-      </ul>
-
-      <strong>Example:</strong>
-      <pre><code>
-const original = { name: 'Dev', address: { city: 'Kolkata' } };
-const shallow = { ...original };
-
-shallow.address.city = 'Delhi';
-console.log(original.address.city); // Output: 'Delhi' (original is affected)
-      </code></pre>
-
-      <br><strong>Deep Copy:</strong>
-      <ul>
-        <li>Creates a full, independent copy of the object and all nested objects.</li>
-        <li>Changes to the copy do not affect the original.</li>
-      </ul>
-
-      <strong>Example (using JSON):</strong>
-      <pre><code>
-const original = { name: 'Dev', address: { city: 'Kolkata' } };
-const deep = JSON.parse(JSON.stringify(original));
-
-deep.address.city = 'Delhi';
-console.log(original.address.city); // Output: 'Kolkata' (original not affected)
-      </code></pre>
-
-      <strong>Note:</strong> JSON method doesn’t handle functions, Dates, undefined, RegExp, etc.
-
-      <br><br><strong>Advanced Deep Copy (using lodash):</strong>
-      <pre><code>
-const _ = require('lodash');
-const deep = _.cloneDeep(original);
-      </code></pre>
-
-      <strong>Summary:</strong>
-      <table border="1" cellpadding="5">
-        <tr><th>Type</th><th>Nested Objects</th><th>Use Case</th></tr>
-        <tr><td>Shallow Copy</td><td>Referenced</td><td>Simple or flat objects</td></tr>
-        <tr><td>Deep Copy</td><td>Copied recursively</td><td>Complex or nested objects</td></tr>
-      </table>
-    </div>
-  </li>
-</ul>
-
-
-<ul class="faq">
-  <li data-id="q127">
-    <span class="faq-question">Buffer?</span>
-    <div class="answer">
-      
-
-<code>
-  A <strong>Buffer</strong> in Node.js is a built-in class that allows you to work with raw binary data directly in memory, especially useful when dealing with streams, file systems, TCP sockets, etc. It represents a fixed-size chunk of memory allocated outside the V8 heap.
-  <br />
-  <br />
-<b>Buffers are not resizable. </b><br />If you need a resizable array of binary data, consider using <b>Uint8Array or Streams with chunks.</b>
-  
-<br><br><strong>Why Buffers?</strong>
-<ol>
-  <li>JavaScript strings are Unicode and not ideal for binary data.</li>
-  <li>Buffers allow handling binary data (e.g., images, files, sockets) directly.</li>
-</ol>
-<br />
-  
-<strong>Use Cases:</strong>
-<ol>
-<li>Reading and writing files</li>
-<li>Handling stream data (e.g. TCP, HTTP)</li>
-<li>Binary data manipulation (e.g. image processing, encryption)</li>
-</ol>
-
-</code>
-
-
-
-
-      
-<pre>
-<strong>Create a Buffer:</strong>
-  const buf = Buffer.from('hello');
-  console.log(buf);           // &lt;Buffer 68 65 6c 6c 6f&gt;
-  console.log(buf.toString()); // hello
-</pre>
-      
-<code>
-  <strong>Buffer Methods:</strong>
-  <ol>
-  <li>Buffer.from() – creates buffer from string/array/arrayBuffer</li>
-  <li>Buffer.alloc(size) – creates a zero-filled buffer of given size</li>
-  <li>Buffer.concat([buf1, buf2]) – joins multiple buffers</li>
-  <li>buf.toString() – converts buffer to human-readable string</li>
-  <li>buf.length – gets size of buffer in bytes</li>
-  </ol>
-</code>
-
-<pre>
-  <strong>Example – Buffer concatenation:</strong>
-  const a = Buffer.from('Node');
-  const b = Buffer.from('JS');
-  const combined = Buffer.concat([a, b]);
-  console.log(combined.toString()); // NodeJS
-</pre>
-
-      
-    </div>
-  </li>
-</ul>
-
-
-<ul class="faq">
-  <li data-id="q125">
-    <span class="faq-question">Stream?</span>
-    <div class="answer">
-      A <strong>Stream</strong> in Node.js is an abstract interface for working with streaming data. Streams are used to handle large data efficiently by processing it in chunks instead of loading it all into memory at once.
-      
-      <br />
-      <strong>Why use Streams?</strong>
-    <code>
-      <ul>
-        <li>Efficient memory usage for large files or data.</li>
-        <li>Non-blocking, event-driven architecture.</li>
-        <li>Used internally in many Node.js APIs (e.g., HTTP, file system, process).</li>
-      </ul>
-    </code>
-      <br /><br>
-      <strong>Types of Streams:</strong>
-      <code>
-      <ul>
-        <li><strong>Readable:</strong> For reading data (e.g., fs.createReadStream()).</li>
-        <li><strong>Writable:</strong> For writing data (e.g., fs.createWriteStream()).</li>
-        <li><strong>Duplex:</strong> Can read and write (e.g., TCP sockets).</li>
-        <li><strong>Transform:</strong> Duplex stream that can modify or transform data (e.g., zlib.createGzip()).</li>
-      </ul>
-      </code>
-
-      <br />
-
-      <strong>Common stream events:</strong>
-      <code>
-      <ul>
-        <li>data – emitted when data is available to read.</li>
-        <li>end – no more data</li>
-        <li>error – error occurred</li>
-        <li>finish – finished writing</li>
-      </ul>
-      </code>
-      <br />
-
-      <strong>Basic Example (File Stream):</strong>
-      <pre>
-const fs = require('fs');
-const readable = fs.createReadStream('input.txt');
-const writable = fs.createWriteStream('output.txt');
-readable.pipe(writable);
--------------------------------------
-
-readable.on('data', chunk => {
-  console.log('Chunk:', chunk.toString());
-});
-
-readable.on('end', () => {
-  console.log('Finished reading.');
-});
-      </pre>
-    </div>
-  </li>
-</ul>
-
-<ul class="faq">
-  <li data-id="q126">
-    <span class="faq-question">Pipe?</span>
-    <div class="answer">
-      <code>In Node.js, .pipe() is a method used to connect the output of a <strong>readable stream</strong> to the input of a <strong>writable stream</strong>. It allows data to flow automatically from source to destination, handling backpressure internally.</code>
-      <br />
-<pre>
-Syntax: readableStream.pipe(writableStream);
-Why use pipe()?
-  1. Simplifies stream handling.
-  2. Automatically manages flow control (backpressure).
-  3. Used for reading/writing large files, zipping, HTTP responses, etc.
-</pre>
-
-      <strong>Basic Example:</strong>
-      <pre><code>
-const fs = require('fs');
-
-const readable = fs.createReadStream('input.txt');
-const writable = fs.createWriteStream('output.txt');
-
-readable.pipe(writable);
-      </code></pre>
-
-      <strong>Behind the Scenes:</strong> <code>pipe()</code> listens for <code>data</code>, <code>end</code>, <code>error</code> events, and handles flow control — pausing the readable stream when the writable stream can't keep up.
-
-      <strong>Chaining Pipes (with transform stream):</strong>
-      <pre><code>
-const zlib = require('zlib');
-const fs = require('fs');
-
-fs.createReadStream('file.txt')
-  .pipe(zlib.createGzip())              // compress the stream
-  .pipe(fs.createWriteStream('file.txt.gz')); // write compressed file
-      </code></pre>
-
-      <strong>Real-World Use Cases:</strong>
-      <ul>
-        <li>File copy or backup utilities.</li>
-        <li>Compression/decompression (Gzip, Brotli).</li>
-        <li>Video/audio streaming servers.</li>
-        <li>Streaming data from a file to an HTTP response.</li>
-      </ul>
-
-      <strong>Note:</strong> Use <code>pipeline()</code> from <code>stream</code> module for better error handling in complex piping:
-      <pre><code>
-const { pipeline } = require('stream');
-pipeline(
-  fs.createReadStream('a.txt'),
-  fs.createWriteStream('b.txt'),
-  (err) => { if (err) console.error('Pipeline failed:', err); }
-);
-      </code></pre>
-    </div>
-  </li>
-</ul>
-
-
-<ul class="faq">
-  <li data-id="q128">
-    <span class="faq-question green">Buffer vs Stream vs Pipe?</span>
-    <div class="answer">
-      These three concepts are commonly used in Node.js for handling data — especially large or binary data — but they serve different purposes.
-
-      <br><code><strong>🔹 Buffer:</strong>
-      <ol>
-        <li>A <strong>Buffer</strong> holds binary data in memory as a fixed-size chunk.</li>
-        <li>Best for small/medium-sized data you want to work with all at once.</li>
-        <li>Can become memory-intensive for large files.</li>
-        <li>Example: const buf = Buffer.from('hello');</li>
-      </ol>
-      </code>
-<br />
-      <code>
-      <strong>🔹 Stream:</strong>
-      <ol>
-        <li>A <strong>Stream</strong> is an event-based abstraction for continuous data flow.</li>
-        <li>Processes data in <strong>chunks</strong>, without loading the entire content in memory.</li>
-        <li>Efficient for large files, real-time data (e.g., file I/O, HTTP requests).</li>
-        <li>Types: Readable, Writable, Duplex, Transform</li>
-        <li>Example:
-          <pre>
-const fs = require('fs');
-const stream = fs.createReadStream('file.txt');
-stream.on('data', chunk => console.log(chunk.toString()));
-          </pre>
-        </li>
-      </ol>
-    </code>
-<br />
-      <code>
-      <strong>🔹 Pipe:</strong>
-      <ol>
-        <li><strong>pipe()</strong> is a helper method used to connect two streams: readable → writable.</li>
-        <li>Transfers data automatically while managing flow control (backpressure).</li>
-        <li>Common for file copy, compression, HTTP response streaming, etc.</li>
-        <li>Example:
-          <pre><code>
-fs.createReadStream('input.txt')
-  .pipe(fs.createWriteStream('output.txt'));
-          </code></pre>
-        </li>
-      </ol>
-    </code>
-    <br />
-
-      <strong>🟩 Summary Table:</strong>
-      <table border="1" cellpadding="5">
-        <tr>
-          <th>Feature</th><th>Buffer</th><th>Stream</th><th>Pipe</th>
-        </tr>
-        <tr>
-          <td>Purpose</td>
-          <td>Store binary data in memory</td>
-          <td>Read/write data in chunks</td>
-          <td>Connect readable to writable stream</td>
-        </tr>
-        <tr>
-          <td>Memory Usage</td>
-          <td>High for large files</td>
-          <td>Low (chunked)</td>
-          <td>Depends on stream</td>
-        </tr>
-        <tr>
-          <td>Speed</td>
-          <td>Fast for small data</td>
-          <td>Efficient for large data</td>
-          <td>Efficient & automated</td>
-        </tr>
-        <tr>
-          <td>Use Case</td>
-          <td>Binary operations</td>
-          <td>Large file/network I/O</td>
-          <td>Chaining streams</td>
-        </tr>
-      </table>
-<pre>
-<br><strong>Conclusion:</strong>
-<b>Buffer</b> for small chunks of binary data, 
-<b>Stream</b> when dealing with large or continuous data, and 
-<b>pipe()</b> to connect and automate stream workflows.
-</pre>
-    </div>
-  </li>
-</ul>
-
-<ul class="faq">
-  <li data-id="q129">
-    <span class="faq-question green">Sharding in Databases?</span>
-    <div class="answer">
-      <strong>Sharding</strong> is a database architecture pattern used to horizontally partition large datasets across multiple databases (shards). Each shard holds a subset of the data, and all shards together form a complete dataset. <br />
-
-      <strong>Conclusion:</strong>
-      Sharding enables horizontal scalability for databases by breaking big data into smaller, manageable parts. It’s powerful but requires careful planning and design.
-
-      <br><br>
-    <code>
-      <strong>Why use Sharding?</strong>
-      <ol>
-        <li>Improves performance and scalability by distributing load.</li>
-        <li>Reduces contention and I/O bottlenecks on a single server.</li>
-        <li>Enables handling of large datasets that exceed a single machine's capacity.</li>
-      </ol>
-      <br />
-      <strong>How it works:</strong>
-      <ol>
-        <li>Data is split based on a <strong>shard key</strong> (e.g., user ID, region).</li>
-        <li>Each shard can be hosted on a different physical or logical server.</li>
-        <li>The application or a routing layer determines where to read/write data.</li>
-      </ol>
-    <br />
-
-      <strong>Example:</strong>
-      <ol>
-        <li>Instead of storing 100 million user records in one DB, you shard them across 10 databases, each storing 10 million.</li>
-        <li>User IDs 1-10M → Shard 1, 10M-20M → Shard 2, etc.</li>
-      </ol>
-
-    </code>
-
-    <code>
-      <strong>Sharding Strategies:</strong>
-      <ol>
-        <li><strong>Range-based:</strong> Divide data based on value ranges (e.g., date, ID).</li>
-        <li><strong>Hash-based:</strong> Apply a hash function on the shard key.</li>
-        <li><strong>Geo-based:</strong> Partition by location (e.g., country, region).</li>
-      </ol>
-    </code>
-    <br />
-      <code>
-      <strong>Challenges:</strong>
-      <ol>
-        <li>Cross-shard joins and transactions are complex or inefficient.</li>
-        <li>Resharding (changing shard strategy) can be hard.</li>
-        <li>Requires good shard key design to avoid hotspots.</li>
-      </ol>
-    </code>
-      <br />
-      <code>
-      <strong>Databases that support sharding:</strong>
-      <ol>
-        <li>MongoDB – Native sharding support</li>
-        <li>Cassandra – Automatically partitions data</li>
-        <li>PostgreSQL/MySQL – Via manual partitioning or middleware (e.g., Citus, Vitess)</li>
-      </ol>
-      </code>
-
-<pre>
-
-  // NestJS Sharding Example with MySQL (manual routing by user ID)
-
-  // 1. DatabaseConfigService - handles connections to multiple shards
-  @Injectable()
-  export class DatabaseConfigService {
-    private shardConnections: Record<string, DataSource> = {};
-  
-    constructor() {
-      // Simulate 2 shards for example
-      this.shardConnections["shard1"] = new DataSource({
-        type: "mysql",
-        host: "localhost",
-        port: 3306,
-        username: "root",
-        password: "password",
-        database: "user_shard_1",
-        entities: [User],
-        synchronize: true,
-      });
-  
-      this.shardConnections["shard2"] = new DataSource({
-        type: "mysql",
-        host: "localhost",
-        port: 3306,
-        username: "root",
-        password: "password",
-        database: "user_shard_2",
-        entities: [User],
-        synchronize: true,
-      });
-    }
-  
-    async initConnections() {
-      for (const shard of Object.values(this.shardConnections)) {
-        if (!shard.isInitialized) await shard.initialize();
-      }
-    }
-  
-    getShard(userId: number): DataSource {
-      return userId % 2 === 0 ? this.shardConnections["shard1"] : this.shardConnections["shard2"];
-    }
-  
-    getAllShards(): DataSource[] {
-      return Object.values(this.shardConnections);
-    }
-  }
-  
-  // 2. User Entity
-  @Entity()
-  export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
-  
-    @Column()
-    name: string;
-  
-    @Column()
-    email: string;
-  }
-  
-  // 3. UserService - routes DB calls to the correct shard
-  @Injectable()
-  export class UserService {
-    constructor(private dbService: DatabaseConfigService) {}
-  
-    async findAll(userId: number): Promise<User[]> {
-      const shard = this.dbService.getShard(userId);
-      const userRepo = shard.getRepository(User);
-      return userRepo.find();
-    }
-  
-    async create(userId: number, dto: { name: string; email: string }): Promise<User> {
-      const shard = this.dbService.getShard(userId);
-      const userRepo = shard.getRepository(User);
-      const user = userRepo.create(dto);
-      return userRepo.save(user);
-    }
-  
-    async findByEmail(email: string): Promise<User | null> {
-      for (const shard of this.dbService.getAllShards()) {
-        const userRepo = shard.getRepository(User);
-        const user = await userRepo.findOne({ where: { email } });
-        if (user) return user;
-      }
-      return null;
-    }
-  
-    async findById(id: number): Promise<User | null> {
-      for (const shard of this.dbService.getAllShards()) {
-        const userRepo = shard.getRepository(User);
-        const user = await userRepo.findOne({ where: { id } });
-        if (user) return user;
-      }
-      return null;
-    }
-  
-    async findByName(name: string): Promise<User[]> {
-      const results: User[] = [];
-      for (const shard of this.dbService.getAllShards()) {
-        const userRepo = shard.getRepository(User);
-        const users = await userRepo.find({ where: { name } });
-        results.push(...users);
-      }
-      return results;
-    }
-  }
-  
-  // 4. UserController
-  @Controller('users')
-  export class UserController {
-    constructor(private userService: UserService) {}
-  
-    @Get(':userId')
-    async getUsers(@Param('userId', ParseIntPipe) userId: number) {
-      return this.userService.findAll(userId);
-    }
-  
-    @Post(':userId')
-    async createUser(@Param('userId', ParseIntPipe) userId: number, @Body() body) {
-      return this.userService.create(userId, body);
-    }
-  
-    @Get('email/:email')
-    async getUserByEmail(@Param('email') email: string) {
-      return this.userService.findByEmail(email);
-    }
-  
-    @Get('id/:id')
-    async getUserById(@Param('id', ParseIntPipe) id: number) {
-      return this.userService.findById(id);
-    }
-  
-    @Get('name/:name')
-    async getUserByName(@Param('name') name: string) {
-      return this.userService.findByName(name);
-    }
-  }
-  
-  // 5. AppModule
-  @Module({
-    imports: [],
-    controllers: [UserController],
-    providers: [UserService, DatabaseConfigService],
-  })
-  export class AppModule {
-    constructor(private dbService: DatabaseConfigService) {}
-  
-    async onModuleInit() {
-      await this.dbService.initConnections();
-    }
-  }
-  
-  
-</pre>
-
-
-
-    </div>
-  </li>
-</ul>
 
 
 <li data-id="q_redux_formatted"><span class="faq-question">
@@ -1302,79 +595,72 @@ fs.createReadStream('input.txt')
   <li data-id="q_redux_example"><span class="faq-question">
     Redux Example ***
     </span><div class="answer">
-    Here's a simple example of Redux in a React application:
     
-    <br><br><strong>1. Install Redux:</strong><br>
-    <code>npm install redux react-redux</code>
-    
-    <br><br><strong>2. Create Action:</strong><br>
-    <pre><code>
-    // actions.js
-    export const increment = () =&gt; ({ type: 'INCREMENT' });
-    </code></pre>
-    
-    <br><strong>3. Create Reducer:</strong><br>
-    <pre><code>
-    // reducer.js
-    const counterReducer = (state = 0, action) =&gt; {
-      switch (action.type) {
-        case 'INCREMENT':
-          return state + 1;
-        default:
-          return state;
-      }
-    };
-    export default counterReducer;
-    </code></pre>
-    
-    <br><strong>4. Create Store:</strong>
-    <pre><code>
-    // store.js
-    import { createStore } from 'redux';
-    import counterReducer from './reducer';
-    const store = createStore(counterReducer);
-    export default store;
-    </code></pre>
-    
-    <br><strong>5. Provide Store to React:</strong><br>
-    <pre><code>
-    // index.js
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { Provider } from 'react-redux';
-    import App from './App';
-    import store from './store';
-    
-    ReactDOM.render(
-      &lt;Provider store={store}&gt;
-        &lt;App /&gt;
-      &lt;/Provider&gt;,
-      document.getElementById('root')
-    );
-    </code></pre>
-    
-    <br><strong>6. Use Redux in Component:</strong><br>
-    <pre><code>
-    // App.js
-    import React from 'react';
-    import { useSelector, useDispatch } from 'react-redux';
-    import { increment } from './actions';
-    
-    function App() {
-      const count = useSelector(state =&gt; state);
-      const dispatch = useDispatch();
-    
-      return (
-        &lt;div&gt;
-          &lt;h1&gt;Count: {count}&lt;/h1&gt;
-          &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
-        &lt;/div&gt;
-      );
+<pre>
+  This sets up a working counter app using Redux.
+  <strong>1. Install Redux:</strong>  npm install redux react-redux
+
+  <strong>2. Create Action:</strong>  actions.js
+  export const increment = () =&gt; ({ type: 'INCREMENT' });
+
+
+  <strong>3. Create Reducer:</strong>  reducer.js
+  const counterReducer = (state = 0, action) =&gt; {
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      default:
+        return state;
     }
-    export default App;
-    </code></pre>
+  };
+  export default counterReducer;
+
+
+
+  <strong>4. Create Store:</strong>  store.js
+  import { createStore } from 'redux';
+  import counterReducer from './reducer';
+  const store = createStore(counterReducer);
+  export default store;
+
+
+
+  <strong>5. Provide Store to React:</strong>  index.js
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+  import { Provider } from 'react-redux';
+  import App from './App';
+  import store from './store';
+  
+  ReactDOM.render(
+    &lt;Provider store={store}&gt;
+      &lt;App /&gt;
+    &lt;/Provider&gt;,
+    document.getElementById('root')
+  );
+
+
+  
+  <strong>6. Use Redux in Component:</strong>  App.js
+  import React from 'react';
+  import { useSelector, useDispatch } from 'react-redux';
+  import { increment } from './actions';
+  
+  function App() {
+    const count = useSelector(state =&gt; state);
+    const dispatch = useDispatch();
+  
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Count: {count}&lt;/h1&gt;
+        &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+  export default App;
+</pre>
     
-    This sets up a working counter app using Redux.
+    
     </div></li>
 
     <li data-id="q_redux_middleware"><span class="faq-question">
@@ -1385,19 +671,20 @@ fs.createReadStream('input.txt')
       <br><br><strong>How Middleware Works:</strong><br>
       When an action is dispatched, middleware can intercept it, perform tasks (e.g., logging or fetching data), and then pass the action to the reducer.
       
-      <br><br><strong>Example:</strong><br>
-      <pre><code>
-      const loggerMiddleware = store =&gt; next =&gt; action =&gt; {
-        console.log('Dispatching:', action);
-        return next(action);
-      };
-      </code></pre>
-      
-      <br><strong>Apply Middleware:</strong><br>
-      <pre><code>
-      import { createStore, applyMiddleware } from 'redux';
-      const store = createStore(reducer, applyMiddleware(loggerMiddleware));
-      </code></pre>
+
+<pre>
+  <strong>Example:</strong> 
+  const loggerMiddleware = store =&gt; next =&gt; action =&gt; {
+    console.log('Dispatching:', action);
+    return next(action);
+  };
+
+  <strong>Apply Middleware:</strong>
+  import { createStore, applyMiddleware } from 'redux';
+  const store = createStore(reducer, applyMiddleware(loggerMiddleware));
+
+
+</pre>
       
       <br><strong>Common Middleware:</strong><br>
       <ul>
@@ -1506,6 +793,72 @@ fs.createReadStream('input.txt')
             </ul>
             </div></li>
             
+
+
+
+            <li data-id="q_react_state"><span class="faq-question">
+              State in React?
+              </span><div class="answer">
+              State in React is an object that holds dynamic data for a component. It determines how the component behaves and renders. When the state changes, React automatically re-renders the component to reflect the new data. State is managed within the component (using <code>useState</code> in functional components) and should be updated using the provided setter function to ensure proper reactivity.
+              
+              </div></li>
+              
+              <li data-id="q_react_vs_next"><span class="faq-question">
+              Difference between React.js and Next.js?
+              </span><div class="answer">
+              <strong>React.js</strong> is a JavaScript library for building user interfaces, mainly focused on the frontend. It offers a component-based approach and handles client-side rendering but doesn’t include built-in routing or server-side rendering.
+              
+              <strong>Next.js</strong> is a React framework that extends React by adding powerful features like:
+              <ul>
+              <li>File-based routing</li>
+              <li>Server-side rendering (SSR)</li>
+              <li>Static site generation (SSG)</li>
+              <li>API routes</li>
+              <li>SEO optimization</li>
+              </ul>
+              While React provides the foundation for UI, Next.js offers a complete solution for building full-stack applications with better performance and scalability.
+              </div></li>
+              
+              <li data-id="q_react_memory_virtualization"><span class="faq-question">
+              memory cleanup and virtualization in React.js?
+              </span><div class="answer">
+              <strong>Memory Cleanup:</strong> In React, memory cleanup is often done using the <code>useEffect</code> hook’s cleanup function. It prevents memory leaks by cleaning up subscriptions, timers, or event listeners when a component unmounts or before re-running the effect.
+              
+              Example:
+              <pre><code>
+              useEffect(() => {
+              const timer = setInterval(() => console.log('Tick'), 1000);
+              return () => clearInterval(timer); // Cleanup
+              }, []);
+              </code></pre>
+              
+              <strong>Virtualization:</strong> Virtualization improves performance by rendering only the visible portion of large lists instead of the entire list. Libraries like <code>react-window</code> or <code>react-virtualized</code> help with this.
+              
+              Example with <code>react-window</code>:
+              <pre><code>
+              import { FixedSizeList as List } from 'react-window';
+              
+              &lt;List height={400} itemCount={1000} itemSize={35} width={300}&gt;
+              {({ index, style }) =&gt; &lt;div style={style}&gt;Item {index}&lt;/div&gt;}
+              &lt;/List&gt;
+              </code></pre>
+              
+              This boosts performance and reduces memory usage in large UIs.
+              </div></li>
+              
+              <li data-id="q_mysql_acid"><span class="faq-question">
+                ACID in MySQL?
+                </span><div class="answer">
+                ACID stands for Atomicity, Consistency, Isolation, and Durability — key properties that ensure reliable database transactions.
+                <br />
+                - <strong>Atomicity:</strong> Transactions are all-or-nothing; either fully completed or fully rolled back.<br>
+                - <strong>Consistency:</strong> Transactions bring the database from one valid state to another, maintaining data integrity.<br>
+                - <strong>Isolation:</strong> Concurrent transactions don’t interfere; intermediate states are hidden.<br>
+                - <strong>Durability:</strong> Once committed, changes persist even after crashes.
+                
+                MySQL’s InnoDB engine supports ACID to guarantee safe and reliable transactions.
+                </div></li>      
+
             <li data-id="q_sql_normalization"><span class="faq-question">
               SQL Normalization?
               </span><div class="answer">
@@ -1565,6 +918,1016 @@ fs.createReadStream('input.txt')
 
 
               <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>    
+
+
+
+
+
+              <li data-id="q122obj"><span class="faq-question green ">
+                Object, Rest, Rest Operator
+              </span><div class="answer">
+              <pre>
+              <b>Object</b>
+              var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+              const x = Object.keys(obj);
+              const y = Object.values(obj);
+              const z = Object.entries(obj);
+              
+              
+              
+              
+              const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
+              const v1 = Math.max(...Object.values(x1));
+              const v2 = Math.max(...[[1,2],3,4].flat());
+              const v3 = Math.max(1,2,3,4);
+              
+              
+              </pre>
+              
+              <pre>
+                <b>Rest Operator</b>
+                const user = { id: 1, name: "Alice", age: 30 };
+                const { name, ...rest } = user;
+                console.log(name); // "Alice"
+                console.log(rest); // { id: 1, age: 30 }
+              
+              
+                <b>Spread Operator</b>
+                const arr = [1, 2, 3];
+                const newArr = [...arr, 4, 5];
+                console.log(newArr); // [1, 2, 3, 4, 5]
+              
+              </pre>
+              
+              
+              </div></li>
+              
+              
+              
+              <li data-id="q122"><span class="faq-question">
+                Type vs Object
+                </span><div class="answer">
+              
+              <pre><b>
+              type Car is a type definition
+              myCar is an object at runtime</b>
+              
+              type Car = {
+                brand: string;
+                year: number;
+              };
+              
+              const myCar: Car = {
+                brand: "Toyota",
+                year: 2022
+              };
+              </pre>
+              
+              
+                <h2>1. <code>type</code> (TypeScript only)</h2>
+                <ul>
+                  <li>Used to define custom types</li>
+                  <li>Exists only at <strong>compile time</strong></li>
+                  <li>Helps with static type checking</li>
+                </ul>
+              
+                <pre><code>type User = {
+                name: string;
+                age: number;
+              };
+              
+              const u: User = { name: "Alice", age: 25 };
+              </code></pre>
+              
+                <h2>2. <code>object</code> (JavaScript + TypeScript)</h2>
+                <ul>
+                  <li>A runtime data structure</li>
+                  <li>Used to store key-value pairs</li>
+                </ul>
+              
+                <pre><code>const user = {
+                name: "Bob",
+                age: 30
+              };
+              
+              console.log(user.name); // "Bob"
+              </code></pre>
+              
+                <h2>🔍 Key Differences</h2>
+              
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th><code>type</code> (TypeScript)</th>
+                      <th><code>object</code> (JS/TS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Exists at</td>
+                      <td>Compile time only</td>
+                      <td>Runtime</td>
+                    </tr>
+                    <tr>
+                      <td>Purpose</td>
+                      <td>Type safety</td>
+                      <td>Data storage</td>
+                    </tr>
+                    <tr>
+                      <td>Used for</td>
+                      <td>Defining data shape</td>
+                      <td>Storing key-value pairs</td>
+                    </tr>
+                    <tr>
+                      <td>Can hold data?</td>
+                      <td>No</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>Example syntax</td>
+                      <td><code>type Car = { ... }</code></td>
+                      <td><code>const car = { ... }</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <h2>🧪 Example: Using both</h2>
+                <pre><code>type Car = {
+                brand: string;
+                year: number;
+              };
+              
+              const myCar: Car = {
+                brand: "Toyota",
+                year: 2022
+              };</code></pre>
+              
+              
+                  </div></li>
+              
+              <li data-id="q122"><span class="faq-question">
+                Monolithic vs Microservices
+                </span><div class="answer">
+              
+                
+                <p>Here’s a clear and practical comparison between <strong>Monolithic</strong> and <strong>Microservices</strong> architectures — especially useful from a backend/full-stack perspective.</p>
+              
+                <h2>🧱 MONOLITHIC ARCHITECTURE</h2>
+              
+                <h3>🔹 What Is It?</h3>
+                <p>A single unified codebase that handles everything: frontend, backend, database logic, etc.</p>
+              
+                <h3>✅ Example:</h3>
+                <p>All modules like Auth, Product, Billing live in one Node.js/Express app or NestJS app.</p>
+              
+                <pre class="code-block">
+              app/
+              ├── controllers/
+              ├── services/
+              ├── models/
+              └── server.js
+                </pre>
+              
+                <h3>✅ Pros:</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Advantage</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>✅ Simple</td>
+                      <td>Easier to build, test, and deploy initially</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Fast Dev Cycle</td>
+                      <td>Local dev and debugging are straightforward</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Performance</td>
+                      <td>Function calls instead of inter-service HTTP</td>
+                    </tr>
+                    <tr>
+                      <td>✅ No DevOps Needed</td>
+                      <td>Minimal infrastructure setup</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <h3>❌ Cons:</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Disadvantage</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>❌ Scaling Pain</td>
+                      <td>Hard to scale one feature independently</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Tight Coupling</td>
+                      <td>Change in one module can break others</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Big Deployments</td>
+                      <td>Any small change requires full redeployment</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Tech Lock-in</td>
+                      <td>Difficult to mix languages/tools</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Harder to Onboard</td>
+                      <td>Large codebase = steep learning curve</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <hr />
+              
+                <h2>🧩 MICROSERVICES ARCHITECTURE</h2>
+              
+                <h3>🔹 What Is It?</h3>
+                <p>A collection of small, independently deployable services that each focus on a specific business domain.</p>
+              
+                <h3>✅ Example:</h3>
+                <ul>
+                  <li><code>auth-service</code> (NestJS)</li>
+                  <li><code>product-service</code> (Express)</li>
+                  <li><code>order-service</code> (Go or Python)</li>
+                  <li>Communicate via REST, gRPC, or Kafka</li>
+                </ul>
+              
+                <pre class="code-block">
+              services/
+              ├── auth/
+              ├── products/
+              ├── orders/
+              └── gateway/  &lt;-- API Gateway (optional)
+                </pre>
+              
+                <h3>✅ Pros:</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Advantage</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>✅ Independent Scaling</td>
+                      <td>Scale each service based on need (e.g., product &gt; auth)</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Tech Flexibility</td>
+                      <td>Use best-fit language (Go for compute, Node.js for I/O)</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Fault Isolation</td>
+                      <td>One service crash ≠ whole app crash</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Faster Deployment</td>
+                      <td>Deploy only the changed service</td>
+                    </tr>
+                    <tr>
+                      <td>✅ Easier CI/CD</td>
+                      <td>Small, focused pipelines</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <h3>❌ Cons:</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Disadvantage</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>❌ Complexity</td>
+                      <td>Infrastructure, communication, observability</td>
+                    </tr>
+                    <tr>
+                      <td>❌ DevOps Intensive</td>
+                      <td>Needs Docker, Kubernetes, service discovery</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Data Consistency</td>
+                      <td>Requires eventual consistency, transactions are tricky</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Latency</td>
+                      <td>HTTP/gRPC calls between services = slower than in-memory calls</td>
+                    </tr>
+                    <tr>
+                      <td>❌ Debugging Difficulties</td>
+                      <td>Tracing across services needs observability tools</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <hr />
+              
+                <h2>⚖️ Comparison Table</h2>
+              
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Monolithic</th>
+                      <th>Microservices</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Codebase</td>
+                      <td>Single repo</td>
+                      <td>Multiple repos/modules</td>
+                    </tr>
+                    <tr>
+                      <td>Deployment</td>
+                      <td>One artifact</td>
+                      <td>Many deployable services</td>
+                    </tr>
+                    <tr>
+                      <td>Scaling</td>
+                      <td>Entire app</td>
+                      <td>Per service</td>
+                    </tr>
+                    <tr>
+                      <td>Fault Isolation</td>
+                      <td>Poor</td>
+                      <td>Strong</td>
+                    </tr>
+                    <tr>
+                      <td>Tech Stack Flexibility</td>
+                      <td>Limited</td>
+                      <td>Flexible per service</td>
+                    </tr>
+                    <tr>
+                      <td>Team Structure</td>
+                      <td>Centralized</td>
+                      <td>Decentralized, cross-functional</td>
+                    </tr>
+                    <tr>
+                      <td>Best for</td>
+                      <td>Small/medium projects</td>
+                      <td>Large, scalable systems</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <hr />
+              
+                <h2>🛠️ When to Use What?</h2>
+              
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Situation</th>
+                      <th>Recommendation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>MVP, startup project</td>
+                      <td>✅ <strong>Monolithic</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Small team, tight deadlines</td>
+                      <td>✅ <strong>Monolithic</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Large team, distributed ownership</td>
+                      <td>✅ <strong>Microservices</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Independent scaling of services</td>
+                      <td>✅ <strong>Microservices</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Need high availability and fault isolation</td>
+                      <td>✅ <strong>Microservices</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <p>Let me know if you'd like a <strong>NestJS-based microservices demo</strong>, or how to <strong>break a monolith into microservices</strong>.</p>
+              
+              </div></li>
+              
+              
+              <li data-id="q53337">
+                <span class="faq-question green">Security Practices in Node.js?***</span>
+                <div class="answer">
+                  <ol>
+                    <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
+                    <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
+                    <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
+                    <li><strong>Environment variables:</strong> Store secrets and credentials securely using environment variables or secrets managers.</li>
+                    <li><strong>Limit privileges:</strong> Run Node.js processes with the least privileges needed.</li>
+                    <li><strong>Prevent DOS attacks:</strong> Use rate limiting and request throttling.</li>
+                    <li><strong>Use security headers:</strong> Implement headers like Content Security Policy (CSP), X-Content-Type-Options, and others.</li>
+                    <li><strong>Handle errors securely:</strong> Don’t expose stack traces or sensitive info in error responses.</li>
+                    <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
+                    <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
+                    <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
+                  </ol>
+              <pre>
+                app.use(rateLimit({
+                  windowMs: 1 * 60 * 1000, // 1 minute
+                  max: 5, // limit each IP to 5 requests per windowMs
+                  message: "Too many requests, try again later.",
+                }));
+              </pre>
+                </div>
+              </li>
+              
+              <li data-id="q58">
+                <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
+                <div class="answer">
+                  Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
+                  <code>
+                    <ol>
+                      <li><strong>Clickjacking</strong> with the <b>X-Frame-Options</b> header</li>
+                      <li><strong>XSS attacks</strong> with <b>X-XSS-Protection</b></li>
+                      <li><strong>MIME sniffing</strong> with <b>X-Content-Type-Options</b></li>
+                      <li><strong>Enforces HTTPS</strong> with <b>Strict-Transport-Security</b></li>
+                      <li><strong>Content Security Policy</strong> to control allowed resources</li>
+                    </ol>
+                  </code>
+                  Using Helmet is simple:
+                  <pre><code>const helmet = require('helmet');
+              app.use(helmet());</code></pre>
+                  It’s widely recommended for any Express app to improve default security.
+                </div>
+              </li>
+              
+              
+              
+              
+              <ul class="faq">
+                <li data-id="q124">
+                  <span class="faq-question">Shallow copy vs Deep copy?</span>
+                  <div class="answer">
+                    In Node.js (and JavaScript), copying an object or array can be done in two ways: <strong>shallow copy</strong> and <strong>deep copy</strong>.
+              
+                    <br><br><strong>Shallow Copy:</strong>
+                    <ul>
+                      <li>Copies only the top-level properties of an object.</li>
+                      <li>Nested objects are still referenced, not copied.</li>
+                      <li>Changes to nested objects in the copy affect the original.</li>
+                    </ul>
+              
+                    <strong>Example:</strong>
+                    <pre><code>
+              const original = { name: 'Dev', address: { city: 'Kolkata' } };
+              const shallow = { ...original };
+              
+              shallow.address.city = 'Delhi';
+              console.log(original.address.city); // Output: 'Delhi' (original is affected)
+                    </code></pre>
+              
+                    <br><strong>Deep Copy:</strong>
+                    <ul>
+                      <li>Creates a full, independent copy of the object and all nested objects.</li>
+                      <li>Changes to the copy do not affect the original.</li>
+                    </ul>
+              
+                    <strong>Example (using JSON):</strong>
+                    <pre><code>
+              const original = { name: 'Dev', address: { city: 'Kolkata' } };
+              const deep = JSON.parse(JSON.stringify(original));
+              
+              deep.address.city = 'Delhi';
+              console.log(original.address.city); // Output: 'Kolkata' (original not affected)
+                    </code></pre>
+              
+                    <strong>Note:</strong> JSON method doesn’t handle functions, Dates, undefined, RegExp, etc.
+              
+                    <br><br><strong>Advanced Deep Copy (using lodash):</strong>
+                    <pre><code>
+              const _ = require('lodash');
+              const deep = _.cloneDeep(original);
+                    </code></pre>
+              
+                    <strong>Summary:</strong>
+                    <table border="1" cellpadding="5">
+                      <tr><th>Type</th><th>Nested Objects</th><th>Use Case</th></tr>
+                      <tr><td>Shallow Copy</td><td>Referenced</td><td>Simple or flat objects</td></tr>
+                      <tr><td>Deep Copy</td><td>Copied recursively</td><td>Complex or nested objects</td></tr>
+                    </table>
+                  </div>
+                </li>
+              </ul>
+              
+              
+              <ul class="faq">
+                <li data-id="q127">
+                  <span class="faq-question">Buffer?</span>
+                  <div class="answer">
+                    
+              
+              <code>
+                A <strong>Buffer</strong> in Node.js is a built-in class that allows you to work with raw binary data directly in memory, especially useful when dealing with streams, file systems, TCP sockets, etc. It represents a fixed-size chunk of memory allocated outside the V8 heap.
+                <br />
+                <br />
+              <b>Buffers are not resizable. </b><br />If you need a resizable array of binary data, consider using <b>Uint8Array or Streams with chunks.</b>
+                
+              <br><br><strong>Why Buffers?</strong>
+              <ol>
+                <li>JavaScript strings are Unicode and not ideal for binary data.</li>
+                <li>Buffers allow handling binary data (e.g., images, files, sockets) directly.</li>
+              </ol>
+              <br />
+                
+              <strong>Use Cases:</strong>
+              <ol>
+              <li>Reading and writing files</li>
+              <li>Handling stream data (e.g. TCP, HTTP)</li>
+              <li>Binary data manipulation (e.g. image processing, encryption)</li>
+              </ol>
+              
+              </code>
+              
+              
+              
+              
+                    
+              <pre>
+              <strong>Create a Buffer:</strong>
+                const buf = Buffer.from('hello');
+                console.log(buf);           // &lt;Buffer 68 65 6c 6c 6f&gt;
+                console.log(buf.toString()); // hello
+              </pre>
+                    
+              <code>
+                <strong>Buffer Methods:</strong>
+                <ol>
+                <li>Buffer.from() – creates buffer from string/array/arrayBuffer</li>
+                <li>Buffer.alloc(size) – creates a zero-filled buffer of given size</li>
+                <li>Buffer.concat([buf1, buf2]) – joins multiple buffers</li>
+                <li>buf.toString() – converts buffer to human-readable string</li>
+                <li>buf.length – gets size of buffer in bytes</li>
+                </ol>
+              </code>
+              
+              <pre>
+                <strong>Example – Buffer concatenation:</strong>
+                const a = Buffer.from('Node');
+                const b = Buffer.from('JS');
+                const combined = Buffer.concat([a, b]);
+                console.log(combined.toString()); // NodeJS
+              </pre>
+              
+                    
+                  </div>
+                </li>
+              </ul>
+              
+              
+              <ul class="faq">
+                <li data-id="q125">
+                  <span class="faq-question">Stream?</span>
+                  <div class="answer">
+                    A <strong>Stream</strong> in Node.js is an abstract interface for working with streaming data. Streams are used to handle large data efficiently by processing it in chunks instead of loading it all into memory at once.
+                    
+                    <br />
+                    <strong>Why use Streams?</strong>
+                  <code>
+                    <ul>
+                      <li>Efficient memory usage for large files or data.</li>
+                      <li>Non-blocking, event-driven architecture.</li>
+                      <li>Used internally in many Node.js APIs (e.g., HTTP, file system, process).</li>
+                    </ul>
+                  </code>
+                    <br /><br>
+                    <strong>Types of Streams:</strong>
+                    <code>
+                    <ul>
+                      <li><strong>Readable:</strong> For reading data (e.g., fs.createReadStream()).</li>
+                      <li><strong>Writable:</strong> For writing data (e.g., fs.createWriteStream()).</li>
+                      <li><strong>Duplex:</strong> Can read and write (e.g., TCP sockets).</li>
+                      <li><strong>Transform:</strong> Duplex stream that can modify or transform data (e.g., zlib.createGzip()).</li>
+                    </ul>
+                    </code>
+              
+                    <br />
+              
+                    <strong>Common stream events:</strong>
+                    <code>
+                    <ul>
+                      <li>data – emitted when data is available to read.</li>
+                      <li>end – no more data</li>
+                      <li>error – error occurred</li>
+                      <li>finish – finished writing</li>
+                    </ul>
+                    </code>
+                    <br />
+              
+                    <strong>Basic Example (File Stream):</strong>
+                    <pre>
+              const fs = require('fs');
+              const readable = fs.createReadStream('input.txt');
+              const writable = fs.createWriteStream('output.txt');
+              readable.pipe(writable);
+              -------------------------------------
+              
+              readable.on('data', chunk => {
+                console.log('Chunk:', chunk.toString());
+              });
+              
+              readable.on('end', () => {
+                console.log('Finished reading.');
+              });
+                    </pre>
+                  </div>
+                </li>
+              </ul>
+              
+              <ul class="faq">
+                <li data-id="q126">
+                  <span class="faq-question">Pipe?</span>
+                  <div class="answer">
+                    <code>In Node.js, .pipe() is a method used to connect the output of a <strong>readable stream</strong> to the input of a <strong>writable stream</strong>. It allows data to flow automatically from source to destination, handling backpressure internally.</code>
+                    <br />
+              <pre>
+              Syntax: readableStream.pipe(writableStream);
+              Why use pipe()?
+                1. Simplifies stream handling.
+                2. Automatically manages flow control (backpressure).
+                3. Used for reading/writing large files, zipping, HTTP responses, etc.
+              </pre>
+              
+                    <strong>Basic Example:</strong>
+                    <pre><code>
+              const fs = require('fs');
+              
+              const readable = fs.createReadStream('input.txt');
+              const writable = fs.createWriteStream('output.txt');
+              
+              readable.pipe(writable);
+                    </code></pre>
+              
+                    <strong>Behind the Scenes:</strong> <code>pipe()</code> listens for <code>data</code>, <code>end</code>, <code>error</code> events, and handles flow control — pausing the readable stream when the writable stream can't keep up.
+              
+                    <strong>Chaining Pipes (with transform stream):</strong>
+                    <pre><code>
+              const zlib = require('zlib');
+              const fs = require('fs');
+              
+              fs.createReadStream('file.txt')
+                .pipe(zlib.createGzip())              // compress the stream
+                .pipe(fs.createWriteStream('file.txt.gz')); // write compressed file
+                    </code></pre>
+              
+                    <strong>Real-World Use Cases:</strong>
+                    <ul>
+                      <li>File copy or backup utilities.</li>
+                      <li>Compression/decompression (Gzip, Brotli).</li>
+                      <li>Video/audio streaming servers.</li>
+                      <li>Streaming data from a file to an HTTP response.</li>
+                    </ul>
+              
+                    <strong>Note:</strong> Use <code>pipeline()</code> from <code>stream</code> module for better error handling in complex piping:
+                    <pre><code>
+              const { pipeline } = require('stream');
+              pipeline(
+                fs.createReadStream('a.txt'),
+                fs.createWriteStream('b.txt'),
+                (err) => { if (err) console.error('Pipeline failed:', err); }
+              );
+                    </code></pre>
+                  </div>
+                </li>
+              </ul>
+              
+              
+              <ul class="faq">
+                <li data-id="q128">
+                  <span class="faq-question green">Buffer vs Stream vs Pipe?</span>
+                  <div class="answer">
+                    These three concepts are commonly used in Node.js for handling data — especially large or binary data — but they serve different purposes.
+              
+                    <br><code><strong>🔹 Buffer:</strong>
+                    <ol>
+                      <li>A <strong>Buffer</strong> holds binary data in memory as a fixed-size chunk.</li>
+                      <li>Best for small/medium-sized data you want to work with all at once.</li>
+                      <li>Can become memory-intensive for large files.</li>
+                      <li>Example: const buf = Buffer.from('hello');</li>
+                    </ol>
+                    </code>
+              <br />
+                    <code>
+                    <strong>🔹 Stream:</strong>
+                    <ol>
+                      <li>A <strong>Stream</strong> is an event-based abstraction for continuous data flow.</li>
+                      <li>Processes data in <strong>chunks</strong>, without loading the entire content in memory.</li>
+                      <li>Efficient for large files, real-time data (e.g., file I/O, HTTP requests).</li>
+                      <li>Types: Readable, Writable, Duplex, Transform</li>
+                      <li>Example:
+                        <pre>
+              const fs = require('fs');
+              const stream = fs.createReadStream('file.txt');
+              stream.on('data', chunk => console.log(chunk.toString()));
+                        </pre>
+                      </li>
+                    </ol>
+                  </code>
+              <br />
+                    <code>
+                    <strong>🔹 Pipe:</strong>
+                    <ol>
+                      <li><strong>pipe()</strong> is a helper method used to connect two streams: readable → writable.</li>
+                      <li>Transfers data automatically while managing flow control (backpressure).</li>
+                      <li>Common for file copy, compression, HTTP response streaming, etc.</li>
+                      <li>Example:
+                        <pre><code>
+              fs.createReadStream('input.txt')
+                .pipe(fs.createWriteStream('output.txt'));
+                        </code></pre>
+                      </li>
+                    </ol>
+                  </code>
+                  <br />
+              
+                    <strong>🟩 Summary Table:</strong>
+                    <table border="1" cellpadding="5">
+                      <tr>
+                        <th>Feature</th><th>Buffer</th><th>Stream</th><th>Pipe</th>
+                      </tr>
+                      <tr>
+                        <td>Purpose</td>
+                        <td>Store binary data in memory</td>
+                        <td>Read/write data in chunks</td>
+                        <td>Connect readable to writable stream</td>
+                      </tr>
+                      <tr>
+                        <td>Memory Usage</td>
+                        <td>High for large files</td>
+                        <td>Low (chunked)</td>
+                        <td>Depends on stream</td>
+                      </tr>
+                      <tr>
+                        <td>Speed</td>
+                        <td>Fast for small data</td>
+                        <td>Efficient for large data</td>
+                        <td>Efficient & automated</td>
+                      </tr>
+                      <tr>
+                        <td>Use Case</td>
+                        <td>Binary operations</td>
+                        <td>Large file/network I/O</td>
+                        <td>Chaining streams</td>
+                      </tr>
+                    </table>
+              <pre>
+              <br><strong>Conclusion:</strong>
+              <b>Buffer</b> for small chunks of binary data, 
+              <b>Stream</b> when dealing with large or continuous data, and 
+              <b>pipe()</b> to connect and automate stream workflows.
+              </pre>
+                  </div>
+                </li>
+              </ul>
+              
+              <ul class="faq">
+                <li data-id="q129">
+                  <span class="faq-question green">Sharding in Databases?</span>
+                  <div class="answer">
+                    <strong>Sharding</strong> is a database architecture pattern used to horizontally partition large datasets across multiple databases (shards). Each shard holds a subset of the data, and all shards together form a complete dataset. <br />
+              
+                    <strong>Conclusion:</strong>
+                    Sharding enables horizontal scalability for databases by breaking big data into smaller, manageable parts. It’s powerful but requires careful planning and design.
+              
+                    <br><br>
+                  <code>
+                    <strong>Why use Sharding?</strong>
+                    <ol>
+                      <li>Improves performance and scalability by distributing load.</li>
+                      <li>Reduces contention and I/O bottlenecks on a single server.</li>
+                      <li>Enables handling of large datasets that exceed a single machine's capacity.</li>
+                    </ol>
+                    <br />
+                    <strong>How it works:</strong>
+                    <ol>
+                      <li>Data is split based on a <strong>shard key</strong> (e.g., user ID, region).</li>
+                      <li>Each shard can be hosted on a different physical or logical server.</li>
+                      <li>The application or a routing layer determines where to read/write data.</li>
+                    </ol>
+                  <br />
+              
+                    <strong>Example:</strong>
+                    <ol>
+                      <li>Instead of storing 100 million user records in one DB, you shard them across 10 databases, each storing 10 million.</li>
+                      <li>User IDs 1-10M → Shard 1, 10M-20M → Shard 2, etc.</li>
+                    </ol>
+              
+                  </code>
+              
+                  <code>
+                    <strong>Sharding Strategies:</strong>
+                    <ol>
+                      <li><strong>Range-based:</strong> Divide data based on value ranges (e.g., date, ID).</li>
+                      <li><strong>Hash-based:</strong> Apply a hash function on the shard key.</li>
+                      <li><strong>Geo-based:</strong> Partition by location (e.g., country, region).</li>
+                    </ol>
+                  </code>
+                  <br />
+                    <code>
+                    <strong>Challenges:</strong>
+                    <ol>
+                      <li>Cross-shard joins and transactions are complex or inefficient.</li>
+                      <li>Resharding (changing shard strategy) can be hard.</li>
+                      <li>Requires good shard key design to avoid hotspots.</li>
+                    </ol>
+                  </code>
+                    <br />
+                    <code>
+                    <strong>Databases that support sharding:</strong>
+                    <ol>
+                      <li>MongoDB – Native sharding support</li>
+                      <li>Cassandra – Automatically partitions data</li>
+                      <li>PostgreSQL/MySQL – Via manual partitioning or middleware (e.g., Citus, Vitess)</li>
+                    </ol>
+                    </code>
+              
+              <pre>
+              
+                // NestJS Sharding Example with MySQL (manual routing by user ID)
+              
+                // 1. DatabaseConfigService - handles connections to multiple shards
+                @Injectable()
+                export class DatabaseConfigService {
+                  private shardConnections: Record<string, DataSource> = {};
+                
+                  constructor() {
+                    // Simulate 2 shards for example
+                    this.shardConnections["shard1"] = new DataSource({
+                      type: "mysql",
+                      host: "localhost",
+                      port: 3306,
+                      username: "root",
+                      password: "password",
+                      database: "user_shard_1",
+                      entities: [User],
+                      synchronize: true,
+                    });
+                
+                    this.shardConnections["shard2"] = new DataSource({
+                      type: "mysql",
+                      host: "localhost",
+                      port: 3306,
+                      username: "root",
+                      password: "password",
+                      database: "user_shard_2",
+                      entities: [User],
+                      synchronize: true,
+                    });
+                  }
+                
+                  async initConnections() {
+                    for (const shard of Object.values(this.shardConnections)) {
+                      if (!shard.isInitialized) await shard.initialize();
+                    }
+                  }
+                
+                  getShard(userId: number): DataSource {
+                    return userId % 2 === 0 ? this.shardConnections["shard1"] : this.shardConnections["shard2"];
+                  }
+                
+                  getAllShards(): DataSource[] {
+                    return Object.values(this.shardConnections);
+                  }
+                }
+                
+                // 2. User Entity
+                @Entity()
+                export class User {
+                  @PrimaryGeneratedColumn()
+                  id: number;
+                
+                  @Column()
+                  name: string;
+                
+                  @Column()
+                  email: string;
+                }
+                
+                // 3. UserService - routes DB calls to the correct shard
+                @Injectable()
+                export class UserService {
+                  constructor(private dbService: DatabaseConfigService) {}
+                
+                  async findAll(userId: number): Promise<User[]> {
+                    const shard = this.dbService.getShard(userId);
+                    const userRepo = shard.getRepository(User);
+                    return userRepo.find();
+                  }
+                
+                  async create(userId: number, dto: { name: string; email: string }): Promise<User> {
+                    const shard = this.dbService.getShard(userId);
+                    const userRepo = shard.getRepository(User);
+                    const user = userRepo.create(dto);
+                    return userRepo.save(user);
+                  }
+                
+                  async findByEmail(email: string): Promise<User | null> {
+                    for (const shard of this.dbService.getAllShards()) {
+                      const userRepo = shard.getRepository(User);
+                      const user = await userRepo.findOne({ where: { email } });
+                      if (user) return user;
+                    }
+                    return null;
+                  }
+                
+                  async findById(id: number): Promise<User | null> {
+                    for (const shard of this.dbService.getAllShards()) {
+                      const userRepo = shard.getRepository(User);
+                      const user = await userRepo.findOne({ where: { id } });
+                      if (user) return user;
+                    }
+                    return null;
+                  }
+                
+                  async findByName(name: string): Promise<User[]> {
+                    const results: User[] = [];
+                    for (const shard of this.dbService.getAllShards()) {
+                      const userRepo = shard.getRepository(User);
+                      const users = await userRepo.find({ where: { name } });
+                      results.push(...users);
+                    }
+                    return results;
+                  }
+                }
+                
+                // 4. UserController
+                @Controller('users')
+                export class UserController {
+                  constructor(private userService: UserService) {}
+                
+                  @Get(':userId')
+                  async getUsers(@Param('userId', ParseIntPipe) userId: number) {
+                    return this.userService.findAll(userId);
+                  }
+                
+                  @Post(':userId')
+                  async createUser(@Param('userId', ParseIntPipe) userId: number, @Body() body) {
+                    return this.userService.create(userId, body);
+                  }
+                
+                  @Get('email/:email')
+                  async getUserByEmail(@Param('email') email: string) {
+                    return this.userService.findByEmail(email);
+                  }
+                
+                  @Get('id/:id')
+                  async getUserById(@Param('id', ParseIntPipe) id: number) {
+                    return this.userService.findById(id);
+                  }
+                
+                  @Get('name/:name')
+                  async getUserByName(@Param('name') name: string) {
+                    return this.userService.findByName(name);
+                  }
+                }
+                
+                // 5. AppModule
+                @Module({
+                  imports: [],
+                  controllers: [UserController],
+                  providers: [UserService, DatabaseConfigService],
+                })
+                export class AppModule {
+                  constructor(private dbService: DatabaseConfigService) {}
+                
+                  async onModuleInit() {
+                    await this.dbService.initConnections();
+                  }
+                }
+                
+                
+              </pre>
+              
+              
+              
+                  </div>
+                </li>
+              </ul>
+              
+              
+              
+              
 
 
 <li data-id="q_promise"><span class="faq-question">
@@ -2804,55 +3167,10 @@ GraphQL offers several advantages over traditional REST APIs:
 These features make GraphQL ideal for complex, evolving APIs and frontend-driven development.
 </div></li>
 
-<li data-id="q_react_state"><span class="faq-question">
-State in React?
-</span><div class="answer">
-State in React is an object that holds dynamic data for a component. It determines how the component behaves and renders. When the state changes, React automatically re-renders the component to reflect the new data. State is managed within the component (using <code>useState</code> in functional components) and should be updated using the provided setter function to ensure proper reactivity.
 
-</div></li>
 
-<li data-id="q_react_vs_next"><span class="faq-question">
-Difference between React.js and Next.js?
-</span><div class="answer">
-<strong>React.js</strong> is a JavaScript library for building user interfaces, mainly focused on the frontend. It offers a component-based approach and handles client-side rendering but doesn’t include built-in routing or server-side rendering.
 
-<strong>Next.js</strong> is a React framework that extends React by adding powerful features like:
-<ul>
-<li>File-based routing</li>
-<li>Server-side rendering (SSR)</li>
-<li>Static site generation (SSG)</li>
-<li>API routes</li>
-<li>SEO optimization</li>
-</ul>
-While React provides the foundation for UI, Next.js offers a complete solution for building full-stack applications with better performance and scalability.
-</div></li>
 
-<li data-id="q_react_memory_virtualization"><span class="faq-question">
-memory cleanup and virtualization in React.js?
-</span><div class="answer">
-<strong>Memory Cleanup:</strong> In React, memory cleanup is often done using the <code>useEffect</code> hook’s cleanup function. It prevents memory leaks by cleaning up subscriptions, timers, or event listeners when a component unmounts or before re-running the effect.
-
-Example:
-<pre><code>
-useEffect(() => {
-const timer = setInterval(() => console.log('Tick'), 1000);
-return () => clearInterval(timer); // Cleanup
-}, []);
-</code></pre>
-
-<strong>Virtualization:</strong> Virtualization improves performance by rendering only the visible portion of large lists instead of the entire list. Libraries like <code>react-window</code> or <code>react-virtualized</code> help with this.
-
-Example with <code>react-window</code>:
-<pre><code>
-import { FixedSizeList as List } from 'react-window';
-
-&lt;List height={400} itemCount={1000} itemSize={35} width={300}&gt;
-{({ index, style }) =&gt; &lt;div style={style}&gt;Item {index}&lt;/div&gt;}
-&lt;/List&gt;
-</code></pre>
-
-This boosts performance and reduces memory usage in large UIs.
-</div></li>
 <li data-id="q_design_patterns"><span class="faq-question">
 What are design patterns in Node.js?
 </span><div class="answer">
@@ -3073,18 +3391,7 @@ the difference between Token and Session?
 Sessions are server-managed; tokens are client-managed. Tokens are popular for APIs and stateless apps; sessions suit traditional web apps.
 </div></li>
 
-<li data-id="q_mysql_acid"><span class="faq-question">
-ACID in MySQL?
-</span><div class="answer">
-ACID stands for Atomicity, Consistency, Isolation, and Durability — key properties that ensure reliable database transactions.
-<br />
-- <strong>Atomicity:</strong> Transactions are all-or-nothing; either fully completed or fully rolled back.<br>
-- <strong>Consistency:</strong> Transactions bring the database from one valid state to another, maintaining data integrity.<br>
-- <strong>Isolation:</strong> Concurrent transactions don’t interfere; intermediate states are hidden.<br>
-- <strong>Durability:</strong> Once committed, changes persist even after crashes.
 
-MySQL’s InnoDB engine supports ACID to guarantee safe and reliable transactions.
-</div></li>
 
 <li data-id="q_aws_api_gateway"><span class="faq-question">
 AWS API Gateway?
