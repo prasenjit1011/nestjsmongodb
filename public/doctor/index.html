@@ -1015,95 +1015,82 @@ shallow / shadow copy
 
 
 
-              <li data-id="q122obj"><span class="faq-question green ">
-                Object, Rest, Rest Operator
-              </span><div class="answer">
-              <pre>
-              <b>Object</b>
-              var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
-              const x = Object.keys(obj);
-              const y = Object.values(obj);
-              const z = Object.entries(obj);
+<li data-id="q122obj"><span class="faq-question green ">
+  Object, Rest, Rest Operator, Event
+</span><div class="answer">
+<pre>
+  <b>Object</b>
+  var obj = { a: 5, b: { c: 6, d: { e: 2 } } };
+  const x = Object.keys(obj);
+  const y = Object.values(obj);
+  const z = Object.entries(obj);
+
+
+  const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
+  const v1 = Math.max(...Object.values(x1));
+  const v2 = Math.max(...[[1,2],3,4].flat());
+  const v3 = Math.max(1,2,3,4);
+</pre>
+<pre>
+  <b>Rest Operator</b>
+  const user = { id: 1, name: "Alice", age: 30 };
+  const { name, ...rest } = user;
+  console.log(name); // "Alice"
+  console.log(rest); // { id: 1, age: 30 }
+
+
+  <b>Spread Operator</b>
+  const arr = [1, 2, 3];
+  const newArr = [...arr, 4, 5];
+  console.log(newArr); // [1, 2, 3, 4, 5]
+</pre>
+
+<pre>
+  <b>Event</b>
+  const users     = {};
+  const app       = require('express')();
+  const eventData = new (require('events'))();
+
+  eventData.on('hello',(data)=>{
+      const cnt   = Object.keys(users).length
+      users[cnt]  = data;
+      console.log('Event Hello Received : ', data);
+  });
+
+  app.get('/event/hello/:txt',(req, res)=>{
+      console.log('Event Hello Emited');
+      eventData.emit('hello', req.params.txt);
+      res.json('Event Created Successfully!')
+  });
+</pre>
+</div></li>
               
               
               
-              
-              const x1 = { a: 1, b: 4, c: 8, d: 2, f: 3 };
-              const v1 = Math.max(...Object.values(x1));
-              const v2 = Math.max(...[[1,2],3,4].flat());
-              const v3 = Math.max(1,2,3,4);
-              
-              
-              </pre>
-              
-              <pre>
-                <b>Rest Operator</b>
-                const user = { id: 1, name: "Alice", age: 30 };
-                const { name, ...rest } = user;
-                console.log(name); // "Alice"
-                console.log(rest); // { id: 1, age: 30 }
-              
-              
-                <b>Spread Operator</b>
-                const arr = [1, 2, 3];
-                const newArr = [...arr, 4, 5];
-                console.log(newArr); // [1, 2, 3, 4, 5]
-              
-              </pre>
-              
-              
-              </div></li>
-              
-              
-              
-              <li data-id="q122"><span class="faq-question">
-                Type vs Object
-                </span><div class="answer">
-              
-              <pre><b>
-              type Car is a type definition
-              myCar is an object at runtime</b>
-              
-              type Car = {
-                brand: string;
-                year: number;
-              };
-              
-              const myCar: Car = {
-                brand: "Toyota",
-                year: 2022
-              };
-              </pre>
-              
-              
-                <h2>1. <code>type</code> (TypeScript only)</h2>
-                <ul>
-                  <li>Used to define custom types</li>
-                  <li>Exists only at <strong>compile time</strong></li>
-                  <li>Helps with static type checking</li>
-                </ul>
-              
-                <pre><code>type User = {
-                name: string;
-                age: number;
-              };
-              
-              const u: User = { name: "Alice", age: 25 };
-              </code></pre>
-              
-                <h2>2. <code>object</code> (JavaScript + TypeScript)</h2>
-                <ul>
-                  <li>A runtime data structure</li>
-                  <li>Used to store key-value pairs</li>
-                </ul>
-              
-                <pre><code>const user = {
-                name: "Bob",
-                age: 30
-              };
-              
-              console.log(user.name); // "Bob"
-              </code></pre>
+<li data-id="q122"><span class="faq-question">
+Type vs Object
+</span><div class="answer">
+<pre>
+  <b>🧪 Example: Using both</b>
+  type Car is a type definition
+  myCar is an object at runtime</b>
+  
+  type Car = {  brand: string;  year: number; };
+  const myCar: Car = {  brand: "Toyota",  year: 2022  };
+  console.log(myCar.brand); // Toyota
+</pre>
+
+<pre>
+  <b>Type (TypeScript only)</b>
+  Used to define custom types
+  Exists only at <strong>compile time</strong>
+  Helps with static type checking  
+</pre>
+<pre>
+  <b>Object (JavaScript + TypeScript)</b>
+  A runtime data structure
+  Used to store key-value pairs
+</pre>
               
                 <h2>🔍 Key Differences</h2>
               
@@ -1111,8 +1098,8 @@ shallow / shadow copy
                   <thead>
                     <tr>
                       <th>Feature</th>
-                      <th><code>type</code> (TypeScript)</th>
-                      <th><code>object</code> (JS/TS)</th>
+                      <th><b>type</b> (TypeScript)</th>
+                      <th><b>object</b> (JS/TS)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1144,19 +1131,9 @@ shallow / shadow copy
                   </tbody>
                 </table>
               
-                <h2>🧪 Example: Using both</h2>
-                <pre><code>type Car = {
-                brand: string;
-                year: number;
-              };
-              
-              const myCar: Car = {
-                brand: "Toyota",
-                year: 2022
-              };</code></pre>
-              
-              
-                  </div></li>
+
+
+</div></li>
               
               <li data-id="q122"><span class="faq-question">
                 Monolithic vs Microservices
@@ -1419,51 +1396,49 @@ shallow / shadow copy
               </div></li>
               
               
-              <li data-id="q53337">
-                <span class="faq-question green">Security Practices in Node.js?***</span>
-                <div class="answer">
-                  <ol>
-                    <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
-                    <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
-                    <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
-                    <li><strong>Environment variables:</strong> Store secrets and credentials securely using environment variables or secrets managers.</li>
-                    <li><strong>Limit privileges:</strong> Run Node.js processes with the least privileges needed.</li>
-                    <li><strong>Prevent DOS attacks:</strong> Use rate limiting and request throttling.</li>
-                    <li><strong>Use security headers:</strong> Implement headers like Content Security Policy (CSP), X-Content-Type-Options, and others.</li>
-                    <li><strong>Handle errors securely:</strong> Don’t expose stack traces or sensitive info in error responses.</li>
-                    <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
-                    <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
-                    <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
-                  </ol>
-              <pre>
-                app.use(rateLimit({
-                  windowMs: 1 * 60 * 1000, // 1 minute
-                  max: 5, // limit each IP to 5 requests per windowMs
-                  message: "Too many requests, try again later.",
-                }));
-              </pre>
-                </div>
-              </li>
+<li data-id="q53337">
+  <span class="faq-question green">Security Practices in Node.js?***</span>
+  <div class="answer">
+    <ol class="subul">
+      <li><strong>Validate input:</strong> Always validate and sanitize user input to prevent injection attacks (e.g., SQL injection, XSS).</li>
+      <li><strong>Use HTTPS:</strong> Serve your app over HTTPS to encrypt data in transit.</li>
+      <li><strong>Manage dependencies:</strong> Regularly update and audit npm packages to avoid known vulnerabilities.</li>
+      <li><strong>Environment variables:</strong> Store secrets and credentials securely using environment variables or secrets managers.</li>
+      <li><strong>Limit privileges:</strong> Run Node.js processes with the least privileges needed.</li>
+      <li><strong>Prevent DOS attacks:</strong> Use rate limiting and request throttling.</li>
+      <li><strong>Use security headers:</strong> Implement headers like Content Security Policy (CSP), X-Content-Type-Options, and others.</li>
+      <li><strong>Handle errors securely:</strong> Don’t expose stack traces or sensitive info in error responses.</li>
+      <li><strong>Authentication & Authorization:</strong> Use proven libraries (e.g., Passport.js, JWT) and implement proper access controls.</li>
+      <li><strong>Secure cookies:</strong> Use HttpOnly, Secure, and SameSite flags on cookies.</li>
+      <li><strong>Keep Node.js updated:</strong> Use the latest stable Node.js version with security patches.</li>
+    </ol>
+<pre>
+  app.use(rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: "Too many requests, try again later.",
+  }));
+</pre>
+  </div>
+</li>
               
-              <li data-id="q58">
-                <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
-                <div class="answer">
-                  Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
-                  <code>
-                    <ol>
-                      <li><strong>Clickjacking</strong> with the <b>X-Frame-Options</b> header</li>
-                      <li><strong>XSS attacks</strong> with <b>X-XSS-Protection</b></li>
-                      <li><strong>MIME sniffing</strong> with <b>X-Content-Type-Options</b></li>
-                      <li><strong>Enforces HTTPS</strong> with <b>Strict-Transport-Security</b></li>
-                      <li><strong>Content Security Policy</strong> to control allowed resources</li>
-                    </ol>
-                  </code>
-                  Using Helmet is simple:
-                  <pre><code>const helmet = require('helmet');
-              app.use(helmet());</code></pre>
-                  It’s widely recommended for any Express app to improve default security.
-                </div>
-              </li>
+<li data-id="q58">
+  <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
+  <div class="answer">
+    Helmet is a middleware for Express.js that helps secure your app by setting various HTTP headers. It protects against common vulnerabilities like:
+    <code>
+      <ol class="subul">
+        <li><strong>Clickjacking</strong> with the <b>X-Frame-Options</b> header</li>
+        <li><strong>XSS attacks</strong> with <b>X-XSS-Protection</b></li>
+        <li><strong>MIME sniffing</strong> with <b>X-Content-Type-Options</b></li>
+        <li><strong>Enforces HTTPS</strong> with <b>Strict-Transport-Security</b></li>
+        <li><strong>Content Security Policy</strong> to control allowed resources</li>
+        <li><strong>app.use(require('helmet')())</strong></li>
+      </ol>
+    </code>
+    
+  </div>
+</li>
               
               
               
