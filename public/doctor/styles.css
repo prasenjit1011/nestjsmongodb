@@ -162,3 +162,6 @@ hr{
     margin: 20px 0;         /* optional spacing */
   }
   
+.yellow{
+  background-color: rgb(249, 242, 30) !important;
+}

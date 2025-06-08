@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>NodeJS</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script src="/doctor/cdn/jquery-3.6.0.min.js"></script>
+<script src="/doctor/cdn/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -47,7 +47,7 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       <tr>
         <td>Docker</td>
         <td>Appsync,DynamoDB,API Gateway</td>
-        <td></td>
+        <td>CI/CD</td>
         <td></td>
       </tr>
       <tr>
@@ -3225,7 +3225,7 @@ API Gateway simplifies building scalable, secure, and reliable APIs with minimal
 
 
 
-  <li data-id="typescriptqq"><span class="faq-question green">
+  <li data-id="typescriptqq" class="yellow"><span class="faq-question">
     TypeScript Question
   </span><div class="answer">
     <ol>
@@ -6772,7 +6772,7 @@ JOIN customers ON orders.customer_id = customers.id;</code></pre>
 </div></li>
 
 
-<li data-id="q122"><span class="faq-question">
+<li data-id="q122" class="yellow"><span class="faq-question">
 Redis Question-Answer
 </span>
 
@@ -6892,36 +6892,36 @@ Redis Question-Answer
   </li>
 
 
-<li data-id="q122redissss"><span class="faq-question green">Is Redis a database, cache, or message broker?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Is Redis a database, cache, or message broker?</span><div class="answer">
   Redis is all three. It can be used as an in-memory NoSQL database, a high-performance cache, and a lightweight message broker via Pub/Sub.
 
 <ol>
 
-  <li data-id="q122redissss"><span class="faq-question green">How is Redis different from other databases like MySQL or MongoDB?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">How is Redis different from other databases like MySQL or MongoDB?</span><div class="answer">
     Redis stores all data in memory, enabling ultra-fast access. It supports complex data types like lists and sets, lacks traditional table-based schemas, and is optimized for speed rather than storage size or relational queries.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What are the data structures supported by Redis?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What are the data structures supported by Redis?</span><div class="answer">
     Strings, Lists, Sets, Sorted Sets (ZSets), Hashes, Bitmaps, HyperLogLogs, Streams, and GEO data.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">Is Redis single-threaded or multi-threaded?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">Is Redis single-threaded or multi-threaded?</span><div class="answer">
     Redis is single-threaded for most operations to ensure simplicity and predictability, but Redis 6+ supports multi-threaded I/O.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What is the maximum size of a Redis key and value?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is the maximum size of a Redis key and value?</span><div class="answer">
     The maximum key size is 512 MB; the value size can also be up to 512 MB for strings.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What is the default port Redis runs on?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is the default port Redis runs on?</span><div class="answer">
     Port 6379.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What is the difference between Redis and Memcached?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is the difference between Redis and Memcached?</span><div class="answer">
     Redis supports more data types, persistence, replication, and scripting. Memcached is simpler and only stores strings in memory.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">How does Redis store data in memory?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">How does Redis store data in memory?</span><div class="answer">
     Redis stores all data in RAM using a variety of compact data structures and encodings for high performance.
   </div></li>
   
@@ -6931,37 +6931,37 @@ Redis Question-Answer
 
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Can Redis be used for persistent storage?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Can Redis be used for persistent storage?</span><div class="answer">
   Yes, Redis supports two persistence mechanisms: RDB (snapshotting) and AOF (Append Only File).
 
 <ol>
 
 
-  <li data-id="q122redissss"><span class="faq-question green">What is a Redis string and what operations can be performed on it?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is a Redis string and what operations can be performed on it?</span><div class="answer">
     A string is the most basic data type and can store any binary data up to 512 MB. Operations: GET, SET, INCR, APPEND, etc.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What is a Redis list? How is it different from a set?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is a Redis list? How is it different from a set?</span><div class="answer">
     A list is an ordered collection of strings. A set is an unordered collection of unique strings.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">Explain Redis set and its use cases.</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">Explain Redis set and its use cases.</span><div class="answer">
     A set is an unordered collection of unique elements. Use cases include tagging, deduplication, and membership checks.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What are sorted sets in Redis?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What are sorted sets in Redis?</span><div class="answer">
     A sorted set is a collection of unique elements ordered by a score. Use cases: leaderboards, ranking systems.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">What is a Redis hash and when should you use it?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">What is a Redis hash and when should you use it?</span><div class="answer">
     A hash is a mapping between string fields and values, useful for storing objects like user profiles.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">Can you perform range queries in Redis? If yes, how?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">Can you perform range queries in Redis? If yes, how?</span><div class="answer">
     Yes, using Sorted Sets with commands like ZRANGE, ZREVRANGE, and ZRANGEBYSCORE.
   </div></li>
   
-  <li data-id="q122redissss"><span class="faq-question green">How would you store and access a JSON object in Redis?</span><div class="answer">
+  <li data-id="q122redissss"><span class="faq-question">How would you store and access a JSON object in Redis?</span><div class="answer">
     You can store it as a stringified JSON in a string key or use Redis modules like RedisJSON.
   </div></li>
   
@@ -6970,131 +6970,131 @@ Redis Question-Answer
 
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is Redis Pub/Sub? Give an example use case.</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is Redis Pub/Sub? Give an example use case.</span><div class="answer">
   Pub/Sub allows messages to be published to channels and received by subscribers. Example: real-time notifications.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is a Redis stream?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is a Redis stream?</span><div class="answer">
   A log-like data structure used for storing time-ordered events, suitable for messaging and event sourcing.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Explain Redis HyperLogLog.</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Explain Redis HyperLogLog.</span><div class="answer">
   A probabilistic data structure for approximate cardinality counting (e.g., unique visitors) with minimal memory.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is a Redis bitmap?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is a Redis bitmap?</span><div class="answer">
   Bitmaps allow you to set and check bits at given offsets in strings; used for tracking binary states compactly.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is Redis GEO data structure used for?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is Redis GEO data structure used for?</span><div class="answer">
   To store and query geographic locations by longitude and latitude using commands like GEOADD and GEORADIUS.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How can you expire keys in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How can you expire keys in Redis?</span><div class="answer">
   Use EXPIRE, SETEX, or TTL to set and manage time-to-live (TTL) on keys.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is the difference between DEL and UNLINK?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is the difference between DEL and UNLINK?</span><div class="answer">
   DEL deletes the key synchronously, while UNLINK deletes asynchronously to avoid blocking the event loop.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How do you ensure Redis performs optimally under high load?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How do you ensure Redis performs optimally under high load?</span><div class="answer">
   Use efficient data structures, enable persistence wisely, tune memory limits, and consider clustering or sharding.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are Redis eviction policies?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are Redis eviction policies?</span><div class="answer">
   Policies used when memory limit is reached: noeviction, allkeys-lru, volatile-lru, allkeys-random, etc.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Explain Lazy vs Eager expiration in Redis.</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Explain Lazy vs Eager expiration in Redis.</span><div class="answer">
   Lazy expiration removes keys only when accessed; eager expiration removes expired keys periodically in the background.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are Redis memory optimization techniques?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are Redis memory optimization techniques?</span><div class="answer">
   Use smaller key/value names, appropriate data encodings, Redis modules like RedisJSON, and memory policies.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How to handle large datasets in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How to handle large datasets in Redis?</span><div class="answer">
   Use clustering, compress data, offload large blobs to other storage, and keep only hot data in Redis.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How do you monitor Redis performance?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How do you monitor Redis performance?</span><div class="answer">
   Use tools like Redis CLI (INFO), RedisInsight, Prometheus + Grafana, and built-in metrics.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are RDB and AOF in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are RDB and AOF in Redis?</span><div class="answer">
   RDB (snapshotting) saves the DB at intervals; AOF logs every write operation. Both are for persistence.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are the differences between RDB and AOF persistence mechanisms?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are the differences between RDB and AOF persistence mechanisms?</span><div class="answer">
   RDB is faster for recovery and saves at intervals; AOF is safer for durability and logs every operation.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Can Redis use both RDB and AOF at the same time?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Can Redis use both RDB and AOF at the same time?</span><div class="answer">
   Yes, Redis can be configured to use both for improved durability and faster recovery.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How does Redis handle data recovery after a crash?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How does Redis handle data recovery after a crash?</span><div class="answer">
   Redis reloads data from the AOF file or latest RDB snapshot during startup.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is the SAVE and BGSAVE command in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is the SAVE and BGSAVE command in Redis?</span><div class="answer">
   SAVE performs a synchronous snapshot; BGSAVE runs it in the background to avoid blocking.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How are transactions handled in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How are transactions handled in Redis?</span><div class="answer">
   Transactions are supported using MULTI, EXEC, DISCARD, and WATCH, but without rollback.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are the commands used to start and execute a transaction in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are the commands used to start and execute a transaction in Redis?</span><div class="answer">
   MULTI (start), followed by commands, then EXEC (execute) or DISCARD (abort).
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is the use of WATCH in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is the use of WATCH in Redis?</span><div class="answer">
   WATCH monitors keys for changes and aborts the transaction if any watched key is modified before EXEC.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Can you use Lua scripting in Redis? Why and how?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Can you use Lua scripting in Redis? Why and how?</span><div class="answer">
   Yes. Lua scripts ensure atomicity and are executed using the EVAL command. Useful for batch operations.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Is Redis transaction atomic?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Is Redis transaction atomic?</span><div class="answer">
   Yes. A Redis transaction is atomic, meaning all commands inside MULTI/EXEC are executed sequentially without interference.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is Redis Sentinel?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is Redis Sentinel?</span><div class="answer">
   Sentinel provides high availability by monitoring Redis instances and performing automatic failover.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is Redis Cluster and how does it work?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is Redis Cluster and how does it work?</span><div class="answer">
   Redis Cluster provides horizontal partitioning (sharding) and high availability without external tools.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What is the difference between Redis replication and clustering?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What is the difference between Redis replication and clustering?</span><div class="answer">
   Replication copies data to slaves; clustering partitions data across nodes for scalability and fault tolerance.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How does Redis handle failover?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How does Redis handle failover?</span><div class="answer">
   Redis Sentinel detects failures and promotes a replica to master. Cluster nodes also have failover logic.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How does Redis shard data in a cluster?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How does Redis shard data in a cluster?</span><div class="answer">
   It uses a hash slot algorithm (0–16383 slots) and distributes keys based on CRC16 hash.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How can you secure a Redis instance?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How can you secure a Redis instance?</span><div class="answer">
   Use strong passwords, rename dangerous commands, bind to localhost, enable TLS, and use firewalls.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">How do you configure password authentication in Redis?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">How do you configure password authentication in Redis?</span><div class="answer">
   Set the <code>requirepass</code> option in <code>redis.conf</code> or with the CONFIG SET command.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">Can Redis be used over SSL/TLS?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">Can Redis be used over SSL/TLS?</span><div class="answer">
   Yes. Redis supports TLS natively since version 6.0, or via stunnel/proxy for older versions.
 </div></li>
 
-<li data-id="q122redissss"><span class="faq-question green">What are some Redis configuration best practices?</span><div class="answer">
+<li data-id="q122redissss"><span class="faq-question">What are some Redis configuration best practices?</span><div class="answer">
   Use maxmemory settings, persistence tuning, password protection, appropriate eviction policy, and monitoring tools.
 </div></li>
 
@@ -7496,7 +7496,7 @@ console.log(result);  // Output: 15
 
 
 
-  <li data-id="q300"><span class="faq-question">
+  <li data-id="q300" class="yellow" ><span class="faq-question">
   Mongo DB Question List
   </span><div class="answer">
   <ol>
@@ -8167,11 +8167,1863 @@ console.log(result);  // Output: 15
   
   
   </div></li>
+
+
+
+
+  <li data-id="q32" class="yellow">
+    <span class="faq-question">Jest?</span>
+    <div class="answer">
+<ol>
+  <li>What is Jest?</li>
+  <li>How do you install Jest in a Node.js project?</li>
+  <li>How do you write a simple test case in Jest?</li>
+  <li>What is a test suite in Jest?</li>
+  <li>What is a test case in Jest?</li>
+  <li>How do you run tests using Jest?</li>
+  <li>What is the difference between `test` and `it` in Jest?</li>
+  <li>How do you mock functions in Jest?</li>
+  <li>What is a mock function (spy) in Jest?</li>
+  <li>How do you mock modules in Jest?</li>
+  <li>How do you reset mocks between tests in Jest?</li>
+  <li>What is the difference between `jest.fn()` and `jest.mock()`?</li>
+  <li>How do you test asynchronous code in Jest?</li>
+  <li>What is the use of `done` callback in Jest tests?</li>
+  <li>How do you test promises in Jest?</li>
+  <li>How do you test async/await functions with Jest?</li>
+  <li>What is snapshot testing in Jest?</li>
+  <li>How do you create and update snapshots in Jest?</li>
+  <li>What are some best practices for snapshot testing?</li>
+  <li>How do you run only a specific test or test suite in Jest?</li>
+  <li>What are Jest setup and teardown methods?</li>
+  <li>Explain `beforeAll`, `beforeEach`, `afterAll`, and `afterEach` in Jest.</li>
+  <li>How do you configure Jest using `jest.config.js`?</li>
+  <li>What is the default test environment in Jest?</li>
+  <li>How do you change the test environment in Jest?</li>
+  <li>What is code coverage and how do you measure it with Jest?</li>
+  <li>How do you exclude files or directories from Jest coverage?</li>
+  <li>What is the use of `--watch` mode in Jest?</li>
+  <li>How do you run Jest tests in parallel?</li>
+  <li>How do you use custom matchers in Jest?</li>
+  <li>What are the built-in Jest matchers?</li>
+  <li>How do you extend Jest matchers?</li>
+  <li>How do you test React components with Jest?</li>
+  <li>How do you combine Jest with React Testing Library?</li>
+  <li>How do you mock API calls in Jest?</li>
+  <li>How do you mock HTTP requests with Jest?</li>
+  <li>How do you mock timers in Jest?</li>
+  <li>What are fake timers and how do you use them in Jest?</li>
+  <li>How do you clear or advance timers in Jest?</li>
+  <li>How do you mock Date or time in Jest tests?</li>
+  <li>How do you handle exceptions or errors in Jest tests?</li>
+  <li>How do you test for thrown errors in Jest?</li>
+  <li>How do you debug Jest tests?</li>
+  <li>How do you run Jest tests with debugging enabled?</li>
+  <li>How do you test private functions in Jest?</li>
+  <li>Can you test TypeScript code with Jest?</li>
+  <li>How do you configure Jest for TypeScript?</li>
+  <li>What is the difference between `jest.resetAllMocks()` and `jest.clearAllMocks()`?</li>
+  <li>How do you use the `test.each` function in Jest?</li>
+  <li>What is the purpose of `expect.assertions()` in Jest?</li>
+  <li>How do you test events or callbacks in Jest?</li>
+  <li>What is the difference between `toBe` and `toEqual` in Jest?</li>
+  <li>How do you test object properties and array contents with Jest?</li>
+  <li>How do you mock environment variables in Jest?</li>
+  <li>How do you test code that depends on environment variables?</li>
+  <li>How do you use Jest with Babel?</li>
+  <li>How do you use Jest with Webpack?</li>
+  <li>How do you integrate Jest with CI/CD pipelines?</li>
+  <li>What is the default timeout for a Jest test, and how do you change it?</li>
+  <li>How do you skip or disable tests in Jest?</li>
+  <li>How do you run only a single test file in Jest?</li>
+  <li>How do you use test coverage thresholds in Jest?</li>
+  <li>How do you generate a code coverage report in Jest?</li>
+  <li>How do you mock classes or constructors in Jest?</li>
+  <li>How do you spy on method calls in Jest?</li>
+  <li>What is the difference between spies and mocks in Jest?</li>
+  <li>How do you mock nested modules in Jest?</li>
+  <li>How do you mock default exports in Jest?</li>
+  <li>How do you mock named exports in Jest?</li>
+  <li>How do you mock the `fs` module in Jest?</li>
+  <li>How do you test command-line scripts using Jest?</li>
+  <li>What is the use of `jest.clearAllTimers()`?</li>
+  <li>How do you test React hooks with Jest?</li>
+  <li>What is the difference between shallow rendering and full rendering in Jest?</li>
+  <li>How do you use `enzyme` with Jest?</li>
+  <li>How do you test Redux actions and reducers with Jest?</li>
+  <li>How do you test async Redux actions with Jest?</li>
+  <li>How do you mock Redux store in Jest tests?</li>
+  <li>How do you test GraphQL queries with Jest?</li>
+  <li>How do you mock GraphQL API calls in Jest?</li>
+  <li>How do you test WebSocket connections in Jest?</li>
+  <li>How do you test event emitters in Jest?</li>
+  <li>How do you mock third-party libraries in Jest?</li>
+  <li>How do you reset module registry in Jest?</li>
+  <li>What is the purpose of `jest.isolateModules()`?</li>
+  <li>How do you mock fetch requests in Jest?</li>
+  <li>How do you use `jest.spyOn()`?</li>
+  <li>How do you mock timers globally in Jest?</li>
+  <li>How do you test conditional logic in Jest?</li>
+  <li>How do you test data transformations in Jest?</li>
+  <li>How do you mock database calls in Jest?</li>
+  <li>How do you test error handling logic in Jest?</li>
+  <li>How do you test middleware functions with Jest?</li>
+  <li>How do you mock and test Express routes with Jest?</li>
+  <li>How do you test performance-critical code with Jest?</li>
+  <li>How do you run Jest tests in watch mode?</li>
+  <li>How do you use code coverage badges with Jest?</li>
+  <li>How do you generate JSON coverage reports with Jest?</li>
+  <li>How do you test web workers in Jest?</li>
+  <li>How do you mock console methods in Jest?</li>
+  <li>How do you test command execution in Jest?</li>
+  <li>How do you test file uploads with Jest?</li>
+</ol></div></li>  
+
+
+<li data-id="q32">
+  <span class="faq-question">What is Jest?</span>
+  <div class="answer">
+    Jest is a popular JavaScript testing framework maintained by Meta, designed to work out-of-the-box for testing JavaScript and TypeScript projects. It provides a complete and easy-to-use solution for unit, integration, and snapshot testing with features like zero-config setup, built-in assertions, mocking, and code coverage.
+  </div>
+</li>
+
+<li data-id="q33">
+  <span class="faq-question">How do you install Jest in a Node.js project?</span>
+  <div class="answer">
+    You can install Jest via npm by running: <code>npm install --save-dev jest</code>. Then, add a test script in <code>package.json</code> like: <code>"test": "jest"</code>. Finally, run tests using <code>npm test</code>.
+  </div>
+</li>
+
+<li data-id="q34">
+  <span class="faq-question">How do you write a simple test case in Jest?</span>
+  <div class="answer">
+    You write a test case using the <code>test()</code> or <code>it()</code> function. Example:
+    <pre><code>test('adds 1 + 2 to equal 3', () => {
+  expect(1 + 2).toBe(3);
+});</code></pre>
+  </div>
+</li>
+
+<li data-id="q35">
+  <span class="faq-question">What is a test suite in Jest?</span>
+  <div class="answer">
+    A test suite is a collection of related test cases grouped together using the <code>describe()</code> function. It helps organize tests logically.
+  </div>
+</li>
+
+<li data-id="q36">
+  <span class="faq-question">What is a test case in Jest?</span>
+  <div class="answer">
+    A test case is an individual unit of testing defined using <code>test()</code> or <code>it()</code>. It contains the actual code that tests a specific behavior or function.
+  </div>
+</li>
+
+<li data-id="q37">
+  <span class="faq-question">How do you run tests using Jest?</span>
+  <div class="answer">
+    Run the command <code>npx jest</code> or <code>npm test</code> (if configured) in the terminal. Jest will find and execute tests matching its default or configured patterns.
+  </div>
+</li>
+
+<li data-id="q38">
+  <span class="faq-question">What is the difference between <code>test</code> and <code>it</code> in Jest?</span>
+  <div class="answer">
+    There is no functional difference between <code>test()</code> and <code>it()</code> in Jest. Both define a test case. <code>it()</code> is often preferred for readability in behavior-driven development (BDD) style.
+  </div>
+</li>
+
+<li data-id="q39">
+  <span class="faq-question">How do you mock functions in Jest?</span>
+  <div class="answer">
+    You can mock functions using <code>jest.fn()</code> to create a mock function or use <code>jest.spyOn(object, 'method')</code> to spy on existing methods.
+  </div>
+</li>
+
+<li data-id="q40">
+  <span class="faq-question">What is a mock function (spy) in Jest?</span>
+  <div class="answer">
+    A mock function (spy) records information about its calls, such as arguments and return values, allowing you to test if a function was called correctly without executing its real implementation.
+  </div>
+</li>
+
+<li data-id="q41">
+  <span class="faq-question">How do you mock modules in Jest?</span>
+  <div class="answer">
+    Use <code>jest.mock('moduleName')</code> to mock an entire module. You can provide custom implementations by passing a factory function as the second argument.
+  </div>
+</li>
+<li data-id="q42">
+  <span class="faq-question">How do you reset mocks between tests in Jest?</span>
+  <div class="answer">
+    You can reset mocks between tests using Jest's lifecycle methods such as <code>beforeEach(() => { jest.resetAllMocks(); })</code> or <code>afterEach(() => { jest.clearAllMocks(); })</code> to ensure mocks don’t retain state between tests.
+  </div>
+</li>
+
+<li data-id="q43">
+  <span class="faq-question">What is the difference between <code>jest.fn()</code> and <code>jest.mock()</code>?</span>
+  <div class="answer">
+    <code>jest.fn()</code> creates a standalone mock function, while <code>jest.mock()</code> mocks entire modules or specific module exports automatically.
+  </div>
+</li>
+
+<li data-id="q44">
+  <span class="faq-question">How do you test asynchronous code in Jest?</span>
+  <div class="answer">
+    You can test async code by returning a Promise, using async/await, or using the <code>done</code> callback to signal Jest when the async operation completes.
+  </div>
+</li>
+
+<li data-id="q45">
+  <span class="faq-question">What is the use of <code>done</code> callback in Jest tests?</span>
+  <div class="answer">
+    The <code>done</code> callback is used in tests to tell Jest that an asynchronous test has finished, which is useful for callback-based async functions.
+  </div>
+</li>
+
+<li data-id="q46">
+  <span class="faq-question">How do you test promises in Jest?</span>
+  <div class="answer">
+    Return the promise from the test, and use matchers like <code>resolves</code> and <code>rejects</code> to assert outcomes. Example: <code>return expect(promise).resolves.toBe(value);</code>
+  </div>
+</li>
+
+<li data-id="q47">
+  <span class="faq-question">How do you test async/await functions with Jest?</span>
+  <div class="answer">
+    Declare the test function as <code>async</code> and use <code>await</code> inside it to wait for promises. Example: <code>test('...', async () => { const data = await fetchData(); expect(data).toBe(...); });</code>
+  </div>
+</li>
+
+<li data-id="q48">
+  <span class="faq-question">What is snapshot testing in Jest?</span>
+  <div class="answer">
+    Snapshot testing captures the rendered output or value of a component/function at a given time and compares it on subsequent runs to detect unintended changes.
+  </div>
+</li>
+
+<li data-id="q49">
+  <span class="faq-question">How do you create and update snapshots in Jest?</span>
+  <div class="answer">
+    Run tests with <code>jest --updateSnapshot</code> or <code>u</code> in interactive mode to create or update snapshot files.
+  </div>
+</li>
+
+<li data-id="q50">
+  <span class="faq-question">What are some best practices for snapshot testing?</span>
+  <div class="answer">
+    Keep snapshots small and focused, review snapshot changes carefully before committing, and avoid snapshots for frequently changing or trivial output.
+  </div>
+</li>
+
+<li data-id="q51">
+  <span class="faq-question">How do you run only a specific test or test suite in Jest?</span>
+  <div class="answer">
+    Use <code>test.only()</code> or <code>describe.only()</code> to run specific tests or suites. Alternatively, run Jest with the <code>-t</code> flag and a test name pattern.
+  </div>
+</li>
+<li data-id="q52">
+  <span class="faq-question">What are Jest setup and teardown methods?</span>
+  <div class="answer">
+    Setup and teardown methods in Jest are lifecycle hooks that run code before and after tests or test suites, helping prepare the environment or clean up resources.
+  </div>
+</li>
+
+<li data-id="q53">
+  <span class="faq-question">Explain <code>beforeAll</code>, <code>beforeEach</code>, <code>afterAll</code>, and <code>afterEach</code> in Jest.</span>
+  <div class="answer">
+    <ul>
+      <li><code>beforeAll()</code>: Runs once before all tests in a suite.</li>
+      <li><code>beforeEach()</code>: Runs before each individual test.</li>
+      <li><code>afterEach()</code>: Runs after each individual test.</li>
+      <li><code>afterAll()</code>: Runs once after all tests in a suite.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q54">
+  <span class="faq-question">How do you configure Jest using <code>jest.config.js</code>?</span>
+  <div class="answer">
+    Create a <code>jest.config.js</code> file in the project root and export an object with Jest configuration options, e.g.:
+    <pre><code>module.exports = {
+  testEnvironment: 'node',
+  verbose: true,
+  coverageDirectory: 'coverage',
+};</code></pre>
+  </div>
+</li>
+
+<li data-id="q55">
+  <span class="faq-question">What is the default test environment in Jest?</span>
+  <div class="answer">
+    The default test environment in Jest is <code>jsdom</code>, which simulates a browser-like environment.
+  </div>
+</li>
+
+<li data-id="q56">
+  <span class="faq-question">How do you change the test environment in Jest?</span>
+  <div class="answer">
+    Set the <code>testEnvironment</code> option in <code>jest.config.js</code>, e.g., <code>testEnvironment: 'node'</code> to use a Node.js environment.
+  </div>
+</li>
+
+<li data-id="q57">
+  <span class="faq-question">What is code coverage and how do you measure it with Jest?</span>
+  <div class="answer">
+    Code coverage measures how much of your code is exercised by tests. In Jest, use the <code>--coverage</code> flag to generate coverage reports.
+  </div>
+</li>
+
+<li data-id="q58">
+  <span class="faq-question">How do you exclude files or directories from Jest coverage?</span>
+  <div class="answer">
+    Use the <code>coveragePathIgnorePatterns</code> option in <code>jest.config.js</code> to specify files or folders to exclude from coverage.
+  </div>
+</li>
+
+<li data-id="q59">
+  <span class="faq-question">What is the use of <code>--watch</code> mode in Jest?</span>
+  <div class="answer">
+    The <code>--watch</code> mode runs Jest in watch mode, re-running tests on file changes for faster development feedback.
+  </div>
+</li>
+
+<li data-id="q60">
+  <span class="faq-question">How do you run Jest tests in parallel?</span>
+  <div class="answer">
+    Jest runs tests in parallel by default, using worker threads. You can control concurrency with the <code>--maxWorkers</code> option.
+  </div>
+</li>
+
+<li data-id="q61">
+  <span class="faq-question">How do you use custom matchers in Jest?</span>
+  <div class="answer">
+    Custom matchers can be added by extending Jest’s expect using <code>expect.extend()</code> with your own matcher functions.
+  </div>
+</li>
+<li data-id="q62">
+  <span class="faq-question">What are the built-in Jest matchers?</span>
+  <div class="answer">
+    Jest provides built-in matchers like <code>toBe()</code>, <code>toEqual()</code>, <code>toContain()</code>, <code>toBeNull()</code>, <code>toBeTruthy()</code>, <code>toHaveBeenCalled()</code>, and many more for asserting values and behaviors.
+  </div>
+</li>
+
+<li data-id="q63">
+  <span class="faq-question">How do you extend Jest matchers?</span>
+  <div class="answer">
+    Use <code>expect.extend()</code> to add custom matcher functions, which enhance Jest’s assertion capabilities with your own logic.
+  </div>
+</li>
+
+<li data-id="q64">
+  <span class="faq-question">How do you test React components with Jest?</span>
+  <div class="answer">
+    Write test files that import React components, render them (usually with tools like React Testing Library or Enzyme), and use Jest assertions to verify UI behavior and output.
+  </div>
+</li>
+
+<li data-id="q65">
+  <span class="faq-question">How do you combine Jest with React Testing Library?</span>
+  <div class="answer">
+    Use React Testing Library’s rendering and querying utilities inside Jest test cases to interact with components and assert expected UI states.
+  </div>
+</li>
+
+<li data-id="q66">
+  <span class="faq-question">How do you mock API calls in Jest?</span>
+  <div class="answer">
+    Mock API calls by mocking the modules making HTTP requests using <code>jest.mock()</code> or by using libraries like <code>msw</code> (Mock Service Worker) for more advanced scenarios.
+  </div>
+</li>
+
+<li data-id="q67">
+  <span class="faq-question">How do you mock HTTP requests with Jest?</span>
+  <div class="answer">
+    Use Jest’s manual mocks to replace HTTP libraries (like axios or fetch) or use <code>jest.spyOn()</code> to mock specific methods, returning controlled responses.
+  </div>
+</li>
+
+<li data-id="q68">
+  <span class="faq-question">How do you mock timers in Jest?</span>
+  <div class="answer">
+    Use Jest’s fake timer functions with <code>jest.useFakeTimers()</code> to control timer functions like <code>setTimeout</code>, <code>setInterval</code>, and <code>Date.now()</code>.
+  </div>
+</li>
+
+<li data-id="q69">
+  <span class="faq-question">What are fake timers and how do you use them in Jest?</span>
+  <div class="answer">
+    Fake timers allow you to simulate and control the passage of time in tests. Use <code>jest.useFakeTimers()</code> and then control time with methods like <code>jest.advanceTimersByTime()</code>.
+  </div>
+</li>
+
+<li data-id="q70">
+  <span class="faq-question">How do you clear or advance timers in Jest?</span>
+  <div class="answer">
+    Use <code>jest.clearAllTimers()</code> to clear timers and <code>jest.advanceTimersByTime(ms)</code> to fast-forward the timer by a specified number of milliseconds.
+  </div>
+</li>
+
+<li data-id="q71">
+  <span class="faq-question">How do you mock Date or time in Jest tests?</span>
+  <div class="answer">
+    Mock Date by overriding <code>Date.now()</code> or creating a mock Date object inside tests, often combined with fake timers for complete control over time-based code.
+  </div>
+</li>
+<li data-id="q72">
+  <span class="faq-question">How do you handle exceptions or errors in Jest tests?</span>
+  <div class="answer">
+    Use <code>try/catch</code> blocks inside test functions or test for errors using Jest’s <code>toThrow()</code> matcher to assert that a function throws an error.
+  </div>
+</li>
+
+<li data-id="q73">
+  <span class="faq-question">How do you test for thrown errors in Jest?</span>
+  <div class="answer">
+    Use <code>expect(() => fn()).toThrow()</code> or <code>await expect(asyncFn()).rejects.toThrow()</code> to test synchronous and asynchronous error throwing respectively.
+  </div>
+</li>
+
+<li data-id="q74">
+  <span class="faq-question">How do you debug Jest tests?</span>
+  <div class="answer">
+    Use <code>console.log()</code> statements or run Jest in debug mode with Node.js debuggers like Chrome DevTools or VSCode debugger to inspect variables and test flow.
+  </div>
+</li>
+
+<li data-id="q75">
+  <span class="faq-question">How do you run Jest tests with debugging enabled?</span>
+  <div class="answer">
+    Run Jest with <code>node --inspect-brk ./node_modules/.bin/jest --runInBand</code> and attach a debugger in your IDE or Chrome DevTools for step-by-step debugging.
+  </div>
+</li>
+
+<li data-id="q76">
+  <span class="faq-question">How do you test private functions in Jest?</span>
+  <div class="answer">
+    Export private functions explicitly for testing or test them indirectly through the public API. Avoid testing internals directly to keep tests maintainable.
+  </div>
+</li>
+
+<li data-id="q77">
+  <span class="faq-question">Can you test TypeScript code with Jest?</span>
+  <div class="answer">
+    Yes, Jest supports TypeScript via additional setup like <code>ts-jest</code> which compiles TypeScript during tests.
+  </div>
+</li>
+
+<li data-id="q78">
+  <span class="faq-question">How do you configure Jest for TypeScript?</span>
+  <div class="answer">
+    Install <code>ts-jest</code> and configure Jest by setting <code>preset: "ts-jest"</code> in <code>jest.config.js</code> to enable TypeScript support.
+  </div>
+</li>
+
+<li data-id="q79">
+  <span class="faq-question">What is the difference between <code>jest.resetAllMocks()</code> and <code>jest.clearAllMocks()</code>?</span>
+  <div class="answer">
+    <code>jest.clearAllMocks()</code> resets mock call history but keeps mock implementations; <code>jest.resetAllMocks()</code> resets both call history and implementations.
+  </div>
+</li>
+
+<li data-id="q80">
+  <span class="faq-question">How do you use the <code>test.each</code> function in Jest?</span>
+  <div class="answer">
+    <code>test.each(table)(name, fn)</code> runs the same test repeatedly with different data sets from <code>table</code>, useful for parameterized testing.
+  </div>
+</li>
+
+<li data-id="q81">
+  <span class="faq-question">What is the purpose of <code>expect.assertions()</code> in Jest?</span>
+  <div class="answer">
+    It ensures a certain number of assertions are called during a test, useful especially in async tests to verify all expected checks run.
+  </div>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">==========  jest : 50 - 102 ======================</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">================================</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">================================</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">================================</span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
+<li data-id="q32" class="yellow"><span class="faq-question">
+CI/CD Question List?
+</span><div class="answer">
+
+  <ol>
+    <li>What is GitHub Actions?</li>
+    <li>How does GitHub Actions enable CI/CD?</li>
+    <li>What is a workflow in GitHub Actions?</li>
+    <li>What is a job in GitHub Actions?</li>
+    <li>What are steps in a GitHub Actions workflow?</li>
+    <li>What is an action in GitHub Actions?</li>
+    <li>What is a runner in GitHub Actions?</li>
+    <li>What is the difference between a hosted and self-hosted runner?</li>
+    <li>How do you trigger a GitHub Actions workflow?</li>
+    <li>What are GitHub Actions workflow events?</li>
+    <li>How do you schedule workflows in GitHub Actions?</li>
+    <li>What is the syntax of a GitHub Actions workflow file?</li>
+    <li>What are reusable workflows in GitHub Actions?</li>
+    <li>How do you use secrets in GitHub Actions?</li>
+    <li>How do you pass environment variables in GitHub Actions?</li>
+    <li>How do you cache dependencies in GitHub Actions?</li>
+    <li>How do you use matrix builds in GitHub Actions?</li>
+    <li>How do you implement conditional steps in GitHub Actions?</li>
+    <li>How do you deploy to AWS from GitHub Actions?</li>
+    <li>How do you deploy to Heroku using GitHub Actions?</li>
+    <li>How do you deploy to Firebase using GitHub Actions?</li>
+    <li>How do you deploy to Kubernetes using GitHub Actions?</li>
+    <li>How do you use Docker in GitHub Actions?</li>
+    <li>How do you publish Docker images to GitHub Container Registry (GHCR)?</li>
+    <li>What is the `uses` keyword in GitHub Actions?</li>
+    <li>What is the `run` keyword in GitHub Actions?</li>
+    <li>How do you debug GitHub Actions workflows?</li>
+    <li>What are the different status checks in GitHub Actions?</li>
+    <li>What is the difference between `main.yml` and `ci.yml`?</li>
+    <li>How do you use third-party actions in your workflow?</li>
+    <li>How do you create a custom GitHub Action?</li>
+    <li>What are composite actions in GitHub?</li>
+    <li>How do you handle manual approvals in GitHub Actions?</li>
+    <li>What are environments in GitHub Actions?</li>
+    <li>How do you create deployment gates with GitHub Actions?</li>
+    <li>How do you test PRs with GitHub Actions?</li>
+    <li>How do you restrict workflows to specific branches?</li>
+    <li>How do you use `concurrency` in GitHub Actions?</li>
+    <li>What is the `jobs.<job_id>.needs` keyword used for?</li>
+    <li>How do you run workflows only on specific file changes?</li>
+    <li>How do you upload and download artifacts in GitHub Actions?</li>
+    <li>What is the `GITHUB_TOKEN` and how is it used?</li>
+    <li>How do you integrate GitHub Actions with Slack?</li>
+    <li>How do you implement CI/CD for a Node.js app using GitHub Actions?</li>
+    <li>How do you set up CI/CD for a React app using GitHub Actions?</li>
+    <li>How do you implement testing with Jest in GitHub Actions?</li>
+    <li>How do you version your application using GitHub Actions?</li>
+    <li>How do you implement semantic release with GitHub Actions?</li>
+    <li>How do you use GitHub Actions for monorepos?</li>
+    <li>What are common security best practices for GitHub Actions?</li>
+    <li>What are common CI/CD anti-patterns in GitHub Actions?</li>
+
+    <li>What is CI/CD?</li>
+    <li>What are the main goals of CI/CD?</li>
+    <li>What are the benefits of implementing CI/CD in a project?</li>
+    <li>What is the difference between CI and CD?</li>
+    <li>What are the key components of a CI/CD pipeline?</li>
+    <li>How do you design a CI/CD pipeline?</li>
+    <li>What tools are commonly used for CI/CD?</li>
+    <li>Explain the role of Jenkins in CI/CD.</li>
+    <li>What are some popular alternatives to Jenkins?</li>
+    <li>What is a build pipeline?</li>
+    <li>What is a deployment pipeline?</li>
+    <li>What is continuous integration?</li>
+    <li>What is continuous delivery?</li>
+    <li>What is continuous deployment?</li>
+    <li>What is the difference between continuous delivery and deployment?</li>
+    <li>What is a build artifact?</li>
+    <li>What is an artifact repository?</li>
+    <li>How do you manage secrets in a CI/CD pipeline?</li>
+    <li>What is a webhook in the context of CI/CD?</li>
+    <li>What is pipeline as code?</li>
+    <li>What is YAML and how is it used in CI/CD?</li>
+    <li>What is GitOps?</li>
+    <li>What are stages in a CI/CD pipeline?</li>
+    <li>How do you handle rollback in CI/CD?</li>
+    <li>What are canary deployments?</li>
+    <li>What are blue-green deployments?</li>
+    <li>What is A/B testing in deployment?</li>
+    <li>What is the purpose of unit testing in CI/CD?</li>
+    <li>What is integration testing?</li>
+    <li>What is end-to-end testing?</li>
+    <li>What is smoke testing in CI/CD?</li>
+    <li>How do you automate testing in a CI/CD pipeline?</li>
+    <li>How do you monitor a CI/CD pipeline?</li>
+    <li>What is code coverage and how is it tracked?</li>
+    <li>How do you enforce code quality in a pipeline?</li>
+    <li>What are some security concerns with CI/CD?</li>
+    <li>What is DevSecOps?</li>
+    <li>What is a self-hosted runner?</li>
+    <li>What is a shared runner in GitLab CI?</li>
+    <li>How does GitHub Actions compare to Jenkins?</li>
+    <li>How do you deploy to AWS using CI/CD?</li>
+    <li>How do you deploy to Kubernetes using CI/CD?</li>
+    <li>How do you deploy to Azure using CI/CD?</li>
+    <li>What is Helm and how is it used in CI/CD?</li>
+    <li>What is ArgoCD?</li>
+    <li>What is Spinnaker?</li>
+    <li>What is CircleCI?</li>
+    <li>What is Travis CI?</li>
+    <li>What is Bitbucket Pipelines?</li>
+    <li>What is CodePipeline (AWS)?</li>
+    <li>What is CodeBuild (AWS)?</li>
+    <li>How do you secure credentials in GitHub Actions?</li>
+    <li>What is the role of environment variables in CI/CD?</li>
+    <li>What is caching in CI/CD pipelines?</li>
+    <li>What are pipeline triggers?</li>
+    <li>How do you run a pipeline manually?</li>
+    <li>What is a multi-branch pipeline?</li>
+    <li>How do you handle database migrations in CI/CD?</li>
+    <li>How do you version artifacts in a pipeline?</li>
+    <li>How do you notify teams of pipeline results?</li>
+    <li>What is the difference between declarative and scripted pipelines?</li>
+    <li>How do you integrate Docker in a CI/CD pipeline?</li>
+    <li>How do you publish Docker images from a pipeline?</li>
+    <li>How do you use Docker Compose in CI/CD?</li>
+    <li>What are runners/agents/executors in CI/CD?</li>
+    <li>How can you parallelize builds in CI/CD?</li>
+    <li>What are matrix builds?</li>
+    <li>What are the best practices for writing CI/CD pipelines?</li>
+    <li>What is infrastructure as code (IaC) in CI/CD?</li>
+    <li>What is Terraform and how is it used in CI/CD?</li>
+    <li>What is Ansible and how is it integrated in pipelines?</li>
+    <li>What is the difference between on-prem CI/CD and cloud CI/CD?</li>
+    <li>How do you test microservices with CI/CD?</li>
+    <li>How do you manage monorepos in CI/CD?</li>
+    <li>How does feature flagging help in CD?</li>
+    <li>What is progressive delivery?</li>
+    <li>What is a job in CI/CD terminology?</li>
+    <li>What is a workflow in GitHub Actions?</li>
+    <li>What is a pipeline template?</li>
+    <li>How do you use artifacts between pipeline stages?</li>
+    <li>How do you implement approval gates in CI/CD?</li>
+    <li>What is pipeline orchestration?</li>
+    <li>What are common CI/CD anti-patterns?</li>
+    <li>What is the role of code review in CI/CD?</li>
+    <li>What is the difference between push and pull-based deployment?</li>
+    <li>What is drift detection in CI/CD?</li>
+    <li>How do you test infrastructure changes with CI/CD?</li>
+    <li>How can you use static code analysis tools in a pipeline?</li>
+    <li>What is SonarQube and how is it used in CI/CD?</li>
+    <li>What is the importance of feedback loops in CI/CD?</li>
+    <li>How do you track pipeline history?</li>
+    <li>How do you configure branch-based deployments?</li>
+    <li>How do you handle dependency management in CI/CD?</li>
+    <li>How do you test frontend and backend apps together in CI/CD?</li>
+    <li>What’s the role of a package manager in CI/CD?</li>
+    <li>How do you run background services for tests in CI/CD?</li>
+    <li>How do you debug a failed pipeline?</li>
+    <li>How do you make pipelines scalable?</li>
+    <li>How do you ensure idempotency in deployments?</li>
+    <li>How do you manage pipeline drift?</li>
+  </ol>
   
-  
-  
+</div></li>
+
+<li data-id="q32">
+  <span class="faq-question">What is GitHub Actions?</span>
+  <div class="answer">
+    GitHub Actions is a CI/CD platform provided by GitHub that allows you to automate software workflows directly in your repository. You can use it to build, test, and deploy your code every time a change is pushed to your repo, or on a schedule.
+  </div>
+</li>
+
+<li data-id="q33">
+  <span class="faq-question">How does GitHub Actions enable CI/CD?</span>
+  <div class="answer">
+    GitHub Actions enables CI/CD by allowing developers to define workflows using YAML files. These workflows can include steps for building, testing, and deploying applications automatically in response to triggers like code pushes, pull requests, or cron schedules.
+  </div>
+</li>
+
+<li data-id="q34">
+  <span class="faq-question">What is a workflow in GitHub Actions?</span>
+  <div class="answer">
+    A workflow is a configurable automated process made up of one or more jobs. It is defined in a YAML file stored in the `.github/workflows` directory of your repository and is triggered by specific GitHub events like `push`, `pull_request`, or `schedule`.
+  </div>
+</li>
+
+<li data-id="q35">
+  <span class="faq-question">What is a job in GitHub Actions?</span>
+  <div class="answer">
+    A job is a set of steps that execute on the same runner in a workflow. Jobs are executed in parallel by default, but you can define dependencies using the `needs` keyword to control their order of execution.
+  </div>
+</li>
+
+<li data-id="q36">
+  <span class="faq-question">What are steps in a GitHub Actions workflow?</span>
+  <div class="answer">
+    Steps are individual tasks that are executed as part of a job in a GitHub Actions workflow. They can run shell commands or use actions. All steps in a job run sequentially on the same runner.
+  </div>
+</li>
+
+<li data-id="q37">
+  <span class="faq-question">What is an action in GitHub Actions?</span>
+  <div class="answer">
+    An action is a reusable extension that can be used as a step in a workflow. Actions can be created by you or sourced from the GitHub Marketplace. They encapsulate a specific task, like setting up a language environment or deploying code.
+  </div>
+</li>
+
+<li data-id="q38">
+  <span class="faq-question">What is a runner in GitHub Actions?</span>
+  <div class="answer">
+    A runner is a server that executes the jobs defined in your GitHub Actions workflows. It listens for available jobs and runs each job’s steps in sequence using the environment defined by the job.
+  </div>
+</li>
+
+<li data-id="q39">
+  <span class="faq-question">What is the difference between a hosted and self-hosted runner?</span>
+  <div class="answer">
+    A hosted runner is provided by GitHub and runs in their cloud environment, while a self-hosted runner is a machine you manage. Hosted runners are easy to set up and maintain, but self-hosted runners allow more control over the runtime and environment.
+  </div>
+</li>
+
+
+<li data-id="q40">
+  <span class="faq-question">How do you trigger a GitHub Actions workflow?</span>
+  <div class="answer">
+    A GitHub Actions workflow can be triggered by various events such as a `push` to a branch, a `pull_request`, a manual dispatch (`workflow_dispatch`), or a scheduled cron job (`schedule`). These triggers are defined under the `on:` key in the workflow file.
+  </div>
+</li>
+
+<li data-id="q41">
+  <span class="faq-question">What are GitHub Actions workflow events?</span>
+  <div class="answer">
+    Workflow events are specific GitHub events that trigger workflows. Common events include `push`, `pull_request`, `issues`, `release`, `workflow_dispatch`, and `schedule`. Each event corresponds to actions performed on the repository.
+  </div>
+</li>
+
+<li data-id="q42">
+  <span class="faq-question">How do you schedule workflows in GitHub Actions?</span>
+  <div class="answer">
+    Workflows can be scheduled using the `schedule` event and a cron expression. This allows you to run workflows automatically at specific intervals or times. For example:<br><code>on: schedule:<br>&nbsp;&nbsp;- cron: '0 0 * * *'</code>
+  </div>
+</li>
+
+<li data-id="q43">
+  <span class="faq-question">What is the syntax of a GitHub Actions workflow file?</span>
+  <div class="answer">
+    A workflow file is written in YAML and stored under `.github/workflows/`. The basic syntax includes `name`, `on` (event), `jobs`, and `steps`. Each job contains steps, and each step can run a command or use an action.
+  </div>
+</li>
+
+<li data-id="q44">
+  <span class="faq-question">What are reusable workflows in GitHub Actions?</span>
+  <div class="answer">
+    Reusable workflows are workflows that can be referenced and called from other workflows using the `workflow_call` trigger. They promote modularity and reduce duplication across repositories or workflows.
+  </div>
+</li>
+
+<li data-id="q45">
+  <span class="faq-question">How do you use secrets in GitHub Actions?</span>
+  <div class="answer">
+    Secrets can be stored securely in your GitHub repository or organization settings under <strong>Settings &gt; Secrets</strong>. You can reference them in workflows using <code>${{ secrets.SECRET_NAME }}</code> and they are automatically masked in logs.
+  </div>
+</li>
+
+<li data-id="q46">
+  <span class="faq-question">How do you pass environment variables in GitHub Actions?</span>
+  <div class="answer">
+    You can pass environment variables using the `env` key at the workflow, job, or step level. Example:<br>
+    <code>env:<br>&nbsp;&nbsp;NODE_ENV: production</code><br>
+    These variables can then be accessed in shell commands or scripts within the workflow.
+  </div>
+</li>
+
+<li data-id="q47">
+  <span class="faq-question">How do you cache dependencies in GitHub Actions?</span>
+  <div class="answer">
+    You can cache dependencies using the `actions/cache` action. This speeds up builds by storing and reusing dependency files. Example for Node.js:<br>
+    <code>
+      - uses: actions/cache@v3<br>
+        with:<br>
+        &nbsp;&nbsp;path: node_modules<br>
+        &nbsp;&nbsp;key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    </code>
+  </div>
+</li>
+
+<li data-id="q48">
+  <span class="faq-question">How do you use matrix builds in GitHub Actions?</span>
+  <div class="answer">
+    Matrix builds allow you to run a job across multiple combinations of variables. This is useful for testing across multiple Node.js versions or OS types. Example:<br>
+    <code>
+      strategy:<br>
+      &nbsp;&nbsp;matrix:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;node-version: [14, 16, 18]
+    </code>
+  </div>
+</li>
+
+<li data-id="q49">
+  <span class="faq-question">How do you implement conditional steps in GitHub Actions?</span>
+  <div class="answer">
+    You can implement conditional steps using the `if` keyword. It allows you to run a step only if a certain condition is met. Example:<br>
+    <code>
+      - name: Run only on main<br>
+        if: github.ref == 'refs/heads/main'<br>
+        run: echo "This runs only on main branch"
+    </code>
+  </div>
+</li>
+
+<li data-id="q50">
+  <span class="faq-question">How do you deploy to AWS from GitHub Actions?</span>
+  <div class="answer">
+    To deploy to AWS, you typically use the `aws-actions/configure-aws-credentials` action followed by CLI or custom actions for deployment. Example:<br>
+    <code>
+      - uses: aws-actions/configure-aws-credentials@v3<br>
+        with:<br>
+        &nbsp;&nbsp;aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}<br>
+        &nbsp;&nbsp;aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}<br>
+        &nbsp;&nbsp;aws-region: us-east-1
+    </code>
+  </div>
+</li>
+
+<li data-id="q51">
+  <span class="faq-question">How do you deploy to Heroku using GitHub Actions?</span>
+  <div class="answer">
+    You can deploy to Heroku by using the `akhileshns/heroku-deploy` action. It requires a Heroku API key, app name, and email. Example:<br>
+    <code>
+      - uses: akhileshns/heroku-deploy@v3.12.12<br>
+        with:<br>
+        &nbsp;&nbsp;heroku_api_key: ${{ secrets.HEROKU_API_KEY }}<br>
+        &nbsp;&nbsp;heroku_app_name: "your-app-name"<br>
+        &nbsp;&nbsp;heroku_email: "you@example.com"
+    </code>
+  </div>
+</li>
+
+<li data-id="q52">
+  <span class="faq-question">How do you deploy to Firebase using GitHub Actions?</span>
+  <div class="answer">
+    To deploy to Firebase, you can use the `FirebaseExtended/action-hosting-deploy` action. It requires a Firebase token and project ID. Example:<br>
+    <code>
+      - uses: FirebaseExtended/action-hosting-deploy@v0<br>
+        with:<br>
+        &nbsp;&nbsp;repoToken: "${{ secrets.GITHUB_TOKEN }}"<br>
+        &nbsp;&nbsp;firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"<br>
+        &nbsp;&nbsp;channelId: live<br>
+        &nbsp;&nbsp;projectId: your-project-id
+    </code>
+  </div>
+</li>
+
+<li data-id="q53">
+  <span class="faq-question">How do you deploy to Kubernetes using GitHub Actions?</span>
+  <div class="answer">
+    You can deploy to Kubernetes using the `kubectl` CLI in GitHub Actions. Set up your kubeconfig and run deployment commands. Example:<br>
+    <code>
+      - name: Set up Kubeconfig<br>
+        run: echo "${{ secrets.KUBECONFIG }}" &gt; $HOME/.kube/config<br><br>
+      - name: Deploy<br>
+        run: kubectl apply -f k8s/deployment.yaml
+    </code>
+  </div>
+</li>
+
+<li data-id="q54">
+  <span class="faq-question">How do you use Docker in GitHub Actions?</span>
+  <div class="answer">
+    You can use Docker in GitHub Actions to build, test, and push images. Example:<br>
+    <code>
+      - name: Build Docker image<br>
+        run: docker build -t my-app .<br><br>
+      - name: Run container<br>
+        run: docker run my-app
+    </code>
+  </div>
+</li>
+
+<li data-id="q55">
+  <span class="faq-question">How do you publish Docker images to GitHub Container Registry (GHCR)?</span>
+  <div class="answer">
+    Use `docker login` and `docker push` in GitHub Actions. Example:<br>
+    <code>
+      - name: Log in to GitHub Container Registry<br>
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin<br><br>
+      - name: Push image<br>
+        run: docker push ghcr.io/${{ github.repository }}/my-image:latest
+    </code>
+  </div>
+</li>
+
+<li data-id="q56">
+  <span class="faq-question">What is the <b>uses</b> keyword in GitHub Actions?</span>
+  <div class="answer">
+    The <code>uses</code> keyword specifies an action to run in a step. It can refer to an action from the GitHub Marketplace, a public repo, or a local path. Example:<br>
+    <code>
+      - uses: actions/checkout@v3
+    </code>
+  </div>
+</li>
+<li data-id="q57">
+  <span class="faq-question">What is the <b>run</b> keyword in GitHub Actions?</span>
+  <div class="answer">
+    The <code>run</code> keyword is used to execute shell commands in a step within a job. You can use it to build, test, or run any script directly in the runner’s shell. Example:<br>
+    <code>
+      - name: Install dependencies<br>
+        run: npm install
+    </code>
+  </div>
+</li>
+
+<li data-id="q58">
+  <span class="faq-question">How do you debug GitHub Actions workflows?</span>
+  <div class="answer">
+    You can debug workflows by using `run: echo` statements, enabling step output logging, and enabling `ACTIONS_STEP_DEBUG=true` as a secret. Additionally, GitHub provides logs for every step to help identify issues.
+  </div>
+</li>
+
+<li data-id="q59">
+  <span class="faq-question">What are the different status checks in GitHub Actions?</span>
+  <div class="answer">
+    Status checks include success, failure, cancelled, and skipped. These indicate whether a job or workflow ran successfully, failed, was manually cancelled, or didn’t meet conditions to run.
+  </div>
+</li>
+
+<li data-id="q60">
+  <span class="faq-question">What is the difference between <b>main.yml</b> and <b>ci.yml</b>?</span>
+  <div class="answer">
+    There is no functional difference based on file name alone. Both are workflow YAML files. Naming is for organization: <code>main.yml</code> might run general tasks, while <code>ci.yml</code> may be focused on continuous integration like building and testing.
+  </div>
+</li>
+
+<li data-id="q61">
+  <span class="faq-question">How do you use third-party actions in your workflow?</span>
+  <div class="answer">
+    You can use third-party actions by referencing them in the <code>uses</code> keyword. Most actions are available on the GitHub Marketplace. Example:<br>
+    <code>
+      - uses: actions/setup-node@v3<br>
+        with:<br>
+        &nbsp;&nbsp;node-version: '18'
+    </code>
+  </div>
+</li>
+<li data-id="q62">
+  <span class="faq-question">How do you create a custom GitHub Action?</span>
+  <div class="answer">
+    You can create a custom action using JavaScript, Docker, or as a composite action. Place the action code in a repository and define it in an <code>action.yml</code> file with inputs, outputs, and runs section. Example:<br>
+    <code>
+      name: "My Custom Action"<br>
+      runs:<br>
+      &nbsp;&nbsp;using: "node12"<br>
+      &nbsp;&nbsp;main: "index.js"
+    </code>
+  </div>
+</li>
+
+<li data-id="q63">
+  <span class="faq-question">What are composite actions in GitHub?</span>
+  <div class="answer">
+    Composite actions let you combine multiple steps from different actions into one reusable action. They're written in YAML and use the <code>runs.using: composite</code> field. Useful for encapsulating repeatable logic.
+  </div>
+</li>
+
+<li data-id="q64">
+  <span class="faq-question">How do you handle manual approvals in GitHub Actions?</span>
+  <div class="answer">
+    Use environments with required reviewers for manual approvals. When a job references an environment, GitHub will pause the workflow until it's manually approved. Example:<br>
+    <code>
+      environment: production
+    </code>
+  </div>
+</li>
+
+<li data-id="q65">
+  <span class="faq-question">What are environments in GitHub Actions?</span>
+  <div class="answer">
+    Environments define specific deployment targets like staging or production. You can configure secrets, protection rules, and required reviewers for each environment. Jobs can reference an environment using the <code>environment</code> key.
+  </div>
+</li>
+
+<li data-id="q66">
+  <span class="faq-question">How do you create deployment gates with GitHub Actions?</span>
+  <div class="answer">
+    Deployment gates are created using environments with required reviewers and wait timers. This allows enforcing approvals or time-based delays before continuing with the deployment job.
+  </div>
+</li>
+
+<li data-id="q67">
+  <span class="faq-question">How do you test PRs with GitHub Actions?</span>
+  <div class="answer">
+    You can trigger workflows on pull request events using <code>on: pull_request</code>. This runs your tests or other jobs automatically whenever a PR is created or updated.
+  </div>
+</li>
+
+<li data-id="q68">
+  <span class="faq-question">How do you restrict workflows to specific branches?</span>
+  <div class="answer">
+    Use the <code>branches</code> filter under the <code>on</code> key. Example:<br>
+    <code>
+      on:<br>
+      &nbsp;&nbsp;push:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;branches: [ main, develop ]
+    </code>
+  </div>
+</li>
+
+<li data-id="q69">
+  <span class="faq-question">How do you use <b>concurrency</b> in GitHub Actions?</span>
+  <div class="answer">
+    The <code>concurrency</code> keyword ensures that only one workflow or job with the same concurrency group runs at a time, canceling any previous runs in the group. Useful to avoid race conditions. Example:<br>
+    <code>
+      concurrency:<br>
+      &nbsp;&nbsp;group: ${{ github.ref }}<br>
+      &nbsp;&nbsp;cancel-in-progress: true
+    </code>
+  </div>
+</li>
+
+<li data-id="q70">
+  <span class="faq-question">What is the <b>jobs..needs</b> keyword used for?</span>
+  <div class="answer">
+    The <code>needs</code> keyword defines job dependencies, making a job wait for others to complete before running. It helps create sequential or conditional workflows. Example:<br>
+    <code>
+      jobs:<br>
+      &nbsp;&nbsp;build:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br>
+      &nbsp;&nbsp;test:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;needs: build<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest
+    </code>
+  </div>
+</li>
+
+<li data-id="q71">
+  <span class="faq-question">How do you run workflows only on specific file changes?</span>
+  <div class="answer">
+    Use the <code>paths</code> or <code>paths-ignore</code> filters under the <code>on</code> key to trigger workflows only when certain files or directories change. Example:<br>
+    <code>
+      on:<br>
+      &nbsp;&nbsp;push:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;paths: [ 'src/**', 'package.json' ]
+    </code>
+  </div>
+</li>
+<li data-id="q72">
+  <span class="faq-question">How do you upload and download artifacts in GitHub Actions?</span>
+  <div class="answer">
+    Use the <code>actions/upload-artifact</code> action to upload artifacts and <code>actions/download-artifact</code> to download them in later jobs. Example:<br>
+    <code>
+      - uses: actions/upload-artifact@v3<br>
+        with:<br>
+        &nbsp;&nbsp;name: my-artifact<br>
+        &nbsp;&nbsp;path: path/to/files<br><br>
+      - uses: actions/download-artifact@v3<br>
+        with:<br>
+        &nbsp;&nbsp;name: my-artifact
+    </code>
+  </div>
+</li>
+
+<li data-id="q73">
+  <span class="faq-question">What is the <b>GITHUB_TOKEN</b> and how is it used?</span>
+  <div class="answer">
+    <code>GITHUB_TOKEN</code> is an automatically generated secret used to authenticate workflows and interact with the GitHub API. It’s used for actions like pushing commits, creating issues, or accessing the repo securely.
+  </div>
+</li>
+
+<li data-id="q74">
+  <span class="faq-question">How do you integrate GitHub Actions with Slack?</span>
+  <div class="answer">
+    Use a Slack webhook and GitHub Action like <code>8398a7/action-slack</code> to send notifications. Configure the webhook URL as a secret and add a step to post messages on workflow success or failure.
+  </div>
+</li>
+
+<li data-id="q75">
+  <span class="faq-question">How do you implement CI/CD for a Node.js app using GitHub Actions?</span>
+  <div class="answer">
+    Typical CI/CD includes steps to install dependencies, run tests, build, and deploy. Example steps:<br>
+    <code>
+      - run: npm install<br>
+      - run: npm test<br>
+      - run: npm run build<br>
+      - run: npm run deploy
+    </code>
+  </div>
+</li>
+
+<li data-id="q76">
+  <span class="faq-question">How do you set up CI/CD for a React app using GitHub Actions?</span>
+  <div class="answer">
+    Similar to Node.js, but includes building React production assets. Typical workflow:<br>
+    <code>
+      - run: npm install<br>
+      - run: npm test<br>
+      - run: npm run build<br>
+      - run: deploy to hosting service (e.g., Firebase, Netlify)
+    </code>
+  </div>
+</li>
+
+<li data-id="q77">
+  <span class="faq-question">How do you implement testing with Jest in GitHub Actions?</span>
+  <div class="answer">
+    Add a step to install dependencies and run Jest tests in your workflow:<br>
+    <code>
+      - uses: actions/checkout@v3<br>
+      - name: Install dependencies<br>
+        run: npm install<br>
+      - name: Run Jest tests<br>
+        run: npm test
+    </code>
+  </div>
+</li>
+
+<li data-id="q78">
+  <span class="faq-question">How do you version your application using GitHub Actions?</span>
+  <div class="answer">
+    Use Git tags and automate versioning by incrementing versions and creating tags using actions like <code>actions/create-release</code> or semantic versioning tools integrated into the workflow.
+  </div>
+</li>
+
+<li data-id="q79">
+  <span class="faq-question">How do you implement semantic release with GitHub Actions?</span>
+  <div class="answer">
+    Use the <code>semantic-release</code> package in a workflow step to automatically determine version bumps, generate changelogs, and publish releases based on commit messages.
+  </div>
+</li>
+
+<li data-id="q80">
+  <span class="faq-question">How do you use GitHub Actions for monorepos?</span>
+  <div class="answer">
+    Use path filters and matrix strategies to run workflows only on affected packages. Tools like <code>nx</code> or <code>lerna</code> help manage builds and tests for monorepos efficiently.
+  </div>
+</li>
+
+<li data-id="q81">
+  <span class="faq-question">What are common security best practices for GitHub Actions?</span>
+  <div class="answer">
+    Use least privilege tokens, secrets management, restrict workflow triggers, avoid running untrusted code, enable branch protection, and keep actions updated.
+  </div>
+</li>
+<li data-id="q82">
+  <span class="faq-question">What are common CI/CD anti-patterns in GitHub Actions?</span>
+  <div class="answer">
+    Examples include long-running workflows, redundant jobs, poor secret management, ignoring failed tests, overcomplicated pipelines, and running everything on every commit without filtering.
+  </div>
+</li>
+
+<li data-id="q83">
+  <span class="faq-question">What is CI/CD?</span>
+  <div class="answer">
+    CI/CD stands for Continuous Integration and Continuous Delivery/Deployment. It’s a practice of automatically integrating code changes, testing them, and delivering/deploying software frequently and reliably.
+  </div>
+</li>
+
+<li data-id="q84">
+  <span class="faq-question">What are the main goals of CI/CD?</span>
+  <div class="answer">
+    To improve code quality, reduce integration issues, automate testing, accelerate delivery, and enable fast, reliable releases.
+  </div>
+</li>
+
+<li data-id="q85">
+  <span class="faq-question">What are the benefits of implementing CI/CD in a project?</span>
+  <div class="answer">
+    Faster feedback cycles, higher software quality, reduced manual errors, increased deployment frequency, and improved collaboration among teams.
+  </div>
+</li>
+
+<li data-id="q86">
+  <span class="faq-question">What is the difference between CI and CD?</span>
+  <div class="answer">
+    CI (Continuous Integration) focuses on automatically building and testing code changes. CD (Continuous Delivery/Deployment) automates releasing code to production or staging environments.
+  </div>
+</li>
+<li data-id="q87">
+  <span class="faq-question">What are the key components of a CI/CD pipeline?</span>
+  <div class="answer">
+    Key components include source code repository, build automation, automated testing, artifact storage, deployment automation, and monitoring.
+  </div>
+</li>
+
+<li data-id="q88">
+  <span class="faq-question">How do you design a CI/CD pipeline?</span>
+  <div class="answer">
+    Design involves defining stages (build, test, deploy), selecting tools, automating workflows, setting triggers, ensuring security, and monitoring pipeline health.
+  </div>
+</li>
+
+<li data-id="q89">
+  <span class="faq-question">What tools are commonly used for CI/CD?</span>
+  <div class="answer">
+    Common tools include GitHub Actions, Jenkins, GitLab CI, CircleCI, Travis CI, Azure DevOps, and Bitbucket Pipelines.
+  </div>
+</li>
+
+<li data-id="q90">
+  <span class="faq-question">Explain the role of Jenkins in CI/CD.</span>
+  <div class="answer">
+    Jenkins is an open-source automation server that orchestrates the CI/CD pipeline by automating builds, tests, and deployments using plugins and custom scripts.
+  </div>
+</li>
+
+<li data-id="q91">
+  <span class="faq-question">What are some popular alternatives to Jenkins?</span>
+  <div class="answer">
+    Alternatives include GitHub Actions, GitLab CI, CircleCI, Travis CI, Azure DevOps, and Bamboo.
+  </div>
+</li>
+<li data-id="q92">
+  <span class="faq-question">What is a build pipeline?</span>
+  <div class="answer">
+    A build pipeline automates the process of compiling source code, running tests, and producing build artifacts ready for deployment.
+  </div>
+</li>
+
+<li data-id="q93">
+  <span class="faq-question">What is a deployment pipeline?</span>
+  <div class="answer">
+    A deployment pipeline automates the steps to deploy build artifacts to various environments, such as staging or production, including approvals and testing.
+  </div>
+</li>
+
+<li data-id="q94">
+  <span class="faq-question">What is continuous integration?</span>
+  <div class="answer">
+    Continuous Integration (CI) is the practice of automatically merging and testing code changes frequently to detect errors early.
+  </div>
+</li>
+
+<li data-id="q95">
+  <span class="faq-question">What is continuous delivery?</span>
+  <div class="answer">
+    Continuous Delivery (CD) is the practice of automatically preparing code changes for release to production, with manual approval before deployment.
+  </div>
+</li>
+
+<li data-id="q96">
+  <span class="faq-question">What is continuous deployment?</span>
+  <div class="answer">
+    Continuous Deployment automates the release of every successful change directly to production without manual intervention.
+  </div>
+</li>
+<li data-id="q97">
+  <span class="faq-question">What is the difference between continuous delivery and deployment?</span>
+  <div class="answer">
+    Continuous Delivery prepares and validates code for release, requiring manual approval to deploy, while Continuous Deployment automatically releases every change to production without manual steps.
+  </div>
+</li>
+
+<li data-id="q98">
+  <span class="faq-question">What is a build artifact?</span>
+  <div class="answer">
+    A build artifact is the output of the build process, such as binaries, executables, or packaged files ready for deployment.
+  </div>
+</li>
+
+<li data-id="q99">
+  <span class="faq-question">What is an artifact repository?</span>
+  <div class="answer">
+    An artifact repository stores build artifacts securely, allowing teams to manage versions and retrieve them for deployments.
+  </div>
+</li>
+
+<li data-id="q100">
+  <span class="faq-question">How do you manage secrets in a CI/CD pipeline?</span>
+  <div class="answer">
+    Secrets are managed using secure storage solutions like GitHub Secrets, Vault, or environment variables, ensuring sensitive data isn’t exposed in logs or code.
+  </div>
+</li>
+
+<li data-id="q101">
+  <span class="faq-question">What is a webhook in the context of CI/CD?</span>
+  <div class="answer">
+    A webhook is an HTTP callback triggered by events (like code pushes) that notifies CI/CD systems to start pipelines automatically.
+  </div>
+</li>
+<li data-id="q102">
+  <span class="faq-question">What is pipeline as code?</span>
+  <div class="answer">
+    Pipeline as code means defining your CI/CD pipeline configuration as code files (often YAML) stored in your repository, enabling versioning and easier maintenance.
+  </div>
+</li>
+
+<li data-id="q103">
+  <span class="faq-question">What is YAML and how is it used in CI/CD?</span>
+  <div class="answer">
+    YAML (YAML Ain't Markup Language) is a human-readable data serialization format used to define pipeline configurations in CI/CD tools like GitHub Actions, GitLab CI, and Jenkins.
+  </div>
+</li>
+
+<li data-id="q104">
+  <span class="faq-question">What is GitOps?</span>
+  <div class="answer">
+    GitOps is a practice where Git repositories serve as the single source of truth for declarative infrastructure and application deployment, enabling automated CI/CD workflows.
+  </div>
+</li>
+
+<li data-id="q105">
+  <span class="faq-question">What are stages in a CI/CD pipeline?</span>
+  <div class="answer">
+    Stages are logical phases in a CI/CD pipeline such as build, test, deploy, and release, which organize and sequence the workflow steps.
+  </div>
+</li>
+
+<li data-id="q106">
+  <span class="faq-question">How do you handle rollback in CI/CD?</span>
+  <div class="answer">
+    Rollback is handled by deploying a previous stable build or version, automated through pipeline scripts or manually triggered when issues arise.
+  </div>
+</li>
+<li data-id="q107">
+  <span class="faq-question">What are canary deployments?</span>
+  <div class="answer">
+    Canary deployments gradually release new software versions to a small subset of users to monitor for issues before a full rollout.
+  </div>
+</li>
+
+<li data-id="q108">
+  <span class="faq-question">What are blue-green deployments?</span>
+  <div class="answer">
+    Blue-green deployments use two identical production environments (blue and green) to reduce downtime by switching traffic from the old to the new version instantly.
+  </div>
+</li>
+
+<li data-id="q109">
+  <span class="faq-question">What is A/B testing in deployment?</span>
+  <div class="answer">
+    A/B testing involves releasing two different versions of software to different user groups to compare performance or user experience before choosing the best.
+  </div>
+</li>
+
+<li data-id="q110">
+  <span class="faq-question">What is the purpose of unit testing in CI/CD?</span>
+  <div class="answer">
+    Unit testing verifies individual components or functions to catch bugs early and ensure code correctness during CI/CD processes.
+  </div>
+</li>
+
+<li data-id="q111">
+  <span class="faq-question">What is integration testing?</span>
+  <div class="answer">
+    Integration testing checks how different modules or services work together, validating interactions and data flow in the system.
+  </div>
+</li>
+<li data-id="q112">
+  <span class="faq-question">What is end-to-end testing?</span>
+  <div class="answer">
+    End-to-end testing validates the entire application flow from start to finish to ensure all integrated components work as expected.
+  </div>
+</li>
+
+<li data-id="q113">
+  <span class="faq-question">What is smoke testing in CI/CD?</span>
+  <div class="answer">
+    Smoke testing is a quick set of tests run to verify the basic functionality of a build before deeper testing is done.
+  </div>
+</li>
+
+<li data-id="q114">
+  <span class="faq-question">How do you automate testing in a CI/CD pipeline?</span>
+  <div class="answer">
+    Automate testing by integrating test scripts into pipeline stages, triggering tests on code commits, and blocking deployments on failures.
+  </div>
+</li>
+
+<li data-id="q115">
+  <span class="faq-question">How do you monitor a CI/CD pipeline?</span>
+  <div class="answer">
+    Monitoring is done using dashboards, alerts, logs, and metrics to track pipeline health, success rates, and failures in real-time.
+  </div>
+</li>
+
+<li data-id="q116">
+  <span class="faq-question">What is code coverage and how is it tracked?</span>
+  <div class="answer">
+    Code coverage measures the percentage of code exercised by tests and is tracked using tools like Jest, Istanbul, or Coveralls integrated into CI pipelines.
+  </div>
+</li>
+
+<li data-id="q117">
+  <span class="faq-question">How do you enforce code quality in a pipeline?</span>
+  <div class="answer">
+    Enforce code quality by integrating static code analysis, linting, unit tests, code reviews, and quality gates in the pipeline.
+  </div>
+</li>
+
+<li data-id="q118">
+  <span class="faq-question">What are some security concerns with CI/CD?</span>
+  <div class="answer">
+    Security concerns include secret leakage, insecure dependencies, insufficient access controls, and unverified code deployments.
+  </div>
+</li>
+
+<li data-id="q119">
+  <span class="faq-question">What is DevSecOps?</span>
+  <div class="answer">
+    DevSecOps integrates security practices into the DevOps process to automate security testing and ensure secure software delivery.
+  </div>
+</li>
+
+<li data-id="q120">
+  <span class="faq-question">What is a self-hosted runner?</span>
+  <div class="answer">
+    A self-hosted runner is a machine you manage that runs CI/CD jobs instead of using the cloud-hosted runners provided by services like GitHub.
+  </div>
+</li>
+
+<li data-id="q121">
+  <span class="faq-question">What is a shared runner in GitLab CI?</span>
+  <div class="answer">
+    A shared runner is a GitLab-managed runner that can be used by multiple projects, simplifying setup but sharing resources among users.
+  </div>
+</li>
+
+<li data-id="q122">
+  <span class="faq-question">How does GitHub Actions compare to Jenkins?</span>
+  <div class="answer">
+    GitHub Actions is cloud-native and tightly integrated with GitHub, offering simpler setup and scalable workflows, while Jenkins is highly customizable and self-hosted, with extensive plugin support.
+  </div>
+</li>
+
+<li data-id="q123">
+  <span class="faq-question">How do you deploy to AWS using CI/CD?</span>
+  <div class="answer">
+    Deploy to AWS by integrating AWS CLI or SDKs in pipelines, using services like CodeDeploy, ECS, Lambda, or CloudFormation for automated deployment.
+  </div>
+</li>
+
+<li data-id="q124">
+  <span class="faq-question">How do you deploy to Kubernetes using CI/CD?</span>
+  <div class="answer">
+    Deploy to Kubernetes by building container images, pushing them to registries, and applying manifests or Helm charts through automated pipeline steps.
+  </div>
+</li>
+
+<li data-id="q125">
+  <span class="faq-question">How do you deploy to Azure using CI/CD?</span>
+  <div class="answer">
+    Deploy to Azure using Azure DevOps pipelines or GitHub Actions with Azure CLI, ARM templates, or Terraform to provision and deploy resources.
+  </div>
+</li>
+
+<li data-id="q126">
+  <span class="faq-question">What is Helm and how is it used in CI/CD?</span>
+  <div class="answer">
+    Helm is a package manager for Kubernetes that simplifies deployment by managing charts; it’s used in CI/CD to automate Kubernetes app installations and updates.
+  </div>
+</li>
+<li data-id="q127">
+  <span class="faq-question">What is ArgoCD?</span>
+  <div class="answer">
+    ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes that automates the deployment of applications using Git repositories as the source of truth.
+  </div>
+</li>
+
+<li data-id="q128">
+  <span class="faq-question">What is Spinnaker?</span>
+  <div class="answer">
+    Spinnaker is an open-source, multi-cloud continuous delivery platform that helps release software changes with high velocity and confidence.
+  </div>
+</li>
+
+<li data-id="q129">
+  <span class="faq-question">What is CircleCI?</span>
+  <div class="answer">
+    CircleCI is a cloud-based CI/CD platform that automates software builds, tests, and deployments with flexible configuration and integration options.
+  </div>
+</li>
+
+<li data-id="q130">
+  <span class="faq-question">What is Travis CI?</span>
+  <div class="answer">
+    Travis CI is a hosted continuous integration service used to build and test software projects hosted on GitHub, supporting many languages and platforms.
+  </div>
+</li>
+
+<li data-id="q131">
+  <span class="faq-question">What is Bitbucket Pipelines?</span>
+  <div class="answer">
+    Bitbucket Pipelines is a CI/CD service integrated into Bitbucket that automates build, test, and deployment workflows using YAML configuration.
+  </div>
+</li>
+
+<li data-id="q132">
+  <span class="faq-question">What is CodePipeline (AWS)?</span>
+  <div class="answer">
+    AWS CodePipeline is a fully managed continuous delivery service that automates the build, test, and deploy phases of your release process.
+  </div>
+</li>
+
+<li data-id="q133">
+  <span class="faq-question">What is CodeBuild (AWS)?</span>
+  <div class="answer">
+    AWS CodeBuild is a fully managed build service that compiles source code, runs tests, and produces software packages ready for deployment.
+  </div>
+</li>
+
+<li data-id="q134">
+  <span class="faq-question">How do you secure credentials in GitHub Actions?</span>
+  <div class="answer">
+    Secure credentials by storing them in GitHub Secrets, using environment variables, and limiting access permissions to prevent exposure.
+  </div>
+</li>
+
+<li data-id="q135">
+  <span class="faq-question">What is the role of environment variables in CI/CD?</span>
+  <div class="answer">
+    Environment variables provide dynamic configuration to pipelines, allowing different settings for build, test, and deployment stages without hardcoding.
+  </div>
+</li>
+
+<li data-id="q136">
+  <span class="faq-question">What is caching in CI/CD pipelines?</span>
+  <div class="answer">
+    Caching stores dependencies or build outputs between pipeline runs to speed up build times and reduce redundant work.
+  </div>
+</li>
+<li data-id="q137">
+  <span class="faq-question">What are pipeline triggers?</span>
+  <div class="answer">
+    Pipeline triggers are events or conditions like code commits, pull requests, or schedules that automatically start a CI/CD pipeline.
+  </div>
+</li>
+
+<li data-id="q138">
+  <span class="faq-question">How do you run a pipeline manually?</span>
+  <div class="answer">
+    Pipelines can be run manually through CI/CD tool dashboards, CLI commands, or API calls to trigger the workflow on demand.
+  </div>
+</li>
+
+<li data-id="q139">
+  <span class="faq-question">What is a multi-branch pipeline?</span>
+  <div class="answer">
+    A multi-branch pipeline automatically creates and manages pipelines for each branch in a repository, enabling branch-specific builds and tests.
+  </div>
+</li>
+
+<li data-id="q140">
+  <span class="faq-question">How do you handle database migrations in CI/CD?</span>
+  <div class="answer">
+    Database migrations are automated in pipelines using migration tools/scripts that run during deployment to update schema safely.
+  </div>
+</li>
+
+<li data-id="q141">
+  <span class="faq-question">How do you version artifacts in a pipeline?</span>
+  <div class="answer">
+    Artifacts are versioned using semantic versioning, commit hashes, or timestamps to uniquely identify builds for traceability.
+  </div>
+</li>
+<li data-id="q142">
+  <span class="faq-question">How do you notify teams of pipeline results?</span>
+  <div class="answer">
+    Teams are notified via integrations with email, Slack, Microsoft Teams, or other messaging tools, often configured as post-build steps or webhooks.
+  </div>
+</li>
+
+<li data-id="q143">
+  <span class="faq-question">What is the difference between declarative and scripted pipelines?</span>
+  <div class="answer">
+    Declarative pipelines use a predefined syntax for easier readability and structure, while scripted pipelines offer more flexibility through Groovy scripting.
+  </div>
+</li>
+
+<li data-id="q144">
+  <span class="faq-question">How do you integrate Docker in a CI/CD pipeline?</span>
+  <div class="answer">
+    Docker is integrated by building container images during the pipeline, running tests inside containers, and pushing images to registries.
+  </div>
+</li>
+
+<li data-id="q145">
+  <span class="faq-question">How do you publish Docker images from a pipeline?</span>
+  <div class="answer">
+    Docker images are published by authenticating to a container registry and using Docker CLI commands like `docker push` within pipeline steps.
+  </div>
+</li>
+
+<li data-id="q146">
+  <span class="faq-question">How do you use Docker Compose in CI/CD?</span>
+  <div class="answer">
+    Docker Compose is used to define and run multi-container applications during testing or deployment stages within pipelines.
+  </div>
+</li>
+<li data-id="q147">
+  <span class="faq-question">What are runners/agents/executors in CI/CD?</span>
+  <div class="answer">
+    Runners, agents, or executors are machines or services that run the jobs defined in a CI/CD pipeline.
+  </div>
+</li>
+
+<li data-id="q148">
+  <span class="faq-question">How can you parallelize builds in CI/CD?</span>
+  <div class="answer">
+    Parallelization is done by splitting jobs or tests into multiple agents or runners that run simultaneously to reduce overall pipeline time.
+  </div>
+</li>
+
+<li data-id="q149">
+  <span class="faq-question">What are matrix builds?</span>
+  <div class="answer">
+    Matrix builds run the same job with multiple variations of parameters like OS, language versions, or environment variables in parallel.
+  </div>
+</li>
+<li data-id="q150">
+  <span class="faq-question">What are the best practices for writing CI/CD pipelines?</span>
+  <div class="answer">
+    Best practices include keeping pipelines simple and modular, using pipeline as code, automating tests, securing secrets, and enabling fast feedback loops.
+  </div>
+</li>
+
+<li data-id="q151">
+  <span class="faq-question">What is infrastructure as code (IaC) in CI/CD?</span>
+  <div class="answer">
+    IaC is managing and provisioning infrastructure through machine-readable configuration files, enabling automation and versioning in CI/CD pipelines.
+  </div>
+</li>
+<li data-id="q152">
+  <span class="faq-question">What is Terraform and how is it used in CI/CD?</span>
+  <div class="answer">
+    Terraform is an infrastructure as code tool that provisions and manages cloud resources declaratively, often integrated in CI/CD pipelines for automated infrastructure deployment and updates.
+  </div>
+</li>
+
+<li data-id="q153">
+  <span class="faq-question">What is Ansible and how is it integrated in pipelines?</span>
+  <div class="answer">
+    Ansible is an automation tool for configuration management and application deployment, integrated into pipelines to automate environment setup and deployments.
+  </div>
+</li>
+
+<li data-id="q154">
+  <span class="faq-question">What is the difference between on-prem CI/CD and cloud CI/CD?</span>
+  <div class="answer">
+    On-prem CI/CD is hosted on local infrastructure offering full control but requiring maintenance, while cloud CI/CD is hosted by providers offering scalability, easier setup, and managed services.
+  </div>
+</li>
+
+<li data-id="q155">
+  <span class="faq-question">How do you test microservices with CI/CD?</span>
+  <div class="answer">
+    Testing microservices involves unit, integration, and contract tests, often orchestrated in pipelines using containerization and service virtualization for isolated testing.
+  </div>
+</li>
+
+<li data-id="q156">
+  <span class="faq-question">How do you manage monorepos in CI/CD?</span>
+  <div class="answer">
+    Monorepos are managed with selective builds and tests using tools that detect changed projects, optimizing pipeline efficiency and reducing unnecessary runs.
+  </div>
+</li>
+
+<li data-id="q157">
+  <span class="faq-question">How does feature flagging help in CD?</span>
+  <div class="answer">
+    Feature flagging allows teams to enable or disable features dynamically without deploying new code, enabling safer and controlled continuous delivery.
+  </div>
+</li>
+
+<li data-id="q158">
+  <span class="faq-question">What is progressive delivery?</span>
+  <div class="answer">
+    Progressive delivery is an approach that gradually rolls out changes to subsets of users, reducing risk and enabling fast feedback during deployments.
+  </div>
+</li>
+
+<li data-id="q159">
+  <span class="faq-question">What is a job in CI/CD terminology?</span>
+  <div class="answer">
+    A job is a set of steps executed sequentially in a pipeline, usually representing a stage like build, test, or deploy.
+  </div>
+</li>
+
+<li data-id="q160">
+  <span class="faq-question">What is a workflow in GitHub Actions?</span>
+  <div class="answer">
+    A workflow is an automated process defined in a YAML file that contains one or more jobs triggered by specific events.
+  </div>
+</li>
+
+<li data-id="q161">
+  <span class="faq-question">What is a pipeline template?</span>
+  <div class="answer">
+    A pipeline template is a reusable configuration blueprint that defines common pipeline stages or jobs, promoting consistency and reuse.
+  </div>
+</li>
+
+
+<li data-id="q162">
+  <span class="faq-question">How do you use artifacts between pipeline stages?</span>
+  <div class="answer">
+    Artifacts are saved after one stage and downloaded in subsequent stages to share build outputs, test results, or deployment packages.
+  </div>
+</li>
+
+<li data-id="q163">
+  <span class="faq-question">How do you implement approval gates in CI/CD?</span>
+  <div class="answer">
+    Approval gates require manual intervention or automated policies before proceeding to the next pipeline stage, ensuring checks and compliance.
+  </div>
+</li>
+
+<li data-id="q164">
+  <span class="faq-question">What is pipeline orchestration?</span>
+  <div class="answer">
+    Pipeline orchestration manages the execution order, dependencies, and resource allocation of multiple jobs or pipelines.
+  </div>
+</li>
+
+<li data-id="q165">
+  <span class="faq-question">What are common CI/CD anti-patterns?</span>
+  <div class="answer">
+    Anti-patterns include long-running pipelines, manual approvals delaying automation, hardcoded secrets, and ignoring failure handling.
+  </div>
+</li>
+
+<li data-id="q166">
+  <span class="faq-question">What is the role of code review in CI/CD?</span>
+  <div class="answer">
+    Code review ensures code quality, catches bugs early, and enforces standards before changes are integrated and deployed.
+  </div>
+</li>
+<li data-id="q167">
+  <span class="faq-question">What is the difference between push and pull-based deployment?</span>
+  <div class="answer">
+    Push-based deployment initiates deployments from a central system pushing changes to targets, while pull-based deployment lets targets pull changes themselves, often improving security and scalability.
+  </div>
+</li>
+
+<li data-id="q168">
+  <span class="faq-question">What is drift detection in CI/CD?</span>
+  <div class="answer">
+    Drift detection identifies differences between the desired infrastructure state and the actual deployed state, helping maintain consistency.
+  </div>
+</li>
+
+<li data-id="q169">
+  <span class="faq-question">How do you test infrastructure changes with CI/CD?</span>
+  <div class="answer">
+    Infrastructure changes are tested using automated validation tools, infrastructure tests, and deploying to staging environments before production.
+  </div>
+</li>
+
+<li data-id="q170">
+  <span class="faq-question">How can you use static code analysis tools in a pipeline?</span>
+  <div class="answer">
+    Static code analysis tools are integrated as pipeline steps to analyze code quality, security, and style before merging changes.
+  </div>
+</li>
+
+<li data-id="q171">
+  <span class="faq-question">What is SonarQube and how is it used in CI/CD?</span>
+  <div class="answer">
+    SonarQube is a platform for continuous inspection of code quality that integrates with CI/CD pipelines to provide automated code reviews and track technical debt.
+  </div>
+</li>
+
+<li data-id="q172">
+  <span class="faq-question">What is the importance of feedback loops in CI/CD?</span>
+  <div class="answer">
+    Fast feedback loops help teams detect and fix issues quickly, improving software quality and reducing time to market.
+  </div>
+</li>
+
+<li data-id="q173">
+  <span class="faq-question">How do you track pipeline history?</span>
+  <div class="answer">
+    Pipeline history is tracked via CI/CD tools that log execution details, statuses, logs, and artifacts for auditing and troubleshooting.
+  </div>
+</li>
+
+<li data-id="q174">
+  <span class="faq-question">How do you configure branch-based deployments?</span>
+  <div class="answer">
+    Branch-based deployments are configured by specifying branch filters in pipeline triggers, allowing different environments or behaviors per branch.
+  </div>
+</li>
+
+<li data-id="q175">
+  <span class="faq-question">How do you handle dependency management in CI/CD?</span>
+  <div class="answer">
+    Dependency management is handled by using package managers, caching dependencies, and locking versions to ensure reproducible builds.
+  </div>
+</li>
+
+<li data-id="q176">
+  <span class="faq-question">How do you test frontend and backend apps together in CI/CD?</span>
+  <div class="answer">
+    Integration tests and end-to-end tests run in pipelines using staging environments or mock services to validate frontend-backend interactions.
+  </div>
+</li>
+
+<li data-id="q177">
+  <span class="faq-question">What’s the role of a package manager in CI/CD?</span>
+  <div class="answer">
+    A package manager handles dependency installation and versioning, ensuring consistent and reproducible builds across pipeline runs.
+  </div>
+</li>
+
+<li data-id="q178">
+  <span class="faq-question">How do you run background services for tests in CI/CD?</span>
+  <div class="answer">
+    Background services are run using containers, service mocks, or dedicated test environments initialized before test execution in the pipeline.
+  </div>
+</li>
+
+<li data-id="q179">
+  <span class="faq-question">How do you debug a failed pipeline?</span>
+  <div class="answer">
+    Debugging involves examining logs, re-running failed steps with verbose output, and isolating failing tests or configuration errors.
+  </div>
+</li>
+
+<li data-id="q180">
+  <span class="faq-question">How do you make pipelines scalable?</span>
+  <div class="answer">
+    Scalability is achieved through parallel execution, distributed runners, caching, and modular pipeline design.
+  </div>
+</li>
+
+<li data-id="q181">
+  <span class="faq-question">How do you ensure idempotency in deployments?</span>
+  <div class="answer">
+    Idempotency ensures deployments can be repeated without side effects by using declarative configurations and avoiding mutable state changes.
+  </div>
+</li>
+
+<li data-id="q182">
+  <span class="faq-question">How do you manage pipeline drift?</span>
+  <div class="answer">
+    Pipeline drift is managed by regularly auditing pipeline configurations, automating updates, and enforcing version control on pipeline code.
+  </div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
   
