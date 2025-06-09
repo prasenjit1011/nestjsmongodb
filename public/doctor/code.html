@@ -518,6 +518,20 @@
 
 
 
+    ---------- Example 02: Closure ----------
+
+    function fn(){
+      let x = 0;
+      return function fn1(){
+        let c = 20;
+        x = x + c;
+        return x++;
+      }
+    }
+    
+    const hello = fn();
+    console.log(hello())
+    console.log(hello())
 
 
 

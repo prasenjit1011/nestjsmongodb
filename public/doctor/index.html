@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>NodeJS</title>
-<script src="/doctor/cdn/jquery-3.6.0.min.js"></script>
-<script src="/doctor/cdn/js.cookie.min.js"></script>
+<script src="cdn/jquery-3.6.0.min.js"></script>
+<script src="cdn/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -55,6 +55,11 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
         <td>MongoDB</td>
         <td>PostGre SQL</td>
         <td>DynamoDB</td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket
+        </td>
       </tr>
 </tbody></table>  
 
@@ -227,11 +232,143 @@ shallow / shadow copy
 
 </div></li>
 
+<li data-id="q122"><span class="faq-question">
+Input Validation
+</span><div class="answer">
+
+  
+  <p>Input validation is the process of verifying user input to ensure it meets the expected format, type, or value constraints before further processing.</p>
+  
+  <h2>2. Zod Validation Example</h2>
+  <p><strong>Install:</strong> <code>npm install zod</code></p>
+  
+  <pre><code>import { z } from "zod";
+  
+  const userSchema = z.object({
+    username: z.string().min(3),
+    age: z.number().int().positive(),
+  });
+  
+  const result = userSchema.safeParse({
+    username: "JohnDoe",
+    age: 25,
+  });
+  
+  if (!result.success) {
+    console.log(result.error.format());
+  } else {
+    console.log("Valid:", result.data);
+  }
+  </code></pre>
+  
+  <h3>✅ Pros of Zod:</h3>
+  <ul>
+    <li>Functional and immutable</li>
+    <li>Type-safe with TypeScript</li>
+    <li>No decorators needed</li>
+  </ul>
+  
+  <h3>🚫 Cons of Zod:</h3>
+  <ul>
+    <li>Not decorator-based (if you prefer that style)</li>
+  </ul>
+  
+  <hr>
+  
+  <h2>3. Class Validator Example</h2>
+  <p><strong>Install:</strong> <code>npm install class-validator class-transformer</code></p>
+  
+  <pre><code>import { IsString, IsInt, MinLength, IsPositive } from "class-validator";
+  import { plainToInstance } from "class-transformer";
+  
+  class CreateUserDto {
+    @IsString()
+    @MinLength(3)
+    username: string;
+  
+    @IsInt()
+    @IsPositive()
+    age: number;
+  }
+  
+  const input = { username: "JohnDoe", age: 25 };
+  const user = plainToInstance(CreateUserDto, input);
+  
+  import { validate } from "class-validator";
+  
+  validate(user).then(errors => {
+    if (errors.length > 0) {
+      console.log("Validation failed:", errors);
+    } else {
+      console.log("Valid:", user);
+    }
+  });
+  </code></pre>
+  
+  <h3>✅ Pros of Class Validator:</h3>
+  <ul>
+    <li>Decorator-based (OOP-friendly)</li>
+    <li>Widely used in NestJS</li>
+    <li>Supports class-transformer for parsing/transforming inputs</li>
+  </ul>
+  
+  <h3>🚫 Cons of Class Validator:</h3>
+  <ul>
+    <li>More verbose setup</li>
+    <li>Requires decorators and class-based code</li>
+  </ul>
+  
+  <hr>
+  
+  <h2>4. When to Use Which?</h2>
+  <ul>
+    <li><strong>Zod:</strong> Best for functional programming, schema-first validation, and fast prototyping.</li>
+    <li><strong>Class Validator:</strong> Ideal for OOP-style architecture and NestJS applications.</li>
+  </ul>
+  
+  <h2>5. Summary Table</h2>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Zod</th>
+        <th>Class Validator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Style</td>
+        <td>Functional</td>
+        <td>OOP / Decorator-based</td>
+      </tr>
+      <tr>
+        <td>TypeScript Support</td>
+        <td>Excellent (type inference)</td>
+        <td>Good (requires class definitions)</td>
+      </tr>
+      <tr>
+        <td>Integration</td>
+        <td>Framework-agnostic</td>
+        <td>Popular in NestJS</td>
+      </tr>
+      <tr>
+        <td>Dependencies</td>
+        <td>Lightweight</td>
+        <td>Requires decorators & class-transformer</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div></li>
 
 
 
 
-<li data-id="q_redux_formatted"><span class="faq-question green ">
+
+
+
+
+<li data-id="q_redux_formatted" class="yellow"><span class="faq-question">
   Redux
   </span><div class="answer">
   <strong>Redux</strong> is a state management library often used with React for building user interfaces. It provides a centralized store for managing the application's state, making it predictable and maintainable.
@@ -8169,7 +8306,1039 @@ console.log(result);  // Output: 15
   </div></li>
 
 
+  <li data-id="q32" class="yellow"><span class="faq-question">
+    ------------------------------------------------------------------
+    </span></li>
+    <li data-id="q32" class="yellow"><span class="faq-question">
+    --------------------------------------------------------------
+    </span></li>
+    <li data-id="q32" class="yellow"><span class="faq-question">
+    -------------------------------------------------
+    </span></li>
 
+  <li data-id="q32" class="yellow">
+    <span class="faq-question">DevOpps</span>
+    <div class="answer">
+    
+
+      <ol>
+        <li>What is DevOps?</li>
+        <li>What are the key components of DevOps?</li>
+        <li>What is CI/CD in DevOps?</li>
+        <li>What is version control? Name some VCS tools.</li>
+        <li>What is Git, and how does it differ from SVN?</li>
+        <li>Explain Git branching and merging strategies.</li>
+        <li>What are Git tags and how are they used?</li>
+        <li>What is the difference between Git rebase and merge?</li>
+        <li>What is a Git stash?</li>
+        <li>What is the purpose of `.gitignore`?</li>
+        <li>What is Jenkins? How does it work?</li>
+        <li>What are Jenkins pipelines?</li>
+        <li>What is a Jenkinsfile?</li>
+        <li>What is the difference between a freestyle job and a pipeline job in Jenkins?</li>
+        <li>How do you trigger Jenkins builds automatically?</li>
+        <li>What are artifacts in a CI/CD pipeline?</li>
+        <li>What is the difference between continuous integration and continuous deployment?</li>
+        <li>What is Docker?</li>
+        <li>How does Docker differ from a virtual machine?</li>
+        <li>What is a Docker image and a Docker container?</li>
+        <li>What is the purpose of a Dockerfile?</li>
+        <li>What is Docker Compose?</li>
+        <li>What is the difference between ENTRYPOINT and CMD in Dockerfile?</li>
+        <li>How do you persist data in Docker containers?</li>
+        <li>What is Docker Swarm?</li>
+        <li>What is Kubernetes?</li>
+        <li>What are Pods in Kubernetes?</li>
+        <li>What are ReplicaSets?</li>
+        <li>What is a Deployment in Kubernetes?</li>
+        <li>What are Services in Kubernetes?</li>
+        <li>What is Helm?</li>
+        <li>What is a Kubernetes Namespace?</li>
+        <li>How do you perform rolling updates in Kubernetes?</li>
+        <li>What are ConfigMaps and Secrets in Kubernetes?</li>
+        <li>What is the difference between a StatefulSet and a Deployment?</li>
+        <li>What is the purpose of `kubectl`?</li>
+        <li>What is Infrastructure as Code (IaC)?</li>
+        <li>What is Terraform?</li>
+        <li>What are Terraform providers and modules?</li>
+        <li>What is the difference between Terraform and CloudFormation?</li>
+        <li>What is Ansible?</li>
+        <li>What are playbooks in Ansible?</li>
+        <li>What is the difference between Ansible and Puppet/Chef?</li>
+        <li>What is YAML and why is it used in DevOps?</li>
+        <li>What is configuration management?</li>
+        <li>What is monitoring in DevOps?</li>
+        <li>Name some popular monitoring tools.</li>
+        <li>What is Prometheus?</li>
+        <li>What is Grafana?</li>
+        <li>What is ELK Stack?</li>
+        <li>What is log aggregation?</li>
+        <li>What is Blue-Green Deployment?</li>
+        <li>What is Canary Deployment?</li>
+        <li>What are feature flags?</li>
+        <li>What is the “shift-left” approach in DevOps?</li>
+        <li>What is a service mesh?</li>
+        <li>What is Istio?</li>
+        <li>What is load balancing?</li>
+        <li>What is autoscaling?</li>
+        <li>What is horizontal vs vertical scaling?</li>
+        <li>What is a reverse proxy?</li>
+        <li>What is NGINX used for?</li>
+        <li>What is an API Gateway?</li>
+        <li>What is a webhook?</li>
+        <li>What is a rolling deployment?</li>
+        <li>What is immutable infrastructure?</li>
+        <li>What are ephemeral environments?</li>
+        <li>What is chaos engineering?</li>
+        <li>What is incident response in DevOps?</li>
+        <li>What is MTTR, MTBF, and MTTD?</li>
+        <li>What is site reliability engineering (SRE)?</li>
+        <li>What is observability?</li>
+        <li>What are the three pillars of observability?</li>
+        <li>What is APM?</li>
+        <li>What is container orchestration?</li>
+        <li>What is Vault by HashiCorp?</li>
+        <li>What are secrets management tools?</li>
+        <li>What is the principle of least privilege?</li>
+        <li>What is OAuth2 and how does it relate to DevOps?</li>
+        <li>What is SSL/TLS and why is it important?</li>
+        <li>How do you secure CI/CD pipelines?</li>
+        <li>What is SonarQube?</li>
+        <li>What is static code analysis?</li>
+        <li>What is dynamic code analysis?</li>
+        <li>What is a build artifact repository?</li>
+        <li>What is Nexus or Artifactory?</li>
+        <li>What is a package manager?</li>
+        <li>What is semantic versioning?</li>
+        <li>How do you manage secrets in CI/CD pipelines?</li>
+        <li>What is a sandbox environment?</li>
+        <li>What is the purpose of staging environments?</li>
+        <li>What is blue/green testing?</li>
+        <li>How do you handle rollbacks in production?</li>
+        <li>What is trunk-based development?</li>
+        <li>What is GitOps?</li>
+        <li>What is DevSecOps?</li>
+        <li>How do you monitor application performance in production?</li>
+        <li>What are the challenges of microservices in DevOps?</li>
+        <li>What is a centralized logging system?</li>
+        <li>What is the twelve-factor app methodology?</li>
+        <li>What is cloud-native architecture?</li>
+        <li>What is the difference between public, private, and hybrid cloud?</li>
+        <li>How do you ensure high availability in cloud deployments?</li>
+        <li>What is fault tolerance?</li>
+        <li>What is disaster recovery in DevOps?</li>
+      </ol>
+      
+    </div>
+
+  </li>
+
+
+
+    <li data-id="q79">
+      <span class="faq-question">What is DevOps?</span>
+      <div class="answer">
+        DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the software development lifecycle and deliver high-quality software continuously using automation, collaboration, and monitoring.
+      </div>
+    </li>
+  
+    <li data-id="q80">
+      <span class="faq-question">What are the key components of DevOps?</span>
+      <div class="answer">
+        The key components of DevOps include:
+        <ul>
+          <li>Continuous Integration (CI)</li>
+          <li>Continuous Delivery/Deployment (CD)</li>
+          <li>Infrastructure as Code (IaC)</li>
+          <li>Monitoring and Logging</li>
+          <li>Collaboration and Communication</li>
+          <li>Automation</li>
+        </ul>
+      </div>
+    </li>
+  
+    <li data-id="q81">
+      <span class="faq-question">What is CI/CD in DevOps?</span>
+      <div class="answer">
+        CI/CD stands for Continuous Integration and Continuous Delivery/Deployment. CI involves automatically integrating code changes into a shared repository several times a day. CD automates the deployment of these changes to production, ensuring faster and more reliable software releases.
+      </div>
+    </li>
+  
+    <li data-id="q82">
+      <span class="faq-question">What is version control? Name some VCS tools.</span>
+      <div class="answer">
+        Version control is a system that records changes to files over time so that you can recall specific versions later. Popular version control tools include Git, SVN (Subversion), Mercurial, and CVS.
+      </div>
+    </li>
+  
+    <li data-id="q83">
+      <span class="faq-question">What is Git, and how does it differ from SVN?</span>
+      <div class="answer">
+        Git is a distributed version control system where every developer has a full copy of the codebase, while SVN is a centralized version control system. Git supports branching and merging more efficiently and allows offline work.
+      </div>
+    </li>
+  
+    <li data-id="q84">
+      <span class="faq-question">Explain Git branching and merging strategies.</span>
+      <div class="answer">
+        Git branching allows developers to create separate branches for features, fixes, or experiments. Merging integrates these branches into the main codebase. Common strategies include:
+        <ul>
+          <li>Git Flow</li>
+          <li>Feature Branching</li>
+          <li>Release Branching</li>
+          <li>Trunk-Based Development</li>
+        </ul>
+      </div>
+    </li>
+  
+    <li data-id="q85">
+      <span class="faq-question">What are Git tags and how are they used?</span>
+      <div class="answer">
+        Git tags are used to mark specific points in history as important, often used for releases (e.g., v1.0.0). Tags can be lightweight or annotated with metadata.
+      </div>
+    </li>
+  
+    <li data-id="q86">
+      <span class="faq-question">What is the difference between Git rebase and merge?</span>
+      <div class="answer">
+        <strong>Git merge</strong> preserves the history and creates a new merge commit, while <strong>Git rebase</strong> re-applies commits on top of another base tip, creating a linear history. Rebase is cleaner but can rewrite history.
+      </div>
+    </li>
+  
+    <li data-id="q87">
+      <span class="faq-question">What is a Git stash?</span>
+      <div class="answer">
+        Git stash temporarily shelves (or stashes) changes in your working directory so you can work on something else, then come back and re-apply them later.
+      </div>
+    </li>
+  
+    <li data-id="q88">
+      <span class="faq-question">What is the purpose of <b>.gitignore</b>?</span>
+      <div class="answer">
+        The <code>.gitignore</code> file specifies intentionally untracked files to ignore, such as log files, build artifacts, and environment-specific files. It helps keep the repository clean and focused.
+      </div>
+    </li>
+
+      <li data-id="q89">
+        <span class="faq-question">What is Jenkins? How does it work?</span>
+        <div class="answer">
+          Jenkins is an open-source automation server used to automate parts of the software development process, such as building, testing, and deploying code. It works by running jobs or pipelines configured to execute specific tasks on code repositories when triggered manually or automatically.
+        </div>
+      </li>
+    
+      <li data-id="q90">
+        <span class="faq-question">What are Jenkins pipelines?</span>
+        <div class="answer">
+          Jenkins pipelines are a suite of plugins that support integration and implementation of continuous delivery pipelines. A pipeline defines the entire lifecycle of a job from code commit to deployment using a domain-specific language (DSL).
+        </div>
+      </li>
+    
+      <li data-id="q91">
+        <span class="faq-question">What is a Jenkinsfile?</span>
+        <div class="answer">
+          A Jenkinsfile is a text file that contains the definition of a Jenkins pipeline. It is stored in the source control repository and provides a way to define pipeline steps using either declarative or scripted syntax.
+        </div>
+      </li>
+    
+      <li data-id="q92">
+        <span class="faq-question">What is the difference between a freestyle job and a pipeline job in Jenkins?</span>
+        <div class="answer">
+          A freestyle job is a simple, configurable job with limited automation and flexibility. A pipeline job, defined using a Jenkinsfile, allows for complex automation, versioning in source control, and better scalability through stages and parallelism.
+        </div>
+      </li>
+    
+      <li data-id="q93">
+        <span class="faq-question">How do you trigger Jenkins builds automatically?</span>
+        <div class="answer">
+          Jenkins builds can be triggered automatically using:
+          <ul>
+            <li>Webhooks from version control systems like GitHub or GitLab</li>
+            <li>Poll SCM (periodic checks for changes)</li>
+            <li>Cron schedules</li>
+            <li>Upstream/downstream project triggers</li>
+            <li>Jenkins REST API calls</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q94">
+        <span class="faq-question">What are artifacts in a CI/CD pipeline?</span>
+        <div class="answer">
+          Artifacts are the output files generated during a build process, such as binaries, JAR files, Docker images, or reports. They are stored and often passed to later stages like testing or deployment.
+        </div>
+      </li>
+    
+      <li data-id="q95">
+        <span class="faq-question">What is the difference between continuous integration and continuous deployment?</span>
+        <div class="answer">
+          <strong>Continuous Integration (CI)</strong> involves regularly merging code changes and running automated tests to ensure integration success.  
+          <strong>Continuous Deployment (CD)</strong> goes further by automatically deploying every change that passes tests to production without manual intervention.
+        </div>
+      </li>
+    
+      <li data-id="q96">
+        <span class="faq-question">What is Docker?</span>
+        <div class="answer">
+          Docker is an open-source platform that enables developers to build, package, and run applications in lightweight, portable containers that include everything needed to run the software, such as code, runtime, libraries, and dependencies.
+        </div>
+      </li>
+    
+      <li data-id="q97">
+        <span class="faq-question">How does Docker differ from a virtual machine?</span>
+        <div class="answer">
+          Docker containers share the host OS kernel and are more lightweight and faster to start than virtual machines, which run full guest operating systems on a hypervisor. VMs provide stronger isolation but at the cost of higher overhead.
+        </div>
+      </li>
+    
+      <li data-id="q98">
+        <span class="faq-question">What is a Docker image and a Docker container?</span>
+        <div class="answer">
+          A <strong>Docker image</strong> is a read-only template with instructions for creating a container. A <strong>Docker container</strong> is a running instance of an image, with its own file system, networking, and isolated environment.
+        </div>
+      </li>
+  
+    
+
+
+   
+        <li data-id="q99">
+          <span class="faq-question">What is the purpose of a Dockerfile?</span>
+          <div class="answer">
+            A Dockerfile is a script containing a series of instructions on how to build a Docker image. It automates the process of creating images by defining the base image, installing dependencies, copying files, setting environment variables, and specifying entry points.
+          </div>
+        </li>
+      
+        <li data-id="q100">
+          <span class="faq-question">What is Docker Compose?</span>
+          <div class="answer">
+            Docker Compose is a tool for defining and running multi-container Docker applications using a YAML file. It allows you to configure services, networks, and volumes in one place and start them all with a single command: <code>docker-compose up</code>.
+          </div>
+        </li>
+      
+        <li data-id="q101">
+          <span class="faq-question">What is the difference between ENTRYPOINT and CMD in Dockerfile?</span>
+          <div class="answer">
+            <strong>CMD</strong> sets default arguments for the container’s execution. <strong>ENTRYPOINT</strong> defines the main command to run. If both are used, CMD provides default parameters to ENTRYPOINT. ENTRYPOINT is preferred when you want a fixed executable with configurable arguments.
+          </div>
+        </li>
+      
+        <li data-id="q102">
+          <span class="faq-question">How do you persist data in Docker containers?</span>
+          <div class="answer">
+            Data persistence in Docker is achieved using:
+            <ul>
+              <li><strong>Volumes</strong> – Managed by Docker and stored outside the container lifecycle.</li>
+              <li><strong>Bind mounts</strong> – Link a directory on the host machine to the container.</li>
+              <li><strong>tmpfs</strong> – Temporary storage in memory (non-persistent).</li>
+            </ul>
+          </div>
+        </li>
+      
+        <li data-id="q103">
+          <span class="faq-question">What is Docker Swarm?</span>
+          <div class="answer">
+            Docker Swarm is Docker’s native clustering and orchestration tool. It allows you to manage a cluster of Docker engines (nodes) as a single virtual system, enabling container scaling, service discovery, and load balancing.
+          </div>
+        </li>
+      
+        <li data-id="q104">
+          <span class="faq-question">What is Kubernetes?</span>
+          <div class="answer">
+            Kubernetes is an open-source container orchestration platform designed to automate the deployment, scaling, and management of containerized applications across clusters of hosts.
+          </div>
+        </li>
+      
+        <li data-id="q105">
+          <span class="faq-question">What are Pods in Kubernetes?</span>
+          <div class="answer">
+            A Pod is the smallest deployable unit in Kubernetes. It can contain one or more containers that share storage, network, and a specification for how to run the containers. Pods are ephemeral and can be replaced by the system.
+          </div>
+        </li>
+      
+        <li data-id="q106">
+          <span class="faq-question">What are ReplicaSets?</span>
+          <div class="answer">
+            A ReplicaSet in Kubernetes ensures that a specified number of pod replicas are running at any time. It monitors and maintains the desired number of replicas by starting or terminating pods as needed.
+          </div>
+        </li>
+      
+        <li data-id="q107">
+          <span class="faq-question">What is a Deployment in Kubernetes?</span>
+          <div class="answer">
+            A Deployment provides declarative updates for Pods and ReplicaSets. It allows you to manage application updates, rollbacks, and scaling while ensuring zero downtime during deployment processes.
+          </div>
+        </li>
+      
+        <li data-id="q108">
+          <span class="faq-question">What are Services in Kubernetes?</span>
+          <div class="answer">
+            A Service in Kubernetes is an abstraction that defines a logical set of Pods and a policy to access them. Services enable communication between components inside the cluster and expose workloads to the outside world.
+          </div>
+        </li>
+      
+      
+
+       
+          <li data-id="q109">
+            <span class="faq-question">What is Helm?</span>
+            <div class="answer">
+              Helm is a package manager for Kubernetes that simplifies the deployment and management of applications. It uses Helm charts (pre-configured Kubernetes resources) to define, install, and upgrade applications within a Kubernetes cluster.
+            </div>
+          </li>
+        
+          <li data-id="q110">
+            <span class="faq-question">What is a Kubernetes Namespace?</span>
+            <div class="answer">
+              A Kubernetes Namespace is a logical partition within a cluster that allows grouping of resources. It helps isolate and manage resources (like Pods, Services, and Deployments) among different teams or environments.
+            </div>
+          </li>
+        
+          <li data-id="q111">
+            <span class="faq-question">How do you perform rolling updates in Kubernetes?</span>
+            <div class="answer">
+              Rolling updates in Kubernetes are done using Deployments. Kubernetes gradually replaces Pods with new ones, ensuring zero downtime. This can be configured using <code>kubectl apply</code> and controlled through update strategy settings in the Deployment manifest.
+            </div>
+          </li>
+        
+          <li data-id="q112">
+            <span class="faq-question">What are ConfigMaps and Secrets in Kubernetes?</span>
+            <div class="answer">
+              <strong>ConfigMaps</strong> are used to store non-sensitive configuration data in key-value pairs.  
+              <strong>Secrets</strong> are used to store sensitive data such as passwords, tokens, and keys. Both can be injected into Pods as environment variables or mounted as files.
+            </div>
+          </li>
+        
+          <li data-id="q113">
+            <span class="faq-question">What is the difference between a StatefulSet and a Deployment?</span>
+            <div class="answer">
+              A <strong>Deployment</strong> is used for stateless applications where any Pod can handle any request.  
+              A <strong>StatefulSet</strong> is used for stateful applications requiring stable identities, persistent storage, and ordered deployment or scaling (e.g., databases).
+            </div>
+          </li>
+        
+          <li data-id="q114">
+            <span class="faq-question">What is the purpose of <b>kubectl</b>?</span>
+            <div class="answer">
+              <code>kubectl</code> is the command-line tool used to interact with Kubernetes clusters. It allows users to deploy applications, inspect and manage cluster resources, and view logs and events.
+            </div>
+          </li>
+        
+          <li data-id="q115">
+            <span class="faq-question">What is Infrastructure as Code (IaC)?</span>
+            <div class="answer">
+              Infrastructure as Code (IaC) is the practice of managing and provisioning infrastructure through machine-readable configuration files, rather than manual processes. It enables automation, version control, and consistency across environments.
+            </div>
+          </li>
+        
+          <li data-id="q116">
+            <span class="faq-question">What is Terraform?</span>
+            <div class="answer">
+              Terraform is an open-source Infrastructure as Code (IaC) tool developed by HashiCorp. It allows users to define and provision cloud infrastructure using a declarative configuration language called HCL (HashiCorp Configuration Language).
+            </div>
+          </li>
+        
+          <li data-id="q117">
+            <span class="faq-question">What are Terraform providers and modules?</span>
+            <div class="answer">
+              <strong>Providers</strong> are plugins in Terraform that interact with APIs of cloud providers (like AWS, Azure, GCP) or other platforms.  
+              <strong>Modules</strong> are reusable packages of Terraform configurations that can be shared and used to manage complex infrastructure by breaking it into smaller, reusable components.
+            </div>
+          </li>
+        
+          <li data-id="q118">
+            <span class="faq-question">What is the difference between Terraform and CloudFormation?</span>
+            <div class="answer">
+              <strong>Terraform</strong> is a multi-cloud, open-source IaC tool that supports a wide variety of providers and uses a declarative language (HCL).  
+              <strong>CloudFormation</strong> is AWS-specific and uses JSON/YAML templates to define and manage AWS resources. Terraform is more flexible for multi-cloud scenarios, while CloudFormation is tightly integrated with AWS.
+            </div>
+          </li>
+      
+        
+      
+            <li data-id="q119">
+              <span class="faq-question">What is Ansible?</span>
+              <div class="answer">
+                Ansible is an open-source IT automation tool used for configuration management, application deployment, orchestration, and task automation. It uses simple, human-readable YAML files and operates over SSH without requiring agent installation.
+              </div>
+            </li>
+          
+            <li data-id="q120">
+              <span class="faq-question">What are playbooks in Ansible?</span>
+              <div class="answer">
+                Playbooks are YAML files in Ansible that define a set of tasks to be executed on remote servers. They specify what actions should be performed, such as installing packages, copying files, or restarting services, in a structured and reusable format.
+              </div>
+            </li>
+          
+            <li data-id="q121">
+              <span class="faq-question">What is the difference between Ansible and Puppet/Chef?</span>
+              <div class="answer">
+                <ul>
+                  <li><strong>Ansible</strong> is agentless and uses YAML, with a push-based approach via SSH.</li>
+                  <li><strong>Puppet</strong> and <strong>Chef</strong> use agents on managed nodes and follow a pull-based model.</li>
+                  <li>Puppet uses its own DSL (Domain-Specific Language), while Chef uses Ruby.</li>
+                  <li>Ansible is considered simpler and easier to learn, especially for smaller teams.</li>
+                </ul>
+              </div>
+            </li>
+          
+            <li data-id="q122">
+              <span class="faq-question">What is YAML and why is it used in DevOps?</span>
+              <div class="answer">
+                YAML (YAML Ain’t Markup Language) is a human-readable data serialization format. In DevOps, it’s used to define configuration files for tools like Ansible, Kubernetes, GitHub Actions, and Docker Compose because of its readability and simplicity.
+              </div>
+            </li>
+          
+            <li data-id="q123">
+              <span class="faq-question">What is configuration management?</span>
+              <div class="answer">
+                Configuration management is the process of maintaining consistency of a system’s performance and functional attributes. In DevOps, it involves managing infrastructure configurations and environments using tools like Ansible, Puppet, Chef, and Terraform.
+              </div>
+            </li>
+          
+            <li data-id="q124">
+              <span class="faq-question">What is monitoring in DevOps?</span>
+              <div class="answer">
+                Monitoring in DevOps refers to the practice of observing system performance, availability, and resource usage to ensure reliability and detect failures or bottlenecks. It enables proactive maintenance and better decision-making.
+              </div>
+            </li>
+          
+            <li data-id="q125">
+              <span class="faq-question">Name some popular monitoring tools.</span>
+              <div class="answer">
+                Some widely used monitoring tools include:
+                <ul>
+                  <li>Prometheus</li>
+                  <li>Grafana</li>
+                  <li>ELK Stack (Elasticsearch, Logstash, Kibana)</li>
+                  <li>Datadog</li>
+                  <li>New Relic</li>
+                  <li>Nagios</li>
+                  <li>Zabbix</li>
+                </ul>
+              </div>
+            </li>
+          
+            <li data-id="q126">
+              <span class="faq-question">What is Prometheus?</span>
+              <div class="answer">
+                Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It collects metrics from configured targets at specified intervals and stores them in a time-series database, with support for powerful querying and alerting.
+              </div>
+            </li>
+          
+            <li data-id="q127">
+              <span class="faq-question">What is Grafana?</span>
+              <div class="answer">
+                Grafana is an open-source analytics and visualization tool that integrates with data sources like Prometheus, InfluxDB, and Elasticsearch. It is widely used for creating interactive dashboards to monitor metrics and system performance.
+              </div>
+            </li>
+          
+            <li data-id="q128">
+              <span class="faq-question">What is ELK Stack?</span>
+              <div class="answer">
+                The ELK Stack is a combination of three open-source tools: <strong>Elasticsearch</strong> (search and analytics engine), <strong>Logstash</strong> (log pipeline and transformation), and <strong>Kibana</strong> (visualization and dashboarding). It is used for centralized logging, monitoring, and analysis.
+              </div>
+            </li>
+         
+          
+           
+              <li data-id="q129">
+                <span class="faq-question">What is log aggregation?</span>
+                <div class="answer">
+                  Log aggregation is the process of collecting and centralizing logs from multiple sources (servers, applications, services) into a single system for analysis, monitoring, and troubleshooting. Tools like ELK Stack, Fluentd, and Graylog are commonly used for this purpose.
+                </div>
+              </li>
+            
+              <li data-id="q130">
+                <span class="faq-question">What is Blue-Green Deployment?</span>
+                <div class="answer">
+                  Blue-Green Deployment is a deployment strategy that reduces downtime and risk. Two environments are maintained: one (blue) is live, while the other (green) has the new version. Traffic is switched to green after testing, and blue is kept as a backup.
+                </div>
+              </li>
+            
+              <li data-id="q131">
+                <span class="faq-question">What is Canary Deployment?</span>
+                <div class="answer">
+                  Canary Deployment is a technique where a new application version is gradually rolled out to a small subset of users before full deployment. This allows testing in a production environment with minimal risk and easier rollback in case of issues.
+                </div>
+              </li>
+            
+              <li data-id="q132">
+                <span class="faq-question">What are feature flags?</span>
+                <div class="answer">
+                  Feature flags (or toggles) are mechanisms to enable or disable specific features in an application without deploying new code. They allow safer releases, A/B testing, and gradual rollouts by controlling features at runtime.
+                </div>
+              </li>
+            
+              <li data-id="q133">
+                <span class="faq-question">What is the “shift-left” approach in DevOps?</span>
+                <div class="answer">
+                  The “shift-left” approach involves performing testing, security, and quality checks earlier in the software development lifecycle. This helps detect issues sooner, reduces cost and effort, and improves product quality and delivery speed.
+                </div>
+              </li>
+            
+              <li data-id="q134">
+                <span class="faq-question">What is a service mesh?</span>
+                <div class="answer">
+                  A service mesh is a dedicated infrastructure layer for managing service-to-service communication in microservices architectures. It provides features like traffic management, observability, security, and policy enforcement without changing application code.
+                </div>
+              </li>
+            
+              <li data-id="q135">
+                <span class="faq-question">What is Istio?</span>
+                <div class="answer">
+                  Istio is an open-source service mesh that provides tools for traffic management, security, observability, and policy control in a Kubernetes-based microservices architecture. It uses Envoy as a sidecar proxy to intercept and manage traffic between services.
+                </div>
+              </li>
+            
+              <li data-id="q136">
+                <span class="faq-question">What is load balancing?</span>
+                <div class="answer">
+                  Load balancing is the process of distributing network or application traffic across multiple servers to ensure reliability and performance. It prevents overloading a single server and improves responsiveness and availability.
+                </div>
+              </li>
+            
+              <li data-id="q137">
+                <span class="faq-question">What is autoscaling?</span>
+                <div class="answer">
+                  Autoscaling automatically adjusts the number of computing resources (like servers or pods) based on real-time demand. It ensures optimal performance and cost-efficiency by scaling up under high load and down when demand decreases.
+                </div>
+              </li>
+            
+              <li data-id="q138">
+                <span class="faq-question">What is horizontal vs vertical scaling?</span>
+                <div class="answer">
+                  <ul>
+                    <li><strong>Horizontal Scaling</strong> (scale-out): Adding more machines or instances to handle increased load.</li>
+                    <li><strong>Vertical Scaling</strong> (scale-up): Increasing the capacity (CPU, RAM) of existing machines.</li>
+                  </ul>
+                  Horizontal scaling is more flexible and fault-tolerant, while vertical scaling is limited by hardware capacity.
+                </div>
+              </li>
+        
+            
+             
+                <li data-id="q139">
+                  <span class="faq-question">What is a reverse proxy?</span>
+                  <div class="answer">
+                    A reverse proxy is a server that sits in front of one or more backend servers and forwards client requests to them. It provides benefits like load balancing, caching, SSL termination, and enhanced security.
+                  </div>
+                </li>
+              
+                <li data-id="q140">
+                  <span class="faq-question">What is NGINX used for?</span>
+                  <div class="answer">
+                    NGINX is a high-performance web server that can also function as a reverse proxy, load balancer, and HTTP cache. It is widely used to serve static content, manage traffic, and improve the scalability and security of web applications.
+                  </div>
+                </li>
+              
+                <li data-id="q141">
+                  <span class="faq-question">What is an API Gateway?</span>
+                  <div class="answer">
+                    An API Gateway is a server that acts as an entry point for client requests to microservices. It handles tasks such as request routing, authentication, rate limiting, and response transformation, simplifying the client-side logic.
+                  </div>
+                </li>
+              
+                <li data-id="q142">
+                  <span class="faq-question">What is a webhook?</span>
+                  <div class="answer">
+                    A webhook is a way for one application to send real-time data to another application via an HTTP POST request. It is commonly used for event-driven communication, such as triggering actions when a code push occurs or an order is placed.
+                  </div>
+                </li>
+              
+                <li data-id="q143">
+                  <span class="faq-question">What is a rolling deployment?</span>
+                  <div class="answer">
+                    A rolling deployment is a software release strategy where new versions of an application are gradually rolled out to a few servers at a time. This allows for zero downtime and easy rollback in case of failure.
+                  </div>
+                </li>
+              
+                <li data-id="q144">
+                  <span class="faq-question">What is immutable infrastructure?</span>
+                  <div class="answer">
+                    Immutable infrastructure refers to servers or components that are never modified after deployment. Instead of updating existing systems, new versions are created and replaced. This ensures consistency, reduces errors, and simplifies rollback.
+                  </div>
+                </li>
+              
+                <li data-id="q145">
+                  <span class="faq-question">What are ephemeral environments?</span>
+                  <div class="answer">
+                    Ephemeral environments are temporary, on-demand environments (like staging or testing) that are created automatically and destroyed after use. They support rapid development and testing without polluting permanent environments.
+                  </div>
+                </li>
+              
+                <li data-id="q146">
+                  <span class="faq-question">What is chaos engineering?</span>
+                  <div class="answer">
+                    Chaos engineering is the practice of intentionally injecting failures into a system to test its resilience and identify weaknesses. It helps teams build more robust systems by understanding how they behave under stress or partial outages.
+                  </div>
+                </li>
+              
+                <li data-id="q147">
+                  <span class="faq-question">What is incident response in DevOps?</span>
+                  <div class="answer">
+                    Incident response in DevOps involves detecting, investigating, and resolving unplanned disruptions to services. It includes monitoring, alerting, communication, root cause analysis, and postmortems to improve system reliability.
+                  </div>
+                </li>
+              
+                <li data-id="q148">
+                  <span class="faq-question">What is MTTR, MTBF, and MTTD?</span>
+                  <div class="answer">
+                    <ul>
+                      <li><strong>MTTR (Mean Time to Recovery)</strong>: The average time taken to restore a system after a failure.</li>
+                      <li><strong>MTBF (Mean Time Between Failures)</strong>: The average time between system failures.</li>
+                      <li><strong>MTTD (Mean Time to Detect)</strong>: The average time taken to detect an issue or failure in the system.</li>
+                    </ul>
+                  </div>
+                </li>
+         
+  
+ 
+                  <li data-id="q149">
+                    <span class="faq-question">What is site reliability engineering (SRE)?</span>
+                    <div class="answer">
+                      Site Reliability Engineering (SRE) is a discipline that applies software engineering principles to IT operations. Its goal is to create scalable and highly reliable software systems. SRE teams are responsible for availability, latency, performance, efficiency, and incident response.
+                    </div>
+                  </li>
+                
+                  <li data-id="q150">
+                    <span class="faq-question">What is observability?</span>
+                    <div class="answer">
+                      Observability is the ability to measure the internal state of a system by examining its outputs such as logs, metrics, and traces. It helps teams detect and diagnose issues in complex systems effectively.
+                    </div>
+                  </li>
+                
+                  <li data-id="q151">
+                    <span class="faq-question">What are the three pillars of observability?</span>
+                    <div class="answer">
+                      The three pillars of observability are:
+                      <ul>
+                        <li><strong>Logs</strong>: Text records of events that happen in a system.</li>
+                        <li><strong>Metrics</strong>: Numeric measurements over time that indicate system health and performance.</li>
+                        <li><strong>Traces</strong>: Records of a request's journey through various services in a distributed system.</li>
+                      </ul>
+                    </div>
+                  </li>
+                
+                  <li data-id="q152">
+                    <span class="faq-question">What is APM?</span>
+                    <div class="answer">
+                      APM (Application Performance Monitoring) refers to tools and practices used to monitor and manage the performance, availability, and user experience of software applications. Examples include New Relic, Datadog, and AppDynamics.
+                    </div>
+                  </li>
+                
+                  <li data-id="q153">
+                    <span class="faq-question">What is container orchestration?</span>
+                    <div class="answer">
+                      Container orchestration is the automated management of containerized applications, including deployment, scaling, networking, and lifecycle management. Kubernetes is the most widely used container orchestration platform.
+                    </div>
+                  </li>
+                
+                  <li data-id="q154">
+                    <span class="faq-question">What is Vault by HashiCorp?</span>
+                    <div class="answer">
+                      Vault by HashiCorp is a tool for securely storing and accessing secrets, such as API keys, passwords, certificates, and tokens. It provides dynamic secrets, encryption as a service, and access control.
+                    </div>
+                  </li>
+                
+                  <li data-id="q155">
+                    <span class="faq-question">What are secrets management tools?</span>
+                    <div class="answer">
+                      Secrets management tools securely store, manage, and control access to sensitive information. Common tools include:
+                      <ul>
+                        <li>HashiCorp Vault</li>
+                        <li>AWS Secrets Manager</li>
+                        <li>Azure Key Vault</li>
+                        <li>Google Secret Manager</li>
+                        <li>SOPS (Secrets OPerationS)</li>
+                      </ul>
+                    </div>
+                  </li>
+                
+                  <li data-id="q156">
+                    <span class="faq-question">What is the principle of least privilege?</span>
+                    <div class="answer">
+                      The principle of least privilege is a security concept that ensures users and systems are granted the minimum level of access—or permissions—necessary to perform their tasks. It helps reduce the attack surface and limit the impact of breaches.
+                    </div>
+                  </li>
+                
+                  <li data-id="q157">
+                    <span class="faq-question">What is OAuth2 and how does it relate to DevOps?</span>
+                    <div class="answer">
+                      OAuth2 is an authorization framework that allows third-party applications to access user resources without exposing credentials. In DevOps, it is commonly used for secure API access, SSO (Single Sign-On), and securing CI/CD tools and pipelines.
+                    </div>
+                  </li>
+                
+                  <li data-id="q158">
+                    <span class="faq-question">What is SSL/TLS and why is it important?</span>
+                    <div class="answer">
+                      SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols used to secure communications over networks. They ensure data confidentiality, integrity, and authenticity, making them essential for secure web and API communication.
+                    </div>
+                  </li>
+                     
+
+           
+                    <li data-id="q159">
+                      <span class="faq-question">How do you secure CI/CD pipelines?</span>
+                      <div class="answer">
+                        Securing CI/CD pipelines involves practices like:
+                        <ul>
+                          <li>Using least privilege for access controls</li>
+                          <li>Scanning for secrets and vulnerabilities</li>
+                          <li>Validating code with static and dynamic analysis</li>
+                          <li>Encrypting credentials and using secure storage</li>
+                          <li>Auditing logs and activities</li>
+                          <li>Running builds in isolated environments</li>
+                        </ul>
+                      </div>
+                    </li>
+                  
+                    <li data-id="q160">
+                      <span class="faq-question">What is SonarQube?</span>
+                      <div class="answer">
+                        SonarQube is an open-source platform used to perform automatic reviews of code to detect bugs, code smells, vulnerabilities, and duplications. It integrates with CI/CD tools to enforce code quality gates.
+                      </div>
+                    </li>
+                  
+                    <li data-id="q161">
+                      <span class="faq-question">What is static code analysis?</span>
+                      <div class="answer">
+                        Static code analysis is the process of analyzing source code without executing it. It helps identify syntax errors, code smells, security vulnerabilities, and maintainability issues early in the development lifecycle.
+                      </div>
+                    </li>
+                  
+                    <li data-id="q162">
+                      <span class="faq-question">What is dynamic code analysis?</span>
+                      <div class="answer">
+                        Dynamic code analysis involves executing a program and monitoring its behavior to find issues such as memory leaks, security vulnerabilities, and performance bottlenecks during runtime.
+                      </div>
+                    </li>
+                  
+                    <li data-id="q163">
+                      <span class="faq-question">What is a build artifact repository?</span>
+                      <div class="answer">
+                        A build artifact repository stores the output artifacts (e.g., binaries, JARs, Docker images) generated by CI builds. It supports versioning, access control, and promotes reusability across environments.
+                      </div>
+                    </li>
+                  
+                    <li data-id="q164">
+                      <span class="faq-question">What is Nexus or Artifactory?</span>
+                      <div class="answer">
+                        Nexus and Artifactory are artifact repository managers. They store, manage, and distribute build artifacts and dependencies, supporting various package formats like Maven, npm, Docker, and more.
+                      </div>
+                    </li>
+                  
+                    <li data-id="q165">
+                      <span class="faq-question">What is a package manager?</span>
+                      <div class="answer">
+                        A package manager is a tool that automates the process of installing, upgrading, configuring, and removing software packages. Examples include npm (JavaScript), pip (Python), apt (Debian/Ubuntu), and yum (RedHat/CentOS).
+                      </div>
+                    </li>
+                  
+                    <li data-id="q166">
+                      <span class="faq-question">What is semantic versioning?</span>
+                      <div class="answer">
+                        Semantic versioning is a versioning scheme that uses a three-part number format: <code>MAJOR.MINOR.PATCH</code>. It conveys meaning about the nature of changes:
+                        <ul>
+                          <li>MAJOR – incompatible API changes</li>
+                          <li>MINOR – backward-compatible functionality</li>
+                          <li>PATCH – backward-compatible bug fixes</li>
+                        </ul>
+                      </div>
+                    </li>
+                  
+                    <li data-id="q167">
+                      <span class="faq-question">How do you manage secrets in CI/CD pipelines?</span>
+                      <div class="answer">
+                        Secrets in CI/CD pipelines are managed by:
+                        <ul>
+                          <li>Storing secrets in secure vaults (e.g., HashiCorp Vault, AWS Secrets Manager)</li>
+                          <li>Using environment variables with access controls</li>
+                          <li>Avoiding hardcoding secrets in source code</li>
+                          <li>Encrypting secrets and rotating them regularly</li>
+                          <li>Integrating secrets management tools with CI/CD platforms</li>
+                        </ul>
+                      </div>
+                    </li>
+                  
+                    <li data-id="q168">
+                      <span class="faq-question">What is a sandbox environment?</span>
+                      <div class="answer">
+                        A sandbox environment is an isolated testing environment that mimics production without affecting live data or users. It is used for development, testing, and experimentation to ensure changes are safe before deployment.
+                      </div>
+                    </li>
+           
+                  
+                    
+                      <li data-id="q169">
+                        <span class="faq-question">What is the purpose of staging environments?</span>
+                        <div class="answer">
+                          A staging environment is a replica of the production environment used to test application changes before deployment. It helps identify issues and ensures that new features or fixes work as expected in a production-like setup.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q170">
+                        <span class="faq-question">What is blue/green testing?</span>
+                        <div class="answer">
+                          Blue/Green testing is a deployment strategy that involves running two identical environments: one active (Blue) and one idle (Green). New versions are deployed to the idle environment, and traffic is switched once validated, reducing downtime and risk.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q171">
+                        <span class="faq-question">How do you handle rollbacks in production?</span>
+                        <div class="answer">
+                          Rollbacks in production can be handled by:
+                          <ul>
+                            <li>Keeping previous stable versions ready for redeployment</li>
+                            <li>Using deployment strategies like Blue/Green or Canary</li>
+                            <li>Automating rollbacks with CI/CD tools</li>
+                            <li>Maintaining infrastructure-as-code and versioned artifacts</li>
+                          </ul>
+                        </div>
+                      </li>
+                    
+                      <li data-id="q172">
+                        <span class="faq-question">What is trunk-based development?</span>
+                        <div class="answer">
+                          Trunk-based development is a Git workflow where all developers commit to a single branch (usually main or trunk). Feature flags and short-lived branches are used to avoid merge conflicts and accelerate CI/CD processes.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q173">
+                        <span class="faq-question">What is GitOps?</span>
+                        <div class="answer">
+                          GitOps is a DevOps practice that uses Git as the single source of truth for declarative infrastructure and application configurations. Changes are automatically applied through CI/CD tools when updates are pushed to Git repositories.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q174">
+                        <span class="faq-question">What is DevSecOps?</span>
+                        <div class="answer">
+                          DevSecOps integrates security practices into the DevOps pipeline. It involves automated security testing, compliance checks, vulnerability scanning, and secret management to ensure secure code and infrastructure from development to production.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q175">
+                        <span class="faq-question">How do you monitor application performance in production?</span>
+                        <div class="answer">
+                          Application performance in production is monitored using:
+                          <ul>
+                            <li>APM tools like New Relic, Datadog, or AppDynamics</li>
+                            <li>Log aggregation tools like ELK or Splunk</li>
+                            <li>Metric collection tools like Prometheus and Grafana</li>
+                            <li>Custom alerts, dashboards, and health checks</li>
+                          </ul>
+                        </div>
+                      </li>
+                    
+                      <li data-id="q176">
+                        <span class="faq-question">What are the challenges of microservices in DevOps?</span>
+                        <div class="answer">
+                          Challenges of microservices in DevOps include:
+                          <ul>
+                            <li>Managing inter-service communication and dependencies</li>
+                            <li>Deploying and monitoring numerous services independently</li>
+                            <li>Ensuring data consistency and distributed tracing</li>
+                            <li>Scaling services efficiently and securely</li>
+                            <li>Complex CI/CD workflows and environment management</li>
+                          </ul>
+                        </div>
+                      </li>
+                    
+                      <li data-id="q177">
+                        <span class="faq-question">What is a centralized logging system?</span>
+                        <div class="answer">
+                          A centralized logging system collects and stores logs from multiple services or servers in one location. It simplifies monitoring, debugging, and auditing. Examples include the ELK Stack (Elasticsearch, Logstash, Kibana) and Graylog.
+                        </div>
+                      </li>
+                    
+                      <li data-id="q178">
+                        <span class="faq-question">What is the twelve-factor app methodology?</span>
+                        <div class="answer">
+                          The twelve-factor app is a methodology for building modern, scalable, and maintainable SaaS applications. It promotes practices such as:
+                          <ul>
+                            <li>Codebase tracking in version control</li>
+                            <li>Strict separation of config from code</li>
+                            <li>Backing services as attached resources</li>
+                            <li>Stateless processes</li>
+                            <li>Dev/prod parity</li>
+                            <li>Logs as event streams</li>
+                            <li>Continuous deployment</li>
+                          </ul>
+                          It’s designed to enable portability and resilience in cloud environments.
+                        </div>
+                      </li>
+                    
+                    
+
+
+
+                     
+                        <li data-id="q179">
+                          <span class="faq-question">What is cloud-native architecture?</span>
+                          <div class="answer">
+                            Cloud-native architecture is a design approach that leverages cloud computing technologies to build and run scalable, resilient, and manageable applications. It typically includes microservices, containers, CI/CD automation, and dynamic orchestration with tools like Kubernetes.
+                          </div>
+                        </li>
+                      
+                        <li data-id="q180">
+                          <span class="faq-question">What is the difference between public, private, and hybrid cloud?</span>
+                          <div class="answer">
+                            <ul>
+                              <li><strong>Public Cloud:</strong> Services provided by third-party providers over the internet (e.g., AWS, Azure, GCP). Shared infrastructure.</li>
+                              <li><strong>Private Cloud:</strong> Cloud infrastructure used exclusively by a single organization, either on-premises or hosted.</li>
+                              <li><strong>Hybrid Cloud:</strong> Combines public and private clouds, allowing data and apps to move between them for flexibility and optimization.</li>
+                            </ul>
+                          </div>
+                        </li>
+                      
+                        <li data-id="q181">
+                          <span class="faq-question">How do you ensure high availability in cloud deployments?</span>
+                          <div class="answer">
+                            High availability (HA) in cloud deployments can be ensured through:
+                            <ul>
+                              <li>Deploying across multiple availability zones or regions</li>
+                              <li>Using load balancers for traffic distribution</li>
+                              <li>Implementing auto-scaling to handle traffic spikes</li>
+                              <li>Using managed services with built-in HA features</li>
+                              <li>Regular monitoring and failover mechanisms</li>
+                            </ul>
+                          </div>
+                        </li>
+                      
+                        <li data-id="q182">
+                          <span class="faq-question">What is fault tolerance?</span>
+                          <div class="answer">
+                            Fault tolerance is the ability of a system to continue operating properly in the event of the failure of one or more components. It involves redundancy, failover strategies, and self-healing mechanisms to ensure uptime and reliability.
+                          </div>
+                        </li>
+                      
+                        <li data-id="q183">
+                          <span class="faq-question">What is disaster recovery in DevOps?</span>
+                          <div class="answer">
+                            Disaster recovery in DevOps refers to the strategies and processes to restore systems, data, and operations after a catastrophic failure. This includes:
+                            <ul>
+                              <li>Automated backups and replication</li>
+                              <li>Failover systems and redundant infrastructure</li>
+                              <li>Recovery Time Objective (RTO) and Recovery Point Objective (RPO) planning</li>
+                              <li>Periodic testing of disaster recovery plans</li>
+                            </ul>
+                          </div>
+                        </li>
+                 
+                      
+
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">
+------------------------------------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+--------------------------------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+-------------------------------------------------
+</span></li>
+                                                                                    
 
   <li data-id="q32" class="yellow">
     <span class="faq-question">Jest?</span>
@@ -8326,7 +9495,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q38">
-  <span class="faq-question">What is the difference between <code>test</code> and <code>it</code> in Jest?</span>
+  <span class="faq-question">What is the difference between <b>test</b> and <b>it</b> in Jest?</span>
   <div class="answer">
     There is no functional difference between <code>test()</code> and <code>it()</code> in Jest. Both define a test case. <code>it()</code> is often preferred for readability in behavior-driven development (BDD) style.
   </div>
@@ -8360,7 +9529,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q43">
-  <span class="faq-question">What is the difference between <code>jest.fn()</code> and <code>jest.mock()</code>?</span>
+  <span class="faq-question">What is the difference between <b>jest.fn()</b> and <b>jest.mock()</b>?</span>
   <div class="answer">
     <code>jest.fn()</code> creates a standalone mock function, while <code>jest.mock()</code> mocks entire modules or specific module exports automatically.
   </div>
@@ -8374,7 +9543,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q45">
-  <span class="faq-question">What is the use of <code>done</code> callback in Jest tests?</span>
+  <span class="faq-question">What is the use of <b>done</b> callback in Jest tests?</span>
   <div class="answer">
     The <code>done</code> callback is used in tests to tell Jest that an asynchronous test has finished, which is useful for callback-based async functions.
   </div>
@@ -8429,7 +9598,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q53">
-  <span class="faq-question">Explain <code>beforeAll</code>, <code>beforeEach</code>, <code>afterAll</code>, and <code>afterEach</code> in Jest.</span>
+  <span class="faq-question">Explain <b>beforeAll</b>, <b>beforeEach</b>, <b>afterAll</b>, and <b>afterEach</b> in Jest.</span>
   <div class="answer">
     <ul>
       <li><code>beforeAll()</code>: Runs once before all tests in a suite.</li>
@@ -8441,7 +9610,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q54">
-  <span class="faq-question">How do you configure Jest using <code>jest.config.js</code>?</span>
+  <span class="faq-question">How do you configure Jest using <b>jest.config.js</b>?</span>
   <div class="answer">
     Create a <code>jest.config.js</code> file in the project root and export an object with Jest configuration options, e.g.:
     <pre><code>module.exports = {
@@ -8481,7 +9650,7 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q59">
-  <span class="faq-question">What is the use of <code>--watch</code> mode in Jest?</span>
+  <span class="faq-question">What is the use of <b>--watch</b> mode in Jest?</span>
   <div class="answer">
     The <code>--watch</code> mode runs Jest in watch mode, re-running tests on file changes for faster development feedback.
   </div>
@@ -8619,21 +9788,21 @@ console.log(result);  // Output: 15
 </li>
 
 <li data-id="q79">
-  <span class="faq-question">What is the difference between <code>jest.resetAllMocks()</code> and <code>jest.clearAllMocks()</code>?</span>
+  <span class="faq-question">What is the difference between <b>jest.resetAllMocks()</b> and <b>jest.clearAllMocks()</b>?</span>
   <div class="answer">
     <code>jest.clearAllMocks()</code> resets mock call history but keeps mock implementations; <code>jest.resetAllMocks()</code> resets both call history and implementations.
   </div>
 </li>
 
 <li data-id="q80">
-  <span class="faq-question">How do you use the <code>test.each</code> function in Jest?</span>
+  <span class="faq-question">How do you use the <b>test.each</b> function in Jest?</span>
   <div class="answer">
     <code>test.each(table)(name, fn)</code> runs the same test repeatedly with different data sets from <code>table</code>, useful for parameterized testing.
   </div>
 </li>
 
 <li data-id="q81">
-  <span class="faq-question">What is the purpose of <code>expect.assertions()</code> in Jest?</span>
+  <span class="faq-question">What is the purpose of <b>expect.assertions()</b> in Jest?</span>
   <div class="answer">
     It ensures a certain number of assertions are called during a test, useful especially in async tests to verify all expected checks run.
   </div>
@@ -10002,67 +11171,25 @@ CI/CD Question List?
   </div>
 </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-  
-  
-  
-  
-  
-  
-  
-  
-  </div></li>
-  <li data-id="q32"><span class="faq-question">
-  
-  Helllo
-  
-  </span><div class="answer">
-  
-  </div></li>
+
   
   
 
   
 
 
-  <li data-id="q_call_api_without_useeffect"><span class="faq-question232">------------------------------------------<br />-----------------------------
-  </span><div class="answer"></div></li>
-  <li data-id="q_call_api_without_useeffect"><span class="faq-question234234">------------------------------------------<br />-----------------------------
-  </span><div class="answer"></div></li>
-  <li data-id="q_call_api_without_useeffect"><span class="faq-question232">------------------------------------------<br />-----------------------------
-  </span><div class="answer"></div></li>
-  <li data-id="q_call_api_without_useeffect"><span class="faq-question234234">------------------------------------------<br />-----------------------------
-  </span><div class="answer"></div></li>
-  
+<li data-id="q32" class="yellow"><span class="faq-question">
+------------------------------------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+--------------------------------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+-------------------------------------------------
+</span></li>
     
-
-  </ul>
-                                                                                                      
-  
-  
-
+</ul>
 
 <script src="script.js"></script>
 
