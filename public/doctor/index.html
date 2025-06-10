@@ -58,15 +58,331 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       </tr>
       <tr>
         <td colspan="4">
-          + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket
+          + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka
         </td>
       </tr>
 </tbody></table>  
 
 </div></li>
+<li data-id="q122"><span class="faq-question green">
+  Arrow Function
+</span>
+<div class="answer">
+  <h2>Arrow Function vs Normal Function in Node.js</h2>
 
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Arrow Function</th>
+      <th>Normal Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Syntax</strong></td>
+      <td><b>const fn = () => {}</b></td>
+      <td><b>function fn() {}</b></td>
+    </tr>
+    <tr>
+      <td><strong>this Binding</strong></td>
+      <td>Inherits <b>this</b> from the enclosing scope</td>
+      <td>Has its own <b>this</b> context</td>
+    </tr>
+    <tr>
+      <td><strong>Constructor</strong></td>
+      <td>Cannot be used as a constructor (no <b>new</b>)</td>
+      <td>Can be used as a constructor with <b>new</b></td>
+    </tr>
+    <tr>
+      <td><strong>Arguments Object</strong></td>
+      <td>No <b>arguments</b> object</td>
+      <td>Has <b>arguments</b> object</td>
+    </tr>
+    <tr>
+      <td><strong>Usage in Callbacks</strong></td>
+      <td>Best for callbacks due to lexical <b>this</b></td>
+      <td>Requires manual <b>this</b> binding in some cases</td>
+    </tr>
+    <tr>
+      <td><strong>Hoisting</strong></td>
+      <td>Not hoisted</td>
+      <td>Function declarations are hoisted</td>
+    </tr>
+    <tr>
+      <td><strong>Readable/Verbose</strong></td>
+      <td>Shorter and cleaner syntax</td>
+      <td>More verbose, but clearer in some contexts</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Example:</h3>
+
+<pre>
+  // Arrow Function
+  const add = (a, b) => a + b;
+
+  // Normal Function
+  function add(a, b) {
+    return a + b;
+  }
+</pre>
+
+</div></li>
+
+<li data-id="q122"><span class="faq-question green">
+  CORS
+</span>
+<div class="answer">
+Cross-Origin Resource Sharing
+
+  <p><strong>CORS</strong> is a security feature implemented by web browsers that restricts web pages from making requests to a different domain (origin) than the one that served the web page.</p>
   
+  <h3>✅ Example Scenario:</h3>
+  <ul>
+    <li>Your frontend is served from <code>http://localhost:3000</code></li>
+    <li>Your backend API is running at <code>http://localhost:5000</code></li>
+    <li>Calling the backend from the frontend without proper CORS setup will cause a CORS error.</li>
+  </ul>
+  
+  <h3>🚫 Example CORS Error:</h3>
+  <pre style="background:#f8f8f8;padding:10px;">
+  Access to fetch at 'http://localhost:5000/api' from origin 'http://localhost:3000' 
+  has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present.
+  </pre>
+  
+  <h3>🛠️ How to Fix CORS in Node.js (Express)</h3>
+  
+  <pre><code>
+  // Install the CORS middleware
+  // npm install cors
+  
+  const express = require('express');
+  const cors = require('cors');
+  const app = express();
+  
+  // Enable CORS for all routes
+  app.use(cors());
+  
+  app.get('/api', (req, res) => {
+    res.json({ message: 'CORS is enabled!' });
+  });
+  
+  app.listen(5000, () => console.log('Server running on port 5000'));
+  </code></pre>
+  
+  <h3>🌐 CORS Headers Sent by Server:</h3>
+  <ul>
+    <li><code>Access-Control-Allow-Origin: *</code> — Allow all origins</li>
+    <li><code>Access-Control-Allow-Methods: GET, POST, PUT, DELETE</code></li>
+    <li><code>Access-Control-Allow-Headers: Content-Type</code></li>
+  </ul>
+  
+  <h3>🔒 Important Notes:</h3>
+  <ul>
+    <li>Always restrict allowed origins in production (do not use <code>*</code>)</li>
+    <li>Preflight OPTIONS requests are sent before certain methods like <code>POST</code> with custom headers</li>
+  </ul>
+  
+</div></li>
 
+
+<li data-id="q122"><span class="faq-question green">
+  React useReducer Example
+</span>
+<div class="answer">
+
+<pre>
+  
+      const { useReducer } = React;
+  
+      // Step 1: Define the reducer function
+      function counterReducer(state, action) {
+        switch (action.type) {
+          case 'increment':
+            return { count: state.count + 1 };
+          case 'decrement':
+            return { count: state.count - 1 };
+          case 'reset':
+            return { count: 0 };
+          default:
+            return state;
+        }
+      }
+  
+      // Step 2: Component using useReducer
+      function Counter() {
+        const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+  
+        return (
+          <div style={{ fontFamily: 'Arial', padding: '20px' }}>
+            <h2>useReducer Counter</h2>
+            <p>Count: {state.count}</p>
+            <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+            <button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>
+            <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+          </div>
+        );
+      }
+  
+      // Render the component
+      ReactDOM.createRoot(document.getElementById('root')).render(<Counter />);
+  
+    </pre>
+</div></li>
+
+<li data-id="q122"><span class="faq-question green">
+  Calls, apply, bind, callBind
+</span>
+<div class="answer">
+  <h2>Are <b>call</b>, <b>apply</b>, <b>bind</b>, and <b>callBind</b> Mandatory to Learn?</h2>
+
+<ol>
+  <li>
+    <h3><b>call()</b>, <b>apply()</b>, and <b>bind()</b> – <span style="color: green;">Yes, Mandatory</span></h3>
+    <ul>
+      <li>They are core JavaScript features and part of the official ECMAScript specification.</li>
+      <li>Used frequently in real-world development for:
+        <ul>
+          <li>Function borrowing (e.g., using <b>Array.prototype</b> methods on objects)</li>
+          <li>Controlling the <b>this</b> context in callback functions and event handlers</li>
+          <li>Partial function application with <b>bind()</b></li>
+        </ul>
+      </li>
+      <li>Commonly asked in technical interviews and coding assessments.</li>
+      <li>Essential for understanding how JavaScript functions and scope resolution work.</li>
+    </ul>
+  </li>
+
+  <li>
+    <h3><b>callBind()</b> – <span style="color: orange;">Optional</span></h3>
+    <ul>
+      <li><strong>Not part of standard JavaScript or Node.js</strong>.</li>
+      <li>Found in some utility libraries or polyfills (e.g., <b>es-abstract</b>).</li>
+      <li>Only necessary if you're working with low-level utility libraries, custom polyfills, or contributing to frameworks.</li>
+      <li>Understanding it gives insight into advanced JavaScript patterns but is not required for day-to-day development.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Conclusion</h3>
+<p><strong>If you're learning JavaScript/Node.js seriously, mastering <b>call</b>, <b>apply</b>, and <b>bind</b> is <span style="color: green;">essential</span>.</strong></p>
+<p><b>callBind</b> is <span style="color: orange;">optional</span> and only useful in specialized or advanced scenarios.</p>
+
+</div>
+
+
+<div class="answer">
+<h3>1. <b>call()</b></h3>
+<p>Calls a function with a given <b>this</b> value and arguments provided one by one.</p>
+<pre>
+  function greet(greeting) {
+    console.log(`${greeting}, ${this.name}`);
+  }
+
+  const person = { name: 'Alice' };
+  greet.call(person, 'Hello');  // Output: Hello, Alice
+</pre>
+
+<h3>2. apply()</h3>
+<p>Calls a function with a given <b>this</b> value, and arguments provided as an array.</p>
+<pre>
+  greet.apply(person, ['Hi']);  // Output: Hi, Alice
+</pre>
+
+<h3>3. <b>bind()</b></h3>
+<p>Returns a new function with the bound <b>this</b> context and optional preset arguments.</p>
+<pre>
+  const boundGreet = greet.bind(person, 'Hey');
+  boundGreet();  // Output: Hey, Alice
+</pre>
+
+<h3>4. <b>callBind</b> (Not Standard)</h3>
+<p><b>callBind</b> is <strong>not</strong> a standard method in JavaScript or Node.js.</p>
+<p>However, it may appear in some libraries or polyfills. For example:</p>
+<pre>const callBind = Function.prototype.call.bind(Function.prototype.bind);
+</pre>
+<p>This pattern is used in advanced libraries (like <b>core-js</b> or <b>es-abstract</b>) to create utility functions.</p>
+
+<h3>Summary Table</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>call</code></td>
+      <td>Invokes a function with a specific <b>this</b> and individual arguments</td>
+    </tr>
+    <tr>
+      <td><code>apply</code></td>
+      <td>Like <b>call</b>, but accepts arguments as an array</td>
+    </tr>
+    <tr>
+      <td><code>bind</code></td>
+      <td>Returns a new function with <b>this</b> permanently bound</td>
+    </tr>
+    <tr>
+      <td><code>callBind</code></td>
+      <td><strong>Not a built-in method</strong>, used in some libraries as a utility</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+
+
+<div class="answer">
+  <h2>Advantages of <b>call</b>, <b>apply</b>, <b>bind</b>, and <b>callBind</b> in JavaScript</h2>
+
+  <ol>
+    <li>
+      <h3><b>call()</b></h3>
+      <ul>
+        <li>Allows invoking a function with an explicitly set <b>this</b> context.</li>
+        <li>Useful for borrowing methods from other objects.</li>
+        <li>Arguments are passed individually, which can be simpler when you know the exact number.</li>
+        <li>Good for invoking functions immediately with dynamic context.</li>
+      </ul>
+    </li>
+  
+    <li>
+      <h3><b>apply()</b></h3>
+      <ul>
+        <li>Similar to <b>call</b>, but accepts arguments as an array.</li>
+        <li>Helpful when arguments are already in an array or array-like structure (e.g., <b>arguments</b> object).</li>
+        <li>Commonly used with functions like <b>Math.max.apply(null, array)</b>.</li>
+      </ul>
+    </li>
+  
+    <li>
+      <h3><b>bind()</b></h3>
+      <ul>
+        <li>Returns a new function with permanently bound <b>this</b> context.</li>
+        <li>Ideal for callback scenarios where <b>this</b> context needs to persist (e.g., event handlers).</li>
+        <li>Supports partial application (pre-setting arguments).</li>
+        <li>Improves readability and predictability of context-bound code.</li>
+      </ul>
+    </li>
+  
+    <li>
+      <h3><b>callBind()</b> (Non-standard)</h3>
+      <ul>
+        <li>Not part of native JavaScript, but found in utility libraries (e.g., <b>es-abstract</b>).</li>
+        <li>Combines the behavior of <b>Function.prototype.call</b> and <b>bind</b>.</li>
+        <li>Enables reusable, context-fixed versions of functions.</li>
+        <li>Useful in building polyfills or reusable low-level utilities.</li>
+      </ul>
+    </li>
+  </ol>
+  
+</div>
+
+</li>
 
 <li data-id="q122"><span class="faq-question">
 Express + PostGre SQL + Redis
@@ -231,138 +547,6 @@ shallow / shadow copy
 
 
 </div></li>
-
-<li data-id="q122"><span class="faq-question">
-Input Validation
-</span><div class="answer">
-
-  
-  <p>Input validation is the process of verifying user input to ensure it meets the expected format, type, or value constraints before further processing.</p>
-  
-  <h2>2. Zod Validation Example</h2>
-  <p><strong>Install:</strong> <code>npm install zod</code></p>
-  
-  <pre><code>import { z } from "zod";
-  
-  const userSchema = z.object({
-    username: z.string().min(3),
-    age: z.number().int().positive(),
-  });
-  
-  const result = userSchema.safeParse({
-    username: "JohnDoe",
-    age: 25,
-  });
-  
-  if (!result.success) {
-    console.log(result.error.format());
-  } else {
-    console.log("Valid:", result.data);
-  }
-  </code></pre>
-  
-  <h3>✅ Pros of Zod:</h3>
-  <ul>
-    <li>Functional and immutable</li>
-    <li>Type-safe with TypeScript</li>
-    <li>No decorators needed</li>
-  </ul>
-  
-  <h3>🚫 Cons of Zod:</h3>
-  <ul>
-    <li>Not decorator-based (if you prefer that style)</li>
-  </ul>
-  
-  <hr>
-  
-  <h2>3. Class Validator Example</h2>
-  <p><strong>Install:</strong> <code>npm install class-validator class-transformer</code></p>
-  
-  <pre><code>import { IsString, IsInt, MinLength, IsPositive } from "class-validator";
-  import { plainToInstance } from "class-transformer";
-  
-  class CreateUserDto {
-    @IsString()
-    @MinLength(3)
-    username: string;
-  
-    @IsInt()
-    @IsPositive()
-    age: number;
-  }
-  
-  const input = { username: "JohnDoe", age: 25 };
-  const user = plainToInstance(CreateUserDto, input);
-  
-  import { validate } from "class-validator";
-  
-  validate(user).then(errors => {
-    if (errors.length > 0) {
-      console.log("Validation failed:", errors);
-    } else {
-      console.log("Valid:", user);
-    }
-  });
-  </code></pre>
-  
-  <h3>✅ Pros of Class Validator:</h3>
-  <ul>
-    <li>Decorator-based (OOP-friendly)</li>
-    <li>Widely used in NestJS</li>
-    <li>Supports class-transformer for parsing/transforming inputs</li>
-  </ul>
-  
-  <h3>🚫 Cons of Class Validator:</h3>
-  <ul>
-    <li>More verbose setup</li>
-    <li>Requires decorators and class-based code</li>
-  </ul>
-  
-  <hr>
-  
-  <h2>4. When to Use Which?</h2>
-  <ul>
-    <li><strong>Zod:</strong> Best for functional programming, schema-first validation, and fast prototyping.</li>
-    <li><strong>Class Validator:</strong> Ideal for OOP-style architecture and NestJS applications.</li>
-  </ul>
-  
-  <h2>5. Summary Table</h2>
-  <table border="1" cellpadding="6">
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Zod</th>
-        <th>Class Validator</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Style</td>
-        <td>Functional</td>
-        <td>OOP / Decorator-based</td>
-      </tr>
-      <tr>
-        <td>TypeScript Support</td>
-        <td>Excellent (type inference)</td>
-        <td>Good (requires class definitions)</td>
-      </tr>
-      <tr>
-        <td>Integration</td>
-        <td>Framework-agnostic</td>
-        <td>Popular in NestJS</td>
-      </tr>
-      <tr>
-        <td>Dependencies</td>
-        <td>Lightweight</td>
-        <td>Requires decorators & class-transformer</td>
-      </tr>
-    </tbody>
-  </table>
-  
-</div></li>
-
-
-
 
 
 
@@ -3344,7 +3528,526 @@ API Gateway simplifies building scalable, secure, and reliable APIs with minimal
 
 
 
+
+
+
+
+
+
     
+<li data-id="q_redux_formatted" class="yellow">
+  <span class="faq-question">Zod with NodeJS</span>
+  <div class="answer">
+    <pre>
+&lt;!-- Node.js backend validation with Zod and Express.js --&gt;
+&lt;code&gt;
+const express = require('express');
+const { z } = require('zod');
+
+const app = express();
+app.use(express.json());
+
+// Define Zod schema for Contact Us data
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(5, "Message must be at least 5 characters"),
+});
+
+// POST /contact route with Zod validation
+app.post('/contact', (req, res) =&gt; {
+  const parseResult = contactSchema.safeParse(req.body);
+
+  if (!parseResult.success) {
+    // Validation failed
+    return res.status(400).json({
+      success: false,
+      errors: parseResult.error.errors.map(err =&gt; ({
+        field: err.path[0],
+        message: err.message,
+      })),
+    });
+  }
+
+  // If valid, process data here
+  const validData = parseResult.data;
+
+  res.json({
+    success: true,
+    message: "Contact form submitted successfully",
+    data: validData,
+  });
+});
+
+const PORT = 3000;
+app.listen(PORT, () =&gt; {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+&lt;/code&gt;
+    </pre>
+  </div>
+</li>
+
+
+<li data-id="q_redux_formatted"><span class="faq-question">
+  Class Validator & Zod Type Validations with Examples
+  </span>
+  <div class="answer">
+
+
+<pre>import { z } from "zod";</pre>
+
+<h3>1. String</h3>
+<pre>const stringSchema = z.string();
+
+stringSchema.parse("hello");          // ✅ valid
+// stringSchema.parse(123);           // ❌ throws error
+
+// String with min/max length
+const limitedString = z.string().min(5).max(10);
+limitedString.parse("abcdef");       // ✅ valid
+// limitedString.parse("abc");       // ❌ too short
+</pre>
+
+<h3>2. Number</h3>
+<pre>const numberSchema = z.number();
+
+numberSchema.parse(123);              // ✅ valid
+// numberSchema.parse("123");         // ❌ throws error
+
+// Number with min/max
+const rangedNumber = z.number().min(10).max(100);
+rangedNumber.parse(50);               // ✅ valid
+// rangedNumber.parse(5);             // ❌ too small
+</pre>
+
+<h3>3. Integer</h3>
+<pre>const intSchema = z.number().int();
+
+intSchema.parse(10);                  // ✅ valid
+// intSchema.parse(10.5);             // ❌ not an integer
+</pre>
+
+<h3>4. Boolean</h3>
+<pre>const boolSchema = z.boolean();
+
+boolSchema.parse(true);               // ✅ valid
+// boolSchema.parse("true");          // ❌ throws error
+</pre>
+
+<h3>5. Date</h3>
+<pre>const dateSchema = z.date();
+
+dateSchema.parse(new Date());         // ✅ valid
+// dateSchema.parse("2021-01-01");    // ❌ throws error, use z.string() with .refine for date strings
+</pre>
+
+<h3>6. Array</h3>
+<pre>const arraySchema = z.array(z.string());
+
+arraySchema.parse(["a", "b", "c"]);   // ✅ valid
+// arraySchema.parse(["a", 1]);       // ❌ mixed types
+</pre>
+
+<h3>7. Tuple</h3>
+<pre>const tupleSchema = z.tuple([z.string(), z.number()]);
+
+tupleSchema.parse(["abc", 123]);      // ✅ valid
+// tupleSchema.parse([123, "abc"]);   // ❌ wrong order/types
+</pre>
+
+<h3>8. Object</h3>
+<pre>const objSchema = z.object({
+  name: z.string(),
+  age: z.number().int().positive(),
+});
+
+objSchema.parse({ name: "John", age: 30 }); // ✅ valid
+// objSchema.parse({ name: "John" });       // ❌ missing age
+</pre>
+
+<h3>9. Enum</h3>
+<pre>const colorEnum = z.enum(["Red", "Green", "Blue"]);
+
+colorEnum.parse("Red");                // ✅ valid
+// colorEnum.parse("Yellow");          // ❌ invalid enum value
+</pre>
+
+<h3>10. Literal</h3>
+<pre>const literalSchema = z.literal("specificValue");
+
+literalSchema.parse("specificValue"); // ✅ valid
+// literalSchema.parse("other");       // ❌ not matching literal
+</pre>
+
+<h3>11. Union</h3>
+<pre>const unionSchema = z.union([z.string(), z.number()]);
+
+unionSchema.parse("hello");            // ✅ valid
+unionSchema.parse(123);                // ✅ valid
+// unionSchema.parse(true);            // ❌ invalid type
+</pre>
+
+<h3>12. Intersection</h3>
+<pre>const base = z.object({ id: z.string() });
+const extension = z.object({ age: z.number() });
+
+const intersectionSchema = base.and(extension);
+
+intersectionSchema.parse({ id: "abc", age: 25 }); // ✅ valid
+// intersectionSchema.parse({ id: "abc" });       // ❌ missing age
+</pre>
+
+<h3>13. Optional and Nullable</h3>
+<pre>const optionalSchema = z.string().optional();
+optionalSchema.parse(undefined);      // ✅ valid
+optionalSchema.parse("hello");         // ✅ valid
+
+const nullableSchema = z.string().nullable();
+nullableSchema.parse(null);            // ✅ valid
+nullableSchema.parse("world");         // ✅ valid
+</pre>
+
+<h3>14. Default</h3>
+<pre>const defaultSchema = z.string().default("defaultValue");
+
+defaultSchema.parse(undefined);       // "defaultValue"
+defaultSchema.parse("input");          // "input"
+</pre>
+
+<h3>15. Record</h3>
+<pre>// Object with string keys and number values
+const recordSchema = z.record(z.number());
+
+recordSchema.parse({ a: 1, b: 2 });   // ✅ valid
+// recordSchema.parse({ a: "one" });   // ❌ invalid value type
+</pre>
+
+<h3>16. Custom Validation</h3>
+<pre>const customSchema = z.string().refine(val => val.startsWith("A"), {
+  message: "Must start with 'A'",
+});
+
+customSchema.parse("Apple");           // ✅ valid
+// customSchema.parse("Banana");       // ❌ validation error
+</pre>
+</div>
+</li>
+
+<li data-id="q_redux_formatted"><span class="faq-question">
+  Zod Validation Examples in Node.js
+  </span><div class="answer">
+  
+  <pre>
+    import { z } from "zod";
+    
+    function runValidationExamples() {
+      try {
+        // 1. String
+        const stringSchema = z.string();
+        console.log("String:", stringSchema.parse("hello"));
+    
+        // String with min/max length
+        const limitedString = z.string().min(5).max(10);
+        console.log("Limited String:", limitedString.parse("abcdef"));
+    
+        // 2. Number
+        const numberSchema = z.number();
+        console.log("Number:", numberSchema.parse(123));
+    
+        // Number with min/max
+        const rangedNumber = z.number().min(10).max(100);
+        console.log("Ranged Number:", rangedNumber.parse(50));
+    
+        // 3. Integer
+        const intSchema = z.number().int();
+        console.log("Integer:", intSchema.parse(10));
+    
+        // 4. Boolean
+        const boolSchema = z.boolean();
+        console.log("Boolean:", boolSchema.parse(true));
+    
+        // 5. Date
+        const dateSchema = z.date();
+        console.log("Date:", dateSchema.parse(new Date()));
+    
+        // 6. Array
+        const arraySchema = z.array(z.string());
+        console.log("Array:", arraySchema.parse(["a", "b", "c"]));
+    
+        // 7. Tuple
+        const tupleSchema = z.tuple([z.string(), z.number()]);
+        console.log("Tuple:", tupleSchema.parse(["abc", 123]));
+    
+        // 8. Object
+        const objSchema = z.object({
+          name: z.string(),
+          age: z.number().int().positive(),
+        });
+        console.log("Object:", objSchema.parse({ name: "John", age: 30 }));
+    
+        // 9. Enum
+        const colorEnum = z.enum(["Red", "Green", "Blue"]);
+        console.log("Enum:", colorEnum.parse("Red"));
+    
+        // 10. Literal
+        const literalSchema = z.literal("specificValue");
+        console.log("Literal:", literalSchema.parse("specificValue"));
+    
+        // 11. Union
+        const unionSchema = z.union([z.string(), z.number()]);
+        console.log("Union (string):", unionSchema.parse("hello"));
+        console.log("Union (number):", unionSchema.parse(123));
+    
+        // 12. Intersection
+        const base = z.object({ id: z.string() });
+        const extension = z.object({ age: z.number() });
+        const intersectionSchema = base.and(extension);
+        console.log(
+          "Intersection:",
+          intersectionSchema.parse({ id: "abc", age: 25 })
+        );
+    
+        // 13. Optional and Nullable
+        const optionalSchema = z.string().optional();
+        console.log("Optional (undefined):", optionalSchema.parse(undefined));
+        console.log("Optional (string):", optionalSchema.parse("hello"));
+    
+        const nullableSchema = z.string().nullable();
+        console.log("Nullable (null):", nullableSchema.parse(null));
+        console.log("Nullable (string):", nullableSchema.parse("world"));
+    
+        // 14. Default
+        const defaultSchema = z.string().default("defaultValue");
+        console.log("Default (undefined):", defaultSchema.parse(undefined));
+        console.log("Default (input):", defaultSchema.parse("input"));
+    
+        // 15. Record
+        const recordSchema = z.record(z.number());
+        console.log("Record:", recordSchema.parse({ a: 1, b: 2 }));
+    
+        // 16. Custom validation
+        const customSchema = z.string().refine((val) => val.startsWith("A"), {
+          message: "Must start with 'A'",
+        });
+        console.log("Custom validation:", customSchema.parse("Apple"));
+      } catch (e) {
+        if (e instanceof z.ZodError) {
+          console.error("Validation error:", e.errors);
+        } else {
+          console.error(e);
+        }
+      }
+    }
+    
+    runValidationExamples();
+  </pre>
+  </div></li>
+
+  <li data-id="q122"><span class="faq-question">
+    Input Validation
+    </span><div class="answer">
+    
+      
+      <p>Input validation is the process of verifying user input to ensure it meets the expected format, type, or value constraints before further processing.</p>
+      
+      <h2>2. Zod Validation Example</h2>
+      <p><strong>Install:</strong> <code>npm install zod</code></p>
+      
+      <pre><code>import { z } from "zod";
+      
+      const userSchema = z.object({
+        username: z.string().min(3),
+        age: z.number().int().positive(),
+      });
+      
+      const result = userSchema.safeParse({
+        username: "JohnDoe",
+        age: 25,
+      });
+      
+      if (!result.success) {
+        console.log(result.error.format());
+      } else {
+        console.log("Valid:", result.data);
+      }
+      </code></pre>
+      
+      <h3>✅ Pros of Zod:</h3>
+      <ul>
+        <li>Functional and immutable</li>
+        <li>Type-safe with TypeScript</li>
+        <li>No decorators needed</li>
+      </ul>
+      
+      <h3>🚫 Cons of Zod:</h3>
+      <ul>
+        <li>Not decorator-based (if you prefer that style)</li>
+      </ul>
+      
+      <hr>
+      
+      <h2>3. Class Validator Example</h2>
+      <p><strong>Install:</strong> <code>npm install class-validator class-transformer</code></p>
+      
+      <pre><code>import { IsString, IsInt, MinLength, IsPositive } from "class-validator";
+      import { plainToInstance } from "class-transformer";
+      
+      class CreateUserDto {
+        @IsString()
+        @MinLength(3)
+        username: string;
+      
+        @IsInt()
+        @IsPositive()
+        age: number;
+      }
+      
+      const input = { username: "JohnDoe", age: 25 };
+      const user = plainToInstance(CreateUserDto, input);
+      
+      import { validate } from "class-validator";
+      
+      validate(user).then(errors => {
+        if (errors.length > 0) {
+          console.log("Validation failed:", errors);
+        } else {
+          console.log("Valid:", user);
+        }
+      });
+      </code></pre>
+      
+      <h3>✅ Pros of Class Validator:</h3>
+      <ul>
+        <li>Decorator-based (OOP-friendly)</li>
+        <li>Widely used in NestJS</li>
+        <li>Supports class-transformer for parsing/transforming inputs</li>
+      </ul>
+      
+      <h3>🚫 Cons of Class Validator:</h3>
+      <ul>
+        <li>More verbose setup</li>
+        <li>Requires decorators and class-based code</li>
+      </ul>
+      
+      <hr>
+      
+      <h2>4. When to Use Which?</h2>
+      <ul>
+        <li><strong>Zod:</strong> Best for functional programming, schema-first validation, and fast prototyping.</li>
+        <li><strong>Class Validator:</strong> Ideal for OOP-style architecture and NestJS applications.</li>
+      </ul>
+      
+      <h2>5. Summary Table</h2>
+      <table border="1" cellpadding="6">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Zod</th>
+            <th>Class Validator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Style</td>
+            <td>Functional</td>
+            <td>OOP / Decorator-based</td>
+          </tr>
+          <tr>
+            <td>TypeScript Support</td>
+            <td>Excellent (type inference)</td>
+            <td>Good (requires class definitions)</td>
+          </tr>
+          <tr>
+            <td>Integration</td>
+            <td>Framework-agnostic</td>
+            <td>Popular in NestJS</td>
+          </tr>
+          <tr>
+            <td>Dependencies</td>
+            <td>Lightweight</td>
+            <td>Requires decorators & class-transformer</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div></li>
+
+
+<li data-id="q_redux_formatted"><span class="faq-question">
+Zod
+</span>
+<div class="answer">
+    
+    <form id="contactForm" novalidate>
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" />
+      <div id="error-name" class="error"></div>
+    
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" />
+      <div id="error-email" class="error"></div>
+    
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="5"></textarea>
+      <div id="error-message" class="error"></div>
+    
+      <button type="submit">Submit</button>
+      <div id="formSuccess" class="success"></div>
+    </form>
+
+<pre>
+    
+    https://cdn.jsdelivr.net/npm/zod@3.23.2/lib/index.umd.min.js
+
+      const { z } = window.zod;
+    
+      // Define schema for validation
+      const contactSchema = z.object({
+        name: z.string().min(2, "Name must be at least 2 characters"),
+        email: z.string().email("Invalid email address"),
+        message: z.string().min(5, "Message must be at least 5 characters"),
+      });
+    
+      const form = document.getElementById("contactForm");
+      const successDiv = document.getElementById("formSuccess");
+    
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+    
+        // Clear previous errors
+        ["name", "email", "message"].forEach(id => {
+          document.getElementById(`error-${id}`).textContent = "";
+        });
+        successDiv.textContent = "";
+    
+        // Collect form data
+        const formData = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          message: form.message.value.trim(),
+        };
+    
+        // Validate
+        const result = contactSchema.safeParse(formData);
+    
+        if (!result.success) {
+          // Show errors
+          result.error.errors.forEach(err => {
+            const el = document.getElementById(`error-${err.path[0]}`);
+            if (el) el.textContent = err.message;
+          });
+        } else {
+          // Valid submission
+          successDiv.textContent = "Thank you for contacting us!";
+          form.reset();
+        }
+      });
+    </pre>   
+
+
+</div>
+</li>
 
 
 
@@ -3357,6 +4060,17 @@ API Gateway simplifies building scalable, secure, and reliable APIs with minimal
 
 
 
+
+<li data-id="q32" class="yellow"><span class="faq-question">
+----------------------------------------------------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+------------------------------------TypeScript------------------------------------
+</span></li>
+<li data-id="q32" class="yellow"><span class="faq-question">
+----------------------------------------------------------------------------------
+</span></li>
+    
 
 
 
@@ -5480,7 +6194,7 @@ DB Indexing
 
 
 
-<li data-id="kafka"><span class="faq-question green">
+<li data-id="kafka" class="yellow"><span class="faq-question">
   Kafka
   </span><div class="answer">
 
@@ -5561,6 +6275,47 @@ DB Indexing
     <div class="answer">Schema registry ensures that producers and consumers agree on data format (e.g., using Avro schemas).</div>
   
 </div></li>
+
+
+<li data-id="kafka"><span class="faq-question green">
+  Is Kafka only a messaging tool?
+  </span><div class="answer">
+
+
+<p>Kafka is primarily known as a <strong>distributed event streaming platform</strong> and <strong>messaging system</strong>, but its capabilities go beyond just messaging. Here’s a quick overview of what Kafka is used for:</p>
+
+<h3>Kafka is more than just a messaging tool:</h3>
+<ol>
+  <li>
+    <strong>Messaging / Pub-Sub System:</strong><br>
+    Like traditional messaging queues (e.g., RabbitMQ), Kafka allows producers to send messages to topics and consumers to read those messages. It supports <em>publish-subscribe</em> and <em>message queue</em> patterns.
+  </li>
+  <li>
+    <strong>Event Streaming Platform:</strong><br>
+    Kafka stores streams of records (events) in a durable, ordered, and distributed log. Applications can process these events in real-time, making Kafka ideal for <em>real-time data pipelines</em> and <em>event-driven architectures</em>.
+  </li>
+  <li>
+    <strong>Data Integration and ETL Pipelines:</strong><br>
+    Kafka is often used to collect and move data between systems. With tools like <code>Kafka Connect</code>, it can integrate databases, file systems, and other data sources into the event stream.
+  </li>
+  <li>
+    <strong>Stream Processing:</strong><br>
+    Kafka Streams (a library) and ksqlDB enable <em>real-time processing and transformation</em> of streaming data within Kafka itself.
+  </li>
+  <li>
+    <strong>Durable Storage:</strong><br>
+    Kafka retains data for a configurable period, allowing consumers to read data multiple times or rewind streams, unlike typical messaging queues where messages are removed once consumed.
+  </li>
+</ol>
+
+<h3>Summary:</h3>
+<p>
+  Yes, Kafka is a messaging tool, but it’s more accurately described as a <strong>distributed event streaming platform</strong> that supports messaging, storage, and stream processing.<br>
+  It’s designed for <em>high-throughput, fault-tolerant, scalable, and durable</em> event handling and real-time data processing.
+</p>
+
+    </div></li>
+
 
 <li data-id="kafka"><span class="faq-question green">
   Kafka Example***
@@ -11173,11 +11928,1740 @@ CI/CD Question List?
 
   
 
+<li data-id="q182" class="yellow">
+  <span class="faq-question">AWS API Gateway</span>
+<div class="answer">
+  <ol>
+    <li>What is AWS API Gateway?</li>
+    <li>What are the main features of API Gateway?</li>
+    <li>What types of APIs can you create with API Gateway?</li>
+    <li>What is the difference between REST API and HTTP API in API Gateway?</li>
+    <li>When should you use WebSocket API in API Gateway?</li>
+    <li>How does API Gateway integrate with AWS Lambda?</li>
+    <li>What is a proxy integration in API Gateway?</li>
+    <li>What is a non-proxy integration?</li>
+    <li>What is a VPC link in API Gateway?</li>
+    <li>How do you enable CORS in API Gateway?</li>
+    <li>What are stages in API Gateway?</li>
+    <li>How can you deploy an API in API Gateway?</li>
+    <li>What is a usage plan in API Gateway?</li>
+    <li>What are API keys and how are they used?</li>
+    <li>How can you throttle requests in API Gateway?</li>
+    <li>How does caching work in API Gateway?</li>
+    <li>What is the role of IAM in securing APIs?</li>
+    <li>How can you secure API Gateway using Lambda authorizers?</li>
+    <li>What is a custom domain name in API Gateway?</li>
+    <li>How do you configure custom domain mappings?</li>
+    <li>What is the difference between a REST API and an HTTP API in terms of performance?</li>
+    <li>What are integration request and integration response?</li>
+    <li>How does API Gateway handle binary data?</li>
+    <li>How do you monitor APIs with CloudWatch?</li>
+    <li>How can you enable logging in API Gateway?</li>
+    <li>What is mutual TLS (mTLS) in API Gateway?</li>
+    <li>What is a request validator?</li>
+    <li>How does API Gateway handle request transformations?</li>
+    <li>How does response mapping work?</li>
+    <li>What is method request and method response?</li>
+    <li>What limits exist in AWS API Gateway?</li>
+    <li>How do you handle versioning of APIs?</li>
+    <li>What is the difference between regional, edge-optimized, and private APIs?</li>
+    <li>Can API Gateway work with private VPC endpoints?</li>
+    <li>How do you use API Gateway with AWS WAF?</li>
+    <li>How can you test your API Gateway endpoints?</li>
+    <li>What is a mock integration?</li>
+    <li>What is the role of Swagger/OpenAPI in API Gateway?</li>
+    <li>Can you import/export API definitions?</li>
+    <li>What are authorizer types supported by API Gateway?</li>
+    <li>How does token-based authentication work with JWT in API Gateway?</li>
+    <li>How can you migrate from REST API to HTTP API?</li>
+    <li>What is throttling vs quota in usage plans?</li>
+    <li>How can you prevent abuse of public APIs?</li>
+    <li>What are some best practices for designing scalable APIs with API Gateway?</li>
+    <li>How does API Gateway support multi-region deployments?</li>
+    <li>What is the lifecycle of an API Gateway request?</li>
+    <li>Can you integrate API Gateway with Step Functions?</li>
+    <li>How do you roll back a failed deployment in API Gateway?</li>
+    <li>What is the role of stage variables?</li>
+  </ol>
+</div>
+</li>
+
+
+  <li data-id="q182">
+    <span class="faq-question">What is AWS API Gateway?</span>
+    <div class="answer">
+      AWS API Gateway is a fully managed service that allows developers to create, publish, maintain, monitor, and secure RESTful, HTTP, and WebSocket APIs at any scale. It acts as a front door for applications to access data, business logic, or functionality from backend services like AWS Lambda, EC2, or any web application.
+    </div>
+  </li>
+
+  <li data-id="q183">
+    <span class="faq-question">What are the main features of API Gateway?</span>
+    <div class="answer">
+      Key features include:
+      <ul>
+        <li>Support for REST, HTTP, and WebSocket APIs</li>
+        <li>Authorization using IAM, Lambda Authorizers, and Cognito</li>
+        <li>Throttling and rate limiting</li>
+        <li>Request/response transformation</li>
+        <li>Custom domain support</li>
+        <li>Caching and usage plans</li>
+        <li>Built-in monitoring with CloudWatch</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q184">
+    <span class="faq-question">What types of APIs can you create with API Gateway?</span>
+    <div class="answer">
+      API Gateway supports three types of APIs:
+      <ul>
+        <li><strong>REST API:</strong> Full-featured, best for complex authorization and transformation needs.</li>
+        <li><strong>HTTP API:</strong> Lightweight, faster, and cheaper; ideal for most use cases.</li>
+        <li><strong>WebSocket API:</strong> Used for real-time communication like chat apps or live notifications.</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q185">
+    <span class="faq-question">What is the difference between REST API and HTTP API in API Gateway?</span>
+    <div class="answer">
+      <table border="1" cellpadding="6">
+        <thead>
+          <tr><th>Feature</th><th>REST API</th><th>HTTP API</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Performance</td><td>Higher latency</td><td>Lower latency</td></tr>
+          <tr><td>Price</td><td>More expensive</td><td>Cheaper</td></tr>
+          <tr><td>Authorization</td><td>IAM, Cognito, Lambda</td><td>IAM, JWT (Cognito or OpenID)</td></tr>
+          <tr><td>Transformation</td><td>Request/response mapping supported</td><td>No built-in transformations</td></tr>
+          <tr><td>Use Case</td><td>Advanced features needed</td><td>Simple, fast APIs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </li>
+
+  <li data-id="q186">
+    <span class="faq-question">When should you use WebSocket API in API Gateway?</span>
+    <div class="answer">
+      Use WebSocket API when your application requires real-time, two-way communication between the client and server. Examples include:
+      <ul>
+        <li>Chat applications</li>
+        <li>Live notifications</li>
+        <li>Gaming servers</li>
+        <li>Live collaboration tools</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q187">
+    <span class="faq-question">How does API Gateway integrate with AWS Lambda?</span>
+    <div class="answer">
+      API Gateway acts as a trigger for AWS Lambda. When a client makes an HTTP request to an API Gateway endpoint:
+      <ol>
+        <li>API Gateway receives the request.</li>
+        <li>It validates, authorizes, and transforms the request if configured.</li>
+        <li>The request is forwarded to the configured Lambda function.</li>
+        <li>The Lambda function processes the logic and returns a response.</li>
+        <li>API Gateway formats the response and sends it back to the client.</li>
+      </ol>
+    </div>
+  </li>
+  <li data-id="q188">
+    <span class="faq-question">What is a proxy integration in API Gateway?</span>
+    <div class="answer">
+      A proxy integration allows API Gateway to pass the entire request to the backend service (like AWS Lambda or HTTP endpoint) without modifying it. The backend is responsible for interpreting the request and returning a response in a format API Gateway can pass back to the client. This is common in Lambda proxy integration where API Gateway forwards request data as-is to the Lambda function.
+    </div>
+  </li>
+
+  <li data-id="q189">
+    <span class="faq-question">What is a non-proxy integration?</span>
+    <div class="answer">
+      A non-proxy integration enables you to configure how the request is mapped to the backend and how the response is transformed back to the client. You can define mapping templates, headers, status codes, and query parameters manually. This approach is useful when you want more control over the interaction between API Gateway and your backend.
+    </div>
+  </li>
+
+  <li data-id="q190">
+    <span class="faq-question">What is a VPC link in API Gateway?</span>
+    <div class="answer">
+      A VPC Link in API Gateway allows your API to connect privately to AWS services hosted in your Amazon VPC, such as private ALBs, NLBs, or EC2 instances. It establishes a secure connection without exposing services to the public internet.
+    </div>
+  </li>
+
+  <li data-id="q191">
+    <span class="faq-question">How do you enable CORS in API Gateway?</span>
+    <div class="answer">
+      To enable CORS (Cross-Origin Resource Sharing):
+      <ol>
+        <li>Go to your API Gateway method (e.g., GET, POST).</li>
+        <li>Add a method response with the header <code>Access-Control-Allow-Origin</code>.</li>
+        <li>Set the integration response to include the CORS headers.</li>
+        <li>Optionally, create an <code>OPTIONS</code> method to handle preflight requests.</li>
+        <li>Deploy the API for changes to take effect.</li>
+      </ol>
+    </div>
+  </li>
+
+  <li data-id="q192">
+    <span class="faq-question">What are stages in API Gateway?</span>
+    <div class="answer">
+      Stages in API Gateway represent different environments (like <code>dev</code>, <code>test</code>, <code>prod</code>) for a deployed API. Each stage can have its own configuration, logging settings, throttling limits, and variables. This helps you manage versions and environments effectively.
+    </div>
+  </li>
+
+  <li data-id="q193">
+    <span class="faq-question">How can you deploy an API in API Gateway?</span>
+    <div class="answer">
+      To deploy an API in API Gateway:
+      <ol>
+        <li>Create or update your API definition.</li>
+        <li>Choose or create a stage (e.g., <code>dev</code>).</li>
+        <li>Click “Deploy API” from the API Gateway console or use the AWS CLI.</li>
+        <li>Once deployed, API Gateway assigns an endpoint URL for the selected stage.</li>
+      </ol>
+    </div>
+  </li>
+    <li data-id="q194">
+      <span class="faq-question">What is a usage plan in API Gateway?</span>
+      <div class="answer">
+        A usage plan in API Gateway defines who can access one or more deployed API stages and how much and how fast they can access them. It allows you to throttle and quota usage per customer via API keys, enabling fine-grained control over API consumption.
+      </div>
+    </li>
   
+    <li data-id="q195">
+      <span class="faq-question">What are API keys and how are they used?</span>
+      <div class="answer">
+        API keys are alphanumeric strings that identify the calling project or application. In API Gateway, API keys are used in combination with usage plans to:
+        <ul>
+          <li>Authenticate client requests</li>
+          <li>Track usage and apply throttling/quotas</li>
+          <li>Differentiate between different consumers</li>
+        </ul>
+        Clients pass the API key in the <code>x-api-key</code> header when making requests.
+      </div>
+    </li>
   
+    <li data-id="q196">
+      <span class="faq-question">How can you throttle requests in API Gateway?</span>
+      <div class="answer">
+        API Gateway provides throttling at two levels:
+        <ul>
+          <li><strong>Account-level throttling</strong>: Default settings that apply to all APIs within an account.</li>
+          <li><strong>Usage plan-level throttling</strong>: Custom rate (requests per second) and burst limits (maximum concurrent requests) applied to specific API keys.</li>
+        </ul>
+        Throttling helps protect backend services from being overwhelmed by high traffic.
+      </div>
+    </li>
+  
+    <li data-id="q197">
+      <span class="faq-question">How does caching work in API Gateway?</span>
+      <div class="answer">
+        API Gateway supports response caching at the stage level. When enabled:
+        <ul>
+          <li>Responses are cached for a specified time (TTL - Time to Live).</li>
+          <li>Cached responses are returned for repeated requests with the same parameters.</li>
+          <li>Caching reduces backend load and improves performance.</li>
+        </ul>
+        You can enable caching per method and configure cache keys (e.g., headers, query strings).
+      </div>
+    </li>
+  
+    <li data-id="q198">
+      <span class="faq-question">What is the role of IAM in securing APIs?</span>
+      <div class="answer">
+        AWS Identity and Access Management (IAM) helps secure APIs by:
+        <ul>
+          <li>Controlling which IAM users, groups, or roles can call specific API Gateway methods.</li>
+          <li>Allowing signed requests using AWS Signature Version 4.</li>
+          <li>Integrating with policies to define granular access control based on context (e.g., source IP, user agent).</li>
+        </ul>
+        IAM-based auth is ideal for internal APIs or APIs accessed by other AWS services.
+      </div>
+    </li>
+  
+    <li data-id="q199">
+      <span class="faq-question">How can you secure API Gateway using Lambda authorizers?</span>
+      <div class="answer">
+        Lambda authorizers (also called custom authorizers) are Lambda functions used to control access to your APIs. When a request is made:
+        <ol>
+          <li>API Gateway invokes the Lambda authorizer before calling the backend.</li>
+          <li>The function evaluates a token (e.g., JWT, OAuth2) and returns an IAM policy.</li>
+          <li>API Gateway allows or denies the request based on the returned policy.</li>
+        </ol>
+        This allows you to implement custom authentication and authorization logic.
+      </div>
+    </li>
+  
+
+      <li data-id="q200">
+        <span class="faq-question">What is a custom domain name in API Gateway?</span>
+        <div class="answer">
+          A custom domain name in API Gateway allows you to provide a user-friendly URL (e.g., <code>https://api.yourdomain.com</code>) instead of using the default AWS endpoint. You can map custom domains to different stages or routes of your APIs for branding and better user experience.
+        </div>
+      </li>
+    
+      <li data-id="q201">
+        <span class="faq-question">How do you configure custom domain mappings?</span>
+        <div class="answer">
+          To configure custom domain mappings:
+          <ol>
+            <li>Purchase and configure your domain using Route 53 or another DNS provider.</li>
+            <li>Create a custom domain in API Gateway and associate it with an ACM certificate.</li>
+            <li>Set up base path mappings to map the domain to specific API stages or routes.</li>
+            <li>Create a CNAME or A record in your DNS to point to the API Gateway domain.</li>
+          </ol>
+        </div>
+      </li>
+    
+      <li data-id="q202">
+        <span class="faq-question">What is the difference between a REST API and an HTTP API in terms of performance?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>HTTP API</strong> has better performance with lower latency and is more cost-effective.</li>
+            <li><strong>REST API</strong> supports more advanced features like request/response mapping, API keys, usage plans, and fine-grained authorization.</li>
+          </ul>
+          Use HTTP API for lightweight services and REST API when you need advanced capabilities.
+        </div>
+      </li>
+    
+      <li data-id="q203">
+        <span class="faq-question">What are integration request and integration response?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Integration Request:</strong> Transforms the client request before sending it to the backend. You can map headers, query strings, and body data.</li>
+            <li><strong>Integration Response:</strong> Transforms the backend response before returning it to the client. You can set headers, status codes, and body templates.</li>
+          </ul>
+          These mappings are available in non-proxy integrations.
+        </div>
+      </li>
+    
+      <li data-id="q204">
+        <span class="faq-question">How does API Gateway handle binary data?</span>
+        <div class="answer">
+          API Gateway can handle binary data by:
+          <ul>
+            <li>Adding supported <code>binaryMediaTypes</code> (like <code>image/png</code>) in the settings.</li>
+            <li>Base64-encoding the binary content in the response from Lambda or integration.</li>
+            <li>Decoding the base64-encoded data on the client side.</li>
+          </ul>
+          This ensures safe transmission of binary data over HTTP.
+        </div>
+      </li>
+    
+      <li data-id="q205">
+        <span class="faq-question">How do you monitor APIs with CloudWatch?</span>
+        <div class="answer">
+          API Gateway integrates with Amazon CloudWatch to provide:
+          <ul>
+            <li><strong>Execution logs</strong> for debugging and tracing requests</li>
+            <li><strong>Metrics</strong> like 4XX/5XX errors, latency, and request count</li>
+            <li><strong>Alarms</strong> to notify you of abnormal behavior</li>
+          </ul>
+          You can enable logging at the stage level and customize log groups and formats.
+        </div>
+      </li>
+
+      <li data-id="q206">
+        <span class="faq-question">How can you enable logging in API Gateway?</span>
+        <div class="answer">
+          To enable logging in API Gateway:
+          <ol>
+            <li>Go to your API stage settings in the console.</li>
+            <li>Enable CloudWatch Logs under the “Logs/Tracing” section.</li>
+            <li>Choose a log level (INFO, ERROR, etc.).</li>
+            <li>Grant the API Gateway execution role permission to write to CloudWatch.</li>
+            <li>Deploy your stage for changes to take effect.</li>
+          </ol>
+          Logs will now be visible in the specified CloudWatch Log Group.
+        </div>
+      </li>
+    
+      <li data-id="q207">
+        <span class="faq-question">What is mutual TLS (mTLS) in API Gateway?</span>
+        <div class="answer">
+          Mutual TLS (mTLS) is a security enhancement where both the client and server authenticate each other using X.509 certificates. In API Gateway:
+          <ul>
+            <li>Clients must present a trusted certificate when calling the API.</li>
+            <li>API Gateway verifies the client certificate against a configured truststore.</li>
+            <li>It provides an additional layer of security beyond token-based or IAM authentication.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q208">
+        <span class="faq-question">What is a request validator?</span>
+        <div class="answer">
+          A request validator in API Gateway validates incoming requests based on configured criteria:
+          <ul>
+            <li>Required query string parameters</li>
+            <li>Required headers</li>
+            <li>Request body (JSON schema)</li>
+          </ul>
+          You can choose to validate only parameters, only the body, or both, reducing load on backends by filtering bad requests early.
+        </div>
+      </li>
+    
+      <li data-id="q209">
+        <span class="faq-question">How does API Gateway handle request transformations?</span>
+        <div class="answer">
+          API Gateway can transform incoming requests using mapping templates (Velocity Template Language - VTL) before forwarding them to the backend. This allows:
+          <ul>
+            <li>Extracting and reshaping headers, query strings, and body</li>
+            <li>Inserting static values or conditionals</li>
+            <li>Combining inputs into new formats (e.g., JSON → XML)</li>
+          </ul>
+          This is available in non-proxy REST integrations.
+        </div>
+      </li>
+    
+      <li data-id="q210">
+        <span class="faq-question">How does response mapping work?</span>
+        <div class="answer">
+          Response mapping in API Gateway allows transforming backend responses into desired formats before sending them to the client. This includes:
+          <ul>
+            <li>Changing HTTP status codes based on backend output</li>
+            <li>Mapping or modifying headers</li>
+            <li>Restructuring the response body using mapping templates</li>
+          </ul>
+          Useful when the backend format doesn't match client expectations.
+        </div>
+      </li>
+    
+      <li data-id="q211">
+        <span class="faq-question">What is method request and method response?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Method Request:</strong> Defines how API Gateway receives a request from the client, including query parameters, headers, and authorization settings.</li>
+            <li><strong>Method Response:</strong> Specifies the structure of the response returned to the client, including status codes, headers, and models.</li>
+          </ul>
+          These configurations are used in conjunction with integration settings to process and validate API traffic.
+        </div>
+      </li>
+
+      <li data-id="q212">
+        <span class="faq-question">What limits exist in AWS API Gateway?</span>
+        <div class="answer">
+          AWS API Gateway has several soft and hard limits:
+          <ul>
+            <li>Max 10,000 requests per second (soft limit, can be increased).</li>
+            <li>Payload size: 10 MB for request/response in REST APIs, 6 MB in HTTP APIs.</li>
+            <li>Max 30 seconds timeout for integrations like Lambda.</li>
+            <li>Rate limiting and burst throttling per account or usage plan.</li>
+            <li>Concurrent requests per region and account.</li>
+          </ul>
+          These limits can be increased by submitting a request to AWS Support.
+        </div>
+      </li>
+    
+      <li data-id="q213">
+        <span class="faq-question">How do you handle versioning of APIs?</span>
+        <div class="answer">
+          API versioning in API Gateway can be managed by:
+          <ul>
+            <li>Creating different stages (e.g., <code>/v1</code>, <code>/v2</code>)</li>
+            <li>Using base path mappings with custom domains (<code>api.example.com/v1</code>)</li>
+            <li>Deploying separate APIs for different versions</li>
+            <li>Including version info in headers (less common)</li>
+          </ul>
+          Choose a strategy based on your application's compatibility needs and client adoption.
+        </div>
+      </li>
+    
+      <li data-id="q214">
+        <span class="faq-question">What is the difference between regional, edge-optimized, and private APIs?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Regional APIs:</strong> Accessible only in a specific AWS region. Ideal for internal or regional applications.</li>
+            <li><strong>Edge-Optimized APIs:</strong> Deployed globally using CloudFront. Best for public APIs accessed from various locations.</li>
+            <li><strong>Private APIs:</strong> Accessible only within your VPC using interface VPC endpoints. Used for secure internal services.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q215">
+        <span class="faq-question">Can API Gateway work with private VPC endpoints?</span>
+        <div class="answer">
+          Yes, API Gateway can integrate with resources inside a VPC using:
+          <ul>
+            <li><strong>VPC Link</strong> for REST APIs to connect to Network Load Balancers (NLB) in the VPC.</li>
+            <li><strong>Private integrations</strong> with PrivateLink for HTTP APIs and private REST APIs.</li>
+          </ul>
+          This allows secure and scalable access to backend services not exposed to the public internet.
+        </div>
+      </li>
+    
+      <li data-id="q216">
+        <span class="faq-question">How do you use API Gateway with AWS WAF?</span>
+        <div class="answer">
+          AWS WAF (Web Application Firewall) can be associated with:
+          <ul>
+            <li>Edge-optimized APIs (via associated CloudFront distributions)</li>
+            <li>Regional APIs directly</li>
+          </ul>
+          WAF protects your APIs from common threats (SQL injection, XSS, IP blocking, rate limiting) by defining rules that inspect incoming requests.
+        </div>
+      </li>
+    
+      <li data-id="q217">
+        <span class="faq-question">How can you test your API Gateway endpoints?</span>
+        <div class="answer">
+          You can test API Gateway endpoints by:
+          <ul>
+            <li>Using the “Test” feature in the API Gateway console</li>
+            <li>Sending HTTP requests using <code>curl</code>, Postman, or similar tools</li>
+            <li>Calling the endpoint from Lambda test events (if Lambda is the backend)</li>
+            <li>Using automated test scripts and CI/CD pipelines</li>
+          </ul>
+          Logging and CloudWatch metrics can help diagnose and validate test results.
+        </div>
+      </li>
+
+      <li data-id="q218">
+        <span class="faq-question">What is a mock integration?</span>
+        <div class="answer">
+          A mock integration in API Gateway allows you to return a response to the client without sending a request to a backend. It's useful for:
+          <ul>
+            <li>Testing API setup without deploying backend services</li>
+            <li>Creating stub responses for frontend development</li>
+            <li>Simulating error or success responses</li>
+          </ul>
+          You define response templates and status codes within API Gateway itself.
+        </div>
+      </li>
+    
+      <li data-id="q219">
+        <span class="faq-question">What is the role of Swagger/OpenAPI in API Gateway?</span>
+        <div class="answer">
+          Swagger/OpenAPI specifications allow you to define your API contract using a standard format. In API Gateway, they are used to:
+          <ul>
+            <li>Import APIs via the console or CLI</li>
+            <li>Document existing APIs</li>
+            <li>Generate SDKs and test tools</li>
+          </ul>
+          OpenAPI v2 and v3 are supported, and can be integrated with CI/CD pipelines.
+        </div>
+      </li>
+    
+      <li data-id="q220">
+        <span class="faq-question">Can you import/export API definitions?</span>
+        <div class="answer">
+          Yes, API Gateway supports both import and export of API definitions:
+          <ul>
+            <li><strong>Import:</strong> Upload OpenAPI definitions to create or update an API.</li>
+            <li><strong>Export:</strong> Download the API structure in Swagger/OpenAPI format for documentation or sharing.</li>
+            <li>Supported via console, AWS CLI, SDKs, and Infrastructure as Code tools like SAM and CloudFormation.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q221">
+        <span class="faq-question">What are authorizer types supported by API Gateway?</span>
+        <div class="answer">
+          API Gateway supports the following authorizer types:
+          <ul>
+            <li><strong>Lambda Authorizers (Custom):</strong> Use a Lambda function to validate tokens or headers.</li>
+            <li><strong>IAM Authorization:</strong> Controls access using AWS IAM roles and policies.</li>
+            <li><strong>Cognito User Pools:</strong> Provides authentication and user management with JWT-based access tokens.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q222">
+        <span class="faq-question">How does token-based authentication work with JWT in API Gateway?</span>
+        <div class="answer">
+          Token-based authentication using JWT works by:
+          <ul>
+            <li>Client sends a JWT in the Authorization header.</li>
+            <li>API Gateway validates the token using Cognito or a custom Lambda authorizer.</li>
+            <li>If the token is valid, the request is forwarded to the backend; otherwise, a 401 Unauthorized response is returned.</li>
+            <li>JWTs typically contain claims (e.g., user ID, role) used for access control.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q223">
+        <span class="faq-question">How can you migrate from REST API to HTTP API?</span>
+        <div class="answer">
+          To migrate from REST API to HTTP API in API Gateway:
+          <ol>
+            <li>Export your existing REST API definition as OpenAPI.</li>
+            <li>Create a new HTTP API and import the OpenAPI definition.</li>
+            <li>Update your integrations, as some REST features (e.g., request/response mapping) may differ.</li>
+            <li>Test and deploy the new HTTP API.</li>
+            <li>Update DNS/custom domains and clients if needed.</li>
+          </ol>
+          Note: HTTP APIs offer lower latency and cost, but not all REST features are supported.
+        </div>
+      </li>
+
+      <li data-id="q224">
+        <span class="faq-question">What is throttling vs quota in usage plans?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Throttling:</strong> Limits the rate of requests (requests per second) to prevent spikes. Includes:
+              <ul>
+                <li><strong>Rate limit</strong> (e.g., 100 requests/second)</li>
+                <li><strong>Burst limit</strong> (e.g., temporary spikes up to 200)</li>
+              </ul>
+            </li>
+            <li><strong>Quota:</strong> Defines the total number of allowed requests over a time period (e.g., 10,000 requests per month). It's a hard cap.</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q225">
+        <span class="faq-question">How can you prevent abuse of public APIs?</span>
+        <div class="answer">
+          <ul>
+            <li>Use <strong>API keys</strong> with usage plans (throttling and quotas)</li>
+            <li>Enable <strong>authentication and authorization</strong> (Cognito, IAM, Lambda Authorizers)</li>
+            <li>Use <strong>AWS WAF</strong> to block malicious traffic (IP block lists, rate limits)</li>
+            <li>Enable <strong>CloudWatch logging</strong> to monitor and analyze traffic patterns</li>
+            <li>Apply <strong>CORS policies</strong> properly to control who can access your API</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q226">
+        <span class="faq-question">What are some best practices for designing scalable APIs with API Gateway?</span>
+        <div class="answer">
+          <ul>
+            <li>Use <strong>HTTP APIs</strong> for lightweight, low-latency workloads</li>
+            <li>Leverage <strong>Lambda and Step Functions</strong> for serverless backends</li>
+            <li>Apply <strong>usage plans and throttling</strong> to manage load</li>
+            <li>Use <strong>VPC Links</strong> for secure private integrations</li>
+            <li>Enable <strong>caching</strong> where possible</li>
+            <li>Use <strong>CloudFormation</strong> or <strong>CDK</strong> for infrastructure automation</li>
+            <li>Design with <strong>idempotent endpoints</strong> for safe retries</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q227">
+        <span class="faq-question">How does API Gateway support multi-region deployments?</span>
+        <div class="answer">
+          You can deploy the same API in multiple regions to improve latency and availability:
+          <ul>
+            <li>Deploy identical stacks in different regions using <strong>Infrastructure as Code</strong></li>
+            <li>Use <strong>Route 53 latency-based routing</strong> to route requests to the nearest region</li>
+            <li>Ensure <strong>data synchronization</strong> across regions if needed</li>
+            <li>Handle region failover scenarios using health checks and monitoring</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q228">
+        <span class="faq-question">What is the lifecycle of an API Gateway request?</span>
+        <div class="answer">
+          The lifecycle of a request in API Gateway includes:
+          <ol>
+            <li>Client sends request to API Gateway endpoint</li>
+            <li>Stage and resource route match is resolved</li>
+            <li>Request passes through <strong>authorizers</strong> (IAM/Cognito/Lambda)</li>
+            <li>Request validation and transformation occurs</li>
+            <li>Request sent to backend (Lambda, HTTP, VPC link, etc.)</li>
+            <li>Integration response is mapped</li>
+            <li>Method response is generated and returned to the client</li>
+            <li>Logs and metrics are captured in CloudWatch</li>
+          </ol>
+        </div>
+      </li>
+    
+      <li data-id="q229">
+        <span class="faq-question">Can you integrate API Gateway with Step Functions?</span>
+        <div class="answer">
+          Yes, API Gateway can invoke AWS Step Functions directly via:
+          <ul>
+            <li><strong>AWS Service integration:</strong> Use the <code>StartExecution</code> action</li>
+            <li><strong>HTTP integration:</strong> If the Step Function has an HTTP endpoint (via Lambda or API Gateway)</li>
+          </ul>
+          This is useful for orchestrating workflows (e.g., approvals, data processing) behind API calls.
+        </div>
+      </li>
+    
+      <li data-id="q230">
+        <span class="faq-question">How do you roll back a failed deployment in API Gateway?</span>
+        <div class="answer">
+          You can roll back by:
+          <ul>
+            <li>Re-deploying a previous stage deployment</li>
+            <li>Using <strong>stage variables</strong> to switch versions dynamically</li>
+            <li>Automating deployments using <strong>CI/CD tools</strong> that maintain versions</li>
+            <li>Exporting previous OpenAPI definitions for restore</li>
+          </ul>
+        </div>
+      </li>
+    
+      <li data-id="q231">
+        <span class="faq-question">What is the role of stage variables?</span>
+        <div class="answer">
+          Stage variables are key-value pairs that you define at the stage level in API Gateway. They are used to:
+          <ul>
+            <li>Reference different backend endpoints (e.g., dev vs prod)</li>
+            <li>Pass dynamic configuration to Lambda or HTTP integrations</li>
+            <li>Control deployment behavior without changing the code</li>
+            <li>Work with Lambda aliases for versioning</li>
+          </ul>
+        </div>
+      </li>
+                
+
 
   
 
+
+
+
+
+
+
+
+  
+      <li data-id="q231" class="yellow"><span class="faq-question">AWS S3 Bucket</span></li>
+
+
+
+      <li data-id="q231">
+  <span class="faq-question">What is Amazon S3?</span>
+  <div class="answer">
+        Amazon S3 (Simple Storage Service) is an object storage service that offers industry-leading scalability, availability, security, and performance.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an S3 bucket?</span>
+  <div class="answer">
+        An S3 bucket is a container for storing objects (files, data) in Amazon S3.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are the naming rules for S3 buckets?</span>
+  <div class="answer">
+        Names must be globally unique, contain only lowercase letters, numbers, hyphens, and periods, and be between 3 and 63 characters.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an S3 object?</span>
+  <div class="answer">
+        An object is a file and its metadata stored in a bucket.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are the storage classes in Amazon S3?</span>
+  <div class="answer">
+        - S3 Standard<br>
+        - S3 Intelligent-Tiering<br>
+        - S3 Standard-IA<br>
+        - S3 One Zone-IA<br>
+        - S3 Glacier<br>
+        - S3 Glacier Deep Archive
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How is data secured in S3?</span>
+  <div class="answer">
+        Using encryption at rest (SSE-S3, SSE-KMS, SSE-C) and encryption in transit (SSL/TLS).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is versioning in S3?</span>
+  <div class="answer">
+        Versioning allows you to preserve, retrieve, and restore every version of every object stored in a bucket.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you enable versioning?</span>
+  <div class="answer">
+        Using the AWS Management Console, CLI, or SDK with `put-bucket-versioning` command.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an S3 Lifecycle Rule?</span>
+  <div class="answer">
+        A lifecycle rule automates transitions and deletions of objects based on age or status.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are pre-signed URLs?</span>
+  <div class="answer">
+        Temporary links that grant time-limited access to S3 objects without needing to change bucket permissions.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an S3 policy?</span>
+  <div class="answer">
+        A JSON-based access policy attached to a bucket to control access permissions.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between bucket policy and IAM policy?</span>
+  <div class="answer">
+        Bucket policy applies to the bucket and its objects; IAM policy applies to specific users or roles.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you host a static website on S3?</span>
+  <div class="answer">
+        Enable static website hosting in bucket properties and upload an `index.html` and optionally an `error.html`.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a signed cookie in S3?</span>
+  <div class="answer">
+        A signed cookie allows access to restricted S3 content through CloudFront using cookies instead of URLs.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the default consistency model in S3?</span>
+  <div class="answer">
+        S3 offers strong read-after-write consistency for all objects.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you delete all versions of an object?</span>
+  <div class="answer">
+        Use the AWS CLI with `--version-id` or configure a lifecycle rule for expired delete markers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you move data between storage classes?</span>
+  <div class="answer">
+        Automatically via lifecycle rules or manually by copying the object with the new class.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Multipart Upload?</span>
+  <div class="answer">
+        It allows you to upload large objects as parts, improving upload efficiency and reliability.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you list all objects in a bucket?</span>
+  <div class="answer">
+        Use the CLI command: `aws s3 ls s3://your-bucket-name --recursive`
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the maximum object size in S3?</span>
+  <div class="answer">
+        5 TB (using multipart upload). Single PUT uploads are limited to 5 GB.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you make a bucket public?</span>
+  <div class="answer">
+        Update the bucket policy and disable the "Block Public Access" settings.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you restrict access to specific IP addresses?</span>
+  <div class="answer">
+        Add an IP-based condition in the bucket policy using `aws:SourceIp`.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is S3 Transfer Acceleration?</span>
+  <div class="answer">
+        Speeds up uploads using Amazon CloudFront’s globally distributed edge locations.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you enable S3 event notifications?</span>
+  <div class="answer">
+        Configure notifications to trigger AWS Lambda, SNS, or SQS on object events (PUT, DELETE).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you set object retention in S3?</span>
+  <div class="answer">
+        Use Object Lock with governance or compliance retention modes.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between S3 and EBS?</span>
+  <div class="answer">
+        S3 is object storage for unstructured data; EBS is block storage for EC2 volumes.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can you rename an S3 object?</span>
+  <div class="answer">
+        No, you must copy it to a new key and delete the original.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you allow cross-account access?</span>
+  <div class="answer">
+        Use a bucket policy that grants permissions to another AWS account's IAM role or user.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is SSE-KMS?</span>
+  <div class="answer">
+        Server-Side Encryption using AWS Key Management Service for key management and auditing.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are S3 Access Points?</span>
+  <div class="answer">
+        Named network endpoints for managing access to shared datasets with fine-grained controls.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a bucket ACL?</span>
+  <div class="answer">
+        Legacy access control list allowing access to buckets/objects on a per-user basis.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you backup S3 data?</span>
+  <div class="answer">
+        Use Cross-Region Replication (CRR), AWS Backup, or manual object copying.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is S3 Object Lock?</span>
+  <div class="answer">
+        Prevents objects from being deleted or overwritten for a defined retention period.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you monitor S3 activity?</span>
+  <div class="answer">
+        Use CloudTrail, S3 server access logs, and AWS CloudWatch metrics.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the role of a storage class analysis in S3?</span>
+  <div class="answer">
+        Helps determine when to transition objects to a more cost-effective storage class.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Intelligent-Tiering?</span>
+  <div class="answer">
+        A storage class that automatically moves objects between frequent and infrequent access tiers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are delete markers?</span>
+  <div class="answer">
+        Markers added to objects when versioning is enabled and a delete request is made.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you block public access to all buckets?</span>
+  <div class="answer">
+        Use the global S3 settings or bucket-level settings to block all public access.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is replication in S3?</span>
+  <div class="answer">
+        Automatically copies objects to another bucket (within or across regions) for backup or compliance.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are S3 metrics and how are they used?</span>
+  <div class="answer">
+        CloudWatch metrics like bucket size, number of objects, and request counts help in monitoring and billing.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can you host dynamic websites on S3?</span>
+  <div class="answer">
+        No. S3 only supports static websites; dynamic behavior must use Lambda, API Gateway, etc.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you secure S3 uploads from a frontend app?</span>
+  <div class="answer">
+        Use pre-signed URLs or assume-role federation (e.g., Cognito + IAM Role).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What happens when you delete a versioned object?</span>
+  <div class="answer">
+        A delete marker is added. The object isn’t removed unless a specific version is deleted.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you automate S3 cleanups?</span>
+  <div class="answer">
+        Use lifecycle rules to expire or transition objects.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can you mount an S3 bucket like a filesystem?</span>
+  <div class="answer">
+        Yes, using tools like s3fs-fuse, but it's not recommended for transactional workloads.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the maximum number of buckets allowed per account?</span>
+  <div class="answer">
+        100 by default, but you can request an increase.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you grant public read access to an object?</span>
+  <div class="answer">
+        Set the object ACL to `public-read` or use a bucket policy that allows public `s3:GetObject`.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are S3 Object Tags?</span>
+  <div class="answer">
+        Key-value pairs attached to objects that help with classification, lifecycle, and cost management.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between Glacier and Glacier Deep Archive?</span>
+  <div class="answer">
+        Glacier is for archive data with minutes-to-hours retrieval; Deep Archive is the lowest-cost option with 12–48 hours retrieval.
+      </div>
+  </li>
+    
+  
+  <li data-id="q231" class="yellow"><span class="faq-question">AWS Cloud font</span></li>
+  
+      <li data-id="q231">
+  <span class="faq-question">What is Amazon CloudFront?</span>
+  <div class="answer">
+        A content delivery network (CDN) that delivers data, videos, applications, and APIs globally with low latency.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are Edge Locations in CloudFront?</span>
+  <div class="answer">
+        Data centers located around the world where CloudFront caches content closer to users.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an Origin in CloudFront?</span>
+  <div class="answer">
+        The source of content, such as an S3 bucket, HTTP server, or ALB/EC2 instance, that CloudFront fetches from.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Distribution in CloudFront?</span>
+  <div class="answer">
+        A configuration that tells CloudFront where the content is stored and how to deliver it.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are the two types of CloudFront distributions?</span>
+  <div class="answer">
+        - Web Distribution (HTTP/HTTPS)<br>
+        - RTMP Distribution (for streaming media - now deprecated)
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How does CloudFront cache content?</span>
+  <div class="answer">
+        Content is cached at edge locations based on Cache-Control headers, TTL, and other settings.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is TTL (Time to Live) in CloudFront?</span>
+  <div class="answer">
+        The duration that CloudFront caches content at edge locations before revalidating it.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an Invalidations request in CloudFront?</span>
+  <div class="answer">
+        A way to remove objects from the cache before they expire.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the default TTL in CloudFront?</span>
+  <div class="answer">
+        24 hours (can be configured per cache behavior or via headers).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the maximum file size supported by CloudFront?</span>
+  <div class="answer">
+        30 GB (for HTTP/HTTPS content).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a signed URL?</span>
+  <div class="answer">
+        A URL with an embedded policy and signature to restrict access to content.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a signed cookie?</span>
+  <div class="answer">
+        A cookie that allows access to restricted content without exposing URLs.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">When should you use signed cookies over signed URLs?</span>
+  <div class="answer">
+        When providing access to multiple restricted files, such as whole folders.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can you use HTTPS with CloudFront?</span>
+  <div class="answer">
+        Yes, CloudFront supports HTTPS for both viewers and origin communication.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an Origin Access Identity (OAI)?</span>
+  <div class="answer">
+        A CloudFront feature that allows access to private S3 buckets only through CloudFront.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you restrict S3 bucket access only through CloudFront?</span>
+  <div class="answer">
+        Use Origin Access Identity (OAI) and set a bucket policy to allow access only from CloudFront.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Field-Level Encryption?</span>
+  <div class="answer">
+        Encrypts sensitive data (like credit card info) before it reaches your origin.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Lambda@Edge?</span>
+  <div class="answer">
+        A feature to run Lambda functions at CloudFront edge locations for request/response manipulation.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are some use cases of Lambda@Edge?</span>
+  <div class="answer">
+        A/B testing, header modification, URL rewriting, authentication, and bot filtering.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What protocols does CloudFront support?</span>
+  <div class="answer">
+        HTTP and HTTPS.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between Viewer Protocol Policy and Origin Protocol Policy?</span>
+  <div class="answer">
+        Viewer Protocol: HTTP/HTTPS options for clients.<br>
+        Origin Protocol: HTTP/HTTPS options for CloudFront to fetch from the origin.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can CloudFront deliver dynamic content?</span>
+  <div class="answer">
+        Yes, by configuring behaviors to forward all headers, cookies, and query strings.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Geo Restriction in CloudFront?</span>
+  <div class="answer">
+        Restricts access to content based on the viewer's country.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you monitor CloudFront?</span>
+  <div class="answer">
+        Use CloudWatch metrics, logs, and alarms.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the purpose of cache behaviors in CloudFront?</span>
+  <div class="answer">
+        To define how CloudFront handles requests based on URL patterns.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the default behavior in CloudFront?</span>
+  <div class="answer">
+        The default cache behavior is used when no other path patterns match.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you enable logging in CloudFront?</span>
+  <div class="answer">
+        Enable standard logging to an S3 bucket or real-time logs to Kinesis.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the cost of invalidation requests?</span>
+  <div class="answer">
+        The first 1000 paths per month are free. Charges apply thereafter.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the purpose of forwarding headers to origin?</span>
+  <div class="answer">
+        To help the origin serve personalized or dynamic content based on headers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can CloudFront serve private content?</span>
+  <div class="answer">
+        Yes, using signed URLs or signed cookies.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Origin Failover in CloudFront?</span>
+  <div class="answer">
+        Enables CloudFront to route traffic to a secondary origin if the primary one fails.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the purpose of custom error pages?</span>
+  <div class="answer">
+        To show user-friendly error messages instead of default CloudFront responses.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between CloudFront and S3 Static Website Hosting?</span>
+  <div class="answer">
+        S3 delivers from a single region. CloudFront caches content globally for better performance.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you configure a custom domain with CloudFront?</span>
+  <div class="answer">
+        Use an alternate domain name (CNAME) and attach an SSL certificate (via ACM).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Real-Time Logging in CloudFront?</span>
+  <div class="answer">
+        A feature to stream logs to Kinesis Data Streams for near real-time monitoring.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Origin Shield in CloudFront?</span>
+  <div class="answer">
+        Adds an additional caching layer to reduce load on origins and improve performance.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the maximum number of cache behaviors per distribution?</span>
+  <div class="answer">
+        Up to 25 behaviors per distribution.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you secure CloudFront from DDoS attacks?</span>
+  <div class="answer">
+        Use AWS WAF with CloudFront and enable AWS Shield.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the maximum number of distributions per account?</span>
+  <div class="answer">
+        200 (can be increased via support request).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How does CloudFront handle cookie forwarding?</span>
+  <div class="answer">
+        You can configure behaviors to forward all, whitelist, or none.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are response headers policies?</span>
+  <div class="answer">
+        They control HTTP headers that CloudFront includes in responses.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are origin request policies?</span>
+  <div class="answer">
+        Define what headers, cookies, and query strings CloudFront includes in requests to origins.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can CloudFront compress objects?</span>
+  <div class="answer">
+        Yes, CloudFront supports automatic GZIP and Brotli compression.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the purpose of the Host header in CloudFront requests?</span>
+  <div class="answer">
+        Indicates the origin host; can be modified to support multiple sites behind one CloudFront.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What happens if your origin server uses a self-signed certificate?</span>
+  <div class="answer">
+        CloudFront will reject the origin unless you configure it to trust the certificate (not recommended for production).
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the purpose of caching based on query strings?</span>
+  <div class="answer">
+        Allows CloudFront to cache multiple versions of the same path based on query parameters.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">Can CloudFront be used with API Gateway?</span>
+  <div class="answer">
+        Yes, to cache and deliver APIs at edge locations for faster responses.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How does CloudFront integrate with Route 53?</span>
+  <div class="answer">
+        You can use Route 53 to manage DNS and point your domain to a CloudFront distribution.
+      </div>
+  </li>
+    
+  
+  
+  <li data-id="q231" class="yellow"><span class="faq-question">AWS Kubernetes</span></li>
+      <li data-id="q231">
+  <span class="faq-question">What is Kubernetes?</span>
+  <div class="answer">
+        Kubernetes is an open-source container orchestration platform used to automate deployment, scaling, and operations of application containers across clusters of hosts.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Pod in Kubernetes?</span>
+  <div class="answer">
+        A Pod is the smallest and simplest Kubernetes object. It represents a single instance of a running process in a cluster.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Node?</span>
+  <div class="answer">
+        A Node is a physical or virtual machine on which Kubernetes runs and manages Pods.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Cluster?</span>
+  <div class="answer">
+        A set of nodes that run containerized applications managed by Kubernetes.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Kubelet?</span>
+  <div class="answer">
+        An agent that runs on each node in the cluster and ensures containers are running in a Pod.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Deployment?</span>
+  <div class="answer">
+        A controller that provides declarative updates to Pods and ReplicaSets.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a ReplicaSet?</span>
+  <div class="answer">
+        Ensures a specified number of Pod replicas are running at any given time.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Service in Kubernetes?</span>
+  <div class="answer">
+        An abstraction that defines a logical set of Pods and a policy to access them.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between a Deployment and a StatefulSet?</span>
+  <div class="answer">
+        Deployments are used for stateless applications, while StatefulSets are used for stateful applications with stable identities.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is etcd?</span>
+  <div class="answer">
+        A distributed key-value store used by Kubernetes for all cluster data.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Namespace?</span>
+  <div class="answer">
+        A Namespace allows you to partition resources within the same cluster.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the Control Plane?</span>
+  <div class="answer">
+        The collection of components (API Server, Scheduler, Controller Manager, etcd) that manage the cluster.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the API Server?</span>
+  <div class="answer">
+        The component that exposes the Kubernetes API and serves as the frontend to the cluster's control plane.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a DaemonSet?</span>
+  <div class="answer">
+        Ensures that a copy of a specific Pod runs on all (or some) nodes.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Job in Kubernetes?</span>
+  <div class="answer">
+        A controller that creates Pods to run a task to completion.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a CronJob?</span>
+  <div class="answer">
+        A Job that runs on a scheduled time, similar to cron in Linux.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a ConfigMap?</span>
+  <div class="answer">
+        Used to store non-confidential data in key-value pairs.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Secret?</span>
+  <div class="answer">
+        Similar to ConfigMap, but intended for storing sensitive information like passwords and API keys.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Helm?</span>
+  <div class="answer">
+        A package manager for Kubernetes that simplifies deployment of applications via Helm charts.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are Labels and Selectors?</span>
+  <div class="answer">
+        Labels are key-value pairs attached to objects. Selectors are used to filter and identify objects by label.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a PersistentVolume (PV)?</span>
+  <div class="answer">
+        A piece of storage in the cluster provisioned by an administrator.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a PersistentVolumeClaim (PVC)?</span>
+  <div class="answer">
+        A request for storage by a user that uses a PersistentVolume.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between Rolling Update and Recreate strategy?</span>
+  <div class="answer">
+        Rolling Update gradually replaces Pods. Recreate deletes all old Pods before creating new ones.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Node Affinity?</span>
+  <div class="answer">
+        A set of rules to constrain which nodes your Pod is eligible to be scheduled on.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are Taints and Tolerations?</span>
+  <div class="answer">
+        Taints prevent Pods from being scheduled on nodes unless the Pod tolerates the taint.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Horizontal Pod Autoscaler (HPA)?</span>
+  <div class="answer">
+        Automatically scales the number of Pods based on CPU/memory usage or custom metrics.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Vertical Pod Autoscaler (VPA)?</span>
+  <div class="answer">
+        Automatically adjusts the resource requests and limits of Pods.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Cluster Autoscaler?</span>
+  <div class="answer">
+        Automatically adjusts the number of nodes in your cluster based on pending Pods.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Ingress?</span>
+  <div class="answer">
+        An API object that manages external access to services, typically HTTP.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between Ingress and LoadBalancer?</span>
+  <div class="answer">
+        LoadBalancer exposes service externally using a cloud provider’s load balancer. Ingress offers advanced routing rules.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How does Kubernetes handle networking?</span>
+  <div class="answer">
+        Every Pod gets a unique IP, and communication between Pods is handled via flat network model.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a CNI?</span>
+  <div class="answer">
+        Container Network Interface plugin responsible for configuring network interfaces in containers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the role of kube-proxy?</span>
+  <div class="answer">
+        Maintains network rules on nodes and enables communication to services.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is RBAC?</span>
+  <div class="answer">
+        Role-Based Access Control defines permissions for users and services within the cluster.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a ServiceAccount?</span>
+  <div class="answer">
+        A special account for processes running in Pods to interact with the Kubernetes API.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What are readiness and liveness probes?</span>
+  <div class="answer">
+        Readiness: determines if a Pod is ready to receive traffic. Liveness: checks if a Pod is still running.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a MutatingWebhook and ValidatingWebhook?</span>
+  <div class="answer">
+        Admission controllers that intercept requests to modify or validate objects before they’re persisted.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you perform rolling updates in Kubernetes?</span>
+  <div class="answer">
+        By updating the Deployment with a new image or spec; Kubernetes handles the rollout.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you rollback a deployment?</span>
+  <div class="answer">
+        Use `kubectl rollout undo deployment/&lt;name&gt;`
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is kubeadm?</span>
+  <div class="answer">
+        A tool to bootstrap and manage Kubernetes clusters.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is Minikube?</span>
+  <div class="answer">
+        A tool to run Kubernetes locally.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Custom Resource Definition (CRD)?</span>
+  <div class="answer">
+        Allows users to define custom resources that extend the Kubernetes API.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is an Operator in Kubernetes?</span>
+  <div class="answer">
+        A method of packaging, deploying, and managing a Kubernetes application using custom resources and controllers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is a Sidecar Container?</span>
+  <div class="answer">
+        A secondary container that runs alongside the main container in a Pod to enhance its functionality.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How does Kubernetes handle secrets securely?</span>
+  <div class="answer">
+        Secrets are base64-encoded and can be encrypted at rest using KMS or external providers.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you debug a Kubernetes Pod?</span>
+  <div class="answer">
+        Use commands like `kubectl logs`, `kubectl exec`, and `kubectl describe pod`.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">What is the difference between soft and hard limits in Kubernetes resources?</span>
+  <div class="answer">
+        Soft (requests) define guaranteed resources. Hard (limits) define max resources a Pod can use.
+      </div>
+  </li>
+    
+      <li data-id="q231">
+  <span class="faq-question">How do you monitor a Kubernetes cluster?</span>
+  <div class="answer">
+        Use tools like Prometheus, Grafana, Metrics Server, and ELK stack.
+      </div>
+  </li>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 <li data-id="q32" class="yellow"><span class="faq-question">
 ------------------------------------------------------------------
@@ -11187,6 +13671,8 @@ CI/CD Question List?
 </span></li>
 <li data-id="q32" class="yellow"><span class="faq-question">
 -------------------------------------------------
+<br />
+rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
 </span></li>
     
 </ul>
