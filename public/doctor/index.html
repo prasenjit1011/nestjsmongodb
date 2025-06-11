@@ -14457,11 +14457,456 @@ CI/CD Question List?
       A distributed transaction involves multiple services or databases participating in a single logical transaction. Ensuring atomicity across them is difficult due to network delays and failures. Distributed transactions can be coordinated using two-phase commit (2PC), but this is heavy and not scalable. Microservices often avoid distributed transactions in favor of eventual consistency models.
     </div>
   </li>
-  
+ 
+<li data-id="mbqqq20" class="yellow">
+<span class="faq-question">PostGreSQL</span>
+<div class="answer">
+<ol>
+  <li>What is PostgreSQL?</li>
+<li>What are the key features of PostgreSQL?</li>
+<li>How is PostgreSQL different from MySQL?</li>
+<li>What are data types supported in PostgreSQL?</li>
+<li>What is a tablespace in PostgreSQL?</li>
+<li>What is the use of schemas in PostgreSQL?</li>
+<li>What is a sequence in PostgreSQL?</li>
+<li>How do you create a new database in PostgreSQL?</li>
+<li>How do you list all databases in PostgreSQL?</li>
+<li>How do you connect to a database in PostgreSQL?</li>
+<li>What are roles and users in PostgreSQL?</li>
+<li>How do you manage privileges in PostgreSQL?</li>
+<li>How does PostgreSQL handle transactions?</li>
+<li>What is MVCC (Multi-Version Concurrency Control)?</li>
+<li>What are the isolation levels in PostgreSQL?</li>
+<li>What is a WAL (Write-Ahead Log)?</li>
+<li>What is the purpose of the `VACUUM` command?</li>
+<li>What is `ANALYZE` used for?</li>
+<li>What is autovacuum in PostgreSQL?</li>
+<li>What are temporary tables?</li>
+<li>What is the difference between `DELETE`, `TRUNCATE`, and `DROP`?</li>
+<li>What are indexes in PostgreSQL?</li>
+<li>What types of indexes does PostgreSQL support?</li>
+<li>How do B-tree and GIN indexes differ?</li>
+<li>What is a partial index?</li>
+<li>What is a covering index?</li>
+<li>What are expression indexes?</li>
+<li>What is a composite index?</li>
+<li>What is the `EXPLAIN` command used for?</li>
+<li>How do you optimize a slow query?</li>
+<li>What are materialized views?</li>
+<li>What is the difference between views and materialized views?</li>
+<li>What are CTEs (Common Table Expressions)?</li>
+<li>What is a recursive CTE?</li>
+<li>What are triggers in PostgreSQL?</li>
+<li>What is the difference between BEFORE and AFTER triggers?</li>
+<li>What are functions and stored procedures in PostgreSQL?</li>
+<li>What languages can be used to write functions?</li>
+<li>What is the difference between `LANGUAGE SQL` and `LANGUAGE plpgsql`?</li>
+<li>What are window functions?</li>
+<li>What is the difference between `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`?</li>
+<li>What are aggregate functions in PostgreSQL?</li>
+<li>How do you perform full-text search in PostgreSQL?</li>
+<li>What is `tsvector` and `tsquery`?</li>
+<li>What are arrays in PostgreSQL?</li>
+<li>How do you query an array column?</li>
+<li>What is JSON/JSONB in PostgreSQL?</li>
+<li>What is the difference between JSON and JSONB?</li>
+<li>How do you query JSONB data?</li>
+<li>What is `hstore`?</li>
+<li>What is `pg_stat_activity`?</li>
+<li>How do you kill a running query in PostgreSQL?</li>
+<li>What is `pg_stat_statements`?</li>
+<li>How do you monitor performance in PostgreSQL?</li>
+<li>What are logical and physical replication?</li>
+<li>What is streaming replication?</li>
+<li>What is hot standby?</li>
+<li>What is synchronous replication?</li>
+<li>What are WAL segments?</li>
+<li>What is a failover in PostgreSQL?</li>
+<li>What tools are used for high availability?</li>
+<li>What is connection pooling?</li>
+<li>What are popular PostgreSQL pooling tools?</li>
+<li>What is `pgbouncer`?</li>
+<li>How do you perform backup and restore?</li>
+<li>What is `pg_dump` and `pg_restore`?</li>
+<li>What is `pg_basebackup`?</li>
+<li>What is the difference between logical and physical backup?</li>
+<li>What is the purpose of `psql`?</li>
+<li>How do you write a script in `psql`?</li>
+<li>What is the difference between `psql` and `pgAdmin`?</li>
+<li>What are PostgreSQL extensions?</li>
+<li>What is `PostGIS`?</li>
+<li>What is the difference between serial and identity columns?</li>
+<li>How do you enforce foreign key constraints?</li>
+<li>What are the different types of joins in PostgreSQL?</li>
+<li>What is a lateral join?</li>
+<li>What is the difference between `UNION` and `UNION ALL`?</li>
+<li>What are upserts?</li>
+<li>What is the use of `ON CONFLICT DO NOTHING`?</li>
+<li>What is the default port of PostgreSQL?</li>
+<li>Where is the PostgreSQL configuration file located?</li>
+<li>What are `shared_buffers`, `work_mem`, and `maintenance_work_mem`?</li>
+<li>How do you tune PostgreSQL for performance?</li>
+<li>How do you secure a PostgreSQL server?</li>
+<li>What is `pg_hba.conf`?</li>
+<li>What authentication methods does PostgreSQL support?</li>
+<li>What are advisory locks?</li>
+<li>How do you prevent deadlocks?</li>
+<li>How does PostgreSQL handle concurrent writes?</li>
+<li>What are TOAST tables?</li>
+<li>What is the role of `postgres` user?</li>
+<li>How do you set environment variables for PostgreSQL?</li>
+<li>What is the use of `SET` and `SHOW`?</li>
+<li>How do you enable logging in PostgreSQL?</li>
+<li>How do you find the size of a database/table?</li>
+<li>How do you change the owner of a table?</li>
+<li>How do you rename a table or column?</li>
+<li>How do you create a custom aggregate function?</li>
+<li>How do you grant and revoke privileges?</li>
+<li>How do you schedule jobs in PostgreSQL?</li>
+<li>What is the use of `pg_cron`?</li>
+<li>How do you create a foreign data wrapper?</li>
+<li>What is the use of `postgres_fdw`?</li>
+<li>How do you connect PostgreSQL to other databases?</li>
+<li>What are some PostgreSQL limitations?</li>
+<li>What are common PostgreSQL best practices?</li> </ol>
+</div>
+</li>
+      
+
+
+      <li data-id="mbqqq20">
+        <span class="faq-question">How do you connect PostgreSQL to other databases?</span>
+        <div class="answer">
+        <ul>
+          <li><strong>Foreign Data Wrappers (FDW):</strong> PostgreSQL supports FDWs to connect to external databases like MySQL, Oracle, MongoDB, and even other PostgreSQL instances. Examples include <b>postgres_fdw</b>, <b>mysql_fdw</b>, <b>oracle_fdw</b>.</li>
+          <li><strong>ETL Tools:</strong> Use tools like Apache NiFi, Airbyte, or custom scripts (Python, Node.js) to move or sync data.</li>
+          <li><strong>APIs or Microservices:</strong> Create REST or GraphQL APIs to bridge PostgreSQL with NoSQL or external systems.</li>
+        </ul></div>
+      </li>
+
+      <li data-id="mbqqq20">
+        <span class="faq-question">What are some PostgreSQL limitations?</span>
+        <div class="answer">
+        <ul>
+          <li>Limited built-in support for sharding and multi-master replication</li>
+          <li>Parallel query execution is limited in certain scenarios</li>
+          <li>Write performance may bottleneck under extremely high loads</li>
+          <li>No built-in full-text search features as advanced as Elasticsearch</li>
+          <li>Requires manual partitioning setup (pre-v11)</li>
+          <li>Storage limit per table: ~32 TB (without workarounds)</li>
+        </ul></div>
+      </li>
+
+      <li data-id="mbqqq20">
+        <span class="faq-question">What are common PostgreSQL best practices?</span>
+        <div class="answer">
+        <ul>
+          <li><strong>Performance:</strong> Use indexing, <b>EXPLAIN ANALYZE</b>, connection pooling (PgBouncer), and efficient queries.</li>
+          <li><strong>Schema Design:</strong> Normalize appropriately, use UUIDs or BIGSERIALs, prefer JSONB over JSON.</li>
+          <li><strong>Security:</strong> Avoid superuser accounts, configure SSL, manage roles and privileges.</li>
+          <li><strong>Backups & HA:</strong> Use <b>pg_dump</b>, WAL archiving, set up replication (with Patroni or repmgr).</li>
+          <li><strong>Monitoring:</strong> Use <b>pg_stat_statements</b>, pgBadger, Prometheus + Grafana.</li>
+          <li><strong>Maintenance:</strong> Enable and tune autovacuum, monitor for bloat, and schedule regular ANALYZE runs.</li>
+        </ul></div>
+      </li>
+      <li data-id="mbqqq20">
+        <span class="faq-question">What is the use of pg_cron?</span>
+        <div class="answer">
+          <ul>
+            <li>pg_cron is a PostgreSQL extension used to schedule SQL queries using cron syntax.</li>
+            <li>It allows you to automate tasks such as:
+              <ul>
+                <li>Routine maintenance (e.g., VACUUM, ANALYZE)</li>
+                <li>Data cleanups and periodic updates</li>
+                <li>Running scheduled reports or backups</li>
+              </ul>
+            </li>
+            <li>It runs inside the database server as a background worker and requires superuser privileges to install.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq21">
+        <span class="faq-question">How do you create a foreign data wrapper?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Step 1:</strong> Enable the FDW extension (example for PostgreSQL):
+              <br><code>CREATE EXTENSION IF NOT EXISTS postgres_fdw;</code>
+            </li>
+            <li><strong>Step 2:</strong> Create a foreign server:
+              <br><code>CREATE SERVER foreign_server FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'host', dbname 'db', port '5432');</code>
+            </li>
+            <li><strong>Step 3:</strong> Create user mapping:
+              <br><code>CREATE USER MAPPING FOR CURRENT_USER SERVER foreign_server OPTIONS (user 'username', password 'password');</code>
+            </li>
+            <li><strong>Step 4:</strong> Import schema or create foreign tables:
+              <br><code>IMPORT FOREIGN SCHEMA public FROM SERVER foreign_server INTO local_schema;</code>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq22">
+        <span class="faq-question">What is the use of postgres_fdw?</span>
+        <div class="answer">
+          <ul>
+            <li><code>postgres_fdw</code> is a Foreign Data Wrapper that lets PostgreSQL query tables in another PostgreSQL database as if they were local.</li>
+            <li>Key uses include:
+              <ul>
+                <li>Cross-database querying</li>
+                <li>Building federated database systems</li>
+                <li>Data aggregation from multiple PostgreSQL servers</li>
+              </ul>
+            </li>
+            <li>It supports read and write operations and can also push down WHERE clauses for performance optimization.</li>
+          </ul>
+        </div>
+      </li>
+      <li data-id="mbqqq23">
+        <span class="faq-question">How do you create a custom aggregate function?</span>
+        <div class="answer">
+          <ul>
+            <li>You define a custom aggregate function using the <code>CREATE AGGREGATE</code> statement.</li>
+            <li>It typically requires:
+              <ul>
+                <li>A state transition function</li>
+                <li>An initial state value</li>
+                <li>(Optional) a final function to produce the result</li>
+              </ul>
+            </li>
+            <li><strong>Example:</strong> Creating a custom aggregate to multiply all values:
+              <pre><code>
+      CREATE FUNCTION multiply_state(state numeric, next numeric)
+      RETURNS numeric AS $$
+      BEGIN
+        RETURN state * next;
+      END;
+      $$ LANGUAGE plpgsql;
+      
+      CREATE AGGREGATE product(numeric) (
+        SFUNC = multiply_state,
+        STYPE = numeric,
+        INITCOND = 1
+      );
+              </code></pre>
+            </li>
+            <li>Now you can use it like: <code>SELECT product(salary) FROM employees;</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq24">
+        <span class="faq-question">How do you grant and revoke privileges?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>GRANT</strong> is used to give access to database objects like tables, sequences, functions, etc.</li>
+            <li><strong>REVOKE</strong> removes the granted access.</li>
+            <li><strong>Example - Granting SELECT:</strong>
+              <br><code>GRANT SELECT ON employees TO analyst;</code>
+            </li>
+            <li><strong>Example - Revoking SELECT:</strong>
+              <br><code>REVOKE SELECT ON employees FROM analyst;</code>
+            </li>
+            <li>You can also grant roles: <br><code>GRANT readonly TO user123;</code></li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq25">
+        <span class="faq-question">How do you schedule jobs in PostgreSQL?</span>
+        <div class="answer">
+          <ul>
+            <li>You can schedule jobs using the <code>pg_cron</code> extension or external tools like cron, pgAgent, or custom scripts.</li>
+            <li><strong>Using pg_cron (built-in cron-like scheduler):</strong>
+              <ul>
+                <li>Install pg_cron and load it with: <br><code>CREATE EXTENSION pg_cron;</code></li>
+                <li>Schedule a query:<br>
+                  <code>
+      SELECT cron.schedule('0 1 * * *', $$VACUUM ANALYZE$$);
+                  </code>
+                </li>
+              </ul>
+            </li>
+            <li><strong>Alternative tools:</strong>
+              <ul>
+                <li><strong>pgAgent:</strong> A GUI-friendly PostgreSQL job scheduler</li>
+                <li><strong>cron + psql:</strong> Call psql scripts directly from OS cron jobs</li>
+                <li><strong>pg_partman + cron:</strong> For scheduled partition maintenance</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq26">
+        <span class="faq-question">How do you find the size of a database/table?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>To find the size of a database:</strong><br>
+              <code>SELECT pg_size_pretty(pg_database_size('your_database_name'));</code>
+            </li>
+            <li><strong>To find the size of a table:</strong><br>
+              <code>SELECT pg_size_pretty(pg_total_relation_size('your_table_name'));</code>
+            </li>
+            <li><strong>To get sizes of all tables:</strong>
+              <pre><code>
+      SELECT 
+        relname AS table_name,
+        pg_size_pretty(pg_total_relation_size(relid)) AS size
+      FROM pg_catalog.pg_statio_user_tables
+      ORDER BY pg_total_relation_size(relid) DESC;
+              </code></pre>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq27">
+        <span class="faq-question">How do you change the owner of a table?</span>
+        <div class="answer">
+          <ul>
+            <li>You can change the owner of a table using the <code>ALTER TABLE</code> command.</li>
+            <li><strong>Syntax:</strong><br>
+              <code>ALTER TABLE table_name OWNER TO new_owner;</code>
+            </li>
+            <li>The new owner must be an existing user/role with the necessary privileges.</li>
+            <li>You must be the current owner or a superuser to make this change.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq28">
+        <span class="faq-question">How do you rename a table or column?</span>
+        <div class="answer">
+          <ul>
+            <li><strong>Rename a table:</strong><br>
+              <code>ALTER TABLE old_table_name RENAME TO new_table_name;</code>
+            </li>
+            <li><strong>Rename a column:</strong><br>
+              <code>ALTER TABLE table_name RENAME COLUMN old_column TO new_column;</code>
+            </li>
+            <li>Ensure dependent objects (like views or functions) are updated if necessary.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq29">
+        <span class="faq-question">How do you set environment variables for PostgreSQL?</span>
+        <div class="answer">
+          <ul>
+            <li>Environment variables help configure PostgreSQL clients or server behavior.</li>
+            <li><strong>Common environment variables:</strong>
+              <ul>
+                <li><code>PGHOST</code> – Hostname of the database server</li>
+                <li><code>PGPORT</code> – Port number (default is 5432)</li>
+                <li><code>PGUSER</code> – Database username</li>
+                <li><code>PGPASSWORD</code> – Password for authentication</li>
+                <li><code>PGDATABASE</code> – Default database name</li>
+              </ul>
+            </li>
+            <li><strong>Example (Linux/macOS):</strong>
+              <pre><code>
+      export PGHOST=localhost
+      export PGPORT=5432
+      export PGUSER=postgres
+      export PGPASSWORD=secret
+      export PGDATABASE=mydb
+              </code></pre>
+            </li>
+            <li>These can be used with tools like <code>psql</code>, <code>pg_dump</code>, etc., without needing to pass arguments.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq30">
+        <span class="faq-question">What is the use of <code>SET</code> and <code>SHOW</code>?</span>
+        <div class="answer">
+          <ul>
+            <li><code>SET</code> is used to change the value of runtime configuration parameters for the current session.</li>
+            <li><code>SHOW</code> is used to view the current value of a configuration parameter.</li>
+            <li><strong>Examples:</strong>
+              <ul>
+                <li><code>SET work_mem = '64MB';</code> – Sets the memory per sort operation</li>
+                <li><code>SHOW work_mem;</code> – Displays the current setting of <code>work_mem</code></li>
+                <li><code>RESET work_mem;</code> – Resets the parameter to default</li>
+              </ul>
+            </li>
+            <li>Useful for tuning query performance or enabling specific behaviors at runtime.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq31">
+        <span class="faq-question">How do you enable logging in PostgreSQL?</span>
+        <div class="answer">
+          <ul>
+            <li>Edit the <code>postgresql.conf</code> file (usually found in the data directory).</li>
+            <li><strong>Recommended parameters:</strong>
+              <ul>
+                <li><code>logging_collector = on</code></li>
+                <li><code>log_directory = 'log'</code></li>
+                <li><code>log_filename = 'postgresql-%Y-%m-%d.log'</code></li>
+                <li><code>log_statement = 'all'</code> (for debugging, not for production)</li>
+                <li><code>log_min_duration_statement = 500</code> (logs slow queries > 500ms)</li>
+              </ul>
+            </li>
+            <li>Restart PostgreSQL for the changes to take effect.</li>
+            <li>Use <code>SHOW log_directory;</code> and <code>SHOW log_filename;</code> to verify runtime values.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq32">
+        <span class="faq-question">How does PostgreSQL handle concurrent writes?</span>
+        <div class="answer">
+          <ul>
+            <li>PostgreSQL uses Multi-Version Concurrency Control (MVCC) to manage concurrent writes and reads without locking the entire table.</li>
+            <li>Each transaction sees a consistent snapshot of the database.</li>
+            <li>Writes are isolated from each other using:
+              <ul>
+                <li>Row-level locks</li>
+                <li>Transaction IDs (XIDs)</li>
+                <li>Visibility rules to determine which rows are visible</li>
+              </ul>
+            </li>
+            <li>This allows high concurrency and avoids most deadlocks.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq33">
+        <span class="faq-question">What are TOAST tables?</span>
+        <div class="answer">
+          <ul>
+            <li>TOAST stands for “The Oversized-Attribute Storage Technique.”</li>
+            <li>Used automatically by PostgreSQL to store large values (e.g., large text or bytea fields) that exceed the size limit of a single page (8 KB).</li>
+            <li>TOAST stores large column data in a separate auxiliary table and only keeps a reference in the main table.</li>
+            <li>This keeps table rows small and improves performance by avoiding unnecessary I/O for large values.</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="mbqqq34">
+        <span class="faq-question">What is the role of the <code>postgres</code> user?</span>
+        <div class="answer">
+          <ul>
+            <li>The <code>postgres</code> user is the default superuser account created during PostgreSQL installation.</li>
+            <li>It has full administrative privileges:
+              <ul>
+                <li>Create and drop databases</li>
+                <li>Create roles and users</li>
+                <li>Access and modify any table</li>
+                <li>Install extensions</li>
+              </ul>
+            </li>
+            <li>It is often used for administrative tasks, but it’s good practice to create a separate limited-privilege user for regular application access.</li>
+          </ul>
+        </div>
+      </li>
       
 
 <li data-id="q32" class="yellow"><span class="faq-question">
-------------------------------------------------------------------
+------------------pg..0-90 ------------------------------------------------
 </span></li>
 <li data-id="q32" class="yellow"><span class="faq-question">
 --------------------------------------------------------------
