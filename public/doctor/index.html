@@ -58,12 +58,346 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       </tr>
       <tr>
         <td colspan="4">
-          + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka
+          + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka+Appsync
         </td>
       </tr>
 </tbody></table>  
 
 </div></li>
+
+<li data-id="q122"><span class="faq-question green">
+  AWS SQS vs SNS
+</span>
+<div class="answer">
+ 
+    <section>
+      <h2>SQS – Simple Queue Service</h2>
+      <p><strong>Type:</strong> Message Queue (Pull-based)</p>
+      <p><strong>Use Case:</strong> Decoupling components, job queues, buffering systems.</p>
+      <p><strong>How It Works:</strong> Producers send messages to a queue, and consumers poll the queue to receive messages. FIFO and Standard options available.</p>
+      <ul>
+        <li>At-least-once delivery (Standard)</li>
+        <li>FIFO support with exactly-once processing</li>
+        <li>Dead-letter queues for message failure handling</li>
+        <li>Consumers must poll — no push</li>
+      </ul>
+    </section>
+  
+    <section>
+      <h2>SNS – Simple Notification Service</h2>
+      <p><strong>Type:</strong> Publish/Subscribe (Push-based)</p>
+      <p><strong>Use Case:</strong> Broadcasting messages to multiple systems like Lambda, email, SMS.</p>
+      <p><strong>How It Works:</strong> Publishers send messages to a topic, which pushes messages to all subscribed endpoints.</p>
+      <ul>
+        <li>Push delivery to multiple endpoints</li>
+        <li>Supports SQS, Lambda, HTTP, email, SMS</li>
+        <li>Scalable and real-time</li>
+      </ul>
+    </section>
+  
+    <section>
+      <h2>SQS + SNS Together</h2>
+      <p>Commonly used together in fan-out architectures. SNS broadcasts to multiple SQS queues that each process messages independently.</p>
+    </section>
+  
+    <section>
+      <h2>Comparison Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>SQS</th>
+            <th>SNS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pattern</td>
+            <td>Pull-based (Queue)</td>
+            <td>Push-based (Pub/Sub)</td>
+          </tr>
+          <tr>
+            <td>Use Case</td>
+            <td>Decoupling systems</td>
+            <td>Broadcast messages to multiple endpoints</td>
+          </tr>
+          <tr>
+            <td>Delivery</td>
+            <td>Consumer polls messages</td>
+            <td>Pushes to subscribers</td>
+          </tr>
+          <tr>
+            <td>Message Retention</td>
+            <td>Up to 14 days</td>
+            <td>Short-lived (instant delivery)</td>
+          </tr>
+          <tr>
+            <td>Fan-out</td>
+            <td>Not directly supported</td>
+            <td>Built-in support</td>
+          </tr>
+          <tr>
+            <td>Subscribers</td>
+            <td>One or more consumers</td>
+            <td>Multiple (SQS, Lambda, HTTP, etc.)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <section class="highlight">
+      <h2>TL;DR</h2>
+      <p><strong>Use SQS</strong> for reliable message queuing and decoupled, asynchronous processing.</p>
+      <p><strong>Use SNS</strong> when you need to notify multiple systems in real time.</p>
+    </section>
+
+  
+</div></li>
+
+
+<li data-id="q122"><span class="faq-question green">
+  MongoDB
+  </span>
+  <div class="answer">
+  
+
+
+
+
+
+
+<pre>
+  const mongoose = require('mongoose');
+
+  const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    age: { type: Number, required: true },
+  }, { timestamps: true });
+  
+  module.exports = mongoose.model('User', userSchema);
+</pre>
+
+<pre>
+  const user = await User.create(req.body);
+  const users = await User.find();
+  const user = await User.findById(req.params.id);
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const user = await User.findByIdAndDelete(req.params.id);
+</pre>
+
+<pre>
+  await User.updateOne(
+    { email: "prasenjit@example.com" },
+    { $set: { name: "Prasenjit", age: 30 } },
+    { upsert: true }
+  );
+
+  const user = await User.findOneAndUpdate(
+    { email: "prasenjit@example.com" },     // filter
+    { name: "Prasenjit", age: 30 },         // update
+    { new: true, upsert: true }             // options
+  );
+    
+
+  db.orders.aggregate([
+  {
+      $lookup: {
+        from: "products",        // foreign collection
+        localField: "product_id",// field in orders
+        foreignField: "_id",     // field in products
+        as: "productDetails"     // result array field
+      }
+    }
+  ]);
+
+  const result = await Order.aggregate([
+  {
+      $lookup: {
+        from: "products",
+        localField: "product_id",
+        foreignField: "_id",
+        as: "productDetails"
+      }
+    },
+    { $unwind: "$productDetails" }
+  ]);
+
+  db.orders.aggregate([
+    {
+      $lookup: {
+        from: "products",
+        localField: "product_id",
+        foreignField: "_id",
+        as: "productDetails"
+      }
+    },
+    { $unwind: "$productDetails" },
+    {
+      $match: { "productDetails.price": { $gt: 500 } }
+    },
+    {
+      $project: {
+        quantity: 1,
+        productName: "$productDetails.name",
+        price: "$productDetails.price"
+      }
+    }
+  ]);
+
+
+</pre>
+
+
+<pre>
+  mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+        console.log('MongoDB connected');
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    }).catch(err => console.error(err));
+</pre>
+<ol>
+  <li><strong>Insert Operations</strong>
+    <ul>
+      <li><code>User.create({ name: "Prasenjit", age: 30 });</code></li>
+      <li><code>User.insertMany([{ name: "A", age: 25 }, { name: "B", age: 28 }]);</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Find Operations</strong>
+    <ul>
+      <li><code>User.find();</code></li>
+      <li><code>User.findById("id");</code></li>
+      <li><code>User.find({ age: { $gt: 25 } });</code></li>
+      <li><code>User.find({}, 'name age');</code> (select fields)</li>
+      <li><code>User.find({}, { password: 0 });</code> (exclude fields)</li>
+    </ul>
+  </li>
+
+  <li><strong>Update Operations</strong>
+    <ul>
+      <li><code>User.updateOne({ name: "A" }, { $set: { age: 35 } });</code></li>
+      <li><code>User.updateMany({ age: { $lt: 30 } }, { $inc: { age: 1 } });</code></li>
+      <li><code>User.findByIdAndUpdate(id, { $set: { name: "Updated" } }, { new: true });</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Delete Operations</strong>
+    <ul>
+      <li><code>User.deleteOne({ name: "A" });</code></li>
+      <li><code>User.deleteMany({ age: { $gt: 40 } });</code></li>
+      <li><code>User.findByIdAndDelete(id);</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Upsert</strong>
+    <ul>
+      <li><code>User.updateOne({ email: "a@example.com" }, { $set: { name: "Upserted User" } }, { upsert: true });</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Sorting, Limiting, Skipping (Pagination)</strong>
+    <ul>
+      <li><code>User.find().sort({ age: -1 });</code></li>
+      <li><code>User.find().limit(10);</code></li>
+      <li><code>User.find().skip(10).limit(10);</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Aggregation Operators</strong>
+    <ul>
+      <li>
+        <code>
+          User.aggregate([
+            { $match: { age: { $gte: 25 } } },
+            { $group: { _id: "$age", total: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
+          ]);
+        </code>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong>$lookup (Join)</strong>
+    <ul>
+      <li>
+        <code>
+          User.aggregate([
+            {
+              $lookup: {
+                from: "orders",
+                localField: "_id",
+                foreignField: "userId",
+                as: "userOrders"
+              }
+            }
+          ]);
+        </code>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong>Count</strong>
+    <ul>
+      <li><code>User.countDocuments({ age: { $gt: 25 } });</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Regex Search</strong>
+    <ul>
+      <li><code>User.find({ name: { $regex: "pras", $options: "i" } });</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Indexing</strong>
+    <ul>
+      <li><code>userSchema.index({ email: 1 }, { unique: true });</code></li>
+      <li><code>User.collection.createIndex({ name: 1 });</code></li>
+    </ul>
+  </li>
+
+  <li><strong>Transactions</strong>
+    <ul>
+      <li>
+        <code>
+          const session = await mongoose.startSession();<br>
+          try {<br>
+          &nbsp;&nbsp;session.startTransaction();<br>
+          &nbsp;&nbsp;await User.create([{ name: "Tx User" }], { session });<br>
+          &nbsp;&nbsp;await Order.create([{ total: 100 }], { session });<br>
+          &nbsp;&nbsp;await session.commitTransaction();<br>
+          } catch (err) {<br>
+          &nbsp;&nbsp;await session.abortTransaction();<br>
+          } finally {<br>
+          &nbsp;&nbsp;session.endSession();<br>
+          }
+        </code>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong>Utility Functions</strong>
+    <ul>
+      <li><code>User.exists({ email: "a@example.com" });</code></li>
+      <li><code>User.distinct("age");</code></li>
+      <li><code>User.estimatedDocumentCount();</code></li>
+    </ul>
+  </li>
+</ol>
+
+</div>
+</li>
+
+
+
+
+
+
+
+
+
 <li data-id="q122"><span class="faq-question green">
   Arrow Function
 </span>
@@ -8533,13 +8867,14 @@ console.log(result);  // Output: 15
           <li><span class="faq-question">
                 
                 Difference between find() AND findOne()</span><div class="answer">
-                <ul>
-                  <li><code>find()</code> returns a cursor to all documents that match the query criteria. You can iterate over the results or use <code>toArray()</code> to get all matches.</li>
-                  <li><code>findOne()</code> returns the first document that matches the query criteria.</li>
-                </ul>
+                <ol>
+                  <li><b>find()</b> returns a cursor to all documents that match the query criteria. <br />
+                    You can iterate over the results or use <b>toArray()</b> to get all matches.</li>
+                  <li><b>findOne()</b> returns the first document that matches the query criteria.</li>
+                </ol>
                 <strong>Example:</strong><br />
-                <code>db.users.find({ age: 25 })</code> → returns all matching users<br />
-                <code>db.users.findOne({ age: 25 })</code> → returns one user
+                <b>db.users.find({ age: 25 })</b> → returns all matching users<br />
+                <b>db.users.findOne({ age: 25 })</b> → returns one user
               
                 
               </div>
@@ -13652,15 +13987,395 @@ CI/CD Question List?
 
 
 
+<li data-id="q32" class="yellow"><span class="faq-question">
+  Microservices
+</span>
+<div class="answer">
+
+  <ol>
+    <li>What are microservices?</li>
+    <li>How do microservices differ from monolithic architecture?</li>
+    <li>What are the main benefits of using microservices?</li>
+    <li>What are the common challenges in microservices architecture?</li>
+    <li>What is a service registry?</li>
+    <li>What is service discovery in microservices?</li>
+    <li>What is API Gateway and why is it used in microservices?</li>
+    <li>How do microservices communicate with each other?</li>
+    <li>What is synchronous vs asynchronous communication in microservices?</li>
+    <li>What are REST and gRPC in microservices communication?</li>
+    <li>What is service orchestration?</li>
+    <li>What is service choreography?</li>
+    <li>What is circuit breaker pattern?</li>
+    <li>What is the purpose of a load balancer in microservices?</li>
+    <li>What is eventual consistency?</li>
+    <li>What is the Saga pattern?</li>
+    <li>What is the difference between orchestration and choreography in Saga?</li>
+    <li>What is a sidecar pattern?</li>
+    <li>What is the strangler pattern?</li>
+    <li>What are the advantages of decentralized data management in microservices?</li>
+    <li>How is data consistency maintained across microservices?</li>
+    <li>What is a bounded context in microservices?</li>
+    <li>What is domain-driven design (DDD)?</li>
+    <li>How do you handle transactions in microservices?</li>
+    <li>What is a distributed transaction?</li>
+    <li>How do you secure microservices?</li>
+    <li>What is OAuth2 and how is it used in microservices?</li>
+    <li>What is OpenID Connect?</li>
+    <li>What is service mesh?</li>
+    <li>How does Istio or Linkerd work in a microservices setup?</li>
+    <li>What is containerization and how does it help microservices?</li>
+    <li>What is the role of Docker in microservices?</li>
+    <li>What is Kubernetes and how does it relate to microservices?</li>
+    <li>How do you monitor microservices?</li>
+    <li>What tools are used for logging in microservices?</li>
+    <li>How is tracing handled in distributed microservices?</li>
+    <li>What is Zipkin or Jaeger?</li>
+    <li>How do you handle fault tolerance in microservices?</li>
+    <li>What is load shedding in microservices?</li>
+    <li>What is backpressure?</li>
+    <li>How do you deploy microservices?</li>
+    <li>What is a blue-green deployment?</li>
+    <li>What is a canary deployment?</li>
+    <li>What is the 12-factor app methodology?</li>
+    <li>What are environment variables and why are they used?</li>
+    <li>How do you handle versioning in microservices?</li>
+    <li>What is a polyglot persistence architecture?</li>
+    <li>How do you ensure idempotency in microservices?</li>
+    <li>What is anti-corruption layer in microservices?</li>
+    <li>What is the bulkhead pattern?</li>
+    <li>What is the retry pattern?</li>
+    <li>What is the difference between API Gateway and Service Mesh?</li>
+    <li>How do you implement rate limiting in microservices?</li>
+    <li>What are idempotent operations?</li>
+    <li>What is the role of message brokers in microservices?</li>
+    <li>What is RabbitMQ / Kafka and how are they used?</li>
+    <li>What is a dead letter queue (DLQ)?</li>
+    <li>What is a poison message?</li>
+    <li>How do you handle schema evolution in microservices?</li>
+    <li>What are contract tests in microservices?</li>
+    <li>What is consumer-driven contract testing?</li>
+    <li>What is Pact and how does it work?</li>
+    <li>How do you manage microservice dependencies?</li>
+    <li>How do you isolate failures in microservices?</li>
+    <li>What is a distributed cache?</li>
+    <li>How does Redis or Memcached help in microservices?</li>
+    <li>What are some best practices in designing microservices?</li>
+    <li>How do you handle cross-cutting concerns in microservices?</li>
+    <li>What is centralized logging?</li>
+    <li>How do you test microservices?</li>
+    <li>What are unit tests, integration tests, and end-to-end tests in microservices?</li>
+    <li>How do you debug microservices in production?</li>
+    <li>What is chaos engineering?</li>
+    <li>What is Netflix OSS stack for microservices?</li>
+    <li>What is Hystrix and why was it deprecated?</li>
+    <li>What is Spring Cloud?</li>
+    <li>What is Consul or Eureka in microservices?</li>
+    <li>How do you scale microservices?</li>
+    <li>What is horizontal scaling vs vertical scaling?</li>
+    <li>What are shared-nothing architectures?</li>
+    <li>How do you migrate a monolith to microservices?</li>
+    <li>What is the database-per-service pattern?</li>
+    <li>What is the shared-database anti-pattern?</li>
+    <li>How do you handle configuration in microservices?</li>
+    <li>What is centralized configuration management?</li>
+    <li>What is Spring Cloud Config / HashiCorp Vault?</li>
+    <li>How do you handle secrets in microservices?</li>
+    <li>What is the Ambassador pattern?</li>
+    <li>What is the Adapter pattern in microservices?</li>
+    <li>How do you ensure observability in microservices?</li>
+    <li>What are metrics and how do you expose them?</li>
+    <li>What are Prometheus and Grafana used for?</li>
+    <li>How do you handle slow services in microservices architecture?</li>
+    <li>What is service timeout and retry strategy?</li>
+    <li>What are best practices for API design in microservices?</li>
+    <li>How do you document microservices APIs?</li>
+    <li>What is Swagger / OpenAPI?</li>
+    <li>How do you handle multi-tenancy in microservices?</li>
+    <li>What is tenant isolation?</li>
+    <li>How do microservices affect DevOps?</li>
+    <li>What is CI/CD for microservices?</li>
+    <li>How do you implement feature toggles in microservices?</li>
+    <li>What are dark launches?</li>
+    <li>How do you ensure transactional integrity in a distributed microservices environment?</li>
+    <li>Can you explain the difference between Saga pattern and 2-phase commit? When would you use each?</li>
+    <li>How would you handle distributed tracing across 100+ microservices?</li>
+    <li>What are the major trade-offs of eventual consistency vs strong consistency?</li>
+    <li>How do you implement zero-downtime deployments for microservices?</li>
+    <li>How do you resolve cyclic dependencies between microservices?</li>
+    <li>How would you handle schema evolution in Kafka-based microservices communication?</li>
+    <li>Explain how to design a microservice that needs to perform large batch processing without overwhelming downstream services.</li>
+    <li>How would you implement role-based access control (RBAC) in a microservice architecture?</li>
+    <li>What are the performance implications of synchronous vs asynchronous communication in a highly-scalable microservice system?</li>
+    <li>How would you design multi-region microservices with low latency and high availability?</li>
+    <li>How do you ensure data consistency between services that share no common database?</li>
+    <li>How would you design a versioning strategy for public-facing APIs in microservices?</li>
+    <li>How would you handle the "n+1 query problem" in a microservices architecture?</li>
+    <li>How do you monitor and enforce SLAs (Service Level Agreements) for each microservice?</li>
+    <li>What are the limitations of API Gateway pattern, and how do you overcome them?</li>
+    <li>How do you manage secrets across 100+ microservices securely?</li>
+    <li>How would you implement fine-grained rate limiting per user and per service?</li>
+    <li>What is the CAP theorem and how does it apply to microservice design?</li>
+    <li>What challenges arise when running stateful microservices on Kubernetes?</li>
+    <li>How would you handle race conditions when updating shared data across services?</li>
+    <li>How do you implement a fail-safe mechanism for service dependencies?</li>
+    <li>How do you manage backward compatibility when breaking up a monolith into microservices?</li>
+    <li>How do you detect and prevent cascading failures in a microservice system?</li>
+    <li>What strategies would you use to isolate a noisy neighbor microservice?</li>
+    <li>How would you ensure idempotency in event-driven microservices?</li>
+    <li>How do you perform load testing for microservice communication paths?</li>
+    <li>How would you structure log correlation IDs across distributed systems?</li>
+    <li>Explain how the Outbox Pattern helps in distributed event publishing.</li>
+    <li>How do you deal with partial failures in long-running workflows?</li>
+    <li>How would you implement retry with exponential backoff and jitter for service calls?</li>
+    <li>How do you manage connection pools in services making high volume database or HTTP requests?</li>
+    <li>How do you design a data aggregation layer across multiple microservices?</li>
+    <li>How would you architect a microservices-based real-time analytics system?</li>
+    <li>How do you coordinate deployments of interdependent microservices without downtime?</li>
+    <li>How do you ensure GDPR compliance in a microservices architecture?</li>
+    <li>How would you implement centralized auditing in a decentralized service ecosystem?</li>
+    <li>How would you handle concurrent updates to shared data across services?</li>
+    <li>How do you maintain referential integrity when using separate databases per service?</li>
+    <li>What is the role of eventual consistency in highly available systems and what are its caveats?</li>
+    <li>How do you debug performance issues in a microservice with high latency?</li>
+    <li>How would you handle timeouts and retries in a nested call chain of microservices?</li>
+    <li>How do you secure communication between services in an untrusted network?</li>
+    <li>What are the pros and cons of using gRPC vs REST in internal microservice communication?</li>
+    <li>How do you automate chaos engineering tests in microservice deployments?</li>
+    <li>How would you enforce authentication and authorization uniformly across microservices?</li>
+    <li>How would you implement a global transaction log across services?</li>
+    <li>How would you evolve your database schema while minimizing downtime and impact to dependent services?</li>
+    <li>How would you implement data sharding in a microservices architecture?</li>
+  </ol>
+    
 
 
 
+</div></li>
 
 
 
+  <li data-id="q1wwww">
+    <span class="faq-question">What are microservices?</span>
+    <div class="answer">
+      Microservices are an architectural style where an application is structured as a collection of loosely coupled, independently deployable services. Each service is responsible for a specific business capability and communicates with other services through well-defined APIs.
+    </div>
+  </li>
+
+  <li data-id="q2qq">
+    <span class="faq-question">How do microservices differ from monolithic architecture?</span>
+    <div class="answer">
+      In a monolithic architecture, all components are tightly integrated and run as a single application. Microservices, on the other hand, break the application into smaller, independent services that can be developed, deployed, and scaled separately. This leads to better flexibility, scalability, and maintainability.
+    </div>
+  </li>
+
+  <li data-id="qqq3">
+    <span class="faq-question">What are the main benefits of using microservices?</span>
+    <div class="answer">
+      <ul>
+        <li>Independent deployment and scaling</li>
+        <li>Better fault isolation and resilience</li>
+        <li>Technology flexibility for each service</li>
+        <li>Improved developer productivity</li>
+        <li>Easier continuous delivery and DevOps integration</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="q4qq">
+    <span class="faq-question">What are the common challenges in microservices architecture?</span>
+    <div class="answer">
+      <ul>
+        <li>Complex service communication and orchestration</li>
+        <li>Distributed data management</li>
+        <li>Monitoring and debugging complexity</li>
+        <li>Service versioning and backward compatibility</li>
+        <li>Security and authorization between services</li>
+      </ul>
+    </div>
+  </li>
+
+  <li data-id="qqqqq5">
+    <span class="faq-question">What is a service registry?</span>
+    <div class="answer">
+      A service registry is a database or directory used to dynamically register and discover microservices. It keeps track of service instances and their locations (IP/port), allowing other services to find and communicate with them. Popular examples include Netflix Eureka, Consul, and etcd.
+    </div>
+  </li>
+  <li data-id="mbqqq1">
+    <span class="faq-question">What is service discovery in microservices?</span>
+    <div class="answer">
+      Service discovery is the process by which a microservice automatically detects the location (IP address and port) of other services in the architecture. This is crucial in dynamic environments where services may scale up/down or restart frequently. Service discovery can be client-side (e.g., Netflix Eureka) or server-side (e.g., Kubernetes).
+    </div>
+  </li>
+  
+  <li data-id="mbqqq2">
+    <span class="faq-question">What is API Gateway and why is it used in microservices?</span>
+    <div class="answer">
+      An API Gateway acts as a single entry point for all client requests in a microservices architecture. It handles request routing, authentication, rate limiting, load balancing, and protocol translation. It abstracts the internal service structure and helps simplify communication between clients and services.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq3">
+    <span class="faq-question">How do microservices communicate with each other?</span>
+    <div class="answer">
+      Microservices communicate via network protocols using inter-process communication. The most common methods are:
+      <ul>
+        <li><strong>HTTP/HTTPS</strong> (REST APIs)</li>
+        <li><strong>gRPC</strong> (binary, efficient communication)</li>
+        <li><strong>Message brokers</strong> like RabbitMQ, Kafka (for asynchronous messaging)</li>
+      </ul>
+      The choice depends on latency, data volume, and architectural style.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq4">
+    <span class="faq-question">What is synchronous vs asynchronous communication in microservices?</span>
+    <div class="answer">
+      <ul>
+        <li><strong>Synchronous communication</strong> involves a direct request-response interaction between services (e.g., REST or gRPC). The calling service waits for a response.</li>
+        <li><strong>Asynchronous communication</strong> uses message queues or event streaming (e.g., RabbitMQ, Kafka) where the sender doesn't wait for a response. It's useful for decoupling, scaling, and resiliency.</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="mbqqq5">
+    <span class="faq-question">What are REST and gRPC in microservices communication?</span>
+    <div class="answer">
+      <ul>
+        <li><strong>REST (Representational State Transfer)</strong> is a widely used HTTP-based protocol where services expose endpoints. It's language-agnostic, human-readable (JSON), but slower due to overhead.</li>
+        <li><strong>gRPC (Google Remote Procedure Call)</strong> uses HTTP/2 and Protocol Buffers for compact, efficient communication. It supports bi-directional streaming and is ideal for internal service communication where performance matters.</li>
+      </ul>
+    </div>
+  </li>
+  
 
 
+  <li data-id="mbqqq6">
+    <span class="faq-question">What is service orchestration?</span>
+    <div class="answer">
+      Service orchestration is a centralized approach to managing the interactions between microservices. A central controller (or orchestrator) coordinates the flow of messages and tasks, ensuring that services perform specific steps in a defined order. Tools like Camunda, AWS Step Functions, and Apache Airflow are often used for orchestration.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq7">
+    <span class="faq-question">What is service choreography?</span>
+    <div class="answer">
+      Service choreography is a decentralized approach to microservices communication. Each service knows when to act and whom to notify, based on events. There's no central coordinator—services interact through events or messages, making the system more loosely coupled. This is common in event-driven architectures.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq8">
+    <span class="faq-question">What is circuit breaker pattern?</span>
+    <div class="answer">
+      The circuit breaker pattern is used to detect and handle failures gracefully. When a service call fails repeatedly, the circuit breaker trips, preventing further requests for a time. This helps to avoid overwhelming a failing service and allows it to recover. Libraries like Netflix Hystrix or Resilience4j implement this pattern.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq9">
+    <span class="faq-question">What is the purpose of a load balancer in microservices?</span>
+    <div class="answer">
+      A load balancer distributes incoming requests evenly across multiple instances of a microservice. It helps improve fault tolerance, scalability, and availability by ensuring no single instance is overwhelmed. Load balancers can be implemented at various layers — DNS, L4 (TCP), or L7 (HTTP).
+    </div>
+  </li>
+  
+  <li data-id="mbqqq10">
+    <span class="faq-question">What is eventual consistency?</span>
+    <div class="answer">
+      Eventual consistency is a consistency model used in distributed systems where updates to data are not immediately visible to all services but will become consistent over time. It sacrifices strong consistency for availability and partition tolerance (as per CAP theorem), and is commonly used in microservices and NoSQL databases.
+    </div>
+  </li>
+  
 
+  <li data-id="mbqqq11">
+    <span class="faq-question">What is the Saga pattern?</span>
+    <div class="answer">
+      The Saga pattern is a design pattern for managing distributed transactions across multiple microservices. Instead of a single, atomic transaction, a Saga breaks the process into a series of local transactions. Each step has a compensating action to undo its work in case of failure, ensuring data consistency without 2PC (two-phase commit).
+    </div>
+  </li>
+  
+  <li data-id="mbqqq12">
+    <span class="faq-question">What is the difference between orchestration and choreography in Saga?</span>
+    <div class="answer">
+      <ul>
+        <li><strong>Orchestration:</strong> A central service (or orchestrator) controls the sequence of steps in the Saga and invokes other services to perform tasks.</li>
+        <li><strong>Choreography:</strong> Each service listens for events and performs its step independently, emitting a new event to trigger the next step. There's no central controller.</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="mbqqq13">
+    <span class="faq-question">What is a sidecar pattern?</span>
+    <div class="answer">
+      The sidecar pattern is a design pattern where a helper service (sidecar) is deployed alongside the main microservice in the same container or pod. It adds capabilities such as logging, monitoring, service discovery, or security without modifying the main application logic. Istio uses this for its service mesh data plane.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq14">
+    <span class="faq-question">What is the strangler pattern?</span>
+    <div class="answer">
+      The strangler pattern is a technique for gradually migrating a monolithic system to microservices. New functionality is developed as independent services, and parts of the monolith are replaced over time. The legacy system is slowly "strangled" until it can be completely decommissioned.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq15">
+    <span class="faq-question">What are the advantages of decentralized data management in microservices?</span>
+    <div class="answer">
+      <ul>
+        <li>Each service can use the database that best fits its requirements (polyglot persistence).</li>
+        <li>Services are more loosely coupled and can evolve independently.</li>
+        <li>Improves scalability and performance by avoiding shared database bottlenecks.</li>
+        <li>Reduces single points of failure and allows better fault isolation.</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="mbqqq16">
+    <span class="faq-question">How is data consistency maintained across microservices?</span>
+    <div class="answer">
+      In microservices, data consistency is typically achieved using eventual consistency mechanisms such as:
+      <ul>
+        <li>Saga Pattern for long-running distributed transactions</li>
+        <li>Event-driven architecture with reliable messaging (Kafka, RabbitMQ)</li>
+        <li>Idempotent operations to safely handle retries</li>
+        <li>Outbox pattern to ensure reliable event publishing from databases</li>
+      </ul>
+      Strong consistency is avoided due to the trade-offs in availability and performance in distributed systems.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq17">
+    <span class="faq-question">What is a bounded context in microservices?</span>
+    <div class="answer">
+      A bounded context defines a logical boundary within which a particular domain model is defined and applicable. In microservices, each service typically represents a bounded context, meaning it owns and encapsulates its own data and logic, preventing tight coupling and promoting clear domain separation.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq18">
+    <span class="faq-question">What is domain-driven design (DDD)?</span>
+    <div class="answer">
+      Domain-Driven Design (DDD) is an approach to software development that emphasizes deep understanding of the business domain. It encourages structuring software around domain models and business logic. DDD promotes concepts like entities, value objects, aggregates, repositories, and bounded contexts, which align naturally with microservices architecture.
+    </div>
+  </li>
+  
+  <li data-id="mbqqq19">
+    <span class="faq-question">How do you handle transactions in microservices?</span>
+    <div class="answer">
+      Traditional ACID transactions are hard to maintain in distributed systems. Microservices handle transactions using:
+      <ul>
+        <li>Saga Pattern for coordinating a series of local transactions</li>
+        <li>Compensating transactions to roll back actions in case of failure</li>
+        <li>Eventual consistency and reliable messaging</li>
+        <li>Idempotent APIs and retry mechanisms</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="mbqqq20">
+    <span class="faq-question">What is a distributed transaction?</span>
+    <div class="answer">
+      A distributed transaction involves multiple services or databases participating in a single logical transaction. Ensuring atomicity across them is difficult due to network delays and failures. Distributed transactions can be coordinated using two-phase commit (2PC), but this is heavy and not scalable. Microservices often avoid distributed transactions in favor of eventual consistency models.
+    </div>
+  </li>
+  
       
 
 <li data-id="q32" class="yellow"><span class="faq-question">

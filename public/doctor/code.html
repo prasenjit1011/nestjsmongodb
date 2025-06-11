@@ -534,6 +534,44 @@
     console.log(hello())
 
 
+    ---------- Example 02: Context API ----------
+
+    import React from 'react';
+    import { createContext, useContext } from "react";
+    
+    const MyContext = createContext();
+    
+    const App = () => {
+      return <CompA />
+    }
+    
+    const CompA = () => {
+      const message = "Dummy";
+      return <MyContext.Provider value={{message}}><CompB /></MyContext.Provider>
+    }
+    
+    const CompB = () => {
+      return <CompC />
+    }
+    const CompC = () => {
+      const { message } = useContext(MyContext);
+      return <h5>Comp-C2-{message}</h5>
+    }
+    
+    
+    
+    export default App
+    
+
+
+
+
+
+
+
+
+
+
 
   </code></pre>
 

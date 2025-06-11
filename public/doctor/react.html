@@ -427,14 +427,14 @@ React Vs ReactDOM?
 </span><div class="answer">
 <strong>React</strong> and <strong>ReactDOM</strong> are two separate libraries in the React ecosystem, each with a distinct purpose:
 
-<br><br><strong>React:</strong><br>
+<br><br><strong>React :</strong>
 - React is the core library for building component-based user interfaces.
-- It provides methods like <code>React.createElement()</code>, <code>useState()</code>, and <code>useEffect()</code> for component logic.
+- It provides methods like <b>React.createElement()</b>, <b>useState()</b>, and <b>useEffect()</b> for component logic.
 - It’s platform-agnostic, meaning it doesn’t assume the environment (browser, mobile, etc.).
 
-<br><br><strong>ReactDOM:</strong><br>
+<br><br><strong>ReactDOM :</strong>
 - ReactDOM is the library that specifically handles rendering React components to the DOM (i.e., web browsers).
-- It includes methods like <code>ReactDOM.createRoot()</code> and <code>ReactDOM.render()</code>.
+- It includes methods like <b>ReactDOM.createRoot()</b> and <b>ReactDOM.render()</b>.
 - It bridges React with the actual DOM for web applications.
 
 <br><br><strong>In Summary:</strong><br>
@@ -608,7 +608,7 @@ Memory cleanup in React refers to the practice of releasing resources, subscript
 <li>Avoids unwanted side effects.</li>
 </ul>
 
-<br><strong>Typical use case with <code>useEffect</code>:</strong>
+<br><strong>Typical use case with <b>useEffect</b>:</strong>
 <pre><code>
 useEffect(() =&gt; {
 const id = setInterval(() =&gt; {
@@ -624,11 +624,11 @@ clearInterval(id); // cleanup
 <br><strong>Other cleanup examples:</strong>
 <ul>
 <li><strong>WebSocket connections:</strong> Close them on unmount.</li>
-<li><strong>Event listeners:</strong> Remove them using <code>removeEventListener</code>.</li>
+<li><strong>Event listeners:</strong> Remove them using <b>removeEventListener</b>.</li>
 <li><strong>Subscriptions:</strong> Unsubscribe to avoid multiple calls.</li>
 </ul>
 
-<br><strong>Key Tip:</strong> Always return a cleanup function inside <code>useEffect</code> to handle teardown properly.
+<br><strong>Key Tip:</strong> Always return a cleanup function inside <b>useEffect</b> to handle teardown properly.
 <br /><br />
 <strong>Prevents memory leaks:</strong> Cleaning up resources like timers, listeners, or network requests ensures your app doesn’t hold onto unused memory, avoiding gradual slowdowns or crashes.<br>
 Memory leaks happen when resources like timers or event listeners persist after a component unmounts, causing increased memory use over time.<br>
@@ -1040,17 +1040,17 @@ return null;
 <li data-id="q_onchange_vs_oninput"><span class="faq-question">
 Difference between onChange and onInput?
 </span><div class="answer">
-In React, both <code>onChange</code> and <code>onInput</code> are event handlers for form elements, but they behave slightly differently:
+In React, both <b>onChange</b> and <b>onInput</b> are event handlers for form elements, but they behave slightly differently:
 <br />
 <b>onChange:</b>
 - Triggered when the input loses focus or the value changes.
-- React wraps <code>onChange</code> to behave more like <code>onInput</code> (fires on every keystroke) for text inputs.
+- React wraps <b>onChange</b> to behave more like <b>onInput</b> (fires on every keystroke) for text inputs.
 <br />
 <b>onInput:</b>
 - Triggered immediately after the value of an element changes.
-- Fires for more input types like <code>range</code>, <code>color</code>, etc.
+- Fires for more input types like <b>range</b>, <b>color</b>, etc.
 <br />
-<b>In practice:</b> For text inputs, <code>onChange</code> and <code>onInput</code> behave similarly in React.
+<b>In practice:</b> For text inputs, <b>onChange</b> and <b>onInput</b> behave similarly in React.
 
 <pre><code>
 // Example
@@ -1058,22 +1058,22 @@ In React, both <code>onChange</code> and <code>onInput</code> are event handlers
 &lt;input onInput={(e) =&gt; console.log("Input:", e.target.value)} /&gt;
 </code></pre>
 
-Use <code>onChange</code> in React forms as it's the standard for capturing user input.<br /><br /><br />
+Use <b>onChange</b> in React forms as it's the standard for capturing user input.<br /><br /><br />
 
 
-<b>When should we use <code>onChange</code> and when <code>onInput</code> in React?</b>
+<b>When should we use <b>onChange</b> and when <b>onInput</b> in React?</b>
 
-<b>Use <code>onChange</code> when:</b>
+<b>Use <b>onChange</b> when:</b>
 <ol class="subul">
-<li>You are working with form elements like <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, or <code>&lt;select&gt;</code>.</li>
+<li>You are working with form elements like <b>&lt;input&gt;</b>, <b>&lt;textarea&gt;</b>, or <b>&lt;select&gt;</b>.</li>
 <li>You want to follow React's controlled component pattern.</li>
 <li>You are managing form state (e.g., capturing user input in state).</li>
 </ol>
 
-<b>Use <code>onInput</code> when:</b>
+<b>Use <b>onInput</b> when:</b>
 <ol class="subul">
 <li>You need more immediate, lower-level input events (e.g., for custom validation or live formatting).</li>
-<li>You're working with input types like <code>range</code>, <code>color</code>, or other non-text fields where <code>onChange</code> may behave differently.</li>
+<li>You're working with input types like <b>range</b>, <b>color</b>, or other non-text fields where <b>onChange</b> may behave differently.</li>
 </ol>
 
 <b>Example:</b>
@@ -1085,7 +1085,7 @@ Use <code>onChange</code> in React forms as it's the standard for capturing user
 &lt;input type="text" onInput={(e) =&gt; handleFormat(e.target.value)} /&gt;
 </code></pre>
 
-In most React forms, <code>onChange</code> is the preferred and consistent choice.
+In most React forms, <b>onChange</b> is the preferred and consistent choice.
 </div></li>
 
 
@@ -1917,7 +1917,7 @@ revalidate: 10, // seconds
     </code></pre>
     </div></li>
     
-    <li data-id="q134"><span class="faq-question">
+    <li data-id="q134" class="yellow"><span class="faq-question">
     How does key prop affect reconciliation and re-rendering?</span><div class="answer">
     <p>
     The key prop helps React identify which items have changed, are added, or are removed. It should be a stable and unique identifier.
@@ -1927,21 +1927,11 @@ revalidate: 10, // seconds
     <li>Improves performance by enabling efficient updates.</li>
     <li>Prevents unnecessary re-renders.</li>
     </ul>
-    </div></li>
+    </div>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    <li data-id="q151">
-    <span class="faq-question">How does key prop affect reconciliation and re-rendering?</span>
     <div class="answer">
     <p>
-    In React, the <code>key</code> prop is a special attribute used to uniquely identify elements in a list. It helps React efficiently update the UI by distinguishing which items have changed, been added, or removed.
+    In React, the <b>key</b> prop is a special attribute used to uniquely identify elements in a list. It helps React efficiently update the UI by distinguishing which items have changed, been added, or removed.
     </p>
     
     <h4>🔄 How it affects reconciliation:</h4>
@@ -1953,7 +1943,7 @@ revalidate: 10, // seconds
     
     <h4>✅ Best practices:</h4>
     <ul>
-    <li>Use a unique and stable identifier from your data, like an <code>id</code>.</li>
+    <li>Use a unique and stable identifier from your data, like an <b>id</b>.</li>
     <li>Avoid using array indexes as keys unless the list is static and won't change.</li>
     </ul>
     
@@ -2066,7 +2056,7 @@ revalidate: 10, // seconds
     <li data-id="react-fiber">
     <span class="faq-question green">How does React Fiber work under the hood?</span>
     <div class="answer">
-    React Fiber is the complete rewrite of the React core algorithm introduced in React 16. It improves rendering performance, enables features like Suspense, Concurrent Mode, and better error handling.
+    React Fiber improves rendering performance, enables features like Suspense, Concurrent Mode, and better error handling.
     
     <br /><br />
     <strong>Key Concepts:</strong>
@@ -2092,16 +2082,26 @@ revalidate: 10, // seconds
     </div>
     </li>
     <li data-id="react-fiber-example">
-      <span class="faq-question">React Fiber: Example and Concept</span>
-      <div class="answer">
-        <p><strong>React Fiber</strong> is the internal engine in React (since React 16+) that enables incremental rendering. It breaks the rendering work into units and spreads them over multiple frames, allowing React to pause and resume work, handle priority updates, and make the app more responsive.</p>
-    
-        <h4>🔍 What it enables:</h4>
-        <ul>
-          <li>Interruptible rendering</li>
-          <li>Prioritized updates (e.g., user input over background tasks)</li>
-          <li>Concurrency (via features like <code>Suspense</code> and <code>startTransition</code>)</li>
-        </ul>
+<span class="faq-question">React Fiber: Example and Concept</span>
+<div class="answer">
+<pre>
+  <strong>React Fiber</strong> is the internal engine in React (since React 16+) that enables incremental rendering.
+  It breaks the rendering work into units and spreads them over multiple frames,
+  Allowing React to pause and resume work, handle priority updates, and make the app more responsive.
+
+<b>🔍 What it enables:</b>
+1. Interruptible rendering
+2. Prioritized updates (e.g., user input over background tasks)
+3. Concurrency (via features like <b>Suspense</b> and <b>startTransition</b>)
+
+
+<b>🧠 Explanation:</b>
+1. <b>startTransition</b> tells React that updating the large list is low-priority.
+2. User input (high-priority) is handled immediately.
+3. Thanks to React Fiber, rendering the long list can be paused and resumed, preventing UI blocking.
+
+This illustrates how Fiber supports concurrent rendering by allowing React to differentiate between urgent and non-urgent work.
+</pre>
     
         <h4>📦 Conceptual Example:</h4>
         <pre><code>
@@ -2139,14 +2139,7 @@ revalidate: 10, // seconds
     export default FiberExample;
         </code></pre>
     
-        <h4>🧠 Explanation:</h4>
-        <ul>
-          <li><code>startTransition</code> tells React that updating the large list is low-priority.</li>
-          <li>User input (high-priority) is handled immediately.</li>
-          <li>Thanks to React Fiber, rendering the long list can be paused and resumed, preventing UI blocking.</li>
-        </ul>
-    
-        <p>This illustrates how Fiber supports concurrent rendering by allowing React to differentiate between urgent and non-urgent work.</p>
+
       </div>
     </li>
     
@@ -2356,7 +2349,7 @@ revalidate: 10, // seconds
   <h2>1. Prevent Cross-Site Scripting (XSS)</h2>
   <p>
     React escapes values by default when rendering, so it protects against most XSS attacks.
-    However, avoid using <code>dangerouslySetInnerHTML</code> unless absolutely necessary.
+    However, avoid using <b>dangerouslySetInnerHTML</b> unless absolutely necessary.
   </p>
 
   <ul>
@@ -2369,7 +2362,7 @@ revalidate: 10, // seconds
 
   <h2>3. Secure Authentication</h2>
   <ul>
-    <li>Store tokens (JWT, OAuth tokens) securely, prefer <code>httpOnly</code> cookies over localStorage to prevent XSS token theft.</li>
+    <li>Store tokens (JWT, OAuth tokens) securely, prefer <b>httpOnly</b> cookies over localStorage to prevent XSS token theft.</li>
     <li>Implement proper logout and token expiration strategies.</li>
   </ul>
 
@@ -2391,13 +2384,13 @@ revalidate: 10, // seconds
   <h2>8. Keep Dependencies Updated</h2>
   <p>Regularly update React and related libraries to patch security vulnerabilities.</p>
 
-  <h2>Example: Avoid Using <code>dangerouslySetInnerHTML</code></h2>
+  <h2>Example: Avoid Using <b>dangerouslySetInnerHTML</b></h2>
   <pre>
   &lt;div
     dangerouslySetInnerHTML={{ __html: sanitize(yourHtmlContent) }}
   /&gt;
   </pre>
-  <p>Use a library like <code>dompurify</code> to sanitize HTML before rendering.</p>
+  <p>Use a library like <b>dompurify</b> to sanitize HTML before rendering.</p>
 
   <h2>Useful Libraries</h2>
   <ul>
