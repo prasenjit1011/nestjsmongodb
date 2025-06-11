@@ -3,7 +3,7 @@ name: Deploy to AWS Lambda using Serverless
 on:
   push:
     branches:
-      - doctor  # Change to your deployment branch if needed
+      - doctor_01  # Change to your deployment branch if needed
 
 jobs:
   deploy:
