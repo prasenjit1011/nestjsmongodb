@@ -1,0 +1,262 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    padding: 2px;
+    color: #000000;
+  }
+  
+  /* === Table Styles === */
+  table, .table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #FFFFFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+  }
+  
+  th, td, .table th, .table td {
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  
+  th, .table th {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #FFFFFF;
+  }
+  
+  /* === Code and Pre Styles === */
+  code, pre {
+    background: #FFFFFF;
+    padding: 10px;
+    border-left: 4px solid #007acc;
+    display: block;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 5px;
+  }
+  
+  /* === Sections and Tips === */
+  .section {
+    background: #FFFFFF;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #3498db;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  .description {
+    margin-top: 10px;
+    color: #555;
+  }
+  
+  .mistake {
+    margin-bottom: 20px;
+    background: #FFFFFF;
+    padding: 15px;
+    border-left: 5px solid #f44336;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mistake strong {
+    color: #333;
+  }
+  
+  .tip {
+    background: #FFFFFF;
+    padding: 10px;
+    border-left: 5px solid #4caf50;
+    margin-top: 5px;
+  }
+  
+  /* === FAQ Section === */
+  ul.faq {
+    list-style: none;
+    padding: 0;
+    /*background: #000000;*/
+  }
+  
+  ul.faq li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 10px 1px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    /*background: #000000;*/
+    transition: background 0.3s;
+    position: relative;
+  }
+  
+  ul.faq li:hover {
+    background: #c9c9cc;
+  }
+  
+  ul.faq li ol li {
+    font-weight: 300;
+  }
+  
+  ol.subul {
+    padding-left: 0;
+  }
+  
+  ol.subul strong,
+  ol.subul b {
+    font-weight: bold;
+    background-color: rgb(123, 227, 96);
+  }
+  
+
+
+  .answer {
+    display: none;
+    padding: 10px 10px 20px 30px;
+    background: #FFFFFF;
+    color: #000000;
+    border-left: 4px solid #007bff;
+    border-bottom: 4px solid #007bff;
+    font-weight: 500;
+  }
+  
+  .faq-checkbox {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+  }
+  
+  .faq-question {
+    margin-left: 30px;
+  }
+  
+  /* === Utility Classes === */
+  .d-none {
+    display: none;
+  }
+  
+
+  
+  .yes {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .no {
+    color: red;
+    font-weight: bold;
+  }
+
+hr{
+    border: none;
+    height: 3px;           /* min-height via height */
+    background-color: #007bff; /* bold look */
+    margin: 20px 0;         /* optional spacing */
+  }
+  
+.yellow{
+  /*background-color: #6412de !important;*/
+  background-color: #12de23 !important;
+  color: #000;
+}
+
+.green {
+  background-color: #12de23;
+  font-size: larger;
+  font-weight: 400;
+}
+
+
+
+/********************************************************************************/
+
+body {
+  background-color: #000;
+  color: #FFF;
+}
+
+table, .table {
+  background: #000;
+}
+
+th, .table th {
+  background-color: #000;
+  color: #FFF;
+}
+
+tr:nth-child(even) {
+  background-color: #000;
+}
+
+code, pre {
+  background: #000;
+}
+
+.section {
+  background: #000;
+}
+
+.title {
+  color: #34495e;
+}
+
+.description {
+  color: #555;
+}
+
+.mistake {
+  background: #000;
+}
+
+.tip {
+  background: #FFFFFF;
+}
+
+ul.faq li:hover {
+  background: #3838c0;
+}
+
+ul.faq li ol li {
+  font-weight: 300;
+}
+
+
+ol.subul strong,
+ol.subul b {
+  background-color: #1414d4;
+}
+
+
+
+.answer {
+  background: #000;
+  color: #FFF;
+}
+
+.yes {
+  color: green;
+}
+
+.no {
+  color: red;
+}
+
+hr{
+  background-color: #007bff; 
+}
+
+.yellow{
+  background-color: #12de23 !important;
+  color: #000;
+}
+
+.green {
+  background-color: #1a09b3;
+}
+/********************************************************************************/
