@@ -22,6 +22,7 @@
 <a href="code.html">Code</a> &nbsp; 
 <a href="crud.html">Crud</a> &nbsp; 
 <a href="skill.html">Skill</a> &nbsp; 
+<a href="laravel.html">Laravel</a> &nbsp; 
 <a href="https://onecompiler.com/nodejs/43hqq7r87" target="_blank">Coding</a> &nbsp; 
 </div>
 
@@ -151,6 +152,89 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       <p><strong>Use SNS</strong> when you need to notify multiple systems in real time.</p>
     </section>
 
+  
+</div></li>
+
+
+<li data-id="q122"><span class="faq-question green">
+  Callback 🆚 Promise Priority
+</span>
+<div class="answer">
+<pre>
+  🔁 Event Loop Background
+  JavaScript’s concurrency model is based on an <strong>event loop</strong>. 
+  It has two main queues: 
+  ✅ <strong>Micro-tasks (Promises)</strong> have <strong>higher priority</strong> than macro-tasks.
+
+  Macro-task queue : setTimeout, setInterval, I/O)
+  Micro-task queue : Promise.then, queueMicrotask) 
+</pre>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Callback (e.g., setTimeout)</th>
+          <th>Promise (e.g., .then())</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Queue</td>
+          <td>Macro-task queue</td>
+          <td>Micro-task queue</td>
+        </tr>
+        <tr>
+          <td>Priority</td>
+          <td>✅ Lower</td>
+          <td>✅ Higher</td>
+        </tr>
+        <tr>
+          <td>Execution Order</td>
+          <td>Runs <strong>after</strong> micro-tasks</td>
+          <td>Runs <strong>before</strong> next macro-task</td>
+        </tr>
+        <tr>
+          <td>Use case</td>
+          <td>Traditional async logic</td>
+          <td><code>Modern async chaining,  async/await</code></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>✅ Example:</h2>
+<pre>
+    console.log("Start");
+    setTimeout(() =&gt; {
+      console.log("Callback");
+    }, 0);
+    
+    Promise.resolve().then(() =&gt; {
+      console.log("Promise");
+    });
+    
+    console.log("End");
+</pre>
+  
+    <h3>📤 Output:</h3>
+    <pre><code>Start
+  End
+  Promise
+  Callback</code></pre>
+  
+    <h2>🔎 Explanation:</h2>
+    <ul>
+      <li><code>console.log("Start")</code> and <code>console.log("End")</code> are synchronous.</li>
+      <li><code>.then()</code> is a micro-task, so it runs <strong>immediately after sync code finishes</strong>.</li>
+      <li><code>setTimeout</code> is a macro-task, so it runs <strong>after all micro-tasks are done</strong>.</li>
+    </ul>
+  
+    <h2>🧠 Summary</h2>
+    <ul>
+      <li><strong>Promises have higher priority</strong> than callbacks like <code>setTimeout</code>.</li>
+      <li>Promises are <strong>scheduled earlier</strong> in the event loop via the <strong>micro-task queue</strong>.</li>
+      <li>Use <strong>Promises and <code>async/await</code></strong> for better readability and control in modern code.</li>
+    </ul>
+  
   
 </div></li>
 
