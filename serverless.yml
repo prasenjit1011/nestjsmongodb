@@ -1,4 +1,4 @@
-service: lambdadoctor
+service: lambda04
 
 #frameworkVersion: '^3.0.0'
 
