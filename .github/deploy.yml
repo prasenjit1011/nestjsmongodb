@@ -5,7 +5,6 @@ on:
     branches:
       - doctor  # Change to your deployment branch if needed
 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
