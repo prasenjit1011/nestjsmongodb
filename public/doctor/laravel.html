@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NodeJS</title>
+<title>Laravel</title>
 <script src="cdn/jquery-3.6.0.min.js"></script>
 <script src="cdn/js.cookie.min.js"></script>
 <link rel="stylesheet" href="styles.css">
@@ -33,6 +33,24 @@
 <span class="faq-question">What are the prerequisites to install Laravel 12?</span>
 <div class="answer">
 <pre>
+<a href="AuthController.html">AuthController.html</a>
+composer create-project laravel/laravel myapp
+cd myapp
+composer require laravel/breeze --dev
+php artisan breeze:install
+php artisan key:generate
+php artisan migrate
+
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+
+
+php artisan serve --port=8000
+
+
+
 composer create-project laravel/laravel laravel12_react
 cd laravel12_react
 composer require laravel/breeze --dev
