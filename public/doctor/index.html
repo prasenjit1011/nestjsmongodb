@@ -61,12 +61,60 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
         <td colspan="4">
           + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka+Appsync
           <BR />
-          SQL Injection and JS injection prevention
+          SQL Injection and JS injection prevention<br />
+          React, Next JS, ES6
+Must have created Server Side Rendered application
+Performance optimization - implemented concepts of bundling, lazy loading, code splitting, webpack modification, Dynamic imports
+In-depth understanding on Accessibility
+Unit testing framework Jest, Enzyme
+In-depth understanding of Micro Front End architecture principles.
+IAM, VPC, API Gateway advanced features (WAF, contract interpolation, etc.), and API Gateway customer authorizers (e.g., authentication Lambdas with Okta or similar OAuth 2.0)
         </td>
       </tr>
 </tbody></table>  
 
 </div></li>
+
+
+
+<li data-id="q36" >
+  <span class="faq-question">What are dynamic imports in React?</span>
+  <div class="answer">
+    <p>Dynamic imports in React allow you to load components or modules <strong>lazily</strong> at runtime instead of bundling them during the initial load. This improves performance by reducing the initial bundle size.</p>
+
+    <h4>🔧 Syntax</h4>
+    <pre><code>const Component = React.lazy(() => import('./MyComponent'));</code></pre>
+
+    <h4>🔁 Usage with <code>Suspense</code></h4>
+    <p>React requires a fallback UI to be shown while the dynamically imported component is loading:</p>
+    <pre><code>
+import React, { Suspense } from 'react';
+
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;MyComponent /&gt;
+    &lt;/Suspense&gt;
+  );
+}
+    </code></pre>
+
+    <h4>📦 Benefits</h4>
+    <ul>
+      <li>Improves performance by splitting code into smaller chunks</li>
+      <li>Reduces initial page load time</li>
+      <li>Only loads code when needed (e.g., on route change)</li>
+    </ul>
+
+    <h4>🧠 Notes</h4>
+    <ul>
+      <li>Supported in modern React (16.6+)</li>
+      <li>Can be used with routing libraries like React Router</li>
+    </ul>
+  </div>
+</li>
 
 <li data-id="q122"><span class="faq-question green">
   AWS SQS vs SNS
@@ -14821,7 +14869,7 @@ CI/CD Question List?
       </li>
       
       <li data-id="mbqqq30">
-        <span class="faq-question">What is the use of <code>SET</code> and <code>SHOW</code>?</span>
+        <span class="faq-question">What is the use of <b>SET</b> and <b>SHOW</b>?</span>
         <div class="answer">
           <ul>
             <li><code>SET</code> is used to change the value of runtime configuration parameters for the current session.</li>
@@ -14889,10 +14937,10 @@ CI/CD Question List?
       </li>
       
       <li data-id="mbqqq34">
-        <span class="faq-question">What is the role of the <code>postgres</code> user?</span>
+        <span class="faq-question">What is the role of the <b>postgres</b> user?</span>
         <div class="answer">
           <ul>
-            <li>The <code>postgres</code> user is the default superuser account created during PostgreSQL installation.</li>
+            <li>The <b>postgres</b> user is the default superuser account created during PostgreSQL installation.</li>
             <li>It has full administrative privileges:
               <ul>
                 <li>Create and drop databases</li>
@@ -14907,17 +14955,859 @@ CI/CD Question List?
       </li>
       
 
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">
+  ETL Tools for Data Sync
+</span><div class="answer">
+
+  
+    <h2>ETL Tools: Moving & Syncing Data Between Systems</h2>
+  
+    <p>ETL (Extract, Transform, Load) tools help automate and scale the transfer of data between relational, NoSQL, and external APIs. Below are key options:</p>
+  
+    <h3>1. Apache NiFi</h3>
+    <ul>
+      <li>Drag-and-drop UI for building data pipelines</li>
+      <li>Built-in processors for PostgreSQL, MongoDB, Kafka, HTTP, S3, etc.</li>
+      <li>Supports data transformation using Groovy, Jolt, etc.</li>
+      <li>Good for streaming and real-time pipelines</li>
+    </ul>
+  
+    <h3>2. Airbyte</h3>
+    <ul>
+      <li>Open-source data integration platform</li>
+      <li>Supports 300+ connectors (Postgres, MongoDB, BigQuery, Snowflake)</li>
+      <li>Incremental syncs, schema evolution, logging</li>
+      <li>Deploy via Docker, Kubernetes, or Cloud</li>
+    </ul>
+  
+    <h3>3. Custom Scripts (Python / Node.js)</h3>
+    <ul>
+      <li>Maximum flexibility for custom logic</li>
+      <li>Use libraries like:
+        <ul>
+          <li><x>psycopg2</x>, <x>sqlalchemy</x> for PostgreSQL</li>
+          <li><x>pymongo</x> or <x>mongoose</x> for MongoDB</li>
+          <li><x>axios</x>, <x>fetch</x>, <x>node-postgres</x> in Node.js</li>
+        </ul>
+      </li>
+      <li>Ideal for event-based, filtered or real-time syncs</li>
+    </ul>
+  
+    <h3>4. Example Use Case</h3>
+    <p><strong>Sync new records from PostgreSQL to MongoDB every 10 seconds:</strong></p>
+  
+    <pre><code class="language-js">
+  // Node.js example
+  const { Client } = require('pg');
+  const { MongoClient } = require('mongodb');
+  
+  async function syncData() {
+    const pg = new Client({ connectionString: 'postgresql://user:pass@localhost/db' });
+    const mongo = new MongoClient('mongodb://localhost:27017');
+  
+    await pg.connect();
+    await mongo.connect();
+    const db = mongo.db('analytics');
+  
+    const result = await pg.query('SELECT * FROM users WHERE synced = false');
+    for (const row of result.rows) {
+      await db.collection('users').insertOne(row);
+      await pg.query('UPDATE users SET synced = true WHERE id = $1', [row.id]);
+    }
+  
+    await pg.end();
+    await mongo.close();
+  }
+  
+  setInterval(syncData, 10000); // every 10 seconds
+    </code></pre>
+  
+    <h3>5. When to Use What</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Best For</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Apache NiFi</td>
+          <td>Visual pipelines, event-based streaming</td>
+          <td>No-code, real-time flows, monitoring</td>
+          <td>Heavyweight, needs JVM</td>
+        </tr>
+        <tr>
+          <td>Airbyte</td>
+          <td>Data warehouse sync, cloud-native</td>
+          <td>Out-of-the-box connectors, UI, logs</td>
+          <td>Learning curve, less flexible logic</td>
+        </tr>
+        <tr>
+          <td>Python/Node Scripts</td>
+          <td>Custom business logic, lightweight tasks</td>
+          <td>Full control, easy to deploy</td>
+          <td>Manual error handling, no visual tools</td>
+        </tr>
+      </tbody>
+    </table>
+  
+</div>
+</li>
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">
+Airbyte: ETL Tool for Moving & Syncing Data</span><div class="answer">
+
+
+  <h3>What is Airbyte?</h3>
+  <p><strong>Airbyte</strong> is an open-source data integration platform that lets you move and sync data between databases, APIs, and warehouses.</p>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li>300+ prebuilt connectors (PostgreSQL, MongoDB, MySQL, BigQuery, Snowflake, etc.)</li>
+    <li>Supports both <strong>ETL</strong> and <strong>ELT</strong> patterns</li>
+    <li>Incremental and full refresh sync modes</li>
+    <li>Open-source with a modern UI</li>
+    <li>Runs on Docker or Kubernetes</li>
+    <li>Schema evolution and deduplication support</li>
+    <li>Built-in support for logs, retries, and error tracking</li>
+  </ul>
+
+  <h3>Architecture Overview</h3>
+  <ul>
+    <li>Each sync is a Docker task with source → destination</li>
+    <li>Uses <code>airbyte-server</code> to manage configs, schedules, and logs</li>
+    <li>Can schedule jobs via cron, Airflow, or custom triggers</li>
+  </ul>
+
+  <h3>Use Case: Sync PostgreSQL to MongoDB</h3>
+  <ul>
+    <li>Source: PostgreSQL (change data capture or full refresh)</li>
+    <li>Destination: MongoDB</li>
+    <li>Transform: Basic column mapping (if needed)</li>
+    <li>Schedule: Every 10 minutes</li>
+  </ul>
+
+  <h3>Basic Setup Steps</h3>
+  <ol>
+    <li>Clone Airbyte repo: <code>git clone https://github.com/airbytehq/airbyte</code></li>
+    <li>Run via Docker: <code>cd airbyte &amp;&amp; docker-compose up</code></li>
+    <li>Open UI: <code>http://localhost:8000</code></li>
+    <li>Add Source (PostgreSQL) with DB details</li>
+    <li>Add Destination (e.g., MongoDB, S3, BigQuery)</li>
+    <li>Configure sync frequency and save</li>
+  </ol>
+
+  <h3>Airbyte vs Alternatives</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Strength</th>
+        <th>Limitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Airbyte</td>
+        <td>Connector breadth, modern UI, open-source</td>
+        <td>Not ideal for complex real-time streaming</td>
+      </tr>
+      <tr>
+        <td>Apache NiFi</td>
+        <td>Streaming dataflow visual editor</td>
+        <td>More complex setup and tuning</td>
+      </tr>
+      <tr>
+        <td>Fivetran (SaaS)</td>
+        <td>Managed + enterprise features</td>
+        <td>Paid, not self-hosted</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>When to Use Airbyte</h3>
+  <ul>
+    <li>You need fast setup of data syncs between systems</li>
+    <li>You prefer an open-source, self-hostable alternative to SaaS ETL</li>
+    <li>You need scheduling, logging, and connector auto-updates</li>
+  </ul>
+
+</div></li>
+
+
+
+
+
+
+
+
+
+
+      <li data-id="q32" class="yellow"><span class="faq-question">
+        APIs & Microservices: PostgreSQL + NoSQL (Mongo, Redis, etc.)</span><div class="answer">
+      
+        <h3>1. Architectural Options</h3>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>When it shines</th><th>Key trade-offs</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mono-service with dual connections</td>
+              <td>Simple PoC, shared tx scope not needed</td>
+              <td>Coupled release cycle, harder to scale independently</td>
+            </tr>
+            <tr>
+              <td>Microservices per datastore</td>
+              <td>Clear domain boundaries (CQRS), team autonomy</td>
+              <td>Cross-service joins require API composition/federation</td>
+            </tr>
+            <tr>
+              <td>Event-driven bridge (CDC, Kafka, etc.)</td>
+              <td>Read scalability, eventual consistency, audit-friendly</td>
+              <td>Higher latency, extra infra (Kafka, schema registry)</td>
+            </tr>
+          </tbody>
+        </table>
+      
+        <h3>2. Sync & Integrity Patterns</h3>
+        <ul>
+          <li><strong>Outbox/Inbox</strong> – write to Postgres and outbox in the same TX</li>
+          <li><strong>Debezium CDC</strong> – publish changes to Kafka</li>
+          <li><strong>Idempotent upserts</strong> – safe for retries and event replays</li>
+        </ul>
+      
+        <h3>3. REST vs GraphQL</h3>
+        <table>
+          <thead>
+            <tr><th>Use REST when...</th><th>Use GraphQL when...</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Stable endpoints, CDN-friendly, binary payloads</td>
+              <td>Dynamic joins, schema flexibility, subscriptions</td>
+            </tr>
+          </tbody>
+        </table>
+      
+        <h3>4. NestJS Example (Postgres + Mongo)</h3>
+        <pre><code>
+      // product.module.ts
+      @Module({
+        imports: [
+          MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
+          ClientsModule.register([{ name: 'EVENT_BUS', transport: Transport.KAFKA }]),
+        ],
+        providers: [ProductService, ProductResolver],
+      })
+      export class ProductModule {}
+        </code></pre>
+      
+        <pre><code>
+      // order.module.ts
+      @Module({
+        imports: [
+          TypeOrmModule.forFeature([OrderEntity]),
+          ClientsModule.register([{ name: 'EVENT_BUS', transport: Transport.KAFKA }]),
+        ],
+        providers: [OrderService, OrderResolver],
+      })
+      export class OrderModule {}
+        </code></pre>
+      
+        <pre><code>
+      // graphql-gateway.module.ts
+      @Module({
+        imports: [
+          GraphQLFederationModule.forRoot({
+            autoSchemaFile: true,
+            buildSchemaOptions: { orphanedTypes: [PaginatedProducts] },
+          }),
+        ],
+      })
+      export class GatewayModule {}
+        </code></pre>
+      
+        <h3>5. Cross-Store Query Handling</h3>
+        <table>
+          <thead>
+            <tr><th>Use case</th><th>Solution</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dashboard aggregates</td>
+              <td>GraphQL resolver combines REST services</td>
+            </tr>
+            <tr>
+              <td>Analytics team joins</td>
+              <td>ETL to warehouse or use FDWs</td>
+            </tr>
+            <tr>
+              <td>Search needs</td>
+              <td>Write to ES via Kafka; query ES in GraphQL</td>
+            </tr>
+          </tbody>
+        </table>
+      
+        <h3>6. Operational Safeguards</h3>
+        <ul>
+          <li>Separate connection pools per DB</li>
+          <li>Circuit breakers (e.g., <code>@nestjs/terminus</code>)</li>
+          <li>Kafka schema registry</li>
+          <li>Tag observability spans with db.system</li>
+        </ul>
+      
+        <h3>7. Security and Auth</h3>
+        <ul>
+          <li>JWT validated at edge gateway</li>
+          <li>Tenant-based filters in Postgres and Mongo</li>
+          <li>Use row-level security + scope-based access</li>
+        </ul>
+      
+        <h3>8. Migrations & CI/CD</h3>
+        <ul>
+          <li>Postgres: <code>TypeORM migrations</code> or <code>dbmate</code></li>
+          <li>Mongo: <code>migrate-mongo</code> or custom JS</li>
+          <li>Version gates for event consumers</li>
+        </ul>
+      
+        <h3>Quick Checklist</h3>
+        <ul>
+          <li>Define aggregates and ownership boundaries</li>
+          <li>Pick sync style (direct, CDC, event-driven)</li>
+          <li>Version and test your APIs (OpenAPI or GraphQL SDL)</li>
+          <li>Add health checks and observability early</li>
+          <li>Automate Docker, migrations, and bootstrap flows</li>
+        </ul>
+      
+      </div>
+      </li>
+      
+      <li data-id="q32" class="yellow">
+        <span class="faq-question">What is the use of <x>SET</x> and <x>SHOW</x> in PostgreSQL?</span>
+        <div class="answer">
+          <p><strong><code>SET</code></strong> and <strong><code>SHOW</code></strong> are PostgreSQL commands used to control or inspect session-specific configuration parameters.</p>
+      
+          <h4>🔧 SET</h4>
+          <p><code>SET</code> is used to modify a runtime parameter during the current session or transaction.</p>
+          <p><strong>Syntax:</strong></p>
+          <pre><code>SET parameter_name TO value;
+      SET SESSION parameter_name = value;
+      SET LOCAL parameter_name = value; -- within a transaction</code></pre>
+          <p><strong>Examples:</strong></p>
+          <ul>
+            <li><code>SET timezone TO 'Asia/Kolkata';</code></li>
+            <li><code>SET search_path TO myschema, public;</code></li>
+            <li><code>SET statement_timeout = '5s';</code></li>
+          </ul>
+      
+          <h4>🔍 SHOW</h4>
+          <p><code>SHOW</code> retrieves the current value of a configuration parameter.</p>
+          <p><strong>Syntax:</strong></p>
+          <pre><code>SHOW parameter_name;</code></pre>
+          <p><strong>Examples:</strong></p>
+          <ul>
+            <li><code>SHOW timezone;</code></li>
+            <li><code>SHOW search_path;</code></li>
+            <li><code>SHOW statement_timeout;</code></li>
+          </ul>
+      
+          <h4>🧠 Use Cases</h4>
+          <ul>
+            <li>Temporarily change timezone, memory, or timeout settings</li>
+            <li>Set schema visibility with <code>search_path</code></li>
+            <li>Tune query performance per session</li>
+          </ul>
+        </div>
+      </li>
+      
+      <li data-id="q33" class="yellow">
+        <span class="faq-question">What authentication methods does PostgreSQL support?</span>
+        <div class="answer">
+          <p>PostgreSQL supports several authentication methods for controlling client access:</p>
+          <ul>
+            <li><strong>Trust</strong> – No password required (for local/dev use only)</li>
+            <li><strong>Password-based</strong>:
+              <ul>
+                <li><code>md5</code> – Hashed password authentication</li>
+                <li><code>scram-sha-256</code> – More secure than md5 (recommended)</li>
+                <li><code>password</code> – Plaintext (use only with SSL)</li>
+              </ul>
+            </li>
+            <li><strong>GSSAPI / SSPI</strong> – Kerberos-based single sign-on (SSO)</li>
+            <li><strong>Peer</strong> – Unix domain socket matching OS user (Linux only)</li>
+            <li><strong>LDAP</strong> – Authenticate against an LDAP directory</li>
+            <li><strong>Cert</strong> – SSL certificate-based auth</li>
+            <li><strong>RADIUS</strong> – Remote Authentication Dial-In User Service</li>
+          </ul>
+          <p>Authentication is configured in the <code>pg_hba.conf</code> file.</p>
+        </div>
+      </li>
+      
+      <li data-id="q34" class="yellow">
+        <span class="faq-question">What are advisory locks in PostgreSQL?</span>
+        <div class="answer">
+          <p><strong>Advisory locks</strong> are application-level locks that allow developers to manually coordinate access to shared resources.</p>
+          <ul>
+            <li>Do not lock actual rows/tables—used for custom logic</li>
+            <li>Two types:
+              <ul>
+                <li><code>pg_advisory_lock(key)</code> – blocking</li>
+                <li><code>pg_try_advisory_lock(key)</code> – non-blocking</li>
+              </ul>
+            </li>
+            <li>Can use either a single 64-bit key or two 32-bit integers</li>
+            <li>Released automatically at end of session or transaction</li>
+          </ul>
+          <p><strong>Example:</strong></p>
+          <pre><code>SELECT pg_advisory_lock(12345);  -- acquire lock
+      -- do some work
+      SELECT pg_advisory_unlock(12345);  -- release lock</code></pre>
+        </div>
+      </li>
+      
+      <li data-id="q35" class="yellow">
+        <span class="faq-question">How do you prevent deadlocks in PostgreSQL?</span>
+        <div class="answer">
+          <p>Deadlocks occur when transactions hold and wait on conflicting locks. You can prevent them by:</p>
+          <ul>
+            <li><strong>Consistent Lock Order:</strong> Always acquire locks in the same order across transactions.</li>
+            <li><strong>Keep Transactions Short:</strong> Minimize the duration of locks by limiting transaction scope.</li>
+            <li><strong>Use SELECT ... FOR UPDATE Carefully:</strong> Lock only what's necessary.</li>
+            <li><strong>Retry on Deadlock:</strong> Catch errors like <code>SQLSTATE 40P01</code> and retry safely.</li>
+            <li><strong>Use Deadlock Timeout:</strong> Set <code>deadlock_timeout</code> to detect problems early.</li>
+          </ul>
+          <p><strong>Example (node.js retry logic):</strong></p>
+          <pre><code>
+      try {
+        await client.query("BEGIN");
+        await client.query("SELECT ... FOR UPDATE");
+        await client.query("UPDATE ...");
+        await client.query("COMMIT");
+      } catch (err) {
+        if (err.code === '40P01') {
+          console.log("Deadlock detected. Retrying...");
+          // retry logic here
+        } else {
+          throw err;
+        }
+      }
+          </code></pre>
+        </div>
+      </li>
+      
+
+
+      <li data-id="q37" class="zyellow">
+        <span class="faq-question">What is Jest in unit testing?</span>
+        <div class="answer">
+          <p><strong>Jest</strong> is a JavaScript testing framework developed by Facebook. It is widely used for testing React applications and other JavaScript codebases.</p>
+      
+          <h4>✅ Features</h4>
+          <ul>
+            <li>Zero configuration setup</li>
+            <li>Built-in test runner, assertion library, and mocking support</li>
+            <li>Supports code coverage reports</li>
+            <li>Snapshot testing for UI components</li>
+            <li>Runs tests in parallel for faster performance</li>
+          </ul>
+      
+          <h4>🛠️ Installation</h4>
+          <pre><code>npm install --save-dev jest</code></pre>
+      
+          <h4>🧪 Basic Example</h4>
+          <pre><code>// sum.js
+      function sum(a, b) {
+        return a + b;
+      }
+      module.exports = sum;
+      
+      // sum.test.js
+      const sum = require('./sum');
+      
+      test('adds 1 + 2 to equal 3', () => {
+        expect(sum(1, 2)).toBe(3);
+      });
+          </code></pre>
+      
+          <h4>▶️ Run Tests</h4>
+          <pre><code>npx jest</code></pre>
+      
+          <h4>📦 Integration with React</h4>
+          <p>Jest works seamlessly with React apps, especially those created with Create React App (CRA), where Jest is pre-configured.</p>
+      
+          <h4>🧠 Tip</h4>
+          <ul>
+            <li>Use <code>describe</code> and <code>beforeEach</code> for test grouping and setup.</li>
+            <li>Combine with <code>react-testing-library</code> for component testing.</li>
+          </ul>
+        </div>
+      </li>
+      
+
+
+      <li data-id="q38" class="zyellow">
+        <span class="faq-question">What is the basic NestJS testing stack?</span>
+        <div class="answer">
+          <p>The basic testing stack in NestJS is built around <strong>Jest</strong>, the default testing framework, and includes different tools for unit, integration, and end-to-end (E2E) testing. Below is a breakdown of each testing type and the tools commonly used:</p>
+      
+          <h4>✅ 1. Unit Testing: <code>Jest</code> + <code>@nestjs/testing</code></h4>
+          <ul>
+            <li><strong>Goal:</strong> Test individual components like services, controllers, and pipes in isolation.</li>
+            <li><strong>Tools:</strong>
+              <ul>
+                <li><code>Jest</code> – Test runner and assertion library</li>
+                <li><code>@nestjs/testing</code> – Utility to create isolated test modules</li>
+              </ul>
+            </li>
+            <li><strong>Example:</strong> Test a controller by mocking its service dependency</li>
+          </ul>
+          <pre><code>
+      // Sample unit test
+      const moduleRef = await Test.createTestingModule({
+        controllers: [MyController],
+        providers: [{ provide: MyService, useValue: mockService }],
+      }).compile();
+          </code></pre>
+      
+          <h4>✅ 2. Integration Testing: <code>Jest</code> + <code>Supertest</code></h4>
+          <ul>
+            <li><strong>Goal:</strong> Test multiple components working together (e.g., controller + service + database layer).</li>
+            <li><strong>Tools:</strong>
+              <ul>
+                <li><code>Jest</code></li>
+                <li><code>Supertest</code> – HTTP request simulation and assertion</li>
+              </ul>
+            </li>
+            <li><strong>Example:</strong> Test an API endpoint by bootstrapping the app and sending requests</li>
+          </ul>
+          <pre><code>
+      const app = await Test.createTestingModule({...}).compile();
+      await request(app.getHttpServer()).get('/users').expect(200);
+          </code></pre>
+      
+          <h4>✅ 3. End-to-End (E2E) Testing: <code>Jest</code> + <code>Supertest</code> + Real Modules</h4>
+          <ul>
+            <li><strong>Goal:</strong> Test the complete flow of the application, including real DB and external services (if any).</li>
+            <li><strong>Tools:</strong>
+              <ul>
+                <li><code>Jest</code></li>
+                <li><code>Supertest</code></li>
+                <li>Real application modules and configuration</li>
+              </ul>
+            </li>
+            <li><strong>Example:</strong> Start the app as a whole and test actual HTTP calls to validate real-world behavior</li>
+          </ul>
+          <pre><code>
+      describe('App (e2e)', () => {
+        it('/users (GET)', () => {
+          return request(app.getHttpServer()).get('/users').expect(200);
+        });
+      });
+          </code></pre>
+      
+          <h4>🧠 Summary</h4>
+          <ul>
+            <li><strong>Unit Test</strong> → Test logic in isolation with mocks</li>
+            <li><strong>Integration Test</strong> → Test combined logic of several parts</li>
+            <li><strong>E2E Test</strong> → Simulate real HTTP calls to the fully working app</li>
+          </ul>
+        </div>
+      </li>
+      
+
+      
+
+        <li data-id="q32" class="zyellow">
+          <span class="faq-question">How do you implement a Node.js User CRUD with unit tests, without any database?</span>
+          <div class="answer">
+            <p>This example uses plain JavaScript objects (in-memory storage) to simulate database behavior. Jest is used for unit testing.</p>
+      
+            <h4>1. user.model.js</h4>
+            <pre>
+      let users = [];
+      let id = 1;
+      
+      function createUser(data) {
+        const user = { id: id++, ...data };
+        users.push(user);
+        return user;
+      }
+      
+      function getUser(id) {
+        return users.find(user => user.id === id);
+      }
+      
+      function updateUser(id, data) {
+        const user = getUser(id);
+        if (!user) return null;
+        Object.assign(user, data);
+        return user;
+      }
+      
+      function deleteUser(id) {
+        const index = users.findIndex(user => user.id === id);
+        if (index === -1) return false;
+        users.splice(index, 1);
+        return true;
+      }
+      
+      function getAllUsers() {
+        return users;
+      }
+      
+      function resetUsers() {
+        users = [];
+        id = 1;
+      }
+      
+      module.exports = {
+        createUser,
+        getUser,
+        updateUser,
+        deleteUser,
+        getAllUsers,
+        resetUsers
+      };
+            </pre>
+      
+            <h4>2. user.controller.js</h4>
+            <pre>
+      const userModel = require('./user.model');
+      
+      function create(req, res) {
+        const user = userModel.createUser(req.body);
+        res.status(201).json(user);
+      }
+      
+      function get(req, res) {
+        const user = userModel.getUser(Number(req.params.id));
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        res.json(user);
+      }
+      
+      function update(req, res) {
+        const user = userModel.updateUser(Number(req.params.id), req.body);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        res.json(user);
+      }
+      
+      function remove(req, res) {
+        const deleted = userModel.deleteUser(Number(req.params.id));
+        if (!deleted) return res.status(404).json({ message: 'User not found' });
+        res.status(204).end();
+      }
+      
+      function list(req, res) {
+        res.json(userModel.getAllUsers());
+      }
+      
+      module.exports = { create, get, update, remove, list };
+            </pre>
+      
+            <h4>3. app.js (Express Setup)</h4>
+            <pre>
+      const express = require('express');
+      const userCtrl = require('./user.controller');
+      
+      const app = express();
+      app.use(express.json());
+      
+      app.post('/users', userCtrl.create);
+      app.get('/users/:id', userCtrl.get);
+      app.put('/users/:id', userCtrl.update);
+      app.delete('/users/:id', userCtrl.remove);
+      app.get('/users', userCtrl.list);
+      
+      module.exports = app;
+            </pre>
+      
+            <h4>4. app.test.js (Unit Tests)</h4>
+            <pre>
+      const request = require('supertest');
+      const app = require('./app');
+      const userModel = require('./user.model');
+      
+      beforeEach(() => {
+        userModel.resetUsers();
+      });
+      
+      describe('User CRUD', () => {
+        it('should create a user', async () => {
+          const res = await request(app)
+            .post('/users')
+            .send({ name: 'John', email: 'john@example.com' });
+      
+          expect(res.statusCode).toBe(201);
+          expect(res.body.name).toBe('John');
+        });
+      
+        it('should fetch user by ID', async () => {
+          const user = userModel.createUser({ name: 'Jane', email: 'jane@example.com' });
+          const res = await request(app).get(`/users/${user.id}`);
+          expect(res.statusCode).toBe(200);
+          expect(res.body.email).toBe('jane@example.com');
+        });
+      
+        it('should update a user', async () => {
+          const user = userModel.createUser({ name: 'Jake', email: 'jake@example.com' });
+          const res = await request(app)
+            .put(`/users/${user.id}`)
+            .send({ name: 'Jake Updated' });
+          expect(res.statusCode).toBe(200);
+          expect(res.body.name).toBe('Jake Updated');
+        });
+      
+        it('should delete a user', async () => {
+          const user = userModel.createUser({ name: 'Jim', email: 'jim@example.com' });
+          const res = await request(app).delete(`/users/${user.id}`);
+          expect(res.statusCode).toBe(204);
+        });
+      
+        it('should list all users', async () => {
+          userModel.createUser({ name: 'U1', email: 'u1@example.com' });
+          userModel.createUser({ name: 'U2', email: 'u2@example.com' });
+      
+          const res = await request(app).get('/users');
+          expect(res.statusCode).toBe(200);
+          expect(res.body.length).toBe(2);
+        });
+      });
+            </pre>
+      
+            <h4>5. Run Tests</h4>
+            <pre>
+      npm install express supertest jest
+      npx jest
+            </pre>
+          </div>
+        </li>
+      
+        <li data-id="q14452" class="zyellow">
+          <span class="faq-question">Service Façade Pattern</span>
+          <div class="answer">
+<ol>
+          <li data-id="q1" class="zyellow">
+            <span class="faq-question">Service Façade Pattern</span>
+            <div class="answer">
+              Hides the complexity of underlying services by providing a simplified interface.<br/>
+              <strong>Use Case:</strong> When consumers shouldn't be exposed to the internal service logic.<br/>
+              <strong>Example:</strong> A single mobile API hides multiple backend services.
+            </div>
+          </li>
+        
+          <li data-id="q2" class="zyellow">
+            <span class="faq-question">Enterprise Service Bus (ESB) Pattern</span>
+            <div class="answer">
+              Middleware that handles communication, routing, and transformation among services.<br/>
+              <strong>Use Case:</strong> Integrating heterogeneous systems.<br/>
+              <strong>Example:</strong> An ESB connects CRM, ERP, and billing platforms.
+            </div>
+          </li>
+        
+          <li data-id="q3" class="zyellow">
+            <span class="faq-question">Service Broker Pattern</span>
+            <div class="answer">
+              A registry system that allows services to be registered and discovered.<br/>
+              <strong>Use Case:</strong> Dynamic and distributed service lookup.<br/>
+              <strong>Example:</strong> UDDI or Eureka service registry.
+            </div>
+          </li>
+        
+          <li data-id="q4" class="zyellow">
+            <span class="faq-question">Service Orchestration Pattern</span>
+            <div class="answer">
+              Central coordination of multiple services to complete a business task.<br/>
+              <strong>Use Case:</strong> Sequential or complex business workflows.<br/>
+              <strong>Example:</strong> Order processing system calling payment and shipping services in order.
+            </div>
+          </li>
+        
+          <li data-id="q5" class="zyellow">
+            <span class="faq-question">Service Choreography Pattern</span>
+            <div class="answer">
+              Peer-to-peer coordination among services without a central controller.<br/>
+              <strong>Use Case:</strong> Decentralized workflows.<br/>
+              <strong>Example:</strong> Flight, hotel, and car rental services communicate directly.
+            </div>
+          </li>
+        
+          <li data-id="q6" class="zyellow">
+            <span class="faq-question">Service Composition Pattern</span>
+            <div class="answer">
+              Combines multiple services to form a higher-level composite service.<br/>
+              <strong>Use Case:</strong> Aggregating services into business-level operations.<br/>
+              <strong>Example:</strong> `CustomerProfileService` that combines account, order, and feedback data.
+            </div>
+          </li>
+        
+          <li data-id="q7" class="zyellow">
+            <span class="faq-question">Service Gateway Pattern (API Gateway)</span>
+            <div class="answer">
+              A single entry point for routing, securing, and aggregating service requests.<br/>
+              <strong>Use Case:</strong> Managing external access to multiple internal services.<br/>
+              <strong>Example:</strong> API Gateway routes requests to user, cart, and payment services.
+            </div>
+          </li>
+        
+          <li data-id="q8" class="zyellow">
+            <span class="faq-question">Service Autonomy Pattern</span>
+            <div class="answer">
+              Services maintain control over their own logic and data.<br/>
+              <strong>Use Case:</strong> Building independent and scalable services.<br/>
+              <strong>Example:</strong> Each service has its own database and logic, no shared state.
+            </div>
+          </li>
+        
+          <li data-id="q9" class="zyellow">
+            <span class="faq-question">Asynchronous Messaging Pattern</span>
+            <div class="answer">
+              Uses message queues or pub/sub systems for inter-service communication.<br/>
+              <strong>Use Case:</strong> Decoupling services and improving reliability.<br/>
+              <strong>Example:</strong> Kafka or RabbitMQ for event-driven communication.
+            </div>
+          </li>
+        
+          <li data-id="q10" class="zyellow">
+            <span class="faq-question">Service Contract Pattern</span>
+            <div class="answer">
+              Establishes a formal contract for service interfaces to ensure consistent interaction.<br/>
+              <strong>Use Case:</strong> Avoid breaking changes and support versioning.<br/>
+              <strong>Example:</strong> OpenAPI/Swagger for RESTful API contracts.
+            </div>
+          </li>
+        </ol>
+        </div></li>
+          
+      
+
+
 <li data-id="q32" class="yellow"><span class="faq-question">
 ------------------pg..0-90 ------------------------------------------------
 </span></li>
 <li data-id="q32" class="yellow"><span class="faq-question">
 --------------------------------------------------------------
 </span></li>
-<li data-id="q32" class="yellow"><span class="faq-question">
+<li data-id="q32" ><span class="faq-question">
 -------------------------------------------------
 <br />
-rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
-</span></li>
+Others
+</span>
+
+<pre>
+  rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
+
+  html format : 
+  li data-id="q32" class="zyellow"> span class="faq-question">
+  div class="answer">
+</pre>
+</li>
     
 </ul>
 
