@@ -122,10 +122,17 @@ ol.subul {
   padding-left: 0;
 }
 
+.subul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+
 ol.subul strong,
 ol.subul b {
   font-weight: bold;
-  background-color: rgb(123, 227, 96);
+  background-color: #7be360;
 }
 
 .faq-checkbox {

@@ -69,11 +69,252 @@ In-depth understanding on Accessibility
 Unit testing framework Jest, Enzyme
 In-depth understanding of Micro Front End architecture principles.
 IAM, VPC, API Gateway advanced features (WAF, contract interpolation, etc.), and API Gateway customer authorizers (e.g., authentication Lambdas with Okta or similar OAuth 2.0)
+
+Terraform or Amazon CDK with IaC principles
         </td>
       </tr>
 </tbody></table>  
 
 </div></li>
+
+
+
+
+
+
+
+
+<li data-id="q_node_event"><span class="faq-question green">
+  Event? Event-Driven Programming? EventEmitter
+  </span>
+  <div class="answer">
+    Event-driven programming is a design paradigm where the flow of the program is determined by events like user actions, messages, or I/O operations. In Node.js, this model allows the application to respond asynchronously to events using the <b>EventEmitter</b> class. It enables non-blocking I/O by listening for events and executing callbacks when events occur, improving scalability and performance.
+    
+    This approach helps Node.js efficiently handle multiple operations concurrently without waiting, making it ideal for real-time apps and servers.
+    </div>
+  
+  
+  <div class="answer">
+  In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. <br />
+  Node uses the class to handle events, allowing objects to emit named events and listeners to respond asynchronously.  <br /> <br />
+  This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
+  
+  <pre>
+  const EventEmitter = require('events');
+  const emitter = new EventEmitter();
+  
+  emitter.on('message', (data) =&gt; console.log('Received:', data));
+  emitter.emit('message', 'Hello Node.js!');
+  </pre>
+  </div>
+  </li>
+  
+  
+  <li data-id="q2"><span class="faq-question green">
+  Event loop? Event loop phases? Handle concurrency if it's single-threaded?
+  </span>
+  
+  
+  
+  <div class="answer">
+  The event loop is a mechanism that handles asynchronous callbacks. <br />
+  It allows Node.js to perform non-blocking I/O operations by offloading tasks to the system kernel and executing their callbacks when ready, enabling efficient single-threaded concurrency.
+  <br />
+  <br />
+  Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy tasks are delegated to worker threads or the OS, enabling multiple tasks to be processed concurrently.
+  </div>
+  <div class="answer">
+    
+    Phases include:  <br />
+    <b>
+    1. timers  <br />
+    2. pending callbacks  <br />
+    3. idle/prepare  <br />
+    4. poll  <br />
+    5. check (for `setImmediate`)  <br />
+    6. close callbacks  <br />
+    Each handles specific queued callbacks.
+  </b>
+    </div>
+  </li>
+  
+  <li data-id="jhgh" class="zyellow">
+    <span class="faq-question">Promise vs async/await: Execution Priority in JavaScript</span>
+    <div class="answer">
+      <p><strong>Core Concept:</strong> Both <code>Promise.then()</code> and <code>async/await</code> use the <strong>microtask queue</strong> in the JavaScript event loop.</p>
+  
+      <p><strong>Execution Priority:</strong> They have <u>the same priority</u> because <code>async/await</code> is syntactic sugar over Promises.</p>
+  
+      <p>That means both are placed in the <strong>microtask queue</strong> and executed after all synchronous code is run, but before any macrotasks like <code>setTimeout</code>.</p>
+  
+      <p><strong>Example:</strong></p>
+      <pre><code>
+  console.log("start");
+  
+  Promise.resolve().then(() => console.log("promise"));
+  
+  (async () => {
+    console.log("async start");
+    await null;
+    console.log("async end");
+  })();
+  
+  console.log("end");
+      </code></pre>
+  
+      <p><strong>Expected Output:</strong></p>
+      <pre>
+  start
+  async start
+  end
+  promise
+  async end
+      </pre>
+  
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li><code>Promise.then()</code> and the <code>await</code> continuation (<code>async end</code>) both go to the microtask queue.</li>
+        <li>The order of execution among microtasks is based on when they are queued.</li>
+        <li>Here, the promise <code>then</code> is queued before the <code>await</code> continuation.</li>
+      </ul>
+  
+      <p><strong>Conclusion:</strong> In terms of priority, <code>Promise.then()</code> and <code>async/await</code> are equal — both are scheduled in the microtask queue. The only difference is in when they are added to that queue.</p>
+    </div>
+  </li>
+  <li data-id="q32" class="zyellow">
+    <span class="faq-question">What does it mean: "The only difference is in when they are added to the queue"?</span>
+    <div class="answer">
+      <p>In JavaScript, both <code>Promise.then()</code> and <code>async/await</code> use the <strong>microtask queue</strong>, which means they both run after the current synchronous code completes.</p>
+  
+      <p><strong>But the key difference is:</strong> The exact <u>moment</u> when each task is added to the microtask queue can affect the order they are executed.</p>
+  
+      <p><strong>Example:</strong></p>
+      <pre><code>
+  console.log("start");
+  
+  Promise.resolve().then(() => console.log("promise"));
+  
+  (async () => {
+    console.log("async start");
+    await null;
+    console.log("async end");
+  })();
+  
+  console.log("end");
+      </code></pre>
+  
+      <p><strong>Output:</strong></p>
+      <pre>
+  start
+  async start
+  end
+  promise
+  async end
+      </pre>
+  
+      <p><strong>Why this happens:</strong></p>
+      <ul>
+        <li><code>Promise.then(() =&gt; ...)</code> is scheduled <em>immediately</em> when encountered.</li>
+        <li><code>await</code> pauses the function. Only after reaching <code>await</code> does the continuation (the code after it) get scheduled in the microtask queue.</li>
+      </ul>
+  
+      <p><strong>Timeline:</strong></p>
+      <ol>
+        <li><code>Promise.then()</code> → queued right away as a microtask.</li>
+        <li><code>async function</code> starts and logs "async start".</li>
+        <li><code>await</code> pauses, and only <strong>then</strong> the continuation ("async end") is scheduled.</li>
+      </ol>
+  
+      <p><strong>Conclusion:</strong> Even though both go to the microtask queue, <code>Promise.then()</code> is queued <strong>before</strong> <code>await</code>'s continuation. That’s the difference in “when they are added to the queue”.</p>
+    </div>
+  </li>
+  
+
+  <li data-id="q35562" class="zyellow">
+    <span class="faq-question">Callback vs Promise vs Async/Await: Priority & Execution Order</span>
+    <div class="answer">
+      <p><strong>JavaScript Execution Model:</strong> JavaScript is single-threaded and uses an <em>event loop</em> to manage asynchronous operations. It divides tasks into <strong>macro-tasks</strong> and <strong>micro-tasks</strong>.</p>
+  
+      <ul>
+        <li><strong>Macro-tasks:</strong> setTimeout, setInterval, setImmediate, I/O tasks, etc.</li>
+        <li><strong>Micro-tasks:</strong> Promises (.then/.catch/.finally), async/await (under the hood uses Promises), queueMicrotask, MutationObserver, etc.</li>
+      </ul>
+  
+      <p><strong>Execution Priority Order:</strong></p>
+      <ol>
+        <li>Execute all synchronous code first.</li>
+        <li>Process all <strong>micro-tasks</strong> (Promises, async/await).</li>
+        <li>Process next <strong>macro-task</strong> (e.g., setTimeout).</li>
+      </ol>
+  
+      <p><strong>Comparison:</strong></p>
+      <table border="1" cellpadding="6">
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>Execution Phase</th>
+            <th>Priority</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Callback (e.g., setTimeout)</td>
+            <td>Macro-task Queue</td>
+            <td>Lower than Promise & async/await</td>
+            <td><code>setTimeout(() =&gt; console.log("timeout"));</code></td>
+          </tr>
+          <tr>
+            <td>Promise</td>
+            <td>Micro-task Queue</td>
+            <td>Higher than setTimeout</td>
+            <td><code>Promise.resolve().then(() =&gt; console.log("promise"));</code></td>
+          </tr>
+          <tr>
+            <td>async/await</td>
+            <td>Micro-task Queue (via Promises)</td>
+            <td>Same as Promise</td>
+            <td><code>await something();</code></td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <p><strong>Example Output Order:</strong></p>
+      <pre><code>
+  console.log("start");
+  
+  setTimeout(() => console.log("timeout"), 0);
+  
+  Promise.resolve().then(() => console.log("promise"));
+  
+  (async () => {
+    console.log("async start");
+    await null;
+    console.log("async end");
+  })();
+  
+  console.log("end");
+  
+  // Output:
+  // start
+  // async start
+  // end
+  // promise
+  // async end
+  // timeout
+      </code></pre>
+  
+      <p><strong>Summary:</strong> In terms of priority:</p>
+      <ol>
+        <li>Synchronous code</li>
+        <li>Micro-tasks: Promise → async/await</li>
+        <li>Macro-tasks: Callbacks like setTimeout</li>
+      </ol>
+    </div>
+  </li>
+  
+
+
 
 
 
@@ -2879,59 +3120,8 @@ The <code>@Module()</code> decorator accepts metadata that tells NestJS how to a
 
 
 
-<li data-id="q_node_event"><span class="faq-question green">
-Event? Event-Driven Programming? EventEmitter
-</span>
-<div class="answer">
-  Event-driven programming is a design paradigm where the flow of the program is determined by events like user actions, messages, or I/O operations. In Node.js, this model allows the application to respond asynchronously to events using the <b>EventEmitter</b> class. It enables non-blocking I/O by listening for events and executing callbacks when events occur, improving scalability and performance.
-  
-  This approach helps Node.js efficiently handle multiple operations concurrently without waiting, making it ideal for real-time apps and servers.
-  </div>
 
 
-<div class="answer">
-In Node.js, an event is a signal emitted by objects to indicate that something has happened, such as a user action or system occurrence. <br />
-Node uses the class to handle events, allowing objects to emit named events and listeners to respond asynchronously.  <br /> <br />
-This event-driven architecture enables efficient, non-blocking I/O operations, making Node.js suitable for scalable applications.
-
-<pre>
-const EventEmitter = require('events');
-const emitter = new EventEmitter();
-
-emitter.on('message', (data) =&gt; console.log('Received:', data));
-emitter.emit('message', 'Hello Node.js!');
-</pre>
-</div>
-</li>
-
-
-<li data-id="q2"><span class="faq-question green">
-Event loop? Event loop phases? Handle concurrency if it's single-threaded?
-</span>
-
-
-
-<div class="answer">
-The event loop is a mechanism that handles asynchronous callbacks. <br />
-It allows Node.js to perform non-blocking I/O operations by offloading tasks to the system kernel and executing their callbacks when ready, enabling efficient single-threaded concurrency.
-<br />
-<br />
-Node.js uses the event loop and asynchronous I/O via the libuv library. Heavy tasks are delegated to worker threads or the OS, enabling multiple tasks to be processed concurrently.
-</div>
-<div class="answer">
-  
-  Phases include:  <br />
-  <b>
-  1. timers  <br />
-  2. pending callbacks  <br />
-  3. idle/prepare  <br />
-  4. poll  <br />
-  5. check (for `setImmediate`)  <br />
-  6. close callbacks  <br />
-  Each handles specific queued callbacks.
-</b>
-  </div>
-</li>
 
 <li data-id="q63">
   <span class="faq-question">Can you give an example of each phase of the Node.js Event Loop?</span>
@@ -15785,9 +15975,1178 @@ Airbyte: ETL Tool for Moving & Syncing Data</span><div class="answer">
         </ol>
         </div></li>
           
+
+        
+        <li data-id="fgffiy" class="zyellow">
+          <span class="faq-question">Why do we use Express.js?</span>
+          <div class="answer">
+            Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications. Key reasons for using Express.js include:
+            <ul>
+              <li><strong>Simplicity and Minimalism:</strong> Express offers a clean and minimal interface to build servers and APIs quickly.</li>
+              <li><strong>Routing:</strong> Built-in robust routing system to handle different HTTP methods and URLs easily.</li>
+              <li><strong>Middleware Support:</strong> Enables modular code with middleware functions for handling requests, responses, logging, authentication, etc.</li>
+              <li><strong>Performance:</strong> Built on top of Node.js, it is fast and non-blocking, suitable for scalable applications.</li>
+              <li><strong>Community and Ecosystem:</strong> Large community support and a vast ecosystem of third-party middleware and plugins.</li>
+              <li><strong>Integration:</strong> Easily integrates with databases like MongoDB, MySQL, and tools like Socket.IO or templating engines.</li>
+              <li><strong>RESTful API Support:</strong> Ideal for creating RESTful APIs and microservices architectures.</li>
+            </ul>
+          </div>
+        </li>
+        
+        <li data-id="hjjj54" class="zyellow">
+          <span class="faq-question">How is error handling done in React.js?</span>
+          <div class="answer">
+            Error handling in React.js can be done using several approaches to ensure robust UI and graceful error recovery:
+            <ul>
+              <li><strong>Error Boundaries:</strong> React components that catch JavaScript errors in their child component tree, log them, and display a fallback UI instead of crashing the app.
+                <pre><code>
+        class ErrorBoundary extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = { hasError: false };
+          }
+          static getDerivedStateFromError(error) {
+            return { hasError: true };
+          }
+          componentDidCatch(error, info) {
+            console.error("Error caught:", error, info);
+          }
+          render() {
+            if (this.state.hasError) {
+              return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+            }
+            return this.props.children;
+          }
+        }
+                </code></pre>
+              </li>
+              <li><strong>Try-Catch Blocks:</strong> Use inside event handlers or async functions to catch runtime errors.
+                <pre><code>
+        try {
+          const response = await fetch("/api/data");
+          const data = await response.json();
+          setData(data);
+        } catch (error) {
+          console.error("Fetch error:", error);
+        }
+                </code></pre>
+              </li>
+              <li><strong>React Hook Error Handling:</strong> Handle errors in custom hooks or `useEffect` using try-catch patterns.</li>
+              <li><strong>Global Error Logging:</strong> Use tools like Sentry, LogRocket, or custom logging to capture and report runtime exceptions.</li>
+              <li><strong>Form Error Handling:</strong> Use libraries like Formik or React Hook Form to validate input and show errors to users.</li>
+            </ul>
+          </div>
+        </li>
+        
+        <li data-id="fgffiy" class="zyellow">
+          <span class="faq-question">How is error handling done in Node.js?</span>
+          <div class="answer">
+            Error handling in Node.js is crucial for building reliable applications and involves managing synchronous and asynchronous errors effectively. Common techniques include:
+            <ul>
+              <li><strong>Try-Catch Blocks (Synchronous Code):</strong> Used to catch errors in synchronous code blocks.
+                <pre><code>
+        try {
+          let result = riskyFunction();
+          console.log(result);
+        } catch (error) {
+          console.error("Caught error:", error);
+        }
+                </code></pre>
+              </li>
+              <li><strong>Callback Pattern (Asynchronous):</strong> Traditional Node.js style using error-first callbacks.
+                <pre><code>
+        fs.readFile('file.txt', (err, data) => {
+          if (err) {
+            return console.error("Read error:", err);
+          }
+          console.log(data.toString());
+        });
+                </code></pre>
+              </li>
+              <li><strong>Promises & Async/Await:</strong> Handle asynchronous code with try-catch and `.catch()`.
+                <pre><code>
+        async function fetchData() {
+          try {
+            const res = await fetch("https://api.example.com");
+            const data = await res.json();
+            console.log(data);
+          } catch (error) {
+            console.error("Async error:", error);
+          }
+        }
+                </code></pre>
+              </li>
+              <li><strong>Global Error Handlers:</strong> Catch uncaught exceptions and unhandled promise rejections.
+                <pre><code>
+        process.on("uncaughtException", (err) => {
+          console.error("Uncaught Exception:", err);
+        });
+        process.on("unhandledRejection", (reason, promise) => {
+          console.error("Unhandled Rejection:", reason);
+        });
+                </code></pre>
+              </li>
+              <li><strong>Express Error Middleware:</strong> Centralized error handling in Express.js.
+                <pre><code>
+        app.use((err, req, res, next) => {
+          console.error("Error:", err.message);
+          res.status(500).json({ error: "Something went wrong!" });
+        });
+                </code></pre>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+
+
+        <li data-id="fgf55fiy" class="zyellow">
+          <span class="faq-question">How is data sharing handled in Next.js?</span>
+          <div class="answer">
+            In Next.js, data sharing between components and pages can be achieved using various methods depending on the context and requirements:
+            <ul class="subul">
+              <li><strong>Props:</strong> The most basic method. Data is passed from parent to child components using props.
+                <pre><x>
+        export default function Parent() {
+          return &lt;Child message="Hello from parent!" /&gt;;
+        }
+      </x></pre>
+              </li>
+              <li><strong>Context API:</strong> For sharing global state across multiple components without prop drilling.
+                <pre><code>
+        const MyContext = React.createContext();
+        export function MyProvider({ children }) {
+          const [user, setUser] = useState(null);
+          return (
+            &lt;MyContext.Provider value={{ user, setUser }}&gt;
+              {children}
+            &lt;/MyContext.Provider&gt;
+          );
+        }
+                </code></pre>
+              </li>
+              <li><strong>Custom Hooks:</strong> Encapsulate logic and shared state in reusable hooks.
+                <pre><code>
+        function useAuth() {
+          const [user, setUser] = useState(null);
+          return { user, login: () => setUser({ name: "Dev" }) };
+        }
+                </code></pre>
+              </li>
+              <li><strong>Server-side Sharing (getServerSideProps / getStaticProps):</strong> Share fetched data with pages at request/build time.
+                <pre><code>
+        export async function getServerSideProps() {
+          const res = await fetch("https://api.example.com/data");
+          const data = await res.json();
+          return { props: { data } };
+        }
+                </code></pre>
+              </li>
+              <li><strong>URL Query Parameters:</strong> Pass and share lightweight data via the query string.
+                <pre><code>
+        const router = useRouter();
+        console.log(router.query.id);
+                </code></pre>
+              </li>
+              <li><strong>State Management Libraries:</strong> Use tools like Redux, Zustand, or Recoil for complex or large-scale data sharing across the app.</li>
+            </ul>
+          </div>
+        </li>
+        
+
+        <li data-id="gggguppp" class="zyellow">
+          <span class="faq-question">Is Redux usable in Next.js?</span>
+          <div class="answer">
+            Yes, Redux can be used in Next.js to manage global state across components and pages. It is especially useful for large applications where complex state logic needs to be shared. Here's how Redux works with Next.js:
+            <ul>
+              <li><strong>Integration with SSR:</strong> Next.js supports server-side rendering (SSR), and Redux can be integrated with SSR using libraries like <code>next-redux-wrapper</code> to ensure state hydration across client and server.</li>
+        
+              <li><strong>Installation:</strong>
+                <pre><code>
+        npm install redux react-redux next-redux-wrapper
+                </code></pre>
+              </li>
+        
+              <li><strong>Store Configuration:</strong> Create a Redux store and wrap the app using <code>Provider</code> and <code>createWrapper</code>.
+                <pre><code>
+        // store.js
+        import { configureStore } from '@reduxjs/toolkit';
+        import counterReducer from './counterSlice';
+        
+        export const store = () => configureStore({ reducer: { counter: counterReducer } });
+                </code></pre>
+                <pre><code>
+        // _app.js
+        import { Provider } from 'react-redux';
+        import { wrapper } from './store';
+        
+        function MyApp({ Component, ...rest }) {
+          const { store, props } = wrapper.useWrappedStore(rest);
+          return (
+            &lt;Provider store={store}&gt;
+              &lt;Component {...props.pageProps} /&gt;
+            &lt;/Provider&gt;
+          );
+        }
+        
+        export default MyApp;
+                </code></pre>
+              </li>
+        
+              <li><strong>Accessing State:</strong> Use Redux hooks like <code>useSelector</code> and <code>useDispatch</code> inside components.
+                <pre><code>
+        import { useSelector, useDispatch } from 'react-redux';
+        const count = useSelector(state => state.counter.value);
+        const dispatch = useDispatch();
+                </code></pre>
+              </li>
+        
+              <li><strong>SSR Compatibility:</strong> Redux state can be preloaded in <code>getServerSideProps</code> or <code>getStaticProps</code> using <code>store.dispatch()</code>.</li>
+            </ul>
+            <strong>Conclusion:</strong> Redux works very well in Next.js, especially when using <code>next-redux-wrapper</code> to support SSR and CSR (Client-Side Rendering).
+          </div>
+        </li>
+        
+
+        <li data-id="bdhgf" class="zyellow">
+          <span class="faq-question">Redux with Next.js App Router (App Directory)</span>
+          <div class="answer">
+            <p><strong>Folder Structure:</strong></p>
+            <pre><code>
+        redux-nextjs-app-router/
+        ├── app/
+        │   ├── layout.js
+        │   ├── page.js
+        │   ├── providers.js
+        │   └── components/
+        │       ├── CompA.js
+        │       ├── CompB.js
+        │       └── CompC.js
+        ├── store/
+        │   ├── counterSlice.js
+        │   └── store.js
+        ├── package.json
+            </code></pre>
+        
+            <p><strong>1. store/counterSlice.js</strong></p>
+            <pre><code>
+        import { createSlice } from '@reduxjs/toolkit';
+        
+        const counterSlice = createSlice({
+          name: 'counter',
+          initialState: { value: 0 },
+          reducers: {
+            increment: state => { state.value += 1 },
+            decrement: state => { state.value -= 1 },
+            reset: state => { state.value = 0 },
+          }
+        });
+        
+        export const { increment, decrement, reset } = counterSlice.actions;
+        export default counterSlice.reducer;
+            </code></pre>
+        
+            <p><strong>2. store/store.js</strong></p>
+            <pre><code>
+        import { configureStore } from '@reduxjs/toolkit';
+        import counterReducer from './counterSlice';
+        
+        export const store = configureStore({
+          reducer: { counter: counterReducer }
+        });
+            </code></pre>
+        
+            <p><strong>3. app/providers.js</strong></p>
+            <pre><code>
+        'use client';
+        import { Provider } from 'react-redux';
+        import { store } from '../store/store';
+        
+        export function Providers({ children }) {
+          return &lt;Provider store={store}&gt;{children}&lt;/Provider&gt;;
+        }
+            </code></pre>
+        
+            <p><strong>4. app/layout.js</strong></p>
+            <pre><code>
+        import './globals.css';
+        import { Providers } from './providers';
+        
+        export const metadata = {
+          title: 'Redux App Router',
+          description: 'Next.js 13 App Router with Redux',
+        };
+        
+        export default function RootLayout({ children }) {
+          return (
+            &lt;html lang="en"&gt;
+              &lt;body&gt;
+                &lt;Providers&gt;{children}&lt;/Providers&gt;
+              &lt;/body&gt;
+            &lt;/html&gt;
+          );
+        }
+            </code></pre>
+        
+            <p><strong>5. app/page.js</strong></p>
+            <pre><code>
+        import CompA from './components/CompA';
+        import CompB from './components/CompB';
+        import CompC from './components/CompC';
+        
+        export default function HomePage() {
+          return (
+            &lt;main style={{ padding: 20 }}&gt;
+              &lt;h1&gt;Redux + App Router Example&lt;/h1&gt;
+              &lt;CompA /&gt;
+              &lt;CompB /&gt;
+              &lt;CompC /&gt;
+            &lt;/main&gt;
+          );
+        }
+            </code></pre>
+        
+            <p><strong>6. app/components/CompA.js</strong></p>
+            <pre><code>
+        'use client';
+        import { useSelector } from 'react-redux';
+        
+        export default function CompA() {
+          const count = useSelector((state) => state.counter.value);
+          return &lt;h2&gt;CompA - Counter: {count}&lt;/h2&gt;;
+        }
+            </code></pre>
+        
+            <p><strong>7. app/components/CompB.js</strong></p>
+            <pre><code>
+        'use client';
+        import { useDispatch } from 'react-redux';
+        import { increment, decrement } from '../../store/counterSlice';
+        
+        export default function CompB() {
+          const dispatch = useDispatch();
+          return (
+            &lt;div&gt;
+              &lt;h2&gt;CompB - Controls&lt;/h2&gt;
+              &lt;button onClick={() => dispatch(increment())}&gt;➕ Increment&lt;/button&gt;
+              &lt;button onClick={() => dispatch(decrement())}&gt;➖ Decrement&lt;/button&gt;
+            &lt;/div&gt;
+          );
+        }
+            </code></pre>
+        
+            <p><strong>8. app/components/CompC.js</strong></p>
+            <pre><code>
+        'use client';
+        import { useDispatch } from 'react-redux';
+        import { reset } from '../../store/counterSlice';
+        
+        export default function CompC() {
+          const dispatch = useDispatch();
+          return (
+            &lt;div&gt;
+              &lt;h2&gt;CompC - Reset&lt;/h2&gt;
+              &lt;button onClick={() => dispatch(reset())}&gt;🔄 Reset&lt;/button&gt;
+            &lt;/div&gt;
+          );
+        }
+            </code></pre>
+        
+            <p><strong>9. Dependencies in package.json</strong></p>
+            <pre><code>
+        {
+          "dependencies": {
+            "next": "13.5.0",
+            "react": "18.2.0",
+            "react-dom": "18.2.0",
+            "@reduxjs/toolkit": "^1.9.5",
+            "react-redux": "^8.1.2"
+          }
+        }
+            </code></pre>
+        
+            <p><strong>Run the App:</strong></p>
+            <pre><code>
+        npx create-next-app@latest redux-nextjs-app-router --app
+        cd redux-nextjs-app-router
+        # Replace files with the above code
+        npm install
+        npm run dev
+            </code></pre>
+          </div>
+        </li>
+        <li data-id="hyggg" class="zyellow">
+          <span class="faq-question">What is Redux Toolkit?</span>
+          <div class="answer">
+            <p><strong>Redux Toolkit (RTK)</strong> is the official, recommended way to write Redux logic. It provides a set of tools and abstractions to simplify Redux development and eliminate boilerplate code.</p>
+        
+            <h4>🔧 Features:</h4>
+            <ul>
+              <li><strong>createSlice:</strong> Combines reducers and actions into a single slice.</li>
+              <li><strong>configureStore:</strong> Sets up the Redux store with sensible defaults like middleware and DevTools support.</li>
+              <li><strong>createAsyncThunk:</strong> Simplifies async logic and data fetching (e.g. API calls).</li>
+              <li><strong>createReducer:</strong> Reduces boilerplate when writing reducers with immutability handled internally.</li>
+              <li><strong>Immer.js integration:</strong> Allows writing “mutating” code that is internally converted to immutable updates.</li>
+            </ul>
+        
+            <h4>✅ Benefits:</h4>
+            <ul>
+              <li>Less boilerplate code</li>
+              <li>Built-in DevTools setup</li>
+              <li>Standardized Redux patterns</li>
+              <li>Improved developer experience</li>
+            </ul>
+        
+            <h4>📦 Example:</h4>
+            <pre><code>// counterSlice.js
+        import { createSlice } from '@reduxjs/toolkit';
+        
+        const counterSlice = createSlice({
+          name: 'counter',
+          initialState: { value: 0 },
+          reducers: {
+            increment: state => { state.value += 1 },
+            decrement: state => { state.value -= 1 },
+            reset: state => { state.value = 0 },
+          }
+        });
+        
+        export const { increment, decrement, reset } = counterSlice.actions;
+        export default counterSlice.reducer;
+            </code></pre>
+        
+            <p>Use this slice in your Redux <code>configureStore()</code>:</p>
+        
+            <pre><code>// store.js
+        import { configureStore } from '@reduxjs/toolkit';
+        import counterReducer from './counterSlice';
+        
+        export const store = configureStore({
+          reducer: {
+            counter: counterReducer,
+          }
+        });
+            </code></pre>
+        
+            <h4>📚 Documentation:</h4>
+            <a href="https://redux-toolkit.js.org" target="_blank">https://redux-toolkit.js.org</a>
+          </div>
+        </li>
+        
+        <li data-id="yyytvg" class="zyellow">
+          <span class="faq-question">Redux vs Redux Toolkit</span>
+          <div class="answer">
+            <p><strong>Redux</strong> is a state management library, and <strong>Redux Toolkit (RTK)</strong> is the official, recommended way to use Redux efficiently.</p>
+        
+            <h4>🔍 Comparison:</h4>
+            <table border="1" cellpadding="6" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Redux</th>
+                  <th>Redux Toolkit (RTK)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Boilerplate</strong></td>
+                  <td>Verbose and repetitive code</td>
+                  <td>Minimal code using helpers like <code>createSlice</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Setup</strong></td>
+                  <td>Manual store, middleware, DevTools setup</td>
+                  <td><code>configureStore</code> auto-configures everything</td>
+                </tr>
+                <tr>
+                  <td><strong>Reducers</strong></td>
+                  <td>Written manually with switch-case</td>
+                  <td>Created using <code>createSlice</code> and Immer</td>
+                </tr>
+                <tr>
+                  <td><strong>Async Actions</strong></td>
+                  <td>Manual thunk creation and boilerplate</td>
+                  <td><code>createAsyncThunk</code> simplifies async logic</td>
+                </tr>
+                <tr>
+                  <td><strong>Best Practices</strong></td>
+                  <td>Optional</td>
+                  <td>Built-in by design</td>
+                </tr>
+                <tr>
+                  <td><strong>Learning Curve</strong></td>
+                  <td>Steeper</td>
+                  <td>Beginner-friendly</td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h4>✅ Conclusion:</h4>
+            <ul>
+              <li><strong>Redux:</strong> Good for learning concepts, but verbose and error-prone.</li>
+              <li><strong>Redux Toolkit:</strong> The modern, recommended way to write Redux apps with less code and better defaults.</li>
+            </ul>
+        
+            <h4>📘 Official Docs:</h4>
+            <ul>
+              <li><a href="https://redux.js.org" target="_blank">https://redux.js.org</a> (Redux)</li>
+              <li><a href="https://redux-toolkit.js.org" target="_blank">https://redux-toolkit.js.org</a> (Redux Toolkit)</li>
+            </ul>
+          </div>
+        </li>
+
+
+
+
+
+        <li data-id="ppook" class="zyellow">
+          <span class="faq-question">React + Redux Toolkit Example with CompA, CompB, CompC</span>
+          <div class="answer">
+            
+<pre>
+  <b>Folder Structure:</b>
+  react-redux-app/
+  ├── src/
+  │   ├── App.js
+  │   ├── index.js
+  │   ├── components/
+  │   │   ├── CompA.js
+  │   │   ├── CompB.js
+  │   │   └── CompC.js
+  │   └── redux/
+  │       ├── store.js
+  │       └── counterSlice.js
+  ├── package.json
+</pre>
+  
       
+<pre>
+  <b>1. src/redux/counterSlice.js</b>
+  import { createSlice } from '@reduxjs/toolkit';
+  
+  const counterSlice = createSlice({
+    name: 'counter',
+    initialState: { value: 0 },
+    reducers: {
+      increment: (state) => { state.value += 1 },
+      decrement: (state) => { state.value -= 1 },
+      reset: (state) => { state.value = 0 }
+    },
+  });
+  
+  export const { increment, decrement, reset } = counterSlice.actions;
+  export default counterSlice.reducer;
+</pre>
+  
+      
+<pre>
+  <b>2. src/redux/store.js</b>
+  import { configureStore } from '@reduxjs/toolkit';
+  import counterReducer from './counterSlice';
+  
+  export const store = configureStore({
+    reducer: {
+      counter: counterReducer,
+    },
+  });
+</pre>
+  
+      
+<pre>
+  <b>3. src/components/CompA.js</b>
+  import { useSelector } from 'react-redux';
+  
+  export default function CompA() {
+    const count = useSelector((state) => state.counter.value);
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompA&lt;/h2&gt;
+        &lt;p&gt;Counter Value: {count}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
+      
+<pre>
+  <b>4. src/components/CompB.js</b>
+  import { useDispatch } from 'react-redux';
+  import { increment, decrement } from '../redux/counterSlice';
+  
+  export default function CompB() {
+    const dispatch = useDispatch();
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompB&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch(increment())}&gt;➕ Increment&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch(decrement())}&gt;➖ Decrement&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
 
 
+<pre>
+  <b>5. src/components/CompC.js</b>
+  import { useDispatch } from 'react-redux';
+  import { reset } from '../redux/counterSlice';
+  
+  export default function CompC() {
+    const dispatch = useDispatch();
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompC&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch(reset())}&gt;🔄 Reset&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
+<pre>
+  <b>6. src/App.js</b>
+  import CompA from './components/CompA';
+  import CompB from './components/CompB';
+  import CompC from './components/CompC';
+  
+  function App() {
+    return (
+      &lt;div style={{ padding: 20 }}&gt;
+        &lt;h1&gt;React + Redux Toolkit Example&lt;/h1&gt;
+        &lt;CompA /&gt;
+        &lt;CompB /&gt;
+        &lt;CompC /&gt;
+      &lt;/div&gt;
+    );
+  }
+  
+  export default App;
+</pre>
+  
+<pre>
+  <b>7. src/index.js</b>
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import App from './App';
+  import { Provider } from 'react-redux';
+  import { store } from './redux/store';
+  
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    &lt;Provider store={store}&gt;
+      &lt;App /&gt;
+    &lt;/Provider&gt;
+  );
+</pre>
+  
+      
+<pre>
+  <b>8. package.json Dependencies</b>
+  {
+    "dependencies": {
+      "@reduxjs/toolkit": "^1.9.5",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-redux": "^8.1.2",
+      "react-scripts": "5.0.1"
+    }
+  }
+</pre>
+  
+      
+<pre>
+  <b>🚀 Run Instructions:</b>
+  npx create-react-app react-redux-app
+  cd react-redux-app
+  # Replace src/ with above files
+  npm install @reduxjs/toolkit react-redux
+  npm start
+</pre>
+          </div>
+        </li>
+      
+        <li data-id="nnbjh" class="zyellow">
+          <span class="faq-question">React + Redux (Classic) Example with CompA, CompB, CompC</span>
+          <div class="answer">
+        
+            
+<pre>
+  <b>📁 Folder Structure:</b>
+  src/
+  ├── App.js
+  ├── index.js
+  ├── components/
+  │   ├── CompA.js
+  │   ├── CompB.js
+  │   └── CompC.js
+  ├── redux/
+  │   ├── actions.js
+  │   ├── reducer.js
+  │   └── store.js
+</pre>
+  
+      
+<pre>
+  <b>1️⃣ redux/actions.js</b>
+  export const increment = () => ({ type: 'INCREMENT' });
+  export const decrement = () => ({ type: 'DECREMENT' });
+  export const reset = () => ({ type: 'RESET' });
+</pre>
+  
+<pre>
+  <b>2️⃣ redux/reducer.js</b>
+  const initialState = { value: 0 };
+  
+  export const counterReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return { value: state.value + 1 };
+      case 'DECREMENT':
+        return { value: state.value - 1 };
+      case 'RESET':
+        return { value: 0 };
+      default:
+        return state;
+    }
+  };
+</pre>
+  
+      
+<pre>
+  <b>3️⃣ redux/store.js</b>
+  import { createStore } from 'redux';
+  import { counterReducer } from './reducer';
+  
+  export const store = createStore(counterReducer);
+</pre>
+      
+<pre>
+  <b>4️⃣ components/CompA.js</b>
+  import { useSelector } from 'react-redux';
+  
+  export default function CompA() {
+    const count = useSelector((state) => state.value);
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompA&lt;/h2&gt;
+        &lt;p&gt;Counter: {count}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
+      
+<pre>
+  <b>5️⃣ components/CompB.js</b>
+  import { useDispatch } from 'react-redux';
+  import { increment, decrement } from '../redux/actions';
+  
+  export default function CompB() {
+    const dispatch = useDispatch();
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompB&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch(increment())}&gt;➕ Increment&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch(decrement())}&gt;➖ Decrement&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
+      
+<pre>
+  <b>6️⃣ components/CompC.js</b>
+  import { useDispatch } from 'react-redux';
+  import { reset } from '../redux/actions';
+  
+  export default function CompC() {
+    const dispatch = useDispatch();
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompC&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch(reset())}&gt;🔄 Reset&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+  
+      
+<pre>
+  <b>7️⃣ App.js</b>
+  import CompA from './components/CompA';
+  import CompB from './components/CompB';
+  import CompC from './components/CompC';
+  
+  function App() {
+    return (
+      &lt;div style={{ padding: 20 }}&gt;
+        &lt;h1&gt;React + Redux Example&lt;/h1&gt;
+        &lt;CompA /&gt;
+        &lt;CompB /&gt;
+        &lt;CompC /&gt;
+      &lt;/div&gt;
+    );
+  }
+  
+  export default App;
+</pre>
+  
+      
+<pre>
+  <b>8️⃣ index.js</b>
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import App from './App';
+  import { Provider } from 'react-redux';
+  import { store } from './redux/store';
+  
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    &lt;Provider store={store}&gt;
+      &lt;App /&gt;
+    &lt;/Provider&gt;
+  );
+</pre>
+  
+            
+<pre>
+  <b>📦 package.json dependencies</b>
+  {
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-redux": "^8.1.2",
+      "redux": "^4.2.1",
+      "react-scripts": "5.0.1"
+    }
+  }
+</pre>
+       
+            
+<pre>
+  <b>🚀 Run Instructions</b>
+  npx create-react-app react-redux-app
+  cd react-redux-app
+  # Replace files as per above
+  npm install redux react-redux
+  npm start
+</pre>
+        
+          </div>
+        </li>
+              
+        <li data-id="xvxcxz" class="zyellow">
+          <span class="faq-question">Zustand + Next.js App Router with CompA, CompB, CompC</span>
+          <div class="answer">
+        
+            
+<pre>
+  <b>📁 Folder Structure (app router):</b>
+  app/
+  ├── page.js
+  ├── components/
+  │   ├── CompA.js
+  │   ├── CompB.js
+  │   └── CompC.js
+  store/
+  ├── useCounterStore.js
+</pre>
+<pre>
+  <b>1️⃣ store/useCounterStore.js</b>
+
+  'use client';
+  import { create } from 'zustand';
+  
+  export const useCounterStore = create((set) => ({
+    count: 0,
+    increment: () => set((state) => ({ count: state.count + 1 })),
+    decrement: () => set((state) => ({ count: state.count - 1 })),
+    reset: () => set({ count: 0 }),
+  }));
+</pre>
+
+<pre>
+  <b>2️⃣ app/components/CompA.js</b>      
+  'use client';
+  import { useCounterStore } from '../../store/useCounterStore';
+  
+  export default function CompA() {
+    const count = useCounterStore((state) => state.count);
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompA&lt;/h2&gt;
+        &lt;p&gt;Counter: {count}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+<pre>
+  <b>3️⃣ app/components/CompB.js</b>
+  'use client';
+  import { useCounterStore } from '../../store/useCounterStore';
+  
+  export default function CompB() {
+    const increment = useCounterStore((state) => state.increment);
+    const decrement = useCounterStore((state) => state.decrement);
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompB&lt;/h2&gt;
+        &lt;button onClick={increment}&gt;➕ Increment&lt;/button&gt;
+        &lt;button onClick={decrement}&gt;➖ Decrement&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+
+<pre>
+  <b>4️⃣ app/components/CompC.js</b>      
+  'use client';
+  import { useCounterStore } from '../../store/useCounterStore';
+  
+  export default function CompC() {
+    const reset = useCounterStore((state) => state.reset);
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompC&lt;/h2&gt;
+        &lt;button onClick={reset}&gt;🔄 Reset&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+
+<pre>      
+  <b>5️⃣ app/page.js</b>
+  import CompA from './components/CompA';
+  import CompB from './components/CompB';
+  import CompC from './components/CompC';
+  
+  export default function HomePage() {
+    return (
+      &lt;main style={{ padding: 20 }}&gt;
+        &lt;h1&gt;Zustand + Next.js Example&lt;/h1&gt;
+        &lt;CompA /&gt;
+        &lt;CompB /&gt;
+        &lt;CompC /&gt;
+      &lt;/main&gt;
+    );
+  }
+</pre>
+<pre>      
+  <b>📦 Dependencies (package.json)</b>
+  {
+    "dependencies": {
+      "zustand": "^4.5.2",
+      "next": "^14.0.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  }
+</pre>
+
+<pre>
+  <b>🚀 Setup & Run</b>            
+  npx create-next-app@latest zustand-next-app --app --ts --no-tailwind
+  cd zustand-next-app
+  npm install zustand
+  # Replace files with the code above
+  npm run dev
+</pre>
+
+
+          </div>
+        </li>
+        
+
+        <li data-id="xzcxzsdf" class="zyellow">
+          <span class="faq-question">Context API + Next.js App Router with CompA, CompB, CompC</span>
+          <div class="answer">
+        
+            
+<pre>
+  <b>📁 Folder Structure (App Router)</b>
+  app/
+  ├── page.js
+  ├── context/
+  │   └── CounterContext.js
+  ├── components/
+  │   ├── CompA.js
+  │   ├── CompB.js
+  │   └── CompC.js
+</pre>
+
+<pre>
+  1️⃣ <b>app/context/CounterContext.js</b>
+
+  'use client';
+  import { createContext, useContext, useState } from 'react';
+  
+  const CounterContext = createContext();
+  export const useCounter = () => useContext(CounterContext);
+  
+  export function CounterProvider({ children }) {
+    const [count, setCount] = useState(0);
+  
+    const increment = () => setCount((c) => c + 1);
+    const decrement = () => setCount((c) => c - 1);
+    const reset = () => setCount(0);
+  
+    return (
+      &lt;CounterContext.Provider value={{ count, increment, decrement, reset }}&gt;
+        {children}
+      &lt;/CounterContext.Provider&gt;
+    );
+  }
+</pre>
+
+<pre>
+  <b>2️⃣ app/components/CompA.js</b>
+
+  'use client';
+  import { useCounter } from '../context/CounterContext';
+  
+  export default function CompA() {
+    const { count } = useCounter();
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompA&lt;/h2&gt;
+        &lt;p&gt;Counter: {count}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+
+<pre>
+  <b>3️⃣ app/components/CompB.js</b>
+  
+  'use client';
+  import { useCounter } from '../context/CounterContext';
+  
+  export default function CompB() {
+    const { increment, decrement } = useCounter();
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompB&lt;/h2&gt;
+        &lt;button onClick={increment}&gt;➕ Increment&lt;/button&gt;
+        &lt;button onClick={decrement}&gt;➖ Decrement&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+
+<pre>
+  <b>4️⃣ app/components/CompC.js</b>
+  'use client';
+  import { useCounter } from '../context/CounterContext';
+  
+  export default function CompC() {
+    const { reset } = useCounter();
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;CompC&lt;/h2&gt;
+        &lt;button onClick={reset}&gt;🔄 Reset&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+</pre>
+
+<pre>
+  <b>5️⃣ app/page.js</b>
+  'use client';
+  import { CounterProvider } from './context/CounterContext';
+  import CompA from './components/CompA';
+  import CompB from './components/CompB';
+  import CompC from './components/CompC';
+  
+  export default function HomePage() {
+    return (
+      &lt;CounterProvider&gt;
+        &lt;main style={{ padding: 20 }}&gt;
+          &lt;h1&gt;Context API + Next.js Example&lt;/h1&gt;
+          &lt;CompA /&gt;
+          &lt;CompB /&gt;
+          &lt;CompC /&gt;
+        &lt;/main&gt;
+      &lt;/CounterProvider&gt;
+    );
+  }
+</pre>
+
+<pre>      
+  <b>📦 package.json dependencies</b>
+  {
+    "dependencies": {
+      "next": "^14.0.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  }
+</pre>
+
+<pre>
+  <b>🚀 Run Instructions</b>      
+  npx create-next-app@latest context-next-app --app --ts --no-tailwind
+  cd context-next-app
+  # Replace files as per structure above
+  npm run dev
+</pre>
+        
+</div>
+</li>
+        
+<li data-id="redux-no-thunk" class="zyellow">
+  <span class="faq-question">What happens if we don't use Redux Thunk to call an API?</span>
+  <div class="answer">
+
+    <h4>🚫 Without Redux Thunk (or middleware):</h4>
+    <p>Redux only supports synchronous actions by default. This means:</p>
+    <ul>
+      <li>You can only dispatch plain JavaScript objects — not functions or Promises.</li>
+      <li>If you try to dispatch an async function (like a fetch call), Redux will throw an error because it doesn't know how to handle it.</li>
+    </ul>
+
+    <h4>🧪 Example (Invalid without Thunk):</h4>
+    <pre><code>
+// ❌ This won't work without Redux Thunk
+dispatch(async (dispatch) =&gt; {
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  dispatch({ type: 'SET_DATA', payload: data });
+});
+    </code></pre>
+    <p>Redux will throw: <code>Actions must be plain objects. Use custom middleware for async actions.</code></p>
+
+    <h4>✅ What Redux Thunk Enables:</h4>
+    <ul>
+      <li>Lets you return functions (not just plain objects) from your action creators.</li>
+      <li>Allows you to delay the dispatch of an action, or to dispatch only if a certain condition is met.</li>
+      <li>Gives access to <code>dispatch</code> and <code>getState</code> inside the thunk.</li>
+    </ul>
+
+    <h4>🛠️ Alternative Solutions:</h4>
+    <ul>
+      <li><strong>Redux Toolkit Query (RTK Query)</strong> – Modern approach, handles API requests and caching.</li>
+      <li><strong>Redux Saga</strong> – Generator-based middleware for complex flows.</li>
+      <li><strong>Use <code>useEffect</code> + Context or Zustand</strong> – Simpler state management without Redux at all.</li>
+    </ul>
+
+    <h4>📝 Summary:</h4>
+    <ul>
+      <li>Redux <strong>cannot handle async logic</strong> on its own.</li>
+      <li>Using <strong>Redux Thunk or other middleware is essential</strong> if you want to perform side effects like API calls in Redux actions.</li>
+    </ul>
+
+  </div>
+</li>
+
+
+
+        
 <li data-id="q32" class="yellow"><span class="faq-question">
 ------------------pg..0-90 ------------------------------------------------
 </span></li>
