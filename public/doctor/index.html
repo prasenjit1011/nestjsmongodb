@@ -17444,6 +17444,626 @@ Client → Mongos → Shard 1 (part of data)
 <li data-id="q32" class="yellow"><span class="faq-question">
 ------------------pg..0-90 ------------------------------------------------
 </span></li>
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">Github Action</span>
+<div class="answer">
+  <ol>
+<li class="yellow">What is GitHub Actions?</li>
+<li class="yellow">What are GitHub workflows?</li>
+<li class="yellow">What is a job in GitHub Actions?</li>
+<li class="yellow">What is a runner in GitHub Actions?</li>
+<li class="yellow">What are GitHub-hosted runners?</li>
+<li class="yellow">What are self-hosted runners?</li>
+<li class="yellow">What is a step in GitHub Actions?</li>
+<li class="yellow">What is an event in GitHub Actions?</li>
+<li class="yellow">What are some common GitHub Actions events?</li>
+<li class="yellow">What is the syntax of a GitHub Actions workflow?</li>
+<li class="yellow">Where are GitHub Actions workflows stored?</li>
+<li class="yellow">How do you trigger a workflow manually?</li>
+<li class="yellow">What is `on: push` in a workflow?</li>
+<li class="yellow">How do you specify a specific branch in a workflow trigger?</li>
+<li class="yellow">What is `on: pull_request`?</li>
+<li class="yellow">What is a matrix in GitHub Actions?</li>
+<li class="yellow">How do you define environment variables?</li>
+<li class="yellow">How do you access environment variables?</li>
+<li class="yellow">How do you store secrets in GitHub Actions?</li>
+<li class="yellow">How do you use secrets in workflows?</li>
+<li class="yellow">What is `jobs.<job-id>.strategy.matrix` used for?</li>
+<li class="yellow">How do you define a job dependency?</li>
+<li class="yellow">Can jobs run in parallel?</li>
+<li class="yellow">What is an artifact in GitHub Actions?</li>
+<li class="yellow">How do you upload artifacts?</li>
+<li class="yellow">How do you download artifacts?</li>
+<li class="yellow">What is the default shell in GitHub Actions?</li>
+<li class="yellow">Can you use PowerShell in GitHub Actions?</li>
+<li class="yellow">How do you run a specific script in a step?</li>
+<li class="yellow">How do you define an action?</li>
+<li class="yellow">What is a reusable workflow?</li>
+<li class="yellow">How do you call a reusable workflow?</li>
+<li class="yellow">What is an `if` condition in GitHub Actions?</li>
+<li class="yellow">How do you check the status of a previous step?</li>
+<li class="yellow">How do you trigger a workflow at a specific time?</li>
+<li class="yellow">What is a composite action?</li>
+<li class="yellow">What is the default timeout for a job?</li>
+<li class="yellow">How do you set a custom timeout?</li>
+<li class="yellow">What is `continue-on-error`?</li>
+<li class="yellow">How do you cancel a running workflow?</li>
+<li class="yellow">How do you debug a failing GitHub Action?</li>
+<li class="yellow">What is `GITHUB_TOKEN`?</li>
+<li class="yellow">How do you pass data between jobs?</li>
+<li class="yellow">What is a GitHub Actions environment?</li>
+<li class="yellow">How do you rollback a failed deployment?</li>
+<li class="yellow">Can GitHub Actions deploy to AWS?</li>
+<li class="yellow">How do you deploy to Kubernetes?</li>
+<li class="yellow">How do you cache dependencies?</li>
+<li class="yellow">How do you test a GitHub Actions workflow locally?</li>
+<li class="yellow">How do you restrict a workflow to specific branches?</li>
+<li class="yellow">Can you explain the structure of a GitHub Actions workflow?</li>
+<li class="yellow">What are workflows, jobs, and steps?</li>
+<li class="yellow">What are GitHub runners, and differences between hosted and self-hosted?</li>
+<li class="yellow">Can you explain GitHub Actions triggers and events?</li>
+<li class="yellow">Can you name some use cases for GitHub Actions in DevOps?</li>
+<li class="yellow">What is Continuous Integration (CI)?</li>
+<li class="yellow">What is Continuous Delivery and Continuous Deployment?</li>
+<li class="yellow">Difference between CI, CD, and CD?</li>
+<li class="yellow">Name some benefits of CI/CD.</li>
+<li class="yellow">How does testing fit into CI?</li>
+<li class="yellow">Should testing always be automated?</li>
+<li class="yellow">Name types of tests used in development.</li>
+<li class="yellow">What is test coverage?</li>
+<li class="yellow">Does test coverage need to be 100%?</li>
+<li class="yellow">What is a flaky test?</li>
+<li class="yellow">What is TDD?</li>
+<li class="yellow">Difference between BDD and TDD?</li>
+<li class="yellow">What is version control?</li>
+<li class="yellow">What is Git?</li>
+<li class="yellow">What is a Git repository?</li>
+<li class="yellow">Which other version control systems exist?</li>
+<li class="yellow">What is a Git branch?</li>
+<li class="yellow">What is merging?</li>
+<li class="yellow">What is trunk-based development?</li>
+<li class="yellow">What is Gitflow?</li>
+<li class="yellow">How long should a branch live?</li>
+<li class="yellow">What is the build stage?</li>
+<li class="yellow">Difference between hosted and cloud-based CI/CD platforms?</li>
+<li class="yellow">How long should a build take?</li>
+<li class="yellow">Is security important in CI/CD?</li>
+<li class="yellow">What mechanisms secure CI/CD?</li>
+<li class="yellow">Name some deployment strategies.</li>
+<li class="yellow">What is the role of automated testing in CI/CD?</li>
+<li class="yellow">What is Infrastructure as Code (IaC)?</li>
+<li class="yellow">How to manage secrets and sensitive information?</li>
+<li class="yellow">What strategies would you use to implement CI/CD in a new project?</li>
+<li class="yellow">How do you handle database migrations in CI/CD?</li>
+<li class="yellow">How do you monitor the performance of your CI/CD pipeline?</li>
+<li class="yellow">What are common pitfalls to avoid when implementing CI/CD?</li>
+<li class="yellow">Write a simple YAML config for a CI/CD pipeline using GitHub Actions.</li>
+<li class="yellow">Write a script to run unit tests for a Java application using Maven in CI/CD.</li>
+<li class="yellow">Write a CI/CD pipeline config for deploying a React app using CircleCI.</li>
+<li class="yellow">What is a build artifact and how do you manage them?</li>
+<li class="yellow">Describe blue-green deployment in a CI/CD pipeline.</li>
+<li class="yellow">Explain canary releases in CI/CD.</li>
+<li class="yellow">How do you handle dependencies in a CI/CD process?</li>
+<li class="yellow">Explain how CI and version control relate.</li>
+<li class="yellow">Write a basic Dockerfile and explain each line.</li>
+<li class="yellow">How do you roll back a deployment?</li>
+<li class="yellow">How do you upload and manage artifacts?</li>
+<li class="yellow">What is the difference between CI, CD, and CD?</li>
+<li class="yellow">Explain Continuous Integration benefits.</li>
+<li class="yellow">Explain Continuous Deployment advantages.</li>
+<li class="yellow">Explain Continuous Delivery concept.</li>
+<li class="yellow">Describe typical CI/CD pipeline components.</li>
+<li class="yellow">How do you ensure CI/CD pipeline security?</li>
+<li class="yellow">What is the role of automation in DevOps?</li>
+<li class="yellow">What experiences have you had with CI/CD pipelines?</li>
+<li class="yellow">Can you explain policy-as-code gates in pipelines?</li>
+<li class="yellow">Describe autoscaling self-hosted runners on Kubernetes.</li>
+<li class="yellow">How to structure OIDC secure deploy workflow?</li>
+<li class="yellow">Explain secret hydration without long-lived credentials.</li>
+<li class="yellow">How to implement matrix + concurrency strategy in Actions?</li>
+<li class="yellow">How to ensure artifact retention and provenance?</li>
+<li class="yellow">How do you handle Terraform state locking & drift detection?</li>
+<li class="yellow">Describe reusable workflows for multi-cluster deployments.</li>
+
+  </ol>
+</div>
+</li>
+
+
+<li data-id="q32" class="yellow"><span class="faq-question">TerraForm</span>
+<div class="answer">
+  <ol>
+<li data-id="terraform-q-01" class="yellow"><span class="faq-question">What is Terraform?</span></li>
+<li data-id="terraform-q-02" class="yellow"><span class="faq-question">Why should you use Terraform?</span></li>
+<li data-id="terraform-q-03" class="yellow"><span class="faq-question">What are major competitors of Terraform?</span></li>
+<li data-id="terraform-q-04" class="yellow"><span class="faq-question">What is Infrastructure as Code (IaC)?</span></li>
+<li data-id="terraform-q-05" class="yellow"><span class="faq-question">What is `terraform init`?</span></li>
+<li data-id="terraform-q-06" class="yellow"><span class="faq-question">What is a Terraform provider?</span></li>
+<li data-id="terraform-q-07" class="yellow"><span class="faq-question">How does Terraform work?</span></li>
+<li data-id="terraform-q-08" class="yellow"><span class="faq-question">What are Terraform modules?</span></li>
+<li data-id="terraform-q-09" class="yellow"><span class="faq-question">What is Terraform state?</span></li>
+<li data-id="terraform-q-10" class="yellow"><span class="faq-question">Why is the state file important?</span></li>
+<li data-id="terraform-q-11" class="yellow"><span class="faq-question">What are Terraform backends?</span></li>
+<li data-id="terraform-q-12" class="yellow"><span class="faq-question">What is remote state management?</span></li>
+<li data-id="terraform-q-13" class="yellow"><span class="faq-question">What is a Terraform workspace?</span></li>
+<li data-id="terraform-q-14" class="yellow"><span class="faq-question">What are Terraform provisioners?</span></li>
+<li data-id="terraform-q-15" class="yellow"><span class="faq-question">What built-in provisioners are available?</span></li>
+<li data-id="terraform-q-16" class="yellow"><span class="faq-question">How do you manage sensitive data in Terraform?</span></li>
+<li data-id="terraform-q-17" class="yellow"><span class="faq-question">What is a Terraform lifecycle?</span></li>
+<li data-id="terraform-q-18" class="yellow"><span class="faq-question">What is `terraform plan`?</span></li>
+<li data-id="terraform-q-19" class="yellow"><span class="faq-question">What is `terraform apply`?</span></li>
+<li data-id="terraform-q-20" class="yellow"><span class="faq-question">What is `terraform destroy`?</span></li>
+<li data-id="terraform-q-21" class="yellow"><span class="faq-question">What is `terraform refresh`?</span></li>
+<li data-id="terraform-q-22" class="yellow"><span class="faq-question">What does `terraform fmt` do?</span></li>
+<li data-id="terraform-q-23" class="yellow"><span class="faq-question">Explain `count` vs `for_each` meta-arguments.</span></li>
+<li data-id="terraform-q-24" class="yellow"><span class="faq-question">What is implicit vs explicit dependency?</span></li>
+<li data-id="terraform-q-25" class="yellow"><span class="faq-question">What causes drift and how do you detect it?</span></li>
+<li data-id="terraform-q-26" class="yellow"><span class="faq-question">How does `terraform import` work?</span></li>
+<li data-id="terraform-q-27" class="yellow"><span class="faq-question">How do you handle multiple providers?</span></li>
+<li data-id="terraform-q-28" class="yellow"><span class="faq-question">What is a tainted resource?</span></li>
+<li data-id="terraform-q-29" class="yellow"><span class="faq-question">What are Terraform data sources?</span></li>
+<li data-id="terraform-q-30" class="yellow"><span class="faq-question">What is `terraform graph` used for?</span></li>
+<li data-id="terraform-q-31" class="yellow"><span class="faq-question">How do you upgrade providers?</span></li>
+<li data-id="terraform-q-32" class="yellow"><span class="faq-question">What are workspaces used for?</span></li>
+<li data-id="terraform-q-33" class="yellow"><span class="faq-question">What is Terraform Cloud?</span></li>
+<li data-id="terraform-q-34" class="yellow"><span class="faq-question">What is Terraform Enterprise?</span></li>
+<li data-id="terraform-q-35" class="yellow"><span class="faq-question">What is Sentinel in Terraform?</span></li>
+<li data-id="terraform-q-36" class="yellow"><span class="faq-question">Explain policy-as-code.</span></li>
+<li data-id="terraform-q-37" class="yellow"><span class="faq-question">What are execution plans?</span></li>
+<li data-id="terraform-q-38" class="yellow"><span class="faq-question">What are modules and how do you reuse them?</span></li>
+<li data-id="terraform-q-39" class="yellow"><span class="faq-question">How do you organize large Terraform projects?</span></li>
+<li data-id="terraform-q-40" class="yellow"><span class="faq-question">What is remote state locking?</span></li>
+<li data-id="terraform-q-41" class="yellow"><span class="faq-question">What are override files?</span></li>
+<li data-id="terraform-q-42" class="yellow"><span class="faq-question">What is idempotency in Terraform?</span></li>
+<li data-id="terraform-q-43" class="yellow"><span class="faq-question">What is the structure of `.tf` files?</span></li>
+<li data-id="terraform-q-44" class="yellow"><span class="faq-question">How do you version control Terraform code?</span></li>
+<li data-id="terraform-q-45" class="yellow"><span class="faq-question">How to test Terraform configurations?</span></li>
+<li data-id="terraform-q-46" class="yellow"><span class="faq-question">How do you handle rollbacks?</span></li>
+<li data-id="terraform-q-47" class="yellow"><span class="faq-question">Describe blue-green deployment with Terraform.</span></li>
+<li data-id="terraform-q-48" class="yellow"><span class="faq-question">Explain canary release strategy in Terraform?</span></li>
+<li data-id="terraform-q-49" class="yellow"><span class="faq-question">How do you manage Terraform state in CI/CD?</span></li>
+<li data-id="terraform-q-50" class="yellow"><span class="faq-question">How to structure Terraform for multi-region?</span></li>
+<li data-id="terraform-q-51" class="yellow"><span class="faq-question">How to manage secrets in Terraform?</span></li>
+<li data-id="terraform-q-52" class="yellow"><span class="faq-question">What are CI/CD best practices for Terraform?</span></li>
+<li data-id="terraform-q-53" class="yellow"><span class="faq-question">What is drift detection?</span></li>
+<li data-id="terraform-q-54" class="yellow"><span class="faq-question">What is the Terraform core?</span></li>
+<li data-id="terraform-q-55" class="yellow"><span class="faq-question">What is `terraform validate`?</span></li>
+<li data-id="terraform-q-56" class="yellow"><span class="faq-question">What is `terraform version`?</span></li>
+<li data-id="terraform-q-57" class="yellow"><span class="faq-question">What operating systems does Terraform support?</span></li>
+<li data-id="terraform-q-58" class="yellow"><span class="faq-question">What is provider aliasing?</span></li>
+<li data-id="terraform-q-59" class="yellow"><span class="faq-question">What are local variables (`locals`)?</span></li>
+<li data-id="terraform-q-60" class="yellow"><span class="faq-question">What are output variables?</span></li>
+<li data-id="terraform-q-61" class="yellow"><span class="faq-question">What is Terraform registry?</span></li>
+<li data-id="terraform-q-62" class="yellow"><span class="faq-question">What is OpenTofu?</span></li>
+<li data-id="terraform-q-63" class="yellow"><span class="faq-question">What license does Terraform use?</span></li>
+<li data-id="terraform-q-64" class="yellow"><span class="faq-question">When was Terraform first released?</span></li>
+<li data-id="terraform-q-65" class="yellow"><span class="faq-question">What language is Terraform written in?</span></li>
+<li data-id="terraform-q-66" class="yellow"><span class="faq-question">What providers are available?</span></li>
+<li data-id="terraform-q-67" class="yellow"><span class="faq-question">How do you handle provider versioning?</span></li>
+<li data-id="terraform-q-68" class="yellow"><span class="faq-question">How do you import legacy infra?</span></li>
+<li data-id="terraform-q-69" class="yellow"><span class="faq-question">What is remote state locking?</span></li>
+<li data-id="terraform-q-70" class="yellow"><span class="faq-question">What is Sentinel enforcement levels?</span></li>
+<li data-id="terraform-q-71" class="yellow"><span class="faq-question">What is Terragrunt?</span></li>
+<li data-id="terraform-q-72" class="yellow"><span class="faq-question">What is a resource graph?</span></li>
+<li data-id="terraform-q-73" class="yellow"><span class="faq-question">How does Terraform ensure ordering?</span></li>
+<li data-id="terraform-q-74" class="yellow"><span class="faq-question">Explain `depends_on`.</span></li>
+<li data-id="terraform-q-75" class="yellow"><span class="faq-question">What is `terraform taint` and `untaint`?</span></li>
+<li data-id="terraform-q-76" class="yellow"><span class="faq-question">What are custom providers?</span></li>
+<li data-id="terraform-q-77" class="yellow"><span class="faq-question">What is execution plan?</span></li>
+<li data-id="terraform-q-78" class="yellow"><span class="faq-question">How do you create dynamic blocks?</span></li>
+<li data-id="terraform-q-79" class="yellow"><span class="faq-question">What is the `.terraform` directory?</span></li>
+<li data-id="terraform-q-80" class="yellow"><span class="faq-question">Explain Terraform architecture components.</span></li>
+<li data-id="terraform-q-81" class="yellow"><span class="faq-question">What is victimization? (typo maybe taint)</span></li>
+<li data-id="terraform-q-82" class="yellow"><span class="faq-question">How do you enforce naming conventions?</span></li>
+<li data-id="terraform-q-83" class="yellow"><span class="faq-question">Explain Terraform security best practices.</span></li>
+<li data-id="terraform-q-84" class="yellow"><span class="faq-question">How do you handle drift remediation?</span></li>
+<li data-id="terraform-q-85" class="yellow"><span class="faq-question">What is state versioning?</span></li>
+<li data-id="terraform-q-86" class="yellow"><span class="faq-question">How to handle breaking changes in modules?</span></li>
+<li data-id="terraform-q-87" class="yellow"><span class="faq-question">What is `terraform console`?</span></li>
+<li data-id="terraform-q-88" class="yellow"><span class="faq-question">What is `terraform workspace new`?</span></li>
+<li data-id="terraform-q-89" class="yellow"><span class="faq-question">What is `terraform workspace select`?</span></li>
+<li data-id="terraform-q-90" class="yellow"><span class="faq-question">What is `terraform output`?</span></li>
+<li data-id="terraform-q-91" class="yellow"><span class="faq-question">How do you share modules?</span></li>
+<li data-id="terraform-q-92" class="yellow"><span class="faq-question">What strategies handle multiple environments?</span></li>
+<li data-id="terraform-q-93" class="yellow"><span class="faq-question">Explain Terraform CLI workflow.</span></li>
+<li data-id="terraform-q-94" class="yellow"><span class="faq-question">How to lock state file?</span></li>
+<li data-id="terraform-q-95" class="yellow"><span class="faq-question">Explain error handling in Terraform.</span></li>
+<li data-id="terraform-q-96" class="yellow"><span class="faq-question">What is `.tfstate.lock.info`?</span></li>
+<li data-id="terraform-q-97" class="yellow"><span class="faq-question">What is `terraform state` subcommands?</span></li>
+<li data-id="terraform-q-98" class="yellow"><span class="faq-question">What is `terraform taint` usage?</span></li>
+<li data-id="terraform-q-99" class="yellow"><span class="faq-question">How do you integrate Terraform with CI/CD?</span></li>
+<li data-id="terraform-q-100" class="yellow"><span class="faq-question">What are common pitfalls in Terraform projects?</span></li>
+</ol>
+</div>
+</li>
+
+
+<li data-id="question-01" class="yellow">
+  <span class="faq-question">What is Terraform?</span>
+  <div class="answer">
+    Terraform is an <strong>open-source Infrastructure as Code (IaC)</strong> tool developed by HashiCorp that enables you to provision, manage, and version cloud and on‑prem infrastructure using human-readable declarative configuration files (usually in HCL).
+
+    <ul>
+      <li><strong>Declarative configurations:</strong> You describe <em>what</em> you want, and Terraform figures out <em>how</em> to create it via providers (AWS, Azure, GCP, Kubernetes, etc.).</li>
+      <li><strong>Plan & Apply workflow:</strong> Includes three steps — <code>terraform init</code>, <code>plan</code> (preview changes), and <code>apply</code> (execute changes).</li>
+      <li><strong>Resource graph & dependency handling:</strong> Plans operations in correct order and parallelizes where possible.</li>
+      <li><strong>State management:</strong> Tracks real-world resources to calculate differences and updates accurately.</li>
+      <li><strong>Multi‑cloud provider support:</strong> Works across AWS, Azure, GCP, Kubernetes, SaaS, and more.</li>
+      <li><strong>Modularity:</strong> Supports reusable modules and promotes DRY practices.</li>
+    </ul>
+
+    In short, Terraform lets you treat infrastructure like software – write, review, version, and apply changes consistently and predictably across environments.
+  </div>
+</li>
+
+
+
+<li data-id="python_question_list" class="yellow"><span class="faq-question">Python Question List</span>
+  <div class="answer">
+  
+  <ol>
+      <li class="green">Beginner</li>
+      <li>What is Python? What are its key features?</li>
+      <li>How is Python interpreted?</li>
+      <li>What are the data types in Python?</li>
+      <li>What is the difference between list and tuple?</li>
+      <li>What is a dictionary in Python?</li>
+      <li>What is PEP8?</li>
+      <li>What are Python’s key benefits?</li>
+      <li>Explain the use of indentation in Python.</li>
+      <li>How do you comment in Python?</li>
+      <li>What are Python literals?</li>
+      <li>What is a variable in Python?</li>
+      <li>How do you declare a variable?</li>
+      <li>What is the type() function?</li>
+      <li>How do you convert data types in Python?</li>
+      <li>What are Python functions?</li>
+      <li>How do you define a function in Python?</li>
+      <li>What is the return statement?</li>
+      <li>What is a lambda function?</li>
+      <li>What is the difference between global and local variables?</li>
+      <li>What is recursion in Python?</li>
+      <li>What are loops in Python?</li>
+      <li>Explain break and continue.</li>
+      <li>What is pass in Python?</li>
+      <li>What are Python modules?</li>
+      <li>How to import a module?</li>
+      <li>What is a package in Python?</li>
+      <li>What is __init__.py used for?</li>
+      <li>What is the use of dir() function?</li>
+      <li>What are strings in Python?</li>
+      <li>How to slice a string?</li>
+      <li>What are string methods like split(), join(), replace()?</li>
+      <li>What is list comprehension?</li>
+      <li>What is the difference between is and ==?</li>
+      <li>What is the use of the range() function?</li>
+      <li>What is the difference between append() and extend()?</li>
+      <li>What is the use of len()?</li>
+      <li>How do you handle exceptions in Python?</li>
+      <li>What is the difference between try, except and finally?</li>
+      <li>What is a file in Python?</li>
+      <li>How do you open a file?</li>
+      <li>How do you read/write a file in Python?</li>
+      <li>What is a class in Python?</li>
+      <li>What is an object?</li>
+      <li>What is __str__ in Python?</li>
+      <li>What is self in Python?</li>
+      <li>What is the difference between @staticmethod and @classmethod?</li>
+      <li>What is inheritance in Python?</li>
+      <li>What are Python’s built-in data structures?</li>
+      <li>How to install packages using pip?</li>
+      <li>What is virtualenv?</li>
+
+
+
+      <li  class="green">Intermediate</li>
+      <li>What are *args and **kwargs?</li>
+      <li>What is the difference between deep copy and shallow copy?</li>
+      <li>What is the difference between class and instance variables?</li>
+      <li>Explain Python’s memory management.</li>
+      <li>What are decorators in Python?</li>
+      <li>What is the difference between __new__ and __init__?</li>
+      <li>What are generators in Python?</li>
+      <li>What is the yield keyword?</li>
+      <li>What are iterators and how do they work?</li>
+      <li>What is the use of map(), filter(), and reduce()?</li>
+      <li>What is functools in Python?</li>
+      <li>What are Python’s built-in functions?</li>
+      <li>What is list(), set(), dict() constructor behavior?</li>
+      <li>What is the use of the zip() function?</li>
+      <li>What is the difference between sorted() and sort()?</li>
+      <li>What is the difference between mutable and immutable types?</li>
+      <li>Explain exception hierarchy in Python.</li>
+      <li>What are custom exceptions?</li>
+      <li>What is the purpose of with statement?</li>
+      <li>What is context manager?</li>
+      <li>What is the __enter__ and __exit__ method?</li>
+      <li>What are Python’s built-in exceptions?</li>
+      <li>What is the difference between os and sys modules?</li>
+      <li>What are regular expressions in Python?</li>
+      <li>What is the re module?</li>
+      <li>What are f-strings in Python?</li>
+      <li>Explain slicing with examples.</li>
+      <li>What is negative indexing?</li>
+      <li>What is the use of enumerate()?</li>
+      <li>What is duck typing?</li>
+      <li>What is monkey patching?</li>
+      <li>What is __slots__ in Python?</li>
+      <li>Explain MRO (Method Resolution Order).</li>
+      <li>What is multiple inheritance and how is it handled?</li>
+      <li>What is isinstance() vs type()?</li>
+      <li>How does Python handle memory leaks?</li>
+      <li>What are Python’s garbage collection mechanisms?</li>
+      <li>What are weak references?</li>
+      <li>What is __del__ method?</li>
+      <li>Explain pickling and unpickling in Python.</li>
+      <li>What are the different ways to format strings in Python?</li>
+      <li>How do you measure performance in Python?</li>
+      <li>How do you use the time and datetime module?</li>
+      <li>What is the difference between Python 2 and Python 3?</li>
+      <li>What is the walrus operator (:=)?</li>
+      <li>What is the difference between @property and normal methods?</li>
+      <li>Explain abstract base classes.</li>
+      <li>What are metaclasses in Python?</li>
+      <li>What is __call__ method used for?</li>
+      <li>What is method overloading and overriding in Python?</li>
+      <li>How to debug Python code?</li>
+      <li>What is logging in Python?</li>
+      <li>What are the different logging levels?</li>
+      <li>What are comprehensions in Python?</li>
+      <li>Explain dictionary and set comprehensions.</li>
+      <li>What is the difference between dict.items(), dict.keys(), dict.values()?</li>
+      <li>What is a frozen set?</li>
+      <li>How is exception propagation handled?</li>
+      <li>What is a coroutine in Python?</li>
+      <li>How does Python support concurrency?</li>
+      <li>What are threads in Python?</li>
+      <li>What are asyncio and await in Python?</li>
+      <li>What is the GIL (Global Interpreter Lock)?</li>
+      <li>How does multiprocessing differ from threading?</li>
+      <li>What are daemonic threads?</li>
+      <li>What is subprocess module used for?</li>
+      <li>What is the use of json module?</li>
+      <li>What are Python’s built-in modules for HTTP?</li>
+      <li>How to work with CSV files in Python?</li>
+      <li>How to work with XML in Python?</li>
+      <li>How to send an email using Python?</li>
+      <li>What is unittest module?</li>
+      <li>How to mock objects in unit tests?</li>
+      <li>What are test fixtures?</li>
+      <li>Explain how Python’s import system works.</li>
+      <li>What are namespace packages?</li>
+      <li>What is __main__ in Python?</li>
+      <li>What is the purpose of requirements.txt?</li>
+      <li>How to create a virtual environment manually?</li>
+      <li>How to create a CLI tool in Python?</li>
+      <li>What is click library used for?</li>
+      <li>How do you create a custom Python package?</li>
+      <li>What is the role of setup.py?</li>
+      <li>How to publish a Python package to PyPI?</li>
+      <li>What are the differences between pyenv, pipenv, poetry?</li>
+      <li>What is type hinting in Python?</li>
+      <li>What is the typing module?</li>
+      <li>Explain dataclasses in Python.</li>
+      <li>What is the difference between classmethod and staticmethod?</li>
+      <li>What are Python design patterns?</li>
+      <li>How do you create a singleton in Python?</li>
+      <li>Explain the observer pattern in Python.</li>
+      <li>What is dependency injection in Python?</li>
+      <li>How do you handle circular imports?</li>
+      <li>What is __all__ in Python?</li>
+      <li>What is __dict__ in Python classes?</li>
+      <li>What is introspection in Python?</li>
+      <li>How to measure code coverage in Python?</li>
+      <li>What is doctest?</li>
+
+      
+
+      <li  class="green">Advanced</li>
+      <li>What is metaprogramming in Python?</li>
+      <li>What are descriptors in Python?</li>
+      <li>Explain __get__, __set__, and __delete__ in descriptors.</li>
+      <li>What are contextvars in Python?</li>
+      <li>Explain how memory is allocated in Python objects.</li>
+      <li>What are weak references and why are they used?</li>
+      <li>What are Python memory views?</li>
+      <li>What is interning in Python?</li>
+      <li>Explain the Python memory model.</li>
+      <li>What are slots and how do they optimize memory?</li>
+      <li>How does the CPython implementation manage memory?</li>
+      <li>What is PyPy? How does it differ from CPython?</li>
+      <li>What are Cython and Nuitka?</li>
+      <li>What is the role of ctypes and cffi?</li>
+      <li>How do you write C extensions for Python?</li>
+      <li>What is a buffer protocol in Python?</li>
+      <li>Explain garbage collection and reference counting.</li>
+      <li>How to profile memory usage in Python?</li>
+      <li>What is the tracemalloc module?</li>
+      <li>What is the difference between deep and shallow copies in complex objects?</li>
+      <li>How do you serialize custom objects?</li>
+      <li>What are marshaling and pickling differences?</li>
+      <li>How do you securely deserialize data in Python?</li>
+      <li>What are the alternatives to pickle for serialization?</li>
+      <li>What is the role of dill or msgpack?</li>
+      <li>What is monkey patching and its implications?</li>
+      <li>How to dynamically add methods to a class?</li>
+      <li>What is duck typing and its pros/cons?</li>
+      <li>How is polymorphism achieved in Python?</li>
+      <li>What is the strategy pattern and how do you implement it?</li>
+      <li>Explain function overloading using functools.singledispatch.</li>
+      <li>How do you implement metaclasses?</li>
+      <li>What is the difference between __metaclass__ and type()?</li>
+      <li>What are mixins in Python?</li>
+      <li>What are custom iterables and how are they built?</li>
+      <li>What is the difference between generator functions and generator expressions?</li>
+      <li>Explain coroutine chaining.</li>
+      <li>What is the event loop in asyncio?</li>
+      <li>What is task cancellation in asyncio?</li>
+      <li>How to use asyncio.gather() and asyncio.wait()?</li>
+      <li>What are event-driven architectures in Python?</li>
+      <li>What is Tornado and how does it differ from asyncio?</li>
+      <li>What is Twisted framework?</li>
+      <li>How do you test async code in Python?</li>
+      <li>What is aiohttp and where is it used?</li>
+      <li>How to integrate async/await with Django or Flask?</li>
+      <li>What are Python data models?</li>
+      <li>Explain __len__, __getitem__, __setitem__, __contains__.</li>
+      <li>What is __iter__ and how does iteration work in custom objects?</li>
+      <li>What is the difference between @property and setter/deleter?</li>
+
+
+      <li>What are functional programming features in Python?</li>
+      <li>What are partial functions and how do you use functools.partial?</li>
+      <li>Explain currying in Python.</li>
+      <li>What is memoization?</li>
+      <li>How to implement tail recursion optimization in Python?</li>
+      <li>What is the difference between recursion and iteration?</li>
+      <li>What are closures and how are they used?</li>
+      <li>What are inner functions?</li>
+      <li>What are callable objects?</li>
+      <li>What is function introspection?</li>
+      <li>What are annotations in Python functions?</li>
+      <li>What are the best practices for typing in Python?</li>
+      <li>How to validate Python types at runtime?</li>
+      <li>What are Protocols (PEP 544)?</li>
+      <li>What is structural subtyping?</li>
+      <li>What is an abstract base class (ABC)?</li>
+      <li>Explain dependency injection in large Python systems.</li>
+      <li>How do you apply SOLID principles in Python?</li>
+      <li>What is a Pythonic way of writing code?</li>
+      <li>What is the Zen of Python?</li>
+      <li>How do you handle large file processing in Python?</li>
+      <li>What are memory-mapped files and how are they used?</li>
+      <li>What is the mmap module?</li>
+      <li>How do you stream large files in Python?</li>
+      <li>What are the performance implications of using different data structures?</li>
+      <li>How to use bisect for binary search?</li>
+      <li>What is heapq and when should it be used?</li>
+      <li>How does collections.deque differ from a list?</li>
+      <li>What are defaultdict and Counter?</li>
+      <li>What is namedtuple and why use it?</li>
+      <li>What is ChainMap?</li>
+      <li>What is the typing.NamedTuple vs collections.namedtuple?</li>
+      <li>How do you implement a LRU cache in Python?</li>
+      <li>What is the difference between Python’s built-in hash() and hashlib?</li>
+      <li>How do you hash large files efficiently?</li>
+      <li>How do you write thread-safe code in Python?</li>
+      <li>What are race conditions and how to prevent them?</li>
+      <li>What are locks, semaphores, barriers in threading?</li>
+      <li>How to use thread-safe queues?</li>
+      <li>What is the queue module vs asyncio.Queue?</li>
+      <li>Explain inter-process communication in Python.</li>
+      <li>What is the role of multiprocessing.Pool?</li>
+      <li>What are pipes and managers in multiprocessing?</li>
+      <li>How does shared memory work in Python?</li>
+      <li>How do you manage parallelism in data pipelines?</li>
+      <li>What is Dask and how is it used in parallel computing?</li>
+      <li>What is joblib and when to use it?</li>
+      <li>What is PySpark and how does Python interface with big data?</li>
+      <li>How to build REST APIs in Python?</li>
+      <li>How do you secure Python APIs?</li>
+    </ol>
+  </div>
+</li>  
+  
+<li data-id="DynamoDBQQ"><span class="faq-question green">
+  DynamoDB Questions***
+  </span><div class="answer">
+
+  <strong>Basic DynamoDB Questions</strong>
+    <ol>
+      <li>What is DynamoDB?</li>
+      <li>What are the key features of DynamoDB?</li>
+      <li>What is the difference between partition key and sort key?</li>
+      <li>What is a primary key in DynamoDB?</li>
+      <li>What is a composite key?</li>
+      <li>What data types are supported in DynamoDB?</li>
+      <li>What is a DynamoDB table schema?</li>
+      <li>How does DynamoDB handle indexing?</li>
+      <li>What are global secondary indexes (GSI)?</li>
+      <li>What are local secondary indexes (LSI)?</li>
+      <li>Can a table have multiple GSIs or LSIs?</li>
+      <li>What are strongly consistent vs eventually consistent reads?</li>
+      <li>What are the read/write capacity modes in DynamoDB?</li>
+      <li>What is on-demand capacity mode?</li>
+      <li>What is provisioned throughput mode?</li>
+      <li>What happens if read/write capacity is exceeded?</li>
+      <li>How does DynamoDB handle throttling?</li>
+      <li>What are reserved capacity units?</li>
+    </ol>
+ 
+
+  <strong>Intermediate DynamoDB Questions</strong>
+    <ol>
+      <li>How does DynamoDB partition data internally?</li>
+      <li>What is a hot partition?</li>
+      <li>How do you avoid hot partitions in DynamoDB?</li>
+      <li>How does DynamoDB scale reads and writes?</li>
+      <li>What are DynamoDB streams?</li>
+      <li>How can DynamoDB Streams be used?</li>
+      <li>How do you implement triggers in DynamoDB?</li>
+      <li>What is conditional write in DynamoDB?</li>
+      <li>What is a projection expression?</li>
+      <li>How do you perform pagination in DynamoDB?</li>
+      <li>How do you query data in DynamoDB?</li>
+      <li>How do you scan a table in DynamoDB?</li>
+      <li>What's the difference between query and scan?</li>
+      <li>What is a filter expression in DynamoDB?</li>
+      <li>What is a key condition expression?</li>
+      <li>How do you use begins_with and between in queries?</li>
+      <li>What is a TTL (Time To Live) in DynamoDB?</li>
+      <li>How is item expiration handled in TTL?</li>
+    </ol>
+  
+
+  <strong>Advanced DynamoDB Questions</strong>
+    <ol>
+      <li>What is DynamoDB Accelerator (DAX)?</li>
+      <li>What is PartiQL in DynamoDB?</li>
+      <li>What are transactional writes?</li>
+      <li>What is the difference between PutItem and UpdateItem?</li>
+      <li>How do you perform atomic counters in DynamoDB?</li>
+      <li>How do you prevent race conditions in DynamoDB?</li>
+      <li>What is the best way to store large objects in DynamoDB?</li>
+      <li>What are limitations of DynamoDB?</li>
+      <li>How do you design a one-to-many relationship in DynamoDB?</li>
+      <li>How do you store time-series data in DynamoDB?</li>
+      <li>What is the use of ExpressionAttributeNames?</li>
+      <li>What are best practices for schema design in DynamoDB?</li>
+      <li>How do you back up and restore DynamoDB tables?</li>
+      <li>What are DynamoDB Global Tables?</li>
+    </ol>
+  
+</div></li>
+  
+
+<li data-id="q32" class="yellow"><span class="faq-question">AWS Service List</span>
+<div class="answer">
+<ol>
+
+  <li data-id="aws-q-01" class="yellow"><span class="faq-question">AWS Lambda</span><div class="answer green">Serverless compute allowing you to run code without managing servers—ideal for event-driven functions, APIs, or microservices. Pay only for execution time :contentReference[oaicite:1]{index=1}.</div></li>
+  <li data-id="aws-q-02" class="yellow"><span class="faq-question">Amazon EC2</span><div class="answer green">Virtual machines with scalable compute capacity for running custom servers or workloads. Useful when you need full OS control :contentReference[oaicite:2]{index=2}.</div></li>
+  <li data-id="aws-q-03" class="yellow"><span class="faq-question">Amazon S3</span><div class="answer green">Highly durable object storage for files, static assets, backups, or data lakes. Great for hosting static websites or storing media :contentReference[oaicite:3]{index=3}.</div></li>
+  <li data-id="aws-q-04" class="yellow"><span class="faq-question">Amazon RDS</span><div class="answer green">Managed relational database service supporting MySQL, PostgreSQL, Oracle, etc. Handles backups, scaling, and patching :contentReference[oaicite:4]{index=4}.</div></li>
+  <li data-id="aws-q-05" class="yellow"><span class="faq-question">Amazon DynamoDB</span><div class="answer green">Fully managed NoSQL database offering low latency and automatic scaling—ideal for key-value workloads :contentReference[oaicite:5]{index=5}.</div></li>
+  <li data-id="aws-q-06" class="yellow"><span class="faq-question">Amazon API Gateway</span><div class="answer green">Creates, secures, and manages APIs at scale—works seamlessly with Lambda or other backends :contentReference[oaicite:6]{index=6}.</div></li>
+  <li data-id="aws-q-07" class="yellow"><span class="faq-question">AWS CloudFormation</span><div class="answer green">Infrastructure as Code (IaC) service to declaratively define and manage AWS resources via YAML/JSON templates :contentReference[oaicite:7]{index=7}.</div></li>
+  <li data-id="aws-q-08" class="yellow"><span class="faq-question">AWS CloudWatch</span><div class="answer green">Monitoring, logging, and alerting for AWS resources and applications—essential for observability :contentReference[oaicite:8]{index=8}.</div></li>
+  <li data-id="aws-q-09" class="yellow"><span class="faq-question">Amazon CloudFront</span><div class="answer green">Global CDN to distribute content with low latency and high transfer speeds, with integrated SSL/DDoS protection :contentReference[oaicite:9]{index=9}.</div></li>
+   <li data-id="aws-q-10" class="yellow"><span class="faq-question">Amazon VPC</span><div class="answer green">Provides private networking controls—subnets, routing, security groups—for your AWS infrastructure :contentReference[oaicite:10]{index=10}.</div></li>
+ <li data-id="aws-q-11" class="yellow"><span class="faq-question">AWS CodeCommit, CodeBuild, CodeDeploy, CodePipeline</span><div class="answer green">CI/CD toolchain for source control, building, testing, and deploying applications within AWS :contentReference[oaicite:11]{index=11}.</div></li>
+  <li data-id="aws-q-12" class="yellow"><span class="faq-question">AWS CloudShell / Cloud9</span><div class="answer green">Browser-based IDE and CLI environment for coding and prototyping directly within AWS :contentReference[oaicite:12]{index=12}.</div></li>
+  <li data-id="aws-q-13" class="yellow"><span class="faq-question">AWS App Runner</span><div class="answer green">Fully managed container deployment service with automatic scaling—ideal for containerized web apps :contentReference[oaicite:13]{index=13}.</div></li>
+ <li data-id="aws-q-14" class="yellow"><span class="faq-question">Amazon X-Ray</span><div class="answer green">Helps trace and debug distributed systems – crucial for microservices monitoring :contentReference[oaicite:14]{index=14}.</div></li>
+    </ol>
+    </div>
+    </li>
+
+
+
+
+
 <li data-id="q32" class="yellow"><span class="faq-question">
 --------------------------------------------------------------
 </span></li>
@@ -17455,6 +18075,12 @@ Others
 
 <pre>
   rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
+
+
+  convert to html format:
+  li data-id="question-" class="yellow"><span class="faq-question">
+  div class answer
+
 
   html format : 
   li data-id="q32" class="zyellow"> span class="faq-question">

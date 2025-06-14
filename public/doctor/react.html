@@ -2398,8 +2398,279 @@ ReactJS Security Best Practices
 </div></li>
 
 
+<li data-id="mongodb-q-01" class="yellow">
+  <span class="faq-question">What is MongoDB data modeling?</span>
+  <div class="answer">
+    Designing and structuring documents, relationships, indexes, and validation rules based on real access patterns—even though MongoDB doesn't enforce a schema—to improve performance, consistency, and maintainability. :contentReference[oaicite:1]{index=1}
+  </div>
+</li>
+
+<li data-id="mongodb-q-02" class="yellow">
+  <span class="faq-question">What is the difference between embedded and referenced models?</span>
+  <div class="answer">
+    Embedded models store related data within a single document (good for one-to-one or few-many relationships, faster reads, atomic updates). Referenced models store relations via IDs in separate collections (ideal for many-to-many, frequently changing data, avoiding document size limits). :contentReference[oaicite:2]{index=2}
+  </div>
+</li>
+
+<li data-id="mongodb-q-03" class="yellow">
+  <span class="faq-question">When should you embed vs reference?</span>
+  <div class="answer">
+    Embed when data is accessed together and small. Reference when data is large, changes often, or used independently. Evaluate based on access patterns, data growth, and update frequency. :contentReference[oaicite:3]{index=3}
+  </div>
+</li>
+
+<li data-id="mongodb-q-04" class="yellow">
+  <span class="faq-question">How do you model one-to-many or many-to-many relationships?</span>
+  <div class="answer">
+    For one-to-many: embed small arrays, or reference when large. For many-to-many: use references across collections, sometimes with junction/bridge collections or extended reference patterns. :contentReference[oaicite:4]{index=4}
+  </div>
+</li>
+
+<li data-id="mongodb-q-05" class="yellow">
+  <span class="faq-question">What are common data modeling patterns and anti-patterns?</span>
+  <div class="answer">
+    Patterns: embedding for related reads, referencing for normalized data, bucket for time-series, polymorphic for varied types, extended references. Anti-patterns: oversized or deeply nested documents, unbounded arrays, excessive indexes, unneeded collections. :contentReference[oaicite:5]{index=5}
+  </div>
+</li>
+
+<li data-id="mongodb-q-06" class="yellow">
+  <span class="faq-question">Why does MongoDB still need schema design?</span>
+  <div class="answer">
+    Despite being schema-less, structure ensures consistency, aids validation, optimizes queries, supports ODMs, and controls growth. Tools like JSON Schema validation and modeling utilities enhance data quality. :contentReference[oaicite:6]{index=6}
+  </div>
+</li>
+
+<li data-id="mongodb-q-07" class="yellow">
+  <span class="faq-question">How do you visualize and document MongoDB schemas?</span>
+  <div class="answer">
+    Use ER-like diagrams via tools like Hackolade, Dataedo, DbSchema, or Moon Modeler. These tools infer nested structures and references, and can generate interactive HTML or PDF documentation. :contentReference[oaicite:7]{index=7}
+  </div>
+</li>
+
+<li data-id="mongodb-q-08" class="yellow">
+  <span class="faq-question">What are practical tips for schema design performance?</span>
+  <div class="answer">
+    Align schema with query patterns; embed when data co-occurs; index commonly queried fields; avoid huge docs; shard with appropriate keys; consider document growth via bucketing. :contentReference[oaicite:8]{index=8}
+  </div>
+</li>
+
+<li data-id="python-q-01" class="yellow">
+<span class="faq-question">Python</span>
+<div class="answer">
+
+  <ol>
+    <li class="green">Beginner</li>
+    <li>What is Python? What are its key features?</li>
+    <li>How is Python interpreted?</li>
+    <li>What are the data types in Python?</li>
+    <li>What is the difference between list and tuple?</li>
+    <li>What is a dictionary in Python?</li>
+    <li>What is PEP8?</li>
+    <li>What are Python’s key benefits?</li>
+    <li>Explain the use of indentation in Python.</li>
+    <li>How do you comment in Python?</li>
+    <li>What are Python literals?</li>
+    <li>What is a variable in Python?</li>
+    <li>How do you declare a variable?</li>
+    <li>What is the type() function?</li>
+    <li>How do you convert data types in Python?</li>
+    <li>What are Python functions?</li>
+    <li>How do you define a function in Python?</li>
+    <li>What is the return statement?</li>
+    <li>What is a lambda function?</li>
+    <li>What is the difference between global and local variables?</li>
+    <li>What is recursion in Python?</li>
+    <li>What are loops in Python?</li>
+    <li>Explain break and continue.</li>
+    <li>What is pass in Python?</li>
+    <li>What are Python modules?</li>
+    <li>How to import a module?</li>
+    <li>What is a package in Python?</li>
+    <li>What is __init__.py used for?</li>
+    <li>What is the use of dir() function?</li>
+    <li>What are strings in Python?</li>
+    <li>How to slice a string?</li>
+    <li>What are string methods like split(), join(), replace()?</li>
+    <li>What is list comprehension?</li>
+    <li>What is the difference between is and ==?</li>
+    <li>What is the use of the range() function?</li>
+    <li>What is the difference between append() and extend()?</li>
+    <li>What is the use of len()?</li>
+    <li>How do you handle exceptions in Python?</li>
+    <li>What is the difference between try, except and finally?</li>
+    <li>What is a file in Python?</li>
+    <li>How do you open a file?</li>
+    <li>How do you read/write a file in Python?</li>
+    <li>What is a class in Python?</li>
+    <li>What is an object?</li>
+    <li>What is __str__ in Python?</li>
+    <li>What is self in Python?</li>
+    <li>What is the difference between @staticmethod and @classmethod?</li>
+    <li>What is inheritance in Python?</li>
+    <li>What are Python’s built-in data structures?</li>
+    <li>How to install packages using pip?</li>
+    <li>What is virtualenv?</li>
+  </ol>
+  
+  <ol start="51">
+    <li class="yellow">Intermediate</li>
+    <li>What are *args and **kwargs?</li>
+    <li>What is the difference between deep copy and shallow copy?</li>
+    <li>What is the difference between class and instance variables?</li>
+    <li>Explain Python’s memory management.</li>
+    <li>What are decorators in Python?</li>
+    <li>What is the difference between __new__ and __init__?</li>
+    <li>What are generators in Python?</li>
+    <li>What is the yield keyword?</li>
+    <li>What are iterators and how do they work?</li>
+    <li>What is the use of map(), filter(), and reduce()?</li>
+    <li>What is functools in Python?</li>
+    <li>What are Python’s built-in functions?</li>
+    <li>What is list(), set(), dict() constructor behavior?</li>
+    <li>What is the use of the zip() function?</li>
+    <li>What is the difference between sorted() and sort()?</li>
+    <li>What is the difference between mutable and immutable types?</li>
+    <li>Explain exception hierarchy in Python.</li>
+    <li>What are custom exceptions?</li>
+    <li>What is the purpose of with statement?</li>
+    <li>What is context manager?</li>
+    <li>What is the __enter__ and __exit__ method?</li>
+    <li>What are Python’s built-in exceptions?</li>
+    <li>What is the difference between os and sys modules?</li>
+    <li>What are regular expressions in Python?</li>
+    <li>What is the re module?</li>
+    <li>What are f-strings in Python?</li>
+    <li>Explain slicing with examples.</li>
+    <li>What is negative indexing?</li>
+    <li>What is the use of enumerate()?</li>
+    <li>What is duck typing?</li>
+    <li>What is monkey patching?</li>
+    <li>What is __slots__ in Python?</li>
+    <li>Explain MRO (Method Resolution Order).</li>
+    <li>What is multiple inheritance and how is it handled?</li>
+    <li>What is isinstance() vs type()?</li>
+    <li>How does Python handle memory leaks?</li>
+    <li>What are Python’s garbage collection mechanisms?</li>
+    <li>What are weak references?</li>
+    <li>What is __del__ method?</li>
+    <li>Explain pickling and unpickling in Python.</li>
+    <li>What are the different ways to format strings in Python?</li>
+    <li>How do you measure performance in Python?</li>
+    <li>How do you use the time and datetime module?</li>
+    <li>What is the difference between Python 2 and Python 3?</li>
+    <li>What is the walrus operator (:=)?</li>
+    <li>What is the difference between @property and normal methods?</li>
+    <li>Explain abstract base classes.</li>
+    <li>What are metaclasses in Python?</li>
+    <li>What is __call__ method used for?</li>
+    <li>What is method overloading and overriding in Python?</li>
+    <li>How to debug Python code?</li>
+    <li>What is logging in Python?</li>
+    <li>What are the different logging levels?</li>
+    <li>What are comprehensions in Python?</li>
+    <li>Explain dictionary and set comprehensions.</li>
+    <li>What is the difference between dict.items(), dict.keys(), dict.values()?</li>
+    <li>What is a frozen set?</li>
+    <li>How is exception propagation handled?</li>
+    <li>What is a coroutine in Python?</li>
+    <li>How does Python support concurrency?</li>
+    <li>What are threads in Python?</li>
+    <li>What are asyncio and await in Python?</li>
+    <li>What is the GIL (Global Interpreter Lock)?</li>
+    <li>How does multiprocessing differ from threading?</li>
+    <li>What are daemonic threads?</li>
+    <li>What is subprocess module used for?</li>
+    <li>What is the use of json module?</li>
+    <li>What are Python’s built-in modules for HTTP?</li>
+    <li>How to work with CSV files in Python?</li>
+    <li>How to work with XML in Python?</li>
+    <li>How to send an email using Python?</li>
+    <li>What is unittest module?</li>
+    <li>How to mock objects in unit tests?</li>
+    <li>What are test fixtures?</li>
+    <li>Explain how Python’s import system works.</li>
+    <li>What are namespace packages?</li>
+    <li>What is __main__ in Python?</li>
+    <li>What is the purpose of requirements.txt?</li>
+    <li>How to create a virtual environment manually?</li>
+    <li>How to create a CLI tool in Python?</li>
+    <li>What is click library used for?</li>
+    <li>How do you create a custom Python package?</li>
+    <li>What is the role of setup.py?</li>
+    <li>How to publish a Python package to PyPI?</li>
+    <li>What are the differences between pyenv, pipenv, poetry?</li>
+    <li>What is type hinting in Python?</li>
+    <li>What is the typing module?</li>
+    <li>Explain dataclasses in Python.</li>
+    <li>What is the difference between classmethod and staticmethod?</li>
+    <li>What are Python design patterns?</li>
+    <li>How do you create a singleton in Python?</li>
+    <li>Explain the observer pattern in Python.</li>
+    <li>What is dependency injection in Python?</li>
+    <li>How do you handle circular imports?</li>
+    <li>What is __all__ in Python?</li>
+    <li>What is __dict__ in Python classes?</li>
+    <li>What is introspection in Python?</li>
+    <li>How to measure code coverage in Python?</li>
+    <li>What is doctest?</li>
+  </ol>
+  <ol start="101">
+    <li>What is metaprogramming in Python?</li>
+    <li>What are descriptors in Python?</li>
+    <li>Explain __get__, __set__, and __delete__ in descriptors.</li>
+    <li>What are contextvars in Python?</li>
+    <li>Explain how memory is allocated in Python objects.</li>
+    <li>What are weak references and why are they used?</li>
+    <li>What are Python memory views?</li>
+    <li>What is interning in Python?</li>
+    <li>Explain the Python memory model.</li>
+    <li>What are slots and how do they optimize memory?</li>
+    <li>How does the CPython implementation manage memory?</li>
+    <li>What is PyPy? How does it differ from CPython?</li>
+    <li>What are Cython and Nuitka?</li>
+    <li>What is the role of ctypes and cffi?</li>
+    <li>How do you write C extensions for Python?</li>
+    <li>What is a buffer protocol in Python?</li>
+    <li>Explain garbage collection and reference counting.</li>
+    <li>How to profile memory usage in Python?</li>
+    <li>What is the tracemalloc module?</li>
+    <li>What is the difference between deep and shallow copies in complex objects?</li>
+    <li>How do you serialize custom objects?</li>
+    <li>What are marshaling and pickling differences?</li>
+    <li>How do you securely deserialize data in Python?</li>
+    <li>What are the alternatives to pickle for serialization?</li>
+    <li>What is the role of dill or msgpack?</li>
+    <li>What is monkey patching and its implications?</li>
+    <li>How to dynamically add methods to a class?</li>
+    <li>What is duck typing and its pros/cons?</li>
+    <li>How is polymorphism achieved in Python?</li>
+    <li>What is the strategy pattern and how do you implement it?</li>
+    <li>Explain function overloading using functools.singledispatch.</li>
+    <li>How do you implement metaclasses?</li>
+    <li>What is the difference between __metaclass__ and type()?</li>
+    <li>What are mixins in Python?</li>
+    <li>What are custom iterables and how are they built?</li>
+    <li>What is the difference between generator functions and generator expressions?</li>
+    <li>Explain coroutine chaining.</li>
+    <li>What is the event loop in asyncio?</li>
+    <li>What is task cancellation in asyncio?</li>
+    <li>How to use asyncio.gather() and asyncio.wait()?</li>
+    <li>What are event-driven architectures in Python?</li>
+    <li>What is Tornado and how does it differ from asyncio?</li>
+    <li>What is Twisted framework?</li>
+    <li>How do you test async code in Python?</li>
+    <li>What is aiohttp and where is it used?</li>
+    <li>How to integrate async/await with Django or Flask?</li>
+    <li>What are Python data models?</li>
+    <li>Explain __len__, __getitem__, __setitem__, __contains__.</li>
+    <li>What is __iter__ and how does iteration work in custom objects?</li>
+    <li>What is the difference between @property and setter/deleter?</li>
+  </ol>
+    
 
 
+</div>
+</li>
 
 
     <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
