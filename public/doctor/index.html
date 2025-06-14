@@ -2422,11 +2422,11 @@ Why use pipe()?
                       <li>Efficient for large files, real-time data (e.g., file I/O, HTTP requests).</li>
                       <li>Types: Readable, Writable, Duplex, Transform</li>
                       <li>Example:
-                        <pre>
-              const fs = require('fs');
-              const stream = fs.createReadStream('file.txt');
-              stream.on('data', chunk => console.log(chunk.toString()));
-                        </pre>
+<pre>
+  const fs = require('fs');
+  const stream = fs.createReadStream('file.txt');
+  stream.on('data', chunk => console.log(chunk.toString()));
+</pre>
                       </li>
                     </ol>
                   </code>
@@ -2438,10 +2438,10 @@ Why use pipe()?
                       <li>Transfers data automatically while managing flow control (backpressure).</li>
                       <li>Common for file copy, compression, HTTP response streaming, etc.</li>
                       <li>Example:
-                        <pre><code>
-              fs.createReadStream('input.txt')
-                .pipe(fs.createWriteStream('output.txt'));
-                        </code></pre>
+<pre>
+  fs.createReadStream('input.txt')
+    .pipe(fs.createWriteStream('output.txt'));
+</pre>
                       </li>
                     </ol>
                   </code>
@@ -2548,162 +2548,162 @@ Why use pipe()?
                     </ol>
                     </code>
               
-              <pre>
-              
-                // NestJS Sharding Example with MySQL (manual routing by user ID)
-              
-                // 1. DatabaseConfigService - handles connections to multiple shards
-                @Injectable()
-                export class DatabaseConfigService {
-                  private shardConnections: Record<string, DataSource> = {};
-                
-                  constructor() {
-                    // Simulate 2 shards for example
-                    this.shardConnections["shard1"] = new DataSource({
-                      type: "mysql",
-                      host: "localhost",
-                      port: 3306,
-                      username: "root",
-                      password: "password",
-                      database: "user_shard_1",
-                      entities: [User],
-                      synchronize: true,
-                    });
-                
-                    this.shardConnections["shard2"] = new DataSource({
-                      type: "mysql",
-                      host: "localhost",
-                      port: 3306,
-                      username: "root",
-                      password: "password",
-                      database: "user_shard_2",
-                      entities: [User],
-                      synchronize: true,
-                    });
-                  }
-                
-                  async initConnections() {
-                    for (const shard of Object.values(this.shardConnections)) {
-                      if (!shard.isInitialized) await shard.initialize();
-                    }
-                  }
-                
-                  getShard(userId: number): DataSource {
-                    return userId % 2 === 0 ? this.shardConnections["shard1"] : this.shardConnections["shard2"];
-                  }
-                
-                  getAllShards(): DataSource[] {
-                    return Object.values(this.shardConnections);
-                  }
-                }
-                
-                // 2. User Entity
-                @Entity()
-                export class User {
-                  @PrimaryGeneratedColumn()
-                  id: number;
-                
-                  @Column()
-                  name: string;
-                
-                  @Column()
-                  email: string;
-                }
-                
-                // 3. UserService - routes DB calls to the correct shard
-                @Injectable()
-                export class UserService {
-                  constructor(private dbService: DatabaseConfigService) {}
-                
-                  async findAll(userId: number): Promise<User[]> {
-                    const shard = this.dbService.getShard(userId);
-                    const userRepo = shard.getRepository(User);
-                    return userRepo.find();
-                  }
-                
-                  async create(userId: number, dto: { name: string; email: string }): Promise<User> {
-                    const shard = this.dbService.getShard(userId);
-                    const userRepo = shard.getRepository(User);
-                    const user = userRepo.create(dto);
-                    return userRepo.save(user);
-                  }
-                
-                  async findByEmail(email: string): Promise<User | null> {
-                    for (const shard of this.dbService.getAllShards()) {
-                      const userRepo = shard.getRepository(User);
-                      const user = await userRepo.findOne({ where: { email } });
-                      if (user) return user;
-                    }
-                    return null;
-                  }
-                
-                  async findById(id: number): Promise<User | null> {
-                    for (const shard of this.dbService.getAllShards()) {
-                      const userRepo = shard.getRepository(User);
-                      const user = await userRepo.findOne({ where: { id } });
-                      if (user) return user;
-                    }
-                    return null;
-                  }
-                
-                  async findByName(name: string): Promise<User[]> {
-                    const results: User[] = [];
-                    for (const shard of this.dbService.getAllShards()) {
-                      const userRepo = shard.getRepository(User);
-                      const users = await userRepo.find({ where: { name } });
-                      results.push(...users);
-                    }
-                    return results;
-                  }
-                }
-                
-                // 4. UserController
-                @Controller('users')
-                export class UserController {
-                  constructor(private userService: UserService) {}
-                
-                  @Get(':userId')
-                  async getUsers(@Param('userId', ParseIntPipe) userId: number) {
-                    return this.userService.findAll(userId);
-                  }
-                
-                  @Post(':userId')
-                  async createUser(@Param('userId', ParseIntPipe) userId: number, @Body() body) {
-                    return this.userService.create(userId, body);
-                  }
-                
-                  @Get('email/:email')
-                  async getUserByEmail(@Param('email') email: string) {
-                    return this.userService.findByEmail(email);
-                  }
-                
-                  @Get('id/:id')
-                  async getUserById(@Param('id', ParseIntPipe) id: number) {
-                    return this.userService.findById(id);
-                  }
-                
-                  @Get('name/:name')
-                  async getUserByName(@Param('name') name: string) {
-                    return this.userService.findByName(name);
-                  }
-                }
-                
-                // 5. AppModule
-                @Module({
-                  imports: [],
-                  controllers: [UserController],
-                  providers: [UserService, DatabaseConfigService],
-                })
-                export class AppModule {
-                  constructor(private dbService: DatabaseConfigService) {}
-                
-                  async onModuleInit() {
-                    await this.dbService.initConnections();
-                  }
-                }
-                
-                
-              </pre>
+<pre>
+
+  // NestJS Sharding Example with MySQL (manual routing by user ID)
+
+  // 1. DatabaseConfigService - handles connections to multiple shards
+  @Injectable()
+  export class DatabaseConfigService {
+    private shardConnections: Record<string, DataSource> = {};
+  
+    constructor() {
+      // Simulate 2 shards for example
+      this.shardConnections["shard1"] = new DataSource({
+        type: "mysql",
+        host: "localhost",
+        port: 3306,
+        username: "root",
+        password: "password",
+        database: "user_shard_1",
+        entities: [User],
+        synchronize: true,
+      });
+  
+      this.shardConnections["shard2"] = new DataSource({
+        type: "mysql",
+        host: "localhost",
+        port: 3306,
+        username: "root",
+        password: "password",
+        database: "user_shard_2",
+        entities: [User],
+        synchronize: true,
+      });
+    }
+  
+    async initConnections() {
+      for (const shard of Object.values(this.shardConnections)) {
+        if (!shard.isInitialized) await shard.initialize();
+      }
+    }
+  
+    getShard(userId: number): DataSource {
+      return userId % 2 === 0 ? this.shardConnections["shard1"] : this.shardConnections["shard2"];
+    }
+  
+    getAllShards(): DataSource[] {
+      return Object.values(this.shardConnections);
+    }
+  }
+  
+  // 2. User Entity
+  @Entity()
+  export class User {
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    name: string;
+  
+    @Column()
+    email: string;
+  }
+  
+  // 3. UserService - routes DB calls to the correct shard
+  @Injectable()
+  export class UserService {
+    constructor(private dbService: DatabaseConfigService) {}
+  
+    async findAll(userId: number): Promise<User[]> {
+      const shard = this.dbService.getShard(userId);
+      const userRepo = shard.getRepository(User);
+      return userRepo.find();
+    }
+  
+    async create(userId: number, dto: { name: string; email: string }): Promise<User> {
+      const shard = this.dbService.getShard(userId);
+      const userRepo = shard.getRepository(User);
+      const user = userRepo.create(dto);
+      return userRepo.save(user);
+    }
+  
+    async findByEmail(email: string): Promise<User | null> {
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const user = await userRepo.findOne({ where: { email } });
+        if (user) return user;
+      }
+      return null;
+    }
+  
+    async findById(id: number): Promise<User | null> {
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const user = await userRepo.findOne({ where: { id } });
+        if (user) return user;
+      }
+      return null;
+    }
+  
+    async findByName(name: string): Promise<User[]> {
+      const results: User[] = [];
+      for (const shard of this.dbService.getAllShards()) {
+        const userRepo = shard.getRepository(User);
+        const users = await userRepo.find({ where: { name } });
+        results.push(...users);
+      }
+      return results;
+    }
+  }
+  
+  // 4. UserController
+  @Controller('users')
+  export class UserController {
+    constructor(private userService: UserService) {}
+  
+    @Get(':userId')
+    async getUsers(@Param('userId', ParseIntPipe) userId: number) {
+      return this.userService.findAll(userId);
+    }
+  
+    @Post(':userId')
+    async createUser(@Param('userId', ParseIntPipe) userId: number, @Body() body) {
+      return this.userService.create(userId, body);
+    }
+  
+    @Get('email/:email')
+    async getUserByEmail(@Param('email') email: string) {
+      return this.userService.findByEmail(email);
+    }
+  
+    @Get('id/:id')
+    async getUserById(@Param('id', ParseIntPipe) id: number) {
+      return this.userService.findById(id);
+    }
+  
+    @Get('name/:name')
+    async getUserByName(@Param('name') name: string) {
+      return this.userService.findByName(name);
+    }
+  }
+  
+  // 5. AppModule
+  @Module({
+    imports: [],
+    controllers: [UserController],
+    providers: [UserService, DatabaseConfigService],
+  })
+  export class AppModule {
+    constructor(private dbService: DatabaseConfigService) {}
+  
+    async onModuleInit() {
+      await this.dbService.initConnections();
+    }
+  }
+  
+  
+</pre>
               
               
               
@@ -17140,6 +17140,300 @@ dispatch(async (dispatch) =&gt; {
       <li>Redux <strong>cannot handle async logic</strong> on its own.</li>
       <li>Using <strong>Redux Thunk or other middleware is essential</strong> if you want to perform side effects like API calls in Redux actions.</li>
     </ul>
+
+  </div>
+</li>
+<li data-id="tick-vs-immediate" class="zyellow">
+  <span class="faq-question">What is the difference between <x>process.nextTick()</x> and <x>setImmediate()</x> in Node.js?</span>
+  <div class="answer">
+
+    <h4>🔍 Summary:</h4>
+    <ul>
+      <li><code>process.nextTick()</code> queues a callback to be invoked <strong>immediately after the current operation</strong>, before any I/O or timers.</li>
+      <li><code>setImmediate()</code> queues a callback to be run <strong>on the next iteration of the event loop</strong>, after I/O events.</li>
+    </ul>
+
+    <h4>📌 Execution Order Example:</h4>
+    <pre><code>
+console.log('Start');
+
+process.nextTick(() =&gt; {
+  console.log('nextTick callback');
+});
+
+setImmediate(() =&gt; {
+  console.log('setImmediate callback');
+});
+
+console.log('End');
+    </code></pre>
+
+    <h4>🧾 Output:</h4>
+    <pre><code>
+Start
+End
+nextTick callback
+setImmediate callback
+    </code></pre>
+
+    <h4>📘 Explanation:</h4>
+    <ul>
+      <li><code>process.nextTick()</code> callbacks are executed <strong>after the current function</strong> but <strong>before the event loop continues</strong>.</li>
+      <li><code>setImmediate()</code> callbacks are scheduled to run <strong>on the next tick of the event loop</strong>, after I/O events like timers or network requests.</li>
+    </ul>
+
+    <h4>⛔ Warning:</h4>
+    <p>Overusing <code>process.nextTick()</code> (e.g., recursively) can block the event loop and cause starvation of I/O operations.</p>
+
+    <h4>✅ Use When:</h4>
+    <ul>
+      <li>Use <code>process.nextTick()</code> to <strong>delay execution</strong> until after the current function but before I/O.</li>
+      <li>Use <code>setImmediate()</code> when you want to execute code <strong>after I/O events</strong> or to yield the event loop.</li>
+    </ul>
+
+  </div>
+</li>
+<li data-id="aws-nodejs-services" class="zyellow">
+  <span class="faq-question">Which AWS services are most important for a Node.js developer?</span>
+  <div class="answer">
+
+    <h4>🌐 1. AWS Lambda (Serverless Functions)</h4>
+    <ul>
+      <li>Run backend code without provisioning servers.</li>
+      <li>Supports Node.js natively.</li>
+      <li>Great for APIs, cron jobs, file processing.</li>
+    </ul>
+
+    <h4>📡 2. Amazon API Gateway</h4>
+    <ul>
+      <li>Create and manage RESTful or WebSocket APIs.</li>
+      <li>Integrates with AWS Lambda easily.</li>
+      <li>Supports custom domain names, throttling, auth.</li>
+    </ul>
+
+    <h4>🗃️ 3. Amazon DynamoDB</h4>
+    <ul>
+      <li>Serverless NoSQL key-value and document DB.</li>
+      <li>Perfect for scalable apps and microservices.</li>
+      <li>Node.js SDK for high-throughput operations.</li>
+    </ul>
+
+    <h4>📂 4. Amazon S3 (Simple Storage Service)</h4>
+    <ul>
+      <li>Store and retrieve files (images, backups, logs).</li>
+      <li>Great for file uploads, static hosting, CDN with CloudFront.</li>
+      <li>Use Node.js SDK to upload/download files.</li>
+    </ul>
+
+    <h4>⚙️ 5. AWS CloudWatch</h4>
+    <ul>
+      <li>Monitor logs, metrics, alarms.</li>
+      <li>Useful for Lambda logs, performance metrics.</li>
+      <li>Node.js apps can push custom metrics.</li>
+    </ul>
+
+    <h4>🚀 6. AWS Elastic Beanstalk</h4>
+    <ul>
+      <li>Deploy full Node.js web apps (like Express.js) with auto-scaling.</li>
+      <li>Manages EC2, Load Balancer, RDS under the hood.</li>
+    </ul>
+
+    <h4>🧱 7. Amazon RDS (Relational Database Service)</h4>
+    <ul>
+      <li>Managed SQL databases (MySQL, PostgreSQL, etc.).</li>
+      <li>Connect from Node.js using Sequelize, Prisma, or pg/mysql2.</li>
+    </ul>
+
+    <h4>🛡️ 8. AWS IAM (Identity and Access Management)</h4>
+    <ul>
+      <li>Manage access control for all AWS services.</li>
+      <li>Essential when using SDKs to securely access services.</li>
+    </ul>
+
+    <h4>📥 9. Amazon SNS & SQS</h4>
+    <ul>
+      <li><strong>SNS:</strong> Pub/Sub messaging system for notifications.</li>
+      <li><strong>SQS:</strong> Queue system for background jobs with Node.js consumers.</li>
+    </ul>
+
+    <h4>🧪 10. AWS CDK or CloudFormation</h4>
+    <ul>
+      <li>Infrastructure as Code for deploying Node.js backends.</li>
+      <li>CDK supports TypeScript and integrates well with app logic.</li>
+    </ul>
+
+    <h4>🧠 Bonus: Cognito (Authentication)</h4>
+    <ul>
+      <li>Handle sign-up, sign-in, and user pool management.</li>
+      <li>Integrates with JWT-based auth flows in Node.js APIs.</li>
+    </ul>
+
+    <h4>📌 Tip:</h4>
+    <p>Use the <code>aws-sdk</code> or <code>@aws-sdk/client-&lt;service&gt;</code> libraries in Node.js for service integrations.</p>
+
+  </div>
+</li>
+<li data-id="eb-nodejs-deploy" class="zyellow">
+  <span class="faq-question">How to deploy Node.js + Express app on AWS Elastic Beanstalk?</span>
+  <div class="answer">
+
+    <h4>🚀 Step-by-Step Deployment Guide:</h4>
+
+    <h5>🧱 Step 1: Create an Express App</h5>
+    <pre><code>
+npx express-generator my-app
+cd my-app
+npm install
+    </code></pre>
+
+    <h5>🧪 Step 2: Test Locally</h5>
+    <pre><code>
+npm start
+# Visit http://localhost:3000 to confirm
+    </code></pre>
+
+    <h5>🛠 Step 3: Modify <code>package.json</code></h5>
+    <ul>
+      <li>Add a start script if not already present:</li>
+    </ul>
+    <pre><code>
+"scripts": {
+  "start": "node ./bin/www"
+}
+    </code></pre>
+
+    <h5>📁 Step 4: Add <code>.ebextensions</code> (optional)</h5>
+    <p>Create a folder named <code>.ebextensions</code> and optionally configure things like Node version:</p>
+    <pre><code>
+# .ebextensions/node.config
+option_settings:
+  aws:elasticbeanstalk:container:nodejs:
+    NodeVersion: 18
+    </code></pre>
+
+    <h5>☁️ Step 5: Install EB CLI</h5>
+    <pre><code>
+pip install awsebcli --upgrade
+# or with Homebrew (Mac)
+brew install awsebcli
+    </code></pre>
+
+    <h5>🔐 Step 6: Configure AWS CLI (if not already)</h5>
+    <pre><code>
+aws configure
+# Provide your AWS access key, secret, region, and format
+    </code></pre>
+
+    <h5>📦 Step 7: Initialize Elastic Beanstalk</h5>
+    <pre><code>
+eb init
+# Choose your region
+# Select "Node.js" as the platform
+# Create a new keypair or use an existing one
+    </code></pre>
+
+    <h5>🚀 Step 8: Create Environment & Deploy</h5>
+    <pre><code>
+eb create my-express-env
+# This takes a few minutes
+
+eb open
+# Opens the deployed app in browser
+    </code></pre>
+
+    <h5>📡 Step 9: Deploy Updates</h5>
+    <pre><code>
+# After you make changes
+eb deploy
+    </code></pre>
+
+    <h4>✅ Summary:</h4>
+    <ul>
+      <li>Elastic Beanstalk automates EC2, Load Balancer, Auto-scaling setup.</li>
+      <li>Use <code>eb deploy</code> to push changes anytime.</li>
+      <li>Monitor logs via <code>eb logs</code>.</li>
+    </ul>
+
+    <h4>🔍 Troubleshooting:</h4>
+    <ul>
+      <li>Check logs: <code>eb logs</code></li>
+      <li>Health check failing? Check if port is 8081 instead of 3000</li>
+    </ul>
+
+  </div>
+</li>
+
+<li data-id="mongo-shard-vs-replica" class="zyellow">
+  <span class="faq-question">What is the difference between Sharding and Replica Set in MongoDB?</span>
+  <div class="answer">
+
+    <h4>🔁 Replica Set:</h4>
+    <ul>
+      <li>A <strong>replica set</strong> is a group of MongoDB servers that maintain the same data set.</li>
+      <li>It provides <strong>high availability</strong> and <strong>data redundancy</strong>.</li>
+      <li>Only one node is <strong>primary</strong> (read/write), others are <strong>secondary</strong> (read-only by default).</li>
+      <li>If the primary fails, an automatic election promotes a secondary to primary.</li>
+    </ul>
+    <pre><code>
+Primary   → Accepts writes
+│
+├── Secondary 1 → Replica
+└── Secondary 2 → Replica
+    </code></pre>
+
+    <h4>📦 Sharding:</h4>
+    <ul>
+      <li><strong>Sharding</strong> is the process of splitting data across multiple machines (called shards).</li>
+      <li>It provides <strong>horizontal scalability</strong> to handle large data sets and high throughput.</li>
+      <li>Each shard contains a subset of the data.</li>
+      <li>Sharded clusters include a <strong>config server</strong> and <strong>mongos router</strong>.</li>
+    </ul>
+    <pre><code>
+Client → Mongos → Shard 1 (part of data)
+               → Shard 2 (part of data)
+               → Shard 3 (part of data)
+    </code></pre>
+
+    <h4>🆚 Key Differences:</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Replica Set</th>
+          <th>Sharding</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Purpose</td>
+          <td>High availability</td>
+          <td>Scalability for large datasets</td>
+        </tr>
+        <tr>
+          <td>Data distribution</td>
+          <td>Same data on all nodes</td>
+          <td>Data is split across shards</td>
+        </tr>
+        <tr>
+          <td>Read/Write</td>
+          <td>Primary handles write, secondary for read (optionally)</td>
+          <td>Depends on shard key; multiple nodes handle writes</td>
+        </tr>
+        <tr>
+          <td>Failure Handling</td>
+          <td>Automatic failover via election</td>
+          <td>If a shard fails, only its data is unavailable</td>
+        </tr>
+        <tr>
+          <td>Example Use</td>
+          <td>Uptime & reliability</td>
+          <td>Big data, large user base</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>🚀 Best Practice:</h4>
+    <p>MongoDB often combines both: each <strong>shard</strong> is a <strong>replica set</strong> to provide both scalability and availability.</p>
 
   </div>
 </li>
