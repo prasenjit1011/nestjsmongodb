@@ -31,3 +31,14 @@ $(document).ready(function () {
     answer.slideToggle();
     });
     });
+
+$('#addCss').on('click', function() {
+if ($('#dynamic-css').length === 0) {
+    $('head').append('<link id="dynamic-css" rel="stylesheet" href="stylesdark.css" type="text/css" />');
+}
+});
+
+$('#removeCss').on('click', function() {
+$('#dynamic-css').remove();
+});
+    

@@ -9,6 +9,7 @@
     "sls:package": "serverless package",
     "sls:remove": "serverless remove",
     "build": "nest build",
+    "dev": "ts-node src/main.local.ts",
     "start:local": "ts-node src/main.local.ts",
     "deploy": "serverless deploy",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
