@@ -55,10 +55,16 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
         <td></td>
       </tr>
       <tr>
-        <td>Redis</td>
+        <td><a href="#redis">Redis / RabitMQ</a></td>
         <td>MongoDB</td>
         <td>PostGre SQL</td>
         <td><a href="#DynamoDB-question-list">DynamoDB</a></td>
+      </tr>
+      <tr>
+        <td><a href="#zod">Zod</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
         <td colspan="4">
@@ -4194,31 +4200,49 @@ API Gateway simplifies building scalable, secure, and reliable APIs with minimal
 
 
     
-<li data-id="q_redux_formatted" class="yellow">
+<li data-id="q_redux_formatted" class="yellow"  id="zod">
   <span class="faq-question">Zod with NodeJS</span>
   <div class="answer">
-    <pre>
-&lt;!-- Node.js backend validation with Zod and Express.js --&gt;
-&lt;code&gt;
+<pre>
+  const stringSchema  = z.string().min(5).max(10).parse("hello")
+  const rangedNumber  = z.number().min(10).max(100).parse(50).int()
+  const boolSchema    = z.boolean().parse(true); 
+  const dateSchema    = z.date().parse(new Date());
+  const arraySchema   = z.array(z.string()).parse(["a", "b", "c"]);
+  const colorEnum     = z.enum(["Red", "Green", "Blue"]).parse("Red")
+  
+  objSchema.parse({ name: "John", age: 30 });
+  const objSchema     = z.object({
+                            name: z.string(), 
+                            age: z.number().int().positive(),
+                          });
+  
+  customSchema.parse("Apple");
+  const customSchema = z.string()
+                        .refine(val => val.startsWith("A"),{
+                          message: "Must start with 'A'",
+                        });
+  
+  const tupleSchema = z.tuple([z.string(), z.number()]);
+  tupleSchema.parse(["abc", 123]);
+</pre>
+<hr />
+<pre>
 const express = require('express');
-const { z } = require('zod');
-
-const app = express();
+const { z }   = require('zod');
+const app     = express();
 app.use(express.json());
 
-// Define Zod schema for Contact Us data
 const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  message: z.string().min(5, "Message must be at least 5 characters"),
+  name:     z.string().min(2, "Name must be at least 2 characters"),
+  email:    z.string().email( "Invalid email address"),
+  message:  z.string().min(5, "Message must be at least 5 characters"),
 });
 
-// POST /contact route with Zod validation
 app.post('/contact', (req, res) =&gt; {
-  const parseResult = contactSchema.safeParse(req.body);
+  <b class="green">const parseResult = contactSchema.safeParse(req.body);</b>
 
   if (!parseResult.success) {
-    // Validation failed
     return res.status(400).json({
       success: false,
       errors: parseResult.error.errors.map(err =&gt; ({
@@ -4242,8 +4266,8 @@ const PORT = 3000;
 app.listen(PORT, () =&gt; {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-&lt;/code&gt;
-    </pre>
+
+</pre>
   </div>
 </li>
 
@@ -4388,7 +4412,7 @@ recordSchema.parse({ a: 1, b: 2 });   // ✅ valid
 });
 
 customSchema.parse("Apple");           // ✅ valid
-// customSchema.parse("Banana");       // ❌ validation error
+// customSchema.parse("dummy");       // ❌ validation error
 </pre>
 </div>
 </li>
@@ -6555,7 +6579,7 @@ DB Indexing
 </div></li>
 
 
-<li data-id="redis-diff"><span class="faq-question green">
+<li data-id="redis-diff" id="redis"><span class="faq-question green">
   📊 Redis vs RabbitMQ vs Kafka vs AWS SNS
   </span><div class="answer">
     

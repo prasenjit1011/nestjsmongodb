@@ -164,7 +164,9 @@ hr {
   border: none;
   height: 3px;
   background-color: #007bff;
-  margin: 1.25rem 0;
+  margin-bottom: 0px;
+  /*margin: 1.25rem 0;*/
+
 }
 
 .yellow {

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('#addCss').click();
     // Load checkbox states from cookies
     $('.faq li').each(function () {
     const id = $(this).data('id');
