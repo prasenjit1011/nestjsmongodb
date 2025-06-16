@@ -1923,15 +1923,34 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
     
     <li data-id="x11a"><span class="faq-question">
     React.memo?
-    </span><div class="answer">
-    React.memo is a higher-order component (HOC) in React that memoizes a functional component.
-    It prevents unnecessary re-renders by caching the component’s output unless its props change.
-    <code>
-      const MyComponent = React.memo((props) => {
-        // ...
-      });
-      
-    </code>
+    </span>
+    <div class="answer">
+  React.memo is a higher-order component (HOC) in React that memoizes a functional component.<br />
+  It prevents unnecessary re-renders by caching the component’s output unless its props change.
+
+<pre>
+  const MyComponent = React.memo((props) => {
+    // ...
+  });
+</pre>
+<p><strong>React.memo</strong> can cause unnecessary complexity, stale UI bugs due to shallow prop comparison, and increased memory usage. <br />
+  It adds overhead if the component is simple or props don’t change often. <br /><br />
+  Overusing it without profiling may degrade performance rather than improve it, especially in large or dynamic component trees.</p>
+<br />
+
+<ul>
+  <li>Extra work on every render due to shallow comparison</li>
+  <li>False sense of performance improvement</li>
+  <li>Stale or mutated props causing bugs</li>
+  <li>Over-optimizing the wrong layer</li>
+  <li>Blocks intentional re-renders (e.g., animations)</li>
+  <li>Increased memory overhead</li>
+  <li>Hurts concurrent rendering in React 18</li>
+  <li>Makes debugging more difficult</li>
+</ul>
+
+
+
     </div></li>
     
     <li data-id="x11"><span class="faq-question">
