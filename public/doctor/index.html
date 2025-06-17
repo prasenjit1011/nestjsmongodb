@@ -1747,21 +1747,9 @@ When would you use componentDidUpdate()?</li>
 What is the Context API and how does it work?</li>
 <li>
 How does code-splitting work in React?</li>
-<li>
-
-
-
-
-What is rehydration and how does React handle it?</li>
-<li>
-What are the trade-offs between using Redux and React Context?</li>
-<li>
-------------------------------------------------------------------------------</li>
-<li>
-
-
-
-What is React Fiber and how does it improve React performance?</li>
+<li>What is rehydration and how does React handle it?</li>
+<li>What are the trade-offs between using Redux and React Context?</li>
+<li>What is React Fiber and how does it improve React performance?</li>
 <li>
 How does React handle concurrent rendering internally?</li>
 <li>
@@ -2265,8 +2253,107 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
     
     </div></li>
     
-    
-    
+    <li data-id="q_useCallback" class="yellow"><span class="faq-question">
+      ReactJS UI Developer Interview Questions (10+ Years Experience)
+    </span><div class="answer">
+  
+
+  <h2>🧠 React Core Concepts (Advanced)</h2>
+  <ol>
+    <li>Explain the concept of <strong>React Fiber architecture</strong>. How does it differ from the previous reconciliation algorithm?</li>
+    <li>What are the phases of the <strong>React rendering lifecycle</strong> in class and functional components?</li>
+    <li>Explain the purpose of <strong>keys</strong> in React. What are the risks of using indexes as keys?</li>
+    <li>How does <strong>React batch updates</strong> and how does it impact performance?</li>
+    <li>Describe <strong>controlled vs uncontrolled components</strong> with examples.</li>
+    <li>How does <strong>reconciliation</strong> work in React?</li>
+    <li>What is <strong>StrictMode</strong> in React and how does it help in development?</li>
+    <li>How do <strong>error boundaries</strong> work? Can you implement a reusable one?</li>
+  </ol>
+
+  <h2>⚙️ Hooks & Custom Hooks</h2>
+  <ol>
+    <li>Difference between <code>useEffect</code>, <code>useLayoutEffect</code>, and <code>useInsertionEffect</code>.</li>
+    <li>Explain how <strong>stale closures</strong> can affect <code>useEffect</code> or <code>useCallback</code>.</li>
+    <li>What are the <strong>rules of hooks</strong>? How does React enforce them?</li>
+    <li>Build a <strong>custom hook for data fetching</strong> with loading and error state.</li>
+    <li>What is <code>useRef</code> used for? Give examples of DOM access and persistent value storage.</li>
+    <li>Compare <code>useMemo</code> and <code>useCallback</code>. When should each be used?</li>
+  </ol>
+
+  <h2>📦 State Management</h2>
+  <ol>
+    <li>When to choose <strong>Redux</strong> over <strong>Context API</strong>?</li>
+    <li>How do you structure a <strong>Redux Toolkit</strong> application?</li>
+    <li>What are the performance issues with <strong>Context API</strong> and how to resolve them?</li>
+    <li>How to manage <strong>cross-component state sharing</strong> using hooks and context?</li>
+    <li>Compare <strong>Redux</strong> with <strong>Recoil</strong>, <strong>Zustand</strong>, and <strong>Jotai</strong>.</li>
+  </ol>
+
+  <h2>📐 Architecture & Design Patterns</h2>
+  <ol>
+    <li>How do you structure a large-scale React app for maintainability and scalability?</li>
+    <li>Explain the <strong>compound component</strong> pattern in React.</li>
+    <li>Describe the <strong>container/presenter</strong> (smart/dumb) component pattern.</li>
+    <li>What is the <strong>render props</strong> pattern? Why is it less used today?</li>
+    <li>How do you implement <strong>feature flags</strong> in a React application?</li>
+    <li>Explain <strong>code splitting</strong> and <strong>lazy loading</strong> in React.</li>
+  </ol>
+
+  <h2>🎨 UI/UX & Performance Optimization</h2>
+  <ol>
+    <li>How do you improve React app performance?</li>
+    <li>What are common <strong>anti-patterns</strong> in React UI development?</li>
+    <li>How would you handle <strong>infinite scrolling</strong> or <strong>virtualized lists</strong> in React?</li>
+    <li>How do you optimize for <strong>First Contentful Paint (FCP)</strong> in SPAs?</li>
+    <li>Discuss <strong>debounce vs throttle</strong> in input optimization.</li>
+  </ol>
+
+  <h2>🧪 Testing & CI/CD</h2>
+  <ol>
+    <li>How do you write tests for hooks using <strong>React Testing Library</strong>?</li>
+    <li>What are strategies to test components with asynchronous behavior?</li>
+    <li>How do you perform <strong>snapshot testing</strong>? What are its limitations?</li>
+    <li>Difference between <strong>unit, integration, and E2E</strong> testing in React context?</li>
+    <li>How do you set up CI for React testing with GitHub Actions or GitLab CI?</li>
+  </ol>
+
+  <h2>🔌 API Integration & Side Effects</h2>
+  <ol>
+    <li>How do you manage side effects in React applications?</li>
+    <li>How do you cancel an API request in a component?</li>
+    <li>What strategies do you use for retrying failed requests?</li>
+    <li>How do you build <strong>loading indicators, skeleton loaders, and optimistic UIs</strong>?</li>
+    <li>How do you implement a <strong>debounced search input</strong> with API calls?</li>
+  </ol>
+
+  <h2>🌐 Accessibility & Internationalization</h2>
+  <ol>
+    <li>How do you ensure accessibility (a11y) in your components?</li>
+    <li>How do you implement RTL (right-to-left) support?</li>
+    <li>How do you implement <strong>i18n (internationalization)</strong> in React?</li>
+  </ol>
+
+  <h2>🛠 Tooling, Libraries & Ecosystem</h2>
+  <ol>
+    <li>Why choose <strong>Vite</strong> or <strong>Turbopack</strong> over CRA?</li>
+    <li>How do you configure <strong>ESLint, Prettier, and Husky</strong>?</li>
+    <li>How do you handle responsive design and browser compatibility?</li>
+    <li>How do you implement <strong>theming and dark/light modes</strong>?</li>
+    <li>Which UI libraries (e.g. MUI, Tailwind) do you prefer and why?</li>
+  </ol>
+
+  <h2>💼 Behavioral & System Design (Frontend)</h2>
+  <ol>
+    <li>How do you prioritize UI tasks under tight deadlines?</li>
+    <li>Describe a time when you solved a critical performance issue.</li>
+    <li>How would you design a <strong>real-time dashboard</strong> in React?</li>
+    <li>How do you structure a <strong>multi-step form wizard</strong>?</li>
+    <li>How would you handle <strong>multi-theme, multi-locale, PWA-ready</strong> UI requirements?</li>
+  </ol>
+
+
+</div></li> 
+
     <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
     
     
