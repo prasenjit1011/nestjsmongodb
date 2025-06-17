@@ -2093,61 +2093,58 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
     <li data-id="q13"><span class="faq-question green">
       useReducer Example.
       </span><div class="answer">
-    
-      <h1>🔧 </h1>
-    
-      <h2>🧪 Counter Component</h2>
-    
-      <pre><code>import React, { useReducer } from 'react';
-    
-    const initialState = { count: 0 };
-    
-    function <strong class="green">myreducer</strong>(state, action) {
-      switch (action.type) {
-        case 'increment':
-          return { count: state.count + 1 };
-        case 'decrement':
-          return { count: state.count - 1 };
-        case 'reset':
-          return initialState;
-        default:
-          throw new Error('Unknown action type');
-      }
+<pre>
+  🔧 🧪 Counter Component
+  import React, { useReducer } from 'react';
+  const initialState = { count: 0 };
+  
+  function <strong class="green">myreducer</strong>(state, action) {
+    switch (action.type) {
+      case 'increment':
+        return { count: state.count + 1 };
+      case 'decrement':
+        return { count: state.count - 1 };
+      case 'reset':
+        return initialState;
+      default:
+        throw new Error('Unknown action type');
     }
+  }
+  
+  function Counter() {
+    const [state, dispatch] = useReducer(<strong class="green">myreducer, initialState</strong>);
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Count: {state.count}&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch({ type: 'decrement' })}&gt;-&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch({ type: 'reset' })}&gt;Reset&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch({ type: 'increment' })}&gt;+&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  export default Counter;
+</pre>    
+      
+<pre>
+  🧠 Explanation
+  1. useReducer(reducer, initialState): Initializes state and gives you a dispatch method.
+  2. reducer: A pure function to calculate new state based on the action type.
+  3. dispatch({ type: 'increment' }): Triggers a state update through the reducer.
+
+  ✅ When to Use useReducer
+  1. For complex state logic (e.g., multiple related values)
+  2. When state changes are triggered by many different actions
+  3. When the same logic must be reused across components
+</pre>    
     
-    function Counter() {
-      const [state, dispatch] = useReducer(<strong class="green">myreducer, initialState</strong>);
-    
-      return (
-        &lt;div&gt;
-          &lt;h2&gt;Count: {state.count}&lt;/h2&gt;
-          &lt;button onClick={() =&gt; dispatch({ type: 'decrement' })}&gt;-&lt;/button&gt;
-          &lt;button onClick={() =&gt; dispatch({ type: 'reset' })}&gt;Reset&lt;/button&gt;
-          &lt;button onClick={() =&gt; dispatch({ type: 'increment' })}&gt;+&lt;/button&gt;
-        &lt;/div&gt;
-      );
-    }
-    
-    export default Counter;</code></pre>
-    
-      <h2>🧠 Explanation</h2>
-      <ul>
-        <li><strong>useReducer(reducer, initialState)</strong>: Initializes state and gives you a dispatch method.</li>
-        <li><strong>reducer</strong>: A pure function to calculate new state based on the action type.</li>
-        <li><strong>dispatch({ type: 'increment' })</strong>: Triggers a state update through the reducer.</li>
-      </ul>
-    
-      <h2>✅ When to Use useReducer</h2>
-      <ul>
-        <li>For complex state logic (e.g., multiple related values)</li>
-        <li>When state changes are triggered by many different actions</li>
-        <li>When the same logic must be reused across components</li>
-      </ul>
+
     
     
     
     
-    </div></li>
+</div></li>
     
     
     
@@ -2272,12 +2269,12 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
 
   <h2>⚙️ Hooks & Custom Hooks</h2>
   <ol>
-    <li>Difference between <code>useEffect</code>, <code>useLayoutEffect</code>, and <code>useInsertionEffect</code>.</li>
-    <li>Explain how <strong>stale closures</strong> can affect <code>useEffect</code> or <code>useCallback</code>.</li>
+    <li>Difference between <x>useEffect</x>, <x>useLayoutEffect</x>, and <x>useInsertionEffect</x>.</li>
+    <li>Explain how <strong>stale closures</strong> can affect <x>useEffect</x> or <x>useCallback</x>.</li>
     <li>What are the <strong>rules of hooks</strong>? How does React enforce them?</li>
     <li>Build a <strong>custom hook for data fetching</strong> with loading and error state.</li>
-    <li>What is <code>useRef</code> used for? Give examples of DOM access and persistent value storage.</li>
-    <li>Compare <code>useMemo</code> and <code>useCallback</code>. When should each be used?</li>
+    <li>What is <x>useRef</x> used for? Give examples of DOM access and persistent value storage.</li>
+    <li>Compare <x>useMemo</x> and <x>useCallback</x>. When should each be used?</li>
   </ol>
 
   <h2>📦 State Management</h2>
@@ -2354,15 +2351,47 @@ In a micro-frontend React architecture, how do you isolate global styles and avo
 
 </div></li> 
 
+
+<li data-id="q_useCallback"><span class="faq-question">
+  When to Choose Redux Over Context API?
+  </span><div class="answer">
+
+
+<ul>
+  <li><strong>Global State Complexity:</strong> If your application has <em>complex state logic</em> involving deeply nested structures, multiple reducers, or cross-slice interactions, Redux is better suited with its middleware and action-based architecture.</li>
+
+  <li><strong>Predictable State Management:</strong> Redux enforces a <em>strict unidirectional data flow</em> and immutability, making debugging and state tracking easier, especially using tools like <x>Redux DevTools</x>.</li>
+
+  <li><strong>Performance Optimization:</strong> Context API can cause <em>unnecessary re-renders</em> when the provider value changes. Redux, with its <x>connect</x> HOC or <x>useSelector</x> hook, allows fine-grained component subscription, minimizing re-renders.</li>
+
+  <li><strong>Middleware Support:</strong> Redux offers <em>middleware (like Redux Thunk, Redux Saga)</em> for handling async logic, logging, caching, and side effects in a structured and scalable way.</li>
+
+  <li><strong>Code Scalability:</strong> For large applications with teams working on different modules, Redux's organized file structure (actions, reducers, selectors) makes the state management <em>easier to scale and maintain</em>.</li>
+
+  <li><strong>Third-party Ecosystem:</strong> Redux has a rich ecosystem of developer tools, middleware, and community support, which can save development time and improve reliability.</li>
+
+  <li><strong>Time Travel Debugging:</strong> Redux supports advanced debugging features such as <em>time-travel debugging</em> which is not possible with Context API alone.</li>
+</ul>
+
+<h3>Use Context API When:</h3>
+<ul>
+  <li>Your state is <strong>not deeply nested</strong> or too complex.</li>
+  <li>You are managing <strong>UI-level state</strong> like themes, user preferences, or modals.</li>
+  <li>You want to <strong>avoid boilerplate</strong> and keep the project lightweight.</li>
+</ul>
+</div></li>
+
+
+
     <li data-id="q3"><span class="faq-question">---------------------------------------</span><br /><span class="faq-question">---------------------------------------</span></li>  
     
     
     <li data-id="q_useCallback"><span class="faq-question">
     useCallback() help performance?
     </span><div class="answer">
-    <code>useCallback()</code> is a React hook that memoizes a function, preventing it from being re-created on every render unless its dependencies change. This improves performance, especially when passing callback functions to memoized child components, because it avoids unnecessary re-renders.
+    <x>useCallback()</x> is a React hook that memoizes a function, preventing it from being re-created on every render unless its dependencies change. This improves performance, especially when passing callback functions to memoized child components, because it avoids unnecessary re-renders.
     <br />
-    <b>Use Case:</b> When a child component receives a function as a prop and is wrapped with <code>React.memo</code>, using <code>useCallback</code> ensures that the function reference remains stable.
+    <b>Use Case:</b> When a child component receives a function as a prop and is wrapped with <x>React.memo</x>, using <x>useCallback</x> ensures that the function reference remains stable.
     
     <b>Example:</b>
     <pre><code>
