@@ -1619,7 +1619,279 @@ export default fetchDataEpic;
 
 </div></li>
 
-<li data-id="q_redux_formatted" id="redux_qlist" class="yellow"><span class="faq-question">
+  
+<li data-id="q_redux_example"  id="redux_qlist" class="yellow"><span class="faq-question">
+Redux Example ***
+</span><div class="answer">
+<pre>
+  // store.js
+  import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+  const counterSlice = createSlice({
+    name: 'mycounter',
+    initialState: 0,
+    reducers: {
+      increment: (state) => state + 1,
+    },
+  });
+
+  const bankerSlice = createSlice({
+    name: 'mybanker',
+    initialState: { balance: 1000 },
+    reducers: {
+      deposit:  (state, action) =>   { state.balance += action.payload;  },
+      withdraw: (state, action) =>  { state.balance -= action.payload;  },
+    },
+  });
+
+  const store = configureStore({
+    reducer: {
+      mycounter: counterSlice.reducer,
+      mybanker: bankerSlice.reducer,
+    },
+  });
+
+  export const { increment } = counterSlice.actions;
+  export const { deposit, withdraw } = bankerSlice.actions;
+  export default store;
+  <hr />
+  import { Provider } from 'react-redux';
+  import store from './store';
+  
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    &lt;Provider store={store}>
+      &lt;App />
+    &lt;/Provider>
+  )
+  <hr />
+  import { useSelector, useDispatch } from 'react-redux';
+  import { increment } from './store';
+  
+  
+  const App = () => {  
+    const txt       = `App.js : Vite + React`;
+    const count     = useSelector((state) => state.mycounter);
+    const dispatch  = useDispatch();
+    return (
+      &lt;>
+        &lt;button onClick={() => dispatch(increment())}>Increment&lt;/button>
+        &lt;h3>{txt} : {count}</h3>
+        &lt;CompA />
+        &lt;CompB />
+      &lt;/>
+    )
+  }
+</pre>
+
+</div></li>
+  
+<li data-id="q_redux_example"  id="redux_qlist" class="yellow"><span class="faq-question">
+  Redux Example : 01
+  </span><div class="answer">
+  
+<pre>
+<b class="green">
+  Action, Reducer, Store &nbsp; &nbsp; 
+</b>
+1. npm install redux react-redux
+
+2. actions.js : 
+    export const increment = () =&gt; ({ type: 'INCREMENT' });
+
+3. reducer.js : 
+    const counterReducer = (state = 0, action) =&gt; {
+      switch (action.type) {
+        case 'INCREMENT':
+          return state + 1;
+        default:
+          return state;
+      }
+    };
+    export default counterReducer;
+
+4. store.js
+    import { createStore } from 'redux';
+    import counterReducer from './reducer';
+    const store = createStore(counterReducer);
+    export default store;
+
+5. index.js
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Provider } from 'react-redux';
+
+    import App from './App';
+    import store from './store';
+
+    ReactDOM.render(
+      &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+      &lt;/Provider&gt;,
+      document.getElementById('root')
+    );
+
+6. App.js
+    import React from 'react';
+    import { useSelector, useDispatch } from 'react-redux';
+    import { increment } from './actions';
+
+    function App() {
+      const count = useSelector(state =&gt; state);
+      const dispatch = useDispatch();
+
+      return (
+        &lt;div&gt;
+          &lt;h1&gt;Count: {count}&lt;/h1&gt;
+          &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
+        &lt;/div&gt;
+      );
+    }
+    export default App;
+</pre>
+  
+  
+  </div></li>
+  <li data-id="q_redux_formatted" class="yellow"><span class="faq-question">Reduxjs/Toolkit React-Redux
+  </span><div class="answer">
+  <ul>
+    <li data-id="redux-toolkit-1" class="zyellow">
+      <span class="faq-question">1. Install Required Packages</span>
+      <div class="answer">
+        <pre>npm install @reduxjs/toolkit react-redux</pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-2" class="zyellow">
+      <span class="faq-question">2. Folder Structure</span>
+      <div class="answer">
+        <pre>
+  src/
+  ├── app/
+  │   └── store.js
+  ├── features/
+  │   └── counter/
+  │       ├── counterSlice.js
+  │       └── Counter.js
+  ├── App.js
+  └── index.js
+        </pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-3" class="zyellow">
+      <span class="faq-question">3. Create the Store (store.js)</span>
+      <div class="answer">
+        <pre>
+  import { configureStore } from '@reduxjs/toolkit';
+  import counterReducer from '../features/counter/counterSlice';
+  
+  export const store = configureStore({
+    reducer: {
+      counter: counterReducer,
+    },
+  });
+        </pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-4" class="zyellow">
+      <span class="faq-question">4. Create a Slice (counterSlice.js)</span>
+      <div class="answer">
+        <pre>
+  import { createSlice } from '@reduxjs/toolkit';
+  
+  const initialState = {
+    value: 0,
+  };
+  
+  export const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+      increment: state => { state.value += 1; },
+      decrement: state => { state.value -= 1; },
+      incrementByAmount: (state, action) => {
+        state.value += action.payload;
+      },
+    },
+  });
+  
+  export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+  export default counterSlice.reducer;
+        </pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-5" class="zyellow">
+      <span class="faq-question">5. Create a Component (Counter.js)</span>
+      <div class="answer">
+        <pre>
+  import React from 'react';
+  import { useSelector, useDispatch } from 'react-redux';
+  import { increment, decrement, incrementByAmount } from './counterSlice';
+  
+  export function Counter() {
+    const count = useSelector(state => state.counter.value);
+    const dispatch = useDispatch();
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Counter: {count}&lt;/h2&gt;
+        &lt;button onClick={() =&gt; dispatch(increment())}&gt;+1&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch(decrement())}&gt;-1&lt;/button&gt;
+        &lt;button onClick={() =&gt; dispatch(incrementByAmount(5))}&gt;+5&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+        </pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-6" class="zyellow">
+      <span class="faq-question">6. Provide the Store (index.js)</span>
+      <div class="answer">
+        <pre>
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import { Provider } from 'react-redux';
+  import { store } from './app/store';
+  import App from './App';
+  
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    &lt;Provider store={store}&gt;
+      &lt;App /&gt;
+    &lt;/Provider&gt;
+  );
+        </pre>
+      </div>
+    </li>
+  
+    <li data-id="redux-toolkit-7" class="zyellow">
+      <span class="faq-question">7. Use the Counter Component (App.js)</span>
+      <div class="answer">
+        <pre>
+  import React from 'react';
+  import { Counter } from './features/counter/Counter';
+  
+  function App() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Redux Toolkit Counter&lt;/h1&gt;
+        &lt;Counter /&gt;
+      &lt;/div&gt;
+    );
+  }
+  
+  export default App;
+        </pre>
+      </div>
+    </li>
+  </ul>
+  
+    </div></li>
+
+<li data-id="q_redux_formatted" class="yellow"><span class="faq-question">
   Redux
   </span><div class="answer">
   <strong>Redux</strong> is a state management library often used with React for building user interfaces. It provides a centralized store for managing the application's state, making it predictable and maintainable.
@@ -1662,76 +1934,7 @@ export default fetchDataEpic;
   <br><strong>Use Cases:</strong><br>
   Redux is best suited for large, complex applications with shared state. For simpler apps, React's Context API may be enough.
   </div></li>
-  <li data-id="q_redux_example"><span class="faq-question">
-    Redux Example ***
-    </span><div class="answer">
-    
-<pre>
-  This sets up a working counter app using Redux.
-  <strong>1. Install Redux:</strong>  npm install redux react-redux
 
-  <strong>2. Create Action:</strong>  actions.js
-  export const increment = () =&gt; ({ type: 'INCREMENT' });
-
-
-  <strong>3. Create Reducer:</strong>  reducer.js
-  const counterReducer = (state = 0, action) =&gt; {
-    switch (action.type) {
-      case 'INCREMENT':
-        return state + 1;
-      default:
-        return state;
-    }
-  };
-  export default counterReducer;
-
-
-
-  <strong>4. Create Store:</strong>  store.js
-  import { createStore } from 'redux';
-  import counterReducer from './reducer';
-  const store = createStore(counterReducer);
-  export default store;
-
-
-
-  <strong>5. Provide Store to React:</strong>  index.js
-  import React from 'react';
-  import ReactDOM from 'react-dom';
-  import { Provider } from 'react-redux';
-  import App from './App';
-  import store from './store';
-  
-  ReactDOM.render(
-    &lt;Provider store={store}&gt;
-      &lt;App /&gt;
-    &lt;/Provider&gt;,
-    document.getElementById('root')
-  );
-
-
-  
-  <strong>6. Use Redux in Component:</strong>  App.js
-  import React from 'react';
-  import { useSelector, useDispatch } from 'react-redux';
-  import { increment } from './actions';
-  
-  function App() {
-    const count = useSelector(state =&gt; state);
-    const dispatch = useDispatch();
-  
-    return (
-      &lt;div&gt;
-        &lt;h1&gt;Count: {count}&lt;/h1&gt;
-        &lt;button onClick={() =&gt; dispatch(increment())}&gt;Increment&lt;/button&gt;
-      &lt;/div&gt;
-    );
-  }
-  export default App;
-</pre>
-    
-    
-    </div></li>
 
     <li data-id="q_redux_middleware"><span class="faq-question">
       Redux Middleware?
