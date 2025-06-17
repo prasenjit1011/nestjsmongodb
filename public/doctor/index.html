@@ -1621,7 +1621,7 @@ export default fetchDataEpic;
 
   
 <li data-id="q_redux_example"  id="redux_qlist" class="yellow"><span class="faq-question">
-Redux Example ***
+Redux Example : 01 : CounterApp ***
 </span><div class="answer">
 <pre>
   // store.js
@@ -1685,6 +1685,192 @@ Redux Example ***
 
 </div></li>
   
+<li data-id="q_redux_login"  id="redux_login_qlist" class="yellow"><span class="faq-question">
+Redux Example : 02 : Login & Logout API with createAsyncThunk
+</span><div class="answer">
+<pre>
+  Install dependencies : npm install @reduxjs/toolkit react-redux axios<hr />
+  
+  Create Slice for Auth (authSlice.js) :
+  import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+  import Cookies from 'js-cookie';
+  import axios from 'axios';
+  
+  const token = localStorage.getItem('token')
+  const initialState = {
+    user: token ? JSON.parse(localStorage.getItem('user')) : null,
+    token: token || null,
+    loading: false,
+    error: null
+  }
+
+
+  export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
+    const response        = await axios.post('https://yourapi.com/login', credentials)
+  
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('user', JSON.stringify(response.data.user));
+    Cookies.set('token', token);
+
+    return response.data
+  })
+
+  export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    Cookies.remove('token')
+
+    await axios.post('https://yourapi.com/logout');
+    return true;
+  })
+
+  const authSlice = createSlice({
+    name: 'auth',
+    initialState: {
+      user: null,
+      loading: false,
+      error: null
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+      builder
+        .addCase(loginUser.pending, (state) => {
+          state.loading = true
+          state.error = null
+        })
+        .addCase(loginUser.fulfilled, (state, action) => {
+          state.loading = false
+          state.user = action.payload
+        })
+        .addCase(loginUser.rejected, (state, action) => {
+          state.loading = false
+          state.error = action.error.message
+        })
+        .addCase(logoutUser.fulfilled, (state) => {
+          state.user = null
+        })
+      }
+  });
+  
+  const store = configureStore({
+    reducer: {
+      auth: authSlice.reducer
+    }
+  });<hr />
+  import { Provider } from 'react-redux'
+  import store from './app/store'
+  
+  ReactDOM.render(
+    &lt;Provider store={store}>
+      &lt;App />
+    &lt;/Provider>,
+    document.getElementById('root')
+  )
+<hr />
+  import React, { useState } from 'react'
+  import { useDispatch, useSelector } from 'react-redux'
+  import { loginUser, logoutUser } from '../features/auth/authSlice'
+  
+  function Login() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const { user, loading, error } = useSelector(state => state.auth)
+  
+    const handleLogin = () => {
+      dispatch(loginUser({ email, password }))
+    }
+  
+    const handleLogout = () => {
+      dispatch(logoutUser())
+    }
+  
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Login&lt;/h2&gt;
+        &lt;input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" /&gt;
+        &lt;input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" /&gt;
+        &lt;button onClick={handleLogin}&gt;Login&lt;/button&gt;
+        &lt;button onClick={handleLogout}&gt;Logout&lt;/button&gt;
+  
+        {loading && &lt;p&gt;Loading...&lt;/p&gt;}
+        {error && &lt;p style={{ color: 'red' }}&gt;{error}&lt;/p&gt;}
+        {user && &lt;p&gt;Welcome {user.name}&lt;/p&gt;}
+      &lt;/div&gt;
+    )
+  }
+  
+  export default Login
+
+</pre>
+  
+</div></li>
+
+  
+<li data-id="q_redux_login"  id="redux_login_qlist" class="yellow"><span class="faq-question">
+Redux Example : 03 : Reducers vs ExtraReducers ***
+</span><div class="answer">
+  Redux Toolkit: <x>reducers</x> vs <x>extraReducers</x>
+<pre>
+  1️⃣ What is <x>reducers</x>?
+  1. Used to define <strong>synchronous actions</strong> inside the same slice.
+  2. Action creators are <strong>auto-generated</strong>.
+  3. Use <strong><x>reducers</x></strong> for internal, simple synchronous actions.
+  4. Best for simple UI actions like increment, decrement, toggle, etc.
+  <hr />
+  2️⃣ What is <x>extraReducers</x>?
+  1. Used to handle <strong>external actions</strong> or <strong>asynchronous logic</strong> like <x>createAsyncThunk</x>.
+  2. Action creators are <strong>not auto-generated</strong>.
+  3. Use <strong><x>extraReducers</x></strong> for handling async logic and external actions (like API requests).
+  4. Great for API calls and handling actions from other slices. ( login, logout, fetchData )
+</pre>
+
+  
+  
+  <h3>📊 Key Differences</h3>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th><code>reducers</code></th>
+        <th><code>extraReducers</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Handles</td>
+        <td>Internal slice actions</td>
+        <td>External or async actions</td>
+      </tr>
+      <tr>
+        <td>Auto-generates action creators</td>
+        <td>✅ Yes</td>
+        <td>❌ No</td>
+      </tr>
+      <tr>
+        <td>Works with <x>createAsyncThunk</x></td>
+        <td>❌ No</td>
+        <td>✅ Yes</td>
+      </tr>
+      <tr>
+        <td>Cross-slice action support</td>
+        <td>❌ No</td>
+        <td>✅ Yes</td>
+      </tr>
+      <tr>
+        <td>Syntax</td>
+        <td>Object</td>
+        <td>Builder function</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+
+  
+</div></li>
+
+
 <li data-id="q_redux_example"  id="redux_qlist" class="yellow"><span class="faq-question">
   Redux Example : 01
   </span><div class="answer">
