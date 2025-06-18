@@ -78,6 +78,8 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
           AWS JS SDK, AWS services like Lambda, SNS, SES, SQS, SSM, S3, EC2, IAM, CloudWatch, Kinesis and Cloud Formation+
           + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka+Appsync
           <BR />
+          React.Js, Graphql, AWS, ESB, Service Bus, TIBCO, API, Api Gateway
+<br />
           SQL Injection and JS injection prevention<br />
           React, Next JS, ES6
 Must have created Server Side Rendered application
@@ -4448,6 +4450,210 @@ Redux Example : 03 : Reducers vs ExtraReducers ***
 <li data-id="q3" class="yellow"><span class="faq-question">
   ---------------------------------------------</span></li>
 
+  
+<li data-id="q10"><span class="faq-question">RxJS Required</span>
+<div class="answer">
+  <h2>Is RxJS Required for ReactJS?</h2>
+
+  <p><strong>No</strong>, RxJS is <em>not required</em> for building ReactJS applications, but it can be useful in specific use cases.</p>
+  
+  <h3>✅ When RxJS is <u>NOT</u> Required</h3>
+  <ul>
+    <li>Basic forms and inputs</li>
+    <li>Using Axios or fetch for API calls</li>
+    <li>State management with Redux Toolkit or Context API</li>
+    <li>Handling async logic with redux-thunk or redux-saga</li>
+    <li>Real-time features using WebSocket without Observables</li>
+  </ul>
+  
+  <h3>✅ When RxJS is <u>Useful or Recommended</u></h3>
+  <p>RxJS is helpful in advanced scenarios like:</p>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Use Case</th>
+        <th>Why RxJS is Helpful</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Real-time data streams</td>
+        <td>Handles async streams efficiently using Observables</td>
+      </tr>
+      <tr>
+        <td>Debounced search or auto-suggestions</td>
+        <td>Operators like debounceTime and distinctUntilChanged make it easy</td>
+      </tr>
+      <tr>
+        <td>Multi-step async workflows</td>
+        <td>Simplifies chaining and canceling requests</td>
+      </tr>
+      <tr>
+        <td>Combining multiple async sources</td>
+        <td>Use operators like combineLatest and merge</td>
+      </tr>
+      <tr>
+        <td>Using redux-observable</td>
+        <td>RxJS is required to work with Epics</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h3>✅ Summary</h3>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Is RxJS required for ReactJS?</td>
+        <td>❌ No</td>
+      </tr>
+      <tr>
+        <td>Is RxJS useful for complex async or stream-based logic?</td>
+        <td>✅ Yes</td>
+      </tr>
+      <tr>
+        <td>Common combo</td>
+        <td>React + RxJS + redux-observable</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+
+
+  <h2>RxJS with React – Complete Guide</h2>
+
+<p><strong>RxJS</strong> (Reactive Extensions for JavaScript) is a library for reactive programming using Observables, to make it easier to work with asynchronous or callback-based code.</p>
+
+<h3>🌟 What is RxJS?</h3>
+<ul>
+  <li>RxJS provides a way to create and manage asynchronous data streams.</li>
+  <li>It uses Observables to emit values over time and allows operators like debounce, map, merge, filter, etc.</li>
+  <li>It helps manage data flow from multiple sources like WebSocket, API responses, user input, etc.</li>
+</ul>
+
+<h3>🔗 Why Use RxJS in React?</h3>
+<ul>
+  <li>Powerful control over async streams (debounce, throttle, retry, cancel requests)</li>
+  <li>Can handle complex interactions and side effects</li>
+  <li>Helps in auto-complete inputs, search bars, or WebSocket data streams</li>
+  <li>Works great with libraries like redux-observable</li>
+</ul>
+
+<h3>⚙️ Core Concepts in RxJS</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Concept</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Observable</td>
+      <td>Represents a stream of values emitted over time</td>
+    </tr>
+    <tr>
+      <td>Observer</td>
+      <td>An object with next, error, and complete methods to react to emitted values</td>
+    </tr>
+    <tr>
+      <td>Subscription</td>
+      <td>Represents execution of Observable and is used to unsubscribe</td>
+    </tr>
+    <tr>
+      <td>Operators</td>
+      <td>Functions to transform or filter data (e.g., map, filter, debounceTime)</td>
+    </tr>
+    <tr>
+      <td>Subject</td>
+      <td>Both an Observable and Observer; can multicast values to multiple subscribers</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>📌 Use Cases in React</h3>
+<ul>
+  <li><strong>Search with debounce:</strong> Prevents API calls for every keystroke</li>
+  <li><strong>Auto-complete suggestions:</strong> Emits values based on input changes</li>
+  <li><strong>Live updates with WebSocket:</strong> Streams real-time data to the UI</li>
+  <li><strong>Handling cancelable async tasks:</strong> Abort previous API requests easily</li>
+</ul>
+
+<h3>🧪 Example: Debounced Search Input</h3>
+<ol>
+  <li>Use RxJS Subject to collect user input events</li>
+  <li>Apply debounceTime to wait for a pause in typing</li>
+  <li>Subscribe to the stream and make API calls</li>
+  <li>Update the component state with the search result</li>
+</ol>
+
+<h3>📚 Libraries and Tools</h3>
+<ul>
+  <li><strong>rxjs</strong> – core reactive library</li>
+  <li><strong>redux-observable</strong> – middleware for Redux using RxJS Epics</li>
+  <li><strong>recompose</strong> (deprecated) – used to integrate observables into React</li>
+</ul>
+
+<h3>✅ When to Use RxJS</h3>
+<ul>
+  <li>Advanced apps needing stream-based logic</li>
+  <li>Real-time dashboards and WebSocket integrations</li>
+  <li>Custom hooks that deal with user input and APIs</li>
+  <li>Replacing complex promise chains</li>
+</ul>
+
+<h3>❌ When Not to Use RxJS</h3>
+<ul>
+  <li>Simple projects with minimal async logic</li>
+  <li>When Redux Toolkit or useEffect with fetch is sufficient</li>
+  <li>If team is not familiar with reactive programming concepts</li>
+</ul>
+
+<h3>🧠 Learning Curve</h3>
+<p>RxJS is powerful but has a steep learning curve. It requires understanding observables, operators, subscriptions, and error handling properly. Once mastered, it’s a strong tool for managing complex side effects and data flows.</p>
+
+<h3>🎯 Summary</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>RxJS in React</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Required for React?</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Great for complex async workflows?</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Ideal for search debounce, real-time, cancelable tasks?</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Used with redux-observable?</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Beginner-friendly?</td>
+      <td>No, requires learning curve</td>
+    </tr>
+  </tbody>
+</table>
+
+</div></li>
+
+
+
 <li data-id="q10"><span class="faq-question">Cookie vs LocalStorage</span>
 <div class="answer">
   <table border="1" cellpadding="8" cellspacing="0">
@@ -7077,7 +7283,7 @@ setImmediate callback
     
     
     
-    <li data-id="q15"><span class="faq-question">
+    <li data-id="q15" class="yellow"><span class="faq-question">
     getStaticProps Vs getServerSideProps
     </span><div class="answer">
     getStaticProps?
@@ -7088,6 +7294,135 @@ setImmediate callback
     Answer: Runs on each request (server-side) to fetch data dynamically.
     
     <br />
+
+    <hr />
+    <h2>What is getStaticProps in Next.js?</h2>
+<p>
+  <strong>getStaticProps</strong> is a function in Next.js used for <strong>Static Site Generation (SSG)</strong>. 
+  It allows you to fetch data at <strong>build time</strong> and pass it as props to your page component.
+</p>
+
+<h3>When to use getStaticProps?</h3>
+<ul>
+  <li>When you want to pre-render a page at build time.</li>
+  <li>When the data does not change frequently (like a blog or documentation).</li>
+  <li>For better performance as HTML is generated at build time.</li>
+</ul>
+
+<h3>Example of getStaticProps</h3>
+<p>Imagine you want to fetch and display a list of blog posts from an API during the build.</p>
+
+<h4>File: pages/blog.js</h4>
+<pre>
+export async function getStaticProps() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+function Blog({ posts }) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Blog Posts&lt;/h1&gt;
+      &lt;ul&gt;
+        {posts.slice(0, 5).map((post) =&gt; (
+          &lt;li key={post.id}&gt;
+            &lt;strong&gt;{post.title}&lt;/strong&gt;&lt;br /&gt;
+            {post.body}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Blog;
+</pre>
+
+<h3>How it works?</h3>
+<ol>
+  <li>Next.js runs <strong>getStaticProps</strong> during the build process.</li>
+  <li>The data is fetched and passed as props to the component.</li>
+  <li>The HTML is generated at build time and served as static files.</li>
+</ol>
+
+<h3>Benefits of getStaticProps</h3>
+<ul>
+  <li>Fast page loads due to static HTML.</li>
+  <li>SEO-friendly content.</li>
+  <li>Reduced server load compared to SSR (Server-side rendering).</li>
+</ul>
+<hr />
+<h2>What is getServerSideProps in Next.js?</h2>
+<p>
+  <strong>getServerSideProps</strong> is a function in Next.js used for <strong>Server-Side Rendering (SSR)</strong>. 
+  It runs on the server <strong>on every request</strong> and fetches data which is passed to the page component as props.
+</p>
+
+<h3>When to use getServerSideProps?</h3>
+<ul>
+  <li>When the data needs to be fresh on every request (like user dashboards, live data).</li>
+  <li>When you need access to request-specific data (like headers, cookies, query params).</li>
+  <li>For dynamic content that changes frequently.</li>
+</ul>
+
+<h3>Example of getServerSideProps</h3>
+<p>Below is an example of a page that fetches user data from an API every time the page is requested.</p>
+
+<h4>File: pages/user.js</h4>
+<pre>
+export async function getServerSideProps(context) {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+  const user = await res.json();
+
+  return {
+    props: {
+      user,
+    },
+  };
+}
+
+function User({ user }) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;User Information&lt;/h1&gt;
+      &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {user.name}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; {user.email}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Phone:&lt;/strong&gt; {user.phone}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default User;
+</pre>
+
+<h3>How it works?</h3>
+<ol>
+  <li>When a request is made to the page, Next.js calls <strong>getServerSideProps</strong> on the server.</li>
+  <li>The data is fetched on the server during the request.</li>
+  <li>The data is sent as props to the React component and the HTML is generated and sent to the client.</li>
+</ol>
+
+<h3>Benefits of getServerSideProps</h3>
+<ul>
+  <li>Data is always up-to-date.</li>
+  <li>Great for pages that depend on request-specific data.</li>
+  <li>No need to manually call APIs on the client side.</li>
+</ul>
+
+<h3>Drawbacks</h3>
+<ul>
+  <li>Slower than static generation due to server-side computation on each request.</li>
+  <li>Increased server load under high traffic.</li>
+</ul>
+
+
+
     </div></li>
     
     
