@@ -7294,8 +7294,54 @@ setImmediate callback
     Answer: Runs on each request (server-side) to fetch data dynamically.
     
     <br />
-
     <hr />
+<pre>
+  <b class="green">getStaticProps : </b>
+  1. The API is called at build time.
+  2. The fetched data is passed to the component as props.
+  3. Since it’s static, the data will not change until you rebuild the app.
+  4. The returned object must contain a props key.
+  5. Ideal for static pages where data doesn't change often (e.g., blog, docs, home page).
+
+  <b class="green">getServerSideProps : </b>
+  1. It runs on every request, not at build time.
+  2. Useful when data changes frequently or is user-specific.
+  3. Good for authenticated pages or dashboards.
+
+
+  const Home = ({ posts }) => {
+      return (
+        &lt;>
+          &lt;h1>Blog Posts ( Static or Server-Side Rendered  )&lt;/h1>
+          &lt;ul>
+            {posts.map((post) => (
+              &lt;span key={post.id}>
+                {post.title}
+              &lt;/span>
+            ))}
+            &lt;/ul>
+          &lt;/>
+      );
+  }
+
+  export async function <b class="green">getStaticProps / getServerSideProps () {</b>
+
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const posts = await res.json();
+
+      return {
+        props: {
+          posts: posts.slice(0, 5) // only the first 5 posts for brevity
+        }
+      };
+  }
+  
+  export default Home;
+
+</pre>
+
+
+    <hr /><hr /><hr />
     <h2>What is getStaticProps in Next.js?</h2>
 <p>
   <strong>getStaticProps</strong> is a function in Next.js used for <strong>Static Site Generation (SSG)</strong>. 
@@ -8680,7 +8726,7 @@ export default User;
   
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
+        ReactJS Frontend UI Question List
       </span>
       <div class="answer">
     
@@ -8693,7 +8739,7 @@ export default User;
       </p>
     
       <section>
-        <h2>🧠 Core React Concepts</h2>
+        <h2>Core React Concepts</h2>
         <ol>
           <li>What is the Virtual DOM, and how does React use it to improve performance?</li>
           <li>Explain the React component lifecycle. How has it changed with hooks?</li>
@@ -8806,25 +8852,16 @@ export default User;
     </div>
     </li>
       
-    <li data-id="reactui-1" class="zyellow">
+    <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
+        React Form Handling
       </span>
       <div class="answer">
-    
-    
-    
-    
-    
-      
-        <h1>React Form Handling Interview Q&A</h1>
-      
-        <h2>1. How do you handle form validation in React?</h2>
-        <p>
+<p>
           Form validation in React can be handled in several ways:
         </p>
         <ul>
-          <li><strong>Manual validation</strong>: Track form inputs using state and validate on events like <code>onBlur</code> or <code>onSubmit</code>.</li>
+          <li><strong>Manual validation</strong>: Track form inputs using state and validate on events like <x>onBlur</x> or <x>onSubmit</x>.</li>
           <li><strong>Using libraries</strong>:
             <ul>
               <li><strong>React Hook Form</strong>: Minimal re-renders, performance-friendly.</li>
@@ -8834,14 +8871,14 @@ export default User;
           </li>
         </ul>
       
-        <pre><code>const schema = yup.object({
-        email: yup.string().email().required(),
-      });
-      
-      const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-      });
-      </code></pre>
+<pre>
+  const schema = yup.object({
+            email: yup.string().email().required(),
+        });
+  const { register, handleSubmit, formState: { errors } } = useForm({
+            resolver: yupResolver(schema),
+        });
+</pre>
       
         <h2>2. Compare Formik, React Hook Form, and Native Form Handling</h2>
       
@@ -8902,7 +8939,7 @@ export default User;
       
         <h2>3. How do you manage dynamic form fields?</h2>
         <p>
-          Use <strong><code>useFieldArray</code></strong> from React Hook Form:
+          Use <strong><x>useFieldArray</x></strong> from React Hook Form:
         </p>
       
         <pre><code>const { control, register } = useForm();
@@ -8952,13 +8989,11 @@ export default User;
       
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
+        Performance Optimization
       </span>
       <div class="answer">
         
-          <h1>React Performance Optimization Interview Q&A</h1>
-        
-          <h2>1. What is reconciliation in React?</h2>
+          <p>1. What is reconciliation in React?</p>
           <p>
             Reconciliation is the process React uses to determine how the DOM should change in response to state/prop updates.
             React maintains a virtual DOM and when updates occur, it compares the new virtual DOM with the previous one (diffing algorithm). Based on this comparison, it updates only the necessary parts of the real DOM for better performance.
@@ -9027,12 +9062,10 @@ export default User;
         
       <li data-id="reactui-1" class="yellow">
         <span class="faq-question">
-          ReactJS Frontend UI Developer Interview Questions
-        </span>
+          Security Practices        </span>
         <div class="answer">
-      <h1>React Security & Best Practices</h1>
     
-      <h2>1. How do you prevent XSS or CSRF in a React frontend?</h2>
+      <p>1. How do you prevent XSS or CSRF in a React frontend?</p>
       <ul>
         <li>Escape all user input and avoid <code>dangerouslySetInnerHTML</code>.</li>
         <li>Use frameworks like DOMPurify to sanitize HTML when rendering dynamic content.</li>
@@ -9092,13 +9125,10 @@ export default User;
       
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
-      </span>
+        Project & Real-World Experience      </span>
       <div class="answer">
     
-      <h1>Project & Real-World Experience</h1>
-    
-      <h2>1. Describe a complex UI you built and how you approached it.</h2>
+      <p>1. Describe a complex UI you built and how you approached it.</p>
       <ul>
         <li>Built a real-time dashboard for analytics with filters, charts, and tables.</li>
         <li>Used component decomposition, state management (Zustand/Redux), and memoization for performance.</li>
@@ -9144,12 +9174,9 @@ export default User;
       
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
-      </span>
+        State Management      </span>
       <div class="answer">
-      <h1>🧠 State Management</h1>
-    
-      <h2>1. When do you use Context API vs Redux?</h2>
+      <p>1. When do you use Context API vs Redux?</p>
       <ul>
         <li><strong>Context API:</strong> Ideal for light state sharing like theme, language, or authentication state.</li>
         <li><strong>Redux:</strong> Best for large-scale applications with complex and deeply nested state management.</li>
@@ -9193,12 +9220,11 @@ export default User;
       
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
+        Testing
       </span>
       <div class="answer">
-      <h1>🧪 Testing</h1>
     
-      <h2>1. How do you test a React component?</h2>
+      <p>1. How do you test a React component?</p>
       <ul>
         <li>Render the component using testing utilities like <code>React Testing Library</code>.</li>
         <li>Simulate user interactions and verify UI updates.</li>
@@ -9241,11 +9267,11 @@ export default User;
       
     <li data-id="reactui-1" class="yellow">
       <span class="faq-question">
-        ReactJS Frontend UI Developer Interview Questions
+        Zustand
       </span>
       <div class="answer">
       
-        <h1>✅ What is Zustand in React?</h1>
+        <p>✅ What is Zustand in React?</p>
         <p><strong>Zustand</strong> is a <strong>lightweight</strong>, <strong>fast</strong>, and <strong>scalable</strong> state management library for React. It uses hooks and is ideal for managing global or shared state with minimal boilerplate.</p>
       
         <h2>🔍 Why Use Zustand?</h2>
