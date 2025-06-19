@@ -28886,6 +28886,1455 @@ router.push('/about');
 
 
 
+<li data-id="q1" class="yellow">
+  <span class="faq-question">What are the differences between Pages Router and App Router?</span>
+  <div class="answer">
+    The Pages Router is the traditional routing method in Next.js, where each file inside the <b>pages/</b> directory automatically becomes a route. The App Router, introduced in Next.js 13, uses the <b>app/</b> directory and enables a more flexible and powerful routing system. Key differences:
+    <ul>
+      <li>Pages Router uses file-based routing with React components.</li>
+      <li>App Router introduces layouts, templates, and nested routing using React Server Components.</li>
+      <li>App Router supports advanced features like loading and error UI, route groups, and partial rendering.</li>
+      <li>Pages Router supports only Client Components, while App Router supports both Client and Server Components.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q2" class="yellow">
+  <span class="faq-question">What is a Server Component in Next.js 13+?</span>
+  <div class="answer">
+    A Server Component is a React component that runs only on the server. It can fetch data directly from the database or APIs without sending any extra JavaScript to the browser. Benefits include:
+    <ul>
+      <li>Improved performance due to reduced JavaScript bundle size.</li>
+      <li>Better security since sensitive logic stays on the server.</li>
+      <li>No client-side hydration required.</li>
+    </ul>
+    Server Components are the default in the App Router and help deliver faster and more scalable applications.
+  </div>
+</li>
+
+<li data-id="q3" class="yellow">
+  <span class="faq-question">How do Client and Server Components interact?</span>
+  <div class="answer">
+    Client and Server Components interact by allowing Server Components to render Client Components, but not the other way around. This enables the following:
+    <ul>
+      <li>Server Components fetch data and pass it as props to Client Components.</li>
+      <li>Client Components handle interactivity like click events and local state.</li>
+      <li>Server Components can include multiple Client Components as children, but Client Components cannot include Server Components.</li>
+      <li>To mark a component as Client, use the <b>"use client"</b> directive at the top of the file.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q42" class="zyellow">
+  <span class="faq-question">What are the limitations of Server Components?</span>
+  <div class="answer">
+    Server Components in Next.js come with several limitations because they are rendered on the server and do not include client-side interactivity. Key limitations include:
+    <ul>
+      <li>They cannot use React state or lifecycle hooks like useState or useEffect.</li>
+      <li>They cannot access browser-specific APIs like window or document.</li>
+      <li>They cannot respond to user interactions (e.g., onClick) directly.</li>
+      <li>They cannot import client-only libraries such as charting or animation libraries.</li>
+      <li>They must only render other Server Components or Client Components marked with "use client".</li>
+    </ul>
+    Server Components are ideal for static content, data fetching, and layout rendering, but not for interactive UI elements.
+  </div>
+</li>
+
+<li data-id="q43" class="zyellow">
+  <span class="faq-question">How does hydration work in Next.js?</span>
+  <div class="answer">
+    Hydration in Next.js is the process of attaching event listeners and restoring interactivity on the client side after the initial HTML is rendered by the server. This allows React to take over the static HTML and make it dynamic. Key points:
+    <ul>
+      <li>The server sends pre-rendered HTML to the browser for fast initial load.</li>
+      <li>React then loads the JavaScript bundle and reuses the static content to attach interactivity.</li>
+      <li>This process is called "hydration", and it's essential for seamless transitions and interactive behavior.</li>
+      <li>Hydration is only necessary for Client Components, as Server Components do not include interactivity.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q44" class="zyellow">
+  <span class="faq-question">How do you use the use client directive?</span>
+  <div class="answer">
+    The <b>"use client"</b> directive is used at the top of a React component file in Next.js to mark it as a Client Component. This allows the component to use browser features and interactivity. Usage guidelines:
+    <ul>
+      <li>Add <b>"use client"</b> as the first line in the component file.</li>
+      <li>Only Client Components can use hooks like useState, useEffect, and event handlers.</li>
+      <li>Client Components can import other Client Components but not Server Components.</li>
+      <li>Use "use client" only when necessary to keep the JavaScript bundle size small.</li>
+    </ul>
+    This directive helps Next.js optimize performance by separating static content from interactive parts.
+  </div>
+</li>
+ 
+<li data-id="q45" class="zyellow">
+  <span class="faq-question">How do you pass data from Server to Client Components?</span>
+  <div class="answer">
+    In Next.js, you can pass data from Server Components to Client Components using props. Server Components can fetch data on the server and then render Client Components by passing the fetched data as props. This approach allows you to separate data fetching logic from interactive UI logic while maintaining performance and scalability.
+    <ul>
+      <li>Fetch data inside a Server Component using async/await or fetch.</li>
+      <li>Render a Client Component and pass the data as a prop.</li>
+      <li>The Client Component receives the data and can use it normally with hooks and events.</li>
+    </ul>
+  </div>
+</li>
+
+<li data-id="q46" class="zyellow">
+  <span class="faq-question">How are layouts different in App Router?</span>
+  <div class="answer">
+    In the App Router of Next.js 13+, layouts are persistent UI wrappers defined using a special <b>layout.js</b> file in each route segment. They differ from traditional layouts because:
+    <ul>
+      <li>They remain mounted between route changes, which preserves state and improves performance.</li>
+      <li>They support nested and shared layouts across the route hierarchy.</li>
+      <li>You can define multiple layouts at different route levels (e.g., dashboard, admin).</li>
+      <li>They can include both Server and Client Components.</li>
+    </ul>
+    This new layout model provides better flexibility and control over application structure and rendering.
+  </div>
+</li>
+
+<li data-id="q47" class="zyellow">
+  <span class="faq-question">What are parallel routes?</span>
+  <div class="answer">
+    Parallel routes in Next.js 13+ allow you to render multiple pages or components side-by-side within a single layout. This is useful for dashboards, tabbed views, or modals. Instead of a single default route, you define multiple route slots using the <b>@</b> symbol in the folder name.
+    <ul>
+      <li>Each slot acts like an independent sub-route.</li>
+      <li>You can render them concurrently within the same layout.</li>
+      <li>Useful for scenarios like rendering a sidebar and main content at the same time.</li>
+    </ul>
+    Parallel routes improve UX by allowing simultaneous rendering of independent parts of a page.
+  </div>
+</li>
+
+<li data-id="q48" class="zyellow">
+  <span class="faq-question">How do you implement intercepting routes?</span>
+  <div class="answer">
+    Intercepting routes in Next.js allow you to override the default navigation behavior and show a different page in a specific layout, like a modal on top of a previous page. This is implemented using the <b>(.)</b> folder naming convention.
+    <ul>
+      <li>Create a folder with <b>(.)</b> to define an intercepting route.</li>
+      <li>Use it to display content like modals or drawers without leaving the current page.</li>
+      <li>This allows partial route changes and preserves background state.</li>
+    </ul>
+    Intercepting routes are useful for creating smooth and non-disruptive UI experiences, such as modal previews or side panels.
+  </div>
+</li>
+<li data-id="q49" class="zyellow">
+  <span class="faq-question">How does Next.js handle nested routing in the App Router?</span>
+  <div class="answer">
+    In Next.js App Router, nested routing is handled by organizing folders inside the <b>app/</b> directory to represent route segments. Each folder corresponds to a path, and nested folders define nested routes. You can use <b>layout.js</b> files to persist layout components across nested routes.
+    <ul>
+      <li>Each folder inside <b>app/</b> becomes a route segment (e.g., <b>app/dashboard/settings</b> becomes <b>/dashboard/settings</b>).</li>
+      <li><b>layout.js</b> defines shared UI (like sidebars or headers) for nested routes.</li>
+      <li><b>page.js</b> inside each segment defines the content of that route.</li>
+    </ul>
+    Nested routing allows building complex hierarchies of pages with shared UI and consistent structure.
+  </div>
+</li>
+
+<li data-id="q50" class="zyellow">
+  <span class="faq-question">What are dynamic segments and how do they work in app/?</span>
+  <div class="answer">
+    Dynamic segments in Next.js App Router allow you to create routes with variable parameters by using square brackets in folder names. These segments are resolved at runtime based on the URL.
+    <ul>
+      <li>Create a folder like <b>[id]</b> inside <b>app/</b> to match dynamic parts of the URL (e.g., <b>app/products/[id]</b> matches <b>/products/123</b>).</li>
+      <li>Inside the page or layout file, use <b>params</b> in server functions (like <b>generateMetadata</b> or <b>Page</b>) to access the dynamic value.</li>
+      <li>Supports nested dynamic segments (e.g., <b>app/blog/[slug]/comments/[commentId]</b>).</li>
+    </ul>
+    Dynamic segments allow you to build dynamic pages such as product details, user profiles, or blog posts with clean URLs.
+  </div>
+</li>
+
+<li data-id="q51" class="zyellow">
+  <span class="faq-question">How do you implement modal routes?</span>
+  <div class="answer">
+    Modal routes in Next.js App Router are implemented using <b>intercepting routes</b>. This technique allows you to show modals over an existing page without fully navigating away from the background route.
+    <ul>
+      <li>Create a folder named with parentheses like <b>(modals)</b> to define modal content.</li>
+      <li>Use <b>@</b> to create parallel routes (e.g., <b>@modal</b>) that render both background and modal content simultaneously.</li>
+      <li>The modal route can be triggered using navigation and rendered within the existing layout while the background remains intact.</li>
+    </ul>
+    This approach provides a smooth user experience by keeping the current view visible while displaying additional content in a modal overlay.
+  </div>
+</li>
+<li data-id="q52" class="zyellow">
+  <span class="faq-question">How does usePathname() differ from useRouter()?</span>
+  <div class="answer">
+    In Next.js App Router, both <b>usePathname()</b> and <b>useRouter()</b> are React hooks used for accessing routing information, but they serve different purposes:
+    <ul>
+      <li><b>usePathname()</b> returns the current URL path as a string. It is useful when you just need to read the pathname (e.g., to highlight active links).</li>
+      <li><b>useRouter()</b> provides more comprehensive navigation control, including functions like <b>push()</b>, <b>replace()</b>, and <b>back()</b> to programmatically navigate between routes.</li>
+    </ul>
+    <b>usePathname()</b> is lightweight and read-only, while <b>useRouter()</b> is more powerful for handling dynamic navigation in client components.
+  </div>
+</li>
+
+<li data-id="q53" class="zyellow">
+  <span class="faq-question">How does redirect() and notFound() work in App Router?</span>
+  <div class="answer">
+    In Next.js App Router, <b>redirect()</b> and <b>notFound()</b> are functions used for server-side navigation control inside Server Components, Layouts, and Route Handlers:
+    <ul>
+      <li><b>redirect(url)</b>: Immediately sends a redirect response to the client, navigating to the specified URL. It’s commonly used in <b>server actions</b> or <b>loaders</b> when conditional logic is met (e.g., unauthenticated access).</li>
+      <li><b>notFound()</b>: Triggers Next.js’s built-in 404 page. It is used when the requested content doesn’t exist or access is denied.</li>
+    </ul>
+    These functions work only in the server layer and replace client-side hooks like <b>useRouter().push()</b> in traditional navigation logic.
+  </div>
+</li>
+<li data-id="q54" class="zyellow">
+  <span class="faq-question">What is the new fetch() caching behavior in Next.js?</span>
+  <div class="answer">
+    In the App Router of Next.js, the <b>fetch()</b> function is enhanced with built-in caching for improved performance. By default, fetch requests are cached on the server and reused between requests when possible. This behavior allows:
+    <ul>
+      <li>Automatic caching of GET requests.</li>
+      <li>Reusability across requests in the same session.</li>
+      <li>Incremental Static Regeneration (ISR) support using <b>revalidate</b> options.</li>
+    </ul>
+    You can customize caching using options like <b>cache</b>, <b>next.revalidate</b>, and <b>next.tags</b> in the fetch config.
+  </div>
+</li>
+
+<li data-id="q55" class="zyellow">
+  <span class="faq-question">How do you disable caching for a particular request?</span>
+  <div class="answer">
+    To disable caching for a specific fetch request in Next.js, use the <b>cache: "no-store"</b> option. This ensures the request always fetches fresh data from the server:
+    <ul>
+      <li>Pass it like this: <b>fetch(url, { cache: "no-store" })</b></li>
+      <li>Useful for real-time data like dashboards, logs, or admin panels.</li>
+    </ul>
+    This disables Next.js's automatic request caching for that fetch call.
+  </div>
+</li>
+
+<li data-id="q56" class="zyellow">
+  <span class="faq-question">How do you revalidate data using revalidatePath() and revalidateTag()?</span>
+  <div class="answer">
+    In Next.js, <b>revalidatePath()</b> and <b>revalidateTag()</b> are used to manually trigger regeneration of cached data for specific paths or tags. These functions are typically called in <b>Server Actions</b> or <b>Route Handlers</b>:
+    <ul>
+      <li><b>revalidatePath('/dashboard')</b>: Revalidates all cached fetches associated with that path.</li>
+      <li><b>revalidateTag('user-data')</b>: Revalidates all fetch calls that were tagged with <b>next: { tags: ['user-data'] }</b>.</li>
+      <li>They allow cache to be updated manually when a mutation occurs (e.g., form submission, data update).</li>
+    </ul>
+    These functions give developers fine-grained control over incremental data refreshing in Next.js applications.
+  </div>
+</li>
+<li data-id="q57" class="zyellow">
+  <span class="faq-question">What are cache tags in Next.js?</span>
+  <div class="answer">
+    Cache tags in Next.js are custom labels you can assign to fetch requests in Server Components to manage and invalidate cached data precisely. These tags allow you to group cached responses and later revalidate them selectively using <b>revalidateTag()</b>.
+    <ul>
+      <li>Tags are assigned using the <b>next: { tags: ['tag-name'] }</b> option in fetch.</li>
+      <li>You can assign the same tag to multiple fetch calls.</li>
+      <li>When you call <b>revalidateTag('tag-name')</b>, all data with that tag is refreshed.</li>
+      <li>This gives you control over cache updates after mutations without needing full page revalidation.</li>
+    </ul>
+    Cache tags are useful for complex apps where data needs to stay fresh but without over-fetching.
+  </div>
+</li>
+
+<li data-id="q58" class="zyellow">
+  <span class="faq-question">How do you fetch data conditionally in a Server Component?</span>
+  <div class="answer">
+    In Server Components, you can conditionally fetch data based on props, context, or logic before rendering. Since Server Components run only on the server, you can use <b>async/await</b> directly and check conditions before calling fetch.
+    <ul>
+      <li>Use <b>if</b> statements to skip unnecessary requests.</li>
+      <li>Fetch different endpoints based on props (e.g., user roles or route params).</li>
+      <li>You can return early if conditions aren't met, such as rendering a message or null.</li>
+      <li>Fetch results are then passed to child components as props, including Client Components.</li>
+    </ul>
+    Conditional fetching helps optimize performance and ensures components render only the necessary data for the current context.
+  </div>
+</li>
+<li data-id="q59" class="zyellow">
+  <span class="faq-question">How do you generate dynamic metadata in the App Router?</span>
+  <div class="answer">
+    In the App Router of Next.js, dynamic metadata is generated using the <b>generateMetadata()</b> function in a <b>page.js</b> or <b>layout.js</b> file. This function runs on the server and allows you to generate metadata based on dynamic content such as route parameters or fetched data.
+    <ul>
+      <li>Create an <b>async generateMetadata()</b> function and export it from your page or layout file.</li>
+      <li>Use <b>params</b> to access dynamic segments of the URL.</li>
+      <li>Fetch necessary data inside this function and return metadata like title, description, etc.</li>
+    </ul>
+    This ensures each page has unique SEO-optimized metadata.
+  </div>
+</li>
+
+<li data-id="q60" class="zyellow">
+  <span class="faq-question">What is the generateMetadata() function?</span>
+  <div class="answer">
+    The <b>generateMetadata()</b> function in Next.js App Router is a special server-only function used to define page-specific metadata. It replaces the older <b>Head</b> component approach from the Pages Router.
+    <ul>
+      <li>It runs before the page is rendered and can include async logic like API calls or database queries.</li>
+      <li>It returns an object with metadata fields like <b>title</b>, <b>description</b>, <b>robots</b>, <b>openGraph</b>, and <b>twitter</b>.</li>
+      <li>Supports dynamic metadata for each route or slug using <b>params</b>.</li>
+    </ul>
+    It allows for better SEO and social media optimization by customizing page metadata dynamically.
+  </div>
+</li>
+
+<li data-id="q61" class="zyellow">
+  <span class="faq-question">How do you set OG (Open Graph) and Twitter metadata?</span>
+  <div class="answer">
+    You can define Open Graph and Twitter metadata inside the <b>generateMetadata()</b> function using the <b>openGraph</b> and <b>twitter</b> properties in the returned object.
+    <ul>
+      <li><b>openGraph</b> includes properties like <b>title</b>, <b>description</b>, <b>images</b>, <b>url</b>, and <b>siteName</b>.</li>
+      <li><b>twitter</b> includes <b>card</b>, <b>title</b>, <b>description</b>, <b>images</b>, and <b>creator</b>.</li>
+      <li>These metadata tags are used by social platforms like Facebook and Twitter to display rich previews when your page is shared.</li>
+    </ul>
+    This structured metadata enhances link previews and boosts social media engagement.
+  </div>
+</li>
+<li data-id="q62" class="zyellow">
+  <span class="faq-question">How do you integrate structured data (JSON-LD)?</span>
+  <div class="answer">
+    To integrate structured data using JSON-LD in Next.js, you embed a script tag containing JSON-LD inside a Client Component or the <b>&lt;head&gt;</b> of a page. This helps search engines better understand your content.
+    <ul>
+      <li>Create a JavaScript object with your structured data (e.g., type Article, Product, FAQ).</li>
+      <li>Render a <b>script</b> tag with <b>type="application/ld+json"</b> inside your component.</li>
+      <li>Use <b>dangerouslySetInnerHTML</b> to inject the JSON string into the script tag.</li>
+      <li>This is best done inside a Client Component or in a custom <b>&lt;Head&gt;</b> block using <b>next/head</b>.</li>
+    </ul>
+    JSON-LD structured data improves SEO by enabling enhanced search features like rich snippets, FAQs, and breadcrumbs.
+  </div>
+</li>
+
+<li data-id="q63" class="zyellow">
+  <span class="faq-question">How do you implement custom robots.txt and sitemap.xml?</span>
+  <div class="answer">
+    In Next.js, custom <b>robots.txt</b> and <b>sitemap.xml</b> can be implemented in the <b>app/</b> or <b>pages/</b> directory using API routes or static file generation:
+    <ul>
+      <li><b>robots.txt</b>:
+        <ul>
+          <li>Create <b>app/robots.txt/route.js</b> (App Router) or <b>pages/api/robots.txt.js</b> (Pages Router).</li>
+          <li>Return plain text content using <b>Content-Type: text/plain</b>.</li>
+        </ul>
+      </li>
+      <li><b>sitemap.xml</b>:
+        <ul>
+          <li>Generate dynamically using <b>route.js</b> in <b>app/sitemap.xml</b>.</li>
+          <li>Include all public URLs with optional last modified dates.</li>
+        </ul>
+      </li>
+      <li>Alternatively, you can place static files directly in the <b>public/</b> directory (e.g., <b>public/robots.txt</b> and <b>public/sitemap.xml</b>).</li>
+    </ul>
+    This ensures proper crawling by search engines and improves site discoverability.
+  </div>
+</li>
+                                    
+
+<li data-id="q64" class="zyellow">
+  <span class="faq-question">How does middleware help in route protection?</span>
+  <div class="answer">
+    Middleware in Next.js runs before a request reaches a route or page. It helps protect routes by intercepting requests and redirecting users based on conditions like authentication or role checks.
+    <ul>
+      <li>Placed in the root <b>middleware.js</b> file or inside the <b>app/</b> directory.</li>
+      <li>Executes on the Edge runtime and allows modifying request/response headers, rewriting, or redirecting.</li>
+      <li>Use it to check cookies, tokens, or session headers to protect routes without loading full page code.</li>
+    </ul>
+    Middleware is ideal for global route protection, tenant-based routing, or enforcing locale and device checks.
+  </div>
+</li>
+
+<li data-id="q65" class="zyellow">
+  <span class="faq-question">How do you implement session-based auth in Next.js?</span>
+  <div class="answer">
+    Session-based authentication in Next.js can be implemented using cookies to store session tokens. Common steps include:
+    <ul>
+      <li>Authenticate the user and create a signed JWT or session token on the server.</li>
+      <li>Store the token in a secure, HTTP-only cookie.</li>
+      <li>Use middleware or server components to read and verify the token from the cookie for each request.</li>
+      <li>Protect routes by checking if a valid session exists.</li>
+      <li>Use libraries like <b>iron-session</b> or <b>cookie</b> to simplify session handling.</li>
+    </ul>
+    This approach keeps sensitive tokens on the server side and works well with SSR and API routes.
+  </div>
+</li>
+
+<li data-id="q66" class="zyellow">
+  <span class="faq-question">How do you use NextAuth.js with Server Components?</span>
+  <div class="answer">
+    NextAuth.js integrates with Server Components in Next.js App Router using the <b>getServerSession()</b> method. This enables secure access to user data inside Server Components and Layouts.
+    <ul>
+      <li>Configure <b>NextAuth</b> with providers (like GitHub, Google) in <b>app/api/auth/[...nextauth]/route.js</b>.</li>
+      <li>In any Server Component or layout, call <b>getServerSession(authOptions)</b> to retrieve the session.</li>
+      <li>Conditionally render UI based on whether the session exists or not.</li>
+      <li>Combine with middleware to restrict routes based on authentication status.</li>
+    </ul>
+    This provides a secure and SSR-compatible way to manage authentication in modern Next.js apps.
+  </div>
+</li>
+
+<li data-id="q67" class="zyellow">
+  <span class="faq-question">How do you protect dynamic routes from unauthorized access?</span>
+  <div class="answer">
+    To protect dynamic routes in Next.js, especially in the App Router, you can use a combination of <b>middleware</b> and <b>Server Components</b> to validate user sessions or tokens before rendering content.
+    <ul>
+      <li>Use <b>middleware.js</b> to intercept all route requests and check authentication status using cookies or headers.</li>
+      <li>Redirect users to a login page if they are not authenticated.</li>
+      <li>Inside dynamic <b>page.js</b> files, use <b>getServerSession()</b> or token validation to verify access.</li>
+      <li>Render a 401 error, a custom message, or redirect unauthorized users.</li>
+    </ul>
+    This ensures users cannot access routes like <b>/dashboard/[id]</b> unless properly authenticated.
+  </div>
+</li>
+
+<li data-id="q68" class="zyellow">
+  <span class="faq-question">How do you handle role-based access control (RBAC)?</span>
+  <div class="answer">
+    Role-Based Access Control (RBAC) in Next.js is implemented by assigning roles to users (e.g., admin, editor, viewer) and restricting content or routes based on those roles.
+    <ul>
+      <li>Store the user's role in their session or JWT token.</li>
+      <li>Use <b>middleware.js</b> or <b>getServerSession()</b> to read the role and conditionally allow access.</li>
+      <li>Render different UI or block access based on role inside Server Components or Client Components.</li>
+      <li>Protect admin routes or dashboards by validating the user's role server-side before rendering.</li>
+    </ul>
+    RBAC helps ensure that users only access the resources and actions they’re authorized to use, improving both security and UX.
+  </div>
+</li>
+
+
+<li data-id="q69" class="zyellow">
+  <span class="faq-question">How do you test Server Components?</span>
+  <div class="answer">
+    Server Components in Next.js can be tested using testing libraries like <b>React Testing Library</b> and <b>Jest</b>. Since they are server-only, you test them by rendering the component with mock props and checking the returned HTML output.
+    <ul>
+      <li>Use <b>@testing-library/react</b> with Node.js environment or render-to-string tools.</li>
+      <li>Call the async Server Component and wait for the resolved JSX.</li>
+      <li>Use <b>screen.getByText()</b> or snapshot testing to verify the content.</li>
+      <li>Ensure that mock data or props are passed properly for isolated tests.</li>
+    </ul>
+    Server Components are typically tested by asserting their static output and checking conditional rendering based on server logic.
+  </div>
+</li>
+
+<li data-id="q70" class="zyellow">
+  <span class="faq-question">How do you mock fetch in Server Components?</span>
+  <div class="answer">
+    To mock <b>fetch</b> in Server Components, you can use <b>jest.mock()</b> or override the global fetch in your test file. Since fetch runs on the server in these components, mocking is important for unit tests.
+    <ul>
+      <li>Use <b>global.fetch = jest.fn()</b> to override the fetch behavior before rendering the component.</li>
+      <li>Return mock responses using <b>Promise.resolve({ json: () => ... })</b>.</li>
+      <li>Clean up and restore the fetch mock after each test using <b>afterEach()</b>.</li>
+      <li>Mocking enables you to test how your component behaves with different data without making actual HTTP requests.</li>
+    </ul>
+    This method allows you to simulate server-side data fetching within isolated test cases.
+  </div>
+</li>
+
+<li data-id="q71" class="zyellow">
+  <span class="faq-question">How do you test generateMetadata()?</span>
+  <div class="answer">
+    The <b>generateMetadata()</b> function in Next.js App Router is a server-only export used to provide dynamic metadata. You can test it by importing the function and calling it directly with mock <b>params</b> or props.
+    <ul>
+      <li>Import the <b>generateMetadata</b> function in your test file.</li>
+      <li>Pass mock route parameters or fetch responses as inputs.</li>
+      <li>Assert the returned metadata object contains expected <b>title</b>, <b>description</b>, or <b>openGraph</b> fields.</li>
+      <li>Mock any internal fetch or database calls used inside the function.</li>
+    </ul>
+    Testing <b>generateMetadata()</b> ensures SEO-relevant content is generated properly for dynamic pages like blogs or product details.
+  </div>
+</li>
+
+
+
+<li data-id="q72" class="zyellow">
+  <span class="faq-question">How do you write integration tests with Playwright or Cypress?</span>
+  <div class="answer">
+    Integration tests with <b>Playwright</b> or <b>Cypress</b> are used to simulate real user interactions and validate how components, pages, and routing behave together in a Next.js application.
+    <ul>
+      <li><b>Playwright</b> is a powerful tool for E2E tests with cross-browser support. Use <b>page.goto()</b>, <b>page.click()</b>, and <b>page.locator()</b> to test navigation, forms, and modal rendering.</li>
+      <li><b>Cypress</b> runs directly in the browser and provides a developer-friendly UI. Use <b>cy.visit()</b>, <b>cy.get()</b>, and <b>cy.contains()</b> for interaction testing.</li>
+      <li>Test full page navigation in the App Router, such as loading nested routes, server components, and modals.</li>
+      <li>Mock network responses or test against a real dev server using <b>npm run dev</b> and a base URL.</li>
+      <li>Use CI/CD tools to run Playwright/Cypress on pull requests for regression testing.</li>
+    </ul>
+    These tools validate the behavior of the full stack (routing, layout, server/client interaction), ensuring the app works as expected from a user’s perspective.
+  </div>
+</li>
+
+<li data-id="q73" class="zyellow">
+  <span class="faq-question">What are best practices for unit testing in App Router?</span>
+  <div class="answer">
+    Best practices for unit testing in the App Router focus on testing individual components and functions, including both Client and Server Components.
+    <ul>
+      <li>Use <b>Jest</b> with <b>@testing-library/react</b> for rendering and querying components.</li>
+      <li>Mock <b>fetch()</b>, <b>getServerSession()</b>, and <b>next/navigation</b> for isolated testing.</li>
+      <li>Test Server Components by calling the component function and asserting on the returned JSX.</li>
+      <li>For Client Components, test interactivity using <b>fireEvent</b> or <b>userEvent</b>.</li>
+      <li>Group tests by file or feature and maintain clear test descriptions.</li>
+      <li>Use snapshot testing selectively to avoid brittle tests.</li>
+      <li>Mock dynamic segments and metadata functions using dummy params and responses.</li>
+    </ul>
+    These practices help you confidently test the modern routing and rendering features of Next.js 13+ with maintainable and reliable tests.
+  </div>
+</li>
+
+<li data-id="q74" class="zyellow">
+  <span class="faq-question">How does next.config.js control routing and output?</span>
+  <div class="answer">
+    The <b>next.config.js</b> file in Next.js is used to customize routing behavior and control how your application is built and served. It allows developers to configure rewrites, redirects, base paths, and output strategies.
+    <ul>
+      <li><b>rewrites</b> map incoming request paths to different destination paths without changing the URL in the browser.</li>
+      <li><b>redirects</b> perform client- or server-side redirects based on specific conditions.</li>
+      <li><b>basePath</b> sets a subdirectory as the root of the application (e.g., /dashboard).</li>
+      <li><b>trailingSlash</b> determines whether URLs should end with a slash.</li>
+      <li><b>output</b> specifies whether the build is for <b>static export</b> or a <b>standalone Node.js server</b>.</li>
+    </ul>
+    These options give you fine-grained control over route handling, deployment behavior, and the output format of your app.
+  </div>
+</li>
+
+<li data-id="q75" class="zyellow">
+  <span class="faq-question">What is output: export vs output: standalone?</span>
+  <div class="answer">
+    The <b>output</b> setting in <b>next.config.js</b> controls how Next.js builds your project. The two common options are:
+    <ul>
+      <li><b>output: "export"</b>: Generates a fully static version of your site with HTML and assets. No server is required. Used for static hosting like GitHub Pages or S3.</li>
+      <li><b>output: "standalone"</b>: Builds a minimal production-ready Node.js app with all required files in the <b>.next/standalone</b> directory. Ideal for serverless or containerized deployments.</li>
+    </ul>
+    Use <b>export</b> when your app has no server-side logic, and <b>standalone</b> when deploying dynamic routes or server-rendered pages.
+  </div>
+</li>
+
+<li data-id="q76" class="zyellow">
+  <span class="faq-question">How do you enable experimental features in Next.js?</span>
+  <div class="answer">
+    Next.js allows developers to opt into experimental features by using the <b>experimental</b> field in <b>next.config.js</b>. This enables access to upcoming or unstable features.
+    <ul>
+      <li>Add an <b>experimental</b> object in your config file with feature flags as keys.</li>
+      <li>Common flags include:
+        <ul>
+          <li><b>serverActions</b>: Enable Server Actions support.</li>
+          <li><b>turbopack</b>: Enable the new Rust-based bundler.</li>
+          <li><b>appDir</b>: Enable the App Router features (enabled by default in latest versions).</li>
+        </ul>
+      </li>
+      <li>These features are not guaranteed to be stable and may change in future releases.</li>
+    </ul>
+    Use experimental flags cautiously in production and stay updated with release notes and changelogs.
+  </div>
+</li>
+<li data-id="q77" class="zyellow">
+  <span class="faq-question">What is the modularizeImports setting?</span>
+  <div class="answer">
+    The <b>modularizeImports</b> setting in <b>next.config.js</b> allows you to automatically rewrite imports to reduce bundle size by enabling tree-shaking for libraries that don't support it well by default.
+    <ul>
+      <li>It transforms full imports into per-module imports (e.g., <b>import { Button } from "ui-lib"</b> → <b>import Button from "ui-lib/Button"</b>).</li>
+      <li>This improves performance by including only the components you use instead of the entire library.</li>
+      <li>Commonly used for libraries like <b>lodash</b>, <b>date-fns</b>, or large UI kits like <b>Material UI</b>.</li>
+      <li>You define a map of modules to rewrite under <b>modularizeImports</b> in <b>next.config.js</b>.</li>
+    </ul>
+    It's a powerful optimization tool for large projects with many third-party libraries.
+  </div>
+</li>
+
+<li data-id="q78" class="zyellow">
+  <span class="faq-question">How do you reduce bundle size in large Next.js projects?</span>
+  <div class="answer">
+    To reduce bundle size in large Next.js projects, use a combination of code splitting, optimized imports, and caching strategies:
+    <ul>
+      <li><b>Use dynamic imports</b> to load components only when needed.</li>
+      <li><b>Enable modularizeImports</b> to avoid full-package imports.</li>
+      <li><b>Tree-shake unused code</b> by using modern libraries and avoiding default imports from large packages.</li>
+      <li><b>Use Server Components</b> to move non-interactive logic to the server.</li>
+      <li><b>Analyze the bundle</b> with <b>next build && next export && npx next-bundle-analyzer</b>.</li>
+      <li><b>Avoid large images and fonts</b> directly in your bundle — use CDN and lazy loading instead.</li>
+      <li><b>Remove unnecessary polyfills and console logs</b> in production.</li>
+    </ul>
+    These strategies help maintain fast performance and reduce load times for end users.
+  </div>
+</li>
+<li data-id="q79" class="zyellow">
+  <span class="faq-question">What is Flight and how does it optimize rendering?</span>
+  <div class="answer">
+    Flight is the underlying protocol used by React Server Components (RSC) in Next.js to send component tree information from the server to the client. Instead of sending fully rendered HTML, Flight sends a lightweight representation of the component structure.
+    <ul>
+      <li>Flight serializes component payloads from the server and transmits them to the browser efficiently.</li>
+      <li>Client receives only what it needs for hydration or interactivity, reducing bandwidth.</li>
+      <li>This model avoids sending duplicate JavaScript and accelerates time-to-interactive.</li>
+      <li>It enables partial rendering on the server and seamless merging with interactive components on the client.</li>
+    </ul>
+    Flight improves performance by allowing components to render on the server without forcing full hydration or bundling all logic to the client.
+  </div>
+</li>
+
+<li data-id="q80" class="zyellow">
+  <span class="faq-question">How does React Server Components improve performance?</span>
+  <div class="answer">
+    React Server Components (RSC), supported in Next.js App Router, improve performance by shifting rendering responsibility to the server, reducing the amount of JavaScript sent to the client.
+    <ul>
+      <li>Non-interactive components are rendered entirely on the server — no client-side JS is needed.</li>
+      <li>Allows sending only minimal data to the client through the Flight protocol.</li>
+      <li>Fewer bundle sizes lead to faster load times and better Core Web Vitals.</li>
+      <li>Reduces the time-to-hydration by offloading logic to the server, especially useful for dashboards or data-heavy UIs.</li>
+    </ul>
+    RSC enables a hybrid rendering model where only interactive components are hydrated on the client, dramatically reducing unnecessary computation.
+  </div>
+</li>
+
+<li data-id="q81" class="zyellow">
+  <span class="faq-question">How do you use Lighthouse to audit a Next.js app?</span>
+  <div class="answer">
+    Lighthouse is a performance auditing tool built into Chrome DevTools and available via CLI or CI integration. It helps you measure your Next.js app's speed, SEO, accessibility, and PWA readiness.
+    <ul>
+      <li>Open Chrome, go to your deployed Next.js site, and open DevTools.</li>
+      <li>Go to the <b>Lighthouse</b> tab and run an audit for Mobile or Desktop.</li>
+      <li>It evaluates metrics like First Contentful Paint, Largest Contentful Paint, and Time to Interactive.</li>
+      <li>Use the results to identify bottlenecks like large images, unoptimized JS, or excessive layout shifts.</li>
+      <li>Apply suggestions like using <b>next/image</b>, lazy loading, and reducing third-party scripts.</li>
+    </ul>
+    Lighthouse is essential for optimizing user experience and improving search engine rankings.
+  </div>
+</li>
+<li data-id="q82" class="zyellow">
+  <span class="faq-question">How do you implement performance monitoring in production?</span>
+  <div class="answer">
+    Performance monitoring in a production Next.js app can be achieved using third-party tools that track web vitals, errors, and user behavior in real time.
+    <ul>
+      <li>Use tools like <b>Sentry</b>, <b>LogRocket</b>, <b>Datadog</b>, or <b>New Relic</b> to collect metrics and logs.</li>
+      <li>Leverage the <b>reportWebVitals</b> function in Next.js to capture metrics like CLS, FID, and LCP.</li>
+      <li>Send vitals to your monitoring service from <b>pages/_app.js</b> or <b>app/layout.js</b>.</li>
+      <li>Monitor errors, slow API routes, and unhandled promise rejections.</li>
+      <li>Set up alerts or dashboards to proactively detect regressions in performance.</li>
+    </ul>
+    This helps maintain a healthy user experience and troubleshoot issues after deployment.
+  </div>
+</li>
+
+<li data-id="q83" class="zyellow">
+  <span class="faq-question">How does Next.js handle loading UI for streaming pages?</span>
+  <div class="answer">
+    Next.js handles loading UI for streaming pages in the App Router using the <b>loading.js</b> file, which is automatically shown while Server Components are being streamed.
+    <ul>
+      <li>Create a <b>loading.js</b> inside any route folder to display UI during the initial loading or while waiting for nested routes to render.</li>
+      <li>The file is only used with Server Components and <b>React Suspense</b> boundaries.</li>
+      <li>Supports partial rendering — parent layouts can stream first while child pages load in the background.</li>
+      <li>Improves user-perceived performance with visual feedback instead of a blank screen.</li>
+    </ul>
+    This native support for streaming makes transitions smoother and helps users stay engaged during data fetches or dynamic rendering.
+  </div>
+</li>
+<li data-id="q84" class="zyellow">
+  <span class="faq-question">How do you deploy Server Components to Vercel?</span>
+  <div class="answer">
+    Deploying Server Components to Vercel is seamless because Vercel is built to support the App Router and React Server Components out of the box.
+    <ul>
+      <li>Ensure your app uses the <b>app/</b> directory structure with <b>page.js</b>, <b>layout.js</b>, and Server Components.</li>
+      <li>Push your code to GitHub, GitLab, or Bitbucket and connect your repository to Vercel.</li>
+      <li>Vercel automatically detects Next.js and builds your project using <b>output: "standalone"</b>.</li>
+      <li>Server Components are deployed to Vercel’s serverless infrastructure and rendered dynamically.</li>
+    </ul>
+    This allows for efficient rendering with built-in caching, streaming, and dynamic computation at scale.
+  </div>
+</li>
+
+<li data-id="q85" class="zyellow">
+  <span class="faq-question">How does app/ folder work with Vercel’s Edge Network?</span>
+  <div class="answer">
+    The <b>app/</b> folder in Next.js leverages Vercel’s Edge Network by enabling Server Components, streaming, and caching at the edge.
+    <ul>
+      <li>Each route in the <b>app/</b> folder can be dynamically rendered and streamed using React Server Components.</li>
+      <li>Vercel caches static and dynamic segments intelligently using headers and revalidation rules.</li>
+      <li>Layouts and <b>loading.js</b> files support edge streaming, reducing time-to-first-byte (TTFB).</li>
+      <li>When used with <b>Edge Functions</b>, parts of your app can run globally with minimal latency.</li>
+    </ul>
+    This integration helps deliver fast, scalable experiences while maintaining flexibility in rendering and caching.
+  </div>
+</li>
+
+<li data-id="q86" class="zyellow">
+  <span class="faq-question">What are Edge Functions vs API Routes?</span>
+  <div class="answer">
+    <b>Edge Functions</b> and <b>API Routes</b> are two server-side execution models in Next.js, each optimized for different use cases.
+    <ul>
+      <li><b>API Routes</b> are Node.js serverless functions that run in Vercel’s Lambda environment. They support full Node APIs but have higher latency.</li>
+      <li><b>Edge Functions</b> run at Vercel's edge locations, closer to the user, with ultra-low latency and faster cold starts. They use the Web Fetch API (no full Node.js support).</li>
+      <li>Use Edge Functions for quick logic like auth, redirects, personalization, and geolocation.</li>
+      <li>Use API Routes for heavy computation, file handling, or Node.js packages like <b>fs</b> or <b>crypto</b>.</li>
+    </ul>
+    Choosing between them depends on whether you need global speed (Edge) or full backend power (API Route).
+  </div>
+</li>
+<li data-id="q87" class="zyellow">
+  <span class="faq-question">How do you deploy Next.js on AWS Lambda or Docker?</span>
+  <div class="answer">
+    You can deploy a Next.js app on AWS Lambda using the <b>output: "standalone"</b> option and tools like <b>Serverless Framework</b>, <b>AWS SAM</b>, or <b>Lambda@Edge</b>. Docker is also a popular option for containerized deployment.
+    <ul>
+      <li><b>AWS Lambda:</b>
+        <ul>
+          <li>In <b>next.config.js</b>, set <b>output: "standalone"</b> to generate a minimal Node.js app.</li>
+          <li>Use <b>server.js</b> with <b>aws-serverless-express</b> or adapt your app to <b>API Gateway + Lambda</b>.</li>
+          <li>Deploy using Serverless Framework or Terraform with proper Lambda configuration.</li>
+        </ul>
+      </li>
+      <li><b>Docker:</b>
+        <ul>
+          <li>Create a <b>Dockerfile</b> using the standalone build.</li>
+          <li>Use <b>node:alpine</b> or <b>node:slim</b> images for smaller containers.</li>
+          <li>Expose port 3000 and use <b>CMD ["node", "server.js"]</b> to start the app.</li>
+        </ul>
+      </li>
+    </ul>
+    These methods allow you to run dynamic Next.js apps in flexible, scalable server environments.
+  </div>
+</li>
+
+<li data-id="q88" class="zyellow">
+  <span class="faq-question">How do you handle cold starts and latency in SSR?</span>
+  <div class="answer">
+    Cold starts and latency in Server-Side Rendering (SSR) can affect performance, especially in serverless environments like AWS Lambda. To reduce these issues:
+    <ul>
+      <li>Use <b>Edge Functions</b> where possible for lower latency and faster start times.</li>
+      <li>Enable <b>Incremental Static Regeneration (ISR)</b> to serve cached pages and reduce SSR hits.</li>
+      <li>Keep serverless functions warm with scheduled <b>CloudWatch events</b> or ping tools.</li>
+      <li>Optimize dependencies and reduce server payload to minimize startup time.</li>
+      <li>Cache responses at the CDN level (e.g., using CloudFront or Vercel’s edge network).</li>
+      <li>Use lazy loading and split large logic across components.</li>
+    </ul>
+    These strategies improve responsiveness and reduce the performance hit caused by cold starts in server-rendered apps.
+  </div>
+</li>
+<li data-id="q89" class="zyellow">
+  <span class="faq-question">How does Next.js handle routing internally?</span>
+  <div class="answer">
+    Next.js uses a file-system based routing system where the folder and file structure under <b>pages/</b> or <b>app/</b> automatically becomes available as routes.
+    <ul>
+      <li>Each file inside <b>pages/</b> becomes a route (e.g., <b>pages/about.js</b> → <b>/about</b>).</li>
+      <li>Dynamic routes are defined using brackets (e.g., <b>pages/blog/[slug].js</b>).</li>
+      <li>App Router uses <b>layout.js</b>, <b>page.js</b>, and <b>route groups</b> to define complex nested and parallel routing.</li>
+      <li>Under the hood, Next.js maps each request to a corresponding component using route matchers and handlers via its internal router.</li>
+      <li>Pre-fetching and client-side navigation are handled by the <b>next/link</b> and <b>next/navigation</b> modules.</li>
+    </ul>
+    This abstraction makes routing declarative, predictable, and optimized for both SSR and static pages.
+  </div>
+</li>
+
+<li data-id="q90" class="zyellow">
+  <span class="faq-question">What are the internals of static rendering pipeline?</span>
+  <div class="answer">
+    The static rendering pipeline in Next.js transforms your pages into HTML at build time to be served directly from a CDN.
+    <ul>
+      <li>During build, Next.js calls <b>getStaticProps()</b> (Pages Router) or renders Server Components with no dynamic data (App Router).</li>
+      <li>The HTML output is generated using React’s <b>renderToStaticMarkup()</b> or <b>renderToReadableStream()</b>.</li>
+      <li>Each page’s static HTML and optional JSON data are written to the <b>.next</b> directory.</li>
+      <li>These assets are then deployed to CDN (e.g., Vercel Edge Network or S3) for instant delivery.</li>
+      <li>Next.js also generates a routing manifest and fallback files for ISR and dynamic routes.</li>
+    </ul>
+    This pipeline ensures fast loading by pre-rendering HTML while still supporting dynamic updates via revalidation.
+  </div>
+</li>
+
+<li data-id="q91" class="zyellow">
+  <span class="faq-question">How does server-side rendering differ from traditional Node.js SSR?</span>
+  <div class="answer">
+    Server-side rendering (SSR) in Next.js improves on traditional Node.js SSR by automating routing, data fetching, caching, and performance optimizations.
+    <ul>
+      <li><b>Next.js SSR:</b> Uses <b>getServerSideProps()</b> or Server Components to fetch data and render HTML on each request.</li>
+      <li>Includes built-in features like streaming, caching headers, and route-based code splitting.</li>
+      <li>Automatically integrates with React features like Suspense and Server Actions.</li>
+      <li><b>Traditional Node.js SSR:</b> Requires manual setup with Express, ReactDOMServer, and route-to-component mapping.</li>
+      <li>Less optimized for performance and lacks built-in support for static generation or edge deployment.</li>
+    </ul>
+    Next.js abstracts complex SSR setup while enabling fine-grained control and modern rendering strategies.
+  </div>
+</li>
+<li data-id="q92" class="zyellow">
+  <span class="faq-question">How does ISR work under the hood?</span>
+  <div class="answer">
+    Incremental Static Regeneration (ISR) in Next.js allows static pages to be updated after deployment without rebuilding the entire site.
+    <ul>
+      <li>At build time, static pages are generated and stored in the cache or CDN.</li>
+      <li>When a user requests a page, it is served from the static cache instantly.</li>
+      <li>If the page’s revalidation time has expired, Next.js triggers a background regeneration of that page.</li>
+      <li>The updated HTML replaces the previous version in the cache after the regeneration completes.</li>
+      <li>This is controlled using the <b>revalidate</b> option in <b>getStaticProps</b> (Pages Router) or route segment config (App Router).</li>
+    </ul>
+    ISR combines the performance of static pages with the flexibility of server-rendered content, keeping sites fast and up-to-date.
+  </div>
+</li>
+
+<li data-id="q93" class="zyellow">
+  <span class="faq-question">How does Next.js manage concurrent rendering?</span>
+  <div class="answer">
+    Next.js uses React’s Concurrent Rendering capabilities, especially in the App Router, to optimize UI responsiveness and user experience.
+    <ul>
+      <li>Concurrent rendering allows React to interrupt, pause, or resume rendering work as needed.</li>
+      <li>It enables features like <b>Suspense</b>, <b>lazy loading</b>, <b>streaming</b>, and <b>loading.js</b>.</li>
+      <li>Next.js leverages this to stream Server Components, progressively rendering parts of the page.</li>
+      <li>Only Client Components with interactivity are hydrated on the browser side, improving performance.</li>
+      <li>Concurrent rendering avoids blocking the main thread and allows smooth transitions and updates even during complex operations.</li>
+    </ul>
+    This leads to faster time-to-interactive, better perceived performance, and more fluid user interfaces.
+  </div>
+</li>
+<li data-id="q94" class="zyellow">
+  <span class="faq-question">How do you implement Content Security Policy (CSP) in Next.js?</span>
+  <div class="answer">
+    You can implement a Content Security Policy (CSP) in Next.js using the <b>headers()</b> function in <b>next.config.js</b> to set secure HTTP headers for all pages.
+    <ul>
+      <li>Define the CSP string with rules for <b>script-src</b>, <b>style-src</b>, <b>img-src</b>, and other directives.</li>
+      <li>Use nonces or hashes to allow inline scripts or styles securely when needed.</li>
+      <li>Apply the CSP using <b>Content-Security-Policy</b> header for all routes.</li>
+      <li>Test your policy with browser dev tools and <b>report-uri</b> to log violations.</li>
+      <li>Use strict CSP rules to prevent unauthorized scripts from executing on your pages.</li>
+    </ul>
+    CSP helps protect your Next.js application from XSS attacks by restricting the sources of content that can be loaded.
+  </div>
+</li>
+
+<li data-id="q95" class="zyellow">
+  <span class="faq-question">How do you prevent XSS in SSR pages?</span>
+  <div class="answer">
+    Preventing Cross-Site Scripting (XSS) in SSR pages involves sanitizing user-generated content and avoiding unsafe rendering methods.
+    <ul>
+      <li>Never render unescaped HTML using <b>dangerouslySetInnerHTML</b> unless the content is sanitized.</li>
+      <li>Use libraries like <b>DOMPurify</b> or <b>sanitize-html</b> to clean user input.</li>
+      <li>Escape variables by default in JSX — Next.js handles this automatically for standard rendering.</li>
+      <li>Set strict <b>Content-Security-Policy</b> headers to block inline scripts and third-party injections.</li>
+      <li>Validate and encode any user-generated content sent to the server or stored in the database.</li>
+    </ul>
+    These steps protect your server-rendered pages from malicious script injection and content manipulation.
+  </div>
+</li>
+
+<li data-id="q96" class="zyellow">
+  <span class="faq-question">How do you handle JWT securely in the browser and server?</span>
+  <div class="answer">
+    Secure handling of JWT (JSON Web Tokens) in Next.js involves proper storage, transmission, and verification.
+    <ul>
+      <li>Store JWTs in <b>HttpOnly</b>, <b>Secure</b> cookies to protect them from XSS access.</li>
+      <li>Avoid storing JWTs in <b>localStorage</b> or <b>sessionStorage</b>, which are accessible via JavaScript.</li>
+      <li>Use middleware or <b>getServerSideProps</b> to read and verify tokens server-side.</li>
+      <li>Implement short expiration times and rotate tokens using refresh tokens stored in cookies.</li>
+      <li>Use HTTPS to prevent token interception over the network.</li>
+      <li>Verify JWT signatures on the server using trusted algorithms like HS256 or RS256.</li>
+    </ul>
+    This approach minimizes security risks while maintaining stateless authentication for your app.
+  </div>
+</li>
+<li data-id="q97" class="zyellow">
+  <span class="faq-question">What are some security best practices for public APIs?</span>
+  <div class="answer">
+    Securing public APIs is crucial to prevent misuse, abuse, and data breaches. Key best practices include:
+    <ul>
+      <li><b>Rate Limiting:</b> Limit the number of API requests per IP or user to prevent abuse and DDoS attacks.</li>
+      <li><b>Authentication:</b> Require API keys, OAuth tokens, or JWTs to validate the client identity.</li>
+      <li><b>Authorization:</b> Ensure users can only access resources they are permitted to use.</li>
+      <li><b>Input Validation:</b> Sanitize and validate all incoming data to prevent injection attacks (XSS, SQLi, etc.).</li>
+      <li><b>HTTPS Only:</b> Serve your API over HTTPS to protect against man-in-the-middle attacks.</li>
+      <li><b>CORS Restrictions:</b> Set proper CORS headers to control which domains can access your API.</li>
+      <li><b>Logging & Monitoring:</b> Track access patterns, failures, and suspicious activity in real time.</li>
+    </ul>
+    These practices help ensure your API remains stable, protected, and resilient against common threats.
+  </div>
+</li>
+
+<li data-id="q98" class="zyellow">
+  <span class="faq-question">How do you secure environment variables and secrets?</span>
+  <div class="answer">
+    Securing environment variables and secrets ensures sensitive data like API keys, credentials, and tokens are not exposed or misused.
+    <ul>
+      <li><b>Use .env.local:</b> Store secrets in local environment files that are <b>gitignored</b> and never committed.</li>
+      <li><b>Vercel / AWS Secrets Manager:</b> Use cloud-based secret management services to store and access secrets securely.</li>
+      <li><b>Never expose secrets to the client:</b> Only prefix public environment variables with <b>NEXT_PUBLIC_</b>. Server-only variables must stay private.</li>
+      <li><b>Restrict access:</b> Set appropriate IAM or file permissions so only trusted systems can access the secrets.</li>
+      <li><b>Rotate keys regularly:</b> Invalidate and replace secrets periodically to reduce the impact of potential leaks.</li>
+      <li><b>Audit usage:</b> Track how and where secrets are accessed and used across your infrastructure.</li>
+    </ul>
+    These precautions help protect your application from unauthorized access and data exposure.
+  </div>
+</li>
+                                                      
+<li data-id="q99" class="zyellow">
+  <span class="faq-question">What are some best practices for organizing a large Next.js project?</span>
+  <div class="answer">
+    Organizing a large Next.js project requires scalable folder structure, separation of concerns, and clear conventions.
+    <ul>
+      <li><b>Modular Structure:</b> Use feature-based folders inside <b>app/</b> or <b>components/</b> (e.g., <b>auth</b>, <b>dashboard</b>, <b>products</b>).</li>
+      <li><b>Use Aliases:</b> Configure <b>tsconfig.json</b> or <b>jsconfig.json</b> for import path aliases (e.g., <b>@/components</b>).</li>
+      <li><b>Group Logic:</b> Keep API logic in <b>lib/</b>, hooks in <b>hooks/</b>, services in <b>services/</b>, and reusable components in <b>ui/</b>.</li>
+      <li><b>Layouts:</b> Use nested layouts in the App Router to manage consistent UI like headers or sidebars.</li>
+      <li><b>Testing:</b> Organize unit, integration, and e2e tests in <b>__tests__/</b> folders near related code.</li>
+    </ul>
+    A consistent, modular structure enhances team productivity and simplifies onboarding and maintenance.
+  </div>
+</li>
+
+<li data-id="q100" class="zyellow">
+  <span class="faq-question">How do you structure a monorepo with multiple Next.js apps?</span>
+  <div class="answer">
+    A monorepo allows you to manage multiple Next.js apps and shared packages within one repository, using tools like <b>TurboRepo</b> or <b>Nx</b>.
+    <ul>
+      <li>Use a root directory structure like:
+        <ul>
+          <li><b>apps/web</b> → main app</li>
+          <li><b>apps/admin</b> → admin panel</li>
+          <li><b>packages/ui</b> → shared components</li>
+          <li><b>packages/utils</b> → shared utility functions</li>
+        </ul>
+      </li>
+      <li>Define root-level <b>tsconfig.json</b>, <b>eslint</b>, and <b>prettier</b> config for consistency.</li>
+      <li>Use <b>pnpm workspaces</b>, <b>Yarn workspaces</b>, or <b>npm workspaces</b> to manage dependencies.</li>
+      <li>Use <b>TurboRepo</b> or <b>Nx</b> for task caching, dependency graph, and efficient CI builds.</li>
+    </ul>
+    This setup allows scalable development of multiple apps with shared logic in one unified codebase.
+  </div>
+</li>
+
+<li data-id="q101" class="zyellow">
+  <span class="faq-question">How do you integrate shared UI libraries in a monorepo?</span>
+  <div class="answer">
+    To integrate a shared UI library in a monorepo with multiple Next.js apps:
+    <ul>
+      <li>Create a <b>packages/ui</b> folder for your reusable components.</li>
+      <li>Use <b>React</b>, <b>Tailwind CSS</b>, or any design system to build generic UI components (e.g., <b>Button</b>, <b>Card</b>).</li>
+      <li>Export components using <b>index.ts</b> inside the package.</li>
+      <li>Ensure the UI package has its own <b>tsconfig.json</b> and <b>package.json</b>.</li>
+      <li>Import shared components in your apps via path aliases or workspace references (e.g., <b>import { Button } from "ui"</b>).</li>
+      <li>Use <b>transpilePackages</b> in <b>next.config.js</b> to make Next.js transpile the UI package if it uses TypeScript or JSX.</li>
+    </ul>
+    This promotes DRY principles and maintains a consistent design system across all applications.
+  </div>
+</li>
+<li data-id="q102" class="zyellow">
+  <span class="faq-question">What are some common design patterns used in Next.js architecture?</span>
+  <div class="answer">
+    Next.js projects can adopt several proven design patterns to improve scalability, maintainability, and performance:
+    <ul>
+      <li><b>Modular Architecture:</b> Break the project into reusable, domain-specific modules (e.g., auth, dashboard, products).</li>
+      <li><b>Container-Presenter Pattern:</b> Separate logic (container) from UI (presenter) components for better testability and reusability.</li>
+      <li><b>Layout Pattern:</b> Use nested <b>layout.js</b> files in the App Router to manage persistent UI like headers or sidebars.</li>
+      <li><b>Hooks Pattern:</b> Encapsulate logic in custom hooks (e.g., <b>useAuth</b>, <b>useFetch</b>, <b>useCart</b>).</li>
+      <li><b>Service Layer Pattern:</b> Abstract API calls or business logic into dedicated service files in <b>lib/</b> or <b>services/</b>.</li>
+      <li><b>Repository Pattern:</b> Encapsulate data access logic (e.g., DB queries, API clients) for easier testing and future replacement.</li>
+      <li><b>Facade Pattern:</b> Combine multiple APIs or components into a simpler interface, often used in shared services or SDKs.</li>
+    </ul>
+    These patterns help organize large codebases and reduce coupling between components, making code more modular and testable.
+  </div>
+</li>
+
+<li data-id="q103" class="zyellow">
+  <span class="faq-question">How do you apply SOLID principles in Next.js?</span>
+  <div class="answer">
+    The SOLID principles can be applied in a Next.js codebase to ensure clean, maintainable, and scalable architecture:
+    <ul>
+      <li><b>S – Single Responsibility:</b> Each component, hook, or service should have one responsibility (e.g., <b>LoginForm</b> only handles login UI).</li>
+      <li><b>O – Open/Closed:</b> Components and modules should be open to extension but closed to modification. Use props and composition instead of hardcoded logic.</li>
+      <li><b>L – Liskov Substitution:</b> Ensure custom components and classes can be substituted without breaking functionality (e.g., extend a base button).</li>
+      <li><b>I – Interface Segregation:</b> Keep components and services focused — avoid forcing unrelated props or APIs into one module.</li>
+      <li><b>D – Dependency Inversion:</b> Depend on abstractions like services or hooks instead of hardcoded implementations (e.g., inject API clients or auth services).</li>
+    </ul>
+    Applying these principles results in modular, extensible, and testable Next.js applications.
+  </div>
+</li>
+      
+<li data-id="q104" class="zyellow">
+  <span class="faq-question">How do you set up CI/CD pipelines for Next.js with GitHub Actions?</span>
+  <div class="answer">
+    GitHub Actions allows you to automate building, testing, and deploying your Next.js app. To set up a pipeline:
+    <ul>
+      <li>Create a <b>.github/workflows/deploy.yml</b> file in your project.</li>
+      <li>Use jobs like <b>install</b>, <b>build</b>, <b>test</b>, and <b>deploy</b>.</li>
+      <li>Install dependencies with <b>npm install</b> or <b>pnpm install</b>.</li>
+      <li>Run <b>next build</b> to compile your app.</li>
+      <li>Deploy to your target platform (e.g., Vercel, AWS, Docker, or S3) using CLI or action plugins.</li>
+      <li>Use secrets like <b>VERCEL_TOKEN</b> or <b>AWS_ACCESS_KEY_ID</b> stored securely in GitHub settings.</li>
+    </ul>
+    This enables automatic builds and deployments every time you push to a branch like <b>main</b> or <b>release</b>.
+  </div>
+</li>
+
+<li data-id="q105" class="zyellow">
+  <span class="faq-question">How do you run integration tests before deployment?</span>
+  <div class="answer">
+    To run integration tests before deployment in Next.js using GitHub Actions:
+    <ul>
+      <li>Write tests using tools like <b>Playwright</b>, <b>Cypress</b>, or <b>Jest with Puppeteer</b>.</li>
+      <li>In your GitHub Actions workflow, add a <b>test</b> job that runs after the build step.</li>
+      <li>Spin up a local Next.js server using <b>next start</b> or a mock server before executing tests.</li>
+      <li>Run your integration test scripts (e.g., <b>npm run test:e2e</b>).</li>
+      <li>Fail the job if any test fails to prevent broken code from being deployed.</li>
+      <li>Use test reports and screenshots to debug failed runs.</li>
+    </ul>
+    This ensures every deployment is validated through real-world testing flows.
+  </div>
+</li>
+
+<li data-id="q106" class="zyellow">
+  <span class="faq-question">How do you configure environment-specific builds?</span>
+  <div class="answer">
+    You can configure environment-specific builds in Next.js using environment variables and conditional logic.
+    <ul>
+      <li>Define <b>.env.local</b>, <b>.env.development</b>, <b>.env.production</b>, and other custom env files.</li>
+      <li>Use <b>NEXT_PUBLIC_</b> prefix for variables needed on the client.</li>
+      <li>Configure <b>build</b> and <b>start</b> scripts in <b>package.json</b> based on NODE_ENV (e.g., <b>NODE_ENV=production next build</b>).</li>
+      <li>In GitHub Actions, pass different env files based on the branch or deployment target (e.g., staging vs production).</li>
+      <li>Use <b>process.env.ENV_NAME</b> to write conditional logic in your app.</li>
+    </ul>
+    This setup helps you deploy different configurations for development, staging, and production environments safely.
+  </div>
+</li>
+
+<li data-id="q107" class="zyellow">
+  <span class="faq-question">How do you perform blue-green deployments?</span>
+  <div class="answer">
+    Blue-green deployment is a strategy where two environments (blue and green) are used to reduce downtime and risk during deployment.
+    <ul>
+      <li>Set up two identical environments: <b>Blue</b> (current live) and <b>Green</b> (new version).</li>
+      <li>Deploy your new Next.js app to the green environment without affecting users.</li>
+      <li>Run tests and health checks on the green environment to ensure it works properly.</li>
+      <li>Switch traffic from blue to green using a load balancer, DNS switch, or feature flag.</li>
+      <li>Keep the blue environment available as a backup until the new version is fully stable.</li>
+    </ul>
+    This approach allows zero-downtime releases and makes it easy to rollback in case of issues.
+  </div>
+</li>
+
+<li data-id="q108" class="zyellow">
+  <span class="faq-question">How do you handle rollback strategies?</span>
+  <div class="answer">
+    Rollback strategies help you quickly revert to a previous stable version of your Next.js app when a deployment fails.
+    <ul>
+      <li><b>Blue-Green Rollback:</b> If using blue-green deployments, just route traffic back to the blue environment.</li>
+      <li><b>Versioned Deployments:</b> Keep multiple app versions and promote a previous one as the current.</li>
+      <li><b>Vercel Revert:</b> In Vercel, use the "Revert to Previous Deployment" feature.</li>
+      <li><b>Git Revert:</b> Revert a commit in Git, push the change, and let your CI/CD redeploy the previous version.</li>
+      <li><b>Monitor and Alert:</b> Set up health checks and error monitoring (e.g., Sentry) to detect when rollbacks are needed.</li>
+    </ul>
+    Proper rollback strategies reduce downtime and help ensure fast recovery from bugs or failed releases.
+  </div>
+</li>
+
+
+<li data-id="q109" class="zyellow">
+  <span class="faq-question">How do you integrate with CMS (e.g. Sanity, Strapi) using GraphQL?</span>
+  <div class="answer">
+    You can integrate a headless CMS like Sanity or Strapi with Next.js using GraphQL by querying content directly in your components or pages.
+    <ul>
+      <li>Enable or configure GraphQL API on the CMS (e.g., install GraphQL plugin in Strapi).</li>
+      <li>Use a GraphQL client like Apollo Client, urql, or graphql-request in your Next.js app.</li>
+      <li>Create reusable GraphQL queries to fetch content like blog posts, pages, or settings.</li>
+      <li>Call queries inside <b>getStaticProps</b>, <b>getServerSideProps</b>, or Server Components to prefetch data.</li>
+      <li>Handle CMS authentication via tokens or API keys securely using environment variables.</li>
+    </ul>
+    This allows you to build content-rich, SEO-friendly websites using data managed by non-developers.
+  </div>
+</li>
+
+<li data-id="q110" class="zyellow">
+  <span class="faq-question">How do you implement preview mode with headless CMS?</span>
+  <div class="answer">
+    Preview mode in Next.js allows content editors to view draft content from a headless CMS before it’s published.
+    <ul>
+      <li>Set up a preview endpoint (e.g., <b>/api/preview</b>) that sets preview cookies using <b>res.setPreviewData()</b>.</li>
+      <li>Update <b>getStaticProps</b> to fetch draft content when <b>context.preview</b> is true.</li>
+      <li>Trigger preview from your CMS (e.g., Strapi or Sanity) using a "Preview URL" that points to your site’s preview endpoint with a slug or ID.</li>
+      <li>Create a <b>/api/exit-preview</b> route to exit preview mode and clear cookies.</li>
+      <li>Secure preview mode with tokens or secret parameters to prevent unauthorized access.</li>
+    </ul>
+    This helps editors and reviewers validate content before publishing it live.
+  </div>
+</li>
+
+<li data-id="q111" class="zyellow">
+  <span class="faq-question">How do you integrate with WebSockets or real-time APIs?</span>
+  <div class="answer">
+    Next.js can integrate with WebSockets or real-time APIs like Socket.IO, Pusher, or Ably to support live features such as chat, notifications, or dashboards.
+    <ul>
+      <li>Install a real-time library like <b>socket.io-client</b> or use native WebSocket API in the browser.</li>
+      <li>Use Client Components to establish the WebSocket connection since WebSockets require a browser environment.</li>
+      <li>Connect to your backend server or third-party service from within <b>useEffect</b> in a React component.</li>
+      <li>Handle messages and events to update UI in real time using state or context.</li>
+      <li>For server-side, use a custom Express server or deploy your real-time backend separately (e.g., on AWS Lambda or Node.js server).</li>
+    </ul>
+    Real-time integration enhances user experience by delivering updates instantly without page refreshes.
+  </div>
+</li>
+<li data-id="q112" class="zyellow">
+  <span class="faq-question">How do you add Google Analytics v4 to Next.js App Router?</span>
+  <div class="answer">
+    You can integrate Google Analytics v4 (GA4) into a Next.js App Router project by injecting the GA script and tracking route changes manually.
+    <ul>
+      <li>Add the GA4 script using the <b>&lt;Script strategy="afterInteractive"&gt;</b> component in <b>app/layout.js</b> or a shared layout.</li>
+      <li>Initialize GA with your Measurement ID using the <b>gtag</b> setup.</li>
+      <li>Use the <b>usePathname</b> and <b>useEffect</b> hooks in a Client Component to track page views on route changes.</li>
+      <li>Ensure script is loaded only in the browser and not in server components.</li>
+      <li>Respect user privacy and cookie consent policies if required.</li>
+    </ul>
+    This setup ensures GA4 captures analytics data correctly in a modern App Router-based Next.js app.
+  </div>
+</li>
+
+<li data-id="q113" class="zyellow">
+  <span class="faq-question">How do you add self-hosted analytics (e.g. Plausible)?</span>
+  <div class="answer">
+    To use a privacy-friendly, self-hosted analytics tool like Plausible:
+    <ul>
+      <li>Sign up or self-host the Plausible instance.</li>
+      <li>Get the tracking script from your Plausible dashboard.</li>
+      <li>Add the script in <b>app/layout.js</b> using Next.js’s <b>&lt;Script strategy="afterInteractive"&gt;</b>.</li>
+      <li>Use <b>data-domain</b> attribute in the script to specify your domain.</li>
+      <li>For dynamic routing, trigger manual page views using the Plausible API and the <b>usePathname</b> hook.</li>
+      <li>Host the script yourself for full control and GDPR compliance.</li>
+    </ul>
+    Plausible is lightweight, respects user privacy, and works seamlessly with Next.js.
+  </div>
+</li>
+
+<li data-id="q114" class="zyellow">
+  <span class="faq-question">How do you monitor API latency?</span>
+  <div class="answer">
+    Monitoring API latency helps track performance bottlenecks and ensure optimal response times for users.
+    <ul>
+      <li>Use APM tools like <b>New Relic</b>, <b>Datadog</b>, <b>Dynatrace</b>, or <b>Sentry Performance</b> to automatically track request times.</li>
+      <li>Log request duration using middleware or interceptors in API routes or backend services.</li>
+      <li>Track metrics such as response time, throughput, and error rate using Prometheus and Grafana if self-hosting.</li>
+      <li>Set up alerts for latency spikes using CloudWatch, LogRocket, or custom dashboards.</li>
+      <li>For simple use cases, manually log timestamps at request start and end points to calculate duration.</li>
+    </ul>
+    Monitoring latency enables proactive optimization and better user experience across all environments.
+  </div>
+</li>
+<li data-id="q115" class="zyellow">
+  <span class="faq-question">How do you collect frontend performance metrics?</span>
+  <div class="answer">
+    Frontend performance metrics help you monitor how your site performs in real user conditions. You can collect them using:
+    <ul>
+      <li><b>Web Vitals:</b> Use the <b>web-vitals</b> package to collect Core Web Vitals like LCP, FID, CLS, etc. in your Next.js app.</li>
+      <li><b>Custom Logging:</b> Log metrics to your own backend or external services using the <b>reportWebVitals</b> function in <b>_app.js</b> (Pages Router) or <b>app/layout.js</b> (App Router).</li>
+      <li><b>Google Analytics:</b> Send Web Vitals to GA4 using <b>gtag</b> or <b>Google Tag Manager</b>.</li>
+      <li><b>Performance Monitoring Tools:</b> Use LogRocket, Sentry Performance, or Datadog RUM to track load times and interactions.</li>
+      <li><b>Browser APIs:</b> Use <b>PerformanceObserver</b> and <b>performance.now()</b> to measure specific parts of your UI.</li>
+    </ul>
+    Collecting real-world performance metrics allows you to improve user experience based on actual usage data.
+  </div>
+</li>
+
+<li data-id="q116" class="zyellow">
+  <span class="faq-question">How do you analyze and optimize Lighthouse scores?</span>
+  <div class="answer">
+    Lighthouse scores provide insights into your site's performance, accessibility, SEO, and best practices.
+    <ul>
+      <li>Run Lighthouse using Chrome DevTools or as a CI tool with <b>lighthouse-ci</b>.</li>
+      <li>Analyze the report sections: Performance, Accessibility, SEO, Best Practices, and PWA.</li>
+      <li>Common optimization steps:
+        <ul>
+          <li>Minimize JavaScript and CSS bundle size using tree-shaking and dynamic imports.</li>
+          <li>Enable lazy loading for images and components using <b>next/image</b> and <b>React.lazy</b>.</li>
+          <li>Reduce initial page load time using Server Components and <b>loading.js</b> files.</li>
+          <li>Improve font loading with <b>font-display: swap</b> and optimize Google Fonts usage.</li>
+          <li>Implement proper caching headers and use CDN for static assets.</li>
+        </ul>
+      </li>
+      <li>Re-run Lighthouse to confirm improvements and track progress over time.</li>
+    </ul>
+    Optimizing Lighthouse scores helps improve performance, user satisfaction, and search engine rankings.
+  </div>
+</li>
+<li data-id="q117" class="zyellow">
+  <span class="faq-question">How do you scale a Next.js app to handle millions of users?</span>
+  <div class="answer">
+    Scaling a Next.js app for millions of users involves optimizing infrastructure, caching, rendering strategy, and observability:
+    <ul>
+      <li><b>Static Rendering:</b> Use Static Generation and ISR to serve highly cached pages without computation per request.</li>
+      <li><b>Load Balancers:</b> Use AWS ALB, NGINX, or Cloud Load Balancing to distribute traffic across instances.</li>
+      <li><b>Horizontal Scaling:</b> Deploy multiple containers or serverless instances (e.g., AWS Lambda, ECS) behind a load balancer.</li>
+      <li><b>Edge Network:</b> Use Vercel, Cloudflare, or AWS CloudFront to serve pages and assets closer to users.</li>
+      <li><b>Database Optimization:</b> Use read replicas, sharding, and caching (Redis) to reduce DB bottlenecks.</li>
+      <li><b>Observability:</b> Monitor CPU, memory, and latency using tools like Datadog, New Relic, or Sentry.</li>
+    </ul>
+    These techniques help your Next.js application scale effectively and maintain responsiveness under massive traffic loads.
+  </div>
+</li>
+
+<li data-id="q118" class="zyellow">
+  <span class="faq-question">What are the performance limits of ISR?</span>
+  <div class="answer">
+    Incremental Static Regeneration (ISR) is highly performant but comes with some practical limits:
+    <ul>
+      <li><b>Initial Request Delay:</b> If a page is not cached and needs regeneration, the first user experiences latency.</li>
+      <li><b>High Churn Pages:</b> If content updates too frequently (e.g., every few seconds), ISR becomes less effective than SSR.</li>
+      <li><b>Build Time Pages:</b> Pages not accessed won’t be generated, which can delay availability for less popular pages.</li>
+      <li><b>Storage Limits:</b> Hosting platforms like Vercel and AWS S3 may have limits on cache size and page quantity.</li>
+      <li><b>Global Invalidation:</b> Revalidation logic is often time-based, not event-driven, unless paired with Webhooks or APIs.</li>
+    </ul>
+    While ISR is ideal for most dynamic-static hybrid sites, consider SSR or Edge Functions for high-churn, personalized content.
+  </div>
+</li>
+
+<li data-id="q119" class="zyellow">
+  <span class="faq-question">How do you implement CDN-level caching?</span>
+  <div class="answer">
+    CDN-level caching ensures faster load times and reduced server load by serving content from geographically distributed servers.
+    <ul>
+      <li><b>Use a CDN:</b> Deploy static assets and generated pages to CDNs like Vercel Edge, AWS CloudFront, or Cloudflare.</li>
+      <li><b>Cache-Control Headers:</b> Set appropriate headers such as <b>Cache-Control: public, max-age=31536000, immutable</b> for assets.</li>
+      <li><b>ISR Pages:</b> ISR pages are automatically cached at the edge with a <b>stale-while-revalidate</b> policy.</li>
+      <li><b>Dynamic Routes:</b> For SSR pages, set response headers dynamically via API or middleware.</li>
+      <li><b>CDN Invalidation:</b> Use platform APIs to programmatically purge outdated content from the cache when necessary.</li>
+      <li><b>Edge Middleware:</b> Use Next.js Middleware to control caching or route users based on geo, auth, or device info.</li>
+    </ul>
+    CDN caching offloads traffic from your origin and ensures rapid delivery of content across the globe.
+  </div>
+</li>
+<li data-id="q120" class="zyellow">
+  <span class="faq-question">How do you reduce time-to-first-byte (TTFB)?</span>
+  <div class="answer">
+    Reducing TTFB improves how fast the first byte of data is received by the browser, which directly impacts perceived performance.
+    <ul>
+      <li><b>Use Static Generation (SSG):</b> Serve pre-rendered content with minimal server processing time.</li>
+      <li><b>Enable Incremental Static Regeneration (ISR):</b> Cache pages at the edge and revalidate in the background.</li>
+      <li><b>Deploy to Edge Locations:</b> Use platforms like Vercel, AWS CloudFront, or Cloudflare to bring content closer to users.</li>
+      <li><b>Reduce Server Logic:</b> Optimize SSR and API routes by minimizing DB calls and using efficient queries.</li>
+      <li><b>Compress Responses:</b> Enable gzip or Brotli compression to reduce payload size.</li>
+      <li><b>Optimize Cold Starts:</b> For serverless apps, reduce dependencies and keep functions warm when possible.</li>
+    </ul>
+    Lowering TTFB helps deliver content faster and improves metrics like LCP and overall Core Web Vitals.
+  </div>
+</li>
+
+<li data-id="q121" class="zyellow">
+  <span class="faq-question">How do you manage rendering cost on large eCommerce apps?</span>
+  <div class="answer">
+    Large eCommerce apps often have thousands of products, categories, and dynamic pricing — which can be costly to render.
+    <ul>
+      <li><b>Use ISR:</b> Pre-render high-traffic product pages and regenerate only when necessary using background revalidation.</li>
+      <li><b>Paginate Listings:</b> Split product catalogs into pages or infinite scroll to reduce data and render load per page.</li>
+      <li><b>Lazy Load Content:</b> Load components like reviews or recommendations on scroll or when visible.</li>
+      <li><b>Cache API Responses:</b> Use Redis or CDN caching for product data and filters to avoid repeated DB access.</li>
+      <li><b>Split Rendering:</b> Use Server and Client Components wisely. Render static info server-side, hydrate only interactive parts.</li>
+      <li><b>Edge Functions:</b> Personalize prices, offers, or availability at the edge without full SSR overhead.</li>
+    </ul>
+    These strategies reduce backend load, lower latency, and keep your storefront fast even during heavy traffic.
+  </div>
+</li>
+<li data-id="q122" class="zyellow">
+  <span class="faq-question">What is partial prerendering?</span>
+  <div class="answer">
+    Partial prerendering is a Next.js strategy that combines static generation and server rendering on a single page.
+    <ul>
+      <li>Some parts of the page are pre-rendered at build time (static), while others are rendered on the server when needed.</li>
+      <li>This allows developers to statically serve non-personalized content and server-render only the dynamic or personalized parts.</li>
+      <li>It improves performance while still supporting dynamic content without fully relying on SSR.</li>
+      <li>Partial prerendering uses the App Router, React Suspense, and Server Components under the hood.</li>
+      <li>It also enables better caching and faster load times for hybrid pages.</li>
+    </ul>
+    This approach is especially useful for marketing pages, product listings, and content-heavy websites with some dynamic elements.
+  </div>
+</li>
+
+<li data-id="q123" class="zyellow">
+  <span class="faq-question">How do you use Suspense for SSR and loading UI?</span>
+  <div class="answer">
+    React Suspense in Next.js is used to wrap asynchronous content and show fallback UI while the data loads.
+    <ul>
+      <li>Wrap slow-loading Server or Client Components inside <b>&lt;Suspense fallback={...}&gt;</b> to control loading states.</li>
+      <li>Use <b>loading.js</b> in route segments in the App Router to automatically handle loading UI during server streaming.</li>
+      <li>Suspense can delay rendering part of the tree until the component is ready, improving perceived performance.</li>
+      <li>Combine Suspense with Server Components to defer loading expensive content (like comments, charts, or widgets).</li>
+      <li>SSR Suspense uses streaming to deliver HTML as it becomes available instead of blocking the entire page.</li>
+    </ul>
+    Suspense enables smoother user experiences by progressively rendering components without full-page reloads.
+  </div>
+</li>
+
+<li data-id="q124" class="zyellow">
+  <span class="faq-question">What are streaming server components and how do they work?</span>
+  <div class="answer">
+    Streaming Server Components allow Next.js to progressively send HTML from the server to the browser as each component resolves.
+    <ul>
+      <li>Server Components are rendered on the server and sent as a stream of HTML to the client.</li>
+      <li>This enables the page to start displaying as soon as the first parts are ready, rather than waiting for the full page.</li>
+      <li>Streaming improves performance and time-to-interactive, especially on slow networks or with complex pages.</li>
+      <li>React Suspense and <b>loading.js</b> work together with streaming to show fallback UI while parts of the page load.</li>
+      <li>Only interactive Client Components are hydrated in the browser, reducing JavaScript bundle size.</li>
+    </ul>
+    Streaming is ideal for building fast, responsive apps with dynamic content and reduced blocking on the main thread.
+  </div>
+</li>
+<li data-id="q125" class="zyellow">
+  <span class="faq-question">How do you prioritize rendering in large layouts?</span>
+  <div class="answer">
+    Prioritizing rendering in large layouts helps improve performance and user experience by showing important content first.
+    <ul>
+      <li><b>Above-the-Fold First:</b> Place the most critical content (like product title, CTA, hero section) near the top of the component tree.</li>
+      <li><b>Defer Non-Critical Components:</b> Use React Suspense or dynamic imports with <b>loading</b> fallback for widgets, sidebars, or ads.</li>
+      <li><b>Use <b>priority</b> for Next.js Image:</b> Set <b>priority</b> on hero images or logos to preload them early.</li>
+      <li><b>Server Components:</b> Use Server Components for static content to reduce JavaScript payload and speed up render.</li>
+      <li><b>Split Layouts:</b> Use nested layouts in the App Router to isolate slow sections and load them progressively.</li>
+    </ul>
+    These techniques ensure critical UI is delivered quickly, even in complex page structures.
+  </div>
+</li>
+
+<li data-id="q126" class="zyellow">
+  <span class="faq-question">How do you ensure fast LCP for all devices?</span>
+  <div class="answer">
+    Largest Contentful Paint (LCP) measures how fast the main content is rendered. To optimize LCP across all devices:
+    <ul>
+      <li><b>Use <b>next/image</b>:</b> Optimize images automatically with lazy loading and responsive sizing.</li>
+      <li><b>Preload Fonts:</b> Load important web fonts using <b>font-display: swap</b> and <b>preload</b> links in <b>head</b>.</li>
+      <li><b>Minimize JavaScript:</b> Reduce JS bundle size using tree-shaking, dynamic imports, and Server Components.</li>
+      <li><b>Serve from Edge:</b> Deploy content with CDNs (like Vercel, Cloudflare, or AWS CloudFront) to reduce latency.</li>
+      <li><b>Critical CSS:</b> Use built-in CSS optimization in Next.js to inline and load above-the-fold styles first.</li>
+      <li><b>Responsive Design:</b> Ensure mobile devices get optimized layouts and assets to avoid blocking on slow networks.</li>
+    </ul>
+    Monitoring with tools like Lighthouse, WebPageTest, and Core Web Vitals ensures your LCP stays fast across devices.
+  </div>
+</li>
+<li data-id="q127" class="zyellow">
+  <span class="faq-question">How do you rate-limit API requests?</span>
+  <div class="answer">
+    Rate limiting protects your API from abuse and ensures fair usage by controlling how often users can make requests.
+    <ul>
+      <li><b>In-Memory:</b> Use libraries like <b>express-rate-limit</b> or <b>lru-cache</b> for small apps or short-term limits.</li>
+      <li><b>Redis-Based:</b> Use Redis with packages like <b>rate-limiter-flexible</b> or <b>express-rate-limit-redis</b> for distributed, scalable rate limiting.</li>
+      <li><b>Next.js Middleware:</b> Apply rate limiting logic in <b>middleware.js</b> to intercept requests before they reach API routes.</li>
+      <li><b>API Gateway:</b> Use AWS API Gateway, Cloudflare, or Vercel Edge Middleware to implement global rate limits.</li>
+      <li><b>Custom Headers:</b> Return headers like <b>X-RateLimit-Limit</b> and <b>X-RateLimit-Remaining</b> to inform clients.</li>
+    </ul>
+    Choose the right strategy based on app size, expected traffic, and hosting platform.
+  </div>
+</li>
+
+<li data-id="q128" class="zyellow">
+  <span class="faq-question">How do you secure file upload endpoints?</span>
+  <div class="answer">
+    File upload endpoints are vulnerable to abuse and should be secured properly to prevent attacks and misuse.
+    <ul>
+      <li><b>Authentication:</b> Require valid user sessions or API tokens to access upload routes.</li>
+      <li><b>File Type Validation:</b> Accept only specific file types (e.g., images, PDFs) and reject others using MIME type checks.</li>
+      <li><b>File Size Limit:</b> Enforce max file size restrictions using libraries like <b>busboy</b> or <b>multer</b>.</li>
+      <li><b>Virus Scanning:</b> Optionally scan files using antivirus tools or AWS services like Macie or Lambda antivirus plugins.</li>
+      <li><b>Storage Access Control:</b> Use private buckets or signed URLs for S3 uploads and downloads.</li>
+      <li><b>Temporary Storage:</b> Avoid storing uploads directly on the server filesystem—prefer S3 or cloud storage.</li>
+    </ul>
+    Implementing these controls helps prevent data leaks, server crashes, and malware injections.
+  </div>
+</li>
+
+<li data-id="q129" class="zyellow">
+  <span class="faq-question">How do you process multipart/form-data in API routes?</span>
+  <div class="answer">
+    Processing <b>multipart/form-data</b> in Next.js API routes requires disabling the default body parser and using a parsing library.
+    <ul>
+      <li><b>Disable Default Parser:</b> Set <b>bodyParser: false</b> in the API route config to handle raw requests.</li>
+      <li><b>Use <b>formidable</b>:</b> A popular library for parsing file uploads and form fields. Wrap it in a Promise for async/await support.</li>
+      <li><b>Use <b>busboy</b>:</b> Lightweight and streaming-based, ideal for handling large file uploads efficiently.</li>
+      <li><b>Parse Fields and Files:</b> Extract text inputs and files from the request and validate them before saving.</li>
+      <li><b>Forward to Cloud Storage:</b> Upload files directly to services like S3 or Cloudinary after parsing.</li>
+    </ul>
+    This method gives full control over file handling, making it suitable for secure and scalable upload APIs.
+  </div>
+</li>
+<li data-id="q130" class="zyellow">
+  <span class="faq-question">How does edge middleware differ from traditional middleware?</span>
+  <div class="answer">
+    Edge Middleware in Next.js is executed at the edge, close to the user, whereas traditional middleware typically runs on a centralized server.
+    <ul>
+      <li><b>Execution Location:</b> Edge middleware runs on CDN edge nodes (e.g., Vercel Edge Network), while traditional middleware runs on your backend server or Node.js runtime.</li>
+      <li><b>Performance:</b> Edge middleware provides faster response times and lower latency since it's executed geographically near the user.</li>
+      <li><b>Cold Start:</b> Edge middleware is designed for fast, low-overhead execution, ideal for frequent requests and real-time personalization.</li>
+      <li><b>Environment:</b> It runs in a lightweight runtime like V8 isolates or WebAssembly, which means no access to Node.js APIs, file system, or full packages.</li>
+      <li><b>Use Cases:</b> Used for authentication, redirects, A/B testing, geolocation, bot detection, and headers manipulation.</li>
+    </ul>
+    Edge middleware improves scalability and user experience by offloading logic closer to the user, without needing full SSR or backend execution.
+  </div>
+</li>
+
+<li data-id="q131" class="zyellow">
+  <span class="faq-question">How do you build geographic personalization with middleware?</span>
+  <div class="answer">
+    Geographic personalization tailors content based on the user’s location, and can be efficiently implemented using Edge Middleware.
+    <ul>
+      <li><b>Access Geo Data:</b> Use <b>request.geo</b> object provided by the edge runtime to get the user's country, region, or city.</li>
+      <li><b>Redirect or Rewrite:</b> Use this geo data to redirect users to region-specific pages or apply rewrites for localized content.</li>
+      <li><b>Inject Headers:</b> Add custom headers like <b>x-region</b> or <b>x-country</b> to pass location info to downstream components.</li>
+      <li><b>Control Caching:</b> Vary CDN cache based on geography using the <b>Vary</b> header (e.g., <b>Vary: x-country</b>).</li>
+      <li><b>Language Detection:</b> Combine geo info with <b>Accept-Language</b> header to serve localized language versions.</li>
+    </ul>
+    This enables seamless personalization without additional backend logic or impacting performance.
+  </div>
+</li>
+                                                
+<li data-id="q132" class="zyellow">
+  <span class="faq-question">How do you build a multi-tenant SaaS app with Next.js?</span>
+  <div class="answer">
+    Building a multi-tenant SaaS app in Next.js involves structuring your app to isolate tenant data while sharing the same codebase.
+    <ul>
+      <li><b>Tenant Identification:</b> Use subdomains (e.g., tenant1.yourapp.com) or custom domains to differentiate tenants. Use middleware to extract tenant ID from the host.</li>
+      <li><b>Database Isolation:</b> Choose between schema-based isolation (shared DB with tenant IDs) or database-per-tenant architecture.</li>
+      <li><b>Dynamic Routing:</b> Dynamically route pages and content based on tenant ID or path prefix (e.g., /tenant-a/dashboard).</li>
+      <li><b>Auth Per Tenant:</b> Integrate tenant-specific authentication using Cognito or Auth0, and store tenant metadata in JWT or session.</li>
+      <li><b>Theming and Branding:</b> Load theme config and assets per tenant dynamically from DB or CMS.</li>
+      <li><b>Deployment:</b> Use wildcard domains or edge routing to serve multiple tenants under the same Next.js app.</li>
+    </ul>
+    This model allows you to scale and maintain one app for many clients with secure data separation and custom branding.
+  </div>
+</li>
+
+<li data-id="q133" class="yellow">
+  <span class="faq-question">How do you integrate micro-frontends in Next.js?</span>
+  <div class="answer">
+    Micro-frontends allow teams to build and deploy parts of the UI independently. In Next.js, integration methods include:
+    <ul>
+      <li><b>Module Federation:</b> Use tools like Webpack 5 Module Federation or Next Federation Plugin to dynamically load remote components at runtime.</li>
+      <li><b>Iframe Embedding:</b> Embed remote apps using iframes with postMessage communication for simpler use cases.</li>
+      <li><b>Custom Elements:</b> Load micro-frontends as Web Components using <b>customElements.define</b>.</li>
+      <li><b>Subdomain Deployment:</b> Serve separate apps on subdomains (e.g., dashboard.app.com, billing.app.com) and link them via navigation or SSO.</li>
+      <li><b>Shared Context:</b> Use a shared design system and context bridge for consistent state and theme handling across micro-frontends.</li>
+    </ul>
+    This approach helps large teams ship features independently while maintaining cohesion in a large Next.js-based UI.
+  </div>
+</li>
+
+<li data-id="q134" class="zyellow">
+  <span class="faq-question">How do you handle internationalized routing with fallback content?</span>
+  <div class="answer">
+    Next.js supports internationalized routing with fallback strategies to ensure localized content is served gracefully.
+    <ul>
+      <li><b>Enable i18n:</b> In <b>next.config.js</b>, define <b>i18n</b> with supported locales and a default locale.</li>
+      <li><b>Localized Routes:</b> Automatically serve localized pages using domain-based or path-based routing (e.g., /en, /fr).</li>
+      <li><b>Fallback Strategy:</b> If a translation is missing, use default language content or a fallback translation key from your i18n provider (e.g., i18next, react-intl).</li>
+      <li><b>Middleware for Redirection:</b> Use middleware to detect language preference from browser headers or cookies and redirect users accordingly.</li>
+      <li><b>Static & Dynamic i18n:</b> Use <b>getStaticPaths</b> and <b>getStaticProps</b> with locale context to generate static pages per language.</li>
+    </ul>
+    This ensures users see the right content in their language, and fallback prevents broken or blank pages for missing translations.
+  </div>
+</li>
+
+
+<li data-id="q135" class="zyellow">
+  <span class="faq-question">How do you design a headless eCommerce system with Next.js?</span>
+  <div class="answer">
+    Designing a headless eCommerce system with Next.js involves decoupling the frontend from the backend and integrating APIs for content, product data, and checkout flows.
+    <ul>
+      <li><b>Frontend:</b> Use Next.js (App Router) to create static and dynamic pages like home, product, category, and cart.</li>
+      <li><b>CMS Integration:</b> Use a headless CMS like Contentful, Sanity, or Strapi to manage content like banners, blogs, or landing pages.</li>
+      <li><b>Product Backend:</b> Connect to a commerce engine like Shopify, Commerce.js, BigCommerce, or a custom API for product listings and inventory.</li>
+      <li><b>Cart & Checkout:</b> Manage cart state in React Context, localStorage, or a headless cart service. Use APIs for taxes, shipping, and payments (Stripe, Razorpay, etc.).</li>
+      <li><b>Rendering Strategy:</b> Use ISR for product and category pages, SSR for personalized pages, and Client Components for cart interactions.</li>
+      <li><b>Auth:</b> Use AWS Cognito or Auth0 for login, and JWT for secure checkout.</li>
+      <li><b>Search & Filters:</b> Use Algolia or Meilisearch for faceted search and instant filtering.</li>
+    </ul>
+    This architecture ensures fast performance, flexibility, and scalability for modern eCommerce applications.
+  </div>
+</li>
+
+<li data-id="q136" class="zyellow">
+  <span class="faq-question">How would you migrate a large legacy React app to Next.js App Router?</span>
+  <div class="answer">
+    Migrating a large legacy React app to the Next.js App Router requires planning, modularization, and gradual adoption:
+    <ul>
+      <li><b>Audit the App:</b> Identify reusable components, routes, and data fetching logic in the existing React project.</li>
+      <li><b>Setup Next.js:</b> Create a Next.js project and configure the App Router with folders like <b>app</b>, <b>layout.js</b>, and route segments.</li>
+      <li><b>Incremental Migration:</b> Move one route at a time as a new <b>page.tsx</b> under <b>app/</b> and replace <b>react-router</b> with <b>next/navigation</b>.</li>
+      <li><b>Data Fetching:</b> Replace <b>axios/fetch in useEffect</b> with <b>getServerSideProps</b>, <b>getStaticProps</b>, or Server Components.</li>
+      <li><b>Client Components:</b> Mark interactive components with <b>"use client"</b> and keep them in <b>components/</b>.</li>
+      <li><b>Shared Layouts:</b> Move header, footer, and sidebars to <b>app/layout.js</b> or nested layouts for consistency.</li>
+      <li><b>Gradual Rollout:</b> Use feature flags or subpaths (e.g., <b>/new-dashboard</b>) to migrate parts without breaking the old app.</li>
+    </ul>
+    This phased migration ensures business continuity while progressively modernizing the architecture.
+  </div>
+</li>
+
 
 
 
