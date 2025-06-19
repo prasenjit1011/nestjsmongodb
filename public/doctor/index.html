@@ -44,7 +44,10 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       </tr>
       <tr>
         <td>Coding</td>
-        <td><a href="#reactjs_qlist">Reactjs</a></td>
+        <td>
+          <a href="#reactjs_qlist">Reactjs</a> &nbsp; 
+          <a href="#nextjs_qlist">Nextjs</a>
+        </td>
         <td>
           <a href="#redux_qlist">Redux</a> &nbsp; 
           <a href="#redux_advanced">Advanced</a> &nbsp; 
@@ -27268,31 +27271,1642 @@ Client → Mongos → Shard 1 (part of data)
 
 
 
-<li data-id="q32" class="yellow"><span class="faq-question">
---------------------------------------------------------------
-</span></li>
-<li data-id="q32" ><span class="faq-question">
--------------------------------------------------
-<br />
-Others
-</span>
-
-<pre>
-  rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
 
 
-  convert to html format:
-  li data-id="question-" class="yellow"><span class="faq-question">
-  div class answer
+<li data-id="q_node_event2222" id="nextjs_qlist"><span class="faq-question">
+  What are the main features of Next.js?</span><div class="answer">
+  Next.js is a React-based web framework that enables features like server-side rendering, static site generation, and client-side rendering, making it ideal for building production-ready web applications with better performance, SEO, and developer experience.
+
+  <hr>
+  React is a JavaScript library for building UI components, primarily for client-side rendering. <br />
+  Next.js is a full-stack framework built on top of React that provides routing, SSR, SSG, API routes, and advanced performance features out of the box.
+  <hr />
+  <ul>
+    <li>File-based routing</li>
+    <li>Server-Side Rendering (SSR)</li>
+    <li>Static Site Generation (SSG)</li>
+    <li>Incremental Static Regeneration (ISR)</li>
+    <li>API Routes</li>
+    <li>Image Optimization</li>
+    <li>Automatic Code Splitting</li>
+    <li>Built-in CSS and Sass support</li>
+    <li>App Directory and Server Components (Next.js 13+)</li>
+  </ul>
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is Next.js?</strong></span><div class="answer">
+  Next.js is a React-based web framework that enables features like server-side rendering, static site generation, and client-side rendering, making it ideal for building production-ready web applications with better performance, SEO, and developer experience.
+</div></li>
 
 
-  html format : 
-  li data-id="q32" class="zyellow"> span class="faq-question">
-  div class="answer">
-</pre>
+<li data-id="q_node_event2222"><span class="faq-question">What is server-side rendering (SSR)?</span><div class="answer">
+  <strong></strong><br>
+  Server-side rendering (SSR) means that the HTML of a page is generated on the server for each request. In Next.js, you can implement SSR using <code>getServerSideProps</code>, which fetches data at request time and renders the page accordingly.
 </li>
 
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is static site generation (SSG)?</strong></span><div class="answer">
+  Static Site Generation (SSG) is the process of generating HTML at build time. In Next.js, this is achieved using <code>getStaticProps</code> and optionally <code>getStaticPaths</code>. The generated pages are served as static files, offering fast load times and scalability.
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is client-side rendering (CSR)?</strong></span><div class="answer">
+  Client-side rendering (CSR) is a technique where the browser downloads a minimal HTML shell and renders content using JavaScript on the client side. In Next.js, CSR is typically used when components fetch data using hooks like <code>useEffect</code> and APIs like <code>fetch()</code> after the page has loaded.
+</li>
 
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you create a new Next.js project?</strong></span><div class="answer">
+  You can create a new Next.js project by running the following command:<br>
+  <code>npx create-next-app@latest my-next-app</code><br>
+  This will scaffold a new project with all the required files and configurations.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What are the default files and folders in a Next.js app?</strong></span><div class="answer">
+  A typical Next.js app contains the following files and folders:
+  <ul>
+    <li><strong>pages/</strong> – Contains route-based components</li>
+    <li><strong>public/</strong> – Static assets like images and favicon</li>
+    <li><strong>styles/</strong> – CSS or SCSS files</li>
+    <li><strong>next.config.js</strong> – Configuration for customizing Next.js</li>
+    <li><strong>package.json</strong> – Project dependencies and scripts</li>
+    <li><strong>.next/</strong> – Auto-generated build output (not committed)</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the purpose of the pages directory?</strong></span><div class="answer">
+  The <code>pages</code> directory is where you define the routes of your application. Each file corresponds to a route. For example, <code>pages/index.js</code> becomes the home page (<code>/</code>), and <code>pages/about.js</code> becomes <code>/about</code>. Dynamic routes and API routes are also defined here.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the public folder used for?</strong></span><div class="answer">
+  The <code>public</code> folder is used to store static assets such as images, fonts, and other files that don’t require processing. Files inside <code>public</code> can be accessed directly by URL. For example, <code>public/logo.png</code> is served at <code>/logo.png</code>.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How does routing work in Next.js?</strong></span><div class="answer">
+  Next.js uses a file-based routing system. The files inside the <code>pages/</code> directory automatically become routes. For example, <code>pages/index.js</code> becomes the homepage (<code>/</code>), and <code>pages/about.js</code> becomes the <code>/about</code> route. You don’t need to configure a router manually.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you create a dynamic route in Next.js?</strong></span><div class="answer">
+  To create a dynamic route, you use square brackets in the filename. For example, <code>pages/post/[id].js</code> maps to <code>/post/123</code> or any other ID. You can access the dynamic parameter using <code>useRouter()</code> in client-side components or <code>context.params</code> in <code>getStaticProps</code> or <code>getServerSideProps</code>.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is catch-all routing in Next.js?</strong></span><div class="answer">
+  Catch-all routes match multiple segments. You can define it by using three dots inside square brackets like <code>[...slug].js</code>. For example, <code>pages/docs/[...slug].js</code> can match routes like <code>/docs</code>, <code>/docs/getting-started</code>, or <code>/docs/getting-started/installation</code>.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is optional catch-all routing?</strong></span><div class="answer">
+  Optional catch-all routes are similar to catch-all routes but also match the root path. You define them using double square brackets with three dots: <code>[[...slug]].js</code>. For example, <code>pages/blog/[[...slug]].js</code> can match both <code>/blog</code> and <code>/blog/post/123</code>.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the difference between pages/index.js and pages/about.js?</strong></span><div class="answer">
+  <code>pages/index.js</code> maps to the root URL (<code>/</code>) of your website, which is typically the homepage. <code>pages/about.js</code> maps to <code>/about</code> and is usually used for an About Us page. Both are statically mapped based on their file names.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you create a layout in Next.js?</strong></span><div class="answer">
+  In Next.js, you can create a layout by defining a React component that wraps your page content. You typically create a <code>components/Layout.js</code> file that includes shared elements like header, footer, or sidebar, and then use it in your page components.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How can you share layouts across multiple pages?</strong></span><div class="answer">
+  To share layouts across multiple pages, you can wrap each page in the layout component within the <code>_app.js</code> file. Alternatively, for more flexibility, you can allow each page to define its own layout using a pattern like:<br>
+  <code>Page.getLayout = (page) =&gt; &lt;Layout&gt;{page}&lt;/Layout&gt;;</code><br>
+  Then call this in <code>_app.js</code> before rendering the component.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the <x>_app.js</x> file used for?</strong></span><div class="answer">
+  The <code>_app.js</code> file is a custom App component that wraps every page in your application. It's used to initialize pages, persist layouts between page changes, keep state, and add global CSS or context providers.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the <x>_document.js</x> file used for?</strong></span><div class="answer">
+  The <code>_document.js</code> file is used to augment the HTML document structure. It's rendered only on the server side and allows you to modify the <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> tags, include meta tags, preload fonts, and more.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the difference between <x>_app.js</x> and <x>_document.js</x>?</strong></span><div class="answer">
+  <ul>
+    <li><strong>_app.js</strong>: Controls how pages are rendered and wraps page components.</li>
+    <li><strong>_document.js</strong>: Controls the structure of the HTML document and is rendered on the server only.</li>
+  </ul>
+  Use <code>_app.js</code> for layouts, context, and global styles. Use <code>_document.js</code> for customizing the HTML document shell.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is <x>next.config.js</x>?</strong></span><div class="answer">
+  <code>next.config.js</code> is a configuration file used to customize and extend the default behavior of a Next.js app. It allows you to configure features such as custom Webpack settings, image optimization, environment variables, internationalization, redirects, rewrites, and more. This file must be placed in the root of the project.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you enable custom environment variables in Next.js?</strong></span><div class="answer">
+  To use custom environment variables in Next.js:
+  <ul>
+    <li>Create a <code>.env.local</code> file in the root directory.</li>
+    <li>Prefix your variables with <code>NEXT_PUBLIC_</code> to expose them to the browser.</li>
+    <li>Example:<br>
+      <code>NEXT_PUBLIC_API_URL=https://api.example.com</code>
+    </li>
+    <li>Then, access it using <code>process.env.NEXT_PUBLIC_API_URL</code> in your code.</li>
+  </ul>
+  Variables without the <code>NEXT_PUBLIC_</code> prefix will only be available on the server side.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you add a custom Webpack configuration?</strong></span><div class="answer">
+  You can extend the default Webpack configuration in <code>next.config.js</code> like this:
+  <pre>
+module.exports = {
+webpack: (config, { isServer }) => {
+  // Modify the config
+  config.module.rules.push({
+    test: /\.txt$/,
+    use: 'raw-loader',
+  });
+  return config;
+},
+};
+  </pre>
+  This allows you to add loaders, plugins, aliases, or modify behavior for both server and client builds.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you serve static files in Next.js?</strong><br>
+  In Next.js, static files can be served by placing them inside the <code>public/</code> directory. Any file in the <code>public/</code> folder can be accessed via a URL path relative to the base URL of your site.<br><br>
+  For example, if you add an image to <code>public/images/logo.png</code>, it can be accessed in the browser at <code>/images/logo.png</code>.<br><br>
+  You can reference static assets in your components like:<br>
+  <code>&lt;img src="/images/logo.png" alt="Logo" /&gt;</code>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">x
+  <strong>What is the difference between <x>public/</x> and <x>static/</x>?</strong></span><div class="answer">
+  <ul>
+    <li><strong>public/</strong>: This is the recommended folder in modern Next.js apps for serving static assets. Files here are served as-is and can be directly accessed from the root URL. It supports all asset types (images, fonts, etc.).</li>
+    <li><strong>static/</strong>: This folder was used in older versions of Next.js (prior to version 9). It's now deprecated. Use <code>public/</code> instead.</li>
+  </ul>
+  <strong>Recommendation:</strong> Always use the <code>public/</code> directory for serving static files in current versions of Next.js.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you navigate between pages in Next.js?</strong><br>
+  In Next.js, you navigate between pages using the built-in <code>Link</code> component from <code>next/link</code>. It enables client-side transitions between routes without a full page reload.<br><br>
+  Example usage:<br>
+  <code>&lt;Link href="/about"&gt;Go to About&lt;/Link&gt;</code><br>
+  Alternatively, you can use the <code>useRouter()</code> hook from <code>next/router</code> for programmatic navigation:<br>
+  <code>router.push('/about')</code>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the Link component in Next.js?</strong></span><div class="answer">
+  The <code>Link</code> component is a wrapper around anchor tags that enables seamless client-side navigation in Next.js. It improves performance by prefetching linked pages in the background and avoids full reloads.<br><br>
+  Example:<br>
+  <code>
+    &lt;Link href="/contact"&gt;<br>
+    &nbsp;&nbsp;&lt;a&gt;Contact Us&lt;/a&gt;<br>
+    &lt;/Link&gt;
+  </code><br>
+  In modern versions, wrapping with <code>&lt;a&gt;</code> is optional if no custom styles or behaviors are needed.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is shallow routing?</strong></span><div class="answer">
+  Shallow routing allows you to change the URL without running data fetching methods like <code>getServerSideProps</code>, <code>getStaticProps</code>, or reloading the page.<br><br>
+  Example:<br>
+  <code>router.push('/dashboard?tab=profile', undefined, { shallow: true })</code><br>
+  This is useful for updating query parameters, tabs, or filters without triggering a full re-render or page reload.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is <xcode>getStaticProps()</xcode>?</strong></span><div class="answer">
+  <code>getStaticProps</code> is a Next.js function used for Static Site Generation (SSG). It runs at build time and allows you to fetch data that will be rendered as static HTML. It is typically used for pages that can be pre-rendered ahead of time and do not need to update often.
+  <br><br>
+  Example use case: blog posts, documentation pages, product listings.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is <xcode>getServerSideProps()</xcode>?</strong></span><div class="answer">
+  <code>getServerSideProps</code> is used for Server-Side Rendering (SSR). It runs on every request and fetches data on the server before rendering the page. This is ideal for pages that need up-to-date data on each request, such as user dashboards or real-time content.
+  <br><br>
+  Example use case: authenticated pages, dashboards, search results.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is <xcode>getStaticPaths()</xcode>?</strong></span><div class="answer">
+  <code>getStaticPaths</code> is used with <code>getStaticProps</code> to generate dynamic static pages at build time. It tells Next.js which dynamic routes to pre-render based on external data.
+  <br><br>
+  Example use case: generating static pages for each blog post using its slug or ID.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>Can you use <x>getStaticProps</x> and <x>getServerSideProps</x> together?</strong></span><div class="answer">
+  No, you cannot use both <code>getStaticProps</code> and <code>getServerSideProps</code> in the same page. A page can use only one data-fetching method. You must choose based on whether you want static generation (faster, cached at build) or server-side rendering (fresh on every request).
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the use of revalidation in <x>getStaticProps</x>?</strong></span><div class="answer">
+  Revalidation allows you to update static pages after they’ve been built, without needing to rebuild the entire site. In <code>getStaticProps</code>, you can return a <code>revalidate</code> key (in seconds), which tells Next.js to regenerate the page in the background when a request comes in after the revalidate time has passed.
+  <br><br>
+  Example:<br>
+  <code>return { props: { data }, revalidate: 60 }</code><br>
+  This ensures your content stays fresh while keeping the performance benefits of static generation.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is Incremental Static Regeneration (ISR)?</strong></span><div class="answer">
+  ISR allows Next.js to create or update static pages after the site has been built and deployed. It combines the benefits of static generation with the flexibility of server-rendered content. ISR uses the <code>revalidate</code> option in <code>getStaticProps</code> to automatically regenerate the page behind the scenes after a specified time interval.
+  <br><br>
+  It supports scalable and dynamic static pages, making it ideal for eCommerce, blogs, and news sites.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is fallback in <xcode>getStaticPaths()</xcode>?</strong></span><div class="answer">
+  The <code>fallback</code> key in <code>getStaticPaths()</code> defines how Next.js handles dynamic routes not returned by <code>getStaticPaths</code> at build time. It has three options:
+  <ul>
+    <li><strong>false</strong>: Only paths returned by <code>getStaticPaths</code> will be statically generated; others will return 404.</li>
+    <li><strong>true</strong>: Paths not returned at build time will be rendered on-demand and cached.</li>
+    <li><strong>'blocking'</strong>: Similar to <code>true</code>, but the user waits for the HTML to be generated on the server before receiving the response.</li>
+  </ul>
+  This makes your app more scalable by allowing on-demand static page generation.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you fetch data on the client side?</strong></span><div class="answer">
+  In Next.js, you can fetch data on the client side using standard React hooks like <code>useEffect</code> along with the Fetch API, Axios, or other libraries. This method runs in the browser after the initial render.
+  <br><br>
+  Example:
+  <pre>
+useEffect(() =&gt; {
+fetch('/api/data')
+  .then(res =&gt; res.json())
+  .then(data =&gt; setData(data));
+}, []);
+  </pre>
+  This is commonly used when the data is dynamic, user-specific, or should not be statically or server-rendered.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What are some recommended libraries for data fetching in Next.js?</strong><br>
+  Popular libraries used for client-side data fetching in Next.js include:
+  <ul>
+    <li><strong>Axios</strong> – Promise-based HTTP client for easy API calls.</li>
+    <li><strong>SWR (stale-while-revalidate)</strong> – A React Hooks library by Vercel for efficient caching, revalidation, and pagination.</li>
+    <li><strong>React Query</strong> – A powerful data-fetching and caching library that supports mutations, background refetching, and more.</li>
+    <li><strong>GraphQL Clients</strong> – Such as Apollo Client or URQL for querying GraphQL APIs.</li>
+  </ul>
+  These libraries enhance performance, reduce boilerplate, and manage data fetching state intelligently.
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you add meta tags in Next.js?</strong><br>
+  Meta tags in Next.js are added using the built-in <code>Head</code> component from <code>next/head</code>. You include this component in your page or layout and insert your meta tags inside it.<br><br>
+  Example:
+  <pre>
+import Head from 'next/head';
+
+&lt;Head&gt;
+&lt;title&gt;My Page Title&lt;/title&gt;
+&lt;meta name="description" content="This is a description for SEO." /&gt;
+&lt;meta property="og:title" content="My Page Title" /&gt;
+&lt;/Head&gt;
+  </pre>
+  This allows you to set page titles, descriptions, Open Graph tags, and other SEO-related metadata.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the Head component?</strong></span><div class="answer">
+  The <code>Head</code> component in Next.js is a special component imported from <code>next/head</code> that lets you modify the <code>&lt;head&gt;</code> section of the HTML document. You can use it to dynamically add meta tags, title, favicon links, scripts, and more on a per-page basis.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you make a page SEO-friendly in Next.js?</strong></span><div class="answer">
+  To make a page SEO-friendly in Next.js, follow these best practices:
+  <ul>
+    <li>Use the <code>Head</code> component to set a unique title and meta description for each page.</li>
+    <li>Use semantic HTML (e.g., <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>).</li>
+    <li>Implement structured data using JSON-LD inside <code>Head</code>.</li>
+    <li>Use <code>getStaticProps</code> or <code>getServerSideProps</code> to serve crawlable content.</li>
+    <li>Ensure fast load time by optimizing images and reducing bundle size.</li>
+    <li>Use accessible tags and attributes for screen readers (ARIA roles, alt text).</li>
+  </ul>
+  These techniques help improve your page's visibility in search engines and enhance user experience.
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How can you implement authentication in Next.js?</strong></span><div class="answer">
+  Authentication in Next.js can be implemented using several approaches:
+  <ul>
+    <li><strong>NextAuth.js</strong>: A powerful library that supports OAuth, credentials, JWT, and social providers like Google or GitHub.</li>
+    <li><strong>Custom JWT-based Auth</strong>: Use <code>getServerSideProps</code> or middleware to verify JWT tokens on server-side rendered pages.</li>
+    <li><strong>Session Cookies</strong>: Store session tokens in HTTP-only cookies and validate them via API routes or middleware.</li>
+  </ul>
+  You can protect routes and APIs by checking tokens or session state on each request.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you handle protected routes?</strong></span><div class="answer">
+  Protected routes in Next.js can be handled by:
+  <ul>
+    <li>Using <code>getServerSideProps</code> to check authentication before rendering the page.</li>
+    <li>Redirecting unauthenticated users to a login page using <code>context.res.writeHead()</code> or <code>return { redirect }</code>.</li>
+    <li>Using middleware (in <code>middleware.js</code>) to inspect cookies or headers and block/redirect unauthorized access before a route loads.</li>
+    <li>Client-side checks using hooks like <code>useEffect()</code> to redirect if session is missing (for CSR pages).</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What tools does Next.js provide for performance optimization?</strong></span><div class="answer">
+  Next.js offers several built-in performance optimizations:
+  <ul>
+    <li><strong>Automatic code splitting</strong> – Loads only the JavaScript required for the current page.</li>
+    <li><strong>Image optimization</strong> – Automatic resizing, compression, and lazy loading of images.</li>
+    <li><strong>Incremental Static Regeneration (ISR)</strong> – Updates static pages on-demand without full rebuilds.</li>
+    <li><strong>Prefetching</strong> – Prefetches linked pages in the background to improve navigation speed.</li>
+    <li><strong>Fast refresh</strong> – Fast reload during development for better DX.</li>
+    <li><strong>Middleware & Edge Functions</strong> – Minimize backend latency and route-specific logic.</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is automatic code splitting?</strong></span><div class="answer">
+  Automatic code splitting means that Next.js only sends the JavaScript required for the page being viewed. It splits the bundle by route so that each page loads faster, reducing initial load time and improving performance. Shared components and dependencies are also chunked efficiently.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is Image Optimization in Next.js?</strong></span><div class="answer">
+  Next.js provides an advanced <code>next/image</code> component that optimizes images on the fly. Key features include:
+  <ul>
+    <li>Automatic resizing based on device size and resolution</li>
+    <li>Built-in lazy loading</li>
+    <li>WebP support and format selection</li>
+    <li>On-demand server-side optimization</li>
+  </ul>
+  Example usage:<br>
+  <code>&lt;Image src="/hero.png" width={800} height={400} alt="Hero" /&gt;</code><br>
+  It helps improve performance and Core Web Vitals by reducing image payload.
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you test Next.js components?</strong></span><div class="answer">
+  You can test Next.js components using popular React testing tools like:
+  <ul>
+    <li><strong>Jest</strong>: A testing framework by Meta used for unit and integration testing.</li>
+    <li><strong>React Testing Library (RTL)</strong>: A lightweight library that encourages testing from the user’s perspective.</li>
+  </ul>
+  Example setup:
+  <ul>
+    <li>Install dependencies: <code>npm install --save-dev jest @testing-library/react @testing-library/jest-dom</code></li>
+    <li>Create test files with <code>.test.js</code> or <code>.spec.js</code> extensions</li>
+  </ul>
+  Example test:
+  <pre>
+import { render, screen } from '@testing-library/react';
+import Home from '../pages/index';
+
+test('renders home page', () =&gt; {
+render(&lt;Home /&gt;);
+expect(screen.getByText('Welcome')).toBeInTheDocument();
+});
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What tools can be used for end-to-end testing?</strong></span><div class="answer">
+  Popular tools for end-to-end (E2E) testing in Next.js include:
+  <ul>
+    <li><strong>Playwright</strong>: A fast, reliable framework that supports multiple browsers and advanced features.</li>
+    <li><strong>Cypress</strong>: A developer-friendly E2E testing tool that runs tests directly in the browser.</li>
+    <li><strong>Selenium</strong>: A more traditional tool for automated browser testing (less common in modern React workflows).</li>
+  </ul>
+  These tools simulate user behavior and test full workflows like login, navigation, and form submission.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you deploy a Next.js app?</strong></span><div class="answer">
+  You can deploy a Next.js app by:
+  <ul>
+    <li><strong>Vercel</strong>: One-click deploy and automatic integration with GitHub/GitLab/Bitbucket</li>
+    <li><strong>Netlify</strong>: Great for static and hybrid sites (requires <code>next export</code> or custom functions)</li>
+    <li><strong>Render, Railway, or Fly.io</strong>: Modern PaaS with container support</li>
+    <li><strong>AWS, Azure, or Google Cloud</strong>: For advanced custom deployments</li>
+    <li><strong>Docker</strong>: Package and deploy as a container anywhere</li>
+  </ul>
+  For static export, use:<br>
+  <code>next export</code><br>
+  For full SSR features, choose platforms with Node.js support.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What platforms support Next.js deployment?</strong></span><div class="answer">
+  Supported platforms include:
+  <ul>
+    <li><strong>Vercel</strong> (official)</li>
+    <li><strong>Netlify</strong></li>
+    <li><strong>Render</strong></li>
+    <li><strong>Railway</strong></li>
+    <li><strong>AWS Amplify / Lambda</strong></li>
+    <li><strong>Heroku</strong> (with custom Node server)</li>
+    <li><strong>DigitalOcean</strong> (via droplet or App Platform)</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is Vercel and how is it related to Next.js?</strong></span><div class="answer">
+  <strong>Vercel</strong> is a cloud platform for frontend developers, designed by the creators of Next.js. It offers seamless deployment for Next.js apps with zero configuration. It supports features like:
+  <ul>
+    <li>Automatic deployments from Git</li>
+    <li>Built-in CDN</li>
+    <li>Incremental Static Regeneration</li>
+    <li>Serverless functions</li>
+  </ul>
+  Vercel is considered the best platform for deploying full-featured Next.js applications.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you create nested routes in Next.js?</strong><br>
+  In Next.js, you create nested routes by organizing files into subfolders inside the <code>pages</code> directory. Each folder represents a segment of the URL path.
+  <br><br>
+  Example structure:
+  <pre>
+pages/
+blog/
+  index.js         → /blog
+  post.js          → /blog/post
+  comments/
+    index.js       → /blog/comments
+  </pre>
+  This structure automatically creates nested routes without any manual routing configuration.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What are API routes in Next.js?</strong></span><div class="answer">
+  API routes in Next.js allow you to build server-side functions as RESTful endpoints. You can place JavaScript or TypeScript files inside the <code>pages/api</code> directory.
+  <br><br>
+  Example:
+  <pre>
+pages/api/hello.js
+  </pre>
+  Will be available at:
+  <pre>
+/api/hello
+  </pre>
+  These routes run on the server only and can be used to handle form submissions, database queries, authentication, etc.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you secure API routes?</strong></span><div class="answer">
+  To secure API routes in Next.js, you can:
+  <ul>
+    <li>Check for an authenticated session (e.g., using <code>next-auth</code>)</li>
+    <li>Verify JWT tokens passed via headers or cookies</li>
+    <li>Validate API keys or custom headers</li>
+    <li>Use rate limiting and CORS policies to restrict access</li>
+  </ul>
+  Example check:
+  <pre>
+export default function handler(req, res) {
+const token = req.headers.authorization;
+if (!token || token !== 'expected_token') {
+  return res.status(401).json({ error: 'Unauthorized' });
+}
+res.status(200).json({ message: 'Secure data' });
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you use dynamic API routes?</strong></span><div class="answer">
+  Dynamic API routes are created by adding square brackets in the filename under <code>pages/api</code>.
+  <br><br>
+  Example:
+  <pre>
+pages/api/user/[id].js
+  </pre>
+  This route matches <code>/api/user/123</code>. You can access the dynamic parameter from <code>req.query</code>:
+  <pre>
+export default function handler(req, res) {
+const { id } = req.query;
+res.status(200).json({ userId: id });
+}
+  </pre>
+  This allows you to create RESTful API endpoints that respond based on dynamic values.
+</li>
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is Next.js middleware?</strong></span><div class="answer">
+  Middleware in Next.js runs before a request is completed and allows you to execute code, redirect, rewrite, or modify the request/response. It runs at the edge, close to the user, improving performance and latency for logic like auth, geo-targeting, and A/B testing.
+  <br><br>
+  Middleware is defined in a <code>middleware.js</code> (or <code>.ts</code>) file at the root or in specific folders.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you implement and use middleware?</strong></span><div class="answer">
+  To create middleware, add a <code>middleware.js</code> file in the root or inside a folder for route-specific logic.
+  <br><br>
+  Example:
+  <pre>
+export function middleware(request) {
+const loggedIn = Boolean(request.cookies.get('token'));
+if (!loggedIn) {
+  return Response.redirect(new URL('/login', request.url));
+}
+return NextResponse.next();
+}
+  </pre>
+  You must export a <code>config</code> if you want to restrict which routes the middleware applies to:
+  <pre>
+export const config = {
+matcher: ['/dashboard/:path*'],
+};
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What are use cases for middleware in Next.js?</strong><br>
+  Common use cases include:
+  <ul>
+    <li>Authentication and authorization checks</li>
+    <li>Locale-based redirection</li>
+    <li>Bot detection and blocking</li>
+    <li>Geo-targeting and country-based content</li>
+    <li>Custom headers or rewrites</li>
+    <li>A/B testing or feature flag logic</li>
+  </ul>
+  Middleware runs before rendering and can modify or redirect the request without changing the route file.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is the app directory in Next.js 13+?</strong><br>
+  The <code>app/</code> directory is a new routing and file structure introduced in Next.js 13 as part of the App Router. It replaces <code>pages/</code> and allows better flexibility, layouts, loading states, and server components.
+  <br><br>
+  Each folder in <code>app/</code> represents a route and can contain:
+  <ul>
+    <li><code>page.js</code> – Main route component</li>
+    <li><code>layout.js</code> – Shared layout wrapper</li>
+    <li><code>loading.js</code> – Loading UI for async content</li>
+    <li><code>error.js</code> – Error boundary for route</li>
+  </ul>
+  It supports server-first rendering and streaming by default.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you use <code>layout.js</code> in the new app directory?</strong><br>
+  In the App Router, <code>layout.js</code> is used to wrap multiple pages with shared UI (like headers or sidebars). It persists across nested routes without reloading.
+  <br><br>
+  Example:
+  <pre>
+export default function Layout({ children }) {
+return (
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;Header /&gt;
+      {children}
+    &lt;/body&gt;
+  &lt;/html&gt;
+);
+}
+  </pre>
+  Place this inside a folder like <code>app/dashboard/layout.js</code> to apply it to all nested routes under <code>/dashboard</code>.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How does routing differ in the app vs pages directory?</strong></span><div class="answer">
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th><code>pages/</code> Directory</th>
+        <th><code>app/</code> Directory</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Routing</td>
+        <td>File-based (each file = route)</td>
+        <td>Folder-based (folder + page.js = route)</td>
+      </tr>
+      <tr>
+        <td>Layouts</td>
+        <td>Custom via _app.js or manual composition</td>
+        <td>Built-in via layout.js</td>
+      </tr>
+      <tr>
+        <td>Streaming / Server Components</td>
+        <td>No</td>
+        <td>Yes (Server-first by default)</td>
+      </tr>
+      <tr>
+        <td>Error Handling</td>
+        <td>Global via _error.js</td>
+        <td>Per route via error.js</td>
+      </tr>
+      <tr>
+        <td>Loading UI</td>
+        <td>Manual with state</td>
+        <td>Built-in via loading.js</td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td>Stable</td>
+        <td>Stable (from Next.js 14+)</td>
+      </tr>
+    </tbody>
+  </table>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How can you cache SSR pages?</strong></span><div class="answer">
+  In Next.js, SSR pages (using <code>getServerSideProps</code>) are rendered on each request by default. To cache them:
+  <ul>
+    <li>Use external caching (e.g., <strong>CDN like Cloudflare</strong>, or <strong>Varnish</strong>)</li>
+    <li>Set cache headers manually in the API or SSR response</li>
+    <li>Example with header:
+      <pre>
+export async function getServerSideProps({ res }) {
+res.setHeader(
+  'Cache-Control',
+  'public, s-maxage=60, stale-while-revalidate=30'
+);
+return { props: { time: Date.now() } };
+}
+      </pre>
+    </li>
+  </ul>
+  This enables caching at the CDN level while allowing background revalidation.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How does ISR (Incremental Static Regeneration) work under the hood?</strong></span><div class="answer">
+  ISR allows static pages to be updated after the site is built and deployed. When a request is made:
+  <ul>
+    <li>If the page is fresh (within <code>revalidate</code> time), it is served from cache.</li>
+    <li>If the page is stale, Next.js shows the cached version and triggers a background regeneration.</li>
+    <li>The new static version replaces the old one once built.</li>
+  </ul>
+  ISR uses a combination of <code>getStaticProps</code> and a <code>revalidate</code> value to make this work automatically.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the use of <x>revalidate</x> in ISR?</strong></span><div class="answer">
+  The <code>revalidate</code> key (in seconds) tells Next.js how often to regenerate the static page in the background. It ensures that content stays up-to-date while benefiting from the speed of static pages.
+  <br><br>
+  Example:
+  <pre>
+export async function getStaticProps() {
+const data = await fetchData();
+return {
+  props: { data },
+  revalidate: 60 // page regenerates at most every 60 seconds
+};
+}
+  </pre>
+  With this, your content updates in near real-time without full redeployments.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you integrate TypeScript into a Next.js project?</strong></span><div class="answer">
+  To use TypeScript in Next.js:
+  <ul>
+    <li>Rename files from <code>.js</code> to <code>.ts</code> or <code>.tsx</code></li>
+    <li>Run: <code>npx create-next-app@latest --typescript</code> or add manually</li>
+    <li>Or install manually:
+      <pre>
+npm install --save-dev typescript @types/react @types/node
+      </pre>
+    </li>
+    <li>Start the dev server: <code>npm run dev</code></li>
+    <li>Next.js will auto-generate <code>tsconfig.json</code></li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you type <x>getStaticProps</x> and <x>getServerSideProps</x>?</strong></span><div class="answer">
+  You can use Next.js types from <code>next</code> for accurate typings.
+  <br><br>
+  Example with <code>getStaticProps</code>:
+  <pre>
+import { GetStaticProps } from 'next';
+
+export const getStaticProps: GetStaticProps = async (context) =&gt; {
+return {
+  props: { data: 'hello' },
+};
+};
+  </pre>
+  Example with <code>getServerSideProps</code>:
+  <pre>
+import { GetServerSideProps } from 'next';
+
+export const getServerSideProps: GetServerSideProps = async (context) =&gt; {
+return {
+  props: { data: 'hello from SSR' },
+};
+};
+  </pre>
+  You can also define custom prop types for better IntelliSense and type safety.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is the Next.js <code>Image</code> component?</strong><br>
+  The <code>Image</code> component in Next.js is a built-in component from <code>next/image</code> used for optimized image rendering. It automatically provides lazy loading, resizing, format selection (like WebP), and responsive behavior out of the box.
+  <br><br>
+  Example:
+  <pre>
+import Image from 'next/image';
+
+&lt;Image
+src="/profile.jpg"
+alt="Profile"
+width={200}
+height={200}
+/&gt;
+  </pre>
+  This helps improve performance and Core Web Vitals by reducing image size and load time.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How does image optimization work in Next.js?</strong></span><div class="answer">
+  Next.js automatically optimizes images with the <code>Image</code> component by:
+  <ul>
+    <li>Serving the appropriate size based on the device screen size</li>
+    <li>Using modern formats like WebP when supported</li>
+    <li>Applying lazy loading by default</li>
+    <li>Serving images through a built-in server or custom CDN (e.g., Vercel Image Optimization API)</li>
+  </ul>
+  This eliminates the need for manual image resizing or performance tuning.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you add custom fonts in Next.js?</strong></span><div class="answer">
+  There are two common methods to add custom fonts:
+  <ul>
+    <li>
+      <strong>Using Google Fonts (recommended in Next.js 13+):</strong>
+      <pre>
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export default function Page() {
+return (
+  &lt;main className={inter.className}&gt;
+    Hello World
+  &lt;/main&gt;
+);
+}
+      </pre>
+      This uses built-in font optimization with automatic preload and fallback.
+    </li>
+    <li>
+      <strong>Using self-hosted fonts:</strong>
+      <ul>
+        <li>Place your font files (e.g., .woff, .woff2) inside <code>/public/fonts</code></li>
+        <li>Add <code>@font-face</code> in a global CSS file (e.g., <code>globals.css</code>)</li>
+        <li>Example:
+          <pre>
+@font-face {
+font-family: 'MyFont';
+src: url('/fonts/MyFont.woff2') format('woff2');
+font-weight: normal;
+font-style: normal;
+}
+          </pre>
+          Then use <code>font-family: 'MyFont'</code> in your styles.
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What styling options are supported in Next.js?</strong><br>
+  Next.js supports various styling methods out of the box:
+  <ul>
+    <li><strong>CSS Modules</strong> – Component-scoped styles using <code>.module.css</code></li>
+    <li><strong>Global CSS</strong> – Imported in <code>_app.js</code> for global use</li>
+    <li><strong>Tailwind CSS</strong> – Utility-first framework, easily integrated</li>
+    <li><strong>Styled-components</strong> – CSS-in-JS styling</li>
+    <li><strong>Emotion</strong> – CSS-in-JS with powerful theming</li>
+    <li><strong>SASS/SCSS</strong> – With <code>next-sass</code> or built-in support</li>
+  </ul>
+  Next.js allows developers to mix and match based on project needs.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you use CSS Modules in Next.js?</strong><br>
+  CSS Modules are scoped locally to the component where they are imported. To use them:
+  <ul>
+    <li>Create a CSS file named with <code>.module.css</code> (e.g., <code>Button.module.css</code>)</li>
+    <li>Import it into your component:
+      <pre>
+import styles from './Button.module.css';
+
+export default function Button() {
+return &lt;button className={styles.primary}&gt;Click&lt;/button&gt;;
+}
+      </pre>
+    </li>
+  </ul>
+  This ensures no class name collisions.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>Can you use Tailwind CSS in Next.js?</strong><br>
+  Yes, Tailwind CSS integrates seamlessly with Next.js. Steps to install:
+  <ul>
+    <li>Run:
+      <pre>
+npx create-next-app my-app
+cd my-app
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+      </pre>
+    </li>
+    <li>Edit <code>tailwind.config.js</code>:
+      <pre>
+content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+      </pre>
+    </li>
+    <li>Add Tailwind to <code>globals.css</code>:
+      <pre>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      </pre>
+    </li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you use <code>next-auth</code>?</strong><br>
+  <code>next-auth</code> is a complete authentication solution for Next.js.
+  <ul>
+    <li>Install: <code>npm install next-auth</code></li>
+    <li>Create a file at <code>pages/api/auth/[...nextauth].js</code></li>
+    <li>Configure providers (e.g., GitHub, Google, Credentials)</li>
+    <li>Use hooks:
+      <pre>
+import { useSession, signIn, signOut } from 'next-auth/react';
+      </pre>
+    </li>
+    <li>Wrap your app in <code>SessionProvider</code> inside <code>_app.js</code></li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How can you store JWT tokens securely in Next.js?</strong><br>
+  JWT tokens can be stored securely by:
+  <ul>
+    <li>Using <strong>HTTP-only cookies</strong> to prevent access from JavaScript (XSS protection)</li>
+    <li>Avoiding <code>localStorage</code> or <code>sessionStorage</code> for sensitive tokens</li>
+    <li>Setting <code>secure</code>, <code>SameSite</code>, and <code>HttpOnly</code> flags in cookies</li>
+  </ul>
+  Example with <code>next-auth</code> using JWT:
+  <pre>
+jwt: {
+secret: process.env.JWT_SECRET,
+},
+session: {
+strategy: 'jwt',
+},
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you protect SSR/SSG routes?</strong><br>
+  To protect SSR or SSG pages:
+  <ul>
+    <li>Use <code>getServerSideProps</code> to check session/token and redirect if unauthorized</li>
+    <li>Use <code>getStaticProps</code> with <code>revalidate</code> only if content is public or secured via another layer</li>
+    <li>Example SSR protection:
+      <pre>
+import { getSession } from 'next-auth/react';
+
+export async function getServerSideProps(context) {
+const session = await getSession(context);
+if (!session) {
+  return {
+    redirect: {
+      destination: '/login',
+      permanent: false,
+    },
+  };
+}
+return { props: { user: session.user } };
+}
+      </pre>
+    </li>
+  </ul>
+</li>
+<li>Next.js i18n, Forms, and File Upload Questions and Answers</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is i18n in Next.js?</strong><br>
+  i18n (internationalization) in Next.js allows you to build multilingual applications with locale-based routing and content translation. Next.js provides built-in support via the <code>i18n</code> config in <code>next.config.js</code>.<br><br>
+  Example configuration:
+  <pre>
+module.exports = {
+i18n: {
+  locales: ['en', 'fr', 'de'],
+  defaultLocale: 'en',
+},
+};
+  </pre>
+  This enables routing like <code>/en/about</code>, <code>/fr/about</code>, etc., and automatically handles locale detection.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you configure locale-specific routing?</strong><br>
+  Locale-specific routing is handled by enabling i18n in <code>next.config.js</code>. Next.js will prefix routes with locale codes and provide automatic redirection based on the user’s language settings.
+  <br><br>
+  Example usage in a link:
+  <pre>
+import Link from 'next/link';
+
+&lt;Link href="/" locale="fr"&gt;French Home&lt;/Link&gt;
+  </pre>
+  To get the current locale inside a page:
+  <pre>
+import { useRouter } from 'next/router';
+const { locale, locales, defaultLocale } = useRouter();
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you handle forms in Next.js?</strong><br>
+  Form handling in Next.js works the same as in React. You can use:
+  <ul>
+    <li>React state for controlled inputs</li>
+    <li>Refs for uncontrolled inputs</li>
+    <li>Libraries like <strong>React Hook Form</strong> for complex forms</li>
+  </ul>
+  Example:
+  <pre>
+function ContactForm() {
+const [name, setName] = useState('');
+const handleSubmit = (e) => {
+  e.preventDefault();
+  fetch('/api/contact', {
+    method: 'POST',
+    body: JSON.stringify({ name }),
+  });
+};
+
+return (
+  &lt;form onSubmit={handleSubmit}&gt;
+    &lt;input value={name} onChange={e =&gt; setName(e.target.value)} /&gt;
+    &lt;button type="submit"&gt;Send&lt;/button&gt;
+  &lt;/form&gt;
+);
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you upload a file using Next.js?</strong><br>
+  File uploads in Next.js can be handled using a form with <code>enctype="multipart/form-data"</code> and an API route.
+  <br><br>
+  Example frontend:
+  <pre>
+&lt;form method="POST" action="/api/upload" encType="multipart/form-data"&gt;
+&lt;input type="file" name="file" /&gt;
+&lt;button type="submit"&gt;Upload&lt;/button&gt;
+&lt;/form&gt;
+  </pre>
+
+  Example backend (API route using <code>formidable</code>):
+  <pre>
+import formidable from 'formidable';
+export const config = {
+api: {
+  bodyParser: false,
+},
+};
+
+export default function handler(req, res) {
+const form = new formidable.IncomingForm();
+form.parse(req, (err, fields, files) => {
+  if (err) return res.status(500).json({ error: err });
+  res.status(200).json({ uploaded: files });
+});
+}
+  </pre>
+  You must install <code>formidable</code> with: <code>npm install formidable</code>
+</li>
+<li>Next.js Client vs Server Components, Logging, and Monitoring</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is the difference between client and server components?</strong><br>
+  In Next.js (v13+ with the App Router), components can be rendered either on the server or the client:
+  <ul>
+    <li><strong>Server Components</strong> (default):
+      <ul>
+        <li>Rendered on the server</li>
+        <li>Do not include JavaScript in the browser</li>
+        <li>Cannot use React state, effects, or browser-only APIs</li>
+        <li>Great for performance and SEO</li>
+      </ul>
+    </li>
+    <li><strong>Client Components</strong>:
+      <ul>
+        <li>Rendered on the client (browser)</li>
+        <li>Can use <code>useState</code>, <code>useEffect</code>, and other hooks</li>
+        <li>Required for interactive UI</li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you mark a component as a client component?</strong><br>
+  To mark a component as a client component in the Next.js App Router, add the directive:
+  <pre>
+'use client';
+  </pre>
+  at the top of the file.
+  <br><br>
+  Example:
+  <pre>
+'use client';
+
+import { useState } from 'react';
+
+export default function Counter() {
+const [count, setCount] = useState(0);
+return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;;
+}
+  </pre>
+  Without this directive, the component is treated as a server component by default.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you add logging in a Next.js app?</strong><br>
+  You can add logging in both client-side and server-side code:
+  <ul>
+    <li><strong>Client-side logging</strong>: Use <code>console.log()</code> or libraries like <code>loglevel</code></li>
+    <li><strong>Server-side logging</strong> (e.g. in <code>getServerSideProps</code>, API routes):
+      <pre>
+console.info('Fetching data...');
+console.error('Error occurred:', error);
+      </pre>
+    </li>
+    <li>For advanced logging:
+      <ul>
+        <li>Use <strong>winston</strong> or <strong>pino</strong> for structured logs</li>
+        <li>Send logs to a centralized service like Logtail, AWS CloudWatch, or Elasticsearch</li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What tools can be used for error monitoring in production?</strong><br>
+  Common tools for real-time error monitoring in production Next.js apps include:
+  <ul>
+    <li><strong>Sentry</strong> – Tracks frontend and backend errors with stack traces</li>
+    <li><strong>Bugsnag</strong> – Offers stability insights and error alerting</li>
+    <li><strong>LogRocket</strong> – Combines session replay with error tracking</li>
+    <li><strong>Datadog</strong> – Full observability platform with logging and APM</li>
+    <li><strong>New Relic</strong> – Performance monitoring with alerting and diagnostics</li>
+  </ul>
+  These tools help identify runtime issues, user impact, and performance bottlenecks in production environments.
+</li>
+<li>Next.js Monorepos, Code Sharing, and Custom Server Integration</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>Can you use Next.js in a monorepo?</strong><br>
+  Yes, Next.js works well in monorepos using tools like:
+  <ul>
+    <li><strong>Turborepo</strong> (from Vercel) – Optimized for monorepos with caching and dependency graph</li>
+    <li><strong>Yarn Workspaces</strong> or <strong>npm workspaces</strong> – For managing multiple packages</li>
+  </ul>
+  Monorepos allow managing multiple apps and packages (e.g., design systems, shared utils) in one repository.<br><br>
+  Example structure:
+  <pre>
+my-monorepo/
+apps/
+  web/
+  admin/
+packages/
+  ui/
+  utils/
+  config/
+  </pre>
+  Each app (like `web` or `admin`) can be a separate Next.js application.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you share code between multiple Next.js apps?</strong><br>
+  You can share code across apps in a monorepo using:
+  <ul>
+    <li>Creating shared packages inside a <code>packages/</code> folder</li>
+    <li>Using <code>yarn workspaces</code> or <code>npm workspaces</code> to manage dependencies</li>
+    <li>Importing shared code like:
+      <pre>
+import { formatDate } from '@myorg/utils';
+      </pre>
+    </li>
+    <li>Using TypeScript path aliases or symlinks (configured in <code>tsconfig.json</code> and <code>next.config.js</code>)</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is a custom server in Next.js?</strong><br>
+  A custom server in Next.js replaces the default Next.js server with your own Node.js server using frameworks like Express or Fastify.
+  <br><br>
+  Use cases:
+  <ul>
+    <li>Custom routing or middleware</li>
+    <li>Integrating with existing backend logic</li>
+    <li>Serving dynamic content or APIs not handled via <code>pages/api</code></li>
+  </ul>
+  Note: Using a custom server disables automatic static optimization and edge functions. Vercel does not support custom servers.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you use Express or Fastify with Next.js?</strong><br>
+  Example with Express:
+  <pre>
+// server.js
+const express = require('express');
+const next = require('next');
+
+const app = next({ dev: process.env.NODE_ENV !== 'production' });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+const server = express();
+
+server.get('/custom', (req, res) => {
+  return res.send('Custom route');
+});
+
+server.all('*', (req, res) => {
+  return handle(req, res);
+});
+
+server.listen(3000, () => {
+  console.log('> Ready on http://localhost:3000');
+});
+});
+  </pre>
+
+  Example with Fastify:
+  <pre>
+// server.js
+const next = require('next');
+const fastify = require('fastify')();
+
+const app = next({ dev: true });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+fastify.get('/custom', (req, reply) => {
+  reply.send('Custom Fastify route');
+});
+
+fastify.all('/*', (req, reply) => {
+  handle(req.raw, reply.raw).then(() => {
+    reply.sent = true;
+  });
+});
+
+fastify.listen({ port: 3000 }, () => {
+  console.log('> Ready on http://localhost:3000');
+});
+});
+  </pre>
+</li>
+
+<li>Next.js Error Pages, GitHub Actions, and Deployment</li>
+
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>Can you customize the 404 and 500 error pages?</strong><br>
+  Yes, Next.js allows full customization of:
+  <ul>
+    <li><code>404.js</code> – for "Page Not Found" errors</li>
+    <li><code>500.js</code> – for internal server errors (SSR failures)</li>
+  </ul>
+  Example for <code>pages/404.js</code>:
+  <pre>
+export default function Custom404() {
+return &lt;h1&gt;404 - Page Not Found&lt;/h1&gt;;
+}
+  </pre>
+
+  Example for <code>pages/500.js</code>:
+  <pre>
+export default function Custom500() {
+return &lt;h1&gt;500 - Server-side Error&lt;/h1&gt;;
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>What is the purpose of <code>_error.js</code>?</strong><br>
+  The file <code>pages/_error.js</code> is used to customize error handling for both client-side and server-side rendering. It is only used in the **Pages Router** (not App Router).
+  <ul>
+    <li>Handles 404, 500, and other HTTP errors</li>
+    <li>Can access the error object and customize UI or log errors</li>
+  </ul>
+  Example:
+  <pre>
+function Error({ statusCode }) {
+return (
+  &lt;p&gt;
+    {statusCode
+      ? `An error ${statusCode} occurred on server`
+      : 'An error occurred on client'}
+  &lt;/p&gt;
+);
+}
+
+Error.getInitialProps = ({ res, err }) =&gt; {
+const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+return { statusCode };
+};
+
+export default Error;
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you use GitHub Actions with Next.js?</strong><br>
+  GitHub Actions can build, test, and deploy your Next.js app automatically.
+  <br><br>
+  Example workflow: <code>.github/workflows/deploy.yml</code>
+  <pre>
+name: Deploy Next.js
+
+on:
+push:
+  branches: [main]
+
+jobs:
+build:
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v3
+  - uses: actions/setup-node@v3
+    with:
+      node-version: 18
+
+  - run: npm install
+  - run: npm run build
+  - run: npm run export # for static export
+  </pre>
+  You can also add deployment steps for platforms like Vercel, S3, or Netlify CLI.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React</span><div class="answer">
+  <strong>How do you deploy a Next.js app to AWS, Netlify, or Heroku?</strong><br>
+  <ul>
+    <li><strong>✅ AWS (S3 + CloudFront):</strong>
+      <ul>
+        <li>Run <code>next export</code> to generate static files</li>
+        <li>Upload <code>out/</code> directory to S3</li>
+        <li>Serve via CloudFront for CDN performance</li>
+      </ul>
+    </li>
+
+    <li><strong>✅ Netlify:</strong>
+      <ul>
+        <li>Install plugin: <code>@netlify/plugin-nextjs</code></li>
+        <li>Deploy via GitHub or CLI</li>
+        <li>No need to export – full support for SSR/ISR</li>
+      </ul>
+    </li>
+
+    <li><strong>✅ Heroku:</strong>
+      <ul>
+        <li>Create <code>Procfile</code>: <code>web: next start</code></li>
+        <li>Set <code>NODE_ENV=production</code></li>
+        <li>Use <code>heroku buildpacks:add heroku/nodejs</code></li>
+        <li>Push to Heroku via Git</li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li>Next.js Optimization and Testing Questions and Answers</li>
+
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is tree-shaking?</strong></span><div class="answer">
+  Tree-shaking is a technique used during the JavaScript bundling process to remove unused code (also called "dead code").<br><br>
+  Next.js (via Webpack or Turbopack) automatically tree-shakes ES6 modules during the build to reduce the final bundle size.
+  <br><br>
+  ✅ Tip: Use ES module syntax (<code>import { something } from 'library'</code>) instead of <code>require</code> to ensure tree-shaking works.
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you reduce bundle size in Next.js?</strong></span><div class="answer">
+  Several strategies help reduce bundle size in a Next.js app:
+  <ul>
+    <li>Use <strong>dynamic imports</strong> with <code>next/dynamic</code> for large components or libraries</li>
+    <li>Enable <code>modular</code> imports (e.g., <code>import Button from 'antd/lib/button'</code>)</li>
+    <li>Remove unused dependencies and dead code</li>
+    <li>Split third-party code using <code>dynamic()</code></li>
+    <li>Use <code>analyze</code> plugin to visualize bundle size:
+      <pre>
+npm install @next/bundle-analyzer
+// next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: true });
+module.exports = withBundleAnalyzer({});
+      </pre>
+    </li>
+    <li>Tree-shake utility libraries like lodash using <code>lodash-es</code></li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What is the best way to unit test pages and API routes?</strong></span><div class="answer">
+  For unit testing in Next.js, the best practices include:
+  <ul>
+    <li><strong>Pages and Components:</strong> Use <code>Jest</code> with <code>React Testing Library</code></li>
+    <li><strong>API Routes:</strong> Use <code>Jest</code> to test handlers directly by mocking <code>req</code> and <code>res</code> objects</li>
+    <li><strong>Setup:</strong>
+      <pre>
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom
+      </pre>
+    </li>
+  </ul>
+
+  Example test for a component:
+  <pre>
+// __tests__/Home.test.tsx
+import { render, screen } from '@testing-library/react';
+import Home from '../pages/index';
+
+test('renders home page', () => {
+render(&lt;Home /&gt;);
+expect(screen.getByText('Welcome')).toBeInTheDocument();
+});
+  </pre>
+
+  Example test for an API route:
+  <pre>
+// __tests__/api/hello.test.ts
+import handler from '../../pages/api/hello';
+
+test('returns hello response', async () => {
+const req = {};
+const res = {
+  status: jest.fn().mockReturnThis(),
+  json: jest.fn()
+};
+
+await handler(req, res);
+expect(res.status).toHaveBeenCalledWith(200);
+expect(res.json).toHaveBeenCalledWith({ name: 'John Doe' });
+});
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you mock <xcode>getStaticProps</code> in tests?</strong></span><div class="answer">
+  You can mock <code>getStaticProps</code> using Jest by isolating it from the page or mocking it directly in your tests.
+  <br><br>
+  Example of mocking <code>getStaticProps</code>:
+  <pre>
+jest.mock('../pages/index', () => {
+const original = jest.requireActual('../pages/index');
+return {
+  __esModule: true,
+  ...original,
+  getStaticProps: jest.fn(() =&gt; ({
+    props: { title: 'Mocked Title' },
+  })),
+};
+});
+  </pre>
+
+  Or test it directly:
+  <pre>
+import { getStaticProps } from '../pages/index';
+
+test('getStaticProps returns expected data', async () => {
+const response = await getStaticProps();
+expect(response).toEqual({
+  props: { title: 'Expected Title' }
+});
+});
+  </pre>
+
+  ✅ Tip: Place `getStaticProps` in a separate file (e.g., `lib/data.ts`) for easier mocking and unit testing.
+</li>
+
+<li>Next.js CMS Integration, GraphQL Support, and Static Export</li>
+
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you connect a CMS (e.g., Strapi, Contentful) with Next.js?</strong></span><div class="answer">
+  You can connect any headless CMS by fetching data from its REST or GraphQL API during build or runtime.
+  <br><br>
+  Example with REST API (e.g., Strapi in <code>getStaticProps</code>):
+  <pre>
+export async function getStaticProps() {
+const res = await fetch('https://cms.example.com/posts');
+const posts = await res.json();
+
+return {
+  props: { posts },
+  revalidate: 10
+};
+}
+  </pre>
+
+  Example with Contentful (using official SDK):
+  <pre>
+import { createClient } from 'contentful';
+
+const client = createClient({
+space: process.env.CONTENTFUL_SPACE_ID,
+accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+});
+
+export async function getStaticProps() {
+const entries = await client.getEntries({ content_type: 'blogPost' });
+
+return {
+  props: { posts: entries.items }
+};
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>Can you use GraphQL with Next.js?</strong></span><div class="answer">
+  Yes, you can integrate GraphQL in both client and server parts of a Next.js app. Common tools include:
+  <ul>
+    <li><code>graphql-request</code> – Lightweight GraphQL client for server-side fetching</li>
+    <li><code>@apollo/client</code> – Full-featured client for browser and SSR support</li>
+  </ul>
+
+  Example using <code>graphql-request</code> in <code>getStaticProps</code>:
+  <pre>
+import { request, gql } from 'graphql-request';
+
+export async function getStaticProps() {
+const query = gql`
+  {
+    posts {
+      id
+      title
+    }
+  }
+`;
+
+const data = await request('https://api.example.com/graphql', query);
+return {
+  props: { posts: data.posts }
+};
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you export a fully static Next.js site?</strong></span><div class="answer">
+  To export a static site, use the <code>next export</code> command. This works only with **Static Site Generation (SSG)** – no SSR or API routes.
+  <br><br>
+  Steps:
+  <ul>
+    <li>Ensure all pages use <code>getStaticProps</code> or are purely static</li>
+    <li>Set <code>output: 'export'</code> in <code>next.config.js</code> (Next.js 13+)</li>
+    <li>Run:
+      <pre>
+npm run build
+npm run export
+      </pre>
+    </li>
+    <li>Static files will be in the <code>out/</code> directory, ready to deploy to S3, GitHub Pages, etc.</li>
+  </ul>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>What are the limitations of static export?</strong></span><div class="answer">
+  Static export has several limitations:
+  <ul>
+    <li>❌ No support for <code>getServerSideProps</code> or API routes</li>
+    <li>❌ No server-side rendering or runtime logic</li>
+    <li>❌ No dynamic routes unless all paths are known at build time via <code>getStaticPaths</code></li>
+    <li>✅ Works well only for purely static content (e.g., blogs, documentation)</li>
+    <li>✅ Cannot use incremental static regeneration (ISR)</li>
+  </ul>
+  It’s ideal for JAMstack-style deployments but not suitable for highly dynamic apps.
+</li>
+
+<li>Next.js Routing Hooks and Navigation Methods</li>
+
+
+<li data-id="q_node_event2222"><span class="faq-question">
+  <strong>How do you use the new <xcode>useRouter</xcode> and <xcode>usePathname</xcode> hooks?</strong></span><div class="answer">
+  In the **App Router** (Next.js 13+), routing has been split into separate, focused hooks:
+
+  <ul>
+    <li><code>useRouter</code> is available in the **Pages Router** and was used to access pathname, query, and push/replace functions.</li>
+    <li>In the **App Router**, you now use more specific hooks:
+      <ul>
+        <li><code>usePathname()</code> – returns the current URL path (string)</li>
+        <li><code>useSearchParams()</code> – returns a <code>URLSearchParams</code> object</li>
+        <li><code>useRouter()</code> – from <code>next/navigation</code>, used for navigation</li>
+      </ul>
+    </li>
+  </ul>
+
+  <br>
+  Example:
+  <pre>
+'use client';
+
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+
+export default function MyComponent() {
+const pathname = usePathname();
+const searchParams = useSearchParams();
+const router = useRouter();
+
+const handleClick = () => {
+  router.push('/about');
+};
+
+return (
+  &lt;div&gt;
+    &lt;p&gt;Path: {pathname}&lt;/p&gt;
+    &lt;button onClick={handleClick}&gt;Go to About&lt;/button&gt;
+  &lt;/div&gt;
+);
+}
+  </pre>
+</li>
+
+<li data-id="q_node_event2222"><span class="faq-question">React
+  <strong>What is the difference between <xcode>next/link</xcode> and <xcode>next/navigation</xcode>?</strong>
+  </span><div class="answer">
+  <ul>
+    <li><strong><code>next/link</code>:</strong>
+      <ul>
+        <li>Used to create clickable links in JSX</li>
+        <li>Preloads pages in the background for fast transitions</li>
+        <li>Syntax is declarative</li>
+        <li>Used like:
+          <pre>
+import Link from 'next/link';
+
+&lt;Link href="/about"&gt;About&lt;/Link&gt;
+          </pre>
+        </li>
+      </ul>
+    </li>
+
+    <li><strong><code>next/navigation</code>:</strong>
+      <ul>
+        <li>Programmatic navigation using <code>useRouter()</code> hook</li>
+        <li>Useful inside event handlers, conditions, etc.</li>
+        <li>Syntax is imperative</li>
+        <li>Example:
+          <pre>
+'use client';
+import { useRouter } from 'next/navigation';
+
+const router = useRouter();
+router.push('/about');
+          </pre>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  ✅ Use <code>next/link</code> for links in the UI<br>
+  ✅ Use <code>next/navigation</code> for actions, redirects, or conditional routing
+</li>
+
+<li data-id="q32" class="yellow"><span class="faq-question">
+  --------------------------------------------------------------
+  </span></li>
+  <li data-id="q32" ><span class="faq-question">
+  ------------------------------ Others -------------------
+  
+  
+  </span>
+  
+  <pre>
+    rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
+  
+  
+    convert to html format:
+    li data-id="question-" class="yellow"><span class="faq-question">
+    div class answer
+  
+  
+    html format : 
+    li data-id="q32" class="zyellow"> span class="faq-question">
+    div class="answer">
+  </pre>
+  </li>
+  
     
 </ul>
 
