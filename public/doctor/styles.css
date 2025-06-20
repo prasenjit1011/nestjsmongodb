@@ -191,10 +191,11 @@ a{
 
 /* === Responsive Font Scaling === */
 
+
 /* Medium Screens (Tablets ≥ 768px) */
 @media (min-width: 768px) {
   body {
-    font-size: 1.0625rem; /* ~17px */
+    font-size: 0.7625rem; /* ~17px */
   }
   .title {
     font-size: 1.375rem;
@@ -202,7 +203,7 @@ a{
   .faq-question,
   .description,
   .answer {
-    font-size: 1.0625rem;
+    font-size: 0.7625rem;
   }
   table, th, td {
     font-size: 1rem;
