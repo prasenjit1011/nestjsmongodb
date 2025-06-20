@@ -32098,6 +32098,118 @@ router.push('/about');
 
 
 
+
+
+
+  <li data-id="q32" class="yellow">
+    <span class="faq-question">How do I upload a 1 GB CSV to a database using Node.js?</span>
+    <div class="answer">
+  
+      <h3>Step-by-Step Guide to Upload 1 GB CSV to DB Using Node.js</h3>
+  
+      <ol>
+        <li><strong>Install required packages:</strong> You’ll need <code>fast-csv</code> or <code>csv-parser</code> and a DB client like <code>pg</code> (PostgreSQL), <code>mysql2</code>, or <code>mongoose</code> for MongoDB.</li>
+  
+        <li><strong>Use streaming to handle large files:</strong> Use <code>fs.createReadStream()</code> to avoid loading the entire CSV into memory.</li>
+  
+        <li><strong>Use batch insert or DB transaction:</strong> Insert rows in batches (e.g., 1000 rows at a time) to reduce DB write overhead.</li>
+      </ol>
+  
+      <h4>📁 File Structure</h4>
+      <ul>
+        <li>/upload.html</li>
+        <li>/server.js</li>
+        <li>/uploads/ (CSV files stored here)</li>
+      </ul>
+  
+      <h4>📄 server.js (Node.js)</h4>
+      <pre>
+  const fs = require('fs');
+  const path = require('path');
+  const csv = require('fast-csv');
+  const { Pool } = require('pg'); // Use mysql2 or mongoose if needed
+  
+  const pool = new Pool({
+    user: 'your_user',
+    host: 'localhost',
+    database: 'your_db',
+    password: 'your_password',
+    port: 5432,
+  });
+  
+  async function uploadCSV(filePath) {
+    const stream = fs.createReadStream(filePath);
+    const csvStream = csv.parse({ headers: true });
+    const batch = [];
+    const batchSize = 1000;
+  
+    csvStream.on('data', async (row) => {
+      batch.push(row);
+      if (batch.length === batchSize) {
+        csvStream.pause();
+        await insertBatch(batch);
+        batch.length = 0;
+        csvStream.resume();
+      }
+    });
+  
+    csvStream.on('end', async () => {
+      if (batch.length > 0) {
+        await insertBatch(batch);
+      }
+      console.log('CSV upload complete');
+    });
+  
+    stream.pipe(csvStream);
+  }
+  
+  async function insertBatch(rows) {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      for (const row of rows) {
+        await client.query('INSERT INTO your_table(col1, col2) VALUES($1, $2)', [row.col1, row.col2]);
+      }
+      await client.query('COMMIT');
+    } catch (err) {
+      await client.query('ROLLBACK');
+      console.error('Batch insert error:', err);
+    } finally {
+      client.release();
+    }
+  }
+  
+  // Example call
+  uploadCSV(path.join(__dirname, 'uploads', 'bigfile.csv'));
+      </pre>
+  
+      <h4>📄 upload.html</h4>
+      <pre>
+  &lt;form action="/upload" method="POST" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="csvfile" /&gt;
+    &lt;button type="submit"&gt;Upload&lt;/button&gt;
+  &lt;/form&gt;
+      </pre>
+  
+      <h4>⚠️ Tips</h4>
+      <ul>
+        <li>Ensure the CSV is clean and matches DB schema.</li>
+        <li>Handle backpressure with <code>pause()</code> and <code>resume()</code>.</li>
+        <li>Use tools like <code>PM2</code> for long-running processes.</li>
+      </ul>
+  
+    </div>
+  </li>
+  
+
+
+
+
+
+
+
+
+
 <li data-id="q32" class="yellow"><span class="faq-question">
   --------------------------------------------------------------
   </span></li>
