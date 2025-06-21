@@ -45,6 +45,7 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
       <tr>
         <td><a href="#awslambda">AWS Lambda</a></td>
         <td><a href="#awscognito">AWS Cognito</a></td>
+        <td><a href="#awsdynamodb">DynamoDB</a></td>
       </tr>
       <tr>
         <td>Coding</td>
@@ -71,7 +72,7 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
         <td><a href="#redis">Redis / RabitMQ</a></td>
         <td><a href="#mongodb_qlist">MongoDB</a></td>
         <td>PostGre SQL</td>
-        <td><a href="#DynamoDB-question-list">DynamoDB</a></td>
+        <td></td>
       </tr>
       <tr>
         <td><a href="#zod">Zod</a></td>
@@ -17141,1206 +17142,6 @@ DB Indexing
 
 
 
-
-    <li data-id="q_call_api_without_useeffect" id="awslambda"><span class="faq-question green">
-      Lambda : Question?
-      </span><div class="answer">
-      
-      <ol>
-        <li><strong>What is AWS Lambda?</strong></li>
-        <li><strong>What are the key features of AWS Lambda?</strong></li>
-        <li><strong>How does AWS Lambda pricing work?</strong></li>
-        <li><strong>What triggers can invoke a Lambda function?</strong></li>
-        <li><strong>What are the supported languages in AWS Lambda?</strong></li>
-        <li><strong>What is the maximum execution time of a Lambda function?</strong></li>
-        <li><strong>How do you monitor a Lambda function?</strong></li>
-        <li><strong>What is a cold start in AWS Lambda?</strong></li>
-        <li><strong>How can you reduce cold start time?</strong></li>
-        <li><strong>What is the difference between synchronous and asynchronous invocation?</strong></li>
-        <li><strong>How does concurrency work in Lambda?</strong></li>
-        <li><strong>What is the default memory limit and how can it be changed?</strong></li>
-        <li><strong>How do you handle errors in AWS Lambda?</strong></li>
-        <li><strong>Can a Lambda function call another Lambda function?</strong></li>
-        <li><strong>How do you version and alias a Lambda function?</strong></li>
-        <li><strong>What is Lambda@Edge?</strong></li>
-        <li><strong>What is the difference between Lambda and EC2?</strong></li>
-        <li><strong>How do you deploy a Lambda function?</strong></li>
-        <li><strong>How can environment variables be used in Lambda?</strong></li>
-        <li><strong>How does IAM relate to Lambda function permissions?</strong></li>
-        <li><strong>What is the Lambda execution role?</strong></li>
-        <li><strong>How can you connect Lambda to VPC?</strong></li>
-        <li><strong>How do you integrate AWS Lambda with API Gateway?</strong></li>
-        <li><strong>What is the use of the Lambda Layers feature?</strong></li>
-        <li><strong>What is the difference between Lambda and Step Functions?</strong></li>
-      </ol>
-      --------------------------------
-      </div></li>
-    
-
-
-      <li data-id="q_call_api_without_useeffect"><span class="faq-question">
-        What is AWS Lambda and how does it work?</span>
-        <div class="answer">
-          <p>
-            AWS Lambda is a serverless compute service that runs your code in response to events and automatically manages the underlying compute resources.
-          </p>
-          <ul>
-            <li>You write code (functions).</li>
-            <li>Upload it to Lambda.</li>
-            <li>Set a trigger (e.g., API Gateway, S3, DynamoDB).</li>
-            <li>Lambda scales automatically and runs only when triggered.</li>
-            <li>You pay only for the time your code runs (billed per millisecond).</li>
-          </ul>
-        </li>
-      
-        <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
-          What are Lambda Triggers and Examples?</span>
-          <div class="answer">
-          <p>A trigger is an AWS service/event that invokes a Lambda function. Examples include:</p>
-          <table border="1" cellpadding="5">
-            <thead>
-              <tr>
-                <th>Trigger Source</th>
-                <th>Example Use Case</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>API Gateway</td>
-                <td>RESTful APIs</td>
-              </tr>
-              <tr>
-                <td>S3</td>
-                <td>Process image upload</td>
-              </tr>
-              <tr>
-                <td>DynamoDB Streams</td>
-                <td>Audit logs on table change</td>
-              </tr>
-              <tr>
-                <td>CloudWatch Events</td>
-                <td>Scheduled tasks (cron jobs)</td>
-              </tr>
-              <tr>
-                <td>SNS/SQS</td>
-                <td>Event-driven messaging</td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
-      
-        <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
-          What are Cold Starts in AWS Lambda?</span>
-          <div class="answer">
-          <p>
-            A <em>cold start</em> occurs when a Lambda function is invoked after a period of inactivity or when AWS scales up new instances.
-          </p>
-          <ul>
-            <li>Causes delay due to bootstrapping environment</li>
-            <li>More noticeable in VPC-connected or large-sized functions</li>
-            <li>Can be mitigated using:
-              <ul>
-                <li>Provisioned Concurrency</li>
-                <li>Keeping functions warm via CloudWatch or scheduled triggers</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      
-        <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
-          What are the Limits of AWS Lambda?</span>
-          <div class="answer">
-          <table border="1" cellpadding="5">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Default Limit (as of 2024)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Timeout</td>
-                <td>Up to 15 minutes (900 seconds)</td>
-              </tr>
-              <tr>
-                <td>Memory</td>
-                <td>128 MB to 10,240 MB (10 GB)</td>
-              </tr>
-              <tr>
-                <td>Package Size</td>
-                <td>50 MB (direct upload) / 250 MB (S3)</td>
-              </tr>
-              <tr>
-                <td>Environment Variables</td>
-                <td>4 KB</td>
-              </tr>
-              <tr>
-                <td>Concurrency</td>
-                <td>1,000 per account (soft limit)</td>
-              </tr>
-              <tr>
-                <td>Ephemeral Storage</td>
-                <td>512 MB default (up to 10 GB optional)</td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
-      
-        <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
-          How does Lambda handle state and scalability?</span>
-          <div class="answer">
-          <ul>
-            <li><strong>State:</strong> Lambda is <em>stateless</em>. Each invocation is isolated. Use external systems like DynamoDB, S3, or Redis to manage state.</li>
-            <li><strong>Scalability:</strong> Lambda <em>automatically scales</em> out by running multiple copies in response to incoming events.</li>
-            <li>No need to manage servers or instances.</li>
-            <li>Can scale from <strong>zero to thousands</strong> of parallel executions.</li>
-          </ul>
-        </li>
-
-
-      <li data-id="q_what_is_lambda">
-        <span class="faq-question ">Lambda?</span>
-        <div class="answer">
-          AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
-          <br />Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
-        
-          <br />
-          <br />
-          <b>Key features of AWS Lambda include:</b>
-          <ul>
-            <li>No server management</li>
-            <li>Automatic scaling</li>
-            <li>Sub-second metering (pay only for usage)</li>
-            <li>Event-driven invocation (triggers from over 200 AWS services)</li>
-            <li>Built-in fault tolerance</li>
-            <li>Supports environment variables, versioning, and aliases</li>
-            <li>Integration with VPC, Layers, and Container Images</li>
-          </ul>
-        </div>
-
-
-        <div class="answer">
-          AWS Lambda provides a powerful and flexible serverless compute platform. Its key features include:
-          <ul>
-            <li><strong>Event-Driven Execution:</strong> Automatically triggered by AWS services (e.g., S3, API Gateway, DynamoDB) or external events.</li>
-            <li><strong>No Server Management:</strong> No need to provision or manage infrastructure. AWS handles everything.</li>
-            <li><strong>Automatic Scaling:</strong> Lambda scales automatically with the number of incoming events.</li>
-            <li><strong>Pay-per-Use Pricing:</strong> Billed per millisecond based on the number of requests and compute time used.</li>
-            <li><strong>Supports Multiple Languages:</strong> Includes Node.js, Python, Go, Java, .NET, Ruby, and custom runtimes.</li>
-            <li><strong>Short-Lived Functions:</strong> Functions run up to 15 minutes and then terminate automatically.</li>
-            <li><strong>Built-in Monitoring:</strong> Integrated with CloudWatch for logs and metrics.</li>
-            <li><strong>Environment Variables:</strong> Store configuration and secrets per environment (e.g., dev, prod).</li>
-            <li><strong>Versioning & Aliases:</strong> Create immutable versions of code and route traffic with named aliases.</li>
-            <li><strong>VPC Support:</strong> Access private resources in a VPC securely.</li>
-            <li><strong>Provisioned Concurrency:</strong> Pre-warm instances to avoid cold starts for latency-sensitive workloads.</li>
-            <li><strong>Lambda Layers:</strong> Package and share libraries or dependencies across multiple functions.</li>
-          </ul>
-        </div>
-      </li>
-      
-
-        <li data-id="q1uuuy">
-          <span class="faq-question green">Lambda: Keeping functions warm using scheduled CloudWatch Events</span>
-          <div class="answer">
-            <p>In AWS Lambda, <strong>cold starts</strong> happen when your function is invoked after being idle, causing latency due to container initialization. One common technique to <strong>keep Lambda functions warm</strong> is using <strong>Amazon CloudWatch Events (EventBridge)</strong> to invoke the function on a regular schedule.</p>
-      
-            <h4>✅ Steps to Keep Lambda Warm with CloudWatch Scheduled Events</h4>
-      
-            <h5>1. Create a CloudWatch Event Rule</h5>
-            <p>This will run every 5 minutes (or less) to trigger the Lambda and keep it warm.</p>
-            <p><strong>Example: rate expression:</strong><br><code>rate(5 minutes)</code></p>
-            <p><strong>Example: cron expression:</strong><br><code>cron(0/5 * * * ? *)</code></p>
-      
-            <h5>2. Attach Lambda as the Target</h5>
-            <p>Use the AWS Management Console or CLI to set the Lambda function as the target of the scheduled rule.</p>
-      
-            <h5>3. Lambda Code (Optional: Check <code>source</code> to filter warm-up calls)</h5>
-<pre>
-  exports.handler = async (event) =&gt; {
-    if (event.source === 'aws.events') {
-      console.log("Warm-up ping received");
-      return "Lambda is warm";
-    }
-  
-    // Normal Lambda logic here
-    console.log("Normal execution");
-    return "Processed request";
-  };
-</pre>
-      
-            <h4>🛠️ AWS CLI Example</h4>
-            <pre><code>aws events put-rule \
-        --name keep-lambda-warm \
-        --schedule-expression "rate(5 minutes)"
-      
-      aws lambda add-permission \
-        --function-name myLambdaFunction \
-        --statement-id allow-scheduled-invoke \
-        --action 'lambda:InvokeFunction' \
-        --principal events.amazonaws.com \
-        --source-arn arn:aws:events:&lt;region&gt;:&lt;account-id&gt;:rule/keep-lambda-warm
-      
-      aws events put-targets \
-        --rule keep-lambda-warm \
-        --targets "Id"="1","Arn"="arn:aws:lambda:&lt;region&gt;:&lt;account-id&gt;:function:myLambdaFunction"</code></pre>
-      
-            <h4>🔥 Best Practices</h4>
-            <ul>
-              <li>Use a <strong>lightweight payload</strong> to reduce cost.</li>
-              <li>For <strong>multiple Lambdas</strong>, consolidate into a single “warming” function that calls others asynchronously.</li>
-              <li>Use <code>Provisioned Concurrency</code> for critical APIs (more reliable but has cost).</li>
-            </ul>
-          </div>
-        </li>
-      
-      
-        
-          <li data-id="q2">
-            <span class="faq-question green">Step-by-Step: Create a CloudWatch Event Rule to keep an API warm</span>
-            <div class="answer">
-              <p>This guide shows how to use <strong>Amazon EventBridge (CloudWatch Events)</strong> to ping an API endpoint like:</p>
-              <p><code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></p>
-        
-              <h4>✅ Goal</h4>
-              <p>Invoke a Lambda function or API Gateway endpoint every 5 minutes to keep it warm and avoid cold starts.</p>
-        
-              <h4>🧩 Step-by-Step: Using AWS Console to Call an API URL</h4>
-        
-              <h5>🟢 1. Go to <strong>EventBridge</strong></h5>
-              <ul>
-                <li>Sign in to the AWS Console</li>
-                <li>Open <strong>Amazon EventBridge</strong> from the "Management &amp; Governance" section</li>
-              </ul>
-        
-              <h5>🟢 2. Create Rule</h5>
-              <ul>
-                <li>Click <strong>“Rules” &gt; “Create rule”</strong></li>
-                <li>Rule name: <code>keep-api-warm</code></li>
-                <li>Description: <code>Keep API Gateway warm</code></li>
-                <li><strong>Event Source:</strong> “EventBridge (default bus)”</li>
-                <li><strong>Rule type:</strong> “Schedule”</li>
-              </ul>
-        
-              <h5>🟢 3. Set Schedule</h5>
-              <ul>
-                <li>Select: <strong>rate expression</strong></li>
-                <li>Input: <code>rate(5 minutes)</code></li>
-              </ul>
-        
-              <h5>🟢 4. Add Target (API Gateway or Custom URL)</h5>
-              <p>Since you are calling an external API endpoint:</p>
-              <ul>
-                <li>Choose <strong>Target type:</strong> <code>API destination</code></li>
-                <li>Click <strong>Create a new API destination</strong></li>
-              </ul>
-        
-              <h5>🔧 Set up API Destination</h5>
-              <ul>
-                <li>Name: <code>KeepWarmDestination</code></li>
-                <li>Method: <code>GET</code> or <code>POST</code> (depending on your endpoint)</li>
-                <li>Endpoint URL: <code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></li>
-                <li>Create a <strong>Connection</strong> (e.g., <code>AnonymousConnection</code>) if no auth is needed</li>
-                <li>Choose <strong>No authentication</strong> or <strong>API Key</strong> as required</li>
-              </ul>
-        
-              <p>Then click <strong>Next</strong>, review, and <strong>Create rule</strong>.</p>
-        
-              <h4>✅ Result</h4>
-              <p>EventBridge will call your API endpoint every 5 minutes to prevent cold starts.</p>
-        
-              <h4>⚠️ Notes</h4>
-              <ul>
-                <li>Ensure the API doesn’t require a specific payload (default is empty).</li>
-                <li>Monitor usage via CloudWatch Logs.</li>
-                <li>You can also create a “warm-up Lambda” that pings the endpoint if more flexibility is needed.</li>
-              </ul>
-            </div>
-          </li>
-        
-        
-
-      <li data-id="q_lambda_pricing">
-        <span class="faq-question">How does AWS Lambda pricing work?</span>
-        <div class="answer">
-          AWS Lambda charges are based on:
-          <ul>
-            <li><strong>Number of requests:</strong> First 1 million requests/month are free. After that, it's $0.20 per million requests.</li>
-            <li><strong>Duration:</strong> Billed per millisecond from the time your code begins executing until it returns or otherwise terminates. Depends on the memory allocated.</li>
-          </ul>
-          Example: If your function runs for 200ms and uses 128MB memory, you only pay for that exact duration and size.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_triggers">
-        <span class="faq-question">What triggers can invoke a Lambda function?</span>
-        <div class="answer">
-          Lambda can be triggered by various AWS services, including:
-          <ul>
-            <li>API Gateway (HTTP requests)</li>
-            <li>S3 (file uploads, deletions)</li>
-            <li>DynamoDB Streams</li>
-            <li>SNS (notifications)</li>
-            <li>SQS (queues)</li>
-            <li>CloudWatch Events & Logs</li>
-            <li>Cognito, Alexa Skills, EventBridge, etc.</li>
-          </ul>
-          Lambda can also be triggered manually using the AWS SDK or CLI.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_languages">
-        <span class="faq-question">What are the supported languages in AWS Lambda?</span>
-        <div class="answer">
-          AWS Lambda natively supports:
-          <ul>
-            <li>Node.js</li>
-            <li>Python</li>
-            <li>Java</li>
-            <li>Go</li>
-            <li>C# (.NET Core)</li>
-            <li>Ruby</li>
-          </ul>
-          It also supports custom runtimes and container images, allowing you to use any language.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_timeout">
-        <span class="faq-question">What is the maximum execution time of a Lambda function?</span>
-        <div class="answer">
-          The maximum timeout for a Lambda function is <strong>15 minutes (900 seconds)</strong> per invocation. You can configure the timeout in the Lambda function settings depending on your use case.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_monitoring">
-        <span class="faq-question">How do you monitor a Lambda function?</span>
-        <div class="answer">
-          Lambda integrates with AWS CloudWatch to provide monitoring:
-          <ul>
-            <li><strong>CloudWatch Logs:</strong> Automatically captures console output and errors.</li>
-            <li><strong>CloudWatch Metrics:</strong> Tracks invocation count, duration, error count, throttles, and more.</li>
-            <li><strong>CloudWatch Alarms:</strong> Trigger notifications based on metric thresholds.</li>
-            <li><strong>X-Ray:</strong> For distributed tracing and performance analysis.</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_call_api_without_useeffect">
-        <span class="faq-question">What is a cold start in AWS Lambda?</span>
-        <div class="answer">
-          A cold start occurs when AWS needs to create a new container to run your Lambda function—for example, when there's no existing warm instance available. It includes the time taken to:
-          <ul>
-            <li>Provision the runtime container</li>
-            <li>Download your function code</li>
-            <li>Initialize dependencies</li>
-          </ul>
-          Cold starts introduce extra latency (usually 100ms–1s). They are more noticeable with VPC-configured or infrequently used functions.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_cold_start_optimization">
-        <span class="faq-question">How can you reduce cold start time?</span>
-        <div class="answer">
-          You can reduce cold start time in AWS Lambda by:
-          <ul>
-            <li>Using lighter runtimes like Node.js or Go (faster startup)</li>
-            <li>Minimizing initialization code and package size</li>
-            <li>Keeping functions warm using scheduled CloudWatch Events</li>
-            <li>Avoiding VPC connections unless required (or optimizing them)</li>
-            <li>Using Provisioned Concurrency (pre-warms containers to eliminate cold starts)</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_sync_async">
-        <span class="faq-question">What is the difference between synchronous and asynchronous invocation?</span>
-        <div class="answer">
-          <strong>Synchronous Invocation:</strong> Caller waits for the function to process and return a result. Example: API Gateway.<br />
-          <strong>Asynchronous Invocation:</strong> Caller sends the request and continues without waiting for a response. Example: S3 or SNS.<br />
-          <strong>Differences:</strong>
-          <ul>
-            <li>Synchronous = real-time; Asynchronous = event-based</li>
-            <li>Synchronous errors are returned immediately; asynchronous are logged</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_concurrency">
-        <span class="faq-question">How does concurrency work in Lambda?</span>
-        <div class="answer">
-          Concurrency is the number of instances that can run in parallel:
-          <ul>
-            <li><strong>Unreserved concurrency:</strong> Default limit shared across functions (e.g. 1000)</li>
-            <li><strong>Reserved concurrency:</strong> Guarantees a specific number of concurrent executions for a function</li>
-            <li><strong>Provisioned concurrency:</strong> Keeps containers initialized and ready to respond instantly</li>
-          </ul>
-          If concurrency limit is hit, excess requests are throttled.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_memory">
-        <span class="faq-question">What is the default memory limit and how can it be changed?</span>
-        <div class="answer">
-          <strong>Default Memory:</strong> 128 MB<br />
-          <strong>Range:</strong> 128 MB to 10,240 MB (10 GB), in 1 MB increments.<br />
-          You can change it from:
-          <ul>
-            <li>AWS Console &rarr; Lambda &rarr; Configuration &rarr; Memory</li>
-            <li>Or via CLI: <code>aws lambda update-function-configuration</code></li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_errors">
-        <span class="faq-question">How do you handle errors in AWS Lambda?</span>
-        <div class="answer">
-          You can handle errors in Lambda using:
-          <ul>
-            <li><strong>Try-catch blocks:</strong> Handle exceptions in your code</li>
-            <li><strong>Return meaningful error responses (for synchronous calls)</strong></li>
-            <li><strong>Dead Letter Queues (DLQs):</strong> Capture failed async invocations</li>
-            <li><strong>CloudWatch Logs:</strong> View stack traces and error details</li>
-            <li><strong>Retries:</strong> Lambda automatically retries failed async events (2 times by default)</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_calls_lambda">
-        <span class="faq-question">Can a Lambda function call another Lambda function?</span>
-        <div class="answer">
-          Yes, a Lambda function can invoke another Lambda using the AWS SDK or AWS CLI. This is useful for microservice architectures or function chaining.<br />
-          Example in Node.js:
-<pre>
-const AWS = require('aws-sdk');
-const lambda = new AWS.Lambda();
-lambda.invoke({
-  FunctionName: 'anotherLambdaFunction',
-  Payload: JSON.stringify({ key: 'value' })
-}, (err, data) => { ... });
-</pre>
-          Make sure the calling Lambda has the IAM permission <code>lambda:InvokeFunction</code>.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_version_alias">
-        <span class="faq-question">How do you version and alias a Lambda function?</span>
-        <div class="answer">
-          <strong>Versioning:</strong> Every time you publish a function version, AWS creates an immutable snapshot of the code and configuration.<br />
-          <strong>Alias:</strong> Acts as a pointer to a specific version. Useful for traffic shifting (e.g., <code>prod</code>, <code>beta</code> aliases).<br />
-          Example:
-          <ul>
-            <li><code>$LATEST</code> → Draft code</li>
-            <li><code>1</code>, <code>2</code>, etc. → Published versions</li>
-            <li><code>alias: prod → version: 5</code></li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_call_api_without_useeffect">
-        <span class="faq-question">What is Lambda@Edge?</span>
-        <div class="answer">
-          Lambda@Edge is an extension of AWS Lambda that lets you run functions at AWS edge locations. It's integrated with Amazon CloudFront and is used for:
-          <ul>
-            <li>Customizing CDN content before it's delivered</li>
-            <li>Implementing security/auth at the edge</li>
-            <li>Personalizing content based on headers, cookies, etc.</li>
-            <li>Modifying requests/responses without origin call</li>
-          </ul>
-          It improves performance and reduces latency by moving compute closer to the user.
-        </div>
-      </li>
-      
-    
-      <li data-id="q_lambda_vs_ec2">
-        <span class="faq-question">What is the difference between Lambda and EC2?</span>
-        <div class="answer">
-          <strong>AWS Lambda:</strong> Serverless, event-driven compute service. No server management; pay-per-invocation.<br />
-          <strong>EC2:</strong> Virtual server in the cloud. You manage OS, scaling, patching.<br /><br />
-          <strong>Key Differences:</strong>
-          <ul>
-            <li>Lambda is event-based; EC2 is instance-based</li>
-            <li>Lambda scales automatically; EC2 needs manual or auto-scaling setup</li>
-            <li>Lambda is billed per millisecond; EC2 is billed per second or hour</li>
-            <li>Lambda can't be used for long-running tasks (max 15 minutes); EC2 can run indefinitely</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_deploy">
-        <span class="faq-question">How do you deploy a Lambda function?</span>
-        <div class="answer">
-          You can deploy a Lambda function using:
-          <ul>
-            <li><strong>AWS Console:</strong> Upload .zip or use inline editor</li>
-            <li><strong>AWS CLI:</strong> Use <code>aws lambda create-function</code> or <code>update-function-code</code></li>
-            <li><strong>Infrastructure as Code:</strong> Tools like AWS SAM, Serverless Framework, Terraform, or CloudFormation</li>
-            <li><strong>CI/CD Pipelines:</strong> Using CodePipeline, GitHub Actions, or Jenkins</li>
-          </ul>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_env">
-        <span class="faq-question">How can environment variables be used in Lambda?</span>
-        <div class="answer">
-          Lambda supports environment variables to:
-          <ul>
-            <li>Store config values (DB URLs, API keys, etc.)</li>
-            <li>Separate environment-specific settings (dev, test, prod)</li>
-          </ul>
-          <strong>Access:</strong> Use <code>process.env.VARIABLE_NAME</code> in your function code.<br />
-          <strong>Security:</strong> You can encrypt them using KMS and manage access with IAM policies.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_iam">
-        <span class="faq-question">How does IAM relate to Lambda function permissions?</span>
-        <div class="answer">
-          AWS IAM (Identity and Access Management) controls who can:
-          <ul>
-            <li>Create, modify, delete Lambda functions</li>
-            <li>Assign permissions to Lambda functions</li>
-            <li>Invoke functions or access resources Lambda interacts with</li>
-          </ul>
-          Lambda uses <strong>execution roles</strong> (IAM roles) to interact with other AWS services securely.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_exec_role">
-        <span class="faq-question">What is the Lambda execution role?</span>
-        <div class="answer">
-          The execution role is an IAM role assumed by the Lambda function at runtime. It defines:
-          <ul>
-            <li>Which AWS services the function can access (e.g., S3, DynamoDB)</li>
-            <li>Permission to write logs to CloudWatch</li>
-          </ul>
-          <strong>Policy Example:</strong>
-          <pre><code>{
-        "Effect": "Allow",
-        "Action": ["s3:GetObject", "logs:CreateLogStream"],
-        "Resource": "*"
-      }</code></pre>
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_vpc">
-        <span class="faq-question">How can you connect Lambda to VPC?</span>
-        <div class="answer">
-          Lambda can access private VPC resources (e.g., RDS, EC2) by assigning:
-          <ul>
-            <li>VPC ID</li>
-            <li>Subnets with NAT Gateway (for internet access)</li>
-            <li>Security groups (to control access)</li>
-          </ul>
-          This allows your Lambda to operate securely within your VPC.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_apigw">
-        <span class="faq-question">How do you integrate AWS Lambda with API Gateway?</span>
-        <div class="answer">
-          You can expose your Lambda function via REST or HTTP APIs using API Gateway:
-          <ul>
-            <li>Create a REST API in API Gateway</li>
-            <li>Define resources and methods (e.g., GET /users)</li>
-            <li>Set integration type as Lambda function</li>
-            <li>Deploy the API to a stage (e.g., /prod)</li>
-          </ul>
-          This setup allows clients to invoke Lambda functions over HTTPS.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_layers">
-        <span class="faq-question">What is the use of the Lambda Layers feature?</span>
-        <div class="answer">
-          Lambda Layers are a way to package and reuse shared code or dependencies across multiple functions. Use cases:
-          <ul>
-            <li>Third-party libraries (e.g., bcrypt, pandas)</li>
-            <li>Custom utility modules</li>
-            <li>Large binaries or compiled packages</li>
-          </ul>
-          <strong>Benefits:</strong> Reduces deployment size and duplication across functions.
-        </div>
-      </li>
-      
-      <li data-id="q_lambda_vs_stepfunctions">
-        <span class="faq-question">What is the difference between Lambda and Step Functions?</span>
-        <div class="answer">
-          <strong>AWS Lambda:</strong> Executes single tasks triggered by events.<br />
-          <strong>AWS Step Functions:</strong> Orchestrates multiple AWS services/functions in workflows with logic.<br />
-          <strong>Comparison:</strong>
-          <ul>
-            <li>Lambda = compute unit; Step Functions = workflow engine</li>
-            <li>Step Functions handle retries, timeouts, branching, error catching</li>
-            <li>Useful for building complex apps like ETL pipelines, order processing, etc.</li>
-          </ul>
-        </div>
-      </li>
-      
-
-<li data-id="q_lambda_vs_stepfunctions">
-<span class="faq-question green ">
-  What are AWS Step Functions in context of AWS Lambda?
-</span>
-<div class="answer">
-  <p>
-    AWS Step Functions is a <strong>visual workflow service</strong> that lets you coordinate multiple AWS services — especially <strong>Lambda functions</strong> — into <strong>serverless workflows</strong> using <strong>state machines</strong>.
-  </p>
-  
-  <hr>
-  
-  <h3>🔄 Use Case</h3>
-  <p>You use Step Functions when you need to:</p>
-  <ul>
-    <li>Orchestrate multiple Lambda functions in sequence or parallel</li>
-    <li>Handle retries, timeouts, and error-catching logic easily</li>
-    <li>Implement workflows like:
-      <ul>
-        <li>Order processing</li>
-        <li>Approval flows</li>
-        <li>ETL pipelines</li>
-        <li>ML model training</li>
-      </ul>
-    </li>
-  </ul>
-  
-  <hr>
-  
-  <h3>🔧 Example: Step Functions + AWS Lambda</h3>
-  <h4>🎯 Workflow:</h4>
-  <pre>
-  User triggers workflow →
-    Step 1: Validate Order (Lambda)
-    Step 2: Check Inventory (Lambda)
-    Step 3: Charge Payment (Lambda)
-    Step 4: Send Notification (Lambda)
-  </pre>
-  
-  <hr>
-  
-  <h3>🧾 State Machine Definition (Amazon States Language - JSON)</h3>
-  <pre><code>{
-    "Comment": "Order Processing Workflow",
-    "StartAt": "ValidateOrder",
-    "States": {
-      "ValidateOrder": {
-        "Type": "Task",
-        "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:ValidateOrder",
-        "Next": "CheckInventory"
-      },
-      "CheckInventory": {
-        "Type": "Task",
-        "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:CheckInventory",
-        "Next": "ChargePayment"
-      },
-      "ChargePayment": {
-        "Type": "Task",
-        "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:ChargePayment",
-        "Next": "SendNotification"
-      },
-      "SendNotification": {
-        "Type": "Task",
-        "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:SendNotification",
-        "End": true
-      }
-    }
-  }
-  </code></pre>
-  
-  <hr>
-  
-  <h3>✅ Benefits</h3>
-  <table border="1" cellpadding="5">
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Benefit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Visual Workflows</td>
-        <td>Easy to debug, visualize, and trace steps</td>
-      </tr>
-      <tr>
-        <td>Error Handling</td>
-        <td>Built-in retry, catch, and fallback states</td>
-      </tr>
-      <tr>
-        <td>Sequential + Parallel</td>
-        <td>Define series and branching flows</td>
-      </tr>
-      <tr>
-        <td>Audit + Logging</td>
-        <td>Integrated with CloudWatch Logs</td>
-      </tr>
-      <tr>
-        <td>Pay-per-state</td>
-        <td>Charged per state transition, cost-effective</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <hr>
-  
-  <h3>🔐 IAM Permissions</h3>
-  <p>
-    Each Lambda used in Step Functions must:
-  </p>
-  <ul>
-    <li>Allow execution from Step Functions</li>
-    <li>Be invoked with appropriate IAM roles</li>
-  </ul>
-  
-  <hr>
-  
-  <h3>🧪 Bonus: Step Functions + Express Workflows</h3>
-  <p>
-    If you need faster execution and lower costs for short-duration tasks, use:
-  </p>
-  <ul>
-    <li><strong>Express Workflows</strong> for high-volume, event-driven workloads</li>
-    <li><strong>Standard Workflows</strong> for long-running workflows (up to 1 year)</li>
-  </ul>
-</div>
-</li>
-
-<li data-id="question-aws-ses-1" class="yellow">
-  <span class="faq-question">What is AWS SES?</span>
-  <div class="answer">
-    AWS SES (Simple Email Service) is a cloud-based email sending service designed to help digital marketers and application developers send marketing, notification, and transactional emails securely and cost-effectively.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-2" class="zyellow">
-  <span class="faq-question">What are the common use cases of AWS SES?</span>
-  <div class="answer">
-    <ul>
-      <li>Sending transactional emails (e.g., OTPs, order confirmations)</li>
-      <li>Marketing and promotional campaigns</li>
-      <li>System alerts and notifications</li>
-      <li>Bulk email distribution</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-aws-ses-3" class="zyellow">
-  <span class="faq-question">How do you verify a domain or email in SES?</span>
-  <div class="answer">
-    You verify a domain/email by adding a DNS TXT record provided by SES or clicking a verification link sent to the specified email address. Domain verification is required for bulk or production email sending.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-4" class="zyellow">
-  <span class="faq-question">What are SES sending limits and how do you increase them?</span>
-  <div class="answer">
-    SES limits depend on the region and whether your account is in the sandbox or production. You can increase limits by requesting a production access upgrade via AWS Support.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-5" class="zyellow">
-  <span class="faq-question">What is the difference between sandbox and production mode in SES?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Sandbox:</strong> Used for testing; you can only send emails to verified addresses.</li>
-      <li><strong>Production:</strong> After approval, you can send to unverified addresses and higher volume.</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-aws-ses-6" class="zyellow">
-  <span class="faq-question">How can you send email using AWS SES in Node.js?</span>
-  <div class="answer">
-    Use the <code>@aws-sdk/client-ses</code> package. You configure the SES client and call <code>SendEmailCommand</code> or <code>SendRawEmailCommand</code> depending on the use case (e.g., attachments).
-  </div>
-</li>
-
-<li data-id="question-aws-ses-7" class="zyellow">
-  <span class="faq-question">How do you monitor SES email deliveries?</span>
-  <div class="answer">
-    SES integrates with Amazon CloudWatch, SNS, and event destinations to monitor bounces, complaints, deliveries, and rejections. You can set alarms based on metrics.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-8" class="zyellow">
-  <span class="faq-question">What are bounces and complaints in SES?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Bounce:</strong> When an email is rejected by the recipient's mail server.</li>
-      <li><strong>Complaint:</strong> When a recipient marks the email as spam.</li>
-    </ul>
-    Both affect your sender reputation and should be handled via SNS notifications or CloudWatch alerts.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-9" class="zyellow">
-  <span class="faq-question">How do you send email with attachments using SES?</span>
-  <div class="answer">
-    You must use <code>SendRawEmailCommand</code> and build the MIME message manually, including attachments in base64-encoded format with correct content-type headers.
-  </div>
-</li>
-
-<li data-id="question-aws-ses-10" class="zyellow">
-  <span class="faq-question">How do you authenticate your domain for better deliverability?</span>
-  <div class="answer">
-    Set up DNS records:
-    <ul>
-      <li><strong>SPF:</strong> To authorize AWS SES as a sender</li>
-      <li><strong>DKIM:</strong> To sign emails cryptographically</li>
-      <li><strong>DMARC:</strong> To specify how to handle failed SPF/DKIM checks</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ssm-1" class="yellow">
-  <span class="faq-question">What is AWS SSM (Systems Manager)?</span>
-  <div class="answer">
-    AWS SSM (AWS Systems Manager) is a service that lets you view and control your cloud and on-premises infrastructure. <br />
-    It helps manage EC2 instances, patch updates, automate tasks, run scripts, and store configuration secrets.
-  </div>
-</li>
-
-<li data-id="question-ssm-2" class="zyellow">
-  <span class="faq-question">What are the key components of AWS SSM?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>SSM Agent:</strong> Installed on instances to allow communication with SSM</li>
-      <li><strong>Run Command:</strong> Execute shell scripts/commands remotely</li>
-      <li><strong>Parameter Store:</strong> Secure storage for configuration values and secrets</li>
-      <li><strong>Automation:</strong> Reusable workflows for tasks like patching or provisioning</li>
-      <li><strong>Session Manager:</strong> Secure shell access to EC2 without SSH or bastion</li>
-      <li><strong>Patch Manager:</strong> Automate OS patching</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ssm-3" class="zyellow">
-  <span class="faq-question">How do you use SSM Parameter Store?</span>
-  <div class="answer">
-    You can store configuration values and secrets using SSM Parameter Store. Parameters can be plaintext or encrypted using KMS. They are accessed programmatically via AWS SDK, CLI, or environment variables.
-  </div>
-</li>
-
-<li data-id="question-ssm-4" class="zyellow">
-  <span class="faq-question">What is the difference between standard and advanced parameters in Parameter Store?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Standard:</strong> Free up to 10,000 parameters, no expiration, basic features</li>
-      <li><strong>Advanced:</strong> Support for higher limits, parameter policies (like expiration), and parameter versions history</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ssm-5" class="zyellow">
-  <span class="faq-question">How does Session Manager improve security?</span>
-  <div class="answer">
-    Session Manager enables shell access to EC2 instances without SSH keys or open ports. It logs session activity, integrates with CloudTrail, and supports encryption for secure auditing.
-  </div>
-</li>
-
-<li data-id="question-ssm-6" class="zyellow">
-  <span class="faq-question">What IAM permissions are required for SSM to work with EC2?</span>
-  <div class="answer">
-    The EC2 instance must have an attached IAM role with policies like <code>AmazonSSMManagedInstanceCore</code>. Additional permissions are needed for accessing Parameter Store, logging, etc.
-  </div>
-</li>
-
-<li data-id="question-ssm-7" class="zyellow">
-  <span class="faq-question">How do you execute remote commands using AWS SSM?</span>
-  <div class="answer">
-    Use SSM Run Command via AWS Console, CLI, or SDK. It allows execution of commands on target EC2 instances (with SSM agent) without needing SSH or opening inbound ports.
-  </div>
-</li>
-
-<li data-id="question-ssm-8" class="zyellow">
-  <span class="faq-question">What are Automation Documents (SSM Documents)?</span>
-  <div class="answer">
-    Automation Documents (SSM Docs) are JSON/YAML templates defining actions for Systems Manager. You can use AWS-provided or custom documents to automate patching, backups, deployments, etc.
-  </div>
-</li>
-
-<li data-id="question-ssm-9" class="zyellow">
-  <span class="faq-question">What is the role of AWS SSM in CI/CD pipelines?</span>
-  <div class="answer">
-    AWS SSM can be integrated in CI/CD pipelines to:
-    <ul>
-      <li>Deploy code or run scripts after a build</li>
-      <li>Update configuration values via Parameter Store</li>
-      <li>Use Run Command to restart services or run health checks</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ssm-10" class="zyellow">
-  <span class="faq-question">What are best practices when using AWS SSM?</span>
-  <div class="answer">
-    <ul>
-      <li>Use IAM roles with least privilege</li>
-      <li>Enable logging and auditing via CloudWatch and CloudTrail</li>
-      <li>Rotate and encrypt secrets using Parameter Store + KMS</li>
-      <li>Use Session Manager instead of SSH for instance access</li>
-      <li>Tag and organize SSM documents and parameters</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-kinesis-1" class="yellow">
-  <span class="faq-question">What is AWS Kinesis?</span>
-  <div class="answer">
-    AWS Kinesis is a platform for real-time data streaming at scale. It enables processing of large streams of data records in real time for analytics, monitoring, and response.
-  </div>
-</li>
-
-<li data-id="question-kinesis-2" class="zyellow">
-  <span class="faq-question">What are the components of AWS Kinesis?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Kinesis Data Streams (KDS):</strong> Collect and process real-time streaming data</li>
-      <li><strong>Kinesis Data Firehose:</strong> Load streaming data to S3, Redshift, Elasticsearch, etc.</li>
-      <li><strong>Kinesis Data Analytics:</strong> Real-time SQL queries on streaming data</li>
-      <li><strong>Kinesis Video Streams:</strong> Stream and store video from devices</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-kinesis-3" class="zyellow">
-  <span class="faq-question">How does Kinesis Data Stream work?</span>
-  <div class="answer">
-    Data producers push data records into Kinesis streams. Each stream consists of shards. Consumers (like Lambda, EC2) read and process data from these shards.
-  </div>
-</li>
-
-<li data-id="question-kinesis-4" class="zyellow">
-  <span class="faq-question">What is a shard in Kinesis?</span>
-  <div class="answer">
-    A shard is the base throughput unit of a Kinesis stream. Each shard supports 1MB/s input and 2MB/s output. You can increase throughput by adding more shards.
-  </div>
-</li>
-
-<li data-id="question-kinesis-5" class="zyellow">
-  <span class="faq-question">What is the difference between Kinesis Data Streams and Firehose?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Data Streams:</strong> Real-time processing; you manage consumers and scaling</li>
-      <li><strong>Firehose:</strong> Fully managed; automatically loads to destinations (e.g., S3)</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-kinesis-6" class="zyellow">
-  <span class="faq-question">What is the retention period for Kinesis Data Streams?</span>
-  <div class="answer">
-    By default, data is retained for 24 hours. You can extend retention up to 365 days.
-  </div>
-</li>
-
-<li data-id="question-kinesis-7" class="zyellow">
-  <span class="faq-question">How can you consume data from a Kinesis stream?</span>
-  <div class="answer">
-    You can use:
-    <ul>
-      <li>AWS Lambda</li>
-      <li>Kinesis Client Library (KCL)</li>
-      <li>Amazon Kinesis Data Analytics</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-kinesis-8" class="zyellow">
-  <span class="faq-question">What are common use cases for AWS Kinesis?</span>
-  <div class="answer">
-    <ul>
-      <li>Log and event data streaming</li>
-      <li>Real-time analytics and dashboards</li>
-      <li>IoT telemetry processing</li>
-      <li>Video stream analysis</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-cfn-1" class="yellow">
-  <span class="faq-question">What is AWS CloudFormation?</span>
-  <div class="answer">
-    CloudFormation is an Infrastructure as Code (IaC) service that lets you define AWS infrastructure using JSON or YAML templates and deploy it automatically.
-  </div>
-</li>
-
-<li data-id="question-cfn-2" class="zyellow">
-  <span class="faq-question">What are the components of a CloudFormation template?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Parameters</strong> – Accept input values</li>
-      <li><strong>Resources</strong> – Define AWS services to provision</li>
-      <li><strong>Outputs</strong> – Export values</li>
-      <li><strong>Mappings</strong> – Define conditional values</li>
-      <li><strong>Conditions</strong> – Create conditional resources</li>
-      <li><strong>Metadata</strong> – Add extra data (e.g., configs)</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-cfn-3" class="zyellow">
-  <span class="faq-question">What is a CloudFormation Stack?</span>
-  <div class="answer">
-    A stack is a collection of AWS resources created, updated, or deleted together as a unit using a CloudFormation template.
-  </div>
-</li>
-
-<li data-id="question-cfn-4" class="zyellow">
-  <span class="faq-question">What is the use of Change Sets in CloudFormation?</span>
-  <div class="answer">
-    Change Sets let you preview changes that CloudFormation will make before applying them. This helps prevent unintended resource updates or deletions.
-  </div>
-</li>
-
-<li data-id="question-cfn-5" class="zyellow">
-  <span class="faq-question">How does CloudFormation handle updates to existing stacks?</span>
-  <div class="answer">
-    CloudFormation compares the new template with the current stack and makes necessary changes. Resources are added/updated/deleted to match the updated template.
-  </div>
-</li>
-
-<li data-id="question-cfn-6" class="zyellow">
-  <span class="faq-question">What is a nested stack?</span>
-  <div class="answer">
-    A nested stack is a CloudFormation stack created within another stack. It helps modularize templates and reuse common configurations.
-  </div>
-</li>
-
-<li data-id="question-cfn-7" class="zyellow">
-  <span class="faq-question">How do you manage secrets in CloudFormation templates?</span>
-  <div class="answer">
-    You can reference secrets stored in AWS Secrets Manager or SSM Parameter Store using dynamic references (e.g., <code>{{resolve:ssm-secure:parameter-name}}</code>).
-  </div>
-</li>
-
-<li data-id="question-cfn-8" class="zyellow">
-  <span class="faq-question">Can CloudFormation rollback changes on failure?</span>
-  <div class="answer">
-    Yes. If a stack creation or update fails, CloudFormation automatically rolls back to the previous stable state (unless rollback is explicitly disabled).
-  </div>
-</li>
-
-<li data-id="question-cfn-9" class="zyellow">
-  <span class="faq-question">What tools can you use with CloudFormation for CI/CD?</span>
-  <div class="answer">
-    You can integrate CloudFormation with CodePipeline, CodeBuild, GitHub Actions, Jenkins, or Terraform (to generate templates).
-  </div>
-</li>
-
-<li data-id="question-cfn-10" class="zyellow">
-  <span class="faq-question">What are best practices for writing CloudFormation templates?</span>
-  <div class="answer">
-    <ul>
-      <li>Use YAML over JSON for readability</li>
-      <li>Break large templates into nested stacks</li>
-      <li>Parameterize environment-specific values</li>
-      <li>Use <code>DependsOn</code> for explicit dependencies</li>
-      <li>Enable stack protection and rollback alarms</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-1" id="awsec2_qlist" class="yellow">
-  <span class="faq-question">What is AWS EC2?</span>
-  <div class="answer">
-    AWS EC2 (Elastic Compute Cloud) provides scalable virtual servers in the cloud. You can launch instances of different types to host applications, run workloads, or serve web services.
-  </div>
-</li>
-
-<li data-id="question-ec2-2" class="zyellow">
-  <span class="faq-question">What are EC2 instance types?</span>
-  <div class="answer">
-    EC2 instance types are categories of virtual machines optimized for different use cases:
-    <ul>
-      <li><strong>General Purpose:</strong> t3, t4g, m5</li>
-      <li><strong>Compute Optimized:</strong> c5, c6g</li>
-      <li><strong>Memory Optimized:</strong> r5, x1</li>
-      <li><strong>Storage Optimized:</strong> i3, d2</li>
-      <li><strong>Accelerated Computing:</strong> p3, inf1</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-3" class="zyellow">
-  <span class="faq-question">What is an AMI (Amazon Machine Image)?</span>
-  <div class="answer">
-    An AMI is a pre-configured template that contains the OS, software, and settings needed to launch an EC2 instance. You can use AWS-provided, marketplace, or custom AMIs.
-  </div>
-</li>
-
-<li data-id="question-ec2-4" class="zyellow">
-  <span class="faq-question">What is the difference between EBS and instance store?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>EBS (Elastic Block Store):</strong> Persistent block storage that survives instance termination.</li>
-      <li><strong>Instance Store:</strong> Temporary storage that is lost when the instance is stopped or terminated.</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-5" class="zyellow">
-  <span class="faq-question">How do security groups work in EC2?</span>
-  <div class="answer">
-    Security groups act as virtual firewalls. They control inbound and outbound traffic to instances using rules based on protocols, ports, and IPs. Rules are stateful.
-  </div>
-</li>
-
-<li data-id="question-ec2-6" class="zyellow">
-  <span class="faq-question">What is the difference between key pairs and IAM roles in EC2?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>Key Pairs:</strong> Used for SSH access to EC2 instances.</li>
-      <li><strong>IAM Roles:</strong> Assign permissions to EC2 instances to access AWS services (e.g., S3, DynamoDB).</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-7" class="zyellow">
-  <span class="faq-question">How can you make an EC2 instance highly available?</span>
-  <div class="answer">
-    <ul>
-      <li>Use multiple Availability Zones</li>
-      <li>Launch EC2 instances in an Auto Scaling Group</li>
-      <li>Use Elastic Load Balancer (ELB)</li>
-      <li>Deploy AMIs for quick recovery</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-8" class="zyellow">
-  <span class="faq-question">What are spot, on-demand, and reserved instances?</span>
-  <div class="answer">
-    <ul>
-      <li><strong>On-Demand:</strong> Pay-per-use with no commitment.</li>
-      <li><strong>Reserved:</strong> Commit to usage over 1 or 3 years for lower cost.</li>
-      <li><strong>Spot:</strong> Bid for unused capacity at the lowest price—can be terminated anytime by AWS.</li>
-    </ul>
-  </div>
-</li>
-
-<li data-id="question-ec2-9" class="zyellow">
-  <span class="faq-question">How do you automate EC2 instance deployment?</span>
-  <div class="answer">
-    You can use tools like AWS CloudFormation, Terraform, AWS CDK, or EC2 Launch Templates combined with Auto Scaling Groups for automated and repeatable instance deployment.
-  </div>
-</li>
-
-<li data-id="question-ec2-10" class="zyellow">
-  <span class="faq-question">What are common EC2 troubleshooting steps?</span>
-  <div class="answer">
-    <ul>
-      <li>Check system logs using EC2 console</li>
-      <li>Use EC2 Instance Connect if SSH fails</li>
-      <li>Review security group and NACL rules</li>
-      <li>Check instance status checks</li>
-      <li>Verify disk space and memory usage</li>
-    </ul>
-  </div>
-</li>
-
-
-
-
-
 <li data-id="q122"><span class="faq-question green ">
   PostGre SQL + Redis : answer
 </span><div class="answer">
@@ -27604,102 +26405,7 @@ Client → Mongos → Shard 1 (part of data)
     </ol>
   </div>
 </li>  
-  
-<li data-id="DynamoDB-question-list" id="DynamoDB-question-list" class="yellow">
-  <span class="faq-question">
-  DynamoDB Questions***
-  </span><div class="answer">
-
-  <strong>Basic DynamoDB Questions</strong>
-    <ol>
-      <li>What is DynamoDB?</li>
-      <li>What are the key features of DynamoDB?</li>
-      <li>What is the difference between partition key and sort key?</li>
-      <li>What is a primary key in DynamoDB?</li>
-      <li>What is a composite key?</li>
-      <li>What data types are supported in DynamoDB?</li>
-      <li>What is a DynamoDB table schema?</li>
-      <li>How does DynamoDB handle indexing?</li>
-      <li>What are global secondary indexes (GSI)?</li>
-      <li>What are local secondary indexes (LSI)?</li>
-      <li>Can a table have multiple GSIs or LSIs?</li>
-      <li>What are strongly consistent vs eventually consistent reads?</li>
-      <li>What are the read/write capacity modes in DynamoDB?</li>
-      <li>What is on-demand capacity mode?</li>
-      <li>What is provisioned throughput mode?</li>
-      <li>What happens if read/write capacity is exceeded?</li>
-      <li>How does DynamoDB handle throttling?</li>
-      <li>What are reserved capacity units?</li>
-    </ol>
  
-
-  <strong>Intermediate DynamoDB Questions</strong>
-    <ol>
-      <li>How does DynamoDB partition data internally?</li>
-      <li>What is a hot partition?</li>
-      <li>How do you avoid hot partitions in DynamoDB?</li>
-      <li>How does DynamoDB scale reads and writes?</li>
-      <li>What are DynamoDB streams?</li>
-      <li>How can DynamoDB Streams be used?</li>
-      <li>How do you implement triggers in DynamoDB?</li>
-      <li>What is conditional write in DynamoDB?</li>
-      <li>What is a projection expression?</li>
-      <li>How do you perform pagination in DynamoDB?</li>
-      <li>How do you query data in DynamoDB?</li>
-      <li>How do you scan a table in DynamoDB?</li>
-      <li>What's the difference between query and scan?</li>
-      <li>What is a filter expression in DynamoDB?</li>
-      <li>What is a key condition expression?</li>
-      <li>How do you use begins_with and between in queries?</li>
-      <li>What is a TTL (Time To Live) in DynamoDB?</li>
-      <li>How is item expiration handled in TTL?</li>
-    </ol>
-  
-
-  <strong>Advanced DynamoDB Questions</strong>
-    <ol>
-      <li>What is DynamoDB Accelerator (DAX)?</li>
-      <li>What is PartiQL in DynamoDB?</li>
-      <li>What are transactional writes?</li>
-      <li>What is the difference between PutItem and UpdateItem?</li>
-      <li>How do you perform atomic counters in DynamoDB?</li>
-      <li>How do you prevent race conditions in DynamoDB?</li>
-      <li>What is the best way to store large objects in DynamoDB?</li>
-      <li>What are limitations of DynamoDB?</li>
-      <li>How do you design a one-to-many relationship in DynamoDB?</li>
-      <li>How do you store time-series data in DynamoDB?</li>
-      <li>What is the use of ExpressionAttributeNames?</li>
-      <li>What are best practices for schema design in DynamoDB?</li>
-      <li>How do you back up and restore DynamoDB tables?</li>
-      <li>What are DynamoDB Global Tables?</li>
-    </ol>
-  
-</div></li>
-  
-
-<li data-id="q32" class="yellow"><span class="faq-question">AWS Service List</span>
-<div class="answer">
-<ol>
-
-  <li data-id="aws-q-01" class="yellow"><span class="faq-question">AWS Lambda</span><div class="answer green">Serverless compute allowing you to run code without managing servers—ideal for event-driven functions, APIs, or microservices. Pay only for execution time :contentReference[oaicite:1]{index=1}.</div></li>
-  <li data-id="aws-q-02" class="yellow"><span class="faq-question">Amazon EC2</span><div class="answer green">Virtual machines with scalable compute capacity for running custom servers or workloads. Useful when you need full OS control :contentReference[oaicite:2]{index=2}.</div></li>
-  <li data-id="aws-q-03" class="yellow"><span class="faq-question">Amazon S3</span><div class="answer green">Highly durable object storage for files, static assets, backups, or data lakes. Great for hosting static websites or storing media :contentReference[oaicite:3]{index=3}.</div></li>
-  <li data-id="aws-q-04" class="yellow"><span class="faq-question">Amazon RDS</span><div class="answer green">Managed relational database service supporting MySQL, PostgreSQL, Oracle, etc. Handles backups, scaling, and patching :contentReference[oaicite:4]{index=4}.</div></li>
-  <li data-id="aws-q-05" class="yellow"><span class="faq-question">Amazon DynamoDB</span><div class="answer green">Fully managed NoSQL database offering low latency and automatic scaling—ideal for key-value workloads :contentReference[oaicite:5]{index=5}.</div></li>
-  <li data-id="aws-q-06" class="yellow"><span class="faq-question">Amazon API Gateway</span><div class="answer green">Creates, secures, and manages APIs at scale—works seamlessly with Lambda or other backends :contentReference[oaicite:6]{index=6}.</div></li>
-  <li data-id="aws-q-07" class="yellow"><span class="faq-question">AWS CloudFormation</span><div class="answer green">Infrastructure as Code (IaC) service to declaratively define and manage AWS resources via YAML/JSON templates :contentReference[oaicite:7]{index=7}.</div></li>
-  <li data-id="aws-q-08" class="yellow"><span class="faq-question">AWS CloudWatch</span><div class="answer green">Monitoring, logging, and alerting for AWS resources and applications—essential for observability :contentReference[oaicite:8]{index=8}.</div></li>
-  <li data-id="aws-q-09" class="yellow"><span class="faq-question">Amazon CloudFront</span><div class="answer green">Global CDN to distribute content with low latency and high transfer speeds, with integrated SSL/DDoS protection :contentReference[oaicite:9]{index=9}.</div></li>
-   <li data-id="aws-q-10" class="yellow"><span class="faq-question">Amazon VPC</span><div class="answer green">Provides private networking controls—subnets, routing, security groups—for your AWS infrastructure :contentReference[oaicite:10]{index=10}.</div></li>
- <li data-id="aws-q-11" class="yellow"><span class="faq-question">AWS CodeCommit, CodeBuild, CodeDeploy, CodePipeline</span><div class="answer green">CI/CD toolchain for source control, building, testing, and deploying applications within AWS :contentReference[oaicite:11]{index=11}.</div></li>
-  <li data-id="aws-q-12" class="yellow"><span class="faq-question">AWS CloudShell / Cloud9</span><div class="answer green">Browser-based IDE and CLI environment for coding and prototyping directly within AWS :contentReference[oaicite:12]{index=12}.</div></li>
-  <li data-id="aws-q-13" class="yellow"><span class="faq-question">AWS App Runner</span><div class="answer green">Fully managed container deployment service with automatic scaling—ideal for containerized web apps :contentReference[oaicite:13]{index=13}.</div></li>
- <li data-id="aws-q-14" class="yellow"><span class="faq-question">Amazon X-Ray</span><div class="answer green">Helps trace and debug distributed systems – crucial for microservices monitoring :contentReference[oaicite:14]{index=14}.</div></li>
-    </ol>
-    </div>
-    </li>
-
-
 
     <li data-id="azure-0" class="yellow"><span class="faq-question">Azure Question List</span>
       <div class="answer">
@@ -31517,6 +30223,1304 @@ router.push('/about');
   </div>
 </li>
 
+
+
+
+
+<li data-id="q_call_api_without_useeffect" id="awslambda"><span class="faq-question green">
+  Lambda : Question?
+  </span><div class="answer">
+  
+  <ol>
+    <li><strong>What is AWS Lambda?</strong></li>
+    <li><strong>What are the key features of AWS Lambda?</strong></li>
+    <li><strong>How does AWS Lambda pricing work?</strong></li>
+    <li><strong>What triggers can invoke a Lambda function?</strong></li>
+    <li><strong>What are the supported languages in AWS Lambda?</strong></li>
+    <li><strong>What is the maximum execution time of a Lambda function?</strong></li>
+    <li><strong>How do you monitor a Lambda function?</strong></li>
+    <li><strong>What is a cold start in AWS Lambda?</strong></li>
+    <li><strong>How can you reduce cold start time?</strong></li>
+    <li><strong>What is the difference between synchronous and asynchronous invocation?</strong></li>
+    <li><strong>How does concurrency work in Lambda?</strong></li>
+    <li><strong>What is the default memory limit and how can it be changed?</strong></li>
+    <li><strong>How do you handle errors in AWS Lambda?</strong></li>
+    <li><strong>Can a Lambda function call another Lambda function?</strong></li>
+    <li><strong>How do you version and alias a Lambda function?</strong></li>
+    <li><strong>What is Lambda@Edge?</strong></li>
+    <li><strong>What is the difference between Lambda and EC2?</strong></li>
+    <li><strong>How do you deploy a Lambda function?</strong></li>
+    <li><strong>How can environment variables be used in Lambda?</strong></li>
+    <li><strong>How does IAM relate to Lambda function permissions?</strong></li>
+    <li><strong>What is the Lambda execution role?</strong></li>
+    <li><strong>How can you connect Lambda to VPC?</strong></li>
+    <li><strong>How do you integrate AWS Lambda with API Gateway?</strong></li>
+    <li><strong>What is the use of the Lambda Layers feature?</strong></li>
+    <li><strong>What is the difference between Lambda and Step Functions?</strong></li>
+  </ol>
+  --------------------------------
+  </div></li>
+
+
+
+  <li data-id="q_call_api_without_useeffect"><span class="faq-question">
+    What is AWS Lambda and how does it work?</span>
+    <div class="answer">
+      <p>
+        AWS Lambda is a serverless compute service that runs your code in response to events and automatically manages the underlying compute resources.
+      </p>
+      <ul>
+        <li>You write code (functions).</li>
+        <li>Upload it to Lambda.</li>
+        <li>Set a trigger (e.g., API Gateway, S3, DynamoDB).</li>
+        <li>Lambda scales automatically and runs only when triggered.</li>
+        <li>You pay only for the time your code runs (billed per millisecond).</li>
+      </ul>
+    </li>
+  
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
+      What are Lambda Triggers and Examples?</span>
+      <div class="answer">
+      <p>A trigger is an AWS service/event that invokes a Lambda function. Examples include:</p>
+      <table border="1" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Trigger Source</th>
+            <th>Example Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>API Gateway</td>
+            <td>RESTful APIs</td>
+          </tr>
+          <tr>
+            <td>S3</td>
+            <td>Process image upload</td>
+          </tr>
+          <tr>
+            <td>DynamoDB Streams</td>
+            <td>Audit logs on table change</td>
+          </tr>
+          <tr>
+            <td>CloudWatch Events</td>
+            <td>Scheduled tasks (cron jobs)</td>
+          </tr>
+          <tr>
+            <td>SNS/SQS</td>
+            <td>Event-driven messaging</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
+      What are Cold Starts in AWS Lambda?</span>
+      <div class="answer">
+      <p>
+        A <em>cold start</em> occurs when a Lambda function is invoked after a period of inactivity or when AWS scales up new instances.
+      </p>
+      <ul>
+        <li>Causes delay due to bootstrapping environment</li>
+        <li>More noticeable in VPC-connected or large-sized functions</li>
+        <li>Can be mitigated using:
+          <ul>
+            <li>Provisioned Concurrency</li>
+            <li>Keeping functions warm via CloudWatch or scheduled triggers</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
+      What are the Limits of AWS Lambda?</span>
+      <div class="answer">
+      <table border="1" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Default Limit (as of 2024)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Timeout</td>
+            <td>Up to 15 minutes (900 seconds)</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>128 MB to 10,240 MB (10 GB)</td>
+          </tr>
+          <tr>
+            <td>Package Size</td>
+            <td>50 MB (direct upload) / 250 MB (S3)</td>
+          </tr>
+          <tr>
+            <td>Environment Variables</td>
+            <td>4 KB</td>
+          </tr>
+          <tr>
+            <td>Concurrency</td>
+            <td>1,000 per account (soft limit)</td>
+          </tr>
+          <tr>
+            <td>Ephemeral Storage</td>
+            <td>512 MB default (up to 10 GB optional)</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  
+    <li data-id="q_call_api_without_useeffect"><span class="faq-question ">
+      How does Lambda handle state and scalability?</span>
+      <div class="answer">
+      <ul>
+        <li><strong>State:</strong> Lambda is <em>stateless</em>. Each invocation is isolated. Use external systems like DynamoDB, S3, or Redis to manage state.</li>
+        <li><strong>Scalability:</strong> Lambda <em>automatically scales</em> out by running multiple copies in response to incoming events.</li>
+        <li>No need to manage servers or instances.</li>
+        <li>Can scale from <strong>zero to thousands</strong> of parallel executions.</li>
+      </ul>
+    </li>
+
+
+  <li data-id="q_what_is_lambda">
+    <span class="faq-question ">Lambda?</span>
+    <div class="answer">
+      AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
+      <br />Lambda handles the rest—scaling, monitoring, patching, and running your application in response to events.
+    
+      <br />
+      <br />
+      <b>Key features of AWS Lambda include:</b>
+      <ul>
+        <li>No server management</li>
+        <li>Automatic scaling</li>
+        <li>Sub-second metering (pay only for usage)</li>
+        <li>Event-driven invocation (triggers from over 200 AWS services)</li>
+        <li>Built-in fault tolerance</li>
+        <li>Supports environment variables, versioning, and aliases</li>
+        <li>Integration with VPC, Layers, and Container Images</li>
+      </ul>
+    </div>
+
+
+    <div class="answer">
+      AWS Lambda provides a powerful and flexible serverless compute platform. Its key features include:
+      <ul>
+        <li><strong>Event-Driven Execution:</strong> Automatically triggered by AWS services (e.g., S3, API Gateway, DynamoDB) or external events.</li>
+        <li><strong>No Server Management:</strong> No need to provision or manage infrastructure. AWS handles everything.</li>
+        <li><strong>Automatic Scaling:</strong> Lambda scales automatically with the number of incoming events.</li>
+        <li><strong>Pay-per-Use Pricing:</strong> Billed per millisecond based on the number of requests and compute time used.</li>
+        <li><strong>Supports Multiple Languages:</strong> Includes Node.js, Python, Go, Java, .NET, Ruby, and custom runtimes.</li>
+        <li><strong>Short-Lived Functions:</strong> Functions run up to 15 minutes and then terminate automatically.</li>
+        <li><strong>Built-in Monitoring:</strong> Integrated with CloudWatch for logs and metrics.</li>
+        <li><strong>Environment Variables:</strong> Store configuration and secrets per environment (e.g., dev, prod).</li>
+        <li><strong>Versioning & Aliases:</strong> Create immutable versions of code and route traffic with named aliases.</li>
+        <li><strong>VPC Support:</strong> Access private resources in a VPC securely.</li>
+        <li><strong>Provisioned Concurrency:</strong> Pre-warm instances to avoid cold starts for latency-sensitive workloads.</li>
+        <li><strong>Lambda Layers:</strong> Package and share libraries or dependencies across multiple functions.</li>
+      </ul>
+    </div>
+  </li>
+  
+
+    <li data-id="q1uuuy">
+      <span class="faq-question green">Lambda: Keeping functions warm using scheduled CloudWatch Events</span>
+      <div class="answer">
+        <p>In AWS Lambda, <strong>cold starts</strong> happen when your function is invoked after being idle, causing latency due to container initialization. One common technique to <strong>keep Lambda functions warm</strong> is using <strong>Amazon CloudWatch Events (EventBridge)</strong> to invoke the function on a regular schedule.</p>
+  
+        <h4>✅ Steps to Keep Lambda Warm with CloudWatch Scheduled Events</h4>
+  
+        <h5>1. Create a CloudWatch Event Rule</h5>
+        <p>This will run every 5 minutes (or less) to trigger the Lambda and keep it warm.</p>
+        <p><strong>Example: rate expression:</strong><br><code>rate(5 minutes)</code></p>
+        <p><strong>Example: cron expression:</strong><br><code>cron(0/5 * * * ? *)</code></p>
+  
+        <h5>2. Attach Lambda as the Target</h5>
+        <p>Use the AWS Management Console or CLI to set the Lambda function as the target of the scheduled rule.</p>
+  
+        <h5>3. Lambda Code (Optional: Check <code>source</code> to filter warm-up calls)</h5>
+<pre>
+exports.handler = async (event) =&gt; {
+if (event.source === 'aws.events') {
+  console.log("Warm-up ping received");
+  return "Lambda is warm";
+}
+
+// Normal Lambda logic here
+console.log("Normal execution");
+return "Processed request";
+};
+</pre>
+  
+        <h4>🛠️ AWS CLI Example</h4>
+        <pre><code>aws events put-rule \
+    --name keep-lambda-warm \
+    --schedule-expression "rate(5 minutes)"
+  
+  aws lambda add-permission \
+    --function-name myLambdaFunction \
+    --statement-id allow-scheduled-invoke \
+    --action 'lambda:InvokeFunction' \
+    --principal events.amazonaws.com \
+    --source-arn arn:aws:events:&lt;region&gt;:&lt;account-id&gt;:rule/keep-lambda-warm
+  
+  aws events put-targets \
+    --rule keep-lambda-warm \
+    --targets "Id"="1","Arn"="arn:aws:lambda:&lt;region&gt;:&lt;account-id&gt;:function:myLambdaFunction"</code></pre>
+  
+        <h4>🔥 Best Practices</h4>
+        <ul>
+          <li>Use a <strong>lightweight payload</strong> to reduce cost.</li>
+          <li>For <strong>multiple Lambdas</strong>, consolidate into a single “warming” function that calls others asynchronously.</li>
+          <li>Use <code>Provisioned Concurrency</code> for critical APIs (more reliable but has cost).</li>
+        </ul>
+      </div>
+    </li>
+  
+  
+    
+      <li data-id="q2">
+        <span class="faq-question green">Step-by-Step: Create a CloudWatch Event Rule to keep an API warm</span>
+        <div class="answer">
+          <p>This guide shows how to use <strong>Amazon EventBridge (CloudWatch Events)</strong> to ping an API endpoint like:</p>
+          <p><code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></p>
+    
+          <h4>✅ Goal</h4>
+          <p>Invoke a Lambda function or API Gateway endpoint every 5 minutes to keep it warm and avoid cold starts.</p>
+    
+          <h4>🧩 Step-by-Step: Using AWS Console to Call an API URL</h4>
+    
+          <h5>🟢 1. Go to <strong>EventBridge</strong></h5>
+          <ul>
+            <li>Sign in to the AWS Console</li>
+            <li>Open <strong>Amazon EventBridge</strong> from the "Management &amp; Governance" section</li>
+          </ul>
+    
+          <h5>🟢 2. Create Rule</h5>
+          <ul>
+            <li>Click <strong>“Rules” &gt; “Create rule”</strong></li>
+            <li>Rule name: <code>keep-api-warm</code></li>
+            <li>Description: <code>Keep API Gateway warm</code></li>
+            <li><strong>Event Source:</strong> “EventBridge (default bus)”</li>
+            <li><strong>Rule type:</strong> “Schedule”</li>
+          </ul>
+    
+          <h5>🟢 3. Set Schedule</h5>
+          <ul>
+            <li>Select: <strong>rate expression</strong></li>
+            <li>Input: <code>rate(5 minutes)</code></li>
+          </ul>
+    
+          <h5>🟢 4. Add Target (API Gateway or Custom URL)</h5>
+          <p>Since you are calling an external API endpoint:</p>
+          <ul>
+            <li>Choose <strong>Target type:</strong> <code>API destination</code></li>
+            <li>Click <strong>Create a new API destination</strong></li>
+          </ul>
+    
+          <h5>🔧 Set up API Destination</h5>
+          <ul>
+            <li>Name: <code>KeepWarmDestination</code></li>
+            <li>Method: <code>GET</code> or <code>POST</code> (depending on your endpoint)</li>
+            <li>Endpoint URL: <code>https://pc0wd3fim2.execute-api.us-east-1.amazonaws.com/</code></li>
+            <li>Create a <strong>Connection</strong> (e.g., <code>AnonymousConnection</code>) if no auth is needed</li>
+            <li>Choose <strong>No authentication</strong> or <strong>API Key</strong> as required</li>
+          </ul>
+    
+          <p>Then click <strong>Next</strong>, review, and <strong>Create rule</strong>.</p>
+    
+          <h4>✅ Result</h4>
+          <p>EventBridge will call your API endpoint every 5 minutes to prevent cold starts.</p>
+    
+          <h4>⚠️ Notes</h4>
+          <ul>
+            <li>Ensure the API doesn’t require a specific payload (default is empty).</li>
+            <li>Monitor usage via CloudWatch Logs.</li>
+            <li>You can also create a “warm-up Lambda” that pings the endpoint if more flexibility is needed.</li>
+          </ul>
+        </div>
+      </li>
+    
+    
+
+  <li data-id="q_lambda_pricing">
+    <span class="faq-question">How does AWS Lambda pricing work?</span>
+    <div class="answer">
+      AWS Lambda charges are based on:
+      <ul>
+        <li><strong>Number of requests:</strong> First 1 million requests/month are free. After that, it's $0.20 per million requests.</li>
+        <li><strong>Duration:</strong> Billed per millisecond from the time your code begins executing until it returns or otherwise terminates. Depends on the memory allocated.</li>
+      </ul>
+      Example: If your function runs for 200ms and uses 128MB memory, you only pay for that exact duration and size.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_triggers">
+    <span class="faq-question">What triggers can invoke a Lambda function?</span>
+    <div class="answer">
+      Lambda can be triggered by various AWS services, including:
+      <ul>
+        <li>API Gateway (HTTP requests)</li>
+        <li>S3 (file uploads, deletions)</li>
+        <li>DynamoDB Streams</li>
+        <li>SNS (notifications)</li>
+        <li>SQS (queues)</li>
+        <li>CloudWatch Events & Logs</li>
+        <li>Cognito, Alexa Skills, EventBridge, etc.</li>
+      </ul>
+      Lambda can also be triggered manually using the AWS SDK or CLI.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_languages">
+    <span class="faq-question">What are the supported languages in AWS Lambda?</span>
+    <div class="answer">
+      AWS Lambda natively supports:
+      <ul>
+        <li>Node.js</li>
+        <li>Python</li>
+        <li>Java</li>
+        <li>Go</li>
+        <li>C# (.NET Core)</li>
+        <li>Ruby</li>
+      </ul>
+      It also supports custom runtimes and container images, allowing you to use any language.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_timeout">
+    <span class="faq-question">What is the maximum execution time of a Lambda function?</span>
+    <div class="answer">
+      The maximum timeout for a Lambda function is <strong>15 minutes (900 seconds)</strong> per invocation. You can configure the timeout in the Lambda function settings depending on your use case.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_monitoring">
+    <span class="faq-question">How do you monitor a Lambda function?</span>
+    <div class="answer">
+      Lambda integrates with AWS CloudWatch to provide monitoring:
+      <ul>
+        <li><strong>CloudWatch Logs:</strong> Automatically captures console output and errors.</li>
+        <li><strong>CloudWatch Metrics:</strong> Tracks invocation count, duration, error count, throttles, and more.</li>
+        <li><strong>CloudWatch Alarms:</strong> Trigger notifications based on metric thresholds.</li>
+        <li><strong>X-Ray:</strong> For distributed tracing and performance analysis.</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_call_api_without_useeffect">
+    <span class="faq-question">What is a cold start in AWS Lambda?</span>
+    <div class="answer">
+      A cold start occurs when AWS needs to create a new container to run your Lambda function—for example, when there's no existing warm instance available. It includes the time taken to:
+      <ul>
+        <li>Provision the runtime container</li>
+        <li>Download your function code</li>
+        <li>Initialize dependencies</li>
+      </ul>
+      Cold starts introduce extra latency (usually 100ms–1s). They are more noticeable with VPC-configured or infrequently used functions.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_cold_start_optimization">
+    <span class="faq-question">How can you reduce cold start time?</span>
+    <div class="answer">
+      You can reduce cold start time in AWS Lambda by:
+      <ul>
+        <li>Using lighter runtimes like Node.js or Go (faster startup)</li>
+        <li>Minimizing initialization code and package size</li>
+        <li>Keeping functions warm using scheduled CloudWatch Events</li>
+        <li>Avoiding VPC connections unless required (or optimizing them)</li>
+        <li>Using Provisioned Concurrency (pre-warms containers to eliminate cold starts)</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_sync_async">
+    <span class="faq-question">What is the difference between synchronous and asynchronous invocation?</span>
+    <div class="answer">
+      <strong>Synchronous Invocation:</strong> Caller waits for the function to process and return a result. Example: API Gateway.<br />
+      <strong>Asynchronous Invocation:</strong> Caller sends the request and continues without waiting for a response. Example: S3 or SNS.<br />
+      <strong>Differences:</strong>
+      <ul>
+        <li>Synchronous = real-time; Asynchronous = event-based</li>
+        <li>Synchronous errors are returned immediately; asynchronous are logged</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_concurrency">
+    <span class="faq-question">How does concurrency work in Lambda?</span>
+    <div class="answer">
+      Concurrency is the number of instances that can run in parallel:
+      <ul>
+        <li><strong>Unreserved concurrency:</strong> Default limit shared across functions (e.g. 1000)</li>
+        <li><strong>Reserved concurrency:</strong> Guarantees a specific number of concurrent executions for a function</li>
+        <li><strong>Provisioned concurrency:</strong> Keeps containers initialized and ready to respond instantly</li>
+      </ul>
+      If concurrency limit is hit, excess requests are throttled.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_memory">
+    <span class="faq-question">What is the default memory limit and how can it be changed?</span>
+    <div class="answer">
+      <strong>Default Memory:</strong> 128 MB<br />
+      <strong>Range:</strong> 128 MB to 10,240 MB (10 GB), in 1 MB increments.<br />
+      You can change it from:
+      <ul>
+        <li>AWS Console &rarr; Lambda &rarr; Configuration &rarr; Memory</li>
+        <li>Or via CLI: <code>aws lambda update-function-configuration</code></li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_errors">
+    <span class="faq-question">How do you handle errors in AWS Lambda?</span>
+    <div class="answer">
+      You can handle errors in Lambda using:
+      <ul>
+        <li><strong>Try-catch blocks:</strong> Handle exceptions in your code</li>
+        <li><strong>Return meaningful error responses (for synchronous calls)</strong></li>
+        <li><strong>Dead Letter Queues (DLQs):</strong> Capture failed async invocations</li>
+        <li><strong>CloudWatch Logs:</strong> View stack traces and error details</li>
+        <li><strong>Retries:</strong> Lambda automatically retries failed async events (2 times by default)</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_calls_lambda">
+    <span class="faq-question">Can a Lambda function call another Lambda function?</span>
+    <div class="answer">
+      Yes, a Lambda function can invoke another Lambda using the AWS SDK or AWS CLI. This is useful for microservice architectures or function chaining.<br />
+      Example in Node.js:
+<pre>
+const AWS = require('aws-sdk');
+const lambda = new AWS.Lambda();
+lambda.invoke({
+FunctionName: 'anotherLambdaFunction',
+Payload: JSON.stringify({ key: 'value' })
+}, (err, data) => { ... });
+</pre>
+      Make sure the calling Lambda has the IAM permission <code>lambda:InvokeFunction</code>.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_version_alias">
+    <span class="faq-question">How do you version and alias a Lambda function?</span>
+    <div class="answer">
+      <strong>Versioning:</strong> Every time you publish a function version, AWS creates an immutable snapshot of the code and configuration.<br />
+      <strong>Alias:</strong> Acts as a pointer to a specific version. Useful for traffic shifting (e.g., <code>prod</code>, <code>beta</code> aliases).<br />
+      Example:
+      <ul>
+        <li><code>$LATEST</code> → Draft code</li>
+        <li><code>1</code>, <code>2</code>, etc. → Published versions</li>
+        <li><code>alias: prod → version: 5</code></li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_call_api_without_useeffect">
+    <span class="faq-question">What is Lambda@Edge?</span>
+    <div class="answer">
+      Lambda@Edge is an extension of AWS Lambda that lets you run functions at AWS edge locations. It's integrated with Amazon CloudFront and is used for:
+      <ul>
+        <li>Customizing CDN content before it's delivered</li>
+        <li>Implementing security/auth at the edge</li>
+        <li>Personalizing content based on headers, cookies, etc.</li>
+        <li>Modifying requests/responses without origin call</li>
+      </ul>
+      It improves performance and reduces latency by moving compute closer to the user.
+    </div>
+  </li>
+  
+
+  <li data-id="q_lambda_vs_ec2">
+    <span class="faq-question">What is the difference between Lambda and EC2?</span>
+    <div class="answer">
+      <strong>AWS Lambda:</strong> Serverless, event-driven compute service. No server management; pay-per-invocation.<br />
+      <strong>EC2:</strong> Virtual server in the cloud. You manage OS, scaling, patching.<br /><br />
+      <strong>Key Differences:</strong>
+      <ul>
+        <li>Lambda is event-based; EC2 is instance-based</li>
+        <li>Lambda scales automatically; EC2 needs manual or auto-scaling setup</li>
+        <li>Lambda is billed per millisecond; EC2 is billed per second or hour</li>
+        <li>Lambda can't be used for long-running tasks (max 15 minutes); EC2 can run indefinitely</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_deploy">
+    <span class="faq-question">How do you deploy a Lambda function?</span>
+    <div class="answer">
+      You can deploy a Lambda function using:
+      <ul>
+        <li><strong>AWS Console:</strong> Upload .zip or use inline editor</li>
+        <li><strong>AWS CLI:</strong> Use <code>aws lambda create-function</code> or <code>update-function-code</code></li>
+        <li><strong>Infrastructure as Code:</strong> Tools like AWS SAM, Serverless Framework, Terraform, or CloudFormation</li>
+        <li><strong>CI/CD Pipelines:</strong> Using CodePipeline, GitHub Actions, or Jenkins</li>
+      </ul>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_env">
+    <span class="faq-question">How can environment variables be used in Lambda?</span>
+    <div class="answer">
+      Lambda supports environment variables to:
+      <ul>
+        <li>Store config values (DB URLs, API keys, etc.)</li>
+        <li>Separate environment-specific settings (dev, test, prod)</li>
+      </ul>
+      <strong>Access:</strong> Use <code>process.env.VARIABLE_NAME</code> in your function code.<br />
+      <strong>Security:</strong> You can encrypt them using KMS and manage access with IAM policies.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_iam">
+    <span class="faq-question">How does IAM relate to Lambda function permissions?</span>
+    <div class="answer">
+      AWS IAM (Identity and Access Management) controls who can:
+      <ul>
+        <li>Create, modify, delete Lambda functions</li>
+        <li>Assign permissions to Lambda functions</li>
+        <li>Invoke functions or access resources Lambda interacts with</li>
+      </ul>
+      Lambda uses <strong>execution roles</strong> (IAM roles) to interact with other AWS services securely.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_exec_role">
+    <span class="faq-question">What is the Lambda execution role?</span>
+    <div class="answer">
+      The execution role is an IAM role assumed by the Lambda function at runtime. It defines:
+      <ul>
+        <li>Which AWS services the function can access (e.g., S3, DynamoDB)</li>
+        <li>Permission to write logs to CloudWatch</li>
+      </ul>
+      <strong>Policy Example:</strong>
+      <pre><code>{
+    "Effect": "Allow",
+    "Action": ["s3:GetObject", "logs:CreateLogStream"],
+    "Resource": "*"
+  }</code></pre>
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_vpc">
+    <span class="faq-question">How can you connect Lambda to VPC?</span>
+    <div class="answer">
+      Lambda can access private VPC resources (e.g., RDS, EC2) by assigning:
+      <ul>
+        <li>VPC ID</li>
+        <li>Subnets with NAT Gateway (for internet access)</li>
+        <li>Security groups (to control access)</li>
+      </ul>
+      This allows your Lambda to operate securely within your VPC.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_apigw">
+    <span class="faq-question">How do you integrate AWS Lambda with API Gateway?</span>
+    <div class="answer">
+      You can expose your Lambda function via REST or HTTP APIs using API Gateway:
+      <ul>
+        <li>Create a REST API in API Gateway</li>
+        <li>Define resources and methods (e.g., GET /users)</li>
+        <li>Set integration type as Lambda function</li>
+        <li>Deploy the API to a stage (e.g., /prod)</li>
+      </ul>
+      This setup allows clients to invoke Lambda functions over HTTPS.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_layers">
+    <span class="faq-question">What is the use of the Lambda Layers feature?</span>
+    <div class="answer">
+      Lambda Layers are a way to package and reuse shared code or dependencies across multiple functions. Use cases:
+      <ul>
+        <li>Third-party libraries (e.g., bcrypt, pandas)</li>
+        <li>Custom utility modules</li>
+        <li>Large binaries or compiled packages</li>
+      </ul>
+      <strong>Benefits:</strong> Reduces deployment size and duplication across functions.
+    </div>
+  </li>
+  
+  <li data-id="q_lambda_vs_stepfunctions">
+    <span class="faq-question">What is the difference between Lambda and Step Functions?</span>
+    <div class="answer">
+      <strong>AWS Lambda:</strong> Executes single tasks triggered by events.<br />
+      <strong>AWS Step Functions:</strong> Orchestrates multiple AWS services/functions in workflows with logic.<br />
+      <strong>Comparison:</strong>
+      <ul>
+        <li>Lambda = compute unit; Step Functions = workflow engine</li>
+        <li>Step Functions handle retries, timeouts, branching, error catching</li>
+        <li>Useful for building complex apps like ETL pipelines, order processing, etc.</li>
+      </ul>
+    </div>
+  </li>
+  
+
+<li data-id="q_lambda_vs_stepfunctions">
+<span class="faq-question green ">
+What are AWS Step Functions in context of AWS Lambda?
+</span>
+<div class="answer">
+<p>
+AWS Step Functions is a <strong>visual workflow service</strong> that lets you coordinate multiple AWS services — especially <strong>Lambda functions</strong> — into <strong>serverless workflows</strong> using <strong>state machines</strong>.
+</p>
+
+<hr>
+
+<h3>🔄 Use Case</h3>
+<p>You use Step Functions when you need to:</p>
+<ul>
+<li>Orchestrate multiple Lambda functions in sequence or parallel</li>
+<li>Handle retries, timeouts, and error-catching logic easily</li>
+<li>Implement workflows like:
+  <ul>
+    <li>Order processing</li>
+    <li>Approval flows</li>
+    <li>ETL pipelines</li>
+    <li>ML model training</li>
+  </ul>
+</li>
+</ul>
+
+<hr>
+
+<h3>🔧 Example: Step Functions + AWS Lambda</h3>
+<h4>🎯 Workflow:</h4>
+<pre>
+User triggers workflow →
+Step 1: Validate Order (Lambda)
+Step 2: Check Inventory (Lambda)
+Step 3: Charge Payment (Lambda)
+Step 4: Send Notification (Lambda)
+</pre>
+
+<hr>
+
+<h3>🧾 State Machine Definition (Amazon States Language - JSON)</h3>
+<pre><code>{
+"Comment": "Order Processing Workflow",
+"StartAt": "ValidateOrder",
+"States": {
+  "ValidateOrder": {
+    "Type": "Task",
+    "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:ValidateOrder",
+    "Next": "CheckInventory"
+  },
+  "CheckInventory": {
+    "Type": "Task",
+    "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:CheckInventory",
+    "Next": "ChargePayment"
+  },
+  "ChargePayment": {
+    "Type": "Task",
+    "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:ChargePayment",
+    "Next": "SendNotification"
+  },
+  "SendNotification": {
+    "Type": "Task",
+    "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:SendNotification",
+    "End": true
+  }
+}
+}
+</code></pre>
+
+<hr>
+
+<h3>✅ Benefits</h3>
+<table border="1" cellpadding="5">
+<thead>
+  <tr>
+    <th>Feature</th>
+    <th>Benefit</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Visual Workflows</td>
+    <td>Easy to debug, visualize, and trace steps</td>
+  </tr>
+  <tr>
+    <td>Error Handling</td>
+    <td>Built-in retry, catch, and fallback states</td>
+  </tr>
+  <tr>
+    <td>Sequential + Parallel</td>
+    <td>Define series and branching flows</td>
+  </tr>
+  <tr>
+    <td>Audit + Logging</td>
+    <td>Integrated with CloudWatch Logs</td>
+  </tr>
+  <tr>
+    <td>Pay-per-state</td>
+    <td>Charged per state transition, cost-effective</td>
+  </tr>
+</tbody>
+</table>
+
+<hr>
+
+<h3>🔐 IAM Permissions</h3>
+<p>
+Each Lambda used in Step Functions must:
+</p>
+<ul>
+<li>Allow execution from Step Functions</li>
+<li>Be invoked with appropriate IAM roles</li>
+</ul>
+
+<hr>
+
+<h3>🧪 Bonus: Step Functions + Express Workflows</h3>
+<p>
+If you need faster execution and lower costs for short-duration tasks, use:
+</p>
+<ul>
+<li><strong>Express Workflows</strong> for high-volume, event-driven workloads</li>
+<li><strong>Standard Workflows</strong> for long-running workflows (up to 1 year)</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-aws-ses-1" class="yellow">
+<span class="faq-question">What is AWS SES?</span>
+<div class="answer">
+AWS SES (Simple Email Service) is a cloud-based email sending service designed to help digital marketers and application developers send marketing, notification, and transactional emails securely and cost-effectively.
+</div>
+</li>
+
+<li data-id="question-aws-ses-2" class="zyellow">
+<span class="faq-question">What are the common use cases of AWS SES?</span>
+<div class="answer">
+<ul>
+  <li>Sending transactional emails (e.g., OTPs, order confirmations)</li>
+  <li>Marketing and promotional campaigns</li>
+  <li>System alerts and notifications</li>
+  <li>Bulk email distribution</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-aws-ses-3" class="zyellow">
+<span class="faq-question">How do you verify a domain or email in SES?</span>
+<div class="answer">
+You verify a domain/email by adding a DNS TXT record provided by SES or clicking a verification link sent to the specified email address. Domain verification is required for bulk or production email sending.
+</div>
+</li>
+
+<li data-id="question-aws-ses-4" class="zyellow">
+<span class="faq-question">What are SES sending limits and how do you increase them?</span>
+<div class="answer">
+SES limits depend on the region and whether your account is in the sandbox or production. You can increase limits by requesting a production access upgrade via AWS Support.
+</div>
+</li>
+
+<li data-id="question-aws-ses-5" class="zyellow">
+<span class="faq-question">What is the difference between sandbox and production mode in SES?</span>
+<div class="answer">
+<ul>
+  <li><strong>Sandbox:</strong> Used for testing; you can only send emails to verified addresses.</li>
+  <li><strong>Production:</strong> After approval, you can send to unverified addresses and higher volume.</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-aws-ses-6" class="zyellow">
+<span class="faq-question">How can you send email using AWS SES in Node.js?</span>
+<div class="answer">
+Use the <code>@aws-sdk/client-ses</code> package. You configure the SES client and call <code>SendEmailCommand</code> or <code>SendRawEmailCommand</code> depending on the use case (e.g., attachments).
+</div>
+</li>
+
+<li data-id="question-aws-ses-7" class="zyellow">
+<span class="faq-question">How do you monitor SES email deliveries?</span>
+<div class="answer">
+SES integrates with Amazon CloudWatch, SNS, and event destinations to monitor bounces, complaints, deliveries, and rejections. You can set alarms based on metrics.
+</div>
+</li>
+
+<li data-id="question-aws-ses-8" class="zyellow">
+<span class="faq-question">What are bounces and complaints in SES?</span>
+<div class="answer">
+<ul>
+  <li><strong>Bounce:</strong> When an email is rejected by the recipient's mail server.</li>
+  <li><strong>Complaint:</strong> When a recipient marks the email as spam.</li>
+</ul>
+Both affect your sender reputation and should be handled via SNS notifications or CloudWatch alerts.
+</div>
+</li>
+
+<li data-id="question-aws-ses-9" class="zyellow">
+<span class="faq-question">How do you send email with attachments using SES?</span>
+<div class="answer">
+You must use <code>SendRawEmailCommand</code> and build the MIME message manually, including attachments in base64-encoded format with correct content-type headers.
+</div>
+</li>
+
+<li data-id="question-aws-ses-10" class="zyellow">
+<span class="faq-question">How do you authenticate your domain for better deliverability?</span>
+<div class="answer">
+Set up DNS records:
+<ul>
+  <li><strong>SPF:</strong> To authorize AWS SES as a sender</li>
+  <li><strong>DKIM:</strong> To sign emails cryptographically</li>
+  <li><strong>DMARC:</strong> To specify how to handle failed SPF/DKIM checks</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ssm-1" class="yellow">
+<span class="faq-question">What is AWS SSM (Systems Manager)?</span>
+<div class="answer">
+AWS SSM (AWS Systems Manager) is a service that lets you view and control your cloud and on-premises infrastructure. <br />
+It helps manage EC2 instances, patch updates, automate tasks, run scripts, and store configuration secrets.
+</div>
+</li>
+
+<li data-id="question-ssm-2" class="zyellow">
+<span class="faq-question">What are the key components of AWS SSM?</span>
+<div class="answer">
+<ul>
+  <li><strong>SSM Agent:</strong> Installed on instances to allow communication with SSM</li>
+  <li><strong>Run Command:</strong> Execute shell scripts/commands remotely</li>
+  <li><strong>Parameter Store:</strong> Secure storage for configuration values and secrets</li>
+  <li><strong>Automation:</strong> Reusable workflows for tasks like patching or provisioning</li>
+  <li><strong>Session Manager:</strong> Secure shell access to EC2 without SSH or bastion</li>
+  <li><strong>Patch Manager:</strong> Automate OS patching</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ssm-3" class="zyellow">
+<span class="faq-question">How do you use SSM Parameter Store?</span>
+<div class="answer">
+You can store configuration values and secrets using SSM Parameter Store. Parameters can be plaintext or encrypted using KMS. They are accessed programmatically via AWS SDK, CLI, or environment variables.
+</div>
+</li>
+
+<li data-id="question-ssm-4" class="zyellow">
+<span class="faq-question">What is the difference between standard and advanced parameters in Parameter Store?</span>
+<div class="answer">
+<ul>
+  <li><strong>Standard:</strong> Free up to 10,000 parameters, no expiration, basic features</li>
+  <li><strong>Advanced:</strong> Support for higher limits, parameter policies (like expiration), and parameter versions history</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ssm-5" class="zyellow">
+<span class="faq-question">How does Session Manager improve security?</span>
+<div class="answer">
+Session Manager enables shell access to EC2 instances without SSH keys or open ports. It logs session activity, integrates with CloudTrail, and supports encryption for secure auditing.
+</div>
+</li>
+
+<li data-id="question-ssm-6" class="zyellow">
+<span class="faq-question">What IAM permissions are required for SSM to work with EC2?</span>
+<div class="answer">
+The EC2 instance must have an attached IAM role with policies like <code>AmazonSSMManagedInstanceCore</code>. Additional permissions are needed for accessing Parameter Store, logging, etc.
+</div>
+</li>
+
+<li data-id="question-ssm-7" class="zyellow">
+<span class="faq-question">How do you execute remote commands using AWS SSM?</span>
+<div class="answer">
+Use SSM Run Command via AWS Console, CLI, or SDK. It allows execution of commands on target EC2 instances (with SSM agent) without needing SSH or opening inbound ports.
+</div>
+</li>
+
+<li data-id="question-ssm-8" class="zyellow">
+<span class="faq-question">What are Automation Documents (SSM Documents)?</span>
+<div class="answer">
+Automation Documents (SSM Docs) are JSON/YAML templates defining actions for Systems Manager. You can use AWS-provided or custom documents to automate patching, backups, deployments, etc.
+</div>
+</li>
+
+<li data-id="question-ssm-9" class="zyellow">
+<span class="faq-question">What is the role of AWS SSM in CI/CD pipelines?</span>
+<div class="answer">
+AWS SSM can be integrated in CI/CD pipelines to:
+<ul>
+  <li>Deploy code or run scripts after a build</li>
+  <li>Update configuration values via Parameter Store</li>
+  <li>Use Run Command to restart services or run health checks</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ssm-10" class="zyellow">
+<span class="faq-question">What are best practices when using AWS SSM?</span>
+<div class="answer">
+<ul>
+  <li>Use IAM roles with least privilege</li>
+  <li>Enable logging and auditing via CloudWatch and CloudTrail</li>
+  <li>Rotate and encrypt secrets using Parameter Store + KMS</li>
+  <li>Use Session Manager instead of SSH for instance access</li>
+  <li>Tag and organize SSM documents and parameters</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-kinesis-1" class="yellow">
+<span class="faq-question">What is AWS Kinesis?</span>
+<div class="answer">
+AWS Kinesis is a platform for real-time data streaming at scale. It enables processing of large streams of data records in real time for analytics, monitoring, and response.
+</div>
+</li>
+
+<li data-id="question-kinesis-2" class="zyellow">
+<span class="faq-question">What are the components of AWS Kinesis?</span>
+<div class="answer">
+<ul>
+  <li><strong>Kinesis Data Streams (KDS):</strong> Collect and process real-time streaming data</li>
+  <li><strong>Kinesis Data Firehose:</strong> Load streaming data to S3, Redshift, Elasticsearch, etc.</li>
+  <li><strong>Kinesis Data Analytics:</strong> Real-time SQL queries on streaming data</li>
+  <li><strong>Kinesis Video Streams:</strong> Stream and store video from devices</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-kinesis-3" class="zyellow">
+<span class="faq-question">How does Kinesis Data Stream work?</span>
+<div class="answer">
+Data producers push data records into Kinesis streams. Each stream consists of shards. Consumers (like Lambda, EC2) read and process data from these shards.
+</div>
+</li>
+
+<li data-id="question-kinesis-4" class="zyellow">
+<span class="faq-question">What is a shard in Kinesis?</span>
+<div class="answer">
+A shard is the base throughput unit of a Kinesis stream. Each shard supports 1MB/s input and 2MB/s output. You can increase throughput by adding more shards.
+</div>
+</li>
+
+<li data-id="question-kinesis-5" class="zyellow">
+<span class="faq-question">What is the difference between Kinesis Data Streams and Firehose?</span>
+<div class="answer">
+<ul>
+  <li><strong>Data Streams:</strong> Real-time processing; you manage consumers and scaling</li>
+  <li><strong>Firehose:</strong> Fully managed; automatically loads to destinations (e.g., S3)</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-kinesis-6" class="zyellow">
+<span class="faq-question">What is the retention period for Kinesis Data Streams?</span>
+<div class="answer">
+By default, data is retained for 24 hours. You can extend retention up to 365 days.
+</div>
+</li>
+
+<li data-id="question-kinesis-7" class="zyellow">
+<span class="faq-question">How can you consume data from a Kinesis stream?</span>
+<div class="answer">
+You can use:
+<ul>
+  <li>AWS Lambda</li>
+  <li>Kinesis Client Library (KCL)</li>
+  <li>Amazon Kinesis Data Analytics</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-kinesis-8" class="zyellow">
+<span class="faq-question">What are common use cases for AWS Kinesis?</span>
+<div class="answer">
+<ul>
+  <li>Log and event data streaming</li>
+  <li>Real-time analytics and dashboards</li>
+  <li>IoT telemetry processing</li>
+  <li>Video stream analysis</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-cfn-1" class="yellow">
+<span class="faq-question">What is AWS CloudFormation?</span>
+<div class="answer">
+CloudFormation is an Infrastructure as Code (IaC) service that lets you define AWS infrastructure using JSON or YAML templates and deploy it automatically.
+</div>
+</li>
+
+<li data-id="question-cfn-2" class="zyellow">
+<span class="faq-question">What are the components of a CloudFormation template?</span>
+<div class="answer">
+<ul>
+  <li><strong>Parameters</strong> – Accept input values</li>
+  <li><strong>Resources</strong> – Define AWS services to provision</li>
+  <li><strong>Outputs</strong> – Export values</li>
+  <li><strong>Mappings</strong> – Define conditional values</li>
+  <li><strong>Conditions</strong> – Create conditional resources</li>
+  <li><strong>Metadata</strong> – Add extra data (e.g., configs)</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-cfn-3" class="zyellow">
+<span class="faq-question">What is a CloudFormation Stack?</span>
+<div class="answer">
+A stack is a collection of AWS resources created, updated, or deleted together as a unit using a CloudFormation template.
+</div>
+</li>
+
+<li data-id="question-cfn-4" class="zyellow">
+<span class="faq-question">What is the use of Change Sets in CloudFormation?</span>
+<div class="answer">
+Change Sets let you preview changes that CloudFormation will make before applying them. This helps prevent unintended resource updates or deletions.
+</div>
+</li>
+
+<li data-id="question-cfn-5" class="zyellow">
+<span class="faq-question">How does CloudFormation handle updates to existing stacks?</span>
+<div class="answer">
+CloudFormation compares the new template with the current stack and makes necessary changes. Resources are added/updated/deleted to match the updated template.
+</div>
+</li>
+
+<li data-id="question-cfn-6" class="zyellow">
+<span class="faq-question">What is a nested stack?</span>
+<div class="answer">
+A nested stack is a CloudFormation stack created within another stack. It helps modularize templates and reuse common configurations.
+</div>
+</li>
+
+<li data-id="question-cfn-7" class="zyellow">
+<span class="faq-question">How do you manage secrets in CloudFormation templates?</span>
+<div class="answer">
+You can reference secrets stored in AWS Secrets Manager or SSM Parameter Store using dynamic references (e.g., <code>{{resolve:ssm-secure:parameter-name}}</code>).
+</div>
+</li>
+
+<li data-id="question-cfn-8" class="zyellow">
+<span class="faq-question">Can CloudFormation rollback changes on failure?</span>
+<div class="answer">
+Yes. If a stack creation or update fails, CloudFormation automatically rolls back to the previous stable state (unless rollback is explicitly disabled).
+</div>
+</li>
+
+<li data-id="question-cfn-9" class="zyellow">
+<span class="faq-question">What tools can you use with CloudFormation for CI/CD?</span>
+<div class="answer">
+You can integrate CloudFormation with CodePipeline, CodeBuild, GitHub Actions, Jenkins, or Terraform (to generate templates).
+</div>
+</li>
+
+<li data-id="question-cfn-10" class="zyellow">
+<span class="faq-question">What are best practices for writing CloudFormation templates?</span>
+<div class="answer">
+<ul>
+  <li>Use YAML over JSON for readability</li>
+  <li>Break large templates into nested stacks</li>
+  <li>Parameterize environment-specific values</li>
+  <li>Use <code>DependsOn</code> for explicit dependencies</li>
+  <li>Enable stack protection and rollback alarms</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-1" id="awsec2_qlist" class="yellow">
+<span class="faq-question">What is AWS EC2?</span>
+<div class="answer">
+AWS EC2 (Elastic Compute Cloud) provides scalable virtual servers in the cloud. You can launch instances of different types to host applications, run workloads, or serve web services.
+</div>
+</li>
+
+<li data-id="question-ec2-2" class="zyellow">
+<span class="faq-question">What are EC2 instance types?</span>
+<div class="answer">
+EC2 instance types are categories of virtual machines optimized for different use cases:
+<ul>
+  <li><strong>General Purpose:</strong> t3, t4g, m5</li>
+  <li><strong>Compute Optimized:</strong> c5, c6g</li>
+  <li><strong>Memory Optimized:</strong> r5, x1</li>
+  <li><strong>Storage Optimized:</strong> i3, d2</li>
+  <li><strong>Accelerated Computing:</strong> p3, inf1</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-3" class="zyellow">
+<span class="faq-question">What is an AMI (Amazon Machine Image)?</span>
+<div class="answer">
+An AMI is a pre-configured template that contains the OS, software, and settings needed to launch an EC2 instance. You can use AWS-provided, marketplace, or custom AMIs.
+</div>
+</li>
+
+<li data-id="question-ec2-4" class="zyellow">
+<span class="faq-question">What is the difference between EBS and instance store?</span>
+<div class="answer">
+<ul>
+  <li><strong>EBS (Elastic Block Store):</strong> Persistent block storage that survives instance termination.</li>
+  <li><strong>Instance Store:</strong> Temporary storage that is lost when the instance is stopped or terminated.</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-5" class="zyellow">
+<span class="faq-question">How do security groups work in EC2?</span>
+<div class="answer">
+Security groups act as virtual firewalls. They control inbound and outbound traffic to instances using rules based on protocols, ports, and IPs. Rules are stateful.
+</div>
+</li>
+
+<li data-id="question-ec2-6" class="zyellow">
+<span class="faq-question">What is the difference between key pairs and IAM roles in EC2?</span>
+<div class="answer">
+<ul>
+  <li><strong>Key Pairs:</strong> Used for SSH access to EC2 instances.</li>
+  <li><strong>IAM Roles:</strong> Assign permissions to EC2 instances to access AWS services (e.g., S3, DynamoDB).</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-7" class="zyellow">
+<span class="faq-question">How can you make an EC2 instance highly available?</span>
+<div class="answer">
+<ul>
+  <li>Use multiple Availability Zones</li>
+  <li>Launch EC2 instances in an Auto Scaling Group</li>
+  <li>Use Elastic Load Balancer (ELB)</li>
+  <li>Deploy AMIs for quick recovery</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-8" class="zyellow">
+<span class="faq-question">What are spot, on-demand, and reserved instances?</span>
+<div class="answer">
+<ul>
+  <li><strong>On-Demand:</strong> Pay-per-use with no commitment.</li>
+  <li><strong>Reserved:</strong> Commit to usage over 1 or 3 years for lower cost.</li>
+  <li><strong>Spot:</strong> Bid for unused capacity at the lowest price—can be terminated anytime by AWS.</li>
+</ul>
+</div>
+</li>
+
+<li data-id="question-ec2-9" class="zyellow">
+<span class="faq-question">How do you automate EC2 instance deployment?</span>
+<div class="answer">
+You can use tools like AWS CloudFormation, Terraform, AWS CDK, or EC2 Launch Templates combined with Auto Scaling Groups for automated and repeatable instance deployment.
+</div>
+</li>
+
+<li data-id="question-ec2-10" class="zyellow">
+<span class="faq-question">What are common EC2 troubleshooting steps?</span>
+<div class="answer">
+<ul>
+  <li>Check system logs using EC2 console</li>
+  <li>Use EC2 Instance Connect if SSH fails</li>
+  <li>Review security group and NACL rules</li>
+  <li>Check instance status checks</li>
+  <li>Verify disk space and memory usage</li>
+</ul>
+</div>
+</li>
+
+
+
+
+
+
+<li data-id="DynamoDB-question-list" id="awsdynamodb" class="yellow">
+  <span class="faq-question">
+  AWS DynamoDB Questions List
+  </span>
+  <div class="answer">
+
+  <strong>Basic DynamoDB Questions</strong>
+    <ol>
+      <li>What is DynamoDB?</li>
+      <li>What are the key features of DynamoDB?</li>
+      <li>What is the difference between partition key and sort key?</li>
+      <li>What is a primary key in DynamoDB?</li>
+      <li>What is a composite key?</li>
+      <li>What data types are supported in DynamoDB?</li>
+      <li>What is a DynamoDB table schema?</li>
+      <li>How does DynamoDB handle indexing?</li>
+      <li>What are global secondary indexes (GSI)?</li>
+      <li>What are local secondary indexes (LSI)?</li>
+      <li>Can a table have multiple GSIs or LSIs?</li>
+      <li>What are strongly consistent vs eventually consistent reads?</li>
+      <li>What are the read/write capacity modes in DynamoDB?</li>
+      <li>What is on-demand capacity mode?</li>
+      <li>What is provisioned throughput mode?</li>
+      <li>What happens if read/write capacity is exceeded?</li>
+      <li>How does DynamoDB handle throttling?</li>
+      <li>What are reserved capacity units?</li>
+    </ol>
+ 
+
+  <strong>Intermediate DynamoDB Questions</strong>
+    <ol>
+      <li>How does DynamoDB partition data internally?</li>
+      <li>What is a hot partition?</li>
+      <li>How do you avoid hot partitions in DynamoDB?</li>
+      <li>How does DynamoDB scale reads and writes?</li>
+      <li>What are DynamoDB streams?</li>
+      <li>How can DynamoDB Streams be used?</li>
+      <li>How do you implement triggers in DynamoDB?</li>
+      <li>What is conditional write in DynamoDB?</li>
+      <li>What is a projection expression?</li>
+      <li>How do you perform pagination in DynamoDB?</li>
+      <li>How do you query data in DynamoDB?</li>
+      <li>How do you scan a table in DynamoDB?</li>
+      <li>What's the difference between query and scan?</li>
+      <li>What is a filter expression in DynamoDB?</li>
+      <li>What is a key condition expression?</li>
+      <li>How do you use begins_with and between in queries?</li>
+      <li>What is a TTL (Time To Live) in DynamoDB?</li>
+      <li>How is item expiration handled in TTL?</li>
+    </ol>
+  
+
+  <strong>Advanced DynamoDB Questions</strong>
+    <ol>
+      <li>What is DynamoDB Accelerator (DAX)?</li>
+      <li>What is PartiQL in DynamoDB?</li>
+      <li>What are transactional writes?</li>
+      <li>What is the difference between PutItem and UpdateItem?</li>
+      <li>How do you perform atomic counters in DynamoDB?</li>
+      <li>How do you prevent race conditions in DynamoDB?</li>
+      <li>What is the best way to store large objects in DynamoDB?</li>
+      <li>What are limitations of DynamoDB?</li>
+      <li>How do you design a one-to-many relationship in DynamoDB?</li>
+      <li>How do you store time-series data in DynamoDB?</li>
+      <li>What is the use of ExpressionAttributeNames?</li>
+      <li>What are best practices for schema design in DynamoDB?</li>
+      <li>How do you back up and restore DynamoDB tables?</li>
+      <li>What are DynamoDB Global Tables?</li>
+    </ol>
+  
+</div></li>
+  
+
+<li data-id="q32" class="yellow"><span class="faq-question">AWS Service List</span>
+<div class="answer">
+<ol>
+
+  <li data-id="aws-q-01" class="yellow"><span class="faq-question">AWS Lambda</span><div class="answer green">Serverless compute allowing you to run code without managing servers—ideal for event-driven functions, APIs, or microservices. Pay only for execution time :contentReference[oaicite:1]{index=1}.</div></li>
+  <li data-id="aws-q-02" class="yellow"><span class="faq-question">Amazon EC2</span><div class="answer green">Virtual machines with scalable compute capacity for running custom servers or workloads. Useful when you need full OS control :contentReference[oaicite:2]{index=2}.</div></li>
+  <li data-id="aws-q-03" class="yellow"><span class="faq-question">Amazon S3</span><div class="answer green">Highly durable object storage for files, static assets, backups, or data lakes. Great for hosting static websites or storing media :contentReference[oaicite:3]{index=3}.</div></li>
+  <li data-id="aws-q-04" class="yellow"><span class="faq-question">Amazon RDS</span><div class="answer green">Managed relational database service supporting MySQL, PostgreSQL, Oracle, etc. Handles backups, scaling, and patching :contentReference[oaicite:4]{index=4}.</div></li>
+  <li data-id="aws-q-05" class="yellow"><span class="faq-question">Amazon DynamoDB</span><div class="answer green">Fully managed NoSQL database offering low latency and automatic scaling—ideal for key-value workloads :contentReference[oaicite:5]{index=5}.</div></li>
+  <li data-id="aws-q-06" class="yellow"><span class="faq-question">Amazon API Gateway</span><div class="answer green">Creates, secures, and manages APIs at scale—works seamlessly with Lambda or other backends :contentReference[oaicite:6]{index=6}.</div></li>
+  <li data-id="aws-q-07" class="yellow"><span class="faq-question">AWS CloudFormation</span><div class="answer green">Infrastructure as Code (IaC) service to declaratively define and manage AWS resources via YAML/JSON templates :contentReference[oaicite:7]{index=7}.</div></li>
+  <li data-id="aws-q-08" class="yellow"><span class="faq-question">AWS CloudWatch</span><div class="answer green">Monitoring, logging, and alerting for AWS resources and applications—essential for observability :contentReference[oaicite:8]{index=8}.</div></li>
+  <li data-id="aws-q-09" class="yellow"><span class="faq-question">Amazon CloudFront</span><div class="answer green">Global CDN to distribute content with low latency and high transfer speeds, with integrated SSL/DDoS protection :contentReference[oaicite:9]{index=9}.</div></li>
+   <li data-id="aws-q-10" class="yellow"><span class="faq-question">Amazon VPC</span><div class="answer green">Provides private networking controls—subnets, routing, security groups—for your AWS infrastructure :contentReference[oaicite:10]{index=10}.</div></li>
+ <li data-id="aws-q-11" class="yellow"><span class="faq-question">AWS CodeCommit, CodeBuild, CodeDeploy, CodePipeline</span><div class="answer green">CI/CD toolchain for source control, building, testing, and deploying applications within AWS :contentReference[oaicite:11]{index=11}.</div></li>
+  <li data-id="aws-q-12" class="yellow"><span class="faq-question">AWS CloudShell / Cloud9</span><div class="answer green">Browser-based IDE and CLI environment for coding and prototyping directly within AWS :contentReference[oaicite:12]{index=12}.</div></li>
+  <li data-id="aws-q-13" class="yellow"><span class="faq-question">AWS App Runner</span><div class="answer green">Fully managed container deployment service with automatic scaling—ideal for containerized web apps :contentReference[oaicite:13]{index=13}.</div></li>
+ <li data-id="aws-q-14" class="yellow"><span class="faq-question">Amazon X-Ray</span><div class="answer green">Helps trace and debug distributed systems – crucial for microservices monitoring :contentReference[oaicite:14]{index=14}.</div></li>
+    </ol>
+    </div>
+    </li>
 
 
 
