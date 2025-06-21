@@ -14525,7 +14525,545 @@ Type vs Object
 </pre>
   </div>
 </li>
-              
+   
+
+<li data-id="q32" class="yellow">
+  <span class="faq-question">Express.js Vs Koa</span>
+  <div class="answer">
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Express.js</th>
+          <th>Koa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Created By</td>
+          <td>StrongLoop, now part of IBM</td>
+          <td>Original creators of Express (TJ Holowaychuk & team)</td>
+        </tr>
+        <tr>
+          <td>Middleware System</td>
+          <td>Callback-based</td>
+          <td>Promise-based using async/await</td>
+        </tr>
+        <tr>
+          <td>Built-in Middleware</td>
+          <td>Includes body-parser, router, static files</td>
+          <td>Minimal core, external middleware needed</td>
+        </tr>
+        <tr>
+          <td>Learning Curve</td>
+          <td>Easier to learn and use</td>
+          <td>Slightly steeper, more flexible</td>
+        </tr>
+        <tr>
+          <td>Code Size</td>
+          <td>Larger out of the box</td>
+          <td>Smaller and more modular</td>
+        </tr>
+        <tr>
+          <td>Error Handling</td>
+          <td>Try-catch needed inside middleware</td>
+          <td>Native error propagation with async/await</td>
+        </tr>
+        <tr>
+          <td>Context Object</td>
+          <td>Separate request and response</td>
+          <td>Unified context object (ctx)</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Good</td>
+          <td>Slightly better due to lightweight design</td>
+        </tr>
+        <tr>
+          <td>Community Support</td>
+          <td>Very large and mature</td>
+          <td>Smaller but active</td>
+        </tr>
+        <tr>
+          <td>Best For</td>
+          <td>Quick REST APIs and web apps</td>
+          <td>Modern, modular apps with full control</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+<pre>
+
+  //npm install koa koa-router koa-bodyparser mongoose
+
+  const Koa = require('koa');
+  const Router = require('koa-router');
+  const bodyParser = require('koa-bodyparser');
+  const mongoose = require('mongoose');
+  
+  const app = new Koa();
+  const router = new Router();
+  
+  // Connect to MongoDB
+  mongoose.connect('mongodb://localhost:27017/studentdb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  
+  // Student Schema
+  const StudentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    department: String,
+    email: String,
+  });
+  
+  const Student = mongoose.model('Student', StudentSchema);
+  
+  // Middleware
+  app.use(bodyParser());
+  
+  // Create student
+  router.post('/students', async (ctx) => {
+    const newStudent = new Student(ctx.request.body);
+    const saved = await newStudent.save();
+    ctx.body = saved;
+  });
+  
+  // Get all students
+  router.get('/students', async (ctx) => {
+    const students = await Student.find();
+    ctx.body = students;
+  });
+  
+  // Get one student by ID
+  router.get('/students/:id', async (ctx) => {
+    const student = await Student.findById(ctx.params.id);
+    if (!student) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = student;
+    }
+  });
+  
+  // Update student
+  router.put('/students/:id', async (ctx) => {
+    const updated = await Student.findByIdAndUpdate(ctx.params.id, ctx.request.body, {
+      new: true,
+    });
+    if (!updated) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = updated;
+    }
+  });
+  
+  // Delete student
+  router.delete('/students/:id', async (ctx) => {
+    const deleted = await Student.findByIdAndDelete(ctx.params.id);
+    if (!deleted) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = { message: 'Student deleted successfully' };
+    }
+  });
+  
+  // Apply routes
+  app.use(router.routes()).use(router.allowedMethods());
+  
+  // Start server
+  app.listen(3000, () => {
+    console.log('Koa server running on http://localhost:3000');
+  });
+  
+
+</pre>
+  </div>
+
+</li>
+<li data-id="q32" class="yellow">
+  <span class="faq-question">Koa.js Questions</span>
+  <div class="answer">
+    <ol>
+      <li class="green">Basic</li>
+      <li>What is Koa.js?</li>
+      <li>Who created Koa.js?</li>
+      <li>How is Koa.js different from Express.js?</li>
+      <li>What are the core features of Koa.js?</li>
+      <li>How do you install Koa.js in a Node.js project?</li>
+      <li>How do you create a basic server using Koa.js?</li>
+      <li>What is middleware in Koa?</li>
+      <li>How does Koa handle async/await in middleware?</li>
+      <li>What is the role of the context object (ctx) in Koa?</li>
+      <li>How do you handle request and response in Koa?</li>
+      <li>What is koa-router and why is it needed?</li>
+      <li>How do you define routes using koa-router?</li>
+      <li>How do you parse JSON body in a Koa application?</li>
+      <li>How can you handle errors globally in Koa?</li>
+      <li>How do you serve static files in Koa?</li>
+      <li>How do you add CORS support to a Koa app?</li>
+      <li>What is the difference between ctx.request and ctx.req?</li>
+      <li>What is the difference between ctx.response and ctx.res?</li>
+      <li>How do you structure a Koa app with multiple routes and controllers?</li>
+      <li>How do you connect a Koa app to MongoDB?</li>
+      <li>What is the use of koa-bodyparser?</li>
+      <li>How do you handle file uploads in Koa?</li>
+      <li>How do you implement authentication in Koa?</li>
+      <li>What are some common middlewares used in Koa.js?</li>
+      <li>How do you log requests in a Koa application?</li>
+      <li>How do you run a Koa app on a specific port?</li>
+      <li>How do you handle route parameters in Koa?</li>
+      <li>How do you redirect routes in Koa?</li>
+      <li>How do you write unit tests for Koa routes?</li>
+      <li>How is Koa.js suited for building APIs and microservices?</li>
+    
+      <li class="green">Intermediate</li>
+      <li>How does Koa achieve better control over flow compared to Express?</li>
+      <li>What are generator functions in Koa v1 and why were they removed in Koa v2?</li>
+      <li>What is the significance of async/await in Koa middleware?</li>
+      <li>How does Koa handle middleware composition?</li>
+      <li>What is the difference between middleware chaining in Koa and Express?</li>
+      <li>How do you implement centralized error handling in Koa?</li>
+      <li>How can you implement custom middleware in Koa?</li>
+      <li>How do you handle 404 responses in Koa?</li>
+      <li>How do you use Koa with MongoDB and Mongoose?</li>
+      <li>What is the structure of the ctx object in Koa?</li>
+      <li>How do you implement route-level middleware in Koa?</li>
+      <li>How do you handle file uploads using koa-multer or koa-body?</li>
+      <li>How do you manage sessions and cookies in Koa?</li>
+      <li>How do you implement JWT-based authentication in Koa?</li>
+      <li>How do you connect a Koa app to a SQL database?</li>
+      <li>What is the role of `ctx.throw()` and how does it differ from `ctx.status`?</li>
+      <li>How do you implement CORS with custom configuration in Koa?</li>
+      <li>How do you implement rate limiting in a Koa application?</li>
+      <li>What are some performance tuning tips for Koa apps?</li>
+      <li>How can you validate request input in Koa?</li>
+      <li>How do you organize a large Koa project with routes, services, and controllers?</li>
+      <li>How do you implement dependency injection in Koa?</li>
+      <li>How do you test Koa middleware and routes using supertest or similar tools?</li>
+      <li>How do you integrate Swagger or OpenAPI documentation in Koa?</li>
+      <li>How can you implement WebSocket support with Koa?</li>
+      <li>How do you create a RESTful API structure using Koa and koa-router?</li>
+      <li>How do you perform authentication and authorization in Koa?</li>
+      <li>What is the best way to use async/await in deeply nested Koa middleware?</li>
+      <li>How does Koa support streaming large files (e.g., video, CSV) to clients?</li>
+      <li>How can you extend the context (`ctx`) object in a Koa app?</li>
+
+      <li class="green">Advanced</span>
+      <li>How does Koa's context object delegation work under the hood?</li>
+      <li>How can you create a custom context prototype in Koa?</li>
+      <li>How do you implement middleware that supports async retries and backoff?</li>
+      <li>How can you isolate and manage memory leaks in a large Koa application?</li>
+      <li>How do you implement streaming file downloads and uploads in Koa?</li>
+      <li>What are best practices for building scalable Koa microservices?</li>
+      <li>How do you integrate Koa with GraphQL and Apollo Server?</li>
+      <li>How can you use Koa with TypeScript effectively in large applications?</li>
+      <li>How do you ensure security (CSRF, XSS, CSP, etc.) in Koa applications?</li>
+      <li>How do you implement scoped dependency injection across routes in Koa?</li>
+      <li>How does Koa handle backpressure and streaming data?</li>
+      <li>How do you implement multi-tenant architecture using Koa?</li>
+      <li>What’s the best strategy to version APIs in Koa?</li>
+      <li>How do you handle graceful shutdown and connection draining in Koa?</li>
+      <li>How can you use Koa with a task queue (like Bull or RabbitMQ)?</li>
+      <li>How do you enforce request rate limits dynamically (per user/IP) in Koa?</li>
+      <li>How do you use `async_hooks` or `cls-hooked` with Koa for request tracing?</li>
+      <li>How do you implement OpenTelemetry (OTEL) tracing in a Koa app?</li>
+      <li>What are the limitations of Koa middleware stack for complex logic flows?</li>
+      <li>How would you structure a plugin-based Koa application?</li>
+      <li>How can you use Koa with Kubernetes health checks and liveness probes?</li>
+      <li>How do you integrate a centralized logging system (like Winston or Pino) in Koa?</li>
+      <li>How do you build reusable middleware packages for Koa and publish them to NPM?</li>
+      <li>How can you design and enforce schema validation in Koa using libraries like Zod or Joi?</li>
+      <li>How do you debug middleware execution order in large-scale Koa apps?</li>
+      <li>What is the internal lifecycle of a Koa request from middleware to response?</li>
+      <li>How would you implement a zero-downtime deployment strategy with Koa?</li>
+      <li>How do you isolate tenant-specific middleware for multi-tenant SaaS apps in Koa?</li>
+      <li>How do you integrate Koa with serverless platforms like AWS Lambda or Google Cloud Functions?</li>
+      <li>How can you secure Koa apps with OAuth2 or OpenID Connect authentication flows?</li>
+      
+
+
+    </ol>
+  </div>
+</li>
+
+<li data-id="q32" class="yellow">
+  <span class="faq-question">What is the difference between Express.js and Fastify?</span>
+  <div class="answer">
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Express.js</th>
+          <th>Fastify</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Performance</td>
+          <td>Slower due to older architecture</td>
+          <td>Faster and optimized for high performance</td>
+        </tr>
+        <tr>
+          <td>HTTP Version Support</td>
+          <td>Supports HTTP/1.1 only</td>
+          <td>Supports HTTP/1.1 and HTTP/2 out of the box</td>
+        </tr>
+        <tr>
+          <td>Schema-based Validation</td>
+          <td>No built-in support</td>
+          <td>Built-in with JSON Schema</td>
+        </tr>
+        <tr>
+          <td>Plugin Architecture</td>
+          <td>Basic plugin support</td>
+          <td>Highly encapsulated and powerful plugin system</td>
+        </tr>
+        <tr>
+          <td>Logging</td>
+          <td>Manual setup (e.g., with Morgan or Winston)</td>
+          <td>Built-in logging with Pino</td>
+        </tr>
+        <tr>
+          <td>TypeScript Support</td>
+          <td>Community maintained</td>
+          <td>First-class TypeScript support</td>
+        </tr>
+        <tr>
+          <td>Request Lifecycle</td>
+          <td>Simplified and widely understood</td>
+          <td>Highly optimized with low overhead</td>
+        </tr>
+        <tr>
+          <td>Middleware Compatibility</td>
+          <td>Large ecosystem of middleware</td>
+          <td>Limited compatibility, not Express-style middleware</td>
+        </tr>
+        <tr>
+          <td>Learning Curve</td>
+          <td>Simpler and widely adopted</td>
+          <td>Slightly steeper due to new patterns</td>
+        </tr>
+        <tr>
+          <td>Community & Ecosystem</td>
+          <td>Large and mature</td>
+          <td>Growing rapidly with strong support</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>Ideal for quick setups and legacy support</td>
+          <td>Best for performance-sensitive and scalable APIs</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+<pre>
+  const fastify = require('fastify')({ logger: true });
+  const mongoose = require('mongoose');
+  
+  // Connect to MongoDB
+  mongoose.connect('mongodb://localhost:27017/hoteldb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  
+  // Define Hotel Schema
+  const HotelSchema = new mongoose.Schema({
+    name: String,
+    city: String,
+    address: String,
+    price: Number,
+  });
+  const Hotel = mongoose.model('Hotel', HotelSchema);
+  
+  // Create Hotel
+  fastify.post('/hotels', async (request, reply) => {
+    try {
+      const hotel = new Hotel(request.body);
+      const saved = await hotel.save();
+      reply.code(201).send(saved);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Get All Hotels
+  fastify.get('/hotels', async (request, reply) => {
+    const hotels = await Hotel.find();
+    reply.send(hotels);
+  });
+  
+  // Get Hotel by ID
+  fastify.get('/hotels/:id', async (request, reply) => {
+    try {
+      const hotel = await Hotel.findById(request.params.id);
+      if (!hotel) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send(hotel);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Update Hotel
+  fastify.put('/hotels/:id', async (request, reply) => {
+    try {
+      const updated = await Hotel.findByIdAndUpdate(request.params.id, request.body, {
+        new: true,
+      });
+      if (!updated) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send(updated);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Delete Hotel
+  fastify.delete('/hotels/:id', async (request, reply) => {
+    try {
+      const deleted = await Hotel.findByIdAndDelete(request.params.id);
+      if (!deleted) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send({ message: 'Hotel deleted successfully' });
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Start Server
+  const start = async () => {
+    try {
+      await fastify.listen({ port: 3000 });
+      console.log('Server running at http://localhost:3000');
+    } catch (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+  };
+  
+  start();
+  
+</pre>
+
+  </div>
+</li>
+
+<li data-id="q32" class="yellow">
+  <span class="faq-question">Fastify Question List</span>
+  <div class="answer">
+    <ol>
+      <li class="green">Basic</li>
+      <li>What is Fastify.js?</li>
+      <li>Who created Fastify?</li>
+      <li>What are the main features of Fastify?</li>
+      <li>How is Fastify different from Express.js?</li>
+      <li>How do you install Fastify in a Node.js project?</li>
+      <li>How do you create a simple Fastify server?</li>
+      <li>What is a route in Fastify?</li>
+      <li>How do you define a GET route in Fastify?</li>
+      <li>How do you handle POST requests in Fastify?</li>
+      <li>What is the Fastify request and reply object?</li>
+      <li>How do you send JSON responses in Fastify?</li>
+      <li>How do you parse JSON body in Fastify?</li>
+      <li>What is Fastify’s built-in logging system?</li>
+      <li>How do you enable logging in Fastify?</li>
+      <li>What is Fastify’s plugin system?</li>
+      <li>How do you register a plugin in Fastify?</li>
+      <li>How do you organize routes using plugins?</li>
+      <li>How do you return error responses in Fastify?</li>
+      <li>How do you validate request bodies in Fastify?</li>
+      <li>What is Fastify’s schema-based validation?</li>
+      <li>How do you handle query parameters in Fastify?</li>
+      <li>How do you access path parameters in Fastify?</li>
+      <li>How do you serve static files in Fastify?</li>
+      <li>How do you use middleware in Fastify?</li>
+      <li>How do you handle 404 errors in Fastify?</li>
+      <li>How do you use async/await in Fastify routes?</li>
+      <li>What are decorators in Fastify?</li>
+      <li>How do you handle CORS in Fastify?</li>
+      <li>How do you start a Fastify server on a custom port?</li>
+      <li>How do you gracefully shut down a Fastify server?</li>
+
+      <li class="green">Intermediate</li>
+      <li>How does Fastify achieve high performance compared to other frameworks?</li>
+      <li>What is Fastify's plugin encapsulation model and why is it important?</li>
+      <li>How do you share logic or data across plugins in Fastify?</li>
+      <li>What are decorators in Fastify and how do you use them?</li>
+      <li>How does Fastify handle request and response lifecycle?</li>
+      <li>What is the purpose of `fastify.register()`?</li>
+      <li>How do you use hooks like `onRequest`, `preHandler`, `onSend`, and `onResponse`?</li>
+      <li>How do you define and validate route schemas in Fastify?</li>
+      <li>How do you handle custom error handling in Fastify?</li>
+      <li>How does Fastify support route-level options?</li>
+      <li>What is `fastify.addSchema()` and how is it used?</li>
+      <li>How do you configure different log levels in Fastify?</li>
+      <li>How do you implement authentication in Fastify?</li>
+      <li>How can you add middleware to Fastify?</li>
+      <li>What is the difference between middleware and hooks in Fastify?</li>
+      <li>How do you test Fastify routes using a testing framework like tap or jest?</li>
+      <li>How do you serve static files using `@fastify/static`?</li>
+      <li>How do you generate API docs using `@fastify/swagger`?</li>
+      <li>How do you access headers, query, and body data in Fastify routes?</li>
+      <li>What is the use of `reply.send()` vs `return` in Fastify handlers?</li>
+      <li>How do you handle async database queries inside Fastify handlers?</li>
+      <li>How do you manage environment variables securely in Fastify?</li>
+      <li>How do you handle multipart/form-data file uploads in Fastify?</li>
+      <li>What is the role of `fastify.ready()` in lifecycle management?</li>
+      <li>How do you build modular route files with Fastify plugin registration?</li>
+      <li>How can you implement dependency injection using Fastify plugins?</li>
+      <li>How do you use `setErrorHandler()` and `setNotFoundHandler()`?</li>
+      <li>How can you apply global schema validation rules?</li>
+      <li>How do you log request/response lifecycle events in Fastify?</li>
+      <li>How can you monitor performance or metrics in Fastify?</li>
+
+      <li class="green">Advanced Fastify.js Interview Questions</li>
+      <li>How does Fastify's internal HTTP parser optimize performance?</li>
+      <li>How do you create a highly modular Fastify monorepo architecture?</li>
+      <li>How does Fastify compare to Hapi or Restify in high-load scenarios?</li>
+      <li>How do you implement request tracing and correlation IDs in Fastify?</li>
+      <li>How can you register scoped plugins conditionally in Fastify?</li>
+      <li>How do you create reusable Fastify plugins with options?</li>
+      <li>How does Fastify's encapsulation model prevent side effects in plugins?</li>
+      <li>How do you extend Fastify’s reply and request interfaces in TypeScript?</li>
+      <li>How can you benchmark Fastify routes using built-in tools or autocannon?</li>
+      <li>How do you implement streaming file uploads and downloads in Fastify?</li>
+      <li>How do you use Fastify with Redis for caching or sessions?</li>
+      <li>How do you integrate Fastify with AWS Lambda or other serverless platforms?</li>
+      <li>How do you manage context propagation in Fastify across async flows?</li>
+      <li>What are the caveats of using global decorators in Fastify?</li>
+      <li>How do you build a multi-tenant SaaS application with Fastify plugins?</li>
+      <li>How do you isolate routes and services per tenant using encapsulation?</li>
+      <li>How can you implement GraphQL APIs inside a Fastify server?</li>
+      <li>How do you integrate Fastify with OpenTelemetry for distributed tracing?</li>
+      <li>How do you create custom serializers and deserializers in Fastify?</li>
+      <li>How do you ensure schema performance using `$ref` and shared schemas?</li>
+      <li>How do you implement RBAC or ACL systems in Fastify plugins?</li>
+      <li>How does Fastify handle HTTP/2 push and streaming?</li>
+      <li>How do you implement lifecycle hooks across isolated plugin instances?</li>
+      <li>How can you securely expose internal APIs between encapsulated plugins?</li>
+      <li>How do you gracefully shut down a Fastify server with async cleanup?</li>
+      <li>How do you handle plugin registration order and priority in large systems?</li>
+      <li>What are the trade-offs between using hooks and middleware in Fastify?</li>
+      <li>How do you build dynamic route registration based on configuration files?</li>
+      <li>How do you monitor Fastify server internals and memory usage in real time?</li>
+      <li>How do you implement rate limiting per user/tenant with shared services?</li>
+    </ol>
+  </div>
+</li>
+
+
+
+
+
+
 <li data-id="q58">
   <span class="faq-question">What is Helmet in Node.js and how does it improve security?</span>
   <div class="answer">
@@ -32874,7 +33412,43 @@ app.listen(PORT, () => {
       <div class="answer">Unlike relational DBs, it is schema-free, optimized for full-text search, uses distributed JSON document model, and lacks ACID transactions :contentReference[oaicite:15]{index=15}.</div>
     </li>
 
-  
+    <li data-id="q32" class="zyellow">
+      <span class="faq-question">What is API-first architecture?</span>
+      <div class="answer">
+        API-first architecture is a software development approach where APIs are designed, documented, and agreed upon before any code is written for the application logic or user interfaces. It treats APIs as first-class citizens, ensuring that they are consistent, reusable, and well-documented from the beginning.
+    
+        <br><br>
+        This strategy enables better collaboration between teams, improves system scalability, supports parallel development, and ensures that front-end and back-end teams can work independently without delays.
+    
+        <br><br>
+        <strong>Key Characteristics:</strong>
+        <ul>
+          <li>APIs are the central point of the design process</li>
+          <li>Contracts (schemas) are defined using tools like OpenAPI or Swagger</li>
+          <li>Development can proceed in parallel across teams</li>
+          <li>Improves reusability and consistency across services</li>
+        </ul>
+    
+        <br>
+        <strong>Benefits:</strong>
+        <ul>
+          <li>Faster development with fewer integration issues</li>
+          <li>Better developer experience with clear API docs</li>
+          <li>Improves testability and automation</li>
+          <li>Scales well with microservices and front-end/backend separation</li>
+        </ul>
+    
+        <br>
+        <strong>Common Tools:</strong>
+        <ul>
+          <li>OpenAPI (Swagger)</li>
+          <li>Postman</li>
+          <li>Stoplight</li>
+          <li>API Gateway</li>
+        </ul>
+      </div>
+    </li>
+     
 
 
 <li data-id="q32" class="yellow"><span class="faq-question">
@@ -32887,19 +33461,18 @@ app.listen(PORT, () => {
   </span>
   
   <pre>
-    rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
-  
-  
-    convert to html format:
-    li data-id="question-" class="yellow"><span class="faq-question">
-    div class answer
-  
-  
-    html format : 
-    li data-id="q32" class="zyellow"> span class="faq-question">
-    div class="answer">
+rm package-lock.json && rm -rf node_modules && npm install && npm install --package-lock-only && git add package-lock.json && git commit -m "Fix: update lockfile to match package.json" && git push
 
-    don't use &lt;code> in text
+
+convert to html format:
+li data-id="question-" class="yellow"><span class="faq-question">
+div class answer
+
+
+html format : 
+li data-id="q32" class="zyellow"> span class="faq-question">
+div class="answer">
+don't use &lt;code> in text
   </pre>
   </li>
   

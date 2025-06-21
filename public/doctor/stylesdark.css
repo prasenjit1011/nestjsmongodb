@@ -91,6 +91,10 @@ a{
 }
 
 
+.answer{
+  font-weight: 100;
+}
+
 span.green {
   background-color: #0F0;
   color: #000;
