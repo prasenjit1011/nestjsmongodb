@@ -105,7 +105,11 @@
           <tr>
             <td><a href="#nodejs_qlist">Nodejs</a></td>
             <td><a href="#q_ts">TypeScript</a></td>
-            <td>NestJS</td>
+            <td>
+              <a href="#fastify_qlist">Fastify</a> &nbsp;
+              <a href="#koa_qlist">Koa</a> &nbsp;
+              NestJS
+            </td>
             <td>Coding</td>
           </tr>
           <tr>
@@ -139,7 +143,10 @@
           </tr>
           <tr>
             <td><a href="#redis">Redis / RabitMQ</a></td>
-            <td><a href="#mongodb_qlist">MongoDB</a></td>
+            <td>
+              <a href="#mongodb_qlist">MongoDB</a>
+              <a href="#mikroorm_qlist">Mikro ORM</a>
+            </td>
             <td><a href="#elasticsearch">Elasticsearch</a></td>
             <td>PostGre SQL</td>
           </tr>
@@ -14527,541 +14534,6 @@ Type vs Object
 </li>
    
 
-<li data-id="q32" class="yellow">
-  <span class="faq-question">Express.js Vs Koa</span>
-  <div class="answer">
-    <table border="1" cellpadding="6" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Express.js</th>
-          <th>Koa</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Created By</td>
-          <td>StrongLoop, now part of IBM</td>
-          <td>Original creators of Express (TJ Holowaychuk & team)</td>
-        </tr>
-        <tr>
-          <td>Middleware System</td>
-          <td>Callback-based</td>
-          <td>Promise-based using async/await</td>
-        </tr>
-        <tr>
-          <td>Built-in Middleware</td>
-          <td>Includes body-parser, router, static files</td>
-          <td>Minimal core, external middleware needed</td>
-        </tr>
-        <tr>
-          <td>Learning Curve</td>
-          <td>Easier to learn and use</td>
-          <td>Slightly steeper, more flexible</td>
-        </tr>
-        <tr>
-          <td>Code Size</td>
-          <td>Larger out of the box</td>
-          <td>Smaller and more modular</td>
-        </tr>
-        <tr>
-          <td>Error Handling</td>
-          <td>Try-catch needed inside middleware</td>
-          <td>Native error propagation with async/await</td>
-        </tr>
-        <tr>
-          <td>Context Object</td>
-          <td>Separate request and response</td>
-          <td>Unified context object (ctx)</td>
-        </tr>
-        <tr>
-          <td>Performance</td>
-          <td>Good</td>
-          <td>Slightly better due to lightweight design</td>
-        </tr>
-        <tr>
-          <td>Community Support</td>
-          <td>Very large and mature</td>
-          <td>Smaller but active</td>
-        </tr>
-        <tr>
-          <td>Best For</td>
-          <td>Quick REST APIs and web apps</td>
-          <td>Modern, modular apps with full control</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <hr />
-<pre>
-
-  //npm install koa koa-router koa-bodyparser mongoose
-
-  const Koa = require('koa');
-  const Router = require('koa-router');
-  const bodyParser = require('koa-bodyparser');
-  const mongoose = require('mongoose');
-  
-  const app = new Koa();
-  const router = new Router();
-  
-  // Connect to MongoDB
-  mongoose.connect('mongodb://localhost:27017/studentdb', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  
-  // Student Schema
-  const StudentSchema = new mongoose.Schema({
-    name: String,
-    age: Number,
-    department: String,
-    email: String,
-  });
-  
-  const Student = mongoose.model('Student', StudentSchema);
-  
-  // Middleware
-  app.use(bodyParser());
-  
-  // Create student
-  router.post('/students', async (ctx) => {
-    const newStudent = new Student(ctx.request.body);
-    const saved = await newStudent.save();
-    ctx.body = saved;
-  });
-  
-  // Get all students
-  router.get('/students', async (ctx) => {
-    const students = await Student.find();
-    ctx.body = students;
-  });
-  
-  // Get one student by ID
-  router.get('/students/:id', async (ctx) => {
-    const student = await Student.findById(ctx.params.id);
-    if (!student) {
-      ctx.status = 404;
-      ctx.body = { error: 'Student not found' };
-    } else {
-      ctx.body = student;
-    }
-  });
-  
-  // Update student
-  router.put('/students/:id', async (ctx) => {
-    const updated = await Student.findByIdAndUpdate(ctx.params.id, ctx.request.body, {
-      new: true,
-    });
-    if (!updated) {
-      ctx.status = 404;
-      ctx.body = { error: 'Student not found' };
-    } else {
-      ctx.body = updated;
-    }
-  });
-  
-  // Delete student
-  router.delete('/students/:id', async (ctx) => {
-    const deleted = await Student.findByIdAndDelete(ctx.params.id);
-    if (!deleted) {
-      ctx.status = 404;
-      ctx.body = { error: 'Student not found' };
-    } else {
-      ctx.body = { message: 'Student deleted successfully' };
-    }
-  });
-  
-  // Apply routes
-  app.use(router.routes()).use(router.allowedMethods());
-  
-  // Start server
-  app.listen(3000, () => {
-    console.log('Koa server running on http://localhost:3000');
-  });
-  
-
-</pre>
-  </div>
-
-</li>
-<li data-id="q32" class="yellow">
-  <span class="faq-question">Koa.js Questions</span>
-  <div class="answer">
-    <ol>
-      <li class="green">Basic</li>
-      <li>What is Koa.js?</li>
-      <li>Who created Koa.js?</li>
-      <li>How is Koa.js different from Express.js?</li>
-      <li>What are the core features of Koa.js?</li>
-      <li>How do you install Koa.js in a Node.js project?</li>
-      <li>How do you create a basic server using Koa.js?</li>
-      <li>What is middleware in Koa?</li>
-      <li>How does Koa handle async/await in middleware?</li>
-      <li>What is the role of the context object (ctx) in Koa?</li>
-      <li>How do you handle request and response in Koa?</li>
-      <li>What is koa-router and why is it needed?</li>
-      <li>How do you define routes using koa-router?</li>
-      <li>How do you parse JSON body in a Koa application?</li>
-      <li>How can you handle errors globally in Koa?</li>
-      <li>How do you serve static files in Koa?</li>
-      <li>How do you add CORS support to a Koa app?</li>
-      <li>What is the difference between ctx.request and ctx.req?</li>
-      <li>What is the difference between ctx.response and ctx.res?</li>
-      <li>How do you structure a Koa app with multiple routes and controllers?</li>
-      <li>How do you connect a Koa app to MongoDB?</li>
-      <li>What is the use of koa-bodyparser?</li>
-      <li>How do you handle file uploads in Koa?</li>
-      <li>How do you implement authentication in Koa?</li>
-      <li>What are some common middlewares used in Koa.js?</li>
-      <li>How do you log requests in a Koa application?</li>
-      <li>How do you run a Koa app on a specific port?</li>
-      <li>How do you handle route parameters in Koa?</li>
-      <li>How do you redirect routes in Koa?</li>
-      <li>How do you write unit tests for Koa routes?</li>
-      <li>How is Koa.js suited for building APIs and microservices?</li>
-    
-      <li class="green">Intermediate</li>
-      <li>How does Koa achieve better control over flow compared to Express?</li>
-      <li>What are generator functions in Koa v1 and why were they removed in Koa v2?</li>
-      <li>What is the significance of async/await in Koa middleware?</li>
-      <li>How does Koa handle middleware composition?</li>
-      <li>What is the difference between middleware chaining in Koa and Express?</li>
-      <li>How do you implement centralized error handling in Koa?</li>
-      <li>How can you implement custom middleware in Koa?</li>
-      <li>How do you handle 404 responses in Koa?</li>
-      <li>How do you use Koa with MongoDB and Mongoose?</li>
-      <li>What is the structure of the ctx object in Koa?</li>
-      <li>How do you implement route-level middleware in Koa?</li>
-      <li>How do you handle file uploads using koa-multer or koa-body?</li>
-      <li>How do you manage sessions and cookies in Koa?</li>
-      <li>How do you implement JWT-based authentication in Koa?</li>
-      <li>How do you connect a Koa app to a SQL database?</li>
-      <li>What is the role of `ctx.throw()` and how does it differ from `ctx.status`?</li>
-      <li>How do you implement CORS with custom configuration in Koa?</li>
-      <li>How do you implement rate limiting in a Koa application?</li>
-      <li>What are some performance tuning tips for Koa apps?</li>
-      <li>How can you validate request input in Koa?</li>
-      <li>How do you organize a large Koa project with routes, services, and controllers?</li>
-      <li>How do you implement dependency injection in Koa?</li>
-      <li>How do you test Koa middleware and routes using supertest or similar tools?</li>
-      <li>How do you integrate Swagger or OpenAPI documentation in Koa?</li>
-      <li>How can you implement WebSocket support with Koa?</li>
-      <li>How do you create a RESTful API structure using Koa and koa-router?</li>
-      <li>How do you perform authentication and authorization in Koa?</li>
-      <li>What is the best way to use async/await in deeply nested Koa middleware?</li>
-      <li>How does Koa support streaming large files (e.g., video, CSV) to clients?</li>
-      <li>How can you extend the context (`ctx`) object in a Koa app?</li>
-
-      <li class="green">Advanced</span>
-      <li>How does Koa's context object delegation work under the hood?</li>
-      <li>How can you create a custom context prototype in Koa?</li>
-      <li>How do you implement middleware that supports async retries and backoff?</li>
-      <li>How can you isolate and manage memory leaks in a large Koa application?</li>
-      <li>How do you implement streaming file downloads and uploads in Koa?</li>
-      <li>What are best practices for building scalable Koa microservices?</li>
-      <li>How do you integrate Koa with GraphQL and Apollo Server?</li>
-      <li>How can you use Koa with TypeScript effectively in large applications?</li>
-      <li>How do you ensure security (CSRF, XSS, CSP, etc.) in Koa applications?</li>
-      <li>How do you implement scoped dependency injection across routes in Koa?</li>
-      <li>How does Koa handle backpressure and streaming data?</li>
-      <li>How do you implement multi-tenant architecture using Koa?</li>
-      <li>What’s the best strategy to version APIs in Koa?</li>
-      <li>How do you handle graceful shutdown and connection draining in Koa?</li>
-      <li>How can you use Koa with a task queue (like Bull or RabbitMQ)?</li>
-      <li>How do you enforce request rate limits dynamically (per user/IP) in Koa?</li>
-      <li>How do you use `async_hooks` or `cls-hooked` with Koa for request tracing?</li>
-      <li>How do you implement OpenTelemetry (OTEL) tracing in a Koa app?</li>
-      <li>What are the limitations of Koa middleware stack for complex logic flows?</li>
-      <li>How would you structure a plugin-based Koa application?</li>
-      <li>How can you use Koa with Kubernetes health checks and liveness probes?</li>
-      <li>How do you integrate a centralized logging system (like Winston or Pino) in Koa?</li>
-      <li>How do you build reusable middleware packages for Koa and publish them to NPM?</li>
-      <li>How can you design and enforce schema validation in Koa using libraries like Zod or Joi?</li>
-      <li>How do you debug middleware execution order in large-scale Koa apps?</li>
-      <li>What is the internal lifecycle of a Koa request from middleware to response?</li>
-      <li>How would you implement a zero-downtime deployment strategy with Koa?</li>
-      <li>How do you isolate tenant-specific middleware for multi-tenant SaaS apps in Koa?</li>
-      <li>How do you integrate Koa with serverless platforms like AWS Lambda or Google Cloud Functions?</li>
-      <li>How can you secure Koa apps with OAuth2 or OpenID Connect authentication flows?</li>
-      
-
-
-    </ol>
-  </div>
-</li>
-
-<li data-id="q32" class="yellow">
-  <span class="faq-question">What is the difference between Express.js and Fastify?</span>
-  <div class="answer">
-    <table border="1" cellpadding="6" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Express.js</th>
-          <th>Fastify</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Performance</td>
-          <td>Slower due to older architecture</td>
-          <td>Faster and optimized for high performance</td>
-        </tr>
-        <tr>
-          <td>HTTP Version Support</td>
-          <td>Supports HTTP/1.1 only</td>
-          <td>Supports HTTP/1.1 and HTTP/2 out of the box</td>
-        </tr>
-        <tr>
-          <td>Schema-based Validation</td>
-          <td>No built-in support</td>
-          <td>Built-in with JSON Schema</td>
-        </tr>
-        <tr>
-          <td>Plugin Architecture</td>
-          <td>Basic plugin support</td>
-          <td>Highly encapsulated and powerful plugin system</td>
-        </tr>
-        <tr>
-          <td>Logging</td>
-          <td>Manual setup (e.g., with Morgan or Winston)</td>
-          <td>Built-in logging with Pino</td>
-        </tr>
-        <tr>
-          <td>TypeScript Support</td>
-          <td>Community maintained</td>
-          <td>First-class TypeScript support</td>
-        </tr>
-        <tr>
-          <td>Request Lifecycle</td>
-          <td>Simplified and widely understood</td>
-          <td>Highly optimized with low overhead</td>
-        </tr>
-        <tr>
-          <td>Middleware Compatibility</td>
-          <td>Large ecosystem of middleware</td>
-          <td>Limited compatibility, not Express-style middleware</td>
-        </tr>
-        <tr>
-          <td>Learning Curve</td>
-          <td>Simpler and widely adopted</td>
-          <td>Slightly steeper due to new patterns</td>
-        </tr>
-        <tr>
-          <td>Community & Ecosystem</td>
-          <td>Large and mature</td>
-          <td>Growing rapidly with strong support</td>
-        </tr>
-        <tr>
-          <td>Use Case</td>
-          <td>Ideal for quick setups and legacy support</td>
-          <td>Best for performance-sensitive and scalable APIs</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-<pre>
-  const fastify = require('fastify')({ logger: true });
-  const mongoose = require('mongoose');
-  
-  // Connect to MongoDB
-  mongoose.connect('mongodb://localhost:27017/hoteldb', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  
-  // Define Hotel Schema
-  const HotelSchema = new mongoose.Schema({
-    name: String,
-    city: String,
-    address: String,
-    price: Number,
-  });
-  const Hotel = mongoose.model('Hotel', HotelSchema);
-  
-  // Create Hotel
-  fastify.post('/hotels', async (request, reply) => {
-    try {
-      const hotel = new Hotel(request.body);
-      const saved = await hotel.save();
-      reply.code(201).send(saved);
-    } catch (err) {
-      reply.code(500).send({ error: err.message });
-    }
-  });
-  
-  // Get All Hotels
-  fastify.get('/hotels', async (request, reply) => {
-    const hotels = await Hotel.find();
-    reply.send(hotels);
-  });
-  
-  // Get Hotel by ID
-  fastify.get('/hotels/:id', async (request, reply) => {
-    try {
-      const hotel = await Hotel.findById(request.params.id);
-      if (!hotel) {
-        return reply.code(404).send({ error: 'Hotel not found' });
-      }
-      reply.send(hotel);
-    } catch (err) {
-      reply.code(500).send({ error: err.message });
-    }
-  });
-  
-  // Update Hotel
-  fastify.put('/hotels/:id', async (request, reply) => {
-    try {
-      const updated = await Hotel.findByIdAndUpdate(request.params.id, request.body, {
-        new: true,
-      });
-      if (!updated) {
-        return reply.code(404).send({ error: 'Hotel not found' });
-      }
-      reply.send(updated);
-    } catch (err) {
-      reply.code(500).send({ error: err.message });
-    }
-  });
-  
-  // Delete Hotel
-  fastify.delete('/hotels/:id', async (request, reply) => {
-    try {
-      const deleted = await Hotel.findByIdAndDelete(request.params.id);
-      if (!deleted) {
-        return reply.code(404).send({ error: 'Hotel not found' });
-      }
-      reply.send({ message: 'Hotel deleted successfully' });
-    } catch (err) {
-      reply.code(500).send({ error: err.message });
-    }
-  });
-  
-  // Start Server
-  const start = async () => {
-    try {
-      await fastify.listen({ port: 3000 });
-      console.log('Server running at http://localhost:3000');
-    } catch (err) {
-      fastify.log.error(err);
-      process.exit(1);
-    }
-  };
-  
-  start();
-  
-</pre>
-
-  </div>
-</li>
-
-<li data-id="q32" class="yellow">
-  <span class="faq-question">Fastify Question List</span>
-  <div class="answer">
-    <ol>
-      <li class="green">Basic</li>
-      <li>What is Fastify.js?</li>
-      <li>Who created Fastify?</li>
-      <li>What are the main features of Fastify?</li>
-      <li>How is Fastify different from Express.js?</li>
-      <li>How do you install Fastify in a Node.js project?</li>
-      <li>How do you create a simple Fastify server?</li>
-      <li>What is a route in Fastify?</li>
-      <li>How do you define a GET route in Fastify?</li>
-      <li>How do you handle POST requests in Fastify?</li>
-      <li>What is the Fastify request and reply object?</li>
-      <li>How do you send JSON responses in Fastify?</li>
-      <li>How do you parse JSON body in Fastify?</li>
-      <li>What is Fastify’s built-in logging system?</li>
-      <li>How do you enable logging in Fastify?</li>
-      <li>What is Fastify’s plugin system?</li>
-      <li>How do you register a plugin in Fastify?</li>
-      <li>How do you organize routes using plugins?</li>
-      <li>How do you return error responses in Fastify?</li>
-      <li>How do you validate request bodies in Fastify?</li>
-      <li>What is Fastify’s schema-based validation?</li>
-      <li>How do you handle query parameters in Fastify?</li>
-      <li>How do you access path parameters in Fastify?</li>
-      <li>How do you serve static files in Fastify?</li>
-      <li>How do you use middleware in Fastify?</li>
-      <li>How do you handle 404 errors in Fastify?</li>
-      <li>How do you use async/await in Fastify routes?</li>
-      <li>What are decorators in Fastify?</li>
-      <li>How do you handle CORS in Fastify?</li>
-      <li>How do you start a Fastify server on a custom port?</li>
-      <li>How do you gracefully shut down a Fastify server?</li>
-
-      <li class="green">Intermediate</li>
-      <li>How does Fastify achieve high performance compared to other frameworks?</li>
-      <li>What is Fastify's plugin encapsulation model and why is it important?</li>
-      <li>How do you share logic or data across plugins in Fastify?</li>
-      <li>What are decorators in Fastify and how do you use them?</li>
-      <li>How does Fastify handle request and response lifecycle?</li>
-      <li>What is the purpose of `fastify.register()`?</li>
-      <li>How do you use hooks like `onRequest`, `preHandler`, `onSend`, and `onResponse`?</li>
-      <li>How do you define and validate route schemas in Fastify?</li>
-      <li>How do you handle custom error handling in Fastify?</li>
-      <li>How does Fastify support route-level options?</li>
-      <li>What is `fastify.addSchema()` and how is it used?</li>
-      <li>How do you configure different log levels in Fastify?</li>
-      <li>How do you implement authentication in Fastify?</li>
-      <li>How can you add middleware to Fastify?</li>
-      <li>What is the difference between middleware and hooks in Fastify?</li>
-      <li>How do you test Fastify routes using a testing framework like tap or jest?</li>
-      <li>How do you serve static files using `@fastify/static`?</li>
-      <li>How do you generate API docs using `@fastify/swagger`?</li>
-      <li>How do you access headers, query, and body data in Fastify routes?</li>
-      <li>What is the use of `reply.send()` vs `return` in Fastify handlers?</li>
-      <li>How do you handle async database queries inside Fastify handlers?</li>
-      <li>How do you manage environment variables securely in Fastify?</li>
-      <li>How do you handle multipart/form-data file uploads in Fastify?</li>
-      <li>What is the role of `fastify.ready()` in lifecycle management?</li>
-      <li>How do you build modular route files with Fastify plugin registration?</li>
-      <li>How can you implement dependency injection using Fastify plugins?</li>
-      <li>How do you use `setErrorHandler()` and `setNotFoundHandler()`?</li>
-      <li>How can you apply global schema validation rules?</li>
-      <li>How do you log request/response lifecycle events in Fastify?</li>
-      <li>How can you monitor performance or metrics in Fastify?</li>
-
-      <li class="green">Advanced Fastify.js Interview Questions</li>
-      <li>How does Fastify's internal HTTP parser optimize performance?</li>
-      <li>How do you create a highly modular Fastify monorepo architecture?</li>
-      <li>How does Fastify compare to Hapi or Restify in high-load scenarios?</li>
-      <li>How do you implement request tracing and correlation IDs in Fastify?</li>
-      <li>How can you register scoped plugins conditionally in Fastify?</li>
-      <li>How do you create reusable Fastify plugins with options?</li>
-      <li>How does Fastify's encapsulation model prevent side effects in plugins?</li>
-      <li>How do you extend Fastify’s reply and request interfaces in TypeScript?</li>
-      <li>How can you benchmark Fastify routes using built-in tools or autocannon?</li>
-      <li>How do you implement streaming file uploads and downloads in Fastify?</li>
-      <li>How do you use Fastify with Redis for caching or sessions?</li>
-      <li>How do you integrate Fastify with AWS Lambda or other serverless platforms?</li>
-      <li>How do you manage context propagation in Fastify across async flows?</li>
-      <li>What are the caveats of using global decorators in Fastify?</li>
-      <li>How do you build a multi-tenant SaaS application with Fastify plugins?</li>
-      <li>How do you isolate routes and services per tenant using encapsulation?</li>
-      <li>How can you implement GraphQL APIs inside a Fastify server?</li>
-      <li>How do you integrate Fastify with OpenTelemetry for distributed tracing?</li>
-      <li>How do you create custom serializers and deserializers in Fastify?</li>
-      <li>How do you ensure schema performance using `$ref` and shared schemas?</li>
-      <li>How do you implement RBAC or ACL systems in Fastify plugins?</li>
-      <li>How does Fastify handle HTTP/2 push and streaming?</li>
-      <li>How do you implement lifecycle hooks across isolated plugin instances?</li>
-      <li>How can you securely expose internal APIs between encapsulated plugins?</li>
-      <li>How do you gracefully shut down a Fastify server with async cleanup?</li>
-      <li>How do you handle plugin registration order and priority in large systems?</li>
-      <li>What are the trade-offs between using hooks and middleware in Fastify?</li>
-      <li>How do you build dynamic route registration based on configuration files?</li>
-      <li>How do you monitor Fastify server internals and memory usage in real time?</li>
-      <li>How do you implement rate limiting per user/tenant with shared services?</li>
-    </ol>
-  </div>
-</li>
-
-
-
-
 
 
 <li data-id="q58">
@@ -17876,7 +17348,2636 @@ Zod
 
 
 
+<li data-id="q32" id="koa_qlist">
+  <span class="faq-question green">Express.js 🆚 Koa</span>
+  <div class="answer">
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Express.js</th>
+          <th>Koa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Created By</td>
+          <td>StrongLoop, now part of IBM</td>
+          <td>Original creators of Express (TJ Holowaychuk & team)</td>
+        </tr>
+        <tr>
+          <td>Middleware System</td>
+          <td>Callback-based</td>
+          <td>Promise-based using async/await</td>
+        </tr>
+        <tr>
+          <td>Built-in Middleware</td>
+          <td>Includes body-parser, router, static files</td>
+          <td>Minimal core, external middleware needed</td>
+        </tr>
+        <tr>
+          <td>Learning Curve</td>
+          <td>Easier to learn and use</td>
+          <td>Slightly steeper, more flexible</td>
+        </tr>
+        <tr>
+          <td>Code Size</td>
+          <td>Larger out of the box</td>
+          <td>Smaller and more modular</td>
+        </tr>
+        <tr>
+          <td>Error Handling</td>
+          <td>Try-catch needed inside middleware</td>
+          <td>Native error propagation with async/await</td>
+        </tr>
+        <tr>
+          <td>Context Object</td>
+          <td>Separate request and response</td>
+          <td>Unified context object (ctx)</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Good</td>
+          <td>Slightly better due to lightweight design</td>
+        </tr>
+        <tr>
+          <td>Community Support</td>
+          <td>Very large and mature</td>
+          <td>Smaller but active</td>
+        </tr>
+        <tr>
+          <td>Best For</td>
+          <td>Quick REST APIs and web apps</td>
+          <td>Modern, modular apps with full control</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+</li>
+<li data-id="q32">
+  <span class="faq-question green">Example : 01 : Koa</span>
+  <div class="answer">
+    <hr />
+<pre>
 
+  //npm install koa koa-router koa-bodyparser mongoose
+
+  const Koa = require('koa');
+  const Router = require('koa-router');
+  const bodyParser = require('koa-bodyparser');
+  const mongoose = require('mongoose');
+  
+  const app = new Koa();
+  const router = new Router();
+  
+  // Connect to MongoDB
+  mongoose.connect('mongodb://localhost:27017/studentdb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  
+  // Student Schema
+  const StudentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    department: String,
+    email: String,
+  });
+  
+  const Student = mongoose.model('Student', StudentSchema);
+  
+  // Middleware
+  app.use(bodyParser());
+  
+  // Create student
+  router.post('/students', async (ctx) => {
+    const newStudent = new Student(ctx.request.body);
+    const saved = await newStudent.save();
+    ctx.body = saved;
+  });
+  
+  // Get all students
+  router.get('/students', async (ctx) => {
+    const students = await Student.find();
+    ctx.body = students;
+  });
+  
+  // Get one student by ID
+  router.get('/students/:id', async (ctx) => {
+    const student = await Student.findById(ctx.params.id);
+    if (!student) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = student;
+    }
+  });
+  
+  // Update student
+  router.put('/students/:id', async (ctx) => {
+    const updated = await Student.findByIdAndUpdate(ctx.params.id, ctx.request.body, {
+      new: true,
+    });
+    if (!updated) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = updated;
+    }
+  });
+  
+  // Delete student
+  router.delete('/students/:id', async (ctx) => {
+    const deleted = await Student.findByIdAndDelete(ctx.params.id);
+    if (!deleted) {
+      ctx.status = 404;
+      ctx.body = { error: 'Student not found' };
+    } else {
+      ctx.body = { message: 'Student deleted successfully' };
+    }
+  });
+  
+  // Apply routes
+  app.use(router.routes()).use(router.allowedMethods());
+  
+  // Start server
+  app.listen(3000, () => {
+    console.log('Koa server running on http://localhost:3000');
+  });
+  
+
+</pre>
+  </div>
+
+</li>
+<li data-id="q32">
+  <span class="faq-question green">Koa.js Questions</span>
+  <div class="answer">
+    <ol>
+      <li class="green">Basic</li>
+      <li>What is Koa.js?</li>
+      <li>Who created Koa.js?</li>
+      <li>How is Koa.js different from Express.js?</li>
+      <li>What are the core features of Koa.js?</li>
+      <li>How do you install Koa.js in a Node.js project?</li>
+      <li>How do you create a basic server using Koa.js?</li>
+      <li>What is middleware in Koa?</li>
+      <li>How does Koa handle async/await in middleware?</li>
+      <li>What is the role of the context object (ctx) in Koa?</li>
+      <li>How do you handle request and response in Koa?</li>
+      <li>What is koa-router and why is it needed?</li>
+      <li>How do you define routes using koa-router?</li>
+      <li>How do you parse JSON body in a Koa application?</li>
+      <li>How can you handle errors globally in Koa?</li>
+      <li>How do you serve static files in Koa?</li>
+      <li>How do you add CORS support to a Koa app?</li>
+      <li>What is the difference between ctx.request and ctx.req?</li>
+      <li>What is the difference between ctx.response and ctx.res?</li>
+      <li>How do you structure a Koa app with multiple routes and controllers?</li>
+      <li>How do you connect a Koa app to MongoDB?</li>
+      <li>What is the use of koa-bodyparser?</li>
+      <li>How do you handle file uploads in Koa?</li>
+      <li>How do you implement authentication in Koa?</li>
+      <li>What are some common middlewares used in Koa.js?</li>
+      <li>How do you log requests in a Koa application?</li>
+      <li>How do you run a Koa app on a specific port?</li>
+      <li>How do you handle route parameters in Koa?</li>
+      <li>How do you redirect routes in Koa?</li>
+      <li>How do you write unit tests for Koa routes?</li>
+      <li>How is Koa.js suited for building APIs and microservices?</li>
+    
+      <li class="green">Intermediate</li>
+      <li>How does Koa achieve better control over flow compared to Express?</li>
+      <li>What are generator functions in Koa v1 and why were they removed in Koa v2?</li>
+      <li>What is the significance of async/await in Koa middleware?</li>
+      <li>How does Koa handle middleware composition?</li>
+      <li>What is the difference between middleware chaining in Koa and Express?</li>
+      <li>How do you implement centralized error handling in Koa?</li>
+      <li>How can you implement custom middleware in Koa?</li>
+      <li>How do you handle 404 responses in Koa?</li>
+      <li>How do you use Koa with MongoDB and Mongoose?</li>
+      <li>What is the structure of the ctx object in Koa?</li>
+      <li>How do you implement route-level middleware in Koa?</li>
+      <li>How do you handle file uploads using koa-multer or koa-body?</li>
+      <li>How do you manage sessions and cookies in Koa?</li>
+      <li>How do you implement JWT-based authentication in Koa?</li>
+      <li>How do you connect a Koa app to a SQL database?</li>
+      <li>What is the role of `ctx.throw()` and how does it differ from `ctx.status`?</li>
+      <li>How do you implement CORS with custom configuration in Koa?</li>
+      <li>How do you implement rate limiting in a Koa application?</li>
+      <li>What are some performance tuning tips for Koa apps?</li>
+      <li>How can you validate request input in Koa?</li>
+      <li>How do you organize a large Koa project with routes, services, and controllers?</li>
+      <li>How do you implement dependency injection in Koa?</li>
+      <li>How do you test Koa middleware and routes using supertest or similar tools?</li>
+      <li>How do you integrate Swagger or OpenAPI documentation in Koa?</li>
+      <li>How can you implement WebSocket support with Koa?</li>
+      <li>How do you create a RESTful API structure using Koa and koa-router?</li>
+      <li>How do you perform authentication and authorization in Koa?</li>
+      <li>What is the best way to use async/await in deeply nested Koa middleware?</li>
+      <li>How does Koa support streaming large files (e.g., video, CSV) to clients?</li>
+      <li>How can you extend the context (`ctx`) object in a Koa app?</li>
+
+      <li class="green">Advanced</span>
+      <li>How does Koa's context object delegation work under the hood?</li>
+      <li>How can you create a custom context prototype in Koa?</li>
+      <li>How do you implement middleware that supports async retries and backoff?</li>
+      <li>How can you isolate and manage memory leaks in a large Koa application?</li>
+      <li>How do you implement streaming file downloads and uploads in Koa?</li>
+      <li>What are best practices for building scalable Koa microservices?</li>
+      <li>How do you integrate Koa with GraphQL and Apollo Server?</li>
+      <li>How can you use Koa with TypeScript effectively in large applications?</li>
+      <li>How do you ensure security (CSRF, XSS, CSP, etc.) in Koa applications?</li>
+      <li>How do you implement scoped dependency injection across routes in Koa?</li>
+      <li>How does Koa handle backpressure and streaming data?</li>
+      <li>How do you implement multi-tenant architecture using Koa?</li>
+      <li>What’s the best strategy to version APIs in Koa?</li>
+      <li>How do you handle graceful shutdown and connection draining in Koa?</li>
+      <li>How can you use Koa with a task queue (like Bull or RabbitMQ)?</li>
+      <li>How do you enforce request rate limits dynamically (per user/IP) in Koa?</li>
+      <li>How do you use `async_hooks` or `cls-hooked` with Koa for request tracing?</li>
+      <li>How do you implement OpenTelemetry (OTEL) tracing in a Koa app?</li>
+      <li>What are the limitations of Koa middleware stack for complex logic flows?</li>
+      <li>How would you structure a plugin-based Koa application?</li>
+      <li>How can you use Koa with Kubernetes health checks and liveness probes?</li>
+      <li>How do you integrate a centralized logging system (like Winston or Pino) in Koa?</li>
+      <li>How do you build reusable middleware packages for Koa and publish them to NPM?</li>
+      <li>How can you design and enforce schema validation in Koa using libraries like Zod or Joi?</li>
+      <li>How do you debug middleware execution order in large-scale Koa apps?</li>
+      <li>What is the internal lifecycle of a Koa request from middleware to response?</li>
+      <li>How would you implement a zero-downtime deployment strategy with Koa?</li>
+      <li>How do you isolate tenant-specific middleware for multi-tenant SaaS apps in Koa?</li>
+      <li>How do you integrate Koa with serverless platforms like AWS Lambda or Google Cloud Functions?</li>
+      <li>How can you secure Koa apps with OAuth2 or OpenID Connect authentication flows?</li>
+      
+
+
+    </ol>
+  </div>
+</li>
+
+<li data-id="q32" id="fastify_qlist">
+  <span class="faq-question green">Express.js 🆚 Fastify?</span>
+  <div class="answer">
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Express.js</th>
+          <th>Fastify</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Performance</td>
+          <td>Slower due to older architecture</td>
+          <td>Faster and optimized for high performance</td>
+        </tr>
+        <tr>
+          <td>HTTP Version Support</td>
+          <td>Supports HTTP/1.1 only</td>
+          <td>Supports HTTP/1.1 and HTTP/2 out of the box</td>
+        </tr>
+        <tr>
+          <td>Schema-based Validation</td>
+          <td>No built-in support</td>
+          <td>Built-in with JSON Schema</td>
+        </tr>
+        <tr>
+          <td>Plugin Architecture</td>
+          <td>Basic plugin support</td>
+          <td>Highly encapsulated and powerful plugin system</td>
+        </tr>
+        <tr>
+          <td>Logging</td>
+          <td>Manual setup (e.g., with Morgan or Winston)</td>
+          <td>Built-in logging with Pino</td>
+        </tr>
+        <tr>
+          <td>TypeScript Support</td>
+          <td>Community maintained</td>
+          <td>First-class TypeScript support</td>
+        </tr>
+        <tr>
+          <td>Request Lifecycle</td>
+          <td>Simplified and widely understood</td>
+          <td>Highly optimized with low overhead</td>
+        </tr>
+        <tr>
+          <td>Middleware Compatibility</td>
+          <td>Large ecosystem of middleware</td>
+          <td>Limited compatibility, not Express-style middleware</td>
+        </tr>
+        <tr>
+          <td>Learning Curve</td>
+          <td>Simpler and widely adopted</td>
+          <td>Slightly steeper due to new patterns</td>
+        </tr>
+        <tr>
+          <td>Community & Ecosystem</td>
+          <td>Large and mature</td>
+          <td>Growing rapidly with strong support</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>Ideal for quick setups and legacy support</td>
+          <td>Best for performance-sensitive and scalable APIs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</li>
+<li data-id="q32">
+  <span class="faq-question green">Example : 01 : Fastify?</span>
+  <div class="answer">
+<pre>
+  const fastify = require('fastify')({ logger: true });
+  const mongoose = require('mongoose');
+  
+  // Connect to MongoDB
+  mongoose.connect('mongodb://localhost:27017/hoteldb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  
+  // Define Hotel Schema
+  const HotelSchema = new mongoose.Schema({
+    name: String,
+    city: String,
+    address: String,
+    price: Number,
+  });
+  const Hotel = mongoose.model('Hotel', HotelSchema);
+  
+  // Create Hotel
+  fastify.post('/hotels', async (request, reply) => {
+    try {
+      const hotel = new Hotel(request.body);
+      const saved = await hotel.save();
+      reply.code(201).send(saved);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Get All Hotels
+  fastify.get('/hotels', async (request, reply) => {
+    const hotels = await Hotel.find();
+    reply.send(hotels);
+  });
+  
+  // Get Hotel by ID
+  fastify.get('/hotels/:id', async (request, reply) => {
+    try {
+      const hotel = await Hotel.findById(request.params.id);
+      if (!hotel) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send(hotel);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Update Hotel
+  fastify.put('/hotels/:id', async (request, reply) => {
+    try {
+      const updated = await Hotel.findByIdAndUpdate(request.params.id, request.body, {
+        new: true,
+      });
+      if (!updated) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send(updated);
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Delete Hotel
+  fastify.delete('/hotels/:id', async (request, reply) => {
+    try {
+      const deleted = await Hotel.findByIdAndDelete(request.params.id);
+      if (!deleted) {
+        return reply.code(404).send({ error: 'Hotel not found' });
+      }
+      reply.send({ message: 'Hotel deleted successfully' });
+    } catch (err) {
+      reply.code(500).send({ error: err.message });
+    }
+  });
+  
+  // Start Server
+  const start = async () => {
+    try {
+      await fastify.listen({ port: 3000 });
+      console.log('Server running at http://localhost:3000');
+    } catch (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+  };
+  
+  start();
+  
+</pre>
+
+  </div>
+</li>
+
+<li data-id="q32">
+<span class="faq-question green">Example : 02 : Fastify?</span>
+<div class="answer">
+<pre>
+  // server.js
+  const fastify = require('fastify')({ logger: true })
+  
+  // Register a basic route with validation
+  fastify.route({
+    method: 'POST',
+    url: '/user',
+    schema: {
+      body: {
+        type: 'object',
+        required: ['name', 'email'],
+        properties: {
+          name: { type: 'string' },
+          email: { type: 'string', format: 'email' },
+        }
+      },
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            id: { type: 'number' },
+            name: { type: 'string' },
+            email: { type: 'string' }
+          }
+        }
+      }
+    },
+    handler: async (request, reply) => {
+      const { name, email } = request.body
+      return { id: 1, name, email }
+    }
+  })
+  
+  // Global error handler
+  fastify.setErrorHandler(function (error, request, reply) {
+    fastify.log.error(error)
+    reply.status(500).send({ error: 'Something went wrong' })
+  })
+  
+  // Start server
+  const start = async () => {
+    try {
+      await fastify.listen({ port: 3000 })
+      fastify.log.info(`Server running at http://localhost:3000`)
+    } catch (err) {
+      fastify.log.error(err)
+      process.exit(1)
+    }
+  }
+  
+  start()
+  
+</pre>
+</div>
+</li>
+
+<li data-id="q32">
+  <span class="faq-question green">Fastify Question List</span>
+  <div class="answer">
+    <ol>
+      <li class="green">Basic</li>
+      <li>What is Fastify.js?</li>
+      <li>Who created Fastify?</li>
+      <li>What are the main features of Fastify?</li>
+      <li>How is Fastify different from Express.js?</li>
+      <li>How do you install Fastify in a Node.js project?</li>
+      <li>How do you create a simple Fastify server?</li>
+      <li>What is a route in Fastify?</li>
+      <li>How do you define a GET route in Fastify?</li>
+      <li>How do you handle POST requests in Fastify?</li>
+      <li>What is the Fastify request and reply object?</li>
+      <li>How do you send JSON responses in Fastify?</li>
+      <li>How do you parse JSON body in Fastify?</li>
+      <li>What is Fastify’s built-in logging system?</li>
+      <li>How do you enable logging in Fastify?</li>
+      <li>What is Fastify’s plugin system?</li>
+      <li>How do you register a plugin in Fastify?</li>
+      <li>How do you organize routes using plugins?</li>
+      <li>How do you return error responses in Fastify?</li>
+      <li>How do you validate request bodies in Fastify?</li>
+      <li>What is Fastify’s schema-based validation?</li>
+      <li>How do you handle query parameters in Fastify?</li>
+      <li>How do you access path parameters in Fastify?</li>
+      <li>How do you serve static files in Fastify?</li>
+      <li>How do you use middleware in Fastify?</li>
+      <li>How do you handle 404 errors in Fastify?</li>
+      <li>How do you use async/await in Fastify routes?</li>
+      <li>What are decorators in Fastify?</li>
+      <li>How do you handle CORS in Fastify?</li>
+      <li>How do you start a Fastify server on a custom port?</li>
+      <li>How do you gracefully shut down a Fastify server?</li>
+
+      <li class="green">Intermediate</li>
+      <li>How does Fastify achieve high performance compared to other frameworks?</li>
+      <li>What is Fastify's plugin encapsulation model and why is it important?</li>
+      <li>How do you share logic or data across plugins in Fastify?</li>
+      <li>What are decorators in Fastify and how do you use them?</li>
+      <li>How does Fastify handle request and response lifecycle?</li>
+      <li>What is the purpose of `fastify.register()`?</li>
+      <li>How do you use hooks like `onRequest`, `preHandler`, `onSend`, and `onResponse`?</li>
+      <li>How do you define and validate route schemas in Fastify?</li>
+      <li>How do you handle custom error handling in Fastify?</li>
+      <li>How does Fastify support route-level options?</li>
+      <li>What is `fastify.addSchema()` and how is it used?</li>
+      <li>How do you configure different log levels in Fastify?</li>
+      <li>How do you implement authentication in Fastify?</li>
+      <li>How can you add middleware to Fastify?</li>
+      <li>What is the difference between middleware and hooks in Fastify?</li>
+      <li>How do you test Fastify routes using a testing framework like tap or jest?</li>
+      <li>How do you serve static files using `@fastify/static`?</li>
+      <li>How do you generate API docs using `@fastify/swagger`?</li>
+      <li>How do you access headers, query, and body data in Fastify routes?</li>
+      <li>What is the use of `reply.send()` vs `return` in Fastify handlers?</li>
+      <li>How do you handle async database queries inside Fastify handlers?</li>
+      <li>How do you manage environment variables securely in Fastify?</li>
+      <li>How do you handle multipart/form-data file uploads in Fastify?</li>
+      <li>What is the role of `fastify.ready()` in lifecycle management?</li>
+      <li>How do you build modular route files with Fastify plugin registration?</li>
+      <li>How can you implement dependency injection using Fastify plugins?</li>
+      <li>How do you use `setErrorHandler()` and `setNotFoundHandler()`?</li>
+      <li>How can you apply global schema validation rules?</li>
+      <li>How do you log request/response lifecycle events in Fastify?</li>
+      <li>How can you monitor performance or metrics in Fastify?</li>
+
+      <li class="green">Advanced Fastify.js Interview Questions</li>
+      <li>How does Fastify's internal HTTP parser optimize performance?</li>
+      <li>How do you create a highly modular Fastify monorepo architecture?</li>
+      <li>How does Fastify compare to Hapi or Restify in high-load scenarios?</li>
+      <li>How do you implement request tracing and correlation IDs in Fastify?</li>
+      <li>How can you register scoped plugins conditionally in Fastify?</li>
+      <li>How do you create reusable Fastify plugins with options?</li>
+      <li>How does Fastify's encapsulation model prevent side effects in plugins?</li>
+      <li>How do you extend Fastify’s reply and request interfaces in TypeScript?</li>
+      <li>How can you benchmark Fastify routes using built-in tools or autocannon?</li>
+      <li>How do you implement streaming file uploads and downloads in Fastify?</li>
+      <li>How do you use Fastify with Redis for caching or sessions?</li>
+      <li>How do you integrate Fastify with AWS Lambda or other serverless platforms?</li>
+      <li>How do you manage context propagation in Fastify across async flows?</li>
+      <li>What are the caveats of using global decorators in Fastify?</li>
+      <li>How do you build a multi-tenant SaaS application with Fastify plugins?</li>
+      <li>How do you isolate routes and services per tenant using encapsulation?</li>
+      <li>How can you implement GraphQL APIs inside a Fastify server?</li>
+      <li>How do you integrate Fastify with OpenTelemetry for distributed tracing?</li>
+      <li>How do you create custom serializers and deserializers in Fastify?</li>
+      <li>How do you ensure schema performance using `$ref` and shared schemas?</li>
+      <li>How do you implement RBAC or ACL systems in Fastify plugins?</li>
+      <li>How does Fastify handle HTTP/2 push and streaming?</li>
+      <li>How do you implement lifecycle hooks across isolated plugin instances?</li>
+      <li>How can you securely expose internal APIs between encapsulated plugins?</li>
+      <li>How do you gracefully shut down a Fastify server with async cleanup?</li>
+      <li>How do you handle plugin registration order and priority in large systems?</li>
+      <li>What are the trade-offs between using hooks and middleware in Fastify?</li>
+      <li>How do you build dynamic route registration based on configuration files?</li>
+      <li>How do you monitor Fastify server internals and memory usage in real time?</li>
+      <li>How do you implement rate limiting per user/tenant with shared services?</li>
+    </ol>
+  </div>
+</li>
+
+<li data-id="fastyfy-1" id="fastify_qlist">
+  <span class="faq-question">What is Fastify.js?</span>
+  <div class="answer">
+    Fastify.js is a fast and low-overhead web framework for Node.js, designed to build efficient and scalable server-side applications. It focuses on performance, developer experience, and extensibility.
+  </div>
+</li>
+
+<li data-id="fastyfy-2" class="zyellow">
+  <span class="faq-question">Who created Fastify?</span>
+  <div class="answer">
+    Fastify was created by Matteo Collina and Tomas Della Vedova. Both are well-known contributors to the Node.js ecosystem and focus on high-performance server-side solutions.
+  </div>
+</li>
+
+<li data-id="fastyfy-3" class="zyellow">
+  <span class="faq-question">What are the main features of Fastify?</span>
+  <div class="answer">
+    The main features of Fastify include:<br>
+    - High performance with low overhead<br>
+    - Schema-based request and response validation using JSON Schema<br>
+    - Built-in support for logging with pino<br>
+    - Full support for async/await<br>
+    - Extensible through hooks and plugins<br>
+    - HTTP2 support<br>
+    - TypeScript support out-of-the-box<br>
+    - Developer-friendly error handling and debugging tools
+  </div>
+</li>
+<li data-id="fastyfy-4" class="zyellow">
+  <span class="faq-question">How do you install Fastify in a Node.js project?</span>
+  <div class="answer">
+    You can install Fastify using npm or yarn:<br>
+    - Using npm: npm install fastify<br>
+    - Using yarn: yarn add fastify
+  </div>
+</li>
+
+<li data-id="fastyfy-5" class="zyellow">
+  <span class="faq-question">How do you create a simple Fastify server?</span>
+  <div class="answer">
+    To create a simple Fastify server, you need to import Fastify and define a listen method:<br>
+    const fastify = require('fastify')()<br>
+    fastify.get('/', async (request, reply) => 'Hello, world!')<br>
+    fastify.listen({ port: 3000 })
+  </div>
+</li>
+
+<li data-id="fastyfy-6" class="zyellow">
+  <span class="faq-question">What is a route in Fastify?</span>
+  <div class="answer">
+    A route in Fastify is an endpoint that listens to a specific HTTP method and URL path. It handles incoming requests and sends back responses based on the defined logic.
+  </div>
+</li>
+
+<li data-id="fastyfy-7" class="zyellow">
+  <span class="faq-question">How do you define a GET route in Fastify?</span>
+  <div class="answer">
+    You define a GET route in Fastify using the get method:<br>
+    fastify.get('/hello', async (request, reply) => {<br>
+    &nbsp;&nbsp;return 'Hello from Fastify!'<br>
+    })
+  </div>
+</li>
+
+<li data-id="fastyfy-8" class="zyellow">
+  <span class="faq-question">How do you handle POST requests in Fastify?</span>
+  <div class="answer">
+    You handle POST requests in Fastify using the post method and access the request body:<br>
+    fastify.post('/data', async (request, reply) => {<br>
+    &nbsp;&nbsp;const data = request.body<br>
+    &nbsp;&nbsp;return { received: data }<br>
+    })
+  </div>
+</li>
+<li data-id="fastyfy-9" class="zyellow">
+  <span class="faq-question">What is the Fastify request and reply object?</span>
+  <div class="answer">
+    In Fastify, the request object contains all details about the incoming HTTP request such as headers, query parameters, body, and URL params. The reply object is used to send responses back to the client, including setting status codes, headers, and the response body.
+  </div>
+</li>
+
+<li data-id="fastyfy-10" class="zyellow">
+  <span class="faq-question">How do you send JSON responses in Fastify?</span>
+  <div class="answer">
+    Fastify automatically serializes objects to JSON. You can return an object from the handler or use reply.send():<br>
+    return { message: "Success" }<br>
+    or<br>
+    reply.send({ message: "Success" })
+  </div>
+</li>
+
+<li data-id="fastyfy-11" class="zyellow">
+  <span class="faq-question">How do you parse JSON body in Fastify?</span>
+  <div class="answer">
+    Fastify automatically parses JSON request bodies if the content type is application/json. The parsed data is available in request.body without needing any additional middleware.
+  </div>
+</li>
+
+<li data-id="fastyfy-12" class="zyellow">
+  <span class="faq-question">What is Fastify’s built-in logging system?</span>
+  <div class="answer">
+    Fastify uses pino, a high-performance and low-overhead logging library, as its built-in logger. It provides structured logs, supports log levels, and integrates well with Fastify’s lifecycle hooks for debugging and monitoring.
+  </div>
+</li>
+<li data-id="fastyfy-13" class="zyellow">
+  <span class="faq-question">How do you enable logging in Fastify?</span>
+  <div class="answer">
+    Logging is enabled by setting the logger option to true when creating the Fastify instance:<br>
+    const fastify = require('fastify')({ logger: true })
+  </div>
+</li>
+
+<li data-id="fastyfy-14" class="zyellow">
+  <span class="faq-question">What is Fastify’s plugin system?</span>
+  <div class="answer">
+    Fastify’s plugin system allows you to encapsulate routes, hooks, decorators, and other logic into reusable and isolated components. This promotes modular development, code reuse, and better separation of concerns.
+  </div>
+</li>
+
+<li data-id="fastyfy-15" class="zyellow">
+  <span class="faq-question">How do you register a plugin in Fastify?</span>
+  <div class="answer">
+    You can register a plugin using the register method:<br>
+    fastify.register(require('./my-plugin'))<br>
+    or with options:<br>
+    fastify.register(require('./my-plugin'), { prefix: '/api' })
+  </div>
+</li>
+
+<li data-id="fastyfy-16" class="zyellow">
+  <span class="faq-question">How do you organize routes using plugins?</span>
+  <div class="answer">
+    You can organize routes by grouping them in separate files or modules and registering them as plugins using fastify.register(). This allows scoping routes under prefixes and keeping your codebase clean and maintainable.
+  </div>
+</li>
+<li data-id="fastyfy-17" class="zyellow">
+  <span class="faq-question">How do you return error responses in Fastify?</span>
+  <div class="answer">
+    You can return error responses using reply.status().send(), or by throwing a built-in error:<br>
+    reply.status(400).send({ error: "Bad Request" })<br>
+    or<br>
+    throw fastify.httpErrors.badRequest("Invalid data")
+  </div>
+</li>
+
+<li data-id="fastyfy-18" class="zyellow">
+  <span class="faq-question">How do you validate request bodies in Fastify?</span>
+  <div class="answer">
+    Fastify supports JSON Schema validation for request bodies. You can define a schema in the route configuration under the body property:<br>
+    schema: { body: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } }
+  </div>
+</li>
+
+<li data-id="fastyfy-19" class="zyellow">
+  <span class="faq-question">What is Fastify’s schema-based validation?</span>
+  <div class="answer">
+    Schema-based validation in Fastify uses JSON Schema to define and enforce the structure of requests and responses. It automatically validates body, querystring, headers, and params before the handler is called.
+  </div>
+</li>
+
+<li data-id="fastyfy-20" class="zyellow">
+  <span class="faq-question">How do you handle query parameters in Fastify?</span>
+  <div class="answer">
+    Query parameters are accessed using request.query. You can also validate them using a querystring schema:<br>
+    schema: { querystring: { type: 'object', properties: { page: { type: 'integer' } } } }<br>
+    Then access with: const { page } = request.query
+  </div>
+</li>
+<li data-id="fastyfy-21" class="zyellow">
+  <span class="faq-question">How do you access path parameters in Fastify?</span>
+  <div class="answer">
+    You can access path parameters using request.params. Define them in the route path using colon syntax:<br>
+    fastify.get('/user/:id', async (request, reply) => {<br>
+    &nbsp;&nbsp;const { id } = request.params<br>
+    &nbsp;&nbsp;return { userId: id }<br>
+    })
+  </div>
+</li>
+
+<li data-id="fastyfy-22" class="zyellow">
+  <span class="faq-question">How do you serve static files in Fastify?</span>
+  <div class="answer">
+    You can serve static files by registering the fastify-static plugin:<br>
+    const fastifyStatic = require('@fastify/static')<br>
+    const path = require('path')<br>
+    fastify.register(fastifyStatic, {<br>
+    &nbsp;&nbsp;root: path.join(__dirname, 'public'),<br>
+    &nbsp;&nbsp;prefix: '/static/'<br>
+    })
+  </div>
+</li>
+
+<li data-id="fastyfy-23" class="zyellow">
+  <span class="faq-question">How do you use middleware in Fastify?</span>
+  <div class="answer">
+    You can use middleware by registering the @fastify/middie plugin. After registering, you can use express-style middleware with fastify.use():<br>
+    const middie = require('@fastify/middie')<br>
+    await fastify.register(middie)<br>
+    fastify.use(require('cors')())
+  </div>
+</li>
+
+<li data-id="fastyfy-24" class="zyellow">
+  <span class="faq-question">How do you handle 404 errors in Fastify?</span>
+  <div class="answer">
+    You can handle 404 errors by using the setNotFoundHandler() method:<br>
+    fastify.setNotFoundHandler((request, reply) => {<br>
+    &nbsp;&nbsp;reply.status(404).send({ error: 'Route not found' })<br>
+    })
+  </div>
+</li>
+<li data-id="fastyfy-25" class="zyellow">
+  <span class="faq-question">How do you use async/await in Fastify routes?</span>
+  <div class="answer">
+    Fastify fully supports async/await. You can define route handlers as async functions and use await inside them:<br>
+    fastify.get('/data', async (request, reply) => {<br>
+    &nbsp;&nbsp;const result = await fetchData()<br>
+    &nbsp;&nbsp;return result<br>
+    })
+  </div>
+</li>
+
+<li data-id="fastyfy-26" class="zyellow">
+  <span class="faq-question">What are decorators in Fastify?</span>
+  <div class="answer">
+    Decorators in Fastify are a way to add custom properties or methods to the Fastify instance, request, or reply objects. They enable reusable logic and extensions throughout your app.<br>
+    Example: fastify.decorate('utility', () => 'Hello from decorator')
+  </div>
+</li>
+
+<li data-id="fastyfy-27" class="zyellow">
+  <span class="faq-question">How do you handle CORS in Fastify?</span>
+  <div class="answer">
+    To handle CORS in Fastify, you can register the @fastify/cors plugin:<br>
+    const cors = require('@fastify/cors')<br>
+    fastify.register(cors, { origin: true })<br>
+    You can customize allowed origins, methods, and headers using plugin options.
+  </div>
+</li>
+
+<li data-id="fastyfy-28" class="zyellow">
+  <span class="faq-question">How do you start a Fastify server on a custom port?</span>
+  <div class="answer">
+    To start a Fastify server on a custom port, pass the port number to the listen method:<br>
+    fastify.listen({ port: 8080 }, (err, address) => {<br>
+    &nbsp;&nbsp;if (err) throw err<br>
+    &nbsp;&nbsp;console.log(`Server running at ${address}`)<br>
+    })
+  </div>
+</li>
+
+<li data-id="fastyfy-29" class="zyellow">
+  <span class="faq-question">How do you gracefully shut down a Fastify server?</span>
+  <div class="answer">
+    To gracefully shut down a Fastify server, use the close method in response to process signals:<br>
+    process.on('SIGINT', () => fastify.close().then(() => process.exit(0)))<br>
+    This ensures all plugins, routes, and connections are properly cleaned up before exit.
+  </div>
+</li>
+
+<li>Intermediate
+</li>                                    
+<li data-id="fastyfy-30" class="zyellow">
+<span class="faq-question">How does Fastify achieve high performance compared to other frameworks?</span>
+<div class="answer">
+Fastify achieves high performance through several design choices:<br>
+- It uses a schema-based validation system to compile faster runtime code.<br>
+- Internal mechanisms are optimized for low overhead and fast serialization with tools like fast-json-stringify.<br>
+- It minimizes abstraction and uses highly optimized HTTP handling.<br>
+- It avoids unnecessary middleware chains by using hooks and encapsulation instead.
+</div>
+</li>
+
+<li data-id="fastyfy-31" class="zyellow">
+<span class="faq-question">What is Fastify's plugin encapsulation model and why is it important?</span>
+<div class="answer">
+Fastify’s plugin encapsulation model isolates the scope of each plugin, meaning routes, decorators, and hooks defined inside a plugin are not visible to other parts of the application unless explicitly shared.<br>
+This promotes modularity, avoids naming collisions, and improves maintainability by making each plugin self-contained.
+</div>
+</li>
+
+<li data-id="fastyfy-32" class="zyellow">
+<span class="faq-question">How do you share logic or data across plugins in Fastify?</span>
+<div class="answer">
+To share logic or data across plugins in Fastify, you can use decorators. Decorators allow you to attach properties or methods to the Fastify instance, request, or reply:<br>
+Example: fastify.decorate('utils', { sayHello: () => 'Hi!' })<br>
+This makes the utility accessible in all child plugins and routes where it’s registered.
+</div>
+</li>
+<li data-id="fastyfy-33" class="zyellow">
+<span class="faq-question">What are decorators in Fastify and how do you use them?</span>
+<div class="answer">
+Decorators in Fastify allow you to extend the Fastify instance, request, or reply objects with custom methods or properties. This helps in sharing reusable logic across plugins and routes.<br><br>
+Example:<br>
+fastify.decorate('utility', () => 'Hello from utility')<br>
+Inside a route:<br>
+const message = fastify.utility()
+</div>
+</li>
+
+<li data-id="fastyfy-34" class="zyellow">
+<span class="faq-question">How does Fastify handle request and response lifecycle?</span>
+<div class="answer">
+Fastify manages the request and response lifecycle through a series of hooks that are triggered at different stages. Key hooks include:<br>
+- onRequest: runs before request is processed<br>
+- preParsing: modifies raw request before parsing<br>
+- preValidation: runs before schema validation<br>
+- preHandler: runs before handler execution<br>
+- onSend: allows modification of the response<br>
+- onResponse: runs after response is sent<br>
+These hooks enable developers to control and extend the behavior of requests and responses.
+</div>
+</li>
+
+<li data-id="fastyfy-35" class="zyellow">
+<span class="faq-question">What is the purpose of fastify.register()?</span>
+<div class="answer">
+The fastify.register() method is used to add plugins, routes, and functionality to the Fastify instance. It allows code encapsulation, route grouping, and scope isolation. This promotes modular development and lets you apply prefixes, schemas, or configurations to specific sets of routes.<br><br>
+Example:<br>
+fastify.register(require('./userRoutes'), { prefix: '/users' })
+</div>
+</li>
+<li data-id="fastyfy-36" class="zyellow">
+<span class="faq-question">How do you use hooks like onRequest, preHandler, onSend, and onResponse?</span>
+<div class="answer">
+Fastify hooks allow you to run custom logic at different stages of the request/response lifecycle:<br><br>
+- onRequest: runs at the very beginning of the request<br>
+- preHandler: runs before the route handler<br>
+- onSend: runs before the response is sent<br>
+- onResponse: runs after the response is sent<br><br>
+Example:<br>
+fastify.addHook('onRequest', async (request, reply) => {<br>
+&nbsp;&nbsp;console.log('Incoming request')<br>
+})<br>
+fastify.addHook('onSend', async (request, reply, payload) => {<br>
+&nbsp;&nbsp;console.log('Sending response')<br>
+&nbsp;&nbsp;return payload<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-37" class="zyellow">
+<span class="faq-question">How do you define and validate route schemas in Fastify?</span>
+<div class="answer">
+Fastify supports JSON Schema for validating requests and responses. You define schemas in the route options:<br><br>
+fastify.post('/user', {<br>
+&nbsp;&nbsp;schema: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;body: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: 'object',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;properties: { name: { type: 'string' } },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required: ['name']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}, async (request, reply) => {<br>
+&nbsp;&nbsp;return { hello: request.body.name }<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-38" class="zyellow">
+<span class="faq-question">How do you handle custom error handling in Fastify?</span>
+<div class="answer">
+You can handle custom errors in Fastify by using the setErrorHandler method. It captures all uncaught errors and lets you customize the response:<br><br>
+fastify.setErrorHandler((error, request, reply) => {<br>
+&nbsp;&nbsp;fastify.log.error(error)<br>
+&nbsp;&nbsp;reply.status(error.statusCode || 500).send({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;error: 'Custom Error',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message: error.message<br>
+&nbsp;&nbsp;})<br>
+})<br><br>
+You can also throw specific Fastify HTTP errors using fastify.httpErrors.
+</div>
+</li>
+<li data-id="fastyfy-39" class="zyellow">
+<span class="faq-question">How does Fastify support route-level options?</span>
+<div class="answer">
+Fastify allows you to define route-level options like validation schemas, preHandlers, config, and more. These options are passed as the second argument to the route method.<br><br>
+Example:<br>
+fastify.get('/items', {<br>
+&nbsp;&nbsp;schema: { querystring: { type: 'object', properties: { limit: { type: 'integer' } } } },<br>
+&nbsp;&nbsp;preHandler: async (request, reply) => { console.log('Before handler') },<br>
+&nbsp;&nbsp;config: { auth: true }<br>
+}, async (request, reply) => {<br>
+&nbsp;&nbsp;return { message: 'Items route' }<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-40" class="zyellow">
+<span class="faq-question">What is fastify.addSchema() and how is it used?</span>
+<div class="answer">
+fastify.addSchema() is used to define reusable JSON Schemas that can be referenced by multiple routes. It helps keep your code DRY when you have shared schema definitions.<br><br>
+Example:<br>
+fastify.addSchema({<br>
+&nbsp;&nbsp;$id: 'user',<br>
+&nbsp;&nbsp;type: 'object',<br>
+&nbsp;&nbsp;properties: { name: { type: 'string' }, age: { type: 'integer' } },<br>
+&nbsp;&nbsp;required: ['name']<br>
+})<br>
+Then reference it in a route:<br>
+schema: { body: { $ref: 'user#' } }
+</div>
+</li>
+
+<li data-id="fastyfy-41" class="zyellow">
+<span class="faq-question">How do you configure different log levels in Fastify?</span>
+<div class="answer">
+Fastify uses the pino logger internally and supports log level configuration through the logger option. You can set levels like info, warn, error, debug, etc.<br><br>
+Example:<br>
+const fastify = require('fastify')({<br>
+&nbsp;&nbsp;logger: { level: 'debug' }<br>
+})<br>
+You can also define custom serializers, formatters, and enable pretty print for development.
+</div>
+</li>
+<li data-id="fastyfy-42" class="zyellow">
+<span class="faq-question">How do you implement authentication in Fastify?</span>
+<div class="answer">
+Authentication in Fastify can be implemented using custom preHandler functions, hooks, or third-party plugins like fastify-jwt, fastify-oauth2, or fastify-passport.<br><br>
+Example using fastify-jwt:<br>
+1. Register the plugin: fastify.register(require('@fastify/jwt'), { secret: 'supersecret' })<br>
+2. Add auth logic in preHandler:<br>
+fastify.addHook('onRequest', async (request, reply) => {<br>
+&nbsp;&nbsp;try { await request.jwtVerify() } catch (err) { reply.send(err) }<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-43" class="zyellow">
+<span class="faq-question">How can you add middleware to Fastify?</span>
+<div class="answer">
+Fastify doesn’t use middleware by default like Express, but you can enable support using the @fastify/middie plugin.<br><br>
+Example:<br>
+const middie = require('@fastify/middie')<br>
+await fastify.register(middie)<br>
+fastify.use(require('cors')())<br>
+This enables Express-style middleware compatibility, useful for existing middleware libraries.
+</div>
+</li>
+
+<li data-id="fastyfy-44" class="zyellow">
+<span class="faq-question">What is the difference between middleware and hooks in Fastify?</span>
+<div class="answer">
+Middleware and hooks are both used to execute logic during the request lifecycle, but they work differently:<br><br>
+- Middleware (via middie) runs globally and works similarly to Express, but lacks route-specific scope or lifecycle context.<br>
+- Hooks are built-in Fastify mechanisms that run at specific stages like onRequest, preValidation, etc., and can be scoped per route or plugin.<br><br>
+Hooks offer better performance and encapsulation, while middleware provides compatibility with older Node.js libraries.
+</div>
+</li>
+<li data-id="fastyfy-45" class="zyellow">
+<span class="faq-question">How do you test Fastify routes using a testing framework like tap or jest?</span>
+<div class="answer">
+To test Fastify routes, you can inject HTTP requests directly into the server instance using the built-in inject method, which works well with frameworks like tap or jest.<br><br>
+Example with Jest:<br>
+const fastify = require('../app')<br>
+test('GET /health', async () => {<br>
+&nbsp;&nbsp;const res = await fastify.inject({ method: 'GET', url: '/health' })<br>
+&nbsp;&nbsp;expect(res.statusCode).toBe(200)<br>
+&nbsp;&nbsp;expect(res.json()).toEqual({ status: 'ok' })<br>
+})<br><br>
+This allows unit testing without starting the actual HTTP server.
+</div>
+</li>
+
+<li data-id="fastyfy-46" class="zyellow">
+<span class="faq-question">How do you serve static files using @fastify/static?</span>
+<div class="answer">
+You can serve static files by registering the @fastify/static plugin and specifying a directory to serve from.<br><br>
+Example:<br>
+const fastifyStatic = require('@fastify/static')<br>
+const path = require('path')<br>
+fastify.register(fastifyStatic, {<br>
+&nbsp;&nbsp;root: path.join(__dirname, 'public'),<br>
+&nbsp;&nbsp;prefix: '/static/'<br>
+})<br><br>
+This will serve files like /public/image.jpg at /static/image.jpg
+</div>
+</li>
+
+<li data-id="fastyfy-47" class="zyellow">
+<span class="faq-question">How do you generate API docs using @fastify/swagger?</span>
+<div class="answer">
+Fastify can generate Swagger UI documentation using the @fastify/swagger and @fastify/swagger-ui plugins.<br><br>
+Example:<br>
+fastify.register(require('@fastify/swagger'), {<br>
+&nbsp;&nbsp;swagger: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;info: { title: 'API Docs', version: '1.0.0' },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;host: 'localhost:3000',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;basePath: '/'<br>
+&nbsp;&nbsp;}<br>
+})<br>
+fastify.register(require('@fastify/swagger-ui'), { routePrefix: '/docs' })<br><br>
+Visit /docs in the browser to see the interactive API documentation.
+</div>
+</li>
+<li data-id="fastyfy-48" class="zyellow">
+<span class="faq-question">How do you access headers, query, and body data in Fastify routes?</span>
+<div class="answer">
+In Fastify, request data is easily accessible using the request object:<br><br>
+- Headers: request.headers<br>
+- Query parameters: request.query<br>
+- Route parameters: request.params<br>
+- Body: request.body<br><br>
+Example:<br>
+fastify.post('/submit', async (request, reply) => {<br>
+&nbsp;&nbsp;const name = request.body.name<br>
+&nbsp;&nbsp;const token = request.headers['authorization']<br>
+&nbsp;&nbsp;const page = request.query.page<br>
+&nbsp;&nbsp;return { name, token, page }<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-49" class="zyellow">
+<span class="faq-question">What is the use of reply.send() vs return in Fastify handlers?</span>
+<div class="answer">
+In Fastify, both reply.send() and return can be used to send a response. However:<br><br>
+- Using return is the preferred and simpler way in async handlers.<br>
+- reply.send() gives you more control, especially when using lifecycle hooks or chaining additional response settings like status codes.<br><br>
+Example:<br>
+return { success: true }<br>
+or<br>
+reply.code(200).send({ success: true })
+</div>
+</li>
+
+<li data-id="fastyfy-50" class="zyellow">
+<span class="faq-question">How do you handle async database queries inside Fastify handlers?</span>
+<div class="answer">
+Fastify supports async/await syntax, making it easy to handle asynchronous database queries within route handlers.<br><br>
+Example:<br>
+fastify.get('/users', async (request, reply) => {<br>
+&nbsp;&nbsp;const users = await db.findAllUsers()<br>
+&nbsp;&nbsp;return users<br>
+})<br><br>
+You can also catch and handle errors using try-catch blocks:<br>
+try {<br>
+&nbsp;&nbsp;const user = await db.findUserById(id)<br>
+&nbsp;&nbsp;return user<br>
+} catch (err) {<br>
+&nbsp;&nbsp;reply.code(500).send({ error: 'Database error' })<br>
+}
+</div>
+</li>
+<li data-id="fastyfy-51" class="zyellow">
+<span class="faq-question">How do you manage environment variables securely in Fastify?</span>
+<div class="answer">
+Fastify recommends using the <strong>@fastify/env</strong> plugin to load and validate environment variables from a .env file. It ensures all required variables are defined and typed.<br><br>
+Example:<br>
+const envSchema = {<br>
+&nbsp;&nbsp;type: 'object',<br>
+&nbsp;&nbsp;properties: { PORT: { type: 'string', default: '3000' } },<br>
+&nbsp;&nbsp;required: ['PORT']<br>
+}<br>
+fastify.register(require('@fastify/env'), { schema: envSchema })<br><br>
+You can also use dotenv directly for simple loading: require('dotenv').config()
+</div>
+</li>
+
+<li data-id="fastyfy-52" class="zyellow">
+<span class="faq-question">How do you handle multipart/form-data file uploads in Fastify?</span>
+<div class="answer">
+File uploads are supported via the <strong>@fastify/multipart</strong> plugin. It parses multipart/form-data and provides access to uploaded files.<br><br>
+Example:<br>
+fastify.register(require('@fastify/multipart'))<br>
+fastify.post('/upload', async (request, reply) => {<br>
+&nbsp;&nbsp;const data = await request.file()<br>
+&nbsp;&nbsp;const buffer = await data.toBuffer()<br>
+&nbsp;&nbsp;return { filename: data.filename, size: buffer.length }<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-53" class="zyellow">
+<span class="faq-question">What is the role of fastify.ready() in lifecycle management?</span>
+<div class="answer">
+The <strong>fastify.ready()</strong> method is used to wait until the Fastify instance and all its registered plugins are fully loaded and initialized. It ensures that all hooks, routes, and decorators are available before you start making requests or running logic.<br><br>
+It’s especially useful in testing or complex bootstrapping scenarios.<br>
+Example:<br>
+await fastify.ready()<br>
+console.log('Server is fully initialized')
+</div>
+</li>
+<li data-id="fastyfy-54" class="zyellow">
+<span class="faq-question">How do you build modular route files with Fastify plugin registration?</span>
+<div class="answer">
+To organize your Fastify app into modular route files, you define routes in separate files and export them as plugins. Then register each file using <strong>fastify.register()</strong> in your main server file.<br><br>
+Example (routes/user.js):<br>
+module.exports = async function (fastify, opts) {<br>
+&nbsp;&nbsp;fastify.get('/profile', async (request, reply) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return { name: 'User' }<br>
+&nbsp;&nbsp;})<br>
+}<br><br>
+In app.js:<br>
+fastify.register(require('./routes/user'), { prefix: '/user' })
+</div>
+</li>
+
+<li data-id="fastyfy-55" class="zyellow">
+<span class="faq-question">How can you implement dependency injection using Fastify plugins?</span>
+<div class="answer">
+Fastify supports dependency injection through plugin encapsulation and decorators. You can register services (like DB connections) in a plugin and expose them using <strong>decorate()</strong>. These become available in all plugins registered afterward.<br><br>
+Example:<br>
+fastify.register(async function (instance) {<br>
+&nbsp;&nbsp;const db = createDatabaseConnection()<br>
+&nbsp;&nbsp;instance.decorate('db', db)<br>
+})<br><br>
+Then use in another plugin:<br>
+fastify.get('/data', async (request, reply) => {<br>
+&nbsp;&nbsp;const users = await fastify.db.getUsers()<br>
+&nbsp;&nbsp;return users<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-56" class="zyellow">
+<span class="faq-question">How do you use setErrorHandler() and setNotFoundHandler()?</span>
+<div class="answer">
+Fastify provides <strong>setErrorHandler()</strong> and <strong>setNotFoundHandler()</strong> for global error and 404 response handling.<br><br>
+- <strong>setErrorHandler()</strong>: handles all uncaught errors or thrown exceptions:<br>
+fastify.setErrorHandler((error, request, reply) => {<br>
+&nbsp;&nbsp;fastify.log.error(error)<br>
+&nbsp;&nbsp;reply.code(500).send({ error: 'Something went wrong' })<br>
+})<br><br>
+- <strong>setNotFoundHandler()</strong>: handles unmatched routes:<br>
+fastify.setNotFoundHandler((request, reply) => {<br>
+&nbsp;&nbsp;reply.code(404).send({ error: 'Route not found' })<br>
+})
+</div>
+</li>
+<li data-id="fastyfy-57" class="zyellow">
+<span class="faq-question">How can you apply global schema validation rules?</span>
+<div class="answer">
+To apply global schema validation rules in Fastify, you can define shared schemas using <strong>fastify.addSchema()</strong> and reuse them in multiple routes. Additionally, you can define a global JSON schema compiler or serializer if you want full control.<br><br>
+Example:<br>
+fastify.addSchema({<br>
+&nbsp;&nbsp;$id: 'commonParams',<br>
+&nbsp;&nbsp;type: 'object',<br>
+&nbsp;&nbsp;properties: { page: { type: 'integer' }, limit: { type: 'integer' } },<br>
+&nbsp;&nbsp;required: ['page']<br>
+})<br><br>
+Then use it in a route: schema: { querystring: { $ref: 'commonParams#' } }
+</div>
+</li>
+
+<li data-id="fastyfy-58" class="zyellow">
+<span class="faq-question">How do you log request/response lifecycle events in Fastify?</span>
+<div class="answer">
+You can log lifecycle events using Fastify's hooks like <strong>onRequest</strong>, <strong>onSend</strong>, and <strong>onResponse</strong>. If logging is enabled, you can use <strong>request.log</strong> and <strong>reply.log</strong> to output structured logs.<br><br>
+Example:<br>
+fastify.addHook('onRequest', async (request) => {<br>
+&nbsp;&nbsp;request.log.info({ url: request.raw.url }, 'Incoming request')<br>
+})<br>
+fastify.addHook('onResponse', async (request, reply) => {<br>
+&nbsp;&nbsp;reply.log.info({ status: reply.statusCode }, 'Response sent')<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-59" class="zyellow">
+<span class="faq-question">How can you monitor performance or metrics in Fastify?</span>
+<div class="answer">
+Fastify supports performance monitoring and metrics through plugins like <strong>@fastify/metrics</strong>, <strong>prom-client</strong>, or integration with tools like Datadog and New Relic.<br><br>
+Example using @fastify/metrics:<br>
+fastify.register(require('@fastify/metrics'), { endpoint: '/metrics' })<br><br>
+This exposes a Prometheus-compatible metrics endpoint that reports request duration, status codes, and more. You can also use custom metrics and integrate with pino logs for full observability.
+</div>
+</li>
+<li>Advanced Fastify.js Interview Questions</li>    
+<li data-id="fastyfy-60" class="zyellow">
+<span class="faq-question">How does Fastify's internal HTTP parser optimize performance?</span>
+<div class="answer">
+Fastify does not use a custom HTTP parser but instead relies on Node.js’s native HTTP parser, which is written in C++ for performance. Fastify optimizes around it by minimizing overhead, using fast-json-stringify for response serialization, and leveraging schema compilation for validation. These techniques reduce CPU and memory usage, making Fastify extremely efficient under high load.
+</div>
+</li>
+
+<li data-id="fastyfy-61" class="zyellow">
+<span class="faq-question">How do you create a highly modular Fastify monorepo architecture?</span>
+<div class="answer">
+A modular Fastify monorepo architecture involves separating features into independent plugins, utilities, and services. You can use tools like pnpm workspaces, Turborepo, or Nx to manage shared code, versioning, and dependencies.<br><br>
+Structure Example:<br>
+- /apps/api-server → main Fastify instance<br>
+- /packages/routes-user → user-related routes<br>
+- /packages/services-db → database logic<br>
+- /packages/utils-logger → shared logging<br><br>
+Register each module using fastify.register() and share common decorators or utilities via plugin encapsulation.
+</div>
+</li>
+
+<li data-id="fastyfy-62" class="zyellow">
+<span class="faq-question">How does Fastify compare to Hapi or Restify in high-load scenarios?</span>
+<div class="answer">
+Fastify is typically faster and more memory-efficient than Hapi and Restify in high-load scenarios. This is due to:<br>
+- Schema-based optimization and serialization<br>
+- Minimal middleware overhead<br>
+- Asynchronous hooks and plugin encapsulation<br>
+- Native support for HTTP2 and logging with pino<br><br>
+Benchmarks often show Fastify outperforming Hapi and Restify, especially in latency and throughput, making it ideal for performance-critical applications.
+</div>
+</li>
+<li data-id="fastyfy-63" class="zyellow">
+<span class="faq-question">How do you implement request tracing and correlation IDs in Fastify?</span>
+<div class="answer">
+You can implement request tracing by generating a unique correlation ID for each incoming request using a hook like <strong>onRequest</strong>. Attach it to <strong>request.headers</strong> or decorate the request, and include it in logs or response headers.<br><br>
+Example:<br>
+fastify.addHook('onRequest', async (request, reply) => {<br>
+&nbsp;&nbsp;const id = request.headers['x-correlation-id'] || crypto.randomUUID()<br>
+&nbsp;&nbsp;request.headers['x-correlation-id'] = id<br>
+&nbsp;&nbsp;reply.header('x-correlation-id', id)<br>
+&nbsp;&nbsp;request.log = request.log.child({ correlationId: id })<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-64" class="zyellow">
+<span class="faq-question">How can you register scoped plugins conditionally in Fastify?</span>
+<div class="answer">
+You can register plugins conditionally using an <strong>if</strong> statement or based on runtime configuration. This is useful for loading environment-specific features or modules.<br><br>
+Example:<br>
+if (process.env.ENABLE_METRICS === 'true') {<br>
+&nbsp;&nbsp;fastify.register(require('@fastify/metrics'))<br>
+}<br><br>
+You can also use Fastify’s encapsulation to scope these conditional plugins inside specific modules or route prefixes.
+</div>
+</li>
+
+<li data-id="fastyfy-65" class="zyellow">
+<span class="faq-question">How do you create reusable Fastify plugins with options?</span>
+<div class="answer">
+Fastify plugins can accept configuration options by defining a function that uses the <strong>options</strong> argument. These options allow customization and reuse across different parts of the app.<br><br>
+Example:<br>
+module.exports = async function (fastify, opts) {<br>
+&nbsp;&nbsp;fastify.get('/greet', async () => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return { msg: `Hello, ${opts.name}` }<br>
+&nbsp;&nbsp;})<br>
+}<br><br>
+Register with:<br>
+fastify.register(require('./greet-plugin'), { name: 'Dev1' })
+</div>
+</li>
+<li data-id="fastyfy-66" class="zyellow">
+<span class="faq-question">How does Fastify's encapsulation model prevent side effects in plugins?</span>
+<div class="answer">
+Fastify’s encapsulation model ensures that plugins, routes, decorators, and hooks registered within a plugin scope are only visible to that scope and its children. This prevents side effects by isolating behavior and avoiding global mutations.<br><br>
+For example, a decorator added in one plugin won't leak into another unless explicitly shared through <strong>fastify.decorateRequest</strong> or <strong>fastify.decorateReply</strong>. This makes applications more modular, testable, and easier to debug.
+</div>
+</li>
+
+<li data-id="fastyfy-67" class="zyellow">
+<span class="faq-question">How do you extend Fastify’s reply and request interfaces in TypeScript?</span>
+<div class="answer">
+To extend Fastify’s <strong>Request</strong> and <strong>Reply</strong> interfaces in TypeScript, you can use module augmentation by declaring additional properties in a declaration file.<br><br>
+Example (in types.d.ts):<br>
+declare module 'fastify' {<br>
+&nbsp;&nbsp;interface FastifyRequest { user?: { id: string } }<br>
+&nbsp;&nbsp;interface FastifyReply { requestTime?: number }<br>
+}<br><br>
+This ensures proper type checking when accessing custom properties added via hooks or decorators.
+</div>
+</li>
+
+<li data-id="fastyfy-68" class="zyellow">
+<span class="faq-question">How can you benchmark Fastify routes using built-in tools or autocannon?</span>
+<div class="answer">
+Fastify provides a built-in tool called <strong>autocannon</strong> for benchmarking routes and evaluating performance under load.<br><br>
+Example:<br>
+Install globally: <br>
+npm i -g autocannon<br><br>
+Run benchmark:<br>
+autocannon http://localhost:3000/users<br><br>
+Fastify also provides the <strong>autocannon</strong> API via <strong>fastify.autocannon</strong> in some setups, allowing programmatic benchmarking for CI or custom scenarios.
+</div>
+</li>
+<li data-id="fastyfy-69" class="zyellow">
+<span class="faq-question">How do you implement streaming file uploads and downloads in Fastify?</span>
+<div class="answer">
+For streaming file uploads, use the <strong>@fastify/multipart</strong> plugin, which supports handling file streams directly:<br><br>
+fastify.register(require('@fastify/multipart'))<br>
+fastify.post('/upload', async function (request, reply) {<br>
+&nbsp;&nbsp;const data = await request.file()<br>
+&nbsp;&nbsp;await pump(data.file, fs.createWriteStream(`./uploads/${data.filename}`))<br>
+&nbsp;&nbsp;return { status: 'uploaded' }<br>
+})<br><br>
+For downloads, use <strong>reply.send(fileStream)</strong> with proper headers:<br>
+fastify.get('/download', async (request, reply) => {<br>
+&nbsp;&nbsp;const stream = fs.createReadStream('./uploads/example.pdf')<br>
+&nbsp;&nbsp;reply.header('Content-Disposition', 'attachment; filename="example.pdf"')<br>
+&nbsp;&nbsp;return reply.send(stream)<br>
+})
+</div>
+</li>
+
+<li data-id="fastyfy-70" class="zyellow">
+<span class="faq-question">How do you use Fastify with Redis for caching or sessions?</span>
+<div class="answer">
+Fastify integrates with Redis using clients like <strong>ioredis</strong> or <strong>redis</strong>. For sessions, use <strong>@fastify/session</strong> and <strong>@fastify/redis</strong>:<br><br>
+const redis = require('@fastify/redis')<br>
+const session = require('@fastify/session')<br>
+fastify.register(redis, { host: 'localhost' })<br>
+fastify.register(require('@fastify/cookie'))<br>
+fastify.register(session, {<br>
+&nbsp;&nbsp;secret: 'a secret',<br>
+&nbsp;&nbsp;store: new (require('connect-redis')(session))({ client: fastify.redis })<br>
+})<br><br>
+You can also use Redis for response caching or rate limiting with plugins like <strong>fastify-rate-limit</strong>.
+</div>
+</li>
+
+<li data-id="fastyfy-71" class="zyellow">
+<span class="faq-question">How do you integrate Fastify with AWS Lambda or other serverless platforms?</span>
+<div class="answer">
+To use Fastify with AWS Lambda or similar platforms, wrap your Fastify app using <strong>aws-lambda-fastify</strong>:<br><br>
+const awsLambdaFastify = require('aws-lambda-fastify')<br>
+const fastify = require('./app')<br>
+const proxy = awsLambdaFastify(fastify)<br><br>
+exports.handler = proxy<br><br>
+This lets Fastify run as a handler inside Lambda. For other platforms like Google Cloud Functions or Azure, use similar wrappers or adapt HTTP bindings manually.
+</div>
+</li>
+<li data-id="fastyfy-72" class="zyellow">
+<span class="faq-question">How do you manage context propagation in Fastify across async flows?</span>
+<div class="answer">
+Fastify supports context propagation using <strong>AsyncLocalStorage</strong> under the hood. You can also manually manage context using request decorators or third-party tools like <strong>cls-hooked</strong> or <strong>async_hooks</strong>.<br><br>
+Example:<br>
+fastify.addHook('onRequest', async (request) => {<br>
+&nbsp;&nbsp;request.contextData = { traceId: crypto.randomUUID() }<br>
+})<br><br>
+Then access <strong>request.contextData</strong> in routes or other hooks to maintain state across async calls.
+</div>
+</li>
+
+<li data-id="fastyfy-73" class="zyellow">
+<span class="faq-question">What are the caveats of using global decorators in Fastify?</span>
+<div class="answer">
+Global decorators (using <strong>fastify.decorate</strong>) are accessible in all scopes but break Fastify's encapsulation model. This can lead to side effects, tight coupling, and difficulty in testing or reusing plugins.<br><br>
+It's recommended to use scoped decorators inside plugins when possible. If you must use global decorators, define them before registering other plugins and avoid overwriting core methods.
+</div>
+</li>
+
+<li data-id="fastyfy-74" class="zyellow">
+<span class="faq-question">How do you build a multi-tenant SaaS application with Fastify plugins?</span>
+<div class="answer">
+To build a multi-tenant SaaS app, encapsulate tenant-specific logic in isolated plugins. Use tenant context (from headers, subdomain, or JWT) in a preHandler to dynamically load config or DB connections.<br><br>
+Example:<br>
+fastify.register(async function tenantPlugin(scope, opts) {<br>
+&nbsp;&nbsp;scope.addHook('preHandler', async (req) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;req.tenant = await loadTenantConfig(req.headers.host)<br>
+&nbsp;&nbsp;})<br>
+&nbsp;&nbsp;scope.get('/dashboard', async (req) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return { tenant: req.tenant.name }<br>
+&nbsp;&nbsp;})<br>
+})<br><br>
+This allows complete separation of logic, configuration, and routing per tenant.
+</div>
+</li>
+<li data-id="fastyfy-75" class="zyellow">
+<span class="faq-question">How do you isolate routes and services per tenant using encapsulation?</span>
+<div class="answer">
+You can isolate routes and services per tenant in Fastify using the encapsulation model by registering separate plugins per tenant. Each plugin can have its own database connection, routes, and configuration.<br><br>
+Example:<br>
+fastify.register(async function tenantPlugin(scope, opts) {<br>
+&nbsp;&nbsp;scope.decorate('db', connectToTenantDB(opts.tenantId))<br>
+&nbsp;&nbsp;scope.get('/data', async (req) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return await scope.db.getData()<br>
+&nbsp;&nbsp;})<br>
+}, { tenantId: 'tenant_a' })<br><br>
+This keeps each tenant’s logic completely encapsulated and independently scalable.
+</div>
+</li>
+
+<li data-id="fastyfy-76" class="zyellow">
+<span class="faq-question">How can you implement GraphQL APIs inside a Fastify server?</span>
+<div class="answer">
+To implement GraphQL APIs in Fastify, use the <strong>@fastify/graphql</strong> or <strong>mercurius</strong> plugin, which supports schema definitions, resolvers, and subscriptions.<br><br>
+Example:<br>
+fastify.register(require('mercurius'), {<br>
+&nbsp;&nbsp;schema: `type Query { hello: String }`,<br>
+&nbsp;&nbsp;resolvers: { Query: { hello: () => 'Hello Fastify' } },<br>
+&nbsp;&nbsp;graphiql: true<br>
+})<br><br>
+Visit <strong>/graphiql</strong> to interact with the API using the GraphiQL IDE.
+</div>
+</li>
+
+<li data-id="fastyfy-77" class="zyellow">
+<span class="faq-question">How do you integrate Fastify with OpenTelemetry for distributed tracing?</span>
+<div class="answer">
+Fastify can be integrated with OpenTelemetry using the <strong>@opentelemetry/instrumentation-fastify</strong> plugin. You'll also need to set up the OpenTelemetry SDK, exporters (like Jaeger or OTLP), and auto-instrumentation.<br><br>
+Steps:<br>
+1. Install dependencies: <br>
+&nbsp;&nbsp;npm i @opentelemetry/sdk-node @opentelemetry/instrumentation-fastify<br>
+2. Configure tracing in a separate file and initialize before starting Fastify.<br><br>
+Example:<br>
+const { NodeSDK } = require('@opentelemetry/sdk-node')<br>
+const { FastifyInstrumentation } = require('@opentelemetry/instrumentation-fastify')<br>
+new NodeSDK({ instrumentations: [new FastifyInstrumentation()] }).start()
+</div>
+</li>
+<li data-id="fastyfy-78" class="zyellow">
+<span class="faq-question">How do you create custom serializers and deserializers in Fastify?</span>
+<div class="answer">
+Fastify uses <strong>fast-json-stringify</strong> for response serialization, and you can define custom serializers for routes or globally using the <strong>serializerCompiler</strong> option.<br><br>
+Example:<br>
+fastify.setSerializerCompiler(({ schema }) => fastJson(schema))<br><br>
+For a specific route:<br>
+fastify.get('/data', {<br>
+&nbsp;&nbsp;schema: { response: { 200: { type: 'object', properties: { msg: { type: 'string' } } } } },<br>
+&nbsp;&nbsp;serializer: data => JSON.stringify({ ...data, timestamp: Date.now() })<br>
+}, async () => { return { msg: 'Hello' } })<br><br>
+Custom deserialization (e.g. body parsing) can be done with hooks like <strong>preParsing</strong> for full control.
+</div>
+</li>
+
+<li data-id="fastyfy-79" class="zyellow">
+<span class="faq-question">How do you ensure schema performance using $ref and shared schemas?</span>
+<div class="answer">
+Fastify improves performance by compiling JSON Schemas ahead of time using <strong>ajv</strong>. Reusing schemas with <strong>$ref</strong> and <strong>addSchema()</strong> avoids redundant compilation.<br><br>
+Example:<br>
+fastify.addSchema({<br>
+&nbsp;&nbsp;$id: 'User',<br>
+&nbsp;&nbsp;type: 'object',<br>
+&nbsp;&nbsp;properties: { id: { type: 'string' }, name: { type: 'string' } },<br>
+&nbsp;&nbsp;required: ['id', 'name']<br>
+})<br><br>
+Then reference it in routes: <br>
+schema: { response: { 200: { $ref: 'User#' } } }<br><br>
+This avoids compiling the same schema multiple times, speeding up validation.
+</div>
+</li>
+
+<li data-id="fastyfy-80" class="zyellow">
+<span class="faq-question">How do you implement RBAC or ACL systems in Fastify plugins?</span>
+<div class="answer">
+To implement RBAC (Role-Based Access Control) or ACL (Access Control List) in Fastify, use <strong>preHandler</strong> hooks or decorators to enforce role-based checks before route execution.<br><br>
+Example:<br>
+fastify.decorateRequest('user', null)<br>
+fastify.addHook('preHandler', async (request, reply) => {<br>
+&nbsp;&nbsp;if (!request.user?.roles.includes('admin')) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return reply.code(403).send({ error: 'Forbidden' })<br>
+&nbsp;&nbsp;}<br>
+})<br><br>
+You can also build a plugin like <strong>fastify-rbac</strong> or integrate third-party solutions for managing policies dynamically based on roles and permissions.
+</div>
+</li>
+<li data-id="fastyfy-81" class="zyellow">
+<span class="faq-question">How does Fastify handle HTTP/2 push and streaming?</span>
+<div class="answer">
+Fastify supports HTTP/2 when using the built-in <strong>http2</strong> Node.js server. You can enable HTTP/2 by passing the <strong>http2: true</strong> option and using TLS (HTTPS).<br><br>
+Example:<br>
+const fastify = require('fastify')({ http2: true, https: { key, cert } })<br><br>
+For streaming, Fastify supports sending readable streams via <strong>reply.send()</strong>. For HTTP/2 server push (now deprecated in browsers), you can use the <strong>reply.raw.stream.pushStream()</strong> method, but it requires manual handling and client support.
+</div>
+</li>
+
+<li data-id="fastyfy-82" class="zyellow">
+<span class="faq-question">How do you implement lifecycle hooks across isolated plugin instances?</span>
+<div class="answer">
+Each Fastify plugin instance can have its own set of lifecycle hooks like <strong>onRequest</strong>, <strong>preHandler</strong>, etc. These hooks apply only within that encapsulated scope.<br><br>
+To apply shared logic across multiple plugin instances, you can:<br>
+- Create a shared plugin that registers hooks and use <strong>fastify.register()</strong> in each scope<br>
+- Use a global plugin with encapsulation disabled via <strong>fastify.register(sharedPlugin, { encapsulate: false })</strong><br><br>
+This ensures hooks are reused without duplicating logic.
+</div>
+</li>
+
+<li data-id="fastyfy-83" class="zyellow">
+<span class="faq-question">How can you securely expose internal APIs between encapsulated plugins?</span>
+<div class="answer">
+Fastify plugins are isolated, but you can expose internal APIs between them using decorators. This allows you to share functionality while keeping plugins modular.<br><br>
+Example:<br>
+Plugin A:<br>
+fastify.decorate('internalService', () => 'Secret API')<br><br>
+Plugin B (registered after A):<br>
+fastify.get('/use', async (req, reply) => {<br>
+&nbsp;&nbsp;const data = fastify.internalService()<br>
+&nbsp;&nbsp;return { result: data }<br>
+})<br><br>
+Only plugins registered after the decorator will have access, ensuring secure and ordered exposure.
+</div>
+</li>
+<li data-id="fastyfy-84" class="zyellow">
+<span class="faq-question">How do you gracefully shut down a Fastify server with async cleanup?</span>
+<div class="answer">
+Fastify supports graceful shutdown using the <strong>onClose</strong> and <strong>onShutdown</strong> hooks. You can register async cleanup logic like closing DB connections, stopping workers, or flushing logs.<br><br>
+Example:<br>
+fastify.addHook('onClose', async (instance) => {<br>
+&nbsp;&nbsp;await db.close()<br>
+&nbsp;&nbsp;console.log('DB connection closed')<br>
+})<br><br>
+Then trigger shutdown with:<br>
+await fastify.close()<br><br>
+This ensures all plugins and resources clean up properly before exiting.
+</div>
+</li>
+
+<li data-id="fastyfy-85" class="zyellow">
+<span class="faq-question">How do you handle plugin registration order and priority in large systems?</span>
+<div class="answer">
+Plugin registration order in Fastify determines visibility of decorators, hooks, and routes. To control order and priority:<br><br>
+- Register shared utilities (e.g. DB, auth) first<br>
+- Register dependent route modules later<br>
+- Use async/await to ensure one plugin is ready before the next<br><br>
+You can also structure plugins hierarchically and conditionally register them using options to maintain clear dependency chains.
+</div>
+</li>
+
+<li data-id="fastyfy-86" class="zyellow">
+<span class="faq-question">What are the trade-offs between using hooks and middleware in Fastify?</span>
+<div class="answer">
+Fastify favors hooks over traditional middleware for better performance and lifecycle control. Hooks are scoped, ordered, and typed, while middleware (via <strong>use()</strong>) is global and less performant.<br><br>
+Trade-offs:<br>
+- <strong>Hooks</strong>: Better encapsulation, faster execution, granular control<br>
+- <strong>Middleware</strong>: Simpler for legacy Express-style code but slower and not scoped<br><br>
+Prefer hooks (like <strong>onRequest</strong>, <strong>preHandler</strong>) unless integrating legacy libraries requiring middleware.
+</div>
+</li>
+<li data-id="fastyfy-87" class="zyellow">
+<span class="faq-question">How do you build dynamic route registration based on configuration files?</span>
+<div class="answer">
+You can dynamically register routes in Fastify by reading configuration files (like JSON or YAML) and iterating through route definitions to register them at runtime.<br><br>
+Example:<br>
+const routes = require('./routes-config.json')<br>
+routes.forEach((route) => {<br>
+&nbsp;&nbsp;fastify.route({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;method: route.method,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;url: route.url,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;handler: require(route.handler)<br>
+&nbsp;&nbsp;})<br>
+})<br><br>
+This allows building flexible and scalable APIs driven by configuration instead of static code.
+</div>
+</li>
+
+<li data-id="fastyfy-88" class="zyellow">
+<span class="faq-question">How do you monitor Fastify server internals and memory usage in real time?</span>
+<div class="answer">
+You can monitor Fastify internals using:<br>
+- <strong>@fastify/metrics</strong> for Prometheus-compatible metrics<br>
+- Node.js process APIs for memory and CPU stats<br>
+- External tools like PM2, Grafana, or Datadog<br><br>
+Example:<br>
+setInterval(() => {<br>
+&nbsp;&nbsp;console.log(process.memoryUsage())<br>
+}, 10000)<br><br>
+Also, use <strong>pino</strong> logger with serializers and hooks to capture request durations and system health logs.
+</div>
+</li>
+
+<li data-id="fastyfy-89" class="zyellow">
+<span class="faq-question">How do you implement rate limiting per user/tenant with shared services?</span>
+<div class="answer">
+Fastify supports per-user or per-tenant rate limiting using the <strong>@fastify/rate-limit</strong> plugin and a custom key generation function.<br><br>
+Example:<br>
+fastify.register(require('@fastify/rate-limit'), {<br>
+&nbsp;&nbsp;global: false,<br>
+&nbsp;&nbsp;keyGenerator: (req) => req.headers['x-tenant-id'] || req.ip,<br>
+&nbsp;&nbsp;max: 100,<br>
+&nbsp;&nbsp;timeWindow: '1 minute'<br>
+})<br><br>
+This approach ensures each user or tenant has isolated rate limits using shared Redis or memory stores.
+</div>
+</li>
+
+
+<li data-id="mikroorm-1" id="mikroorm_qlist">
+  <span class="faq-question greenCommit">What is MikroORM?</span>
+  <div class="answer">
+    MikroORM is a TypeScript ORM for Node.js applications. It supports PostgreSQL, MySQL, MariaDB, SQLite, and MongoDB, and is based on the Data Mapper pattern for clean separation of database logic.
+  </div>
+</li>
+
+
+<li data-id="mikroorm-1" id="mikroorm_qlist">
+<span class="faq-question">MikroORM : Relation</span>
+<div class="answer">
+<pre>
+  // entities/User.ts
+  import { Entity, PrimaryKey, Property, OneToOne } from '@mikro-orm/core'
+  import { Profile } from './Profile'
+  
+  @Entity()
+  export class User {
+    @PrimaryKey()
+    id!: number
+  
+    @Property()
+    name!: string
+  
+    @OneToOne(() => Profile, profile => profile.user, { cascade: ['persist'] })
+    profile!: Profile
+  }
+<hr />
+// entities/Profile.ts
+import { Entity, PrimaryKey, Property, OneToOne } from '@mikro-orm/core'
+import { User } from './User'
+
+@Entity()
+export class Profile {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  bio!: string
+
+  @OneToOne(() => User, user => user.profile)
+  user!: User
+}
+<hr />
+// entities/Author.ts
+import { Entity, PrimaryKey, Property, OneToMany } from '@mikro-orm/core'
+import { Book } from './Book'
+
+@Entity()
+export class Author {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  name!: string
+
+  @OneToMany(() => Book, book => book.author)
+  books = new Collection<Book>(this)
+}
+<hr />
+// entities/Book.ts
+import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core'
+import { Author } from './Author'
+
+@Entity()
+export class Book {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  title!: string
+
+  @ManyToOne(() => Author)
+  author!: Author
+}
+<hr />
+// entities/Student.ts
+import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/core'
+import { Course } from './Course'
+
+@Entity()
+export class Student {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  name!: string
+
+  @ManyToMany(() => Course, course => course.students)
+  courses = new Collection<Course>(this)
+}
+
+<hr />
+// entities/Course.ts
+import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/core'
+import { Student } from './Student'
+
+@Entity()
+export class Course {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  title!: string
+
+  @ManyToMany(() => Student, student => student.courses)
+  students = new Collection<Student>(this)
+}
+
+<hr />
+// entities/Category.ts
+import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core'
+
+@Entity()
+export class Category {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  name!: string
+
+  @ManyToOne(() => Category, { nullable: true })
+  parent?: Category
+
+  @OneToMany(() => Category, category => category.parent)
+  children = new Collection<Category>(this)
+}
+
+<hr />
+// entities/Course.ts
+import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/core'
+import { Student } from './Student'
+
+@Entity()
+export class Course {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  title!: string
+
+  @ManyToMany(() => Student, student => student.courses)
+  students = new Collection<Student>(this)
+}
+
+<hr />
+// entities/Category.ts
+import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core'
+
+@Entity()
+export class Category {
+  @PrimaryKey()
+  id!: number
+
+  @Property()
+  name!: string
+
+  @ManyToOne(() => Category, { nullable: true })
+  parent?: Category
+
+  @OneToMany(() => Category, category => category.parent)
+  children = new Collection<Category>(this)
+}
+
+<hr />
+// mikro-orm.config.ts
+import { Options } from '@mikro-orm/core'
+import { User, Profile, Author, Book, Student, Course, Category } from './entities'
+
+const config: Options = {
+  type: 'mysql',
+  dbName: 'test_db',
+  user: 'root',
+  password: 'password',
+  port: 3306,
+  host: 'localhost',
+  entities: [User, Profile, Author, Book, Student, Course, Category],
+  debug: true,
+}
+
+export default config
+
+<hr />
+import { MikroORM } from '@mikro-orm/core'
+import config from './mikro-orm.config'
+
+async function main() {
+  const orm = await MikroORM.init(config)
+  const em = orm.em.fork()
+
+  const user = em.create(User, { name: 'Alice' })
+  const profile = em.create(Profile, { bio: 'Dev', user })
+
+  const author = em.create(Author, { name: 'John' })
+  const book1 = em.create(Book, { title: 'Book A', author })
+  const book2 = em.create(Book, { title: 'Book B', author })
+
+  const student = em.create(Student, { name: 'Tom' })
+  const course = em.create(Course, { title: 'Math' })
+  student.courses.add(course)
+  course.students.add(student)
+
+  const category = em.create(Category, { name: 'Parent Category' })
+  const child = em.create(Category, { name: 'Child Category', parent: category })
+
+  await em.persistAndFlush([user, profile, author, book1, book2, student, course, category, child])
+}
+
+main()
+
+<hr />
+<hr />
+
+
+
+
+</pre>
+</div>
+</li>
+<li data-id="mikroorm-mongo-1" class="zyellow">
+  <span class="faq-question">How do you define a One-to-One relation in MikroORM with MongoDB?</span>
+  <div class="answer">
+    One-to-One relations are simulated using references. In MongoDB, you store the related document’s _id in a field and manually populate it.
+    <br><br>
+    Example:<br>
+    <b>User.ts</b><br>
+    @Entity()<br>
+    export class User {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;name!: string;<br>
+      &nbsp;&nbsp;@Property({ ref: true })<br>
+      &nbsp;&nbsp;profile!: ObjectId;<br>
+    }<br><br>
+    <b>Profile.ts</b><br>
+    @Entity()<br>
+    export class Profile {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;bio!: string;<br>
+    }
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-2" class="zyellow">
+  <span class="faq-question">How do you define a One-to-Many and Many-to-One relation in MikroORM with MongoDB?</span>
+  <div class="answer">
+    MongoDB doesn’t support joins natively, so One-to-Many is usually handled by storing a list of _ids (ObjectId) in an array or referencing the parent in the child document.<br><br>
+    Example:<br>
+    <b>Author.ts</b><br>
+    @Entity()<br>
+    export class Author {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;name!: string;<br>
+    }<br><br>
+    <b>Book.ts</b><br>
+    @Entity()<br>
+    export class Book {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;title!: string;<br>
+      &nbsp;&nbsp;@Property({ ref: true })<br>
+      &nbsp;&nbsp;author!: ObjectId;<br>
+    }
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-3" class="zyellow">
+  <span class="faq-question">How do you define a Many-to-Many relation in MikroORM with MongoDB?</span>
+  <div class="answer">
+    Many-to-Many relations are emulated by storing ObjectId references in arrays on both sides.<br><br>
+    Example:<br>
+    <b>Student.ts</b><br>
+    @Entity()<br>
+    export class Student {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;name!: string;<br>
+      &nbsp;&nbsp;@Property({ ref: true })<br>
+      &nbsp;&nbsp;courses: ObjectId[] = [];<br>
+    }<br><br>
+    <b>Course.ts</b><br>
+    @Entity()<br>
+    export class Course {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;title!: string;<br>
+      &nbsp;&nbsp;@Property({ ref: true })<br>
+      &nbsp;&nbsp;students: ObjectId[] = [];<br>
+    }
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-4" class="zyellow">
+  <span class="faq-question">How do you define a Self-Referencing relation in MikroORM with MongoDB?</span>
+  <div class="answer">
+    Self-referencing relations (e.g., nested categories) can be defined by referencing the same entity’s ObjectId.<br><br>
+    Example:<br>
+    <b>Category.ts</b><br>
+    @Entity()<br>
+    export class Category {<br>
+      &nbsp;&nbsp;@PrimaryKey()<br>
+      &nbsp;&nbsp;_id!: ObjectId;<br>
+      &nbsp;&nbsp;@Property()<br>
+      &nbsp;&nbsp;name!: string;<br>
+      &nbsp;&nbsp;@Property({ ref: true, nullable: true })<br>
+      &nbsp;&nbsp;parent?: ObjectId;<br>
+    }
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-5" class="zyellow">
+  <span class="faq-question">What is the best practice to populate relations in MikroORM for MongoDB?</span>
+  <div class="answer">
+    Since MongoDB does not support joins, use `populate` in MikroORM to fetch references:<br>
+    await em.find(User, {}, { populate: ['profile'] });<br>
+    MikroORM will fetch the referenced documents in separate queries and hydrate them.
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-6" class="zyellow">
+  <span class="faq-question">Do you need join tables in MikroORM with MongoDB?</span>
+  <div class="answer">
+    No. Since MongoDB is document-based, you store ObjectId references directly in arrays on each entity for many-to-many relationships instead of using join tables.
+  </div>
+</li>
+
+<li data-id="mikroorm-mongo-7" class="zyellow">
+  <span class="faq-question">How do you cascade persist related documents in MongoDB?</span>
+  <div class="answer">
+    Use the cascade: ['persist'] option in @Property() when referencing related documents. MikroORM will automatically persist related entities on flush.
+  </div>
+</li>
+
+
+
+
+<li data-id="mikroorm-2" class="zyellow">
+  <span class="faq-question">Which databases are supported by MikroORM?</span>
+  <div class="answer">
+    MikroORM supports PostgreSQL, MySQL, MariaDB, SQLite, and MongoDB (with limited features).
+  </div>
+</li>
+
+<li data-id="mikroorm-3" class="zyellow">
+  <span class="faq-question">How do you install MikroORM?</span>
+  <div class="answer">
+    You can install MikroORM using npm or yarn. For example: npm install @mikro-orm/core @mikro-orm/migrations @mikro-orm/cli @mikro-orm/postgresql
+  </div>
+</li>
+
+<li data-id="mikroorm-4" class="zyellow">
+  <span class="faq-question">What is an entity in MikroORM?</span>
+  <div class="answer">
+    An entity in MikroORM is a class that maps to a table in the database. Fields in the class represent columns, and decorators define their metadata.
+  </div>
+</li>
+
+<li data-id="mikroorm-5" class="zyellow">
+  <span class="faq-question">How do you define a primary key in MikroORM?</span>
+  <div class="answer">
+    Use the @PrimaryKey() decorator on a class property to define the primary key for an entity.
+  </div>
+</li>
+
+<li data-id="mikroorm-6" class="zyellow">
+  <span class="faq-question">How do you define a one-to-many relationship?</span>
+  <div class="answer">
+    Use @OneToMany in the parent entity and @ManyToOne in the child entity to define a one-to-many relationship.
+  </div>
+</li>
+
+<li data-id="mikroorm-7" class="zyellow">
+  <span class="faq-question">How do you load related entities?</span>
+  <div class="answer">
+    Use the populate option in find or findOne, such as em.find(User, {}, { populate: ['profile'] })
+  </div>
+</li>
+
+<li data-id="mikroorm-8" class="zyellow">
+  <span class="faq-question">What is the EntityManager in MikroORM?</span>
+  <div class="answer">
+    EntityManager is the main API for database operations like finding, persisting, and removing entities.
+  </div>
+</li>
+
+<li data-id="mikroorm-9" class="zyellow">
+  <span class="faq-question">What is the purpose of MikroORM CLI?</span>
+  <div class="answer">
+    MikroORM CLI provides commands for generating entities, running migrations, seeding data, and managing schemas.
+  </div>
+</li>
+
+<li data-id="mikroorm-10" class="zyellow">
+  <span class="faq-question">How do you run migrations in MikroORM?</span>
+  <div class="answer">
+    Use the CLI command mikro-orm migration:up to apply migrations or migration:create to generate new ones.
+  </div>
+</li>
+
+<li data-id="mikroorm-11" class="zyellow">
+  <span class="faq-question">What is a MikroORM configuration file?</span>
+  <div class="answer">
+    The MikroORM configuration file defines the database connection settings, paths for entities, migrations, and other settings. It is usually named mikro-orm.config.js or .ts.
+  </div>
+</li>
+
+<li data-id="mikroorm-12" class="zyellow">
+  <span class="faq-question">How do you enable TypeScript support in MikroORM?</span>
+  <div class="answer">
+    MikroORM is built with TypeScript in mind. Simply define entities and config files using TypeScript (.ts files) and use decorators for schema metadata.
+  </div>
+</li>
+
+<li data-id="mikroorm-13" class="zyellow">
+  <span class="faq-question">How do you create a new entity?</span>
+  <div class="answer">
+    Use the CLI command mikro-orm entity:create or manually define a class decorated with @Entity() and add fields using decorators like @Property().
+  </div>
+</li>
+
+<li data-id="mikroorm-14" class="zyellow">
+  <span class="faq-question">What is the difference between flush and persist?</span>
+  <div class="answer">
+    persist schedules an entity to be saved. flush executes the SQL operations to apply those changes to the database.
+  </div>
+</li>
+
+<li data-id="mikroorm-15" class="zyellow">
+  <span class="faq-question">How do you define default values for fields?</span>
+  <div class="answer">
+    Assign default values directly in the class or use options in the @Property() decorator.
+  </div>
+</li>
+
+<li data-id="mikroorm-16" class="zyellow">
+  <span class="faq-question">How do you define a many-to-many relationship?</span>
+  <div class="answer">
+    Use @ManyToMany on both sides of the relationship and define the join table with the mappedBy or inversedBy options.
+  </div>
+</li>
+
+<li data-id="mikroorm-17" class="zyellow">
+  <span class="faq-question">How can you use migrations to keep the schema up to date?</span>
+  <div class="answer">
+    Generate new migrations after entity changes using migration:create, then run migration:up to apply them to the database.
+  </div>
+</li>
+
+<li data-id="mikroorm-18" class="zyellow">
+  <span class="faq-question">How do you delete an entity?</span>
+  <div class="answer">
+    Use em.remove(entity) followed by em.flush() to delete an entity from the database.
+  </div>
+</li>
+
+<li data-id="mikroorm-19" class="zyellow">
+  <span class="faq-question">How do you create a custom repository?</span>
+  <div class="answer">
+    Extend EntityRepository for your entity and register it in the MikroORM configuration.
+  </div>
+</li>
+
+<li data-id="mikroorm-20" class="zyellow">
+  <span class="faq-question">What is cascading in MikroORM?</span>
+  <div class="answer">
+    Cascading allows related entities to be persisted or removed automatically when performing actions on the parent entity.
+  </div>
+</li>
+
+<li data-id="mikroorm-21" class="zyellow">
+  <span class="faq-question">What is the purpose of @Property()?</span>
+  <div class="answer">
+    @Property() is a decorator that marks a class field as a persistent property in the database.
+  </div>
+</li>
+
+<li data-id="mikroorm-22" class="zyellow">
+  <span class="faq-question">How do you set up MikroORM in a Node.js project?</span>
+  <div class="answer">
+    Install MikroORM and its dependencies, create a mikro-orm.config.ts file, define entities, and initialize MikroORM with MikroORM.init().
+  </div>
+</li>
+
+<li data-id="mikroorm-23" class="zyellow">
+  <span class="faq-question">How do you seed data in MikroORM?</span>
+  <div class="answer">
+    Create a custom seeder script and insert data using the EntityManager. You can also use community seeding tools.
+  </div>
+</li>
+
+<li data-id="mikroorm-24" class="zyellow">
+  <span class="faq-question">What is the Unit of Work in MikroORM?</span>
+  <div class="answer">
+    Unit of Work tracks changes to entities and coordinates database writes in a single flush operation for consistency and performance.
+  </div>
+</li>
+
+<li data-id="mikroorm-25" class="zyellow">
+  <span class="faq-question">How do you enable SQL logging?</span>
+  <div class="answer">
+    Set debug: true in your MikroORM configuration to log SQL queries and entity operations.
+  </div>
+</li>
+
+<li data-id="mikroorm-26" class="zyellow">
+  <span class="faq-question">How can you validate entities before saving?</span>
+  <div class="answer">
+    Use class-validator decorators or manually add validation logic before calling flush().
+  </div>
+</li>
+
+<li data-id="mikroorm-27" class="zyellow">
+  <span class="faq-question">How do you use transactions in MikroORM?</span>
+  <div class="answer">
+    Wrap your logic inside em.transactional(async em => { ... }) to ensure all operations are executed in a single transaction.
+  </div>
+</li>
+
+<li data-id="mikroorm-28" class="zyellow">
+  <span class="faq-question">What is lazy loading in MikroORM?</span>
+  <div class="answer">
+    Lazy loading allows relations to be loaded only when accessed, using JavaScript proxies and asynchronous getters.
+  </div>
+</li>
+
+<li data-id="mikroorm-29" class="zyellow">
+  <span class="faq-question">How do you perform raw SQL queries?</span>
+  <div class="answer">
+    Use em.getConnection().execute('SELECT * FROM ...') to run raw SQL queries directly.
+  </div>
+</li>
+
+<li data-id="mikroorm-30" class="zyellow">
+  <span class="faq-question">How do you filter and paginate results?</span>
+  <div class="answer">
+    Use em.find() with options like where, limit, offset, and orderBy to filter and paginate query results.
+  </div>
+</li>
+
+
+<li data-id="mikroorm-31" class="zyellow">
+  <span class="faq-question">How do you define composite primary keys in MikroORM?</span>
+  <div class="answer">
+    Use the @PrimaryKey decorator on multiple fields or define an @PrimaryKey composite object using the primary property on @Entity.
+  </div>
+</li>
+
+<li data-id="mikroorm-32" class="zyellow">
+  <span class="faq-question">What is the difference between managed and unmanaged entities?</span>
+  <div class="answer">
+    Managed entities are tracked by the EntityManager and their changes are automatically persisted during flush. Unmanaged entities are detached and not tracked until explicitly persisted.
+  </div>
+</li>
+
+<li data-id="mikroorm-33" class="zyellow">
+  <span class="faq-question">How do you handle soft deletes in MikroORM?</span>
+  <div class="answer">
+    Implement soft deletes by adding a deletedAt field and filtering queries manually or globally using filters.
+  </div>
+</li>
+
+<li data-id="mikroorm-34" class="zyellow">
+  <span class="faq-question">What is orphan removal and how is it used?</span>
+  <div class="answer">
+    Orphan removal ensures that related entities are automatically deleted when removed from a parent collection, using orphanRemoval: true in the relation options.
+  </div>
+</li>
+
+<li data-id="mikroorm-35" class="zyellow">
+  <span class="faq-question">How can you load nested relations in MikroORM?</span>
+  <div class="answer">
+    Use nested populate syntax like populate: ['posts.comments'] to eagerly load deeply nested relations.
+  </div>
+</li>
+
+<li data-id="mikroorm-36" class="zyellow">
+  <span class="faq-question">How do you use lifecycle hooks in MikroORM?</span>
+  <div class="answer">
+    Define methods like beforeCreate, afterUpdate, or beforeFlush in entity classes to trigger actions during persistence events.
+  </div>
+</li>
+
+<li data-id="mikroorm-37" class="zyellow">
+  <span class="faq-question">How do you handle circular dependencies in entity relationships?</span>
+  <div class="answer">
+    Use forward reference functions like () => EntityName in decorators to resolve circular dependencies between entities.
+  </div>
+</li>
+
+<li data-id="mikroorm-38" class="zyellow">
+  <span class="faq-question">What is the use of wrap() in MikroORM?</span>
+  <div class="answer">
+    wrap() provides utility methods on entities such as isInitialized, assign, and toJSON, for better control of entity state and serialization.
+  </div>
+</li>
+
+<li data-id="mikroorm-39" class="zyellow">
+  <span class="faq-question">How can you eager load relations globally?</span>
+  <div class="answer">
+    Use the eager: true option on relation decorators like @OneToOne or @ManyToOne to always load the relation unless explicitly excluded.
+  </div>
+</li>
+
+<li data-id="mikroorm-40" class="zyellow">
+  <span class="faq-question">What is the difference between assign and populate?</span>
+  <div class="answer">
+    assign copies data into entity properties; populate loads related entities. They serve different purposes—assign updates, populate fetches.
+  </div>
+</li>
+
+<li data-id="mikroorm-41" class="zyellow">
+  <span class="faq-question">How do you define enums in MikroORM?</span>
+  <div class="answer">
+    Define enums in TypeScript and use them in entities with @Property({ enum: YourEnum }) to persist enum values in the database.
+  </div>
+</li>
+
+<li data-id="mikroorm-42" class="zyellow">
+  <span class="faq-question">How do you use custom types in MikroORM?</span>
+  <div class="answer">
+    Implement the Type interface to create custom scalar types and register them using MikroORM configuration or decorators.
+  </div>
+</li>
+
+<li data-id="mikroorm-43" class="zyellow">
+  <span class="faq-question">What is batch size and how does it affect performance?</span>
+  <div class="answer">
+    Batch size controls how many entities are flushed or loaded per query. Tuning it improves performance by reducing round-trips and memory usage.
+  </div>
+</li>
+
+<li data-id="mikroorm-44" class="zyellow">
+  <span class="faq-question">How do you implement custom naming strategies?</span>
+  <div class="answer">
+    Extend the AbstractNamingStrategy class to override table/column naming conventions and set it in the MikroORM config.
+  </div>
+</li>
+
+<li data-id="mikroorm-45" class="zyellow">
+  <span class="faq-question">What is the difference between findOne and findOneOrFail?</span>
+  <div class="answer">
+    findOne returns null if no entity is found; findOneOrFail throws an error if no result is returned.
+  </div>
+</li>
+
+<li data-id="mikroorm-46" class="zyellow">
+  <span class="faq-question">How do you configure second-level caching?</span>
+  <div class="answer">
+    MikroORM supports second-level cache via custom cache adapters (like Redis or memory), configured in the cache section of the config file.
+  </div>
+</li>
+
+<li data-id="mikroorm-47" class="zyellow">
+  <span class="faq-question">How can you validate entity uniqueness?</span>
+  <div class="answer">
+    Use unique: true in @Property or define database-level unique constraints via @Unique() decorator or migrations.
+  </div>
+</li>
+
+<li data-id="mikroorm-48" class="zyellow">
+  <span class="faq-question">How do you handle large datasets in MikroORM?</span>
+  <div class="answer">
+    Use pagination, cursor-based queries, or streaming with limit/offset to manage large datasets efficiently.
+  </div>
+</li>
+
+<li data-id="mikroorm-49" class="zyellow">
+  <span class="faq-question">How do you share EntityManager across services?</span>
+  <div class="answer">
+    Pass the EntityManager instance as a dependency to services or use RequestContext to create request-scoped instances.
+  </div>
+</li>
+
+<li data-id="mikroorm-50" class="zyellow">
+  <span class="faq-question">What is RequestContext and when should you use it?</span>
+  <div class="answer">
+    RequestContext enables per-request scope for EntityManager, ensuring isolated Unit of Work per HTTP request in web applications.
+  </div>
+</li>
+
+<li data-id="mikroorm-51" class="zyellow">
+  <span class="faq-question">How do you update partial data in an entity?</span>
+  <div class="answer">
+    Use wrap(entity).assign(data, { mergeObjects: true }) to update only the provided fields without overwriting the entire object.
+  </div>
+</li>
+
+<li data-id="mikroorm-52" class="zyellow">
+  <span class="faq-question">How can you disable auto-flush?</span>
+  <div class="answer">
+    You can control flushing manually using em.flush(), and temporarily disable auto-flush by deferring calls in performance-critical blocks.
+  </div>
+</li>
+
+<li data-id="mikroorm-53" class="zyellow">
+  <span class="faq-question">What is the purpose of em.clear()?</span>
+  <div class="answer">
+    em.clear() clears the identity map and detaches all managed entities, which is useful to avoid memory leaks or prepare for a new request.
+  </div>
+</li>
+
+<li data-id="mikroorm-54" class="zyellow">
+  <span class="faq-question">How do you mock MikroORM for testing?</span>
+  <div class="answer">
+    Use in-memory SQLite, mock EntityManager methods with test doubles, or use dependency injection to isolate data access.
+  </div>
+</li>
+
+<li data-id="mikroorm-55" class="zyellow">
+  <span class="faq-question">How do you implement optimistic locking?</span>
+  <div class="answer">
+    Add a version property with @Version() decorator. MikroORM will throw an error if the version does not match during flush.
+  </div>
+</li>
+
+<li data-id="mikroorm-56" class="zyellow">
+  <span class="faq-question">Can you use MikroORM with GraphQL?</span>
+  <div class="answer">
+    Yes, MikroORM works well with GraphQL by integrating with resolvers, and using tools like TypeGraphQL or NestJS GraphQL module.
+  </div>
+</li>
+
+<li data-id="mikroorm-57" class="zyellow">
+  <span class="faq-question">How do you store JSON fields?</span>
+  <div class="answer">
+    Use @Property({ type: 'json' }) to store raw JSON values in a column, supported by databases like PostgreSQL and MySQL.
+  </div>
+</li>
+
+<li data-id="mikroorm-58" class="zyellow">
+  <span class="faq-question">How do you rename fields in the database?</span>
+  <div class="answer">
+    Use the fieldName option in @Property({ fieldName: 'db_column_name' }) to map entity fields to custom column names.
+  </div>
+</li>
+
+<li data-id="mikroorm-59" class="zyellow">
+  <span class="faq-question">How do you write custom queries with QueryBuilder?</span>
+  <div class="answer">
+    Use em.createQueryBuilder() to write SQL-like queries with join, select, where, and orderBy clauses programmatically.
+  </div>
+</li>
+
+<li data-id="mikroorm-60" class="zyellow">
+  <span class="faq-question">How do you share entities across multiple modules?</span>
+  <div class="answer">
+    Export entity classes from a shared module and import them in other modules using MikroORM’s configuration or framework-specific DI.
+  </div>
+</li>
+<li data-id="mikroorm-61" class="zyellow">
+  <span class="faq-question">How do you implement multi-tenancy with MikroORM?</span>
+  <div class="answer">
+    You can implement multi-tenancy by dynamically configuring the database connection per tenant and initializing MikroORM with separate instances or using a tenant-aware EntityManager context.
+  </div>
+</li>
+
+<li data-id="mikroorm-62" class="zyellow">
+  <span class="faq-question">How does MikroORM handle connection pooling?</span>
+  <div class="answer">
+    MikroORM relies on the underlying driver (like pg or mysql2) for connection pooling. You can configure pool size and behavior via MikroORM's driverOptions or directly in the database driver configuration.
+  </div>
+</li>
+
+<li data-id="mikroorm-63" class="zyellow">
+  <span class="faq-question">How can you cache query results in MikroORM?</span>
+  <div class="answer">
+    MikroORM provides a second-level cache mechanism. Enable it using the cache config in mikro-orm.config.ts and implement a compatible cache adapter like Redis or in-memory cache.
+  </div>
+</li>
+
+<li data-id="mikroorm-64" class="zyellow">
+  <span class="faq-question">How do you handle concurrency control with optimistic locking?</span>
+  <div class="answer">
+    Use the @Version() decorator on a version field. MikroORM automatically increments this field and throws an OptimisticLockError if concurrent updates are detected.
+  </div>
+</li>
+
+<li data-id="mikroorm-65" class="zyellow">
+  <span class="faq-question">How does MikroORM support custom repository logic?</span>
+  <div class="answer">
+    You can extend EntityRepository for your entities and register custom repository classes in the MikroORM config to encapsulate domain-specific queries or business logic.
+  </div>
+</li>
+
+<li data-id="mikroorm-66" class="zyellow">
+  <span class="faq-question">What is the EntityHydrator and how does it work?</span>
+  <div class="answer">
+    EntityHydrator is an internal MikroORM utility that converts raw database rows into entity instances, resolving relationships and lazy-loading proxies as needed.
+  </div>
+</li>
+
+<li data-id="mikroorm-67" class="zyellow">
+  <span class="faq-question">How do you override default serialization logic?</span>
+  <div class="answer">
+    Implement toJSON() or use wrap(entity).toJSON() with custom logic, or pass options to control serialization depth and field filtering.
+  </div>
+</li>
+
+<li data-id="mikroorm-68" class="zyellow">
+  <span class="faq-question">How do you define and use composite foreign keys?</span>
+  <div class="answer">
+    Define multiple @PrimaryKey() fields in the referenced entity and use @ManyToOne or @OneToOne with the primary option to refer to the composite key.
+  </div>
+</li>
+
+<li data-id="mikroorm-69" class="zyellow">
+  <span class="faq-question">How can you audit changes in MikroORM?</span>
+  <div class="answer">
+    Use lifecycle hooks like beforeUpdate or afterFlush to capture change logs, or use a global middleware/plugin that tracks modified entities and persists audit records.
+  </div>
+</li>
+
+<li data-id="mikroorm-70" class="zyellow">
+  <span class="faq-question">What is the recommended way to manage large migrations?</span>
+  <div class="answer">
+    Split migrations into manageable files, use naming conventions, and track dependencies between migration steps. Avoid large auto-generated files; prefer granular manual changes.
+  </div>
+</li>
+
+<li data-id="mikroorm-71" class="zyellow">
+  <span class="faq-question">How do you dynamically switch databases at runtime?</span>
+  <div class="answer">
+    Initialize multiple MikroORM instances with different configurations and switch based on request context or use a factory pattern to generate EntityManagers dynamically.
+  </div>
+</li>
+
+<li data-id="mikroorm-72" class="zyellow">
+  <span class="faq-question">What is the difference between Identity Map and Unit of Work?</span>
+  <div class="answer">
+    Identity Map ensures only one instance of an entity exists in memory. Unit of Work tracks changes to those entities and coordinates database operations during flush.
+  </div>
+</li>
+
+<li data-id="mikroorm-73" class="zyellow">
+  <span class="faq-question">Can you manually trigger hydration in MikroORM?</span>
+  <div class="answer">
+    Yes, use wrap(entity).init() to force hydration of lazy-loaded relations when needed, or preload with populate in queries.
+  </div>
+</li>
+
+<li data-id="mikroorm-74" class="zyellow">
+  <span class="faq-question">How can you implement a plugin system using MikroORM?</span>
+  <div class="answer">
+    Create modular repositories or services that use the EntityManager and load them dynamically per plugin context, possibly using dependency injection frameworks like tsyringe or Inversify.
+  </div>
+</li>
+
+<li data-id="mikroorm-75" class="zyellow">
+  <span class="faq-question">How do you track dirty fields in entities?</span>
+  <div class="answer">
+    Use wrap(entity).isDirty() or wrap(entity).getChanges() to inspect whether an entity has pending changes since it was last flushed.
+  </div>
+</li>
+
+<li data-id="mikroorm-76" class="zyellow">
+  <span class="faq-question">How do you implement complex filtering logic dynamically?</span>
+  <div class="answer">
+    Use the QueryBuilder API to construct advanced queries programmatically, combining where clauses, joins, and expressions at runtime.
+  </div>
+</li>
+
+<li data-id="mikroorm-77" class="zyellow">
+  <span class="faq-question">What is the strategy for batch inserts and updates?</span>
+  <div class="answer">
+    Prepare all entities in memory and call persist followed by a single flush. MikroORM groups operations and optimizes queries for batch processing.
+  </div>
+</li>
+
+<li data-id="mikroorm-78" class="zyellow">
+  <span class="faq-question">How can you optimize startup time in large MikroORM apps?</span>
+  <div class="answer">
+    Use metadata caching, disable discovery where possible, precompile migrations and entities, and lazily load components to improve initialization speed.
+  </div>
+</li>
+
+<li data-id="mikroorm-79" class="zyellow">
+  <span class="faq-question">How do you perform deep cloning of entities?</span>
+  <div class="answer">
+    Use wrap(entity).toObject() followed by em.create(entityClass, clonedObject) to create a new instance without the original references.
+  </div>
+</li>
+
+<li data-id="mikroorm-80" class="zyellow">
+  <span class="faq-question">What are performance tuning tips for MikroORM?</span>
+  <div class="answer">
+    Use lazy loading selectively, optimize populates, minimize flushes, reuse EntityManagers, use indexes, and enable caching where appropriate.
+  </div>
+</li>
+
+<li data-id="mikroorm-81" class="zyellow">
+  <span class="faq-question">How do you unit test MikroORM-dependent services?</span>
+  <div class="answer">
+    Mock EntityManager methods or use in-memory SQLite for full integration. Use dependency injection to provide test doubles for repositories or services.
+  </div>
+</li>
+
+<li data-id="mikroorm-82" class="zyellow">
+  <span class="faq-question">How do you prevent N+1 query problems?</span>
+  <div class="answer">
+    Use populate to eagerly load relations and batch select where needed. Avoid lazy loading in large loops unless justified.
+  </div>
+</li>
+
+<li data-id="mikroorm-83" class="zyellow">
+  <span class="faq-question">How can you monitor MikroORM query performance?</span>
+  <div class="answer">
+    Enable debug logging to inspect queries, measure execution times, and integrate with profiling tools or log analyzers like Pino or Winston.
+  </div>
+</li>
+
+<li data-id="mikroorm-84" class="zyellow">
+  <span class="faq-question">Can you integrate MikroORM with CQRS or DDD patterns?</span>
+  <div class="answer">
+    Yes, by separating read/write models, using repository pattern, and injecting MikroORM's repositories and EntityManager per aggregate or command/query handler.
+  </div>
+</li>
+
+<li data-id="mikroorm-85" class="zyellow">
+  <span class="faq-question">How do you handle long-running transactions?</span>
+  <div class="answer">
+    Use em.transactional() blocks, keep scopes small, and avoid blocking operations between operations to reduce risk of locks or deadlocks.
+  </div>
+</li>
+
+<li data-id="mikroorm-86" class="zyellow">
+  <span class="faq-question">How can you extend metadata behavior for decorators?</span>
+  <div class="answer">
+    Create custom decorators that wrap @Property or other MikroORM decorators, injecting additional metadata into the entity schema via Reflect-metadata.
+  </div>
+</li>
+
+<li data-id="mikroorm-87" class="zyellow">
+  <span class="faq-question">How do you hook into the flush cycle for debugging or metrics?</span>
+  <div class="answer">
+    Use beforeFlush and afterFlush hooks on entities or globally to log metrics, trigger async jobs, or audit entity lifecycle state.
+  </div>
+</li>
+
+<li data-id="mikroorm-88" class="zyellow">
+  <span class="faq-question">How do you implement event sourcing with MikroORM?</span>
+  <div class="answer">
+    Store event logs in append-only tables, persist domain events during flush using hooks, and reconstruct aggregates from event history in memory.
+  </div>
+</li>
+
+<li data-id="mikroorm-89" class="zyellow">
+  <span class="faq-question">Can you integrate MikroORM with Kafka or message queues?</span>
+  <div class="answer">
+    Yes. Trigger message publishing after database flush using afterFlush or transactional context, ensuring atomic delivery with DB consistency.
+  </div>
+</li>
+
+<li data-id="mikroorm-90" class="zyellow">
+  <span class="faq-question">What’s the impact of circular serialization in MikroORM?</span>
+  <div class="answer">
+    Circular relations can cause infinite loops in JSON.stringify. Use wrap(entity).toJSON({ ignoreFields: [...] }) or override toJSON to prevent issues.
+  </div>
+</li>
 
 
 
