@@ -204,6 +204,7 @@ a{
   .description,
   .answer {
     font-size: 0.7625rem;
+    font-weight: 700;
   }
   table, th, td {
     font-size: 1rem;

@@ -40,7 +40,11 @@ Nodejs + Express + Reactjs + PostGre SQL + Redis
         <td><a href="#nodejs_qlist">Nodejs</a></td>
         <td><a href="#q_ts">TypeScript</a></td>
         <td>NestJS</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
         <td><a href="#awslambda">AWS Lambda</a></td>
+        <td><a href="#awscognito">AWS Cognito</a></td>
       </tr>
       <tr>
         <td>Coding</td>
@@ -31516,7 +31520,7 @@ router.push('/about');
 
 
 
-<li data-id="q32" class="yellow"><span class="faq-question">AWS Cognito</span>
+<li data-id="q32" class="yellow" id="awscognito"><span class="faq-question">AWS Cognito</span>
 <div class="answer">
 
 
@@ -31646,6 +31650,369 @@ router.push('/about');
 
 </div></li>
 
+
+<li data-id="q35" class="yellow">
+  <span class="faq-question">Example 01 : AWS Cognito + Node.js</span>
+  <div class="answer">
+<pre>
+console.clear();
+console.log('\n\n-: App Started :-');
+
+const express = require('express');
+const session = require('express-session');
+const { Issuer, generators } = require('openid-client');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// ---------- SESSION CONFIG ----------
+app.use(session({
+  secret: 'your-session-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,  // true in production with HTTPS
+    httpOnly: true
+  }
+}));
+
+// ---------- OPENID CLIENT INIT ----------
+let client;
+let codeVerifier;
+
+(async () => {
+  const issuer = await Issuer.discover('https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXNB8qhQ2');
+
+  client = new issuer.Client({
+    client_id: '3ofju9bq077uisvcv18aj8lrsn',
+    client_secret: '12o7ehteids6lhr4dci52fkcjhfn3nci7uu77bnqg9630ic65s9p',
+    redirect_uris: ['http://localhost:3000/callback'],
+    response_types: ['code']
+  });
+})();
+
+// ---------- CUSTOM AUTH CHECK ----------
+app.use((req, res, next) => {
+  req.isAuthenticated = () => !!req.session.user;
+  next();
+});
+
+// ---------- ROUTES ----------
+
+// Home/Login
+app.get('/', (req, res) => {
+    //res.send('helllo')
+    res.render('login');
+});
+
+// Start Login (redirect to Cognito)
+app.get('/login', (req, res) => {
+  codeVerifier = generators.codeVerifier();
+  const codeChallenge = generators.codeChallenge(codeVerifier);
+
+  const authUrl = client.authorizationUrl({
+    scope: 'email openid',    
+    code_challenge: codeChallenge,
+    code_challenge_method: 'S256'
+  });
+
+  res.redirect(authUrl);
+});
+
+// Cognito Callback
+app.get('/callback', async (req, res, next) => {
+  try {
+    const params = client.callbackParams(req);
+
+    console.log('---params---');
+    console.log(params);
+    const tokenSet = await client.callback('http://localhost:3000/callback', params, {
+      code_verifier: codeVerifier
+    });
+
+    console.log(tokenSet.claims());
+    req.session.user = tokenSet.claims(); // Save user to session
+    res.redirect('/dashboard');
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Dashboard (protected)
+app.get('/dashboard', (req, res) => {
+    console.log('---->>>', req.isAuthenticated())
+  if (!req.isAuthenticated()) return res.redirect('/');
+  res.render('dashboard', { user: req.session.user });
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+  const logoutUrl = `https://us-east-1xxnb8qhq2.auth.us-east-1.amazoncognito.com/logout?client_id=3ofju9bq077uisvcv18aj8lrsn&logout_uri=http://localhost:3000`; 
+  req.session.destroy(() => res.redirect(logoutUrl));
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`App listening at http://localhost:${PORT}`);
+});
+
+</pre>
+  </div>
+</li>
+
+
+<li data-id="q35" class="yellow">
+  <span class="faq-question">Example 02 : Node.js + AWS Cognito + AWS SES + Lambda + Jest......</span>
+  <div class="answer">
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Node.js + Cognito + SES + Lambda + Jest</title>
+    </head>
+    <body>
+      <h2>📁 File Structure</h2>
+      <pre>
+    ├── src/
+    │   ├── auth/
+    │   │   ├── register.js
+    │   │   └── login.js
+    │   ├── email/
+    │   │   └── sendVerification.js
+    │   └── lambda/
+    │       └── handler.js
+    ├── test/
+    │   ├── auth.test.js
+    │   ├── email.test.js
+    │   └── handler.test.js
+    ├── package.json
+    └── jest.config.js
+      </pre>
+    
+      <h2>🔹 package.json</h2>
+      <pre>
+    {
+      "name": "cognito-ses-lambda-jest",
+      "version": "1.0.0",
+      "main": "src/lambda/handler.js",
+      "scripts": {
+        "test": "jest"
+      },
+      "dependencies": {
+        "amazon-cognito-identity-js": "^6.2.0",
+        "aws-sdk": "^2.1350.0"
+      },
+      "devDependencies": {
+        "jest": "^29.5.0"
+      }
+    }
+      </pre>
+    
+      <h2>🔹 src/auth/register.js</h2>
+      <pre>
+    const {
+      CognitoUserPool,
+      CognitoUserAttribute
+    } = require('amazon-cognito-identity-js');
+    
+    const poolData = {
+      UserPoolId: process.env.USER_POOL_ID,
+      ClientId: process.env.USER_POOL_CLIENT_ID
+    };
+    
+    const userPool = new CognitoUserPool(poolData);
+    
+    function registerUser(email, password) {
+      return new Promise((resolve, reject) => {
+        const attributeList = [
+          new CognitoUserAttribute({ Name: 'email', Value: email })
+        ];
+        userPool.signUp(email, password, attributeList, null, (err, data) => {
+          err ? reject(err) : resolve(data);
+        });
+      });
+    }
+    
+    module.exports = { registerUser };
+      </pre>
+    
+      <h2>🔹 src/auth/login.js</h2>
+      <pre>
+    const {
+      AuthenticationDetails,
+      CognitoUser
+    } = require('amazon-cognito-identity-js');
+    
+    const { CognitoUserPool } = require('amazon-cognito-identity-js');
+    
+    const poolData = {
+      UserPoolId: process.env.USER_POOL_ID,
+      ClientId: process.env.USER_POOL_CLIENT_ID
+    };
+    
+    const userPool = new CognitoUserPool(poolData);
+    
+    function loginUser(email, password) {
+      const authDetails = new AuthenticationDetails({ Username: email, Password: password });
+      const userData = { Username: email, Pool: userPool };
+      const cognitoUser = new CognitoUser(userData);
+    
+      return new Promise((resolve, reject) => {
+        cognitoUser.authenticateUser(authDetails, {
+          onSuccess: result => resolve({
+            idToken: result.getIdToken().getJwtToken(),
+            accessToken: result.getAccessToken().getJwtToken(),
+            refreshToken: result.getRefreshToken().getToken()
+          }),
+          onFailure: err => reject(err)
+        });
+      });
+    }
+    
+    module.exports = { loginUser };
+      </pre>
+    
+      <h2>🔹 src/email/sendVerification.js</h2>
+      <pre>
+    const AWS = require('aws-sdk');
+    const ses = new AWS.SES({ region: process.env.AWS_REGION });
+    
+    async function sendVerificationEmail(email, code) {
+      const params = {
+        Destination: { ToAddresses: [email] },
+        Message: {
+          Body: {
+            Text: {
+              Data: `Your verification code is: ${code}`,
+              Charset: 'UTF-8'
+            }
+          },
+          Subject: {
+            Data: 'Verify your email',
+            Charset: 'UTF-8'
+          }
+        },
+        Source: process.env.SES_EMAIL_SOURCE
+      };
+      return ses.sendEmail(params).promise();
+    }
+    
+    module.exports = { sendVerificationEmail };
+      </pre>
+    
+      <h2>🔹 src/lambda/handler.js</h2>
+      <pre>
+    const jwt = require('jsonwebtoken');
+    
+    exports.handler = async event => {
+      const authHeader = event.headers.Authorization || '';
+      const token = authHeader.replace('Bearer ', '');
+    
+      try {
+        const decoded = jwt.decode(token);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ message: 'Authorized', user: decoded })
+        };
+      } catch (err) {
+        return {
+          statusCode: 401,
+          body: JSON.stringify({ message: 'Unauthorized' })
+        };
+      }
+    };
+      </pre>
+    
+      <h2>🔹 test/auth.test.js</h2>
+      <pre>
+    const { registerUser, loginUser } = require('../src/auth');
+    jest.mock('amazon-cognito-identity-js');
+    
+    describe('Auth module', () => {
+      it('calls signUp without error', async () => {
+        const mockSignUp = jest.fn((u, p, a, _, cb) => cb(null, { user: { username: u }}));
+        require('amazon-cognito-identity-js').CognitoUserPool = jest.fn(() => ({ signUp: mockSignUp }));
+        const res = await registerUser('test@example.com', 'Pass123!');
+        expect(res.user.username).toBe('test@example.com');
+      });
+    
+      it('loginUser returns tokens', async () => {
+        const mockAuth = {
+          authenticateUser: (_, handlers) => handlers.onSuccess({
+            getIdToken: () => ({ getJwtToken: () => 'id' }),
+            getAccessToken: () => ({ getJwtToken: () => 'access' }),
+            getRefreshToken: () => ({ getToken: () => 'refresh' })
+          })
+        };
+        require('amazon-cognito-identity-js').CognitoUser = jest.fn(() => mockAuth);
+        require('amazon-cognito-identity-js').AuthenticationDetails = jest.fn();
+        const tokens = await loginUser('x', 'y');
+        expect(tokens).toEqual({ idToken: 'id', accessToken: 'access', refreshToken: 'refresh' });
+      });
+    });
+      </pre>
+    
+      <h2>🔹 test/email.test.js</h2>
+      <pre>
+    const AWS = require('aws-sdk');
+    const { sendVerificationEmail } = require('../src/email');
+    jest.mock('aws-sdk', () => ({
+      SES: jest.fn(() => ({ sendEmail: () => ({ promise: () => Promise.resolve('OK') }) }))
+    }));
+    
+    describe('sendVerificationEmail', () => {
+      it('sends email successfully', async () => {
+        await expect(sendVerificationEmail('a@b.com', '123456')).resolves.toBe('OK');
+      });
+    });
+      </pre>
+    
+      <h2>🔹 test/handler.test.js</h2>
+      <pre>
+    const { handler } = require('../src/lambda/handler');
+    
+    describe('Lambda handler', () => {
+      it('returns 200 for valid token', async () => {
+        const event = { headers: { Authorization: 'Bearer abc' } };
+        const resp = await handler(event);
+        expect(resp.statusCode).toBe(200);
+        expect(JSON.parse(resp.body).message).toBe('Authorized');
+      });
+    
+      it('returns 401 for invalid token', async () => {
+        const event = { headers: { Authorization: 'Bearer ' } };
+        const resp = await handler(event);
+        expect(resp.statusCode).toBe(401);
+      });
+    });
+      </pre>
+    
+      <h2>🔹 jest.config.js</h2>
+      <pre>
+    module.exports = {
+      testEnvironment: 'node',
+      verbose: true
+    };
+      </pre>
+    
+      <h2>✅ Next Steps</h2>
+      <ul>
+        <li>Add real Cognito token verification (using JWKS).</li>
+        <li>Deploy the Lambda with proper IAM roles.</li>
+        <li>Enhance SES email templating.</li>
+        <li>Expand test coverage and CI/CD integration.</li>
+      </ul>
+    </body>
+    </html>
+    
+    
+  </div>
+</li>
 
   <li data-id="q32" class="zyellow">
     <span class="faq-question">What is AWS Cognito?</span>
@@ -31829,254 +32196,6 @@ router.push('/about');
     </ol>
     
   </div></li>
-  <li data-id="q35" class="yellow">
-    <span class="faq-question">Node.js + AWS Cognito + AWS SES + Lambda + Jest......</span>
-    <div class="answer">
-
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>Node.js + Cognito + SES + Lambda + Jest</title>
-      </head>
-      <body>
-        <h2>📁 File Structure</h2>
-        <pre>
-      ├── src/
-      │   ├── auth/
-      │   │   ├── register.js
-      │   │   └── login.js
-      │   ├── email/
-      │   │   └── sendVerification.js
-      │   └── lambda/
-      │       └── handler.js
-      ├── test/
-      │   ├── auth.test.js
-      │   ├── email.test.js
-      │   └── handler.test.js
-      ├── package.json
-      └── jest.config.js
-        </pre>
-      
-        <h2>🔹 package.json</h2>
-        <pre>
-      {
-        "name": "cognito-ses-lambda-jest",
-        "version": "1.0.0",
-        "main": "src/lambda/handler.js",
-        "scripts": {
-          "test": "jest"
-        },
-        "dependencies": {
-          "amazon-cognito-identity-js": "^6.2.0",
-          "aws-sdk": "^2.1350.0"
-        },
-        "devDependencies": {
-          "jest": "^29.5.0"
-        }
-      }
-        </pre>
-      
-        <h2>🔹 src/auth/register.js</h2>
-        <pre>
-      const {
-        CognitoUserPool,
-        CognitoUserAttribute
-      } = require('amazon-cognito-identity-js');
-      
-      const poolData = {
-        UserPoolId: process.env.USER_POOL_ID,
-        ClientId: process.env.USER_POOL_CLIENT_ID
-      };
-      
-      const userPool = new CognitoUserPool(poolData);
-      
-      function registerUser(email, password) {
-        return new Promise((resolve, reject) => {
-          const attributeList = [
-            new CognitoUserAttribute({ Name: 'email', Value: email })
-          ];
-          userPool.signUp(email, password, attributeList, null, (err, data) => {
-            err ? reject(err) : resolve(data);
-          });
-        });
-      }
-      
-      module.exports = { registerUser };
-        </pre>
-      
-        <h2>🔹 src/auth/login.js</h2>
-        <pre>
-      const {
-        AuthenticationDetails,
-        CognitoUser
-      } = require('amazon-cognito-identity-js');
-      
-      const { CognitoUserPool } = require('amazon-cognito-identity-js');
-      
-      const poolData = {
-        UserPoolId: process.env.USER_POOL_ID,
-        ClientId: process.env.USER_POOL_CLIENT_ID
-      };
-      
-      const userPool = new CognitoUserPool(poolData);
-      
-      function loginUser(email, password) {
-        const authDetails = new AuthenticationDetails({ Username: email, Password: password });
-        const userData = { Username: email, Pool: userPool };
-        const cognitoUser = new CognitoUser(userData);
-      
-        return new Promise((resolve, reject) => {
-          cognitoUser.authenticateUser(authDetails, {
-            onSuccess: result => resolve({
-              idToken: result.getIdToken().getJwtToken(),
-              accessToken: result.getAccessToken().getJwtToken(),
-              refreshToken: result.getRefreshToken().getToken()
-            }),
-            onFailure: err => reject(err)
-          });
-        });
-      }
-      
-      module.exports = { loginUser };
-        </pre>
-      
-        <h2>🔹 src/email/sendVerification.js</h2>
-        <pre>
-      const AWS = require('aws-sdk');
-      const ses = new AWS.SES({ region: process.env.AWS_REGION });
-      
-      async function sendVerificationEmail(email, code) {
-        const params = {
-          Destination: { ToAddresses: [email] },
-          Message: {
-            Body: {
-              Text: {
-                Data: `Your verification code is: ${code}`,
-                Charset: 'UTF-8'
-              }
-            },
-            Subject: {
-              Data: 'Verify your email',
-              Charset: 'UTF-8'
-            }
-          },
-          Source: process.env.SES_EMAIL_SOURCE
-        };
-        return ses.sendEmail(params).promise();
-      }
-      
-      module.exports = { sendVerificationEmail };
-        </pre>
-      
-        <h2>🔹 src/lambda/handler.js</h2>
-        <pre>
-      const jwt = require('jsonwebtoken');
-      
-      exports.handler = async event => {
-        const authHeader = event.headers.Authorization || '';
-        const token = authHeader.replace('Bearer ', '');
-      
-        try {
-          const decoded = jwt.decode(token);
-          return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Authorized', user: decoded })
-          };
-        } catch (err) {
-          return {
-            statusCode: 401,
-            body: JSON.stringify({ message: 'Unauthorized' })
-          };
-        }
-      };
-        </pre>
-      
-        <h2>🔹 test/auth.test.js</h2>
-        <pre>
-      const { registerUser, loginUser } = require('../src/auth');
-      jest.mock('amazon-cognito-identity-js');
-      
-      describe('Auth module', () => {
-        it('calls signUp without error', async () => {
-          const mockSignUp = jest.fn((u, p, a, _, cb) => cb(null, { user: { username: u }}));
-          require('amazon-cognito-identity-js').CognitoUserPool = jest.fn(() => ({ signUp: mockSignUp }));
-          const res = await registerUser('test@example.com', 'Pass123!');
-          expect(res.user.username).toBe('test@example.com');
-        });
-      
-        it('loginUser returns tokens', async () => {
-          const mockAuth = {
-            authenticateUser: (_, handlers) => handlers.onSuccess({
-              getIdToken: () => ({ getJwtToken: () => 'id' }),
-              getAccessToken: () => ({ getJwtToken: () => 'access' }),
-              getRefreshToken: () => ({ getToken: () => 'refresh' })
-            })
-          };
-          require('amazon-cognito-identity-js').CognitoUser = jest.fn(() => mockAuth);
-          require('amazon-cognito-identity-js').AuthenticationDetails = jest.fn();
-          const tokens = await loginUser('x', 'y');
-          expect(tokens).toEqual({ idToken: 'id', accessToken: 'access', refreshToken: 'refresh' });
-        });
-      });
-        </pre>
-      
-        <h2>🔹 test/email.test.js</h2>
-        <pre>
-      const AWS = require('aws-sdk');
-      const { sendVerificationEmail } = require('../src/email');
-      jest.mock('aws-sdk', () => ({
-        SES: jest.fn(() => ({ sendEmail: () => ({ promise: () => Promise.resolve('OK') }) }))
-      }));
-      
-      describe('sendVerificationEmail', () => {
-        it('sends email successfully', async () => {
-          await expect(sendVerificationEmail('a@b.com', '123456')).resolves.toBe('OK');
-        });
-      });
-        </pre>
-      
-        <h2>🔹 test/handler.test.js</h2>
-        <pre>
-      const { handler } = require('../src/lambda/handler');
-      
-      describe('Lambda handler', () => {
-        it('returns 200 for valid token', async () => {
-          const event = { headers: { Authorization: 'Bearer abc' } };
-          const resp = await handler(event);
-          expect(resp.statusCode).toBe(200);
-          expect(JSON.parse(resp.body).message).toBe('Authorized');
-        });
-      
-        it('returns 401 for invalid token', async () => {
-          const event = { headers: { Authorization: 'Bearer ' } };
-          const resp = await handler(event);
-          expect(resp.statusCode).toBe(401);
-        });
-      });
-        </pre>
-      
-        <h2>🔹 jest.config.js</h2>
-        <pre>
-      module.exports = {
-        testEnvironment: 'node',
-        verbose: true
-      };
-        </pre>
-      
-        <h2>✅ Next Steps</h2>
-        <ul>
-          <li>Add real Cognito token verification (using JWKS).</li>
-          <li>Deploy the Lambda with proper IAM roles.</li>
-          <li>Enhance SES email templating.</li>
-          <li>Expand test coverage and CI/CD integration.</li>
-        </ul>
-      </body>
-      </html>
-      
-      
-    </div>
-  </li>
 
   <li data-id="q35" class="yellow">
     <span class="faq-question">Why do we use Storybook in ReactJS?</span>
