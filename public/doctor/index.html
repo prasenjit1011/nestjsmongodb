@@ -106,31 +106,30 @@
             <td><a href="#nodejs_qlist">Nodejs</a></td>
             <td><a href="#q_ts">TypeScript</a></td>
             <td>NestJS</td>
-            <td>&nbsp;</td>
+            <td>Coding</td>
           </tr>
           <tr>
             <td><a href="#awslambda">AWS Lambda</a></td>
             <td><a href="#awscognito">AWS Cognito</a></td>
             <td><a href="#awsdynamodb">AWS DynamoDB</a></td>
             <td>
-              <a href="#awsec2_qlist">Ec2</a> &nbsp; 
+              <a href="#awsec2">Ec2</a> &nbsp; 
               API Gateway
             </td>
           </tr>
           <tr>
-            <td>Coding</td>
+            <td><a href="#reactjs_qlist">Reactjs</a></td>
+            <td><a href="#nextjs_qlist">Nextjs</a></td>
             <td>
-              <a href="#reactjs_qlist">Reactjs</a> &nbsp; 
-              
+              <a href="#redux_qlist">Redux</a>, 
+              <a href="#redux_toolkit">Toolkit</a>, 
+              <a href="#redux_thunk">ReduxThunk</a>, 
+              <a href="#redux_saga">ReduxSaga</a>
             </td>
-            <td>
-              <a href="#redux_qlist">Redux</a> &nbsp; 
-              <a href="#redux_advanced">Advanced</a> &nbsp; 
+            <td><a href="#redux_advanced">Advanced</a> &nbsp; 
               <a href="#reduxflux_qlist">Flux</a>
             </td>
-            <td>
-              <a href="#nextjs_qlist">Nextjs</a>
-            </td>
+            <td></td>
           </tr>
           <tr>
             <td><a href="#docker_qlist">Docker</a></td>
@@ -141,8 +140,8 @@
           <tr>
             <td><a href="#redis">Redis / RabitMQ</a></td>
             <td><a href="#mongodb_qlist">MongoDB</a></td>
+            <td><a href="#elasticsearch">Elasticsearch</a></td>
             <td>PostGre SQL</td>
-            <td></td>
           </tr>
           <tr>
             <td><a href="#zod">Zod</a></td>
@@ -152,22 +151,33 @@
           </tr>
           <tr>
             <td colspan="4">
-              AWS Kinesis, Queues+
-              AWS JS SDK, AWS services like Lambda, SNS, SES, SQS, SSM, S3, EC2, IAM, CloudWatch, Kinesis and Cloud Formation+
-              + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka+Appsync
-              <BR />
-              React.Js, Graphql, AWS, ESB, Service Bus, TIBCO, API, Api Gateway
-    <br />
-              SQL Injection and JS injection prevention<br />
-              React, Next JS, ES6
-    Must have created Server Side Rendered application
-    Performance optimization - implemented concepts of bundling, lazy loading, code splitting, webpack modification, Dynamic imports
-    In-depth understanding on Accessibility
-    Unit testing framework Jest, Enzyme
-    In-depth understanding of Micro Front End architecture principles.
-    IAM, VPC, API Gateway advanced features (WAF, contract interpolation, etc.), and API Gateway customer authorizers (e.g., authentication Lambdas with Okta or similar OAuth 2.0)
-    
-    Terraform or Amazon CDK with IaC principles
+<pre>
+  Elasticsearch, Cassandra
+  Build and manage real-time communication systems using WebSockets (e.g., Socket.io, ws)
+  Optimize performance and scalability of WebSocket servers to handle high concurrency
+  Implement efficient thread and resource management
+
+  AWS Kinesis, Queues+
+  AWS JS SDK, AWS services like Lambda, SNS, SES, SQS, SSM, S3, EC2, IAM, CloudWatch, Kinesis and Cloud Formation+
+  + GraphQL User + MongoDB CRUD + callbind + debounce + Any + => fn + NestJS workflow ++websocket + kafka+Appsync
+  <BR />
+  React.Js, Graphql, AWS, ESB, Service Bus, TIBCO, API, Api Gateway
+  <br />
+  SQL Injection and JS injection prevention<br />
+  React, Next JS, ES6
+  Must have created Server Side Rendered application
+  Performance optimization - implemented concepts of bundling, lazy loading, code splitting, webpack modification, Dynamic imports
+  In-depth understanding on Accessibility
+  Unit testing framework Jest, Enzyme
+  In-depth understanding of Micro Front End architecture principles.
+  IAM, VPC, API Gateway advanced features (WAF, contract interpolation, etc.), and 
+  API Gateway customer authorizers (e.g., authentication Lambdas with Okta or similar OAuth 2.0)
+  
+  Terraform or Amazon CDK with IaC principles
+
+</pre>
+
+
             </td>
           </tr>
     </tbody></table>  
@@ -2821,7 +2831,7 @@ export default function Home() {
   </div>
 </li>
 
-<li data-id="q_redux_example"  id="redux_qlist" class="yellow"><span class="faq-question">
+<li data-id="q_redux_example"  id="redux_toolkit" class="yellow"><span class="faq-question">
 Redux Example : 01 : CounterApp ***
 </span><div class="answer">
 <pre>
@@ -2886,7 +2896,7 @@ Redux Example : 01 : CounterApp ***
 
 </div></li>
   
-<li data-id="q_redux_login"  id="redux_login_qlist" class="yellow"><span class="faq-question">
+<li data-id="q_redux_login"  id="redux_thunk" class="yellow"><span class="faq-question">
 Redux Example : 02 : Login & Logout API with createAsyncThunk
 </span><div class="answer">
 <pre>
@@ -3108,7 +3118,7 @@ Redux Example : 02 : Login & Logout API with createAsyncThunk
 </div></li>
 
   
-<li data-id="q_redux_login"  id="redux_login_qlist" class="yellow"><span class="faq-question">
+<li data-id="q_redux_login"  class="yellow"><span class="faq-question">
 Redux Example : 03 : Reducers vs ExtraReducers ***
 </span><div class="answer">
   Redux Toolkit: <x>reducers</x> vs <x>extraReducers</x>
@@ -15415,7 +15425,7 @@ constructor(private readonly userRepo: UserRepository) {}
 }
 </code></pre>
 
-Here, <code>UserRepository</code> is automatically injected by NestJS’s DI container.
+Here, <xcode>UserRepository</code> is automatically injected by NestJS’s DI container.
 
 DI improves modularity, makes mocking easy for testing, and encourages best practices.
 </div></li>
@@ -31354,7 +31364,7 @@ You can integrate CloudFormation with CodePipeline, CodeBuild, GitHub Actions, J
 </div>
 </li>
 
-<li data-id="question-ec2-1" id="awsec2_qlist" class="yellow">
+<li data-id="question-ec2-1" id="awsec2" class="yellow">
 <span class="faq-question">What is AWS EC2?</span>
 <div class="answer">
 AWS EC2 (Elastic Compute Cloud) provides scalable virtual servers in the cloud. You can launch instances of different types to host applications, run workloads, or serve web services.
@@ -32565,10 +32575,306 @@ app.listen(PORT, () => {
 
 
 
+  <li data-id="q1" class="yellow" id="elasticsearch">
+    <span class="faq-question">Elasticsearch?</span>
+    <div class="answer">
+  <ul>
+    <li>What is Elasticsearch?</li>
+    <li>What is an Elasticsearch cluster?</li>
+    <li>What is a node in Elasticsearch?</li>
+    <li>What is an index?</li>
+    <li>What is a document in Elasticsearch?</li>
+    <li>What is a shard and how does sharding work?</li>
+    <li>What are replicas and why use them?</li>
+    <li>Explain indexing in Elasticsearch.</li>
+    <li>What is near real-time search?</li>
+    <li>What are analyzers, tokenizers, and filters?</li>
+    <li>Differentiate full-text vs keyword fields.</li>
+    <li>What is mapping in Elasticsearch?</li>
+    <li>What is dynamic mapping?</li>
+    <li>What are the types of queries: term vs match?</li>
+    <li>Explain aggregations in Elasticsearch.</li>
+    <li>What is the Bulk API?</li>
+    <li>What is the Cat API?</li>
+    <li>What is the difference between search and get?</li>
+    <li>How do you delete an index or document?</li>
+    <li>What is index lifecycle management (ILM)?</li>
+    <li>Explain relevance scoring and boost.</li>
+    <li>What is script scoring?</li>
+    <li>What are compound queries?</li>
+    <li>What is function score query?</li>
+    <li>Explain fuzzy and wildcard queries.</li>
+    <li>What is Elasticsearch's machine learning features?</li>
+    </ul>
+    </div></li>
 
 
 
 
+
+
+    <li data-id="q1" class="yellow" id="elasticsearch">
+      <span class="faq-question">What is Elasticsearch?</span>
+      <div class="answer">
+        A distributed, RESTful search and analytics engine built on Apache Lucene, enabling full-text search, near‑real‑time indexing, and horizontal scaling :contentReference[oaicite:1]{index=1}.
+        <br />
+        Cloud : https://cloud.elastic.co/
+      </div>
+    </li>
+
+
+
+
+
+    <li data-id="q1" class="yellow" id="elasticsearch">
+      <span class="faq-question">Example : 01 : Elasticsearch?</span>
+      <div class="answer">
+<pre>
+  // https://cloud.elastic.co/
+  const express   = require('express');
+  const router    = express.Router();
+  const { Client }= require('@elastic/elasticsearch');
+  
+  const client = new Client({
+                          node: 'https://my-elasticsearch-project-e8744c.es.us-east-1.aws.elastic.cloud:443',
+                          auth: {apiKey: 'OWluZ2taY0JHUXFGSFN2MjdZTkM6ZzNHSU9uLTdXN01ScVR0Q1RtMVpKQQ=='},
+                          serverless: true
+                      });
+  
+  const INDEX = 'students';
+  router.get('/add', async (req, res) => {
+      try {
+          const data  = {title:"Rani = 01A ", details:"Loren ipsum dummy data. Loren ipsum dummy data."};
+          const result= await client.index({index: INDEX, document: data});
+          res.json({ message: 'Student created', id: result._id });
+      }
+      catch (err) {
+          res.status(500).json({ error: err.message });
+      }
+  });
+  
+  // Get all students
+  router.get('/', async (req, res) => {
+      try {
+          await client.indices.create({ index: 'students' }, { ignore: [400] });
+          const result    = await client.search({index: INDEX, query: { match_all: {} }});
+          const students  = result.hits.hits.map(hit => ({
+                                                          id: hit._id,
+                                                          ...hit._source
+                                                      }));
+          res.json(students);
+      } 
+      catch (err) {
+          res.status(500).json({ error: err.message });
+      }
+  });
+  
+  // Get student by ID
+  router.get('/:id', async (req, res) => {
+    try {
+      const result = await client.get({
+        index: INDEX,
+        id: req.params.id
+      });
+      res.json(result._source);
+    } catch (err) {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  });
+  
+  // Update student by ID
+  router.put('/:id', async (req, res) => {
+    try {
+      const result = await client.update({
+        index: INDEX,
+        id: req.params.id,
+        doc: req.body
+      });
+      res.json({ message: 'Student updated', result });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
+  // Delete student by ID
+  router.delete('/:id', async (req, res) => {
+    try {
+      await client.delete({
+        index: INDEX,
+        id: req.params.id
+      });
+      res.json({ message: 'Student deleted' });
+    } catch (err) {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  });
+  
+  module.exports = router;
+</pre>        
+      </div>
+    </li>
+
+    <li data-id="compare-32" class="zyellow">
+      <span class="faq-question">Elasticsearch 🆚 MongoDB?</span>
+      <div class="answer">
+        <table border="1" cellpadding="6" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Elasticsearch</th>
+              <th>MongoDB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Type</td>
+              <td>Search and analytics engine</td>
+              <td>Document-oriented NoSQL database</td>
+            </tr>
+            <tr>
+              <td>Use Case</td>
+              <td>Full-text search, log analytics, real-time search</td>
+              <td>General-purpose document storage and querying</td>
+            </tr>
+            <tr>
+              <td>Data Format</td>
+              <td>JSON documents (Lucene-based)</td>
+              <td>BSON documents (Binary JSON)</td>
+            </tr>
+            <tr>
+              <td>Query Language</td>
+              <td>Query DSL (JSON-based)</td>
+              <td>MongoDB Query Language (MQL)</td>
+            </tr>
+            <tr>
+              <td>Search Capabilities</td>
+              <td>Highly optimized for full-text, fuzzy, and relevance scoring</td>
+              <td>Basic full-text search via text indexes</td>
+            </tr>
+            <tr>
+              <td>Indexing</td>
+              <td>Automatic and custom analyzers for tokenization</td>
+              <td>Indexes fields with support for compound indexes</td>
+            </tr>
+            <tr>
+              <td>Aggregation</td>
+              <td>Powerful pipeline with metrics, filters, and buckets</td>
+              <td>Aggregation framework for summaries and stats</td>
+            </tr>
+            <tr>
+              <td>Joins</td>
+              <td>No joins (can use nested documents)</td>
+              <td>Supports basic joins using $lookup in aggregation</td>
+            </tr>
+            <tr>
+              <td>Transactions</td>
+              <td>Limited transaction support</td>
+              <td>Supports multi-document ACID transactions</td>
+            </tr>
+            <tr>
+              <td>Consistency</td>
+              <td>Eventual consistency</td>
+              <td>Strong consistency (by default)</td>
+            </tr>
+            <tr>
+              <td>Scalability</td>
+              <td>Highly scalable with built-in sharding</td>
+              <td>Supports sharding for horizontal scaling</td>
+            </tr>
+            <tr>
+              <td>Best For</td>
+              <td>Search-heavy applications (e.g., e-commerce search, log monitoring)</td>
+              <td>General CRUD apps (e.g., user data, orders, CMS)</td>
+            </tr>
+            <tr>
+              <td>Visualization Tools</td>
+              <td>Kibana</td>
+              <td>MongoDB Charts, Compass</td>
+            </tr>
+            <tr>
+              <td>Official Cloud Platform</td>
+              <td>Elastic Cloud</td>
+              <td>MongoDB Atlas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+    
+    
+
+  
+    <li data-id="q2" class="zyellow">
+      <span class="faq-question">What is an Elasticsearch cluster, node, shard, and replica?</span>
+      <div class="answer">A cluster is a set of nodes (instances). Each index is divided into shards (primary partitions), with replicas for fault tolerance :contentReference[oaicite:2]{index=2}.</div>
+    </li>
+  
+    <li data-id="q3" class="zyellow">
+      <span class="faq-question">What is indexing and how does it work?</span>
+      <div class="answer">Indexing stores JSON documents in an index, applying analyzers/tokenizers. It’s near‑real‑time: newest data becomes searchable in about a second :contentReference[oaicite:3]{index=3}.</div>
+    </li>
+  
+    <li data-id="q4" class="zyellow">
+      <span class="faq-question">What are analyzers, tokenizers, and filters?</span>
+      <div class="answer">Analyzers process text during indexing/search: split into tokens (tokenizers) and modify them (filters). Types include standard, simple, whitespace, stop, keyword, pattern, language-based, custom :contentReference[oaicite:4]{index=4}.</div>
+    </li>
+  
+    <li data-id="q5" class="zyellow">
+      <span class="faq-question">Explain basic vs term-based queries.</span>
+      <div class="answer">Full-text (e.g., match, match_phrase, multi_match) analyze text. Term-based (e.g., term, wildcard, range, fuzzy) search exact terms without analysis :contentReference[oaicite:5]{index=5}.</div>
+    </li>
+  
+    <li data-id="q6" class="zyellow">
+      <span class="faq-question">What are aggregations?</span>
+      <div class="answer">Aggregations provide metrics and data bucketing (e.g., stats, histograms), enabling analytics and summary queries :contentReference[oaicite:6]{index=6}.</div>
+    </li>
+  
+    <li data-id="q7" class="zyellow">
+      <span class="faq-question">How to perform bulk operations?</span>
+      <div class="answer">Use the bulk API to index/update/delete multiple documents in one request for efficiency :contentReference[oaicite:7]{index=7}.</div>
+    </li>
+  
+    <li data-id="q8" class="zyellow">
+      <span class="faq-question">What is the ELK (Elastic) Stack?</span>
+      <div class="answer">The stack includes Elasticsearch (search backend), Logstash (log ingestion), and Kibana (visualization). Beats and others extend functionality :contentReference[oaicite:8]{index=8}.</div>
+    </li>
+  
+    <li data-id="q9" class="zyellow">
+      <span class="faq-question">How does Elasticsearch scale?</span>
+      <div class="answer">It scales horizontally by adding nodes; shards and replicas distribute data and queries across the cluster :contentReference[oaicite:9]{index=9}.</div>
+    </li>
+  
+    <li data-id="q10" class="zyellow">
+      <span class="faq-question">How do you delete an index or document?</span>
+      <div class="answer">Deleting an index uses the DELETE index API; documents via DELETE index/_doc/id. Bulk operations can also remove many at once :contentReference[oaicite:10]{index=10}.</div>
+    </li>
+  
+    <li data-id="q11" class="zyellow">
+      <span class="faq-question">What is NRT (Near‑Real‑Time) search?</span>
+      <div class="answer">NRT means a very short delay (~1 s) between indexing data and its availability in search results :contentReference[oaicite:11]{index=11}.</div>
+    </li>
+  
+    <li data-id="q12" class="zyellow">
+      <span class="faq-question">What is the cat API?</span>
+      <div class="answer">The cat API provides human-readable cluster/index stats via endpoints like _cat/indices, shards, health, nodes, etc. :contentReference[oaicite:12]{index=12}.</div>
+    </li>
+  
+    <li data-id="q13" class="zyellow">
+      <span class="faq-question">What is a custom analyzer and when use it?</span>
+      <div class="answer">Custom analyzers combine tokenizers and filters tailored for specific languages or use‑cases (e.g., stemming, synonyms) :contentReference[oaicite:13]{index=13}.</div>
+    </li>
+  
+    <li data-id="q14" class="zyellow">
+      <span class="faq-question">Explain shards vs replicas.</span>
+      <div class="answer">Shards split data for distribution; replicas are copies for failover/high availability. Defaults are 5 primary shards and 1 replica :contentReference[oaicite:14]{index=14}.</div>
+    </li>
+  
+    <li data-id="q15" class="zyellow">
+      <span class="faq-question">How is Elasticsearch different from a relational database?</span>
+      <div class="answer">Unlike relational DBs, it is schema-free, optimized for full-text search, uses distributed JSON document model, and lacks ACID transactions :contentReference[oaicite:15]{index=15}.</div>
+    </li>
+
+  
 
 
 <li data-id="q32" class="yellow"><span class="faq-question">
